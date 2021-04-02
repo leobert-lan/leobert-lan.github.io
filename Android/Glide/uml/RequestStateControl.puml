@@ -1,0 +1,45 @@
+@startuml
+state a <<choice>>
+[*] --> PENDING: create
+note left: created but not yet running
+PENDING --> a: begin
+a --> FAILED: [model == null]
+note left: onLoadFailed
+
+a --> WAITING_FOR_SIZE: [通过校验]
+
+
+WAITING_FOR_SIZE --> RUNNING : onSizeReady
+
+state c <<choice>>
+RUNNING --> c : engine.load
+
+state RUNNING {
+    [*] --> loadFromActiveResources
+    state r1 <<choice>>
+    loadFromActiveResources --> r1
+    r1 --> [*]: [exist]
+    r1 --> loadFromCache: [not exist]
+
+    state r2 <<choice>>
+
+    loadFromCache --> r2
+    r2 --> [*]: [exist]
+    r2 --> load: [not exist]
+
+}
+
+RUNNING --> PAUSE: lifecycle control
+PAUSE --> a: lifecycle control
+
+c --> COMPLETE: [!canSetResource]
+c --> COMPLETE: [canSetResource，需要处理后续]
+
+COMPLETE --> [*]
+@enduml
+
+@startuml
+[*] --> CANCELLED: clear
+CANCELLED --> CLEARED
+CLEARED --> [*]
+@enduml

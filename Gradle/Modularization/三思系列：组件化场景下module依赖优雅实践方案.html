@@ -1,0 +1,1057 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>三思系列：组件化场景下module依赖优雅实践方案 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    Android
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" >
+            
+                <span>
+            
+                    
+                    View
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../../Android/View/好玩系列：优雅的处理ButterKnife和KAE被废弃.html">
+            
+                <a href="../../Android/View/好玩系列：优雅的处理ButterKnife和KAE被废弃.html">
+            
+                    
+                    好玩系列：优雅的处理ButterKnife和KAE被废弃
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../../Android/View/三思系列：View体系认知（一），内容是如何正确被展现出来的--视觉呈现概览.md">
+            
+                <span>
+            
+                    
+                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../../Android/View/三思系列：为什么要自定义View.html">
+            
+                <a href="../../Android/View/三思系列：为什么要自定义View.html">
+            
+                    
+                    三思系列：为什么自定义View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../../Android/Idea/三思系列："声明式UI"和"命令式UI"，你的理解可能是错的.html">
+            
+                <a href="../../Android/Idea/三思系列："声明式UI"和"命令式UI"，你的理解可能是错的.html">
+            
+                    
+                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" >
+            
+                <span>
+            
+                    
+                    Drawable
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../../Android/Drawable/三思系列：重新认识Drawable.html">
+            
+                <a href="../../Android/Drawable/三思系列：重新认识Drawable.html">
+            
+                    
+                    三思系列：重新认识Drawable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="../../Android/Drawable/好玩系列：拥有它，XML文件少一半--更方便的处理View背景.html">
+            
+                <a href="../../Android/Drawable/好玩系列：拥有它，XML文件少一半--更方便的处理View背景.html">
+            
+                    
+                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" >
+            
+                <span>
+            
+                    
+                    消息机制
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" data-path="../../Android/Mechanism/Message/三思系列：Android的消息机制，一文吃透.html">
+            
+                <a href="../../Android/Mechanism/Message/三思系列：Android的消息机制，一文吃透.html">
+            
+                    
+                    三思系列：Android的消息机制，一文吃透
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" >
+            
+                <span>
+            
+                    
+                    兼容
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.4.1" data-path="../../Android/Idea/好玩系列：让项目中的相册支持Heif格式图片.html">
+            
+                <a href="../../Android/Idea/好玩系列：让项目中的相册支持Heif格式图片.html">
+            
+                    
+                     好玩系列：让项目中的相册支持Heif格式图片
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" >
+            
+                <span>
+            
+                    
+                    Glide
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="../../Android/Glide/三思系列：Glide%204.X全方位认知%20%7C%20Glide（一）.md">
+            
+                <span>
+            
+                    
+                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="../../Android/Glide/三思系列：Glide%204.X加载过程一文掌握%20%7C%20Glide（二）.md">
+            
+                <span>
+            
+                    
+                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    Gradle
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" >
+            
+                <span>
+            
+                    
+                    组件化
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1.1" data-path="三思系列：组件化场景下module依赖优雅实践方案.html">
+            
+                <a href="三思系列：组件化场景下module依赖优雅实践方案.html">
+            
+                    
+                    三思系列：组件化场景下module依赖优雅实践方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    Review
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../Review/造完了这个轮子--Mocker，却让我感到很羞愧%7C项目复盘.md">
+            
+                <span>
+            
+                    
+                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    数据结构
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../Review/DataStructure/温故：线性表%7C数据结构%20--%202021.md">
+            
+                <span>
+            
+                    
+                    温故：线性表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../Review/DataStructure/温故：栈%7C数据结构%20--%202021.md">
+            
+                <span>
+            
+                    
+                    温故：栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../Review/DataStructure/温故：队列%7C数据结构%20--%202021.md">
+            
+                <span>
+            
+                    
+                    温故：队列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >三思系列：组件化场景下module依赖优雅实践方案</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;&#x7EC4;&#x4EF6;&#x5316;&#x573A;&#x666F;&#x4E0B;module&#x4F9D;&#x8D56;&#x4F18;&#x96C5;&#x5B9E;&#x8DF5;&#x65B9;&#x6848;">&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;&#x7EC4;&#x4EF6;&#x5316;&#x573A;&#x666F;&#x4E0B;module&#x4F9D;&#x8D56;&#x4F18;&#x96C5;&#x5B9E;&#x8DF5;&#x65B9;&#x6848;</h1>
+<h2 id="&#x524D;&#x8A00;">&#x524D;&#x8A00;</h2>
+<p><a href="https://github.com/leobert-lan/Blog/blob/main/info/%E5%85%B3%E4%BA%8E%E4%B8%89%E6%80%9D%E7%B3%BB%E5%88%97.md" target="_blank">&#x5173;&#x4E8E;&#x4E09;&#x601D;&#x7CFB;&#x5217;</a></p>
+<blockquote>
+<p>&#x80CC;&#x666F;&#xFF1A;
+&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8BB0;&#x9519;&#xFF0C;15&#x5E74;&#x90A3;&#x4F1A;Android&#x9879;&#x76EE;&#x9010;&#x6B65;&#x8F6C;&#x5411;&#x4F7F;&#x7528;Gradle&#x6784;&#x5EFA;&#xFF0C;&#x65F6;&#x81F3;&#x4ECA;&#x65E5;&#xFF0C;&#x7EC4;&#x4EF6;&#x5316;&#x5DF2;&#x7ECF;&#x4E0D;&#x518D;&#x662F;&#x4E00;&#x4E2A;&#x65B0;&#x9896;&#x7684;&#x8BDD;&#x9898;&#x3002;</p>
+<p>&#x867D;&#x7136;&#x6211;&#x5C06;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x653E;&#x5728;&#x4E86;<code>Gradle&#x5206;&#x7C7B;</code>&#x4E2D;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;&#x4F7F;&#x7528;gradle&#x6784;&#x5EFA;&#x7684;&#x540E;&#x7AEF;&#x9879;&#x76EE;&#xFF0C;
+&#x70ED;&#x70B9;&#x805A;&#x7126;&#x5728;&#xFF1A;&#x5B9E;&#x73B0;<code>&#x5FAE;&#x670D;&#x52A1;&#x5316;</code>&#xFF0C;&#x9879;&#x76EE;&#x662F;&#x62C6;&#x5F00;&#x7684;&#xFF0C;&#x51B3;&#x5B9A;&#x4E86;&#x4F9D;&#x8D56;&#x5E93;&#x5DF2;&#x7ECF;&#x662F;&#x9759;&#x6001;jar&#x5305;&#xFF0C;&#x548C;&#x6211;&#x4EEC;
+&#x8981;&#x8BA8;&#x8BBA;&#x7684;&#x573A;&#x666F;&#x662F;&#x4E0D;&#x4E00;&#x81F4;&#x7684;&#x3002;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x5728;<code>Android</code>&#x9886;&#x57DF;&#x4E2D;&#x8BA8;&#x8BBA;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;.</p>
+<p>&#x5728;&#x5404;&#x79CD;&#x65B9;&#x6848;&#x7684;&#x7EC4;&#x4EF6;&#x5316;&#x5B9E;&#x65BD;&#x4E2D;&#xFF0C;&#x4E00;&#x5B9A;&#x4F1A;&#x5C06;<code>&#x90E8;&#x5206;&#x529F;&#x80FD;&#x6A21;&#x5757;&#x62C6;&#x5206;</code>&#xFF0C;&#x8FDB;&#x884C;<code>library&#x4E0B;&#x6C89;</code>&#x3002;
+&#x4E8E;&#x662F;&#xFF0C;&#x5C31;&#x6709;&#x4E86;<code>&#x5904;&#x7406;&#x4F9D;&#x8D56;</code>&#x7684;&#x573A;&#x666F;&#x3002;</p>
+<p>&#x76F8;&#x4FE1;&#x5927;&#x5BB6;&#x601D;&#x8003;&#x8FC7;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF1A;&#x5982;&#x679C;&#x4E0B;&#x6C89;&#x7684;<code>library</code>&#x4E5F;&#x63D0;&#x524D;&#x7F16;&#x8BD1;&#x597D;<code>&#x9759;&#x6001;aar&#x5305;</code>&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x9879;&#x76EE;&#x7F16;&#x8BD1;&#x65F6;&#x95F4;&#x4F1A;&#x7F29;&#x77ED;&#x3002; 
+&#x6BCB;&#x5EB8;&#x7F6E;&#x7591;&#xFF0C;&#x8FD9;&#x6837;&#x505A;&#x4F1A;&#x76F4;&#x63A5;&#x4ECE;<code>&#x6E90;&#x5934;&#x89E3;&#x51B3;</code> <code>&#x7F16;&#x8BD1;&#x65F6;&#x95F4;&#x957F;&#x7684;&#x95EE;&#x9898;</code>&#xFF0C;&#x5C31;&#x662F;<code>&#x51CF;&#x5C11;&#x7F16;&#x8BD1;&#x5185;&#x5BB9;</code>&#x3002;</p>
+<p><code>&#x4F46;&#x662F;</code>&#xFF0C;&#x9879;&#x76EE;&#x5408;&#x5E76;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x96BE;&#x514D;&#x5C31;&#x60F3;&#x5728;&#x5F00;&#x53D1;&#x4E0B;&#x5C42;library&#x65F6;&#xFF0C;&#x76F4;&#x63A5;&#x7528;&#x4E0A;&#x5C42;&#x4E1A;&#x52A1;&#x96C6;&#x6210;&#x8FDB;&#x884C;&#x5192;&#x70DF;&#x3002; <em>ps:&#x8FD9;&#x4E2A;&#x505A;&#x6CD5;&#x5E76;&#x4E0D;&#x597D;&#xFF0C;&#x5E94;&#x5F53;&#x4E3A;library&#x914D;&#x7F6E;&#x597D;&#x5192;&#x70DF;&#x6D4B;&#x8BD5;&#x73AF;&#x5883;&#xFF0C;&#x867D;&#x7136;&#x4F1A;&#x8017;&#x8D39;&#x6389;&#x4E00;&#x5B9A;&#x7684;&#x65F6;&#x95F4;</em></p>
+<p>&#x7406;&#x60F3;&#x5F52;&#x7406;&#x60F3;&#xFF0C;&#x6700;&#x7EC8;&#x8FD8;&#x662F;&#x4F1A;&#x8D25;&#x7ED9;&#x73B0;&#x5B9E;&#xFF0C;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x5C31;&#x53D8;&#x6210;&#x4E86;<code>&#x9C7C;&#x548C;&#x718A;&#x638C;&#x60F3;&#x8981;&#x517C;&#x5F97;</code>&#x7684;&#x95EE;&#x9898;</p>
+</blockquote>
+<p>&#x4E3A;&#x4E86;&#x8BA9;&#x9605;&#x8BFB;&#x7684;&#x76EE;&#x6807;&#x66F4;&#x52A0;&#x660E;&#x786E;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x601D;&#x8003;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF1A;</p>
+<p><img src="&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;&#x7EC4;&#x4EF6;&#x5316;&#x573A;&#x666F;&#x4E0B;module&#x4F9D;&#x8D56;&#x4F18;&#x96C5;&#x5B9E;&#x8DF5;&#x65B9;&#x6848;/APP.png" alt="&#x4F9D;&#x8D56;&#x5173;&#x7CFB;"></p>
+<p>&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x5982;&#x679C;&#x505A;&#x5230;<code>&#x6539;&#x52A8;B</code> &#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x5374;&#x4E0D;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x7F16;&#x8BD1;A&#xFF0C;&#x8FD0;&#x884C;APP&#xFF0C;&#x9A8C;&#x8BC1;B&#x7684;&#x4FEE;&#x6539;</p>
+<p>&#x6211;&#x4EEC;&#x4E0B;&#x9762;&#x4F1A;&#x8FDB;&#x884C;&#x4E00;&#x5B9A;&#x5730;&#x5C55;&#x5F00;&#xFF0C;&#x6765;&#x4F53;&#x609F;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;</p>
+<h2 id="&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#x4E2D;&#x7684;&#x4F9D;&#x8D56;&#x5305;&#x6BD4;&#x4F7F;&#x7528;&#x672C;&#x5730;&#x9759;&#x6001;aar&#x8981;&#x65B9;&#x4FBF;">&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#x4E2D;&#x7684;&#x4F9D;&#x8D56;&#x5305;&#x6BD4;&#x4F7F;&#x7528;&#x672C;&#x5730;&#x9759;&#x6001;aar&#x8981;&#x65B9;&#x4FBF;</h2>
+<p>&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;module&#xFF0C;&#x6211;&#x4EEC;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x7F16;&#x8BD1;&#x751F;&#x6210;&#x9759;&#x6001;aar&#x5305;&#xFF0C;&#x53EA;&#x4F1A;&#x5904;&#x7406;&#x5B83;&#x81EA;&#x8EAB;&#x7684;&#x5185;&#x5BB9;&#x3002;&#x90A3;&#x4E48;&#x4ED6;&#x7684;&#x4F9D;&#x8D56;&#x662F;&#x5982;&#x4F55;&#x4F20;&#x9012;&#x7684;&#xFF1F;</p>
+<p><code>&#x901A;&#x8FC7;pom&#x6587;&#x4EF6;</code></p>
+<p>&#x4E3E;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<p>&#x6211;&#x4EEC;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;module&#xFF0C;&#x770B;&#x4E00;&#x4E0B;&#x4F9D;&#x8D56;&#xFF1A;</p>
+<pre><code class="lang-groovy">dependencies {
+
+    implementation <span class="hljs-string">&quot;org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version&quot;</span>
+    implementation <span class="hljs-string">&apos;androidx.core:core-ktx:1.3.2&apos;</span>
+    implementation <span class="hljs-string">&apos;androidx.appcompat:appcompat:1.2.0&apos;</span>
+    implementation <span class="hljs-string">&apos;com.google.android.material:material:1.2.1&apos;</span>
+    testImplementation <span class="hljs-string">&apos;junit:junit:4.+&apos;</span>
+    androidTestImplementation <span class="hljs-string">&apos;androidx.test.ext:junit:1.1.2&apos;</span>
+    androidTestImplementation <span class="hljs-string">&apos;androidx.test.espresso:espresso-core:3.3.0&apos;</span>
+}
+</code></pre>
+<p>&#x5229;&#x7528;maven plugin &#x8FDB;&#x884C;&#x53D1;&#x5E03;&#xFF0C;&#x4F1A;&#x6709;&#x4EFB;&#x52A1;&#x751F;&#x6210;pom&#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-xml"><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
+    <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>leobert<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>B<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>aar<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.jetbrains.kotlin<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>kotlin-stdlib<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.4.21<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>compile<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>androidx.core<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>core-ktx<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.3.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>compile<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>androidx.appcompat<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>appcompat<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.2.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>compile<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.google.android.material<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>material<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.2.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>compile<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span>
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x53D1;&#x73B0;&#xFF0C;&#x5173;&#x4E8E;&#x6D4B;&#x8BD5;&#x76F8;&#x5173;&#x7684;&#x4F9D;&#x8D56;&#x5E76;<code>&#x6CA1;&#x6709;</code>&#x88AB;&#x6536;&#x5F55;&#x5230;pom&#x6587;&#x4EF6;&#x4E2D;&#x3002;&#x8FD9;&#x5F88;&#x5408;&#x7406;&#xFF0C;&#x6D4B;&#x8BD5;&#x4EE3;&#x7801;&#x662F;&#x9488;&#x5BF9;&#x8BE5;module&#x7684;&#xFF0C;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x63D0;&#x4F9B;&#x7ED9;&#x4F7F;&#x7528;&#x65B9;&#xFF0C;&#x5176;&#x4F9D;&#x8D56;&#x81EA;&#x7136;&#x4E5F;&#x4E0D;&#x9700;&#x8981;&#x4F20;&#x9012;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;AGP&#x4E2D;&#x73B0;&#x5728;&#x6709;4&#x79CD;&#x58F0;&#x660E;&#x4F9D;&#x8D56;&#x7684;&#x65B9;&#x5F0F;&#xFF08;&#x9664;&#x53BB;testXXX&#x8FD9;&#x79CD;&#x53D8;&#x79CD;&#xFF09;</p>
+<ul>
+<li>api</li>
+<li>implementation</li>
+<li>compileOnly</li>
+<li>runtimeOnly</li>
+</ul>
+<p>runtimeOnly&#x5BF9;&#x5E94;&#x4EE5;&#x524D;&#x7684;apk&#x65B9;&#x5F0F;&#x58F0;&#x660E;&#x4F9D;&#x8D56;&#xFF0C;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x5FFD;&#x7565;&#x6389;&#xFF0C;&#x6D4B;&#x8BD5;&#x4E00;&#x4E0B;&#x751F;&#x6210;&#x7684;pom&#x6587;&#x4EF6;&#x3002;</p>
+<pre><code class="lang-groovy">dependencies {
+
+    api <span class="hljs-string">&quot;org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version&quot;</span>
+    implementation <span class="hljs-string">&apos;androidx.core:core-ktx:1.3.2&apos;</span>
+    compileOnly <span class="hljs-string">&apos;androidx.appcompat:appcompat:1.2.0&apos;</span>
+    compileOnly <span class="hljs-string">&apos;com.google.android.material:material:1.2.1&apos;</span>
+
+
+    testImplementation <span class="hljs-string">&apos;junit:junit:4.+&apos;</span>
+    androidTestImplementation <span class="hljs-string">&apos;androidx.test.ext:junit:1.1.2&apos;</span>
+    androidTestImplementation <span class="hljs-string">&apos;androidx.test.espresso:espresso-core:3.3.0&apos;</span>
+}
+</code></pre>
+<pre><code class="lang-xml"><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
+    <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>leobert<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>B<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>aar<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.jetbrains.kotlin<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>kotlin-stdlib<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.4.21<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>compile<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>androidx.core<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>core-ktx<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.3.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>compile<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span>
+</code></pre>
+<p>&#x4F7F;&#x7528;compileOnly&#x65B9;&#x5F0F;&#x7684;&#x5E76;&#x6CA1;&#x6709;&#x88AB;&#x6536;&#x5F55;&#x5230;pom&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x800C;api&#x548C;implementation &#x65B9;&#x5F0F;&#xFF0C;&#x5728;pom&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x90FD;&#x8868;&#x73B0;&#x4E3A;
+&#x91C7;&#x7528;compile&#x7684;&#x65B9;&#x6848;&#x5E94;&#x7528;&#x4F9D;&#x8D56;&#x3002;</p>
+<blockquote>
+<p><em>ps:api&#x548C;implementation&#x5728;&#x7F16;&#x7801;&#x671F;&#x7684;&#x4E0D;&#x540C;&#xFF0C;&#x4E0D;&#x662F;&#x6211;&#x4EEC;&#x8BA8;&#x8BBA;&#x7684;&#x91CD;&#x70B9;&#xFF0C;&#x7565;&#x3002;</em></p>
+</blockquote>
+<p><strong>&#x56DE;&#x5230;&#x6211;&#x4EEC;&#x5F00;&#x59CB;&#x7684;&#x95EE;&#x9898;</strong>&#xFF0C;&#x5C06;library&#x53D1;&#x5E03;&#x65F6;&#xFF0C;&#x6309;&#x7167;&#x7EA6;&#x5B9A;&#xFF0C;&#x4F1A;&#x5C06;library&#x672C;&#x8EAB;&#x7684;&#x4F9D;&#x8D56;&#x6536;&#x5F55;&#x5230;pom&#x6587;&#x4EF6;&#x4E2D;&#x3002;&#x76F8;&#x5E94;&#x7684;&#xFF0C;&#x4F7F;&#x7528;&#x65B9;&#x4F7F;&#x7528;
+&#x4ED3;&#x5E93;&#x4E2D;&#x7684;&#x4F9D;&#x8D56;&#x9879;&#x65F6;&#xFF0C;gradle&#x4F1A;&#x62C9;&#x53D6;&#x5176;&#x5BF9;&#x5E94;&#x7684;pom&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x6DFB;&#x52A0;&#x4F9D;&#x8D56;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x7F16;&#x8BD1;&#x597D;&#x7684;&#x9759;&#x6001;&#x5305;&#xFF0C;&#x800C;&#x4E22;&#x5F03;&#x4E86;&#x4ED6;&#x5BF9;&#x5E94;&#x7684;pom&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x4E22;&#x5931;&#x4F9D;&#x8D56;&#xFF0C;&#x51FA;&#x73B0;&#x6253;&#x5305;&#x5931;&#x8D25;&#x6216;&#x8005;&#x8FD0;&#x884C;&#x5F02;&#x5E38;&#x3002;
+&#x8FD9;&#x610F;&#x5473;&#x7740;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4EBA;&#x4E3A;&#x7EF4;&#x62A4;&#x4F9D;&#x8D56;&#x4F20;&#x9012;</p>
+<p><strong>&#x6211;&#x4EEC;&#x8BB0;&#x4F4F;&#x8FD9;&#x4E9B;&#x5185;&#x5BB9;&#xFF0C;&#x5E76;&#x5148;&#x653E;&#x5230;&#x4E00;&#x8FB9;</strong>&#x3002;</p>
+<h2 id="&#x4E0B;&#x6C89;&#x540E;&#xFF0C;library&#x4F1A;&#x6709;&#x591A;&#x4E2A;&#x5C42;&#x7EA7;">&#x4E0B;&#x6C89;&#x540E;&#xFF0C;library&#x4F1A;&#x6709;&#x591A;&#x4E2A;&#x5C42;&#x7EA7;</h2>
+<blockquote>
+<p>&#x4F8B;&#x5982;&#x56FE;&#x4E2D;&#xFF1A;APP =&gt; A =&gt; B&#xFF0C; &#x5373;APP&#x4F9D;&#x8D56;A&#xFF0C;A&#x4F9D;&#x8D56;B&#xFF0C;&#x800C;A&#x548C;B&#x90FD;&#x662F;library</p>
+</blockquote>
+<p>&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;&#x5BF9;&#x4E8E;B&#xFF0C;&#x5E76;&#x4E0D;&#x4F1A;&#x6709;&#x4EC0;&#x4E48;&#x8BF4;&#x6CD5;&#xFF0C;&#x53EA;&#x4F1A;&#x51FA;&#x73B0;&#x5728;A&#x548C;APP</p>
+<p>&#x5982;&#x679C;&#x4E0D;&#x4F7F;&#x7528;&#x9759;&#x6001;&#x5305;&#xFF0C;&#x90A3;&#x4E48;A&#x4F1A;&#x58F0;&#x660E;&#xFF1A;</p>
+<pre><code class="lang-groovy">api project(<span class="hljs-string">&apos;:B&apos;</span>)
+<span class="hljs-comment">//&#x6216;&#x8005;</span>
+implementation project(<span class="hljs-string">&apos;:B&apos;</span>)
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x5148;&#x770B;&#x4E00;&#x4E0B;&#xFF0C;&#x8FD9;&#x6837;&#x751F;&#x6210;&#x7684;library-A&#x7684;pom&#x6587;&#x4EF6;</p>
+<pre><code class="lang-xml"><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
+    <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>leobert<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>A<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>aar<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>Demo<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>B<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>unspecified<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>compile<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span>
+</code></pre>
+<p>&#x4F1A;&#x5F97;&#x5230;groupID&#x662F;&#x9879;&#x76EE;&#x540D;&#xFF0C;artifactId&#x662F;module&#x540D;&#xFF0C;version&#x662F;&#x672A;&#x77E5;&#x7684;&#x4E00;&#x4E2A;&#x4F9D;&#x8D56;&#x9879;&#x3002;</p>
+<p>&#x5047;&#x5982;&#x6211;&#x5C06;A&#x7F16;&#x8BD1;&#x4E3A;&#x9759;&#x6001;&#x5305;&#x5E76;&#x53D1;&#x5E03;&#x5230;&#x4ED3;&#x5E93;&#xFF0C;&#x5E76;&#x8FD0;&#x7528;&#x4E86;pom&#x4E2D;&#x7684;&#x4F9D;&#x8D56;&#x63CF;&#x8FF0;&#xFF0C;&#x4E00;&#x5B9A;&#x4F1A;&#x5F97;&#x5230;&#x65E0;&#x6CD5;&#x627E;&#x5230;:<code>Demo-B-unspecified.pom</code> &#x7684;&#x95EE;&#x9898;&#x3002;
+&#x5F53;&#x7136;&#xFF0C;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>&#x5728;APP&#x4E2D;&#x91CD;&#x65B0;&#x58F0;&#x660E; B&#x7684;&#x4F9D;&#x8D56;</code> &#x6765;&#x89E3;&#x51B3;&#x3002;</p>
+<blockquote>
+<p>&#x8FD9;&#x610F;&#x5473;&#x7740;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x65F6;&#x523B;&#x4FDD;&#x6301;&#x8B66;&#x60D5;&#xFF0C;&#x7EF4;&#x62A4;&#x5404;&#x4E2A;module&#x7684;&#x4F9D;&#x8D56;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x6211;&#x4EEC;&#x65E0;&#x6CD5;&#x540C;&#x65F6;&#x4EAB;&#x53D7;&#xFF1A;<code>&#x9759;&#x6001;&#x5305;&#x51CF;&#x5C11;&#x7F16;&#x8BD1;</code> &amp; <code>&#x968F;&#x5FC3;&#x7684;&#x4FEE;&#x6539;&#x5C40;&#x90E8;&#x5E76;&#x96C6;&#x6210;&#x6D4B;&#x8BD5;</code></p>
+</blockquote>
+<p>&#x8FD9;&#x663E;&#x7136;&#x662F;&#x4E00;&#x4EF6;&#x4E0D;&#x4EBA;&#x9053;&#x4E3B;&#x4E49;&#x7684;&#x4E8B;&#x60C5;&#x3002;</p>
+<p>&#x53CD;&#x601D;&#x4E00;&#x4E0B;&#xFF0C;&#x5BF9;&#x4E8E;A&#x800C;&#x8A00;&#xFF0C;&#x5B83;&#x9700;&#x8981;B&#xFF0C;&#x4F46;&#x4EC5;&#x5728;&#x4E24;&#x4E2A;&#x65F6;&#x673A;&#x9700;&#x8981;&#xFF1A;</p>
+<ul>
+<li>&#x7F16;&#x8BD1;&#x65F6;&#x53D7;&#x68C0;&#xFF0C;&#x5B8C;&#x6210;&#x7F16;&#x8BD1;</li>
+<li>&#x8FD0;&#x884C;&#x65F6;</li>
+</ul>
+<p>&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;library&#xFF0C;&#x5B83;&#x672C;&#x8EAB;&#x5E76;&#x4E0D;&#x5BF9;&#x5E94;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;<code>compileOnly</code> &#x662F;&#x5176;&#x58F0;&#x660E;&#x5BF9;B&#x7684;&#x4F9D;&#x8D56;&#x7684;&#x6700;&#x4F73;&#x65B9;&#x5F0F;&#x3002;</p>
+<p>&#x8FD9;&#x610F;&#x5473;&#x7740;&#xFF0C;&#x6700;&#x7EC8;&#x5BF9;&#x5E94;<code>&#x8FD0;&#x884C;&#x65F6;</code> &#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x5373;APP&#xFF0C;&#x9700;&#x8981;&#x5728;<code>&#x7F16;&#x8BD1;&#x65F6;&#x52A0;&#x5165;</code> &#x5BF9;B&#x7684;&#x4F9D;&#x8D56;&#x3002;&#x5728;&#x539F;&#x5148; A &#x4F7F;&#x7528; Api&#x65B9;&#x5F0F;&#x58F0;&#x660E;&#x5BF9;B&#x7684;&#x4F9D;&#x8D56;&#x65F6;&#xFF0C;&#x662F;&#x901A;&#x8FC7;gradle
+&#x5206;&#x6790;pom&#x6587;&#x4EF6;&#x5B9E;&#x73B0;&#x7684;&#x4F9D;&#x8D56;&#x52A0;&#x5165;&#x3002;&#x800C;&#x73B0;&#x5728;&#xFF0C;&#x9700;&#x8981;<code>&#x4EBA;&#x4E3A;&#x7EF4;&#x62A4;</code>&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x5B9E;&#x73B0; <code>&#x4EBA;&#x9053;&#x4E3B;&#x4E49;</code>&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x9C7C;&#x548C;&#x718A;&#x638C;&#x517C;&#x5F97;&#x3002;</p>
+<h2 id="&#x53CD;&#x601D;&#x4F9D;&#x8D56;&#x4F20;&#x9012;&#x7684;&#x672C;&#x8D28;">&#x53CD;&#x601D;&#x4F9D;&#x8D56;&#x4F20;&#x9012;&#x7684;&#x672C;&#x8D28;</h2>
+<p><img src="&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;&#x7EC4;&#x4EF6;&#x5316;&#x573A;&#x666F;&#x4E0B;module&#x4F9D;&#x8D56;&#x4F18;&#x96C5;&#x5B9E;&#x8DF5;&#x65B9;&#x6848;/APP.png" alt="&#x4F9D;&#x8D56;&#x5173;&#x7CFB;"></p>
+<p>&#x4E00;&#x822C;&#x6211;&#x4EEC;&#x4F1A;&#x50CF;&#x4E0B;&#x9762;&#x7684;&#x6F14;&#x793A;&#x4EE3;&#x7801;&#x4E00;&#x6837;&#x58F0;&#x660E;&#x4F9D;&#x8D56;&#xFF1A;</p>
+<pre><code class="lang-groovy"><span class="hljs-comment">//APP:</span>
+implementation project(<span class="hljs-string">&apos;A&apos;</span>)
+implementation project(<span class="hljs-string">&apos;Foo&apos;</span>)
+
+<span class="hljs-comment">//A:</span>
+implementation project(<span class="hljs-string">&apos;B&apos;</span>)
+implementation project(<span class="hljs-string">&apos;Bar&apos;</span>)
+</code></pre>
+<p>&#x56E0;&#x4E3A;&#x4F9D;&#x8D56;&#x4F20;&#x9012;&#x6027;&#xFF0C;APP&#x5176;&#x5B9E;&#x4F9D;&#x8D56;&#x4E86;A&#xFF0C;Foo&#xFF0C;B&#xFF0C;Bar&#x3002;</p>
+<p>&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x4E00;&#x9897;&#x6811;&#x4E2D;&#xFF0C;&#x9664;&#x53BB;&#x6839;&#x8282;&#x70B9;&#x7684;&#x8282;&#x70B9;&#x96C6;&#x5408;&#x3002;&#x800C;&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;&#x975E;&#x6839;&#x8282;&#x70B9;&#xFF0C;&#x5B83;&#x88AB;&#x4F9D;&#x8D56;&#x7684;&#x5F62;&#x5F0F;&#x53EA;&#x6709;&#x4E24;&#x79CD;&#xFF1A;</p>
+<ul>
+<li>&#x9759;&#x6001;&#x5305;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x7F16;&#x8BD1;&#xFF0C;&#x8282;&#x7EA6;&#x7F16;&#x8BD1;&#x65F6;&#x95F4;</li>
+<li>module&#xFF0C;&#x9700;&#x8981;&#x518D;&#x6B21;&#x7F16;&#x8BD1;&#xFF0C;&#x53EF;&#x4EE5;&#x8FD0;&#x7528;&#x6700;&#x65B0;&#x6539;&#x52A8;</li>
+</ul>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x952E;&#x503C;&#x5BF9;&#x4FE1;&#x606F;&#xFF1A;</p>
+<pre><code class="lang-groovy">project.ext.depRules = [
+        <span class="hljs-string">&quot;B&quot;</span>: <span class="hljs-string">&quot;p&quot;</span>,
+        <span class="hljs-string">&quot;A&quot;</span>: <span class="hljs-string">&quot;a&quot;</span>
+]
+</code></pre>
+<p><code>&quot;p&quot;</code>&#x4EE3;&#x8868;&#x4F7F;&#x7528;project&#xFF0C;<code>&quot;a&quot;</code>&#x4EE3;&#x8868;&#x4F7F;&#x7528;&#x9759;&#x6001;&#x5305;&#x3002;</p>
+<p>&#x5E76;&#x5C06;&#x8FD9;&#x9897;&#x6811;&#x7684;&#x5185;&#x5BB9;&#x8868;&#x8FBE;&#x51FA;&#x6765;&#xFF1A;<strong>&#x6211;&#x4EEC;&#x5148;&#x5FFD;&#x7565;&#x6389;Foo&#x548C;Bar</strong></p>
+<pre><code class="lang-groovy">project.ext.deps = [
+        <span class="hljs-string">&quot;A&quot;</span>  : [
+                <span class="hljs-string">&quot;B&quot;</span>: [
+                        <span class="hljs-string">&quot;p&quot;</span>: project(<span class="hljs-string">&apos;:B&apos;</span>),
+                        <span class="hljs-string">&quot;a&quot;</span>: <span class="hljs-string">&apos;leobert:B:1.0.0&apos;</span>
+                ]
+        ],
+        <span class="hljs-string">&quot;APP&quot;</span>: [
+                <span class="hljs-string">&quot;A&quot;</span>: [
+                        <span class="hljs-string">&quot;p&quot;</span>: project(<span class="hljs-string">&apos;:A&apos;</span>),
+                        <span class="hljs-string">&quot;a&quot;</span>: <span class="hljs-string">&apos;leobert:A:1.0.0&apos;</span>
+                ]
+        ]
+].with(<span class="hljs-literal">true</span>) {
+    A.each { e -&gt;
+        APP.put(e.key, e.value)
+    }
+}
+</code></pre>
+<p>&#x4EE5;A&#x4E3A;&#x4F8B;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#x52A8;&#x6001;&#x6DFB;&#x52A0;&#x4F9D;&#x8D56;&#xFF1A;</p>
+<pre><code class="lang-groovy">project.afterEvaluate { p -&gt;
+        println(<span class="hljs-string">&quot;handle deps for:&quot;</span> + p)
+        deps.A.each { e -&gt;
+            <span class="hljs-keyword">def</span> rule = depRules.get(e.key)
+            println(<span class="hljs-string">&quot;find deps of A: rule is&quot;</span> + rule + <span class="hljs-string">&quot; ,dep is:&quot;</span> + e.value.get(rule).toString())
+            project.dependencies.add(<span class="hljs-string">&quot;compileOnly&quot;</span>, e.value.get(rule))
+        }
+    }
+</code></pre>
+<p>&#x540C;&#x7406;&#xFF0C;&#x5BF9;&#x4E8E;APP&#xFF1A;</p>
+<pre><code class="lang-groovy">project.afterEvaluate { p-&gt;
+        println(<span class="hljs-string">&quot;handle deps for:&quot;</span> + p)
+        deps.APP.each { e -&gt;
+            <span class="hljs-keyword">def</span> rule = depRules.get(e.key)
+            println(<span class="hljs-string">&quot;find deps of App:rule is&quot;</span> + rule + <span class="hljs-string">&quot; ,dep is:&quot;</span> + e.value.get(rule).toString())
+            project.dependencies.add(<span class="hljs-string">&quot;implementation&quot;</span>, e.value.get(rule))
+        }
+    }
+</code></pre>
+<p>&#x67E5;&#x770B;&#x8F93;&#x51FA;&#xFF1A;</p>
+<blockquote>
+<p>Configure project :A</p>
+<p>handle deps for:project &apos;:A&apos;</p>
+<p>find deps of A: rule isp ,dep is:project &apos;:B&apos;</p>
+<p>Configure project :app</p>
+<p>handle deps for:project &apos;:app&apos;</p>
+<p>find deps of App:rule isa ,dep is:leobert:A:1.0.0</p>
+<p>find deps of App:rule isp ,dep is:project &apos;:B&apos;</p>
+</blockquote>
+<p>&#x8FD9;&#x6837;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4FEE;&#x6539;&#x5BF9;&#x5E94;&#x8282;&#x70B9;&#x7684;&#x4F9D;&#x8D56;&#x65B9;&#x5F0F;&#x914D;&#x7F6E;&#x800C;&#x5B9E;&#x73B0;&#x9C7C;&#x548C;&#x718A;&#x638C;&#x517C;&#x5F97;&#x3002;&#x4E0D;&#x518D;&#x53D7;pom&#x6587;&#x4EF6;&#x7684;&#x7EA6;&#x675F;&#x3002;</p>
+<p>&#x5F53;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x56DE;&#x5230;&#x4E0A;&#x9762;&#x8BF4;&#x7684;<code>&#x4E0D;&#x4EBA;&#x9053;&#x4E3B;&#x4E49;</code>&#x4E4B;&#x5904;&#xFF0C;&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x4E86;<code>with</code> &#x51FD;&#x6570;&#xFF0C;&#x5C06;A&#x81EA;&#x8EAB;&#x7684;&#x4F9D;&#x8D56;&#x4FE1;&#x606F;&#xFF0C;&#x6CE8;&#x5165;&#x5230;APP&#x4E2D;&#x3002;
+&#x4F46;&#x662F;&#x5F53;&#x6811;&#x7684;&#x89C4;&#x6A21;&#x53D8;&#x5927;&#x65F6;&#xFF0C;&#x4EBA;&#x4E3A;&#x7EF4;&#x62A4;&#x5C31;&#x5F88;&#x7D2F;&#x4E86;&#x3002;&#x8FD9;&#x662F;<code>&#x5FC5;&#x987B;&#x8981;&#x89E3;&#x51B3;&#x7684;</code>&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x8FD9;&#x5F88;&#x5BB9;&#x6613;&#x89E3;&#x51B3;&#x3002;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x9012;&#x5F52;&#x5904;&#x7406;&#x5373;&#x53EF;</p>
+<h2 id="&#x8D34;&#x8FD1;&#x4EBA;&#x7684;&#x76F4;&#x89C2;&#x611F;&#x53D7;&#x624D;&#x4F18;&#x96C5;&#xFF0C;&#x9010;&#x6B65;&#x5B9E;&#x73B0;&#x4EBA;&#x9053;&#x4E3B;&#x4E49;">&#x8D34;&#x8FD1;&#x4EBA;&#x7684;&#x76F4;&#x89C2;&#x611F;&#x53D7;&#x624D;&#x4F18;&#x96C5;&#xFF0C;&#x9010;&#x6B65;&#x5B9E;&#x73B0;&#x4EBA;&#x9053;&#x4E3B;&#x4E49;</h2>
+<p>&#x6211;&#x4EEC;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x95ED;&#x5305;&#xFF1A;</p>
+<pre><code class="lang-groovy">ext.utils = [
+<span class="hljs-symbol">        applyDependency:</span> { project, e -&gt;
+            <span class="hljs-keyword">def</span> rule = depRules.get(e.key)
+            println(<span class="hljs-string">&quot;find deps of App:rule is &quot;</span> + rule + <span class="hljs-string">&quot; ,dep is:&quot;</span> + e.value.get(rule).toString())
+            project.dependencies.add(<span class="hljs-string">&quot;implementation&quot;</span>, e.value.get(rule))
+
+            <span class="hljs-keyword">try</span> {
+                println(<span class="hljs-string">&quot;try to add sub deps of:&quot;</span> + e.key)
+                <span class="hljs-keyword">def</span> sub = deps.get(e.key)
+                <span class="hljs-keyword">if</span> (sub != <span class="hljs-literal">null</span> &amp;&amp; sub.get(<span class="hljs-string">&quot;isEnd&quot;</span>) != <span class="hljs-literal">true</span>) {
+                    sub.each { se -&gt;
+                        ext.utils.applyDependency(project, se)
+                    }
+                }
+            } <span class="hljs-keyword">catch</span> (Exception ignore) {
+
+            }
+        }
+]
+</code></pre>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x7684;&#x4F9D;&#x8D56;&#x4FE1;&#x606F;&#x662F;&#xFF1A;moduleName-&gt; (moduleName -&gt; (scopeName-&gt; depInfo)) &#x7684;&#x65B9;&#x5F0F;&#x3002;</p>
+<p>&#x8FD9;&#x5BFC;&#x81F4;&#x6211;&#x4EEC;&#x5224;&#x65AD;&#x672B;&#x7AEF;&#x8282;&#x70B9;&#x6709;&#x4E00;&#x5B9A;&#x7684;&#x56F0;&#x96BE;&#xFF0C;&#x5373;&#x9012;&#x5F52;&#x7684;&#x5C3E;&#x90E8;&#x5224;&#x65AD;&#x5B58;&#x5728;&#x56F0;&#x96BE;,&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4EBA;&#x4E3A;&#x6807;&#x8BB0;&#x4E00;&#x4E0B;&#x672B;&#x7AEF;&#x8282;&#x70B9;</p>
+<p>&#x8FD9;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x63CF;&#x8FF0;&#x4E00;&#x4E0B;&#x6811;&#x5373;&#x53EF;&#xFF1A;<strong>&#x540C;&#x6837;&#x5FFD;&#x7565;Foo&#xFF0C;Bar</strong></p>
+<pre><code class="lang-groovy">project.ext.deps = [
+        <span class="hljs-string">&quot;A&quot;</span>  : [
+                <span class="hljs-string">&quot;B&quot;</span>: [
+                        <span class="hljs-string">&quot;isEnd&quot;</span>: <span class="hljs-literal">true</span>,
+                        <span class="hljs-string">&quot;p&quot;</span>    : project(<span class="hljs-string">&apos;:B&apos;</span>),
+                        <span class="hljs-string">&quot;a&quot;</span>    : <span class="hljs-string">&apos;leobert:B:1.0.0&apos;</span>
+                ]
+        ],
+        <span class="hljs-string">&quot;APP&quot;</span>: [
+                <span class="hljs-string">&quot;A&quot;</span>: [
+                        <span class="hljs-string">&quot;p&quot;</span>: project(<span class="hljs-string">&apos;:A&apos;</span>),
+                        <span class="hljs-string">&quot;a&quot;</span>: <span class="hljs-string">&apos;leobert:A:1.0.0&apos;</span>
+                ]
+        ]
+]
+</code></pre>
+<p>&#x95EE;&#x9898;&#x57FA;&#x672C;&#x5F97;&#x5230;&#x89E3;&#x51B3;&#x4E86;&#xFF0C;&#x4F46;&#x662F;&#x5E76;&#x4E0D;&#x4F18;&#x96C5;&#x3002;</p>
+<h3 id="&#x4F18;&#x96C5;&#xFF0C;&#x4F18;&#x96C5;&#xFF0C;&#x4F18;&#x96C5;">&#x4F18;&#x96C5;&#xFF0C;&#x4F18;&#x96C5;&#xFF0C;&#x4F18;&#x96C5;</h3>
+<p>&#x6211;&#x4EEC;&#x4E0D;&#x59A8;&#x518D;&#x4FEE;&#x6539;&#x4E00;&#x4E0B;&#x5BF9;&#x4F9D;&#x8D56;&#x6811;&#x7684;&#x63CF;&#x8FF0;&#x65B9;&#x5F0F;&#xFF0C;&#x5C06;&#x8282;&#x70B9;&#x4FE1;&#x606F;&#x548C;&#x6811;&#x7ED3;&#x6784;&#x5206;&#x5F00;&#xFF0C;&#x91CD;&#x65B0;&#x6539;&#x8FDB;&#xFF1A;</p>
+<p>&#x66F4;&#x4EBA;&#x9053;&#x4E3B;&#x4E49;&#x7684;&#x4F9D;&#x8D56;&#x63CF;&#x8FF0;</p>
+<pre><code class="lang-groovy">project.ext.deps = [
+        <span class="hljs-string">&quot;A&quot;</span>  : [<span class="hljs-string">&quot;B&quot;</span>],
+        <span class="hljs-string">&quot;app&quot;</span>: [<span class="hljs-string">&quot;A&quot;</span>]
+]
+
+project.ext.modules = [
+        <span class="hljs-string">&quot;A&quot;</span>: [
+                <span class="hljs-string">&quot;p&quot;</span>: project(<span class="hljs-string">&apos;:A&apos;</span>),
+                <span class="hljs-string">&quot;a&quot;</span>: <span class="hljs-string">&apos;leobert:A:1.0.0&apos;</span>
+        ],
+        <span class="hljs-string">&quot;B&quot;</span>: [
+                <span class="hljs-string">&quot;p&quot;</span>    : project(<span class="hljs-string">&apos;:B&apos;</span>),
+                <span class="hljs-string">&quot;a&quot;</span>    : <span class="hljs-string">&apos;leobert:B:1.0.0&apos;</span>
+        ]
+]
+
+project.ext.depRules = [
+        <span class="hljs-string">&quot;B&quot;</span>: <span class="hljs-string">&quot;p&quot;</span>,
+        <span class="hljs-string">&quot;A&quot;</span>: <span class="hljs-string">&quot;a&quot;</span>
+]
+</code></pre>
+<p>&#x62BD;&#x8C61;&#x6DFB;&#x52A0;&#x4F9D;&#x8D56;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x9012;&#x5F52;&#x5904;&#x7406;<code>&#x6BCF;&#x4E00;&#x4E2A;&#x8282;&#x70B9;</code>&#x7684;<code>&#x4F9D;&#x8D56;&#x6536;&#x96C6;</code>&#xFF0C;&#x5E76;<code>&#x5411;&#x5BBF;&#x4E3B;module&#x6DFB;&#x52A0;</code>&#xFF0C;&#x5F53;&#x67D0;&#x4E2A;&#x8282;&#x70B9;&#x5728;ext.deps&#x4E2D;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x4F9D;&#x8D56;&#x65F6;&#xFF0C;<code>&#x5F52;</code>&#xFF1A;</p>
+<pre><code class="lang-groovy">ext.utils = [
+<span class="hljs-symbol">            applyDependency:</span> { project, scope, e -&gt;
+                <span class="hljs-keyword">def</span> rule = depRules.get(e)
+                <span class="hljs-keyword">def</span> eInfo = ext.modules.get(e)
+                println(<span class="hljs-string">&quot;find deps of &quot;</span> + project + <span class="hljs-string">&quot;:rule is &quot;</span> + rule + <span class="hljs-string">&quot; ,dep is:&quot;</span> + eInfo.get(rule).toString())
+                project.dependencies.add(scope, eInfo.get(rule))
+
+                <span class="hljs-keyword">def</span> sub = deps.get(e) <span class="hljs-comment">//list deps of e</span>
+                println(<span class="hljs-string">&quot;try to add sub deps of:&quot;</span> + e + <span class="hljs-string">&quot; ---&gt; &quot;</span> + sub)
+
+                <span class="hljs-keyword">if</span> (sub != <span class="hljs-literal">null</span> &amp;&amp; !sub.isEmpty()) {
+                    sub.each { dOfE -&gt;
+                        ext.utils.applyDependency(project, scope, dOfE)
+                    }
+                }
+            }
+    ]
+</code></pre>
+<p>&#x6BCF;&#x4E2A;module&#x53EA;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x81EA;&#x5DF1;&#x7684;scope&#xFF1A;</p>
+<pre><code class="lang-groovy"><span class="hljs-comment">//:app</span>
+project.afterEvaluate { p -&gt;
+    println(<span class="hljs-string">&quot;handle deps for:&quot;</span> + p)
+    deps.get(p.name).each { e -&gt;
+        rootProject.ext.utils.applyDependency(p,<span class="hljs-string">&quot;implementation&quot;</span>,e)
+    }
+}
+
+<span class="hljs-comment">//:A</span>
+project.afterEvaluate { p -&gt;
+    println(<span class="hljs-string">&quot;handle deps for:&quot;</span> + p.name)
+    deps.get(p.name).each { e -&gt;
+        rootProject.ext.utils.applyDependency(p,<span class="hljs-string">&quot;compileOnly&quot;</span>,e)
+    }
+}
+</code></pre>
+<p>&#x53EA;&#x8981;&#x4E0D;&#x662F;&#x72EC;&#x7ACB;&#x8FD0;&#x884C;&#x7684;module&#xFF0C;&#x5C31;&#x662F;<code>compileOnly</code>&#xFF0C;&#x5426;&#x5219;&#x5C31;&#x662F; <code>implementation</code>&#x3002;</p>
+<p>&#x8F93;&#x51FA;&#x4E5F;&#x5BB9;&#x6613;&#x62CD;&#x9519;&#xFF1A;</p>
+<pre><code class="lang-shell">&gt; Configure project :A
+handle deps for:A
+find deps of project &apos;:A&apos;:rule is p ,dep is:project &apos;:B&apos;
+try to add sub deps of:B ---&gt; null
+
+&gt; Configure project :app
+handle deps for:project &apos;:app&apos;
+find deps of project &apos;:app&apos;:rule is a ,dep is:leobert:A:1.0.0
+try to add sub deps of:A ---&gt; [B]
+find deps of project &apos;:app&apos;:rule is p ,dep is:project &apos;:B&apos;
+try to add sub deps of:B ---&gt; null
+</code></pre>
+<h2 id="&#x6D4B;&#x8BD5;&#x4E00;&#x4E2A;&#x590D;&#x6742;&#x573A;&#x666F;">&#x6D4B;&#x8BD5;&#x4E00;&#x4E2A;&#x590D;&#x6742;&#x573A;&#x666F;</h2>
+<p>&#x6211;&#x4EEC;&#x518D;&#x4E0A;&#x56FE;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x8BA9;B&#x548C;Foo&#x4F9D;&#x8D56;Base</p>
+<pre><code class="lang-groovy">project.ext.deps = [
+        <span class="hljs-string">&quot;app&quot;</span>: [<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;Foo&quot;</span>],
+        <span class="hljs-string">&quot;A&quot;</span>  : [<span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;Bar&quot;</span>],
+        <span class="hljs-string">&quot;Foo&quot;</span>: [<span class="hljs-string">&quot;Base&quot;</span>],
+        <span class="hljs-string">&quot;B&quot;</span>  : [<span class="hljs-string">&quot;Base&quot;</span>],
+]
+
+project.ext.modules = [
+        <span class="hljs-string">&quot;A&quot;</span>: [
+                <span class="hljs-string">&quot;p&quot;</span>: project(<span class="hljs-string">&apos;:A&apos;</span>),
+                <span class="hljs-string">&quot;a&quot;</span>: <span class="hljs-string">&apos;leobert:A:1.0.0&apos;</span>
+        ],
+        <span class="hljs-string">&quot;B&quot;</span>: [
+                <span class="hljs-string">&quot;p&quot;</span>: project(<span class="hljs-string">&apos;:B&apos;</span>),
+                <span class="hljs-string">&quot;a&quot;</span>: <span class="hljs-string">&apos;leobert:B:1.0.0&apos;</span>
+        ],
+        <span class="hljs-string">&quot;Foo&quot;</span>: [
+                <span class="hljs-string">&quot;p&quot;</span>: project(<span class="hljs-string">&apos;:Foo&apos;</span>),
+        ],
+        <span class="hljs-string">&quot;Bar&quot;</span>: [
+                <span class="hljs-string">&quot;p&quot;</span>: project(<span class="hljs-string">&apos;:Bar&apos;</span>),
+        ],
+        <span class="hljs-string">&quot;Base&quot;</span>: [
+                <span class="hljs-string">&quot;p&quot;</span>: project(<span class="hljs-string">&apos;:Base&apos;</span>),
+        ]
+]
+
+project.ext.depRules = [
+        <span class="hljs-string">&quot;B&quot;</span>   : <span class="hljs-string">&quot;p&quot;</span>,
+        <span class="hljs-string">&quot;A&quot;</span>   : <span class="hljs-string">&quot;a&quot;</span>,
+        <span class="hljs-string">&quot;Foo&quot;</span> : <span class="hljs-string">&quot;p&quot;</span>,
+        <span class="hljs-string">&quot;Bar&quot;</span> : <span class="hljs-string">&quot;p&quot;</span>,
+        <span class="hljs-string">&quot;Base&quot;</span>: <span class="hljs-string">&quot;p&quot;</span>
+]
+</code></pre>
+<pre><code class="lang-shell">&gt; Configure project :A
+handle deps for:A
+find deps of project &apos;:A&apos;:rule is p ,dep is:project &apos;:B&apos;
+try to add sub deps of:B ---&gt; [Base]
+find deps of project &apos;:A&apos;:rule is p ,dep is:project &apos;:Base&apos;
+try to add sub deps of:Base ---&gt; null
+find deps of project &apos;:A&apos;:rule is p ,dep is:project &apos;:Bar&apos;
+try to add sub deps of:Bar ---&gt; null
+
+&gt; Configure project :app
+handle deps for:project &apos;:app&apos;
+find deps of project &apos;:app&apos;:rule is a ,dep is:leobert:A:1.0.0
+try to add sub deps of:A ---&gt; [B, Bar]
+find deps of project &apos;:app&apos;:rule is p ,dep is:project &apos;:B&apos;
+try to add sub deps of:B ---&gt; [Base]
+find deps of project &apos;:app&apos;:rule is p ,dep is:project &apos;:Base&apos;
+try to add sub deps of:Base ---&gt; null
+find deps of project &apos;:app&apos;:rule is p ,dep is:project &apos;:Bar&apos;
+try to add sub deps of:Bar ---&gt; null
+find deps of project &apos;:app&apos;:rule is p ,dep is:project &apos;:Foo&apos;
+try to add sub deps of:Foo ---&gt; [Base]
+find deps of project &apos;:app&apos;:rule is p ,dep is:project &apos;:Base&apos;
+try to add sub deps of:Base ---&gt; null
+
+&gt; Configure project :Bar
+handle deps for:Bar
+
+&gt; Configure project :Base
+handle deps for:Base
+
+&gt; Configure project :Foo
+handle deps for:Foo
+find deps of project &apos;:Foo&apos;:rule is p ,dep is:project &apos;:Base&apos;
+try to add sub deps of:Base ---&gt; null
+</code></pre>
+<blockquote>
+<p>&#x968F;&#x7740;&#xFF0C;&#x6811;&#x89C4;&#x6A21;&#x7684;&#x589E;&#x5927;&#xFF0C;&#x9605;&#x8BFB;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x8FD8;&#x7B97;&#x660E;&#x663E;&#xFF0C;&#x4F46;&#x662F;&#x9605;&#x8BFB;&#x65E5;&#x5FD7;&#xFF0C;&#x53C8;&#x4E0D;&#x592A;&#x4F18;&#x96C5;&#x4E86;&#x3002;</p>
+</blockquote>
+<h2 id="&#x603B;&#x7ED3;&#x548C;&#x5C55;&#x671B;">&#x603B;&#x7ED3;&#x548C;&#x5C55;&#x671B;</h2>
+<p>&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x63A2;&#x5BFB;&#xFF0C;&#x53D1;&#x73B0;&#x4E86;&#x4E00;&#x79CD;&#x53EF;&#x4EE5; <code>&#x9C7C;&#x548C;&#x718A;&#x638C;&#x517C;&#x5F97;</code> &#x5730;&#x4F9D;&#x8D56;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x5728;Android&#x9886;&#x57DF;&#x7EC4;&#x4EF6;&#x5316;&#x573A;&#x666F;&#x4E0B;&#xFF08;&#x5355;&#x9879;&#x76EE;&#xFF0C;&#x591A;module&#xFF09;&#xFF0C;&#x80FD;&#x591F;&#x7075;&#x6D3B;&#x5730;&#x5207;&#x6362;&#xFF1A;</p>
+<ul>
+<li>&#x9759;&#x6001;&#x5305;&#x4F9D;&#x8D56;&#xFF0C;&#x7F29;&#x77ED;&#x7F16;&#x8BD1;&#x65F6;&#x95F4;</li>
+<li>&#x9879;&#x76EE;&#x4F9D;&#x8D56;&#xFF0C;&#x5FEB;&#x901F;&#x90E8;&#x7F72;&#x53D8;&#x66F4;&#x8FDB;&#x884C;&#x96C6;&#x6210;&#x6D4B;&#x8BD5;</li>
+</ul>
+<p>&#x5BF9;&#x4E86;&#xFF0C;&#x4E0A;&#x9762;&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x91CD;&#x70B9;&#x63D0;&#x5230;&#x5982;&#x4F55;&#x5207;&#x6362;&#xFF0C;&#x5176;&#x5B9E;&#x975E;&#x5E38;&#x5730;&#x7B80;&#x5355;&#xFF1A;
+&#x53EA;&#x9700;&#x8981;&#x4FEE;&#x6539; <code>project.ext.depRules</code> &#x4E2D;&#x5BF9;&#x5E94;&#x7684;&#x914D;&#x7F6E;&#x9879;&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x540E;&#x9762;&#x8FD8;&#x6709;&#x95F2;&#x60C5;&#x9038;&#x81F4;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x518D;&#x5199;&#x4E00;&#x4E2A;studio&#x7684;&#x63D2;&#x4EF6;&#xFF0C;&#x83B7;&#x53D6; <code>dependency.gradle</code> &#x7684;&#x4FE1;&#x606F;&#xFF0C;
+&#x8F93;&#x51FA;&#x53EF;&#x89C6;&#x5316;&#x7684;&#x4F9D;&#x8D56;&#x6811;&#xFF1B;rule&#x914D;&#x7F6E;&#xFF0C;&#x76F4;&#x63A5;&#x505A;&#x6210;&#x591A;&#x4E2A;&#x5F00;&#x5173;&#xFF0C;<code>&#x4F18;&#x96C5;&#xFF0C;&#x6C38;&#x4E0D;&#x8FC7;&#x65F6;</code>&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"三思系列：组件化场景下module依赖优雅实践方案","level":"1.3.1.1","depth":3,"next":{"title":"Review","level":"1.4","depth":1,"ref":"","articles":[{"title":"造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘","level":"1.4.1","depth":2,"path":"Review/造完了这个轮子--Mocker，却让我感到很羞愧%7C项目复盘.md","ref":"./Review/造完了这个轮子--Mocker，却让我感到很羞愧%7C项目复盘.md","articles":[]}]},"previous":{"title":"组件化","level":"1.3.1","depth":2,"ref":"","articles":[{"title":"三思系列：组件化场景下module依赖优雅实践方案","level":"1.3.1.1","depth":3,"path":"Gradle/Modularization/三思系列：组件化场景下module依赖优雅实践方案.md","ref":"./Gradle/Modularization/三思系列：组件化场景下module依赖优雅实践方案.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Gradle/Modularization/三思系列：组件化场景下module依赖优雅实践方案.md","mtime":"2021-02-06T02:27:18.745Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-02T07:26:17.438Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
