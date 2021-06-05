@@ -1,0 +1,1288 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>三思系列：Glide 4.X全方位认知 -- 模块职责概览 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="post_16.html" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    Android
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" >
+            
+                <span>
+            
+                    
+                    View
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../View/post_1.html">
+            
+                <a href="../View/post_1.html">
+            
+                    
+                    好玩系列：优雅的处理ButterKnife和KAE被废弃
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../View/post_6.html">
+            
+                <a href="../View/post_6.html">
+            
+                    
+                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../View/post_7.html">
+            
+                <a href="../View/post_7.html">
+            
+                    
+                    三思系列：为什么自定义View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../Idea/post_9.html">
+            
+                <a href="../Idea/post_9.html">
+            
+                    
+                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" >
+            
+                <span>
+            
+                    
+                    Drawable
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../Drawable/post_2.html">
+            
+                <a href="../Drawable/post_2.html">
+            
+                    
+                    三思系列：重新认识Drawable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="../Drawable/post_4.html">
+            
+                <a href="../Drawable/post_4.html">
+            
+                    
+                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" >
+            
+                <span>
+            
+                    
+                    消息机制
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" data-path="../Mechanism/Message/post_8.html">
+            
+                <a href="../Mechanism/Message/post_8.html">
+            
+                    
+                    三思系列：Android的消息机制，一文吃透
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" >
+            
+                <span>
+            
+                    
+                    兼容
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.4.1" data-path="../Idea/post_14.html">
+            
+                <a href="../Idea/post_14.html">
+            
+                    
+                    好玩系列：让项目中的相册支持Heif格式图片
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" >
+            
+                <span>
+            
+                    
+                    Glide
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.5.1" data-path="post_15.html">
+            
+                <a href="post_15.html">
+            
+                    
+                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="post_16.html">
+            
+                <a href="post_16.html">
+            
+                    
+                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    Gradle
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" >
+            
+                <span>
+            
+                    
+                    组件化
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../../Gradle/Modularization/post_18.html">
+            
+                <a href="../../Gradle/Modularization/post_18.html">
+            
+                    
+                    三思系列：组件化场景下module依赖优雅实践方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" >
+            
+                <span>
+            
+                    
+                    发布
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../../Gradle/Publish/post_17.html">
+            
+                <a href="../../Gradle/Publish/post_17.html">
+            
+                    
+                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    Review
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../Review/post_10.html">
+            
+                <a href="../../Review/post_10.html">
+            
+                    
+                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    数据结构
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../Review/DataStructure/post_11.html">
+            
+                <a href="../../Review/DataStructure/post_11.html">
+            
+                    
+                    温故：线性表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../Review/DataStructure/post_12.html">
+            
+                <a href="../../Review/DataStructure/post_12.html">
+            
+                    
+                    温故：栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../Review/DataStructure/post_13.html">
+            
+                <a href="../../Review/DataStructure/post_13.html">
+            
+                    
+                    温故：队列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >三思系列：Glide 4.X全方位认知 -- 模块职责概览</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;glide-4x&#x5168;&#x65B9;&#x4F4D;&#x8BA4;&#x77E5;----&#x6A21;&#x5757;&#x804C;&#x8D23;&#x6982;&#x89C8;--glide&#xFF08;&#x4E00;&#xFF09;">&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;Glide 4.X&#x5168;&#x65B9;&#x4F4D;&#x8BA4;&#x77E5; -- &#x6A21;&#x5757;&#x804C;&#x8D23;&#x6982;&#x89C8; | Glide&#xFF08;&#x4E00;&#xFF09;</h1>
+<p>&#x6700;&#x8FD1;&#x5728;&#x89E3;&#x51B3;&#x4E00;&#x4E9B;&#x95EE;&#x9898;&#x65F6;&#xFF0C;&#x8FDB;&#x884C;&#x4E86;&#x4E00;&#x4E0B;&#x68C0;&#x7D22;&#xFF0C;&#x53D1;&#x73B0; <code>&#x7EDD;&#x5927;&#x591A;&#x6570;&#x6587;&#x7AE0;</code> &#x662F; <code>&#x57FA;&#x4E8E;3.X</code>&#x3002;Glide&#x4ECE;&#x8FDB;&#x5165;4.X&#x4E5F;&#x6709;&#x4E24;&#x4E09;&#x5E74;&#x4E86;&#xFF0C;&#x5728;3.X&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x53D1;&#x751F;&#x4E86;&#x5F88;&#x591A;&#x53D8;&#x5316;&#x3002; &#x6240;&#x5E78;&#x6211;&#x5BF9; <code>4.X</code>
+&#x7684;&#x6E90;&#x7801;&#x8FD8;&#x6BD4;&#x8F83;&#x719F;&#xFF0C;&#x4E14;Glide&#x7684;&#x8BBE;&#x8BA1;&#x4E5F;&#x5F88;&#x7CBE;&#x5F69;&#xFF0C;&#x7D22;&#x6027;&#x5199;&#x4E00;&#x5199; <code>&#x5BF9;4.X&#x7684;&#x5256;&#x6790;</code>&#x3002;</p>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x5BF9;&#x4E8E;&#x591A;&#x6570;&#x8BFB;&#x8005;&#x800C;&#x8A00;&#xFF0C;&#x56E0;&#x4E3A;&#x6709;&#x4E00;&#x5B9A;&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#xFF0C;&#x8FD9;&#x4E9B;&#x5256;&#x6790;&#x6587;&#x7AE0;&#x5E76;&#x4E0D;&#x662F;&#x6EE1;&#x5730;&#x91D1;&#x7816;&#x4E86;&#xFF0C;&#x53EF;&#x4EE5;&#x6CDB;&#x8BFB;&#x67E5;&#x6F0F;&#x3002;</p>
+<blockquote>
+<p>&#x4E09;&#x601D;&#x7CFB;&#x5217;&#x662F;&#x6211;&#x6700;&#x65B0;&#x7684;&#x5B66;&#x4E60;&#x3001;&#x603B;&#x7ED3;&#x5F62;&#x5F0F;&#xFF0C;&#x7740;&#x91CD;&#x4E8E;:<strong>&#x95EE;&#x9898;&#x5206;&#x6790;</strong>&#x3001;<strong>&#x6280;&#x672F;&#x79EF;&#x7D2F;</strong>&#x3001;<strong>&#x89C6;&#x91CE;&#x62D3;&#x5C55;</strong>&#xFF0C;<a href="https://github.com/leobert-lan/Blog/blob/main/info/%E5%85%B3%E4%BA%8E%E4%B8%89%E6%80%9D%E7%B3%BB%E5%88%97.md" target="_blank">&#x4E86;&#x89E3;&#x66F4;&#x591A;</a></p>
+</blockquote>
+<h2 id="&#x672C;&#x6587;&#x4E3B;&#x65E8;">&#x672C;&#x6587;&#x4E3B;&#x65E8;</h2>
+<p><strong>Glide&#x662F;&#x4E00;&#x4E2A; <code>&#x5E9E;&#x5927;</code> &#x7684;&#x9879;&#x76EE;&#xFF0C;&#x8FD9;&#x4E00;&#x7BC7;&#x65E8;&#x5728;&#x5BF9;Glide&#x9879;&#x76EE;4.X&#x7248;&#x672C;&#x8FDB;&#x884C; <code>&#x5168;&#x65B9;&#x4F4D;&#x7684;&#x8BA4;&#x77E5;</code></strong></p>
+<p>&#x5177;&#x4F53;&#x4E3A;&#xFF1A;<strong>&#x4E86;&#x89E3;Glide&#x5904;&#x7406;&#x54EA;&#x4E9B;&#x95EE;&#x9898;&#xFF0C;&#x54EA;&#x4E9B;&#x6A21;&#x5757;&#x4E0E;&#x4E4B;&#x76F8;&#x5BF9;&#x5E94;</strong></p>
+<p>&#x5BF9;&#x65E9;&#x5E74;&#x95F4; Square&#x516C;&#x53F8;&#x5F00;&#x6E90;&#x7684; <code>Picasso</code> &#x6BD4;&#x8F83;&#x719F;&#x6089;&#x7684;&#x8BFB;&#x8005;&#x800C;&#x8A00;&#xFF0C;&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;<code>Picasso</code> &#x662F;&#x4E00;&#x4E2A; <code>&#x5C0F;&#x800C;&#x96C5;</code> &#x7684;&#x6846;&#x67B6;&#xFF0C;&#x805A;&#x7126;&#x4E8E;&#x56FE;&#x7247;&#x52A0;&#x8F7D;&#x7684;&#x4EE5;&#x4E0B;4&#x70B9;&#x4E3B;&#x8981;&#x95EE;&#x9898;&#xFF1A;</p>
+<ul>
+<li><code>&#x5F02;&#x6B65;&#x8FC7;&#x7A0B;&#x7BA1;&#x7406;&#x4E0E;&#x8C03;&#x5EA6;</code></li>
+<li><code>&#x8D44;&#x6E90;&#x4E0E;&#x663E;&#x793A;&#x5BB9;&#x5668;&#x591A;&#x5BF9;&#x591A;&#x5173;&#x7CFB;</code></li>
+<li><code>&#x591A;&#x7EA7;&#x7F13;&#x5B58;</code></li>
+<li><code>&#x56FE;&#x7247;&#x8F6C;&#x6362;&#x652F;&#x6301;ScaleType</code></li>
+</ul>
+<p>&#x800C;&#x540E;&#x8D77;&#x4E4B;&#x79C0; <code>Glide</code> &#x5DF2;&#x7ECF;&#x662F;&#x4E00;&#x4E2A; <code>&#x535A;&#x5927;&#x4E14;&#x7EC6;&#x81F4;</code> &#x7684;&#x56FE;&#x7247;&#x5F02;&#x6B65;&#x52A0;&#x8F7D;&#x6846;&#x67B6;&#x3002;</p>
+<p>&#x5728;Glide 1.X &#x65F6;&#x671F;&#xFF0C;&#x4E24;&#x8005;&#x7684;&#x5173;&#x6CE8;&#x70B9;&#x57FA;&#x672C;&#x4E00;&#x81F4;&#xFF0C;&#x968F;&#x7740;&#x5B98;&#x65B9;&#x652F;&#x6301;Glide&#x7684;&#x53D1;&#x5C55;&#xFF0C;&#x5B83;&#x7684;&#x5173;&#x6CE8;&#x70B9;&#x4E5F;&#x8D8A;&#x6765;&#x8D8A;&#x591A;&#xFF0C;&#x5305;&#x62EC;&#x4F46;&#x4E0D;&#x9650;&#x4E8E;&#xFF1A;</p>
+<ul>
+<li><code>&#x8D44;&#x6E90;&#x7684;&#x5C01;&#x88C5;</code></li>
+<li><code>&#x8D44;&#x6E90;&#x83B7;&#x53D6;&#x65B9;&#x5F0F;&#x4E0E;&#x8FC7;&#x7A0B;</code></li>
+<li><code>&#x7F13;&#x5B58;</code></li>
+<li><code>decode</code>&#x3001;<code>encode</code> &#x7684;&#x8FC7;&#x7A0B;</li>
+<li><code>Target&#x7684;&#x62BD;&#x8C61;</code>&#xFF0C;<em>&#x6CE8;&#xFF1A;&#x5A92;&#x4F53;&#x8D44;&#x6E90;&#x83B7;&#x53D6;&#x7684;&#x6700;&#x7EC8;&#x76EE;&#x6807;&#xFF0C;&#x4F8B;&#x5982;&#x5B58;&#x4E3A;&#x6587;&#x4EF6;&#x3001;&#x52A0;&#x8F7D;&#x5230;ImageView&#x4E2D;&#x7B49;</em></li>
+<li><code>&#x56FE;&#x7247;&#x8F6C;&#x6362;</code></li>
+<li><code>&#x8D44;&#x6E90;&#x4E0E;Target&#x591A;&#x5BF9;&#x591A;&#x5173;&#x7CFB;</code></li>
+<li><code>&#x751F;&#x547D;&#x5468;&#x671F;&#x611F;&#x77E5;&#x4E0E;&#x63A7;&#x5236;</code></li>
+</ul>
+<p>&#x4ED4;&#x7EC6;&#x601D;&#x8003;&#x8FD9;&#x4E9B;&#x70B9;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x96BE;&#x53D1;&#x73B0;&#xFF0C;Glide&#x5DF2;&#x7ECF;&#x7740;&#x773C;&#x4E8E;&#x89E3;&#x51B3;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF1A;</p>
+<blockquote>
+<p>&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x7CFB;&#x7EDF;&#xFF0C;&#x5BF9;&#x6307;&#x5B9A;&#x7684;&#x6807;&#x8BC6;&#x5A92;&#x4F53;&#x8D44;&#x6E90;&#x7684;&#x5B9E;&#x4F53;&#xFF0C;<em>&#x5176;&#x5C01;&#x88C5;&#x5F62;&#x5F0F;&#x53EF;&#x4EE5;&#x81EA;&#x884C;&#x6269;&#x5C55;</em>&#xFF0C;&#x6267;&#x884C;&#x8D44;&#x6E90;&#x7684;&#x83B7;&#x53D6;&#xFF0C;&#x5E76;&#x5E94;&#x7528;&#x5185;&#x5B58;&#x3001;&#x78C1;&#x76D8;&#x8FDB;&#x884C;&#x7F13;&#x5B58;&#xFF0C;&#x5C01;&#x88C5;&#x56FE;&#x7247;&#x7684;&#x89E3;&#x7801;&#x8FC7;&#x7A0B;&#xFF0C;&#x6309;&#x6307;&#x5B9A;&#x8981;&#x6C42;&#x8FDB;&#x884C;
+&#x88C1;&#x5207;&#x3001;&#x7F29;&#x653E;&#x7B49;&#x56FE;&#x7247;&#x8F6C;&#x6362;&#xFF0C;&#x6700;&#x7EC8;&#x5C06;&#x7ED3;&#x679C;&#x8FD0;&#x7528;&#x5230;&#x6307;&#x5B9A;&#x7684;&#x76EE;&#x6807;&#x3002;&#x5E76;&#x5BF9;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x6309;&#x7167;Android&#x5E73;&#x53F0;&#x7279;&#x6027;&#x8FDB;&#x884C;&#x751F;&#x547D;&#x5468;&#x671F;&#x7BA1;&#x7406;&#x3002;</p>
+</blockquote>
+<p>&#x800C;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x7EDD;&#x5927;&#x591A;&#x6570; <code>&#x8282;&#x70B9;</code> &#x6216;&#x8005;&#x79F0;&#x4E4B;&#x4E3A; <code>&#x5207;&#x9762;</code>&#xFF0C;&#x5747;&#x53EF;&#x8FDB;&#x884C; <code>&#x5916;&#x90E8;&#x6269;&#x5C55;</code></p>
+<p>&#x8FD9;&#x4E00;&#x70B9;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4ECE;&#x9879;&#x76EE;&#x4ECB;&#x7ECD;&#x4E2D;&#x5F97;&#x5230;&#x5370;&#x8BC1;&#xFF1A;<em>&#x770B;&#x91CD;&#x70B9;&#x5355;&#x8BCD;&#x5373;&#x53EF;</em></p>
+<blockquote>
+<p>Glide is a fast and efficient open source <code>media management</code> and <code>image loading framework</code> for Android that wraps <code>media
+decoding</code>, <code>memory and disk caching</code>, and <code>resource pooling</code> into a simple and easy to use interface.</p>
+<p>Glide supports <code>fetching</code>, <code>decoding</code>, and <code>displaying</code> video stills, images, and animated GIFs. Glide includes a flexible API
+that allows developers to plug in to almost any network stack. By default Glide uses a custom <code>HttpUrlConnection</code> based
+stack, but also includes utility libraries plug in to Google&apos;s Volley project or Square&apos;s OkHttp library instead.</p>
+<p>Glide&apos;s <code>primary focus</code> is on <code>making scrolling any kind of a list of images</code> as <code>smooth and fast</code> as possible, but Glide is
+also effective for <code>almost any case</code> where you need to <code>fetch</code>, <code>resize</code>, and <code>display</code> a remote image.</p>
+</blockquote>
+<h2 id="&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4ECE;glide&#x7684;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x7AA5;&#x4E00;&#x6591;">&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4ECE;Glide&#x7684;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x7AA5;&#x4E00;&#x6591;</h2>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x4E00;&#x4E2A;&#x5E9E;&#x5927;&#x7684;&#x7CFB;&#x7EDF;&#x9700;&#x8981;&#x5728;&#x7B26;&#x5408; <code>SRP</code> &#x7684;&#x57FA;&#x7840;&#x4E0A;&#x8FDB;&#x884C;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x8FD9;&#x6837;&#x4E00;&#x6765;&#xFF0C;&#x7C7B;&#x5C31;&#x4F1A;&#x53D8;&#x5F97;&#x5F88;&#x591A;&#xFF0C;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x4F1A;&#x53D8;&#x5F97;&#x590D;&#x6742;&#xFF0C;&#x5229;&#x7528;Builder&#x6A21;&#x5F0F;&#x53EF;&#x4EE5;&#x5F88;&#x597D;&#x7684;&#x89E3;&#x51B3;&#x8FD9;&#x4E00;&#x95EE;&#x9898;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GlideBuilder</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Glide <span class="hljs-title">build</span><span class="hljs-params">(@NonNull Context context)</span> </span>{
+        <span class="hljs-keyword">if</span> (sourceExecutor == <span class="hljs-keyword">null</span>) {
+            sourceExecutor = GlideExecutor.newSourceExecutor();
+        }
+
+        <span class="hljs-keyword">if</span> (diskCacheExecutor == <span class="hljs-keyword">null</span>) {
+            diskCacheExecutor = GlideExecutor.newDiskCacheExecutor();
+        }
+
+        <span class="hljs-keyword">if</span> (animationExecutor == <span class="hljs-keyword">null</span>) {
+            animationExecutor = GlideExecutor.newAnimationExecutor();
+        }
+
+        <span class="hljs-keyword">if</span> (memorySizeCalculator == <span class="hljs-keyword">null</span>) {
+            memorySizeCalculator = <span class="hljs-keyword">new</span> MemorySizeCalculator.Builder(context).build();
+        }
+
+        <span class="hljs-keyword">if</span> (connectivityMonitorFactory == <span class="hljs-keyword">null</span>) {
+            connectivityMonitorFactory = <span class="hljs-keyword">new</span> DefaultConnectivityMonitorFactory();
+        }
+
+        <span class="hljs-keyword">if</span> (bitmapPool == <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">int</span> size = memorySizeCalculator.getBitmapPoolSize();
+            <span class="hljs-keyword">if</span> (size &gt; <span class="hljs-number">0</span>) {
+                bitmapPool = <span class="hljs-keyword">new</span> LruBitmapPool(size);
+            } <span class="hljs-keyword">else</span> {
+                bitmapPool = <span class="hljs-keyword">new</span> BitmapPoolAdapter();
+            }
+        }
+
+        <span class="hljs-keyword">if</span> (arrayPool == <span class="hljs-keyword">null</span>) {
+            arrayPool = <span class="hljs-keyword">new</span> LruArrayPool(memorySizeCalculator.getArrayPoolSizeInBytes());
+        }
+
+        <span class="hljs-keyword">if</span> (memoryCache == <span class="hljs-keyword">null</span>) {
+            memoryCache = <span class="hljs-keyword">new</span> LruResourceCache(memorySizeCalculator.getMemoryCacheSize());
+        }
+
+        <span class="hljs-keyword">if</span> (diskCacheFactory == <span class="hljs-keyword">null</span>) {
+            diskCacheFactory = <span class="hljs-keyword">new</span> InternalCacheDiskCacheFactory(context);
+        }
+
+        <span class="hljs-keyword">if</span> (engine == <span class="hljs-keyword">null</span>) {
+            engine = <span class="hljs-keyword">new</span> Engine(
+                    memoryCache,
+                    diskCacheFactory,
+                    diskCacheExecutor,
+                    sourceExecutor,
+                    GlideExecutor.newUnlimitedSourceExecutor(),
+                    GlideExecutor.newAnimationExecutor(),
+                    isActiveResourceRetentionAllowed);
+        }
+
+        RequestManagerRetriever requestManagerRetriever =
+                <span class="hljs-keyword">new</span> RequestManagerRetriever(requestManagerFactory);
+
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Glide(
+                context,
+                engine,
+                memoryCache,
+                bitmapPool,
+                arrayPool,
+                requestManagerRetriever,
+                connectivityMonitorFactory,
+                logLevel,
+                defaultRequestOptions.lock(),
+                defaultTransitionOptions);
+    }
+}
+</code></pre>
+<p>&#x4ECE;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6536;&#x96C6;&#x5230;&#x4E00;&#x4E0B;&#x6709;&#x6548;&#x4FE1;&#x606F;</p>
+<ul>
+<li>&#x7F13;&#x5B58;&#x4E0E;&#x6C60;<ul>
+<li>MemorySizeCalculator</li>
+<li>LruBitmapPool</li>
+<li>BitmapPoolAdapter</li>
+<li>LruArrayPool</li>
+<li>LruResourceCache</li>
+<li>InternalCacheDiskCacheFactory</li>
+</ul>
+</li>
+<li>&#x8D44;&#x6E90;&#x83B7;&#x53D6;<ul>
+<li>RequestManagerRetriever</li>
+<li>DefaultConnectivityMonitorFactory</li>
+</ul>
+</li>
+<li>&#x6838;&#x5FC3;&#x6D41;&#x7A0B;&#x7BA1;&#x7406;<ul>
+<li>Engine</li>
+</ul>
+</li>
+<li>&#x7EBF;&#x7A0B;&#x6C60;<ul>
+<li>GlideExecutor</li>
+</ul>
+</li>
+</ul>
+<p>&#x518D;&#x770B;&#x5230;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF1A;<em>&#x4EE3;&#x7801;&#x633A;&#x957F;&#xFF0C;&#x7565;&#x53BB;&#x4E86;&#x90E8;&#x5206;&#x5185;&#x5BB9;</em></p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Glide</span> </span>{
+    Glide(
+            <span class="hljs-meta">@NonNull</span> Context context,
+            <span class="hljs-meta">@NonNull</span> Engine engine,
+            <span class="hljs-meta">@NonNull</span> MemoryCache memoryCache,
+            <span class="hljs-meta">@NonNull</span> BitmapPool bitmapPool,
+            <span class="hljs-meta">@NonNull</span> ArrayPool arrayPool,
+            <span class="hljs-meta">@NonNull</span> RequestManagerRetriever requestManagerRetriever,
+            <span class="hljs-meta">@NonNull</span> ConnectivityMonitorFactory connectivityMonitorFactory,
+            <span class="hljs-keyword">int</span> logLevel,
+            <span class="hljs-meta">@NonNull</span> RequestOptions defaultRequestOptions,
+            <span class="hljs-meta">@NonNull</span> Map&lt;Class&lt;?&gt;, TransitionOptions&lt;?, ?&gt;&gt; defaultTransitionOptions) {
+
+        <span class="hljs-keyword">this</span>.engine = engine;
+        <span class="hljs-keyword">this</span>.bitmapPool = bitmapPool;
+        <span class="hljs-keyword">this</span>.arrayPool = arrayPool;
+        <span class="hljs-keyword">this</span>.memoryCache = memoryCache;
+        <span class="hljs-keyword">this</span>.requestManagerRetriever = requestManagerRetriever;
+        <span class="hljs-keyword">this</span>.connectivityMonitorFactory = connectivityMonitorFactory;
+
+        DecodeFormat decodeFormat = defaultRequestOptions.getOptions().get(Downsampler.DECODE_FORMAT);
+        bitmapPreFiller = <span class="hljs-keyword">new</span> BitmapPreFiller(memoryCache, bitmapPool, decodeFormat);
+
+        <span class="hljs-keyword">final</span> Resources resources = context.getResources();
+
+        registry = <span class="hljs-keyword">new</span> Registry();
+        registry.register(<span class="hljs-keyword">new</span> DefaultImageHeaderParser());
+
+        Downsampler downsampler = <span class="hljs-keyword">new</span> Downsampler(registry.getImageHeaderParsers(),
+                resources.getDisplayMetrics(), bitmapPool, arrayPool);
+        ByteBufferGifDecoder byteBufferGifDecoder =
+                <span class="hljs-keyword">new</span> ByteBufferGifDecoder(context, registry.getImageHeaderParsers(), bitmapPool, arrayPool);
+        ResourceDecoder&lt;ParcelFileDescriptor, Bitmap&gt; parcelFileDescriptorVideoDecoder =
+                VideoDecoder.parcel(bitmapPool);
+        ByteBufferBitmapDecoder byteBufferBitmapDecoder = <span class="hljs-keyword">new</span> ByteBufferBitmapDecoder(downsampler);
+        StreamBitmapDecoder streamBitmapDecoder = <span class="hljs-keyword">new</span> StreamBitmapDecoder(downsampler, arrayPool);
+        ResourceDrawableDecoder resourceDrawableDecoder =
+                <span class="hljs-keyword">new</span> ResourceDrawableDecoder(context);
+        ResourceLoader.StreamFactory resourceLoaderStreamFactory =
+                <span class="hljs-keyword">new</span> ResourceLoader.StreamFactory(resources);
+        ResourceLoader.UriFactory resourceLoaderUriFactory =
+                <span class="hljs-keyword">new</span> ResourceLoader.UriFactory(resources);
+        ResourceLoader.FileDescriptorFactory resourceLoaderFileDescriptorFactory =
+                <span class="hljs-keyword">new</span> ResourceLoader.FileDescriptorFactory(resources);
+        ResourceLoader.AssetFileDescriptorFactory resourceLoaderAssetFileDescriptorFactory =
+                <span class="hljs-keyword">new</span> ResourceLoader.AssetFileDescriptorFactory(resources);
+        BitmapEncoder bitmapEncoder = <span class="hljs-keyword">new</span> BitmapEncoder(arrayPool);
+
+        BitmapBytesTranscoder bitmapBytesTranscoder = <span class="hljs-keyword">new</span> BitmapBytesTranscoder();
+        GifDrawableBytesTranscoder gifDrawableBytesTranscoder = <span class="hljs-keyword">new</span> GifDrawableBytesTranscoder();
+
+        ContentResolver contentResolver = context.getContentResolver();
+
+        registry
+                .append(ByteBuffer.class, <span class="hljs-keyword">new</span> ByteBufferEncoder())
+                <span class="hljs-comment">/*&#x7565;&#x53BB;&#x4E00;&#x6BB5;&#x5185;&#x5BB9;&#xFF0C;&#x592A;&#x957F;&#x4E86;*/</span>
+                .register(GifDrawable.class, <span class="hljs-keyword">byte</span>[].class, gifDrawableBytesTranscoder);
+
+        ImageViewTargetFactory imageViewTargetFactory = <span class="hljs-keyword">new</span> ImageViewTargetFactory();
+        glideContext =
+                <span class="hljs-keyword">new</span> GlideContext(
+                        context,
+                        arrayPool,
+                        registry,
+                        imageViewTargetFactory,
+                        defaultRequestOptions,
+                        defaultTransitionOptions,
+                        engine,
+                        logLevel);
+    }
+}
+</code></pre>
+<p>&#x8FD9;&#x4E00;&#x6BB5;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x5373;&#x53EF;&#x90E8;&#x5206;&#xFF1A;</p>
+<ul>
+<li>builder &#x7684; field &#x5BF9;&#x5E94;&#x53D6;&#x503C;&#x8D4B;&#x503C;</li>
+<li>&#x6784;&#x5EFA;&#x975E;&#x5F00;&#x653E;&#x7684; <code>BitmapPreFiller</code> &#x5B9E;&#x4F8B;</li>
+<li>&#x6784;&#x5EFA; <code>Registry</code> &#x5B9E;&#x4F8B; <code>registry</code></li>
+<li>&#x6784;&#x5EFA; <code>DefaultImageHeaderParser</code> &#x3001; <code>ResourceLoader</code> &#x3001;<code>Decoder</code> &#x3001; <code>ResourceTranscoder</code> &#x5E76;&#x5C06;&#x4E4B;&#x6CE8;&#x518C;&#x5230; <code>registry</code></li>
+<li>&#x6784;&#x5EFA; <code>GlideContext</code> &#x5B9E;&#x4F8B; <code>glideContext</code></li>
+</ul>
+<p>&#x6309;&#x7167;&#x7ECF;&#x9A8C;&#x63A8;&#x65AD;&#xFF0C;Registry &#x662F;&#x4E00;&#x4E2A;&#x7B56;&#x7565;&#x6CE8;&#x518C;&#x8868;&#xFF0C;&#x670D;&#x52A1;&#x4E8E; <code>&#x7B56;&#x7565;&#x6A21;&#x5F0F;</code>&#x3002;</p>
+<p><em>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;Glide&#x7684;&#x5DE5;&#x4F5C;&#x73AF;&#x5883;&#x975E;&#x5E38;&#x590D;&#x6742;&#xFF0C;&#x4F8B;&#x5982;&#x83B7;&#x53D6;&#x8D44;&#x6E90;&#xFF0C;&#x5176;&#x8D44;&#x6E90;&#x5B58;&#x5728;&#x4F4D;&#x7F6E;&#x53EF;&#x80FD;&#x5728;&#x7F51;&#x7EDC;&#x4E2D;&#x7684;&#x67D0;&#x4E2A;&#x4F4D;&#x7F6E;&#x3001; &#x53EF;&#x80FD;&#x5728;&#x5E94;&#x7528;&#x7684;Assets&#x4E2D;&#xFF0C;&#x4E5F;&#x53EF;&#x80FD;&#x5728;&#x5176;&#x4ED6;&#x4F4D;&#x7F6E;&#xFF0C;&#x5BF9;&#x4E8E;&#x67D0;&#x4E00;&#x4E2A;&#x76EE;&#x6807;&#xFF0C;&#x6839;&#x636E;&#x573A;&#x666F;&#x4E0D;&#x540C;&#xFF0C;&#x5B58;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x5B9E;&#x73B0;&#x7B56;&#x7565;</em></p>
+<p>&#x7EE7;&#x7EED;&#x6309;&#x7167;&#x7ECF;&#x9A8C;&#x63A8;&#x65AD;&#xFF0C;&#x6CE8;&#x518C;&#x4F1A;&#x5206;&#x4E3A;&#x4E0D;&#x540C;&#x7684;&#x7B56;&#x7565;&#x7EC4;&#xFF0C;&#x5BF9;&#x5E94;&#x4E0D;&#x540C;&#x7684;&#x76EE;&#x6807;,&#x8FD9;&#x4E00;&#x70B9;&#x6211;&#x4EEC;&#x7A0D;&#x540E;&#x518D;&#x770B;&#x3002;</p>
+<p>&#x518D;&#x6309;&#x7167;&#x6211;&#x4EEC;&#x5E38;&#x89C1;&#x7684;&#x4F7F;&#x7528;&#x4E60;&#x60EF;&#xFF0C;&#x8FFD;&#x8E2A;&#x4E00;&#x4E0B;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;&#xFF1A;<em>&#x6CDB;&#x8BFB;&#x5373;&#x53EF;</em></p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Glide</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Glide <span class="hljs-title">get</span><span class="hljs-params">(@NonNull Context context)</span> </span>{
+        <span class="hljs-keyword">if</span> (glide == <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">synchronized</span> (Glide.class) {
+                <span class="hljs-keyword">if</span> (glide == <span class="hljs-keyword">null</span>) {
+                    checkAndInitializeGlide(context);
+                }
+            }
+        }
+
+        <span class="hljs-keyword">return</span> glide;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">checkAndInitializeGlide</span><span class="hljs-params">(@NonNull Context context)</span> </span>{
+        <span class="hljs-comment">//...</span>
+        initializeGlide(context);
+        <span class="hljs-comment">//...</span>
+    }
+
+    <span class="hljs-comment">//&#x91CD;&#x8F7D;&#x7565;&#x53BB;</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> RequestManager <span class="hljs-title">with</span><span class="hljs-params">(@NonNull Activity activity)</span> </span>{
+        <span class="hljs-keyword">return</span> getRetriever(activity).get(activity);
+    }
+
+    <span class="hljs-meta">@NonNull</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> RequestManagerRetriever <span class="hljs-title">getRetriever</span><span class="hljs-params">(@Nullable Context context)</span> </span>{
+        <span class="hljs-comment">// Context could be null for other reasons (ie the user passes in null), but in practice it will</span>
+        <span class="hljs-comment">// only occur due to errors with the Fragment lifecycle.</span>
+        Preconditions.checkNotNull(
+                context,
+                <span class="hljs-string">&quot;You cannot start a load on a not yet attached View or a Fragment where getActivity() &quot;</span>
+                        + <span class="hljs-string">&quot;returns null (which usually occurs when getActivity() is called before the Fragment &quot;</span>
+                        + <span class="hljs-string">&quot;is attached or after the Fragment is destroyed).&quot;</span>);
+        <span class="hljs-keyword">return</span> Glide.get(context).getRequestManagerRetriever();
+    }
+}
+</code></pre>
+<p>&#x6309;&#x7167;&#x4F7F;&#x7528;&#x4E60;&#x60EF;&#xFF0C;&#x4E00;&#x822C;&#x4ECE; <code>Glide.with(...)</code> &#x5F00;&#x59CB;&#x5F97;&#x5230; <code>RequestManager</code>&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4EE5; <code>Glide.get(context).getRequestManagerRetriever()</code>
+&#x65B9;&#x5F0F;&#x83B7;&#x53D6;&#x3002;&#x5982;&#x679C;Glide&#x6CA1;&#x6709;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x5219;&#x4F1A;&#x8C03;&#x7528; <code>initializeGlide</code> &#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<p>&#x8DDF;&#x8FDB;&#x4E00;&#x4E0B;&#x4EE3;&#x7801;&#xFF0C;<em>&#x6CDB;&#x8BFB;&#x5373;&#x53EF;</em></p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Glide</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initializeGlide</span><span class="hljs-params">(@NonNull Context context)</span> </span>{
+        initializeGlide(context, <span class="hljs-keyword">new</span> GlideBuilder());
+    }
+
+    <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">&quot;deprecation&quot;</span>)
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initializeGlide</span><span class="hljs-params">(@NonNull Context context, @NonNull GlideBuilder builder)</span> </span>{
+        Context applicationContext = context.getApplicationContext();
+        GeneratedAppGlideModule annotationGeneratedModule = getAnnotationGeneratedGlideModules();
+        List&lt;com.bumptech.glide.module.GlideModule&gt; manifestModules = Collections.emptyList();
+        <span class="hljs-keyword">if</span> (annotationGeneratedModule == <span class="hljs-keyword">null</span> || annotationGeneratedModule.isManifestParsingEnabled()) {
+            manifestModules = <span class="hljs-keyword">new</span> ManifestParser(applicationContext).parse();
+        }
+
+        <span class="hljs-keyword">if</span> (annotationGeneratedModule != <span class="hljs-keyword">null</span>
+                &amp;&amp; !annotationGeneratedModule.getExcludedModuleClasses().isEmpty()) {
+            Set&lt;Class&lt;?&gt;&gt; excludedModuleClasses =
+                    annotationGeneratedModule.getExcludedModuleClasses();
+            Iterator&lt;com.bumptech.glide.module.GlideModule&gt; iterator = manifestModules.iterator();
+            <span class="hljs-keyword">while</span> (iterator.hasNext()) {
+                com.bumptech.glide.module.GlideModule current = iterator.next();
+                <span class="hljs-keyword">if</span> (!excludedModuleClasses.contains(current.getClass())) {
+                    <span class="hljs-keyword">continue</span>;
+                }
+                <span class="hljs-keyword">if</span> (Log.isLoggable(TAG, Log.DEBUG)) {
+                    Log.d(TAG, <span class="hljs-string">&quot;AppGlideModule excludes manifest GlideModule: &quot;</span> + current);
+                }
+                iterator.remove();
+            }
+        }
+
+        <span class="hljs-keyword">if</span> (Log.isLoggable(TAG, Log.DEBUG)) {
+            <span class="hljs-keyword">for</span> (com.bumptech.glide.module.GlideModule glideModule : manifestModules) {
+                Log.d(TAG, <span class="hljs-string">&quot;Discovered GlideModule from manifest: &quot;</span> + glideModule.getClass());
+            }
+        }
+
+        RequestManagerRetriever.RequestManagerFactory factory =
+                annotationGeneratedModule != <span class="hljs-keyword">null</span>
+                        ? annotationGeneratedModule.getRequestManagerFactory() : <span class="hljs-keyword">null</span>;
+        builder.setRequestManagerFactory(factory);
+        <span class="hljs-keyword">for</span> (com.bumptech.glide.module.GlideModule module : manifestModules) {
+            module.applyOptions(applicationContext, builder);
+        }
+        <span class="hljs-keyword">if</span> (annotationGeneratedModule != <span class="hljs-keyword">null</span>) {
+            annotationGeneratedModule.applyOptions(applicationContext, builder);
+        }
+        Glide glide = builder.build(applicationContext);
+        <span class="hljs-keyword">for</span> (com.bumptech.glide.module.GlideModule module : manifestModules) {
+            module.registerComponents(applicationContext, glide, glide.registry);
+        }
+        <span class="hljs-keyword">if</span> (annotationGeneratedModule != <span class="hljs-keyword">null</span>) {
+            annotationGeneratedModule.registerComponents(applicationContext, glide, glide.registry);
+        }
+        applicationContext.registerComponentCallbacks(glide);
+        Glide.glide = glide;
+    }
+}
+</code></pre>
+<p>&#x6CDB;&#x8BFB;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x53D1;&#x73B0;&#x4E3B;&#x8981;&#x6709; <code>&#x4E09;&#x6B65;</code>&#xFF1A;</p>
+<ul>
+<li>&#x6784;&#x5EFA;GlideBuilder</li>
+<li>&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#xFF0C;&#x52A0;&#x8F7D; <code>&#x53EF;&#x80FD;&#x5B58;&#x5728;</code> &#x7684;&#x81EA;&#x5B9A;&#x4E49;&#x6A21;&#x5757;&#xFF0C;&#x8BBE;&#x7F6E;&#x5230;Builder&#x4E2D;</li>
+<li>&#x6784;&#x5EFA;Glide</li>
+</ul>
+<blockquote>
+<p>&#x601D;&#x5371;&#xFF1A;&#x5982;&#x679C;&#x76F4;&#x63A5;&#x4F7F;&#x7528;GlideBuilder&#x8FDB;&#x884C;&#x6784;&#x5EFA;&#xFF0C;&#x5219;&#x65E0;&#x6CD5;&#x76F4;&#x63A5;&#x8FD0;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x6A21;&#x5757;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x9700;&#x8981;&#x81EA;&#x884C;&#x6CE8;&#x5165;&#x3002;</p>
+</blockquote>
+<h2 id="&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4E8E;register&#x6316;&#x7EC6;&#x8282;">&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4E8E;Register&#x6316;&#x7EC6;&#x8282;</h2>
+<p>&#x4E0A;&#x4E00;&#x8282;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x7565;&#x53BB;&#x4E86;Glide&#x5B9E;&#x4F8B;&#x5316;&#x8FC7;&#x7A0B;&#x7684;&#x4E00;&#x4E9B;&#x7EC6;&#x8282;&#xFF0C;&#x5176;&#x5B9E;&#x73B0;&#x5185;&#x5BB9;&#x4E3A;&#xFF1A;&#x5411;Register&#x6CE8;&#x518C;&#x4E86;&#x5404;&#x79CD;&#x6A21;&#x5757;&#xFF0C;&#x53EF;&#x4EE5;&#x6CDB;&#x8BFB;&#x4E00;&#x4E0B;&#x6E90;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-java"> registry
+        .append(ByteBuffer.class,<span class="hljs-keyword">new</span> ByteBufferEncoder())
+        .append(InputStream.class,<span class="hljs-keyword">new</span> StreamEncoder(arrayPool))
+        <span class="hljs-comment">/* Bitmaps */</span>
+        .append(Registry.BUCKET_BITMAP,ByteBuffer.class,Bitmap.class,byteBufferBitmapDecoder)
+        .append(Registry.BUCKET_BITMAP,InputStream.class,Bitmap.class,streamBitmapDecoder)
+        .append(
+        Registry.BUCKET_BITMAP,
+        ParcelFileDescriptor.class,
+        Bitmap.class,
+        parcelFileDescriptorVideoDecoder)
+        .append(
+        Registry.BUCKET_BITMAP,
+        AssetFileDescriptor.class,
+        Bitmap.class,
+        VideoDecoder.asset(bitmapPool))
+        .append(Bitmap.class,Bitmap.class,UnitModelLoader.Factory.&lt;Bitmap&gt;getInstance())
+        .append(
+        Registry.BUCKET_BITMAP,Bitmap.class,Bitmap.class,<span class="hljs-keyword">new</span> UnitBitmapDecoder())
+        .append(Bitmap.class,bitmapEncoder)
+        <span class="hljs-comment">/* BitmapDrawables */</span>
+        .append(
+        Registry.BUCKET_BITMAP_DRAWABLE,
+        ByteBuffer.class,
+        BitmapDrawable.class,
+        <span class="hljs-keyword">new</span> BitmapDrawableDecoder&lt;&gt;(resources,byteBufferBitmapDecoder))
+        .append(
+        Registry.BUCKET_BITMAP_DRAWABLE,
+        InputStream.class,
+        BitmapDrawable.class,
+        <span class="hljs-keyword">new</span> BitmapDrawableDecoder&lt;&gt;(resources,streamBitmapDecoder))
+        .append(
+        Registry.BUCKET_BITMAP_DRAWABLE,
+        ParcelFileDescriptor.class,
+        BitmapDrawable.class,
+        <span class="hljs-keyword">new</span> BitmapDrawableDecoder&lt;&gt;(resources,parcelFileDescriptorVideoDecoder))
+        .append(BitmapDrawable.class,<span class="hljs-keyword">new</span> BitmapDrawableEncoder(bitmapPool,bitmapEncoder))
+        <span class="hljs-comment">/* GIFs */</span>
+        .append(
+        Registry.BUCKET_GIF,
+        InputStream.class,
+        GifDrawable.class,
+        <span class="hljs-keyword">new</span> StreamGifDecoder(registry.getImageHeaderParsers(),byteBufferGifDecoder,arrayPool))
+        .append(Registry.BUCKET_GIF,ByteBuffer.class,GifDrawable.class,byteBufferGifDecoder)
+        .append(GifDrawable.class,<span class="hljs-keyword">new</span> GifDrawableEncoder())
+        <span class="hljs-comment">/* GIF Frames */</span>
+        <span class="hljs-comment">// Compilation with Gradle requires the type to be specified for UnitModelLoader here.</span>
+        .append(
+        GifDecoder.class,GifDecoder.class,UnitModelLoader.Factory.&lt;GifDecoder&gt;getInstance())
+        .append(
+        Registry.BUCKET_BITMAP,
+        GifDecoder.class,
+        Bitmap.class,
+        <span class="hljs-keyword">new</span> GifFrameResourceDecoder(bitmapPool))
+        <span class="hljs-comment">/* Drawables */</span>
+        .append(Uri.class,Drawable.class,resourceDrawableDecoder)
+        .append(
+        Uri.class,Bitmap.class,<span class="hljs-keyword">new</span> ResourceBitmapDecoder(resourceDrawableDecoder,bitmapPool))
+        <span class="hljs-comment">/* Files */</span>
+        .register(<span class="hljs-keyword">new</span> ByteBufferRewinder.Factory())
+        .append(File.class,ByteBuffer.class,<span class="hljs-keyword">new</span> ByteBufferFileLoader.Factory())
+        .append(File.class,InputStream.class,<span class="hljs-keyword">new</span> FileLoader.StreamFactory())
+        .append(File.class,File.class,<span class="hljs-keyword">new</span> FileDecoder())
+        .append(File.class,ParcelFileDescriptor.class,<span class="hljs-keyword">new</span> FileLoader.FileDescriptorFactory())
+        <span class="hljs-comment">// Compilation with Gradle requires the type to be specified for UnitModelLoader here.</span>
+        .append(File.class,File.class,UnitModelLoader.Factory.&lt;File&gt;getInstance())
+        <span class="hljs-comment">/* Models */</span>
+        .register(<span class="hljs-keyword">new</span> InputStreamRewinder.Factory(arrayPool))
+        .append(<span class="hljs-keyword">int</span>.class,InputStream.class,resourceLoaderStreamFactory)
+        .append(
+        <span class="hljs-keyword">int</span>.class,
+        ParcelFileDescriptor.class,
+        resourceLoaderFileDescriptorFactory)
+        .append(Integer.class,InputStream.class,resourceLoaderStreamFactory)
+        .append(
+        Integer.class,
+        ParcelFileDescriptor.class,
+        resourceLoaderFileDescriptorFactory)
+        .append(Integer.class,Uri.class,resourceLoaderUriFactory)
+        .append(
+        <span class="hljs-keyword">int</span>.class,
+        AssetFileDescriptor.class,
+        resourceLoaderAssetFileDescriptorFactory)
+        .append(
+        Integer.class,
+        AssetFileDescriptor.class,
+        resourceLoaderAssetFileDescriptorFactory)
+        .append(<span class="hljs-keyword">int</span>.class,Uri.class,resourceLoaderUriFactory)
+        .append(String.class,InputStream.class,<span class="hljs-keyword">new</span> DataUrlLoader.StreamFactory())
+        .append(String.class,InputStream.class,<span class="hljs-keyword">new</span> StringLoader.StreamFactory())
+        .append(String.class,ParcelFileDescriptor.class,<span class="hljs-keyword">new</span> StringLoader.FileDescriptorFactory())
+        .append(
+        String.class,AssetFileDescriptor.class,<span class="hljs-keyword">new</span> StringLoader.AssetFileDescriptorFactory())
+        .append(Uri.class,InputStream.class,<span class="hljs-keyword">new</span> HttpUriLoader.Factory())
+        .append(Uri.class,InputStream.class,<span class="hljs-keyword">new</span> AssetUriLoader.StreamFactory(context.getAssets()))
+        .append(
+        Uri.class,
+        ParcelFileDescriptor.class,
+        <span class="hljs-keyword">new</span> AssetUriLoader.FileDescriptorFactory(context.getAssets()))
+        .append(Uri.class,InputStream.class,<span class="hljs-keyword">new</span> MediaStoreImageThumbLoader.Factory(context))
+        .append(Uri.class,InputStream.class,<span class="hljs-keyword">new</span> MediaStoreVideoThumbLoader.Factory(context))
+        .append(
+        Uri.class,
+        InputStream.class,
+        <span class="hljs-keyword">new</span> UriLoader.StreamFactory(contentResolver))
+        .append(
+        Uri.class,
+        ParcelFileDescriptor.class,
+        <span class="hljs-keyword">new</span> UriLoader.FileDescriptorFactory(contentResolver))
+        .append(
+        Uri.class,
+        AssetFileDescriptor.class,
+        <span class="hljs-keyword">new</span> UriLoader.AssetFileDescriptorFactory(contentResolver))
+        .append(Uri.class,InputStream.class,<span class="hljs-keyword">new</span> UrlUriLoader.StreamFactory())
+        .append(URL.class,InputStream.class,<span class="hljs-keyword">new</span> UrlLoader.StreamFactory())
+        .append(Uri.class,File.class,<span class="hljs-keyword">new</span> MediaStoreFileLoader.Factory(context))
+        .append(GlideUrl.class,InputStream.class,<span class="hljs-keyword">new</span> HttpGlideUrlLoader.Factory())
+        .append(<span class="hljs-keyword">byte</span>[].class,ByteBuffer.class,<span class="hljs-keyword">new</span> ByteArrayLoader.ByteBufferFactory())
+        .append(<span class="hljs-keyword">byte</span>[].class,InputStream.class,<span class="hljs-keyword">new</span> ByteArrayLoader.StreamFactory())
+        .append(Uri.class,Uri.class,UnitModelLoader.Factory.&lt;Uri&gt;getInstance())
+        .append(Drawable.class,Drawable.class,UnitModelLoader.Factory.&lt;Drawable&gt;getInstance())
+        .append(Drawable.class,Drawable.class,<span class="hljs-keyword">new</span> UnitDrawableDecoder())
+        <span class="hljs-comment">/* Transcoders */</span>
+        .register(
+        Bitmap.class,
+        BitmapDrawable.class,
+        <span class="hljs-keyword">new</span> BitmapDrawableTranscoder(resources))
+        .register(Bitmap.class,<span class="hljs-keyword">byte</span>[].class,bitmapBytesTranscoder)
+        .register(
+        Drawable.class,
+        <span class="hljs-keyword">byte</span>[].class,
+        <span class="hljs-keyword">new</span> DrawableBytesTranscoder(
+        bitmapPool,bitmapBytesTranscoder,gifDrawableBytesTranscoder))
+        .register(GifDrawable.class,<span class="hljs-keyword">byte</span>[].class,gifDrawableBytesTranscoder);
+</code></pre>
+<p><code>&#x76F4;&#x63A5;&#x8BB2;&#x89E3;</code> &#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x662F; <code>&#x65E0;&#x610F;&#x4E49;</code> &#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x4ECE; <code>Register</code> &#x7C7B;&#x5165;&#x624B;&#xFF0C;&#x5206;&#x6790;&#x6CE8;&#x518C;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Registry</span> </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String BUCKET_GIF = <span class="hljs-string">&quot;Gif&quot;</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String BUCKET_BITMAP = <span class="hljs-string">&quot;Bitmap&quot;</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String BUCKET_BITMAP_DRAWABLE = <span class="hljs-string">&quot;BitmapDrawable&quot;</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String BUCKET_PREPEND_ALL = <span class="hljs-string">&quot;legacy_prepend_all&quot;</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String BUCKET_APPEND_ALL = <span class="hljs-string">&quot;legacy_append&quot;</span>;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ModelLoaderRegistry modelLoaderRegistry;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> EncoderRegistry encoderRegistry;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ResourceDecoderRegistry decoderRegistry;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ResourceEncoderRegistry resourceEncoderRegistry;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> DataRewinderRegistry dataRewinderRegistry;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> TranscoderRegistry transcoderRegistry;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ImageHeaderParserRegistry imageHeaderParserRegistry;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ModelToResourceClassCache modelToResourceClassCache =
+            <span class="hljs-keyword">new</span> ModelToResourceClassCache();
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> LoadPathCache loadPathCache = <span class="hljs-keyword">new</span> LoadPathCache();
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Pool&lt;List&lt;Throwable&gt;&gt; throwableListPool = FactoryPools.threadSafeList();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Registry</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">this</span>.modelLoaderRegistry = <span class="hljs-keyword">new</span> ModelLoaderRegistry(throwableListPool);
+        <span class="hljs-keyword">this</span>.encoderRegistry = <span class="hljs-keyword">new</span> EncoderRegistry();
+        <span class="hljs-keyword">this</span>.decoderRegistry = <span class="hljs-keyword">new</span> ResourceDecoderRegistry();
+        <span class="hljs-keyword">this</span>.resourceEncoderRegistry = <span class="hljs-keyword">new</span> ResourceEncoderRegistry();
+        <span class="hljs-keyword">this</span>.dataRewinderRegistry = <span class="hljs-keyword">new</span> DataRewinderRegistry();
+        <span class="hljs-keyword">this</span>.transcoderRegistry = <span class="hljs-keyword">new</span> TranscoderRegistry();
+        <span class="hljs-keyword">this</span>.imageHeaderParserRegistry = <span class="hljs-keyword">new</span> ImageHeaderParserRegistry();
+        setResourceDecoderBucketPriorityList(
+                Arrays.asList(BUCKET_GIF, BUCKET_BITMAP, BUCKET_BITMAP_DRAWABLE));
+    }
+    <span class="hljs-comment">//API&#x7565;&#x53BB;</span>
+}
+</code></pre>
+<h3 id="&#x8D44;&#x6E90;model&#x52A0;&#x8F7D;&#x5668;">&#x8D44;&#x6E90;Model&#x52A0;&#x8F7D;&#x5668;</h3>
+<p><code>modelLoaderRegistry</code> &#x7528;&#x4E8E;&#x6CE8;&#x518C; <code>&#x8D44;&#x6E90;Model&#x52A0;&#x8F7D;&#x65B9;&#x5F0F;</code> &#x4FE1;&#x606F;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x8D44;&#x6E90;&#x7684;&#x5B9A;&#x4E49;Model&#x4E3A; <code>Uri</code> &#x7C7B;&#xFF0C;&#x6CE8;&#x518C;&#x4E00;&#x4E2A; <code>ModelLoaderFactory</code> &#xFF0C;&#x751F;&#x4EA7;&#x5BF9;&#x5E94;&#x7684;
+<code>ModelLoader</code>&#xFF0C;&#x5C06; <code>Uri</code> &#x5A92;&#x4F53;&#x5B9E;&#x4F53;&#xFF0C;&#x52A0;&#x8F7D;&#x4E3A; <code>InputStream</code> &#x6216;&#x8005;&#x5176;&#x4ED6;&#x5F62;&#x5F0F;&#x7684; <code>&#x5185;&#x5BB9;</code></p>
+<p>&#x76F8;&#x5173;&#x7C7B;&#xFF1A;</p>
+<ul>
+<li><code>ModelLoaderFactory</code></li>
+<li><code>ModelLoader</code> &#x7B49;</li>
+</ul>
+<h3 id="&#x7F16;&#x7801;&#x5668;">&#x7F16;&#x7801;&#x5668;</h3>
+<p><code>encoderRegistry</code> &#x7528;&#x4E8E;&#x6CE8;&#x518C; <code>&#x5185;&#x5BB9;encode&#x65B9;&#x5F0F;</code> &#x4FE1;&#x606F;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5A92;&#x4F53;&#x5B9E;&#x4F53;&#x5DF2;&#x88AB;&#x52A0;&#x8F7D;&#x4E3A; <code>InputStream</code>&#xFF0C;&#x6CE8;&#x518C;&#x4E00;&#x4E2A;&#x5BF9;&#x5E94;&#x5904;&#x7406;&#x7684; <code>Encoder&lt;InputStream&gt;</code>&#xFF0C;
+&#x7528;&#x4E8E;&#x5904;&#x7406;&#x5185;&#x5BB9;&#x7684;encode&#xFF0C;&#x5982;&#x5199;&#x5165;&#x78C1;&#x76D8;&#x8FC7;&#x7A0B;</p>
+<p>&#x76F8;&#x5173;&#x7C7B;&#xFF1A;<code>Encoder</code> &#x63A5;&#x53E3;&#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</p>
+<p>&#x76F8;&#x5E94;&#x7684;&#xFF0C;<code>resourceEncoderRegistry</code> &#x7528;&#x4E8E;&#x6CE8;&#x518C; <code>Resource &#x7684;encode&#x65B9;&#x5F0F;</code>&#xFF0C;&#x8FD9;&#x4E9B;encoder&#x9762;&#x5411; <code>Resource</code>&#xFF0C;&#x76F8;&#x6BD4;&#x4E8E; <code>InputStream</code> &#x7B49;&#x4F4E;&#x7EA7;&#x5F62;&#x5F0F;&#x7684;&#x7F16;&#x7801;&#x5185;&#x5BB9;&#x5C01;&#x88C5;&#xFF0C;
+<code>Resource</code> &#x5B9E;&#x73B0;&#x7C7B;&#x8FDB;&#x884C;&#x4E86;&#x66F4;&#x9AD8;&#x7EA7;&#x522B;&#x7684;&#x7F16;&#x7801;&#x5185;&#x5BB9;&#x5C01;&#x88C5;&#x3002;</p>
+<p>&#x76F8;&#x5173;&#x7C7B;&#xFF1A;</p>
+<ul>
+<li><code>ResourceEncoder</code> &#x63A5;&#x53E3;&#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>Resource</code> &#x63A5;&#x53E3;&#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>EncodeStrategy</code></li>
+</ul>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x5A92;&#x4F53;&#x8D44;&#x6E90;&#x7684;&#x6570;&#x636E;&#x5C01;&#x88C5;&#x5B58;&#x5728;&#x4E0D;&#x540C; <code>&#x5C42;&#x7EA7;</code>&#xFF1A;</p>
+<ul>
+<li>&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x7684;InputSteam</li>
+<li>Bitmap&#xFF0C;BitmapDrawable</li>
+</ul>
+<p>&#x6240;&#x4EE5; encode&#x8FC7;&#x7A0B; &#x5BF9;&#x4E0D;&#x540C;&#x5C42;&#x7EA7;&#x7684;&#x5C01;&#x88C5;&#x7C7B;&#xFF0C;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x5F53;&#x7136;&#xFF0C;encoder&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <code>wrapper</code>&#xFF0C;<code>adapter</code>,<code>transfer</code> &#x7B49;&#x5F62;&#x5F0F;&#xFF0C;&#x5229;&#x7528;&#x5176;&#x5B83;encoder&#x6269;&#x5C55;&#x529F;&#x80FD;</p>
+<h3 id="&#x89E3;&#x7801;&#x5668;">&#x89E3;&#x7801;&#x5668;</h3>
+<p><code>decoderRegistry</code> &#x7528;&#x4E8E;&#x6CE8;&#x518C; <code>&#x5A92;&#x4F53;&#x6570;&#x636E;&#x89E3;&#x7801;&#x4E3A;Resource&#x65B9;&#x5F0F;</code> &#x7684;&#x4FE1;&#x606F;&#x3002;</p>
+<p>&#x524D;&#x9762;&#x6211;&#x4EEC;&#x63D0;&#x5230; <code>modelLoaderRegistry</code> &#x6CE8;&#x518C;&#x7684;&#x4FE1;&#x606F;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x5F97;&#x5230; <code>ModelLoader</code>&#xFF0C; &#x5B83;&#x4EEC;&#x8D1F;&#x8D23;&#x5C06; <code>&#x8D44;&#x6E90;Model</code> &#x52A0;&#x8F7D;&#x4E3A; <code>&#x8D44;&#x6E90;&#x5185;&#x5BB9;</code>&#xFF0C;&#x8FD9;&#x79CD; <code>&#x8D44;&#x6E90;&#x5185;&#x5BB9;</code>&#x4EE5; <code>InputStream</code> &#x7B49;&#x4F4E;&#x7EA7;&#x5F62;&#x5F0F;&#x5B58;&#x5728;&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x8FD9;&#x53EF;&#x4EE5;&#x6709;&#x6548;&#x7684;&#x89E3;&#x51B3; <code>&#x7C7B;&#x6570;&#x91CF;&#x7206;&#x70B8;</code> &#x95EE;&#x9898;&#x3002;</p>
+<blockquote>
+<p>&#x8111;&#x66B4;&#xFF1A;&#x5047;&#x5B9A; Model &#x7684;&#x7C7B;&#x6570;&#x91CF;&#x4E3A;m&#x4E2A;&#xFF0C;&#x89E3;&#x7801;&#x540E;&#x8F93;&#x51FA;&#x7684;&#x5F62;&#x5F0F;&#x6709;n&#x4E2A;</p>
+<ul>
+<li>&#x4E0D;&#x91C7;&#x7528;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5904;&#x7406;&#xFF0C;&#x4E00;&#x5171;&#x9700;&#x8981; m*n &#x4E2A; decoder &#x7C7B;</li>
+<li>&#x91C7;&#x7528;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5904;&#x7406;&#xFF0C;&#x4E00;&#x5171;&#x9700;&#x8981; m+n &#x4E2A; decoder &#x7C7B;</li>
+</ul>
+<p>&#x5F53; <code>&#x5C42;&#x7EA7;</code> &#x589E;&#x52A0;&#x65F6;&#xFF0C;&#x5DEE;&#x8DDD;&#x4F1A;&#x66F4;&#x52A0;&#x660E;&#x663E;</p>
+<p>&#x6309;&#x7167;&#x7ECF;&#x9A8C;&#x63A8;&#x65AD;&#xFF0C;Glide&#x5728;&#x5904;&#x7406;decode&#x8FC7;&#x7A0B;&#x65F6;&#xFF0C;&#x91C7;&#x7528;&#x4E86; <code>Wrapper/delegate</code> &#x6A21;&#x5F0F; &#x6216;&#x8005; <code>bridge</code> &#x6A21;&#x5F0F;&#x3002;</p>
+<p>&#x601D;&#x53D8;&#xFF1A;&#x9879;&#x76EE;&#x4E2D;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7C7B;&#x4F3C;&#x65B9;&#x5F0F;&#xFF0C;&#x5904;&#x7406;&#x4E0D;&#x540C;&#x5C42;&#x7EA7;&#x4E4B;&#x95F4; <code>&#x6570;&#x636E;Bean</code> &#x7684; <code>&#x8F6C;&#x5316;</code> &#x6216;&#x8005; <code>&#x5305;&#x88C5;</code>&#xFF1F;</p>
+</blockquote>
+<p>&#x76F8;&#x5173;&#x7C7B;&#xFF1A;</p>
+<ul>
+<li><code>ResourceDecoder</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>Resource</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+</ul>
+<h3 id="&#x8F6C;&#x6362;&#x5668;">&#x8F6C;&#x6362;&#x5668;</h3>
+<p><em>&#x867D;&#x7136;&#x76F4;&#x8BD1;&#x4E3A;&#x8F6C;&#x7801;&#x5668;&#xFF0C;&#x4F46;&#x662F;&#x5BB9;&#x6613;&#x6982;&#x5FF5;&#x6DF7;&#x6DC6;&#xFF0C;&#x6309;&#x7167;&#x5176;&#x529F;&#x80FD;&#x79F0;&#x4E3A;&#x8F6C;&#x6362;&#x5668;</em></p>
+<p><code>transcoderRegistry</code> &#x7528;&#x4E8E;&#x6CE8;&#x518C; <code>&#x8F6C;&#x5316;&#x5668;&#xFF0C;&#x53CA;&#x5176;&#x8D1F;&#x8D23;&#x7684;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x548C;&#x8F6C;&#x6362;&#x7C7B;&#x578B;</code> &#x4FE1;&#x606F;&#xFF0C;&#x8F6C;&#x6362;&#x5668;&#x5C06;&#x8D44;&#x6E90;&#x4ECE;&#x4E00;&#x79CD;&#x5F62;&#x5F0F;&#x8F6C;&#x6362;&#x4E3A;&#x53E6;&#x4E00;&#x79CD;&#x5F62;&#x5F0F;&#x3002;&#x4F8B;&#x5982;: <code>Bitmap -&gt; byte[]</code></p>
+<p>&#x76F8;&#x5173;&#x7C7B;&#xFF1A;</p>
+<ul>
+<li><code>ResourceTranscoder</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>Resource</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+</ul>
+<h3 id="&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;">&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;</h3>
+<p><code>imageHeaderParserRegistry</code> &#x7528;&#x4E8E;&#x6CE8;&#x518C; <code>&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;</code> &#x4FE1;&#x606F;</p>
+<p><em>&#x6CE8;&#xFF0C;&#x90E8;&#x5206;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E3A;&#x4E86;&#x66F4;&#x7B80;&#x4FBF;&#x7684;&#x51B3;&#x5B9A;&#x6587;&#x4EF6;&#x7684;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#xFF0C;&#x5229;&#x7528;&#x4E86;&#x6587;&#x4EF6;&#x6269;&#x5C55;&#x540D;&#x3002;&#x4F46;&#x6587;&#x4EF6;&#x5B9E;&#x8D28;&#x5185;&#x5BB9;&#x7684;&#x7F16;&#x7801;&#x65B9;&#x5F0F;&#x4FE1;&#x606F;&#xFF0C;&#x5B58;&#x50A8;&#x5728;&#x6587;&#x4EF6;&#x5934;&#x4FE1;&#x606F;&#x4E2D;&#xFF0C;&#x53C8;&#x79F0;&#xFF1A; <code>File Sigs</code>&#x3001;<code>&#x6587;&#x4EF6;&#x9B54;&#x6570;</code> &#x3002;</em></p>
+<blockquote>
+<p>&#x4F8B;&#x5982; FF D8 &#x4EE3;&#x8868; Generic JPEG image file&#xFF0C;&#x5373; JPE, JPEG, JPG</p>
+</blockquote>
+<p><a href="https://www.garykessler.net/library/file_sigs.html" target="_blank">&#x4E86;&#x89E3;&#x66F4;&#x591A;&#x5173;&#x4E8E;File Sigs&#x5185;&#x5BB9;</a></p>
+<p>&#x76F8;&#x5173;&#x7C7B;&#xFF1A;</p>
+<ul>
+<li><code>ImageHeaderParser</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>ImageType</code></li>
+</ul>
+<h2 id="&#x6A21;&#x5757;&#x804C;&#x8D23;&#x603B;&#x7ED3;">&#x6A21;&#x5757;&#x804C;&#x8D23;&#x603B;&#x7ED3;</h2>
+<p>&#x901A;&#x8FC7;&#x524D;&#x6587;&#x7684;&#x5206;&#x6790;&#xFF0C;&#x5E76;&#x67E5;&#x9605;Glide&#x6E90;&#x7801;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5BF9;&#x6A21;&#x5757;&#x804C;&#x8D23;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x521D;&#x6B65;&#x603B;&#x7ED3;&#x3002;</p>
+<p>&#x5728;&#x4E4B;&#x540E;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5BF9;&#x5177;&#x4F53;&#x6A21;&#x5757;&#x8FDB;&#x884C; <code>&#x66F4;&#x7EC6;&#x81F4;</code> &#x7684;&#x6316;&#x6398;&#xFF0C;&#x6B64;&#x5904;&#x603B;&#x7ED3;&#x7684;&#x7C7B;&#x4FE1;&#x606F;&#xFF0C;&#x5C31;&#x662F; <code>&#x7A81;&#x7834;&#x53E3;</code> &#x3002;</p>
+<p><em>&#x8003;&#x8651;&#x5230;&#x76EE;&#x524D;&#x6536;&#x96C6;&#x7684;&#x4FE1;&#x606F; <code>&#x5E76;&#x4E0D;&#x5168;&#x9762;</code> &#xFF0C;&#x6211;&#x4E0D;&#x6253;&#x7B97;&#x7ED8;&#x5236;&#x4E00;&#x4E2A;&#x56FE;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x4FE1;&#x606F;&#x4E5F; <code>&#x5E76;&#x975E;</code> &#x5341;&#x5206;&#x91CD;&#x8981;&#xFF0C;&#x6240;&#x4EE5;&#x5C06;&#x5176;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A; <code>&#x4E34;&#x65F6;&#x7684;&#x5907;&#x5FD8;&#x5F55;</code> &#x5373;&#x53EF;&#x3002;
+&#x5728;&#x540E;&#x7EED;&#x5185;&#x5BB9;&#x4E2D;&#xFF0C;&#x6211;&#x4F1A;&#x5BF9;&#x5404;&#x4E2A;&#x6A21;&#x5757;&#x5355;&#x72EC;&#x603B;&#x7ED3;&#x6210;&#x56FE;</em></p>
+<p>&#x4E0B;&#x4E00;&#x7BC7;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5BF9; <code>&#x8D44;&#x6E90;Model&#x52A0;&#x8F7D;&#x3001;&#x83B7;&#x53D6;&#x6D41;&#x7A0B;</code> &#x8FDB;&#x884C; <code>&#x6DF1;&#x5EA6;&#x6316;&#x6398;</code>&#x3002;</p>
+<hr>
+<h3 id="&#x7F13;&#x5B58;&#x4E0E;&#x6C60;">&#x7F13;&#x5B58;&#x4E0E;&#x6C60;</h3>
+<ul>
+<li>MemorySizeCalculator</li>
+<li>LruBitmapPool</li>
+<li>BitmapPoolAdapter</li>
+<li>LruArrayPool</li>
+<li>LruResourceCache</li>
+<li>InternalCacheDiskCacheFactory</li>
+</ul>
+<h3 id="&#x8D44;&#x6E90;&#x83B7;&#x53D6;">&#x8D44;&#x6E90;&#x83B7;&#x53D6;</h3>
+<ul>
+<li>RequestManagerRetriever</li>
+<li>RequestManager</li>
+<li>RequestBuilder</li>
+<li>Request  </li>
+<li>DefaultConnectivityMonitorFactory</li>
+</ul>
+<h3 id="&#x6838;&#x5FC3;&#x6D41;&#x7A0B;">&#x6838;&#x5FC3;&#x6D41;&#x7A0B;</h3>
+<ul>
+<li>Engine</li>
+</ul>
+<p>&#x5176;&#x4ED6;&#x4FE1;&#x606F;&#x5C1A;&#x4E0D;&#x80FD;&#x786E;&#x5B9A;&#x3002;&#x4E3B;&#x8981;&#x6D41;&#x7A0B;&#x7684;&#x76F8;&#x5173;&#x4FE1;&#x606F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<h4 id="&#x8D44;&#x6E90;model&#x52A0;&#x8F7D;&#x5668;">&#x8D44;&#x6E90;Model&#x52A0;&#x8F7D;&#x5668;</h4>
+<ul>
+<li><code>ModelLoaderFactory</code></li>
+<li><code>ModelLoader</code> &#x7B49;</li>
+</ul>
+<h4 id="&#x7F16;&#x7801;&#x5668;">&#x7F16;&#x7801;&#x5668;</h4>
+<ul>
+<li><code>Encoder</code> &#x63A5;&#x53E3;&#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>ResourceEncoder</code> &#x63A5;&#x53E3;&#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>Resource</code> &#x63A5;&#x53E3;&#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>EncodeStrategy</code></li>
+</ul>
+<h4 id="&#x89E3;&#x7801;&#x5668;">&#x89E3;&#x7801;&#x5668;</h4>
+<ul>
+<li><code>ResourceDecoder</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>Resource</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+</ul>
+<h4 id="&#x8F6C;&#x6362;&#x5668;">&#x8F6C;&#x6362;&#x5668;</h4>
+<ul>
+<li><code>ResourceTranscoder</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>Resource</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+</ul>
+<h4 id="&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;">&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;</h4>
+<ul>
+<li><code>ImageHeaderParser</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>ImageType</code></li>
+</ul>
+<h3 id="&#x7EBF;&#x7A0B;&#x6C60;">&#x7EBF;&#x7A0B;&#x6C60;</h3>
+<ul>
+<li>GlideExecutor</li>
+</ul>
+<h3 id="glide&#x7684;&#x521B;&#x5EFA;&#x4E0E;&#x914D;&#x7F6E;">Glide&#x7684;&#x521B;&#x5EFA;&#x4E0E;&#x914D;&#x7F6E;</h3>
+<p><code>GlideBuilder</code> &#x7528;&#x4E8E;&#x521B;&#x5EFA;&#xFF0C;<code>com.bumptech.glide.module</code> &#x5305;&#x4E0B;&#x7684;&#x5185;&#x5BB9;&#x7528;&#x4E8E;&#x81EA;&#x5B9A;&#x4E49;&#x6A21;&#x5757;&#xFF0C;&#x8BF8;&#x5982;&#xFF1A;</p>
+<ul>
+<li><code>AppGlideModule</code></li>
+<li><code>LibraryGlideModule</code></li>
+</ul>
+<p>&#x4EE5;&#x53CA;&#x4E00;&#x4E9B;&#x5DF2;&#x5E9F;&#x5F03;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;</p>
+<h2 id="&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;">&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;</h2>
+<p><em>&#x53EF;&#x80FD;&#x6709;&#x8BFB;&#x8005;&#x4E60;&#x60EF;&#x6027;&#x5730;&#x62C9;&#x5230;&#x5C3E;&#x90E8;&#xFF0C;&#x524D;&#x9762;&#x63D0;&#x5230;&#xFF0C;&#x7ED3;&#x5C3E;&#x5904;&#x7684;&#x5927;&#x7BC7;&#x5E45;&#x5185;&#x5BB9;&#x90FD;&#x662F; <code>&#x5907;&#x5FD8;&#x5F55;</code> &#x6027;&#x8D28;,&#x800C;&#x4E14;&#x4E4B;&#x540E;&#x7684;&#x7CFB;&#x5217;&#x6587;&#x7AE0;&#x4F1A;&#x5728;&#x8FD9;&#x4E9B;&#x5185;&#x5BB9;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x5C55;&#x5F00;&#xFF0C;&#x53EF;&#x8BFB;&#x53EF;&#x4E0D;&#x8BFB;</em></p>
+<p>&#x4F46;&#x65E2;&#x7136;&#x62C9;&#x5230;&#x4E86;&#x8FD9;&#x91CC;&#xFF0C;&#x5C31;&#x601D;&#x8003;&#x4E00;&#x4E0B;&#x5427;&#xFF0C;&#x9605;&#x8BFB;&#x4F18;&#x79C0;&#x7684;&#x6846;&#x67B6;&#xFF0C;&#x4E0D;&#x4EC5;&#x4EC5;&#x53EF;&#x4EE5;&#x6DF1;&#x5165;&#x4E86;&#x89E3;&#x6846;&#x67B6;&#x5185;&#x5BB9;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x953B;&#x70BC;&#x8BBE;&#x8BA1;&#x80FD;&#x529B;&#xFF1A;</p>
+<ul>
+<li>&#x601D;&#x5371;&#xFF1A;&#x4F7F;&#x7528;GlideBuilder&#x6784;&#x5EFA;Glide&#x5B9E;&#x4F8B;&#x662F;&#x5426;&#x6709;&#x6CA1;&#x6709;&#x6CE8;&#x610F;&#x5230;&#x7684;&#x5371;&#x9669;&#xFF1F;</li>
+<li>&#x601D;&#x5371;&#xFF1A;&#x9879;&#x76EE;&#x4E2D;&#x518D;&#x6B21;&#x5BF9;Glide&#x5B9E;&#x73B0;&#x5355;&#x4F8B;&#x662F;&#x5426;&#x5B58;&#x5728;&#x5371;&#x9669;&#xFF1F;</li>
+<li>&#x601D;&#x53D8;&#xFF1A;&#x9879;&#x76EE;&#x4E2D;&#x662F;&#x5426;&#x5B58;&#x5728;&#x53EF;&#x4EE5;&#x501F;&#x9274;Glide&#x7684;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#x7684;&#x5730;&#x65B9;&#xFF1F;</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="post_16.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"三思系列：Glide 4.X全方位认知 -- 模块职责概览","level":"1.2.5.1","depth":3,"next":{"title":"三思系列：Glide 4.X加载过程一文掌握 | Glide（二）","level":"1.2.5.2","depth":3,"path":"Android/Glide/post_16.md","ref":"./Android/Glide/post_16.md","articles":[]},"previous":{"title":"Glide","level":"1.2.5","depth":2,"ref":"","articles":[{"title":"三思系列：Glide 4.X全方位认知 -- 模块职责概览","level":"1.2.5.1","depth":3,"path":"Android/Glide/post_15.md","ref":"./Android/Glide/post_15.md","articles":[]},{"title":"三思系列：Glide 4.X加载过程一文掌握 | Glide（二）","level":"1.2.5.2","depth":3,"path":"Android/Glide/post_16.md","ref":"./Android/Glide/post_16.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Android/Glide/post_15.md","mtime":"2021-03-26T12:33:07.131Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T03:02:19.856Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

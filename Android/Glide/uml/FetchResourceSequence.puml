@@ -1,0 +1,231 @@
+'第一阶段 request 创建
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor Target
+participant RequestManagerRetriever as RMR
+participant RequestManager as RM
+participant RequestBuilder as RB
+participant Request as R
+
+RMR -> RM: invoke get(view) or others
+RM -> RB: invoke load(model) or others
+RB -> R: invoke into(target)，\n buildRequest
+
+alt 和Target之前的Request 一致
+    R -> Target: 执行之前的请求(若未开始)
+
+else 和Target之前的Request 不一致
+    R -> RM: invoke clear(target)
+    R -> Target: invoke setRequest(request)
+    R -> RM: invoke track(target,request)
+end
+
+@enduml
+'newpage
+
+'第二阶段 request 触发
+@startuml
+autonumber
+'actor Target
+participant RequestManager as RM
+participant TargetTracker as TT
+participant RequestTracker as RT
+
+group track(target,request)
+RM --> TT: targetTracker.track(target)
+note left: lifecycle monitor
+RM --> RT: requestTracker.runRequest(request)
+end
+
+alt isPaused
+group 加入队列等待时机
+RT --> RT: pendingRequests.add(request);
+
+RT --> Request: invoke begin()
+note left
+resumeRequests or
+restartRequests
+end note
+
+end group
+else not paused
+RT --> Request: invoke begin()
+end
+
+@enduml
+
+'private enum Status {
+'    /**
+'     * Created but not yet running.
+'     */
+'    PENDING,
+'    /**
+'     * In the process of fetching media.
+'     */
+'    RUNNING,
+'    /**
+'     * Waiting for a callback given to the Target to be called to determine target dimensions.
+'     */
+'    WAITING_FOR_SIZE,
+'    /**
+'     * Finished loading media successfully.
+'     */
+'    COMPLETE,
+'    /**
+'     * Failed to load media, may be restarted.
+'     */
+'    FAILED,
+'    /**
+'     * Cancelled by the user, may not be restarted.
+'     */
+'    CANCELLED,
+'    /**
+'     * Cleared by the user with a placeholder set, may not be restarted.
+'     */
+'    CLEARED,
+'    /**
+'     * Temporarily paused by the system, may be restarted.
+'     */
+'    PAUSED,
+'  }
+
+'state 状态流转
+
+
+
+
+'第三阶段 尺寸获取，必要的PlaceHolder设置，并向Engine 发起加载请求
+@startuml
+autonumber
+alt state 不合期望
+
+else Status.COMPLETE
+Request --> Request: onResourceReady(resource,DataSource.MEMORY_CACHE)
+else
+alt Util.isValidDimensions
+Request --> Request:onSizeReady
+else not valid dimensions
+Request --> Target: getSize(SizeReadyCallback)
+end
+alt 有必要处理PlaceHolder
+Request --> Target: onLoadStarted
+note bottom
+(status == Status.RUNNING ||
+  status == Status.WAITING_FOR_SIZE) &&
+ canNotifyStatusChanged()
+end note
+end
+end
+
+Target --> ViewTarget: getSize
+note left
+不同实现类细节不一致
+以ViewTarget为例
+end note
+
+ViewTarget --> ViewTarget.SizeDeterminer: getSize
+
+alt 有合法历史测量数据
+ViewTarget.SizeDeterminer --> Request:onSizeReady
+else 无合法历史数据
+ViewTarget.SizeDeterminer --> ViewTreeObserver : addOnPreDrawListener(SizeDeterminerLayoutListener)
+...
+ViewTreeObserver --> ViewTarget.SizeDeterminer: 可以测量尺寸
+ViewTarget.SizeDeterminer --> Request:onSizeReady
+note left
+Request 实现了
+SizeReadyCallback
+end note
+end
+
+Request --> Engine : load
+
+@enduml
+
+'第四阶段 资源获取
+
+@startuml
+hide footbox
+autonumber
+group buildKey
+Engine --> EngineKeyFactory: buildKey
+EngineKeyFactory --> Engine: return EngineKey
+end
+newpage
+
+group loadFromActiveResources
+alt !isMemoryCacheable
+note over Engine: loadFromCache
+
+else isMemoryCacheable
+Engine --> ActiveResources : get(key)
+
+alt exist
+MemoryCache --> ActiveResources : active()
+Engine --> ResourceCallback : onResourceReady
+Engine --> end : return null
+note right: end
+else not exist
+MemoryCache --> Engine : loadFromCache
+end
+
+end
+
+end
+
+newpage
+
+group loadFromCache
+alt !isMemoryCacheable
+note over Engine: use EngineJob to load
+else isMemoryCacheable
+Engine --> MemoryCache : remove(key)
+alt exist
+MemoryCache --> ActiveResources : active()
+Engine --> ResourceCallback : onResourceReady
+Engine --> end : return null
+note right: end
+else not exist
+note over MemoryCache,Engine
+return null
+use EngineJob to load
+end note
+end
+
+
+end
+
+@enduml
+
+@startuml
+autonumber
+hide footbox
+group job 复用
+Engine --> Jobs: get(key,onlyRetrieveFromCache)
+Jobs --> Engine: return EngineJob as current
+note left: nullable
+alt exist
+Engine --> EngineJob : current.addCallback(cb)
+Engine --> end : return LoadStatus
+note right: end
+
+else not exist
+note over Engine: create EngineJob to load
+end
+end
+
+newpage
+Engine --> EngineJobFactory: build
+EngineJobFactory--> Engine : return EngineJob
+Engine --> DecodeJobFactory: build
+DecodeJobFactory --> Engine: return DecodeJob
+note over Engine:  jobs.put(key, engineJob)
+note over EngineJob: engineJob
+Engine --> EngineJob:  engineJob.addCallback(cb); engineJob.start(decodeJob);
+Engine --> end : return LoadStatus
+group EngineJob
+end
+
+@enduml

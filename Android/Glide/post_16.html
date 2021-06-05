@@ -1,0 +1,950 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>三思系列：Glide 4.X加载过程一文掌握 | Glide（二） · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="post_15.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" >
+            
+                <span>
+            
+                    
+                    Android
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" >
+            
+                <span>
+            
+                    
+                    View
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../View/post_1.html">
+            
+                <a href="../View/post_1.html">
+            
+                    
+                    好玩系列：优雅的处理ButterKnife和KAE被废弃
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../View/post_6.html">
+            
+                <a href="../View/post_6.html">
+            
+                    
+                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../View/post_7.html">
+            
+                <a href="../View/post_7.html">
+            
+                    
+                    三思系列：为什么自定义View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../Idea/post_9.html">
+            
+                <a href="../Idea/post_9.html">
+            
+                    
+                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" >
+            
+                <span>
+            
+                    
+                    Drawable
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../Drawable/post_2.html">
+            
+                <a href="../Drawable/post_2.html">
+            
+                    
+                    三思系列：重新认识Drawable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="../Drawable/post_4.html">
+            
+                <a href="../Drawable/post_4.html">
+            
+                    
+                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景.md
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" >
+            
+                <span>
+            
+                    
+                    消息机制
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" data-path="../Mechanism/Message/post_8.html">
+            
+                <a href="../Mechanism/Message/post_8.html">
+            
+                    
+                    三思系列：Android的消息机制，一文吃透
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" >
+            
+                <span>
+            
+                    
+                    兼容
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.4.1" data-path="../Idea/post_14.html">
+            
+                <a href="../Idea/post_14.html">
+            
+                    
+                    好玩系列：让项目中的相册支持Heif格式图片
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" >
+            
+                <span>
+            
+                    
+                    Glide
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="post_15.html">
+            
+                <a href="post_15.html">
+            
+                    
+                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.5.2" data-path="post_16.html">
+            
+                <a href="post_16.html">
+            
+                    
+                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    Gradle
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" >
+            
+                <span>
+            
+                    
+                    组件化
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1.1" data-path="../../Gradle/Modularization/post_18.html">
+            
+                <a href="../../Gradle/Modularization/post_18.html">
+            
+                    
+                    三思系列：组件化场景下module依赖优雅实践方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" >
+            
+                <span>
+            
+                    
+                    发布
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.2.1" data-path="../../Gradle/Publish/post_17.html">
+            
+                <a href="../../Gradle/Publish/post_17.html">
+            
+                    
+                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    Review
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../Review/post_10.html">
+            
+                <a href="../../Review/post_10.html">
+            
+                    
+                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    数据结构
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../Review/DataStructure/post_11.html">
+            
+                <a href="../../Review/DataStructure/post_11.html">
+            
+                    
+                    温故：线性表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../Review/DataStructure/post_12.html">
+            
+                <a href="../../Review/DataStructure/post_12.html">
+            
+                    
+                    温故：栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../../Review/DataStructure/post_13.html">
+            
+                <a href="../../Review/DataStructure/post_13.html">
+            
+                    
+                    温故：队列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;glide-4x&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x4E00;&#x6587;&#x638C;&#x63E1;--glide&#xFF08;&#x4E8C;&#xFF09;">&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;Glide 4.X&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x4E00;&#x6587;&#x638C;&#x63E1; | Glide&#xFF08;&#x4E8C;&#xFF09;</h1>
+<p>&#x4E0A;&#x4E00;&#x7BC7;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x9605;&#x8BFB;Glide&#x521D;&#x59CB;&#x5316;&#x7684;&#x4E3B;&#x8981;&#x4EE3;&#x7801;&#xFF0C;&#x5BF9;Glide&#x4E2D;&#x7684;&#x6A21;&#x5757;&#x8FDB;&#x884C;&#x4E86;&#x804C;&#x8D23;&#x68B3;&#x7406;&#x3002;&#x8FD9;&#x4E00;&#x7BC7;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x524D;&#x6587;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x5BF9;Glide&#x7684; <code>&#x8D44;&#x6E90;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;</code> &#x8FDB;&#x884C;&#x68B3;&#x7406;&#x3002;</p>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x901A;&#x8FC7;&#x535A;&#x6587;&#x6765;&#x770B; <code>&#x5927;&#x7BC7;&#x5E45;</code> &#x7684;&#x4EE3;&#x7801;&#x662F;&#x76F8;&#x5F53; <code>&#x67AF;&#x71E5;&#x4E4F;&#x5473;</code> &#x7684;&#xFF0C;&#x4E3A;&#x4E86;&#x8BA9;&#x9605;&#x8BFB;&#x4F53;&#x9A8C;&#x66F4;&#x4F73;&#xFF0C;&#x672C;&#x6587;&#x4E2D;&#x4F1A;&#x76F4;&#x63A5;&#x7528; <code>UML&#x56FE;</code> &#x4EE3;&#x66FF;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x7684; <code>&#x4EE3;&#x7801;&#x62F7;&#x8D1D;</code>&#x3002;</p>
+<p><em>&#x6CE8;&#xFF1A;&#x672C;&#x6587;&#x57FA;&#x4E8E;Glide 4.12.0&#x3002;&#x53E6;&#xFF1A;&#x6211;&#x7684;UML&#x529F;&#x5E95;&#x4E0D;&#x592A;&#x7262;&#xFF0C;&#x6587;&#x4E2D;&#x6D89;&#x53CA;&#x7684;UML&#x56FE;&#x672A;&#x5FC5;&#x662F;&#x6700;&#x6070;&#x5F53;&#x7684;&#xFF0C;&#x5982;&#x56FE;&#x7C7B;&#x578B;&#x6216;&#x8005;&#x6807;&#x8BC6;&#x9519;&#x7528;&#xFF0C;&#x5982;&#x679C;&#x8BFB;&#x8005;&#x5BF9;&#x6B64;&#x6709;&#x6240;&#x5EFA;&#x6811;&#xFF0C;&#x6211;&#x771F;&#x8BDA;&#x7684;&#x5E0C;&#x671B;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x7559;&#x8A00;&#x533A;&#x7559;&#x4E0B;&#x5B9D;&#x8D35;&#x7684;&#x53C2;&#x8003;&#x610F;&#x89C1;&#x3002;</em></p>
+<p>&#x518D;&#x6B21;&#x4ECB;&#x7ECD;&#x4E0B;&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;</p>
+<blockquote>
+<p>&#x4E09;&#x601D;&#x7CFB;&#x5217;&#x662F;&#x6211;&#x6700;&#x65B0;&#x7684;&#x5B66;&#x4E60;&#x3001;&#x603B;&#x7ED3;&#x5F62;&#x5F0F;&#xFF0C;&#x7740;&#x91CD;&#x4E8E;:<strong>&#x95EE;&#x9898;&#x5206;&#x6790;</strong>&#x3001;<strong>&#x6280;&#x672F;&#x79EF;&#x7D2F;</strong>&#x3001;<strong>&#x89C6;&#x91CE;&#x62D3;&#x5C55;</strong>&#xFF0C;<a href="https://github.com/leobert-lan/Blog/blob/main/info/%E5%85%B3%E4%BA%8E%E4%B8%89%E6%80%9D%E7%B3%BB%E5%88%97.md" target="_blank">&#x4E86;&#x89E3;&#x66F4;&#x591A;</a></p>
+</blockquote>
+<hr>
+<h2 id="&#x653B;&#x575A;&#x7A81;&#x7834;&#x53E3;">&#x653B;&#x575A;&#x7A81;&#x7834;&#x53E3;</h2>
+<p>&#x5728;&#x7B2C;&#x4E00;&#x7BC7;&#x6536;&#x5C3E;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x603B;&#x7ED3;&#x4E86;&#x6DF1;&#x5EA6;&#x5206;&#x6790;&#x65F6;&#x7684;&#x7A81;&#x7834;&#x53E3;&#xFF0C;&#x548C;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x5F3A;&#x5173;&#x8054;&#x7684;&#x5185;&#x5BB9;&#x6458;&#x5F55;&#x5982;&#x4E0B;&#xFF1A;</p>
+<blockquote>
+<p>&#x8D44;&#x6E90;&#x83B7;&#x53D6;</p>
+<ul>
+<li>RequestManagerRetriever</li>
+<li>RequestManager</li>
+<li>RequestBuilder</li>
+<li>Request</li>
+<li>DefaultConnectivityMonitorFactory</li>
+</ul>
+<p>&#x6838;&#x5FC3;&#x6D41;&#x7A0B;</p>
+<ul>
+<li>Engine</li>
+</ul>
+<p>&#x8D44;&#x6E90;Model&#x52A0;&#x8F7D;&#x5668;</p>
+<ul>
+<li><code>ModelLoaderFactory</code></li>
+<li><code>ModelLoader</code> &#x7B49;</li>
+</ul>
+</blockquote>
+<p>&#x5982;&#x679C;&#x8BFB;&#x8005;&#x5728;&#x9605;&#x8BFB;&#x672C;&#x6587;&#x65F6;&#xFF0C;&#x624B;&#x8FB9;&#x521A;&#x597D;&#x6709;Glide&#x7684;&#x6E90;&#x7801;&#xFF0C;&#x53EF;&#x4EE5;&#x914D;&#x5408;&#x9605;&#x8BFB;&#x3002;</p>
+<h2 id="request&#x7684;&#x6784;&#x5EFA;">Request&#x7684;&#x6784;&#x5EFA;</h2>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;Glide&#x5728;&#x8BBE;&#x8BA1;&#x65F6;&#xFF0C;&#x5C06; <code>&#x8D44;&#x6E90;&#x52A0;&#x8F7D;</code> &amp; <code>&#x8D44;&#x6E90;&#x5904;&#x7406;</code> &amp; <code>&#x8D44;&#x6E90;&#x4F7F;&#x7528;</code> &#x7B49;&#x6307;&#x4EE4;&#x63CF;&#x8FF0;&#x5C01;&#x88C5;&#x5728;&#x4E86; <code>Request</code> &#x5B9E;&#x73B0;&#x7C7B;&#x4E2D;&#x3002;</p>
+<p>&#x6700;&#x7B80;&#x5355;&#x7684;&#x4F7F;&#x7528;Sample&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code>// Samples/imgur
+// com.bumptech.glide.samples.imgur.MainActivity
+
+ImgurGlide.with(vh.imageView)
+      .load(image.link)
+      .into(vh.imageView);
+</code></pre><p>&#x8C03;&#x7528; Glide.with &#x5F97;&#x5230; <code>RequestManagerRetriever</code> &#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x8FDB;&#x4E00;&#x6B65;&#x8C03;&#x7528; RequestManagerRetriever.get &#x5F97;&#x5230; <code>RequestManager</code> &#x5B9E;&#x4F8B;</p>
+<p>&#x800C;&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x5219;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF0C;<em>&#x76F8;&#x6BD4;&#x4E8E;&#x6B64;&#x56FE;&#xFF0C;&#x4EE5;&#x6587;&#x5B57;&#x5F62;&#x5F0F;&#x63CF;&#x8FF0;&#x7684;&#x8FC7;&#x7A0B;&#x7565;&#x663E;&#x5570;&#x55E6;</em></p>
+<p><img src="uml/FetchResourceSequence1.png" alt=""></p>
+<p>&#x56FE;&#x4E2D;&#x7684; 1&#x3001;2&#x3001;3 &#x8868;&#x793A;&#x4E86;Request&#x7684;&#x521B;&#x5EFA;&#x8FC7;&#x7A0B;&#x3002;</p>
+<p>&#x5F53;&#x521B;&#x5EFA;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x9700;&#x8981;&#x6267;&#x884C; Request&#xFF0C;&#x4F46;&#x9700;&#x8981;&#x6CE8;&#x610F;&#xFF0C;Glide&#x5904;&#x7406;&#x4E86;&#x4E00;&#x4E2A; <code>&#x5F88;&#x91CD;&#x8981;</code> &#x7684;&#x95EE;&#x9898;&#xFF1A;</p>
+<blockquote>
+<p>Target&#x590D;&#x7528;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x4E0E;Resource&#x5E76;&#x975E; <code>&#x4E00;&#x4E00;&#x5BF9;&#x5E94;</code></p>
+</blockquote>
+<p>&#x5E76;&#x4E14;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x5728; <code>&#x7F51;&#x7EDC;&#x73AF;&#x5883;&#x53D8;&#x5316;</code>&#x3001; <code>&#x751F;&#x547D;&#x5468;&#x671F;&#x534F;&#x540C;</code> &#x7B49;&#x80CC;&#x666F;&#x4E0B;&#x88AB;&#x653E;&#x5927;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x5728;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x8BF7;&#x6C42;&#x524D;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x4E00;&#x5C42;&#x5224;&#x65AD;&#xFF1A;</p>
+<blockquote>
+<p>&#x5BF9;&#x4E8E;&#x8BE5;Target&#xFF0C;<code>&#x672C;&#x6B21;</code> &#x8BF7;&#x6C42;&#x7684;Request&#x662F;&#x5426;&#x4E0E; <code>&#x524D;&#x6B21;</code> &#x8BF7;&#x6C42;&#x7684;Request&#x4E00;&#x81F4;&#xFF1F;</p>
+</blockquote>
+<ul>
+<li>&#x4E00;&#x81F4;&#xFF0C;&#x6267;&#x884C;&#x524D;&#x6B21;&#x8BF7;&#x6C42;</li>
+<li>&#x4E0D;&#x4E00;&#x81F4;&#xFF0C;&#x6E05;&#x7A7A;&#x4E0E;target&#x7ED1;&#x5B9A;&#x7684;&#x5404;&#x79CD;&#x5173;&#x7CFB;&#xFF1B;&#x8BBE;&#x7F6E;&#x672C;&#x6B21;&#x8BF7;&#x6C42;&#xFF1B;&#x6267;&#x884C;&#x8BF7;&#x6C42;</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RequestBuilder</span> </span>{
+    <span class="hljs-keyword">private</span> &lt;Y extends Target&lt;TranscodeType&gt;&gt; <span class="hljs-function">Y <span class="hljs-title">into</span><span class="hljs-params">(
+            @NonNull Y target,
+            @Nullable RequestListener&lt;TranscodeType&gt; targetListener,
+            @NonNull RequestOptions options)</span> </span>{
+        <span class="hljs-comment">//...</span>
+
+        options = options.autoClone();
+        Request request = buildRequest(target, targetListener, options);
+
+        Request previous = target.getRequest();
+        <span class="hljs-keyword">if</span> (request.isEquivalentTo(previous)
+                &amp;&amp; !isSkipMemoryCacheWithCompletePreviousRequest(options, previous)) {
+            request.recycle();
+            <span class="hljs-keyword">if</span> (!Preconditions.checkNotNull(previous).isRunning()) {
+                previous.begin();
+            }
+            <span class="hljs-keyword">return</span> target;
+        }
+
+        requestManager.clear(target);
+        target.setRequest(request);
+        requestManager.track(target, request);
+
+        <span class="hljs-keyword">return</span> target;
+    }
+}
+</code></pre>
+<p><em>&#x5176;&#x4ED6;&#x4EE3;&#x7801;&#x5FFD;&#x7565;</em></p>
+<h2 id="request&#x7684;&#x89E6;&#x53D1;">Request&#x7684;&#x89E6;&#x53D1;</h2>
+<p>&#x524D;&#x6587;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x9605;&#x8BFB;&#x5230;&#x4E86; <code>&#x65B0;Request</code> &#x7684;&#x89E6;&#x53D1;&#x73AF;&#x8282;&#xFF0C;&#x5165;&#x53E3;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RequestManager</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">track</span><span class="hljs-params">(@NonNull Target&lt;?&gt; target, @NonNull Request request)</span> </span>{
+        targetTracker.track(target);
+        requestTracker.runRequest(request);
+    }
+}
+</code></pre>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6316;&#x6398;&#x4E0B;Request&#x89E6;&#x53D1;&#x6D41;&#x7A0B;&#x7EC6;&#x8282;&#xFF0C;&#x4F9D;&#x65E7;&#x5148;&#x770B;&#x56FE;&#xFF1A;</p>
+<p><img src="uml/FetchResourceSequence2.png" alt=""></p>
+<p><code>1&#x3001;2</code> &#x4E24;&#x6B65;&#x5BF9;&#x5E94;&#x4E86; <code>RequestManager#track(Target&lt;?&gt; target, Request request)</code>, &#x6807;&#x7B7E;&#x4E2D;&#x5907;&#x6CE8;&#x4E86;<code>1</code> &#x5904;&#x4E3A; <code>&#x751F;&#x547D;&#x5468;&#x671F;&#x76D1;&#x6D4B;</code></p>
+<blockquote>
+<p>&#x7B80;&#x8981;&#x6269;&#x5C55;&#xFF1A;<code>TargetTracker</code> &#x662F;&#x4E00;&#x4E2A; <code>&#x7EC4;&#x5408;&#x6A21;&#x5F0F;</code> &#x5B9E;&#x73B0;&#xFF0C;&#x5B9E;&#x73B0;&#x4E86; Glide &#x4E2D;&#x7684; <code>LifecycleListener</code>&#xFF0C;&#x5F53;&#x5173;&#x8054;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x4EA7;&#x751F;&#x53D8;&#x5316;&#x65F6;&#xFF0C;&#x8FD9;&#x4E9B;&#x53D8;&#x5316;&#x4F1A;&#x88AB;&#x611F;&#x77E5;&#xFF0C;&#x5E76;&#x4E14;
+<code>TargetTracker</code> &#x4F1A;&#x88AB;&#x56DE;&#x8C03;&#xFF0C;&#x5B9E;&#x73B0;&#x8BF7;&#x6C42;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x534F;&#x540C;&#x7BA1;&#x7406;&#x3002;</p>
+</blockquote>
+<p>&#x800C; <code>2</code> &#x5219;&#x5F00;&#x59CB;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#xFF1A;</p>
+<ul>
+<li>&#x5982;&#x679C;&#x5F53;&#x524D; RequestTracker &#x662F;&#x8FD0;&#x884C;&#x4E2D;&#x7684;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8C03;&#x7528; <code>Request#begin()</code> &#x6267;&#x884C;&#x8BF7;&#x6C42;&#xFF1B; <code>5</code></li>
+<li>&#x5426;&#x5219;&#x52A0;&#x5165;&#x7B49;&#x5F85;&#x961F;&#x5217;&#xFF0C;&#x5F53; <code>resumeRequests</code> &#x6216; <code>restartRequests</code> &#x88AB;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x8FDB;&#x5165;&#x8FD0;&#x884C;&#x72B6;&#x6001;&#xFF0C;&#x8C03;&#x7528; <code>Request#begin()</code> &#x6267;&#x884C;&#x8BF7;&#x6C42;&#xFF1B; <code>3&#x3001;4</code></li>
+</ul>
+<h2 id="request&#x6267;&#x884C;&#x7EC6;&#x8282;">Request&#x6267;&#x884C;&#x7EC6;&#x8282;</h2>
+<p>&#x5728;&#x5F00;&#x59CB;&#x9605;&#x8BFB;&#x8BF7;&#x6C42;&#x7EC6;&#x8282;&#x4E4B;&#x524D;&#xFF0C;&#x4E0D;&#x59A8;&#x5148;&#x4E86;&#x89E3;&#x4E0B;Request&#x4E2D;&#x7684;&#x72B6;&#x6001;&#x673A;&#x5236;&#x3002;</p>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;Request&#x7684;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x662F; <code>&#x590D;&#x6742;&#x7684;</code>&#xFF0C;&#x8BBE;&#x8BA1;&#x4E2D;&#xFF0C;&#x5C06;&#x5176;&#x8BBE;&#x8BA1;&#x6210;&#x4E0D;&#x540C;&#x7684; <code>&#x5207;&#x9762;&#x8FC7;&#x7A0B;</code> &#xFF0C;&#x5904;&#x4E8E;&#x4E0D;&#x540C;&#x7684;&#x72B6;&#x6001;&#x65F6;&#xFF0C;&#x5904;&#x7406;&#x5BF9;&#x5E94;&#x7684;&#x5207;&#x9762;&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x964D;&#x4F4E;&#x5916;&#x90E8;&#x8C03;&#x5EA6;&#x65F6;&#x7684;&#x590D;&#x6742;&#x5EA6;&#x3002;</p>
+<h3 id="&#x72B6;&#x6001;&#x6982;&#x89C8;">&#x72B6;&#x6001;&#x6982;&#x89C8;</h3>
+<p>&#x72B6;&#x6001;&#x7684;&#x679A;&#x4E3E;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">enum</span> Status {
+    <span class="hljs-comment">/**
+     * Created but not yet running.
+     */</span>
+    PENDING,
+    <span class="hljs-comment">/**
+     * In the process of fetching media.
+     */</span>
+    RUNNING,
+    <span class="hljs-comment">/**
+     * Waiting for a callback given to the Target to be called to 
+     * determine target dimensions.
+     */</span>
+    WAITING_FOR_SIZE,
+    <span class="hljs-comment">/**
+     * Finished loading media successfully.
+     */</span>
+    COMPLETE,
+    <span class="hljs-comment">/**
+     * Failed to load media, may be restarted.
+     */</span>
+    FAILED,
+    <span class="hljs-comment">/**
+     * Cancelled by the user, may not be restarted.
+     */</span>
+    CANCELLED,
+    <span class="hljs-comment">/**
+     * Cleared by the user with a placeholder set, may not be restarted.
+     */</span>
+    CLEARED,
+    <span class="hljs-comment">/**
+     * Temporarily paused by the system, may be restarted.
+     */</span>
+    PAUSED,
+  }
+</code></pre>
+<p>&#x9605;&#x8BFB;&#x4EE3;&#x7801;&#x540E;&#xFF0C;&#x6574;&#x7406;&#x4E3B;&#x8981;&#x7684;&#x72B6;&#x6001;&#x53D8;&#x5316;&#x56FE;&#x5982;&#x4E0B;&#xFF1A;<em>&#x5728;&#x9605;&#x8BFB;&#x5904;&#x7406;&#x7EC6;&#x8282;&#x65F6;&#xFF0C;&#x8FD8;&#x4F1A;&#x63D0;&#x5230;&#x76F8;&#x5E94;&#x7684;&#x5185;&#x5BB9;</em></p>
+<p><img src="uml/state.png" alt=""></p>
+<h3 id="request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E00;">Request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E00;</h3>
+<p>&#x8FD9;&#x4E00;&#x5C0F;&#x8282;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x6D89;&#x53CA;&#x8FD9;&#x4E09;&#x4E2A;&#x7EC6;&#x8282;&#xFF1A;</p>
+<ul>
+<li>&#x5C3A;&#x5BF8;&#x83B7;&#x53D6; </li>
+<li>&#x5FC5;&#x8981;&#x7684;PlaceHolder&#x8BBE;&#x7F6E;</li>
+<li>&#x5411;Engine &#x53D1;&#x8D77;&#x52A0;&#x8F7D;&#x8BF7;&#x6C42;</li>
+</ul>
+<p><img src="uml/FetchResourceSequence3.png" alt=""></p>
+<p>&#x5982;&#x524D;&#x6587;&#x6240;&#x63D0;&#x53CA;:</p>
+<ul>
+<li>&#x5F53;&#x8D44;&#x6E90;&#x65E0;&#x6CD5;&#x901A;&#x8FC7;&#x6821;&#x9A8C;&#xFF0C;&#x5C06;&#x76F4;&#x63A5;&#x8FDB;&#x5165; FAILED</li>
+<li>&#x5F53;&#x4E00;&#x5207;&#x90FD;&#x5DF2;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x5373; COMPLETE&#xFF0C;&#x5219;&#x8FDB;&#x5165;&#x8D44;&#x6E90;&#x5904;&#x7406;&#x6D41;&#x7A0B; <code>onResourceReady</code></li>
+</ul>
+<p>&#x5426;&#x5219;&#x8FDB;&#x5165; <code>WAITING_FOR_SIZE</code>&#xFF0C;&#x5E76;&#x5904;&#x7406;&#x5C3A;&#x5BF8;&#x5904;&#x7406;</p>
+<ul>
+<li>&#x5982;&#x679C;&#x5DF2;&#x7ECF;&#x6D4B;&#x91CF;&#x8FC7;&#x7684;&#x5C3A;&#x5BF8;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x8FDB;&#x5165; <code>onSizeReady</code>&#xFF1B; <code>2&#x3001;11</code></li>
+<li>&#x5426;&#x5219;&#x83B7;&#x53D6;&#x5C3A;&#x5BF8;&#xFF0C;&#x5E76;&#x6302;Callback&#xFF1B; <code>3&#x3001;5&#x3001;6&#x3001;7&#x3001;8&#x3001;9&#x3001;10&#x3001;11</code></li>
+</ul>
+<p><em>&#x6CE8;&#x610F;&#xFF1A;&#x5F53;onSizeReady&#x540E;&#xFF0C;&#x72B6;&#x6001;&#x5C06;&#x53D8;&#x4E3A; RUNNING&#xFF0C;&#x8FDB;&#x5165;&#x8D44;&#x6E90;&#x83B7;&#x53D6;&#x6D41;&#x7A0B;&#xFF0C;&#x5373;<code>11</code>&#xFF0C;&#x5E76;&#x4E14;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x5FC5;&#x8981;&#x5904;&#x7406;PlaceHolder&#x4E14;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#xFF0C;&#x5219;&#x4F1A;&#x5728;begin&#x65F6;&#x5904;&#x7406;PlaceHolder&#x8BBE;&#x7F6E;&#xFF0C;&#x5373;<code>4</code></em></p>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#x65F6;&#xFF0C;Target&#x7684;&#x5C3A;&#x5BF8;&#x672A;&#x5FC5;&#x5904;&#x4E8E;&#x53EF;&#x6D4B;&#x91CF;&#x72B6;&#x6001;&#xFF0C;Glide&#x5185;&#x5229;&#x7528;&#x4E86;ViewTree&#x7684;&#x56DE;&#x8C03;&#x673A;&#x5236;&#xFF0C;&#x4EE5;ViewTarget&#x4E3A;&#x4F8B;&#xFF0C;&#x5F53;&#x8BE5;Target&#x8FDB;&#x5165; <code>PreDraw&#x72B6;&#x6001;</code> &#x65F6;&#xFF0C;
+&#x5F00;&#x59CB;&#x6D4B;&#x91CF;&#x5C3A;&#x5BF8;&#xFF0C;&#x51C6;&#x786E;&#x7684;&#x8BB2;&#x662F; <code>&#x83B7;&#x53D6;&#x5C3A;&#x5BF8;</code>&#x3002;</p>
+<p>&#x81F3;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x5373;&#x5C06;&#x9605;&#x8BFB;&#x5230;&#x4E86; <code>&#x8D44;&#x6E90;&#x52A0;&#x8F7D;</code> &#x8FC7;&#x7A0B;&#x3002;</p>
+<h3 id="request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E8C;----&#x8D44;&#x6E90;&#x52A0;&#x8F7D;">Request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E8C; -- &#x8D44;&#x6E90;&#x52A0;&#x8F7D;</h3>
+<p>&#x8FD9;&#x4E00;&#x5C0F;&#x8282;&#xFF0C;&#x6211;&#x4EEC;&#x4E13;&#x6CE8;&#x4E8E;&#x4E00;&#x4E2A;&#x6D41;&#x7A0B;&#x7EC6;&#x8282;&#xFF1A;<code>&#x8D44;&#x6E90;&#x52A0;&#x8F7D;</code> &#x8FC7;&#x7A0B;</p>
+<p>&#x7B80;&#x5355;&#x60F3;&#x8C61;&#x4E00;&#x4E0B;&#xFF0C;&#x4E00;&#x4E2A;&#x5A92;&#x4F53;&#x8D44;&#x6E90;&#xFF0C;&#x5B83;&#x7684;&#x771F;&#x8EAB;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x4E8E;&#xFF1A;&quot;&#x7F51;&#x7EDC;&#x4E2D;&#x7684;&#x67D0;&#x53F0;&#x4E3B;&#x673A;&quot;&#xFF0C;&quot;&#x672C;&#x5730;&#x7684;&#x78C1;&#x76D8;&#x7684;&#x7528;&#x6237;&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x4E0B;&quot;&#xFF0C;&quot;&#x5F53;&#x524D;&#x5E94;&#x7528;&#x7684;&#x6838;&#x5FC3;&#x8D44;&#x6E90;&#x76EE;&#x5F55;&#x4E0B;&quot; &#x7B49;&#x7B49;&#x3002;</p>
+<p>&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x8D44;&#x6E90;&#x65F6;&#xFF0C;<code>&#x5747;&#x4ECE;&#x539F;&#x59CB;&#x4F4D;&#x7F6E;&#x83B7;&#x53D6;</code> &#x7684;&#x65B9;&#x5F0F;&#x662F;&#x4E0D;&#x53EF;&#x53D6;&#x7684;&#xFF0C;&#x9664;&#x4E86; <code>&#x6700;&#x5927;&#x7684;&#x83B7;&#x53D6;&#x6210;&#x672C;</code> &#x5916;&#xFF0C;&#x8FD8;&#x989D;&#x5916;&#x4ED8;&#x8BF8; <code>&#x52A0;&#x8F7D;&#x65F6;&#x95F4;&#x3001;&#x89E3;&#x6790;&#x7B97;&#x529B;&#x6210;&#x672C;</code>&#x3002;</p>
+<blockquote>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x5728;&#x8D44;&#x6E90;&#x6709;&#x6548;&#x65F6;&#x9650;&#x53EF;&#x88AB;&#x4FE1;&#x4EFB;&#x7684;&#x524D;&#x63D0;&#x4E0B;&#xFF0C;&#x6709;&#x5FC5;&#x8981;&#x8BBE;&#x8BA1;&#x7F13;&#x5B58;&#x673A;&#x5236;&#xFF0C;<code>&#x727A;&#x7272;&#x7A7A;&#x95F4;&#x6362;&#x53D6;&#x65F6;&#x95F4;&#x548C;&#x7B97;&#x529B;</code> &#x3002;</p>
+<p>&#x4E0B;&#x4E00;&#x7BC7;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x6DF1;&#x5165;Glide&#x7684;&#x7F13;&#x5B58;&#x673A;&#x5236;&#xFF0C;&#x6316;&#x6398;&#x7EC6;&#x8282;&#xFF1B;&#x5728;&#x672C;&#x7BC7;&#x4E2D;&#xFF0C;&#x8BFB;&#x8005;&#x4EC5;&#x9700;&#x8981;&#x5148;&#x8BB0;&#x4F4F;&#xFF1A;</p>
+<ul>
+<li>Glide &#x8BBE;&#x8BA1;&#x4E86;&#x7F13;&#x5B58;</li>
+<li>&#x7F13;&#x5B58;&#x5305;&#x542B; <code>&#x5185;&#x5B58;&#x7F13;&#x5B58;</code>&#xFF0C;<code>&#x78C1;&#x76D8;&#x7F13;&#x5B58;</code>&#xFF1B;&#x5185;&#x5B58;&#x7F13;&#x5B58;&#x4E2D;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x7EA7;&#x522B;&#xFF1A;<code>&#x5DF2;&#x52A0;&#x8F7D;&#x6FC0;&#x6D3B;&#x7684;&#x7F13;&#x5B58;</code>&#x3001;<code>LRU&#x7F13;&#x5B58;&#x4EE5;&#x53CA;&#x6620;&#x5C04;</code>&#xFF1B; &#x78C1;&#x76D8;&#x7F13;&#x5B58;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x7EA7;&#x522B;&#xFF1A;<code>&#x5DF2;&#x89E3;&#x7801;&#x6570;&#x636E;</code>&#xFF0C;<code>&#x539F;&#x59CB;&#x6570;&#x636E;</code></li>
+<li>&#x4E0D;&#x540C;&#x7684;&#x7F13;&#x5B58;&#x4F7F;&#x7528;&#x7B56;&#x7565;&#xFF0C;&#x540C;&#x65F6;&#x5BF9;&#x5E94;&#x4E86;&#x7F13;&#x5B58;&#x7684;<code>&#x5B58;&#x50A8;</code>&#x3001;<code>&#x83B7;&#x53D6;</code></li>
+</ul>
+</blockquote>
+<p>&#x6574;&#x4E2A;&#x52A0;&#x8F7D;&#x6D41;&#x7A0B;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;3&#x4E2A;&#x73AF;&#x8282;&#xFF1A;</p>
+<ul>
+<li>&#x751F;&#x6210;key</li>
+<li>&#x4ECE;&#x5185;&#x5B58;&#x7F13;&#x5B58;&#x4E2D;&#x83B7;&#x53D6;</li>
+<li>&#x4F7F;&#x7528;EngineJob &#x4ECE;&#x78C1;&#x76D8;&#x7F13;&#x5B58;&#x4E2D;&#x83B7;&#x53D6;</li>
+</ul>
+<p>&#x540C;&#x6837;&#x5148;&#x7ED9;&#x51FA;&#x56FE;&#xFF1A;<em>&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x9605;&#x8BFB;&#xFF0C;&#x5C06;&#x6D41;&#x7A0B;&#x5207;&#x5206;&#x6210;&#x4E86;5&#x5F20;&#x56FE;</em></p>
+<p><img src="uml/FetchResourceSequence4_1-0.png" alt="">
+<img src="uml/FetchResourceSequence4_1-1.png" alt="">
+<img src="uml/FetchResourceSequence4_1-2.png" alt="">
+<img src="uml/FetchResourceSequence4_2-0.png" alt="">
+<img src="uml/FetchResourceSequence4_2-1.png" alt=""></p>
+<hr>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x9010;&#x6B65;&#x5206;&#x6790;</p>
+<p><img src="uml/FetchResourceSequence4_1-0.png" alt=""></p>
+<p><code>1&#x3001;2</code>&#x662F;&#x751F;&#x6210;key&#x8FC7;&#x7A0B;&#xFF0C;<strong>&#x6CE8;&#x610F;&#xFF1A;KEY&#x7684;&#x751F;&#x6210;&#x65B9;&#x5F0F;&#x4E2D;&#xFF0C;&#x9690;&#x85CF;&#x7740;&#x5371;&#x9669;</strong>&#x3002;</p>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x5BF9;&#x540C;&#x4E00;&#x4E2A;&#x5A92;&#x4F53;&#x8D44;&#x6E90;&#xFF0C;&#x91C7;&#x7528;&#x4E0D;&#x540C;&#x7684;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#xFF0C;&#x5F97;&#x5230;&#x7684;&#x7ED3;&#x679C;&#x5B58;&#x5728;&#x5DEE;&#x522B;&#xFF0C;&#x7F13;&#x5B58;&#x65F6;&#xFF0C;&#x5FC5;&#x987B; <code>&#x5B8C;&#x6574;&#x7684;</code> &#x8003;&#x8651;&#x5230;&#x8FD9;&#x4E9B;&#x5904;&#x7406;&#x5DEE;&#x522B;&#xFF0C;&#x5426;&#x5219;&#x4F1A;&#x51FA;&#x73B0; <code>&#x8D44;&#x6E90;&#x9519;&#x7528;</code>&#x3002;<em>&#x672C;&#x6587;&#x5148;&#x4E0D;&#x5BF9;&#x6B64;&#x8FDB;&#x884C;&#x5C55;&#x5F00;</em></p>
+<hr>
+<p><img src="uml/FetchResourceSequence4_1-1.png" alt=""></p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6267;&#x884C; <code>loadFromActiveResources</code>,&#x5373;&#x4ECE; <code>&#x5DF2;&#x52A0;&#x8F7D;&#x6FC0;&#x6D3B;&#x7684;&#x7F13;&#x5B58;</code> &#x4E2D;&#x83B7;&#x53D6;</p>
+<p>&#x5982;&#x679C;&#x4E0D;&#x5141;&#x8BB8;&#x4F7F;&#x7528;&#x5185;&#x5B58;&#x7F13;&#x5B58;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;null&#x8FDB;&#x5165;&#x4E0B;&#x4E00;&#x7EA7;&#x7F13;&#x5B58;&#x83B7;&#x53D6;</p>
+<p>&#x5982;&#x679C;&#x5F97;&#x5230;&#x4E86;&#x7F13;&#x5B58;&#x8D44;&#x6E90;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8FD0;&#x7528;&#xFF1B;&#x5426;&#x5219;&#x8FDB;&#x5165;&#x4E0B;&#x4E00;&#x7EA7;&#x7F13;&#x5B58;&#x83B7;&#x53D6;</p>
+<hr>
+<p>&#x6B64;&#x65F6;&#xFF0C;&#x6FC0;&#x6D3B;&#x7F13;&#x5B58;&#x672A;&#x53D6;&#x5230;&#x76EE;&#x6807;&#x8D44;&#x6E90;&#xFF0C;&#x5C06;&#x8FDB;&#x5165;LRU&#x5185;&#x5B58;&#x7F13;&#x5B58;&#x83B7;&#x53D6;</p>
+<p><img src="uml/FetchResourceSequence4_1-2.png" alt=""></p>
+<p>&#x540C;&#x6837;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x5141;&#x8BB8;&#x4F7F;&#x7528;&#x5185;&#x5B58;&#x7F13;&#x5B58;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;null&#x8FDB;&#x5165;&#x4E0B;&#x4E00;&#x7EA7;&#x7F13;&#x5B58;&#x83B7;&#x53D6;</p>
+<p>&#x5982;&#x679C;&#x5F97;&#x5230;&#x4E86;&#x7F13;&#x5B58;&#x8D44;&#x6E90;&#xFF0C;<em>&#x5C06;&#x4ECE;LRU&#x5185;&#x5B58;&#x7F13;&#x5B58;&#x4E2D;&#x88AB;remove&#xFF0C;&#x505A;LRU&#x6807;&#x8BB0;&#x7EF4;&#x62A4;&#xFF0C;&#x5E76;&#x88AB;&#x52A0;&#x8F7D;&#x5230; <code>&#x6FC0;&#x6D3B;&#x7F13;&#x5B58;</code> &#x4E2D;&#x6FC0;&#x6D3B;</em>&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8FD0;&#x7528;&#xFF1B;&#x5426;&#x5219;&#x8FDB;&#x5165;&#x4E0B;&#x4E00;&#x7EA7;&#x7F13;&#x5B58;&#x83B7;&#x53D6;&#x3002;</p>
+<hr>
+<p>&#x81F3;&#x6B64;&#xFF0C;&#x5185;&#x5B58;&#x7F13;&#x5B58;&#x65E0;&#x6CD5;&#x652F;&#x6301;&#x76EE;&#x6807;&#x8D44;&#x6E90;&#x7684;&#x83B7;&#x53D6;&#xFF0C;&#x9700;&#x8981;&#x8F6C;&#x5411;&#x78C1;&#x76D8;&#x7F13;&#x5B58;</p>
+<p><em>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x8FD9;&#x91CC;&#x7684;&#x5185;&#x5728;&#x7EC6;&#x8282;&#x4F1A;&#x5F88;&#x590D;&#x6742;&#x3002;&#x5C06;&#x5728;&#x7F13;&#x5B58;&#x5206;&#x6790;&#x7BC7;&#x7AE0;&#x4E2D;&#x5C55;&#x5F00;</em></p>
+<p>&#x540C;&#x6837;&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x5F53;&#x7EC6;&#x8282;&#x975E;&#x5E38;&#x590D;&#x6742;&#x65F6;&#xFF0C;&#x6709;&#x5FC5;&#x8981;&#x8FDB;&#x884C; <code>&#x5C01;&#x88C5;</code> &#xFF0C;<code>&#x9690;&#x85CF;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;</code>&#xFF0C;&#x5BF9;&#x8C03;&#x7528;&#x8005;&#x63D0;&#x4F9B;&#x8BED;&#x4E49;&#x6070;&#x5F53;&#x7684; <code>API</code> &#x5373;&#x53EF;&#x3002;</p>
+<p>Glide&#x4E2D;&#xFF0C;&#x5C06;&#x8FD9;&#x4E9B;&#x7EC6;&#x8282;&#x5C01;&#x88C5;&#x4E3A; EngineJob &#x548C; DecodeJob&#xFF1B;</p>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x8FD9;&#x79CD;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x662F; <code>&#x76F8;&#x5BF9;&#x8017;&#x65F6;</code> &#x7684;&#xFF0C;&#x6CA1;&#x6709;&#x5FC5;&#x8981; <code>&#x963B;&#x585E;&#x5F0F;</code> &#x7B49;&#x5F85;&#x7ED3;&#x679C;&#x4EE5;&#x4F7F;&#x7528;&#xFF1B;&#x56E0;&#x6B64;&#xFF0C;&#x5728;&#x52A0;&#x8F7D;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x5B8C;&#x5168;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x4EE5;&#x4E0B;&#x573A;&#x666F;&#xFF1A; <code>&#x540C;&#x4E00;&#x8D44;&#x6E90;</code> &#x88AB; <code>&#x591A;&#x6B21;&#x8981;&#x6C42;</code> &#x52A0;&#x8F7D;&#x3002;
+&#x4E8E;&#x662F;&#xFF0C;&#x5BF9;Job&#x53EF;&#x4EE5;&#x8FDB;&#x884C; <code>&#x590D;&#x7528;</code> &#xFF0C;&#x83B7;&#x53D6;&#x5230;&#x8FD8;&#x5728;&#x52A0;&#x8F7D;&#x4E2D;&#x7684;Job&#x65F6;&#xFF0C;&#x589E;&#x52A0;&#x56DE;&#x8C03;&#x5373;&#x53EF;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF1A;</p>
+<p><img src="uml/FetchResourceSequence4_2-0.png" alt=""></p>
+<p>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x53EF;&#x590D;&#x7528;&#x7684;Job&#xFF0C;&#x5219;&#x521B;&#x5EFA;&#x76F8;&#x5E94;&#x7684;Job&#xFF0C;&#x7EF4;&#x62A4;Job&#x8D44;&#x6E90;&#x6C60;&#xFF0C;&#x8BBE;&#x7F6E;&#x56DE;&#x8C03;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF1A;
+<img src="uml/FetchResourceSequence4_2-1.png" alt=""></p>
+<h3 id="request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E09;----&#x8D44;&#x6E90;&#x4F7F;&#x7528;">Request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E09; -- &#x8D44;&#x6E90;&#x4F7F;&#x7528;</h3>
+<p>&#x5728;&#x524D;&#x6587;&#x7684;&#x8BB2;&#x89E3;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x9605;&#x8BFB;&#x5230;&#x5F53;&#x8D44;&#x6E90;&#x52A0;&#x8F7D;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x4F1A;&#x6267;&#x884C;&#x5230;&#xFF1A; <code>Request#onResourceReady(Resource&lt;?&gt;, DataSource)</code>&#xFF0C;&#x800C;&#x5176;&#x5B9E;&#x73B0;&#x5185;&#x5BB9;&#x5373;&#x4E3A;&#x8D44;&#x6E90;&#x4F7F;&#x7528;&#x3002;
+&#x5F53;&#x7136;&#x52A0;&#x8F7D;&#x5931;&#x8D25;&#xFF0C;&#x6216;&#x8005;&#x8D44;&#x6E90;&#x6821;&#x9A8C;&#x5931;&#x8D25;&#x4F1A;&#x6267;&#x884C; <code>onLoadFailed(GlideException e)</code>&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingleRequest</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResourceReady</span><span class="hljs-params">(Resource&lt;?&gt; resource, DataSource dataSource)</span> </span>{
+        stateVerifier.throwIfRecycled();
+        loadStatus = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">if</span> (resource == <span class="hljs-keyword">null</span>) {
+            GlideException exception = <span class="hljs-keyword">new</span> GlideException(<span class="hljs-string">&quot;...&quot;</span>);
+            onLoadFailed(exception);
+            <span class="hljs-keyword">return</span>;
+        }
+
+        Object received = resource.get();
+        <span class="hljs-keyword">if</span> (received == <span class="hljs-keyword">null</span> || !transcodeClass.isAssignableFrom(received.getClass())) {
+            releaseResource(resource);
+            GlideException exception = <span class="hljs-keyword">new</span> GlideException(<span class="hljs-string">&quot;...&quot;</span>);
+            onLoadFailed(exception);
+            <span class="hljs-keyword">return</span>;
+        }
+
+        <span class="hljs-keyword">if</span> (!canSetResource()) {
+            releaseResource(resource);
+            <span class="hljs-comment">// We can&apos;t put the status to complete before asking canSetResource().</span>
+            status = Status.COMPLETE;
+            <span class="hljs-keyword">return</span>;
+        }
+
+        onResourceReady((Resource&lt;R&gt;) resource, (R) received, dataSource);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResourceReady</span><span class="hljs-params">(Resource&lt;R&gt; resource, R result, DataSource dataSource)</span> </span>{
+        <span class="hljs-comment">// We must call isFirstReadyResource before setting status.</span>
+        <span class="hljs-keyword">boolean</span> isFirstResource = isFirstReadyResource();
+        status = Status.COMPLETE;
+        <span class="hljs-keyword">this</span>.resource = resource;
+
+        <span class="hljs-comment">//log</span>
+
+        isCallingCallbacks = <span class="hljs-keyword">true</span>;
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-keyword">if</span> ((requestListener == <span class="hljs-keyword">null</span>
+                    || !requestListener.onResourceReady(result, model, target, dataSource, isFirstResource))
+                    &amp;&amp; (targetListener == <span class="hljs-keyword">null</span>
+                    || !targetListener.onResourceReady(result, model, target, dataSource, isFirstResource))) {
+                Transition&lt;? <span class="hljs-keyword">super</span> R&gt; animation =
+                        animationFactory.build(dataSource, isFirstResource);
+                target.onResourceReady(result, animation);
+            }
+        } <span class="hljs-keyword">finally</span> {
+            isCallingCallbacks = <span class="hljs-keyword">false</span>;
+        }
+
+        notifyLoadSuccess();
+    }
+}
+</code></pre>
+<p><em>&#x6CE8;&#x610F;:RequestListener &#x4EE5;&#x53CA; TargetListener&#x7684;&#x5904;&#x7406;&#xFF0C;&#x5728;&#x4F7F;&#x7528;&#x76D1;&#x542C;&#x5668; <code>&#x9644;&#x52A0;</code> &#x4E00;&#x4E9B;&#x529F;&#x80FD;&#x65F6;&#xFF0C;&#x4F8B;&#x5982; <code>&#x91C7;&#x96C6;&#x57CB;&#x70B9;</code>&#x3001; <code>&#x4F9D;&#x8D56;&#x72B6;&#x6001;&#x89E6;&#x53D1;</code>&#xFF0C;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x6B64;&#x5904;&#x7EC6;&#x8282;&#x3002;</em></p>
+<p>&#x800C;Target&#x5B9E;&#x73B0;&#x7C7B;&#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#xFF0C;&#x672C;&#x6587;&#x7565;&#x53BB;&#xFF0C;&#x611F;&#x5174;&#x8DA3;&#x7684;&#x8BFB;&#x8005;&#x8FD8;&#x8BF7;&#x81EA;&#x884C;&#x9605;&#x8BFB;&#x6E90;&#x7801;&#x3002;</p>
+<h2 id="&#x5185;&#x5BB9;&#x603B;&#x7ED3;">&#x5185;&#x5BB9;&#x603B;&#x7ED3;</h2>
+<p>&#x8FD9;&#x662F;&#x4E00;&#x5F20;Glide 3.x&#x65F6;&#x4EE3;&#x7684;&#x67B6;&#x6784;&#x56FE;&#xFF0C;&#x4EC5;&#x4F9B;&#x53C2;&#x8003;</p>
+<div style="background-color: white">
+<img src="http://sniffer-site.oss-cn-shenzhen.aliyuncs.com/GlideDiagram.png" alt="Glide 3.x&#x67B6;&#x6784;&#x56FE;&#x4F9B;&#x53C2;&#x8003;">
+</div>
+
+<p><em>&#x56FE;&#x7247;&#x6709;&#x533A;&#x57DF;&#x900F;&#x660E;&#xFF0C;&#x4F7F;&#x7528;&#x4E86;html&#x52A0;&#x4E86;&#x80CC;&#x666F;&#x8272;&#xFF0C;&#x5982;&#x679C;&#x88AB;&#x8F6C;&#x4E49;&#x4E86;&#xFF0C;<a href="http://sniffer-site.oss-cn-shenzhen.aliyuncs.com/GlideDiagram.png" target="_blank">&#x8BF7;&#x770B;&#x8FD9;&#x91CC;</a></em></p>
+<p>&#x56FE;&#x4E2D;&#xFF0C;<code>&#x84DD;&#x8272;</code> &#x548C; <code>&#x7D2B;&#x8272;</code> &#x533A;&#x57DF;&#x5BF9;&#x5E94;&#x4E86;&#x8D44;&#x6E90;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#xFF0C;<code>&#x9EC4;&#x8272;</code> &#x533A;&#x57DF;&#x5BF9;&#x5E94;&#x4E86;&#x539F;&#x59CB;&#x8D44;&#x6E90;&#x83B7;&#x53D6;&#xFF0C;<code>&#x54C1;&#x7EA2;&#x8272;</code> &#x533A;&#x57DF;&#x5BF9;&#x5E94;&#x4E86;&#x5185;&#x90E8;&#x7EBF;&#x7A0B;&#x6C60;&#x3002;</p>
+<p><em>&#x867D;&#x7136;&#x8FD9;&#x5F20;&#x56FE;&#x5DF2;&#x7ECF;&#x65E0;&#x6CD5;&#x548C; <code>Glide 4.x</code> &#x5B8C;&#x5168;&#x5BF9;&#x5E94;&#xFF0C;&#x4F46;&#x662F;&#x5904;&#x7406;&#x95EE;&#x9898;&#x7684;&#x4E3B;&#x8981;&#x6D41;&#x7A0B;&#x8FD8;&#x662F;&#x6CA1;&#x6709;&#x53D8;&#x5316;&#x7684;&#x3002;</em></p>
+<p>&#x672C;&#x6587;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x662F;&#x5728; <code>Glide 4.12.0&#x7248;&#x672C;&#x57FA;&#x7840;&#x4E0A;</code> &#x5BF9; <code>&#x84DD;&#x8272;&#x533A;&#x57DF;</code> &#x7684; <code>&#x6DF1;&#x5EA6;&#x6316;&#x6398;</code> &#x4EE5;&#x53CA;&#x5BF9; <code>&#x7D2B;&#x8272;&#x533A;&#x57DF;</code> &#x7684; <code>&#x7B80;&#x8981;&#x68B3;&#x7406;</code> <em>&#x62E9;&#x53BB;&#x4E86;&#x7F13;&#x5B58;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;</em>&#x3002;</p>
+<h2 id="&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;">&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;</h2>
+<p>&#x5728;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x5206;&#x6790;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x7F57;&#x5217;&#x4E86;&#x90E8;&#x5206;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#x4F7F;&#x7528;&#x7684;&#x5730;&#x65B9;&#x3002;&#x8FD9;&#x4E9B;&#x70B9;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x5E76;&#x5728;&#x4F7F;&#x7528;&#x4E2D;&#x907F;&#x5F00;&#x3002;</p>
+<p>&#x672C;&#x6587;&#x4E2D;&#x6CA1;&#x6709;&#x6D89;&#x53CA;&#x5230;&#x5177;&#x4F53;&#x6848;&#x4F8B;&#xFF0C;&#x6240;&#x4EE5;&#x6CA1;&#x6709; <code>&#x66F4;&#x4F18;&#x505A;&#x6CD5;</code> &#xFF0C; <code>&#x66F4;&#x5408;&#x9002;&#x7684;&#x505A;&#x6CD5;</code> &#x3002;</p>
+<p>&#x4F46;&#x9605;&#x8BFB;&#x4F18;&#x79C0;&#x7684;&#x6E90;&#x7801;&#xFF0C;&#x53EF;&#x4EE5;&#x5206;&#x6790;&#x5176;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#xFF0C;&#x601D;&#x8003;&#x8FD9;&#x6837;&#x8BBE;&#x8BA1;&#x7684;&#x4F18;&#x52A3;&#x3002;</p>
+<p>&#x5982;&#xFF1A;</p>
+<ul>
+<li>Request &#x6839;&#x636E;&#x5185;&#x5728;&#x72B6;&#x6001;&#x679A;&#x4E3E;&#x5904;&#x7406;&#x5207;&#x9762;&#xFF0C;&#x5728;&#x5F02;&#x6B65;&#x5904;&#x7406;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x9690;&#x85CF;&#x4E86;&#x5185;&#x5728;&#x5B9E;&#x73B0;&#xFF0C;&#x4EC5;&#x63D0;&#x4F9B;&#x6700;&#x7B80;&#x5355;&#x7684;&#x63A7;&#x5236;API&#xFF0C;&#x5982; <code>begin</code>&#xFF0C;<code>pause</code>&#xFF1B;&#x53C8;&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x4F7F;&#x7528; <code>&#x72B6;&#x6001;&#x6A21;&#x5F0F;</code>&#xFF1F;</li>
+<li>Engine &#x4F5C;&#x4E3A;&#x6574;&#x4E2A;&#x6D41;&#x7A0B;&#x7684;&#x63A7;&#x5236;&#x6838;&#x5FC3;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x79CD; <code>Facade&#x6A21;&#x5F0F;</code> &#x5B9E;&#x8DF5;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5B83;&#x7684;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x4F7F;&#x7528;&#x8005;&#x9700;&#x8981;&#x6E05;&#x6670;&#x7684;&#x4E86;&#x89E3;&#xFF1A;<ul>
+<li>&#x7F13;&#x5B58;&#x7684;&#x4F7F;&#x7528;&#x7EC6;&#x8282;</li>
+<li>EngineJob&#x7684;&#x8C03;&#x5EA6;&#x7B49; <p>
+&#x800C;&#x589E;&#x52A0;&#x4E86; Facade&#x5C42;&#x540E;&#xFF0C;&#x5BF9;&#x4F7F;&#x7528;&#x8005;&#x800C;&#x8A00;&#xFF0C;&#x4EC5;&#x9700;&#x8981;&#x77E5;&#x9053;&#x5176;&#x529F;&#x80FD;&#x548C;API&#x8BED;&#x4E49;&#x5373;&#x53EF;&#x3002;</p></li>
+</ul>
+</li>
+</ul>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x8FD9;&#x4E9B;&#x5185;&#x5BB9;&#x4EE5;&#x53CA;&#x66F4;&#x7EC6;&#x81F4;&#x7684;&#x601D;&#x8003;&#xFF0C;&#x9700;&#x8981;&#x5EFA;&#x7ACB;&#x5728; <code>&#x6709;&#x76EE;&#x7684;</code> &#x5730;&#x6E90;&#x7801;&#x9605;&#x8BFB;&#x4E0A;&#xFF0C;&#x800C;&#x672C;&#x6587;&#x6240;&#x8D77;&#x5230;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E; <code>&#x5F15;&#x5B50;</code>&#xFF0C;<code>&#x53C2;&#x8003;</code>&#x3002;</p>
+<hr>
+<p>&#x5047;&#x671F;&#x5230;&#x4E86;&#xFF0C;&#x4E5F;&#x5E0C;&#x671B;&#x8BFB;&#x8005;&#x4EEC;&#x53BB;&#x8E0F;&#x8E0F;&#x9752;&#xFF0C;&#x953B;&#x70BC;&#x953B;&#x70BC;&#xFF0C;&#x62E5;&#x6709;&#x5065;&#x5EB7;&#x7684;&#x8EAB;&#x4F53;&#x72B6;&#x6001;&#xFF01;</p>
+<p>&#x6700;&#x8FD1;&#x4F1A;&#x964D;&#x4F4E;&#x5199;&#x539F;&#x521B;&#x7684;&#x9891;&#x6B21;&#xFF0C;<em>&#x5148;&#x524D;&#x4E00;&#x5468;&#x5199;&#x4E24;&#x5230;&#x4E09;&#x7BC7;&#x7740;&#x5B9E;&#x4E5F;&#x6709;&#x4E9B;&#x7D2F;</em>&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="post_15.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 三思系列：Glide 4.X全方位认知 -- 模块职责概览">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"三思系列：Glide 4.X加载过程一文掌握 | Glide（二）","level":"1.2.5.2","depth":3,"next":{"title":"Gradle","level":"1.3","depth":1,"ref":"","articles":[{"title":"组件化","level":"1.3.1","depth":2,"ref":"","articles":[{"title":"三思系列：组件化场景下module依赖优雅实践方案","level":"1.3.1.1","depth":3,"path":"Gradle/Modularization/post_18.md","ref":"Gradle/Modularization/post_18.md","articles":[]}]},{"title":"发布","level":"1.3.2","depth":2,"ref":"","articles":[{"title":"迁移到MavenCentral--再不行动起来，你的托管的library就没了","level":"1.3.2.1","depth":3,"path":"Gradle/Publish/post_17.md","ref":"Gradle/Publish/post_17.md","articles":[]}]}]},"previous":{"title":"三思系列：Glide 4.X全方位认知 -- 模块职责概览","level":"1.2.5.1","depth":3,"path":"Android/Glide/post_15.md","ref":"./Android/Glide/post_15.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Android/Glide/post_16.md","mtime":"2021-04-02T06:06:58.370Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-05T03:02:19.856Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
