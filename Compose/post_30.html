@@ -1,0 +1,1260 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../Gradle/" />
+    
+    
+    <link rel="prev" href="post_29.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Android/View/post_1.html">
+            
+                <a href="../Android/View/post_1.html">
+            
+                    
+                    Android
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Android/View/post_1.html">
+            
+                <a href="../Android/View/post_1.html">
+            
+                    
+                    View
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../Android/View/post_1.html">
+            
+                <a href="../Android/View/post_1.html">
+            
+                    
+                    好玩系列：优雅的处理ButterKnife和KAE被废弃
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../Android/View/post_6.html">
+            
+                <a href="../Android/View/post_6.html">
+            
+                    
+                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../Android/View/post_7.html">
+            
+                <a href="../Android/View/post_7.html">
+            
+                    
+                    三思系列：为什么自定义View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../Android/Idea/post_9.html">
+            
+                <a href="../Android/Idea/post_9.html">
+            
+                    
+                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Android/Drawable/">
+            
+                <a href="../Android/Drawable/">
+            
+                    
+                    Drawable
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../Android/Drawable/post_2.html">
+            
+                <a href="../Android/Drawable/post_2.html">
+            
+                    
+                    三思系列：重新认识Drawable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="../Android/Drawable/post_4.html">
+            
+                <a href="../Android/Drawable/post_4.html">
+            
+                    
+                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Android/Mechanism/Message/post_8.html">
+            
+                <a href="../Android/Mechanism/Message/post_8.html">
+            
+                    
+                    消息机制
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" data-path="../Android/Mechanism/Message/post_8.html">
+            
+                <a href="../Android/Mechanism/Message/post_8.html">
+            
+                    
+                    三思系列：Android的消息机制，一文吃透
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Android/Idea/post_14.html">
+            
+                <a href="../Android/Idea/post_14.html">
+            
+                    
+                    兼容
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.4.1" data-path="../Android/Idea/post_14.html">
+            
+                <a href="../Android/Idea/post_14.html">
+            
+                    
+                    好玩系列：让项目中的相册支持Heif格式图片
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Android/Glide/post_15.html">
+            
+                <a href="../Android/Glide/post_15.html">
+            
+                    
+                    Glide
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="../Android/Glide/post_15.html">
+            
+                <a href="../Android/Glide/post_15.html">
+            
+                    
+                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="../Android/Glide/post_16.html">
+            
+                <a href="../Android/Glide/post_16.html">
+            
+                    
+                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Android/KSP/post_24.html">
+            
+                <a href="../Android/KSP/post_24.html">
+            
+                    
+                    KSP
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.1" data-path="../Android/KSP/post_24.html">
+            
+                <a href="../Android/KSP/post_24.html">
+            
+                    
+                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Jetpack Compose
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="post_21.html">
+            
+                <a href="post_21.html">
+            
+                    
+                    Jetpack Compose | 一文理解神奇的Modifier
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="post_26.html">
+            
+                <a href="post_26.html">
+            
+                    
+                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="post_27.html">
+            
+                <a href="post_27.html">
+            
+                    
+                    Jetpack Compose | 控件篇（二） -- Icon，Image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="post_28.html">
+            
+                <a href="post_28.html">
+            
+                    
+                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="post_29.html">
+            
+                <a href="post_29.html">
+            
+                    
+                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.6" data-path="post_30.html">
+            
+                <a href="post_30.html">
+            
+                    
+                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Gradle/">
+            
+                <a href="../Gradle/">
+            
+                    
+                    Gradle
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Gradle/Modularization/post_18.html">
+            
+                <a href="../Gradle/Modularization/post_18.html">
+            
+                    
+                    组件化
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../Gradle/Modularization/post_18.html">
+            
+                <a href="../Gradle/Modularization/post_18.html">
+            
+                    
+                    三思系列：组件化场景下module依赖优雅实践方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Gradle/Publish/post_17.html">
+            
+                <a href="../Gradle/Publish/post_17.html">
+            
+                    
+                    MavenCentral发布
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../Gradle/Publish/post_17.html">
+            
+                <a href="../Gradle/Publish/post_17.html">
+            
+                    
+                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Gradle/post_22.html">
+            
+                <a href="../Gradle/post_22.html">
+            
+                    
+                    Gradle | 依赖管理最佳实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../Groovy/">
+            
+                <a href="../Groovy/">
+            
+                    
+                    Groovy
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../Groovy/why_write_groovy.html">
+            
+                <a href="../Groovy/why_write_groovy.html">
+            
+                    
+                    为什么撰写这个系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Groovy/post_23.html">
+            
+                <a href="../Groovy/post_23.html">
+            
+                    
+                    Groovy：MOP一文打尽
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Review/post_10.html">
+            
+                <a href="../Review/post_10.html">
+            
+                    
+                    Review
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../Review/post_10.html">
+            
+                <a href="../Review/post_10.html">
+            
+                    
+                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../repo/DaVinCi.html">
+            
+                <a href="../repo/DaVinCi.html">
+            
+                    
+                    个人项目
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../repo/DaVinCi.html">
+            
+                <a href="../repo/DaVinCi.html">
+            
+                    
+                    DaVinCi,取代XML编写Shape或ColorStateList的方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../Review/DataStructure/post_11.html">
+            
+                <a href="../Review/DataStructure/post_11.html">
+            
+                    
+                    数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../Review/DataStructure/post_11.html">
+            
+                <a href="../Review/DataStructure/post_11.html">
+            
+                    
+                    温故：线性表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../Review/DataStructure/post_12.html">
+            
+                <a href="../Review/DataStructure/post_12.html">
+            
+                    
+                    温故：栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../Review/DataStructure/post_13.html">
+            
+                <a href="../Review/DataStructure/post_13.html">
+            
+                    
+                    温故：队列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../info/">
+            
+                <a href="../info/">
+            
+                    
+                    系列说明
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../info/about_view_series.html">
+            
+                <a href="../info/about_view_series.html">
+            
+                    
+                    关于View系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../info/about_sansi_series.html">
+            
+                <a href="../info/about_sansi_series.html">
+            
+                    
+                    关于三思系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../info/about_haowan_series.html">
+            
+                <a href="../info/about_haowan_series.html">
+            
+                    
+                    关于好玩系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../info/about_wengu_series.html">
+            
+                <a href="../info/about_wengu_series.html">
+            
+                    
+                    关于温故系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="jetpack-compose--&#x63A7;&#x4EF6;&#x7BC7;&#xFF08;&#x4E94;&#xFF09;---spacer&#x3001;lazyrow&#x3001;lazycolumn--&#x8BA9;column&#x53EF;&#x6ED1;&#x52A8;">Jetpack Compose | &#x63A7;&#x4EF6;&#x7BC7;&#xFF08;&#x4E94;&#xFF09;-- Spacer&#x3001;LazyRow&#x3001;LazyColumn &amp; &#x8BA9;Column&#x53EF;&#x6ED1;&#x52A8;</h1>
+<p>&#x5728;&#x4E0A;&#x4E00;&#x7BC7;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5B8C;&#x6210;&#x4E86; <code>Box&#x3001;Row&#x3001;Column</code> &#x76F8;&#x5173;&#x5185;&#x5BB9;&#x7684;&#x5B66;&#x4E60;&#xFF0C;&#x5E76;&#x4E14;&#x7559;&#x4E0B;&#x4E86;&#x4E00;&#x4E2A;&#x7591;&#x95EE;&#xFF1A;<strong>&quot;&#x5982;&#x679C;&#x5BB9;&#x5668;&#x5927;&#x5C0F;&#x4E0D;&#x8DB3;&#x4EE5;&#x627F;&#x8F7D;&#x5185;&#x5BB9;&#xFF0C;&#x600E;&#x4E48;&#x5904;&#x7406;&#x5462;&#xFF1F;&quot;</strong>&#xFF0C;&#x8FD9;&#x4E00;&#x7BC7;&#x6211;&#x4EEC;&#x4E00;&#x8D77;&#x5B66;&#x4E60;&#x8FD9;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x3002;</p>
+<blockquote>
+<p><em>&#x6587;&#x4E2D;&#x4EE3;&#x7801;&#x5747;&#x57FA;&#x4E8E; 1.0.1&#x7248;&#x672C;</em></p>
+<p><em>&#x5982;&#x65E0;&#x7279;&#x6B8A;&#x8BF4;&#x660E;&#xFF0C;&#x6587;&#x4E2D;&#x7684; <code>Compose</code> &#x5747;&#x6307;&#x4EE3; <code>Jetpack compose</code></em></p>
+<p>&#x6587;&#x4E2D;&#x4EE3;&#x7801;&#x5747;&#x53EF;&#x5728; <a href="https://github.com/leobert-lan/ComposeWorkShop" target="_blank">WorkShop</a> &#x4E2D;&#x83B7;&#x53D6;&#xFF0C;&#x672C;&#x7BC7;&#x4EE3;&#x7801;&#x96C6;&#x4E2D;&#x4E8E; post29 &amp; post30 &#x5305;&#x4E0B;</p>
+<p>&#x5B8C;&#x6574;&#x7CFB;&#x5217;&#x76EE;&#x5F55;: <a href="https://leobert-lan.github.io/Compose/" target="_blank">Github Pages</a> | <a href="https://juejin.cn/column/6999815370697605156" target="_blank">&#x6398;&#x91D1;</a> | <a href="https://blog.csdn.net/a774057695/category_11298077.html" target="_blank">csdn</a></p>
+</blockquote>
+<h2 id="&#x548C;android&#x8FDB;&#x884C;&#x7B80;&#x5355;&#x5BF9;&#x6BD4;">&#x548C;Android&#x8FDB;&#x884C;&#x7B80;&#x5355;&#x5BF9;&#x6BD4;</h2>
+<p>&#x5728;Android&#x4E2D;&#xFF0C;SDK&#x63D0;&#x4F9B;&#x4E86;&#x8BF8;&#x5982;&#xFF1A; <code>ScrollView</code> <code>NestedScrollView</code> <code>ListView</code> <code>GridView</code> <code>RecyclerView</code>&#xFF0C;&#x7B49;&#x9488;&#x5BF9;&#x5404;&#x7C7B;&#x573A;&#x666F;&#x4E0B;&#x9002;&#x7528;&#x7684;&#x63A7;&#x4EF6;&#xFF0C;
+&#x57FA;&#x4E8E;&#x6ED1;&#x52A8;&#x624B;&#x52BF;&#x8C03;&#x6574;&#x5185;&#x5BB9;&#x5C55;&#x793A;&#x533A;&#x57DF;&#xFF0C;&#x4EE5;&#x8FBE;&#x5230;&#x663E;&#x793A;&#x66F4;&#x591A;&#x5185;&#x5BB9;&#x7684;&#x76EE;&#x7684;&#x3002;</p>
+<p>&#x8FDB;&#x4E00;&#x6B65;&#x63A2;&#x7D22;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#xFF1A;View&#x672C;&#x8EAB;&#x5C31;&#x5305;&#x542B;&#x4E86;Scroll&#x673A;&#x5236;&#x7684; <code>&#x534A;&#x6210;&#x54C1;&#x5B9E;&#x73B0;</code>&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x672C;&#x6587;&#x6211;&#x4EEC;&#x4E0D;&#x53BB;&#x6DF1;&#x7A76;Android&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x501F;&#x52A9;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x638C;&#x63E1;&#x7684;Android&#x77E5;&#x8BC6;&#xFF0C;&#x5F15;&#x51FA;&#x4E00;&#x70B9;&#xFF1A;</p>
+<blockquote>
+<p>&#x57FA;&#x4E8E;Scroll&#x673A;&#x5236;&#xFF0C;&#x7528;&#x5C0F;&#x5BB9;&#x5668;&#x5C55;&#x73B0;&#x5927;&#x5185;&#x5BB9;&#x7684;&#x672C;&#x8D28;&#xFF1A;&#x5728;&#x89C6;&#x56FE;&#x6D4B;&#x91CF;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x7ED3;&#x5408;&#x6ED1;&#x52A8;&#x624B;&#x52BF;&#x5904;&#x7406;&#xFF0C;&#x8C03;&#x6574;&#x5185;&#x5BB9;&#x5E03;&#x5C40;&#xFF0C;&#x7ED8;&#x5236;&#x540E;&#x5C55;&#x73B0;&#x3002;</p>
+</blockquote>
+<p>&#x5728;&#x65E9;&#x671F;&#x7684;&#x4E00;&#x4E9B;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6709;&#x535A;&#x4E3B;&#x63D0;&#x5230;&#xFF1A;Compose&#x4E2D;&#x5BF9;&#x5E94;&#x7684;&#x5185;&#x5BB9;&#x4E3A; <code>ScrollRow&#xFF0C;ScrollColumn</code> / <code>LazyRow&#x3001;LazyColumn</code>&#x3002;</p>
+<p><em>&#x5728;&#x65E9;&#x671F;&#x7684;&#x9884;&#x89C8;&#x7248;&#x4E2D;&#xFF0C;&#x77ED;&#x6682;&#x7684;&#x5B58;&#x5728;&#x8FC7; ScrollRow&#xFF0C;ScrollColumn&#x7B49;&#x5185;&#x5BB9;&#xFF0C;&#x4F3C;&#x4E4E;&#x5DF2;&#x7ECF;&#x88AB;&#x79FB;&#x9664;</em></p>
+<p><strong>Compose&#x4E2D;&#x4E5F;&#x662F;&#x6309;&#x7167;&#x8FD9;&#x6837;&#x7684;&#x601D;&#x8DEF;&#x8BBE;&#x8BA1;&#x7684;</strong>&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5728;&#x540E;&#x7EED;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#x518D;&#x7EC6;&#x81F4;&#x5730;&#x5C55;&#x5F00;&#x7814;&#x7A76;&#xFF0C;&#x672C;&#x7BC7;&#x4E2D;&#x4EC5;&#x5B66;&#x4E60;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x3002;</p>
+<p>&#x5728;&#x771F;&#x6B63;&#x5F00;&#x59CB;&#x8FD9;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x4E4B;&#x524D;&#xFF0C;&#x5148;&#x8865;&#x5145;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x63A7;&#x4EF6; Spacer&#xFF0C;&#x53EF;&#x4EE5;&#x7B80;&#x5355;&#x7684;&#x521B;&#x5EFA;&#x5360;&#x4F4D;&#x95F4;&#x8DDD;&#xFF0C;<em>&#x540E;&#x7EED;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x4ED6;&#x7684;&#x4F4D;&#x7F6E;&#x4E86;</em>&#x3002;</p>
+<h2 id="spacer">Spacer</h2>
+<p>&#x5728;&#x4E4B;&#x524D;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5B66;&#x4E60;&#x8FC7;Modifier&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B;&#x4E00;&#x4E9B;&#x548C;&#x5E03;&#x5C40;&#x76F8;&#x5173;&#x7684;API&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;<code>padding</code>&#x3001;<code>offset</code>&#xFF0C;&#x4F46;&#x5E76;&#x65E0; <code>margin</code> &#x7B49;&#x5185;&#x5BB9;&#xFF0C;<em>&#x6309;&#x7167;&#x4E1A;&#x5185;&#x60EF;&#x4F8B;&#xFF0C;
+&#x5982;&#x679C;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x5E7F;&#x4E3A;&#x63A5;&#x53D7;&#x7684;&#x540D;&#x8BCD;&#xFF0C;&#x4E00;&#x822C;&#x4E0D;&#x4F1A;&#x4F7F;&#x7528;&#x65B0;&#x8BCD;&#xFF0C;&#x81F3;&#x5C11;&#x8BCD;&#x6839;&#x662F;&#x4E00;&#x81F4;&#x7684;</em>
+&#xFF0C;&#x5728;Compose&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;&#x4E86;Spacer&#xFF0C;&#x53D6;&#x7F14;&#x4E86;Margin&#x7684;&#x4E00;&#x4E9B;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x3002;</p>
+<p><em>&#x6CE8;&#xFF1A;&#x8BA1;&#x7B97;&#x603B;&#x662F;&#x6709;&#x635F;&#x8017;&#x7684;&#xFF0C;&#x4E0D;&#x8981;&#x6EE5;&#x7528;Spacer,&#x5E76;&#x4E14;&#x5F88;&#x591A;&#x573A;&#x666F;&#x4E0B;&#x6709;&#x7279;&#x5B9A;&#x7684;&#x65B9;&#x5F0F;&#x5904;&#x7406;&#x95F4;&#x8DDD;&#xFF0C;&#x540E;&#x7EED;&#x4F1A;&#x9010;&#x6E10;&#x5B66;&#x4E60;&#x5230;</em></p>
+<h3 id="&#x5982;&#x4F55;&#x4F7F;&#x7528;">&#x5982;&#x4F55;&#x4F7F;&#x7528;</h3>
+<pre><code class="lang-kotlin">@Composable
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">Spacer</span><span class="hljs-params">(modifier: <span class="hljs-type">Modifier</span>)</span></span>
+</code></pre>
+<p>&#x4E00;&#x822C;&#x53EA;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x4ED6;&#x7684;&#x5BBD;&#x9AD8;&#x5C3A;&#x5BF8;&#x5373;&#x53EF;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-kotlin">Spacer(modifier = Modifier.size(<span class="hljs-number">3.</span>dp))
+</code></pre>
+<h2 id="lazycolumn">LazyColumn</h2>
+<p><em>&#x5728;&#x4E0A;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5B66;&#x4E60;&#x8FC7; Row&#x548C;Column&#xFF0C;&#x5B83;&#x4EEC;&#x4EC5;&#x4EC5;&#x662F;&#x5728;&#x65B9;&#x5411;&#x4E0A;&#x4E0D;&#x4E00;&#x81F4;&#xFF0C;&#x5728;&#x5B9E;&#x73B0;&#x4E0A;&#x975E;&#x5E38;&#x7C7B;&#x4F3C;&#x3002;&#x540C;&#x6837;&#x7684;&#xFF0C;LazyRow&#x548C;LazyColumn&#x4E5F;&#x662F;&#x5982;&#x6B64;&#x3002;</em></p>
+<p>Doc&#x4E2D;&#x63D0;&#x5230;&#xFF1A;</p>
+<blockquote>
+<p>The vertically scrolling list that only composes and lays out the currently visible items.
+The content block defines a DSL which allows you to emit items of different types.
+For example you can use LazyListScope.item to add a single item and LazyListScope.items to add a list of items.</p>
+</blockquote>
+<p>&#x4EC5; &#x7EC4;&#x5408;&#x8BA1;&#x7B97; &#x4EE5;&#x53CA; &#x5E03;&#x5C40; &#x5F53;&#x524D;&#x53EF;&#x89C1;&#x5143;&#x7D20;&#x7684;&#x7EB5;&#x5411;&#x53EF;&#x6ED1;&#x52A8;&#x5217;&#x8868;&#x3002;&#x5185;&#x5BB9;&#x5757;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;DSL&#xFF0C;&#x5141;&#x8BB8;&#x521B;&#x5EFA;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x5143;&#x7D20;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF1A;&#x4F7F;&#x7528; <code>LazyListScope.item</code> &#x6DFB;&#x52A0;&#x5355;&#x4E2A;&#x5143;&#x7D20;&#xFF0C; <code>LazyListScope.items</code> &#x6DFB;&#x52A0;&#x5143;&#x7D20;&#x5217;&#x8868;&#x3002;</p>
+<p><em>&#x6CE8;&#xFF1A;&quot;&#x5185;&#x5BB9;&#x5757;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;DSL&#xFF0C;&#x5141;&#x8BB8;&#x521B;&#x5EFA;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x5143;&#x7D20;&quot;&#xFF0C;&#x8FD9;&#x5E76;&#x4E0D;&#x540C;&#x4E8E;Android&#x4E2D;&#x6982;&#x5FF5;&#xFF1A; <code>RecyclerView#Adapter</code> &#x5177;&#x6709;&#x5C06;&#x6570;&#x636E;&#x6620;&#x5C04;&#x4E3A;&#x540C;&#x7C7B;&#x578B; <code>ViewHolder</code> &#x6216; &#x4E0D;&#x540C;&#x7C7B;&#x578B; <code>ViewHolder</code>
+&#x7684;&#x80FD;&#x529B;&#x3002;&#x800C;&#x662F;&#x6307; &quot;&#x6DFB;&#x52A0;&#x5143;&#x7D20;&#x65F6;&#x53EF;&#x4EE5;&#x662F; <code>&#x5355;&#x4E2A;&#x5143;&#x7D20;</code>&#xFF0C;&#x6216;&#x8005;&#x662F; <code>&#x5143;&#x7D20;&#x7684;&#x5217;&#x8868;</code>&#xFF0C;&#x8FD9;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x7C7B;&#x578B;&#x3002;
+<strong>&#x5B57;&#x9762;&#x7FFB;&#x8BD1;&#x5728;&#x4E2D;&#x6587;&#x8BED;&#x5883;&#x4E0B;&#x5BB9;&#x6613;&#x9020;&#x6210;&#x8BEF;&#x89E3;&#x3002;</strong></em></p>
+<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x5B83;&#x7C7B;&#x4F3C;&#x4E8E;Android&#x4E2D;&#x7684; <code>ListView</code>,<code>RecyclerView</code>, <strong>&#x7740;&#x91CD;&#x70B9;&#x5728;&#x4E8E; <code>Lazy</code></strong>&#xFF0C;<strong>&#x4E0D;&#x4F1A;&#x5C06;&#x5143;&#x7D20;&#x4E00;&#x80A1;&#x8111;&#x7684;&#x5168;&#x8BA1;&#x7B97;&#x3001;&#x5E03;&#x5C40;&#x51FA;&#x6765;</strong>&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x5B83;&#x5E76;&#x4E0D;&#x5BF9;&#x6807;ScrollView&#xFF0C;&#x5728;&#x5B83;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x53EF;&#x6ED1;&#x52A8;&#x9700;&#x6C42;&#x975E;&#x5E38;&#x666E;&#x904D;&#xFF0C;&#x4FBF;&#x9ED8;&#x8BA4;&#x5B9E;&#x73B0;&#x4E86;&#xFF01;</p>
+<blockquote>
+<p>&#x6211;&#x4EEC;&#x524D;&#x9762;&#x63D0;&#x5230;&#xFF1A;</p>
+<p>&#x5728;&#x65E9;&#x671F;&#x7684;&#x4E00;&#x4E9B;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6709;&#x535A;&#x4E3B;&#x63D0;&#x5230;&#xFF1A;Compose&#x4E2D;&#x5BF9;&#x5E94;&#x7684;&#x5185;&#x5BB9;&#x4E3A; ScrollRow&#xFF0C;ScrollColumn / LazyRow&#x3001;LazyColumn</p>
+<p>&#x8FD9;&#x672C;&#x6CA1;&#x6709;&#x5565;&#x9519;&#x8BEF;&#xFF0C;&#x4F46;&#x7EDD;&#x4E0D;&#x662F;&#x88AB;&#x66F2;&#x89E3;&#x7684;&#xFF1A; &quot;Row&#x548C;Column &#x65E0;&#x6CD5;&#x63D0;&#x4F9B;&#x6ED1;&#x52A8;&#x80FD;&#x529B;&#xFF0C;&#x800C;&#x662F;&#x9700;&#x8981;&#x4F7F;&#x7528; LazyRow&#x3001;LazyColumn&quot;</p>
+</blockquote>
+<p><strong>&#x4F46;&#x6C14;&#x6C1B;&#x5DF2;&#x7ECF;&#x70D8;&#x6258;&#x5230;&#x8FD9;&#x91CC;&#x4E86;</strong>&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x5148;&#x5C06;&#x5176;&#x5B66;&#x5B8C;&#xFF0C;&#x518D;&#x5B66;&#x4E60; Row&#x548C;Column &#x5982;&#x4F55;&#x63D0;&#x4F9B;&#x6ED1;&#x52A8;&#x80FD;&#x529B;&#x3002;</p>
+<h3 id="&#x5982;&#x4F55;&#x4F7F;&#x7528;">&#x5982;&#x4F55;&#x4F7F;&#x7528;</h3>
+<pre><code class="lang-kotlin">@Composable
+fun LazyColumn(
+    modifier: Modifier = Modifier,
+    state: LazyListState = rememberLazyListState(),
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    reverseLayout: Boolean = false,
+    verticalArrangement: Arrangement.Vertical =
+        if (!reverseLayout) Arrangement.Top else Arrangement.Bottom,
+    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
+    content: LazyListScope.() -&gt; Unit
+)
+</code></pre>
+<p>&#x5404;&#x4E2A;&#x53C2;&#x6570;&#x542B;&#x4E49;&#xFF1A;</p>
+<ul>
+<li>modifier&#xFF1A;&#x4FEE;&#x9970;&#x5668;</li>
+<li>state&#xFF1A;&#x7528;&#x4E8E;&#x63A7;&#x5236;&#x6216;&#x8005;&#x89C2;&#x6D4B;&#x5217;&#x8868;&#x72B6;&#x6001;</li>
+<li>contentPadding&#xFF1A;&#x6574;&#x4F53;&#x5185;&#x5BB9;&#x5468;&#x56F4;&#x7684;&#x4E00;&#x4E2A;Padding&#xFF0C;<em>&#x6CE8;&#xFF1A;&#x5185;&#x5BB9;&#x56DB;&#x5468;&#x7684;&#x7559;&#x767D;&#xFF0C;&#x4EE5;&#x7EB5;&#x5411;&#x5217;&#x8868;&#x4E3A;&#x4F8B;&#xFF0C;&#x5C3E;&#x90E8;&#x6CA1;&#x6709;&#x5C55;&#x793A;&#x65F6;&#x770B;&#x4E0D;&#x5230;&#x5C3E;&#x90E8;&#x7684;&#x7559;&#x767D;</em> &#x8FD9;&#x901A;&#x8FC7;Modifier&#x65E0;&#x6CD5;&#x5B9E;&#x73B0;&#xFF0C;
+<em>&#x6CE8;&#xFF1A;Modifier&#x53EA;&#x80FD;&#x5B9E;&#x73B0;&#x5217;&#x8868;&#x5BB9;&#x5668;&#x56FA;&#x5B9A;&#x7684;&#x7559;&#x767D;&#x95F4;&#x8DDD;</em> &#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B83;&#x5728;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x524D;&#x548C;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x540E;&#x7559;&#x767D;&#x3002; &#x5982;&#x679C;&#x9700;&#x8981;&#x5728;&#x5143;&#x7D20;&#x95F4;&#x7559;&#x51FA;&#x95F4;&#x8DDD;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; verticalArrangement</li>
+<li>reverseLayout&#xFF1A;&#x662F;&#x5426;&#x53CD;&#x8F6C;&#x5217;&#x8868;</li>
+<li>verticalArrangement&#xFF1A;&#x5B50;&#x63A7;&#x4EF6;&#x7EB5;&#x5411;&#x7684;&#x8303;&#x56F4;&#x3002;<em>&#x53EF;&#x7528;&#x4E8E;&#x6DFB;&#x52A0;&#x5B50;&#x63A7;&#x4EF6;&#x4E4B;&#x95F4;&#x7684;&#x95F4;&#x8DDD;&#xFF0C;&#x4EE5;&#x53CA;&#x5185;&#x5BB9;&#x4E0D;&#x8DB3;&#x4EE5;&#x586B;&#x6EE1;&#x5217;&#x8868;&#x6700;&#x5C0F;&#x5C3A;&#x5BF8;&#x65F6;&#xFF0C;&#x5982;&#x4F55;&#x6392;&#x5E03;</em></li>
+<li>horizontalAlignment&#xFF1A;&#x5B50;&#x63A7;&#x4EF6;&#x6A2A;&#x5411;&#x5BF9;&#x9F50;&#x65B9;&#x5F0F;</li>
+<li>flingBehavior&#xFF1A;fling&#x884C;&#x4E3A;&#x7684;&#x5904;&#x7406;&#x903B;&#x8F91;</li>
+<li>content&#xFF1A;&#x58F0;&#x660E;&#x4E86;&#x5982;&#x4F55;&#x63D0;&#x4F9B;&#x5B50;&#x63A7;&#x4EF6;&#x7684;DSL&#xFF0C;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;</li>
+</ul>
+<pre><code class="lang-kotlin">@LazyScopeMarker
+interface LazyListScope {
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">item</span><span class="hljs-params">(key: <span class="hljs-type">Any?</span> = null, content: <span class="hljs-type">@Composable LazyItemScope.(</span>)</span> -&gt; <span class="hljs-keyword">Unit</span>)</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">items</span><span class="hljs-params">(
+        count: <span class="hljs-type">Int,
+        key: ((index: Int</span>)</span> -&gt; Any)? = null,</span>
+        itemContent: @Composable LazyItemScope.(index: <span class="hljs-keyword">Int</span>) -&gt; <span class="hljs-keyword">Unit</span>
+    )
+
+    @ExperimentalFoundationApi
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">stickyHeader</span><span class="hljs-params">(key: <span class="hljs-type">Any?</span> = null, content: <span class="hljs-type">@Composable LazyItemScope.(</span>)</span> -&gt; <span class="hljs-keyword">Unit</span>)</span>
+}
+</code></pre>
+<p><em>&#x987A;&#x5E26;&#x4E00;&#x63D0;&#xFF1A;&#x7B14;&#x8005;&#x53C2;&#x4E0E;&#x7684;&#x4E0A;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x4E2D;&#xFF0C;&#x9AD8;&#x9891;&#x4F7F;&#x7528;RecycleView&#x7528;&#x4F5C;&#x5185;&#x5BB9;&#x5448;&#x73B0;&#xFF0C;&#x4E3A;&#x4E86;&#x4FBF;&#x6377;&#x7684;&#x5904;&#x7406; &quot;item&#x4E4B;&#x95F4;&#x7684;&#x95F4;&#x8DDD;&quot;&#x3001;&quot;&#x9996;&#x5C3E;&#x7559;&#x767D;&quot;&#x3001;&quot;&#x7279;&#x5B9A;item&#x95F4;&#x4E0D;&#x5E94;&#x7528;&#x95F4;&#x8DDD;&quot;&#xFF0C; &#x5728;&#x9879;&#x76EE;&#x4E2D;&#x5199;&#x4E86;&#x4E00;&#x5957;&#x90E8;&#x4EF6;&#xFF0C;&#x540E;&#x7EED;&#x53EF;&#x4EE5;&#x62C6;&#x51FA;&#x6765;&#x540C;&#x5927;&#x5BB6;&#x5206;&#x4EAB;&#x4E0B;&#x3002;</em></p>
+<h3 id="&#x57FA;&#x4E8E;lazylistscopeitem-&#x65B9;&#x6CD5;">&#x57FA;&#x4E8E;LazyListScope.item &#x65B9;&#x6CD5;</h3>
+<p>&#x5728;&#x4E0A;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x5BF9;&#x5E94;&#x7684;WorkShop&#x5185;&#x5BB9;&#x4E2D;&#xFF0C;&#x5DF2;&#x7ECF;&#x51FA;&#x73B0;&#x4E86;&#x8FD9;&#x4E00;&#x7528;&#x6CD5; <em>post29&#x5305;&#x4E0B;</em>&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-kotlin"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> LazyListScope.<span class="hljs-title">rowDemo</span><span class="hljs-params">()</span> {</span>
+    item {
+        CodeSample(code = <span class="hljs-string">&quot;row sample 1:&quot;</span>)
+        Row {
+            <span class="hljs-comment">// ignore</span>
+        }
+    }
+
+    item {
+        CodeSample(code = <span class="hljs-string">&quot;row sample 2:&#x7EB5;&#x5411;&#x5C45;&#x4E2D;&#x5BF9;&#x9F50;&quot;</span>)
+        <span class="hljs-comment">// ignore</span>
+    }
+
+    <span class="hljs-comment">// ignore</span>
+}
+</code></pre>
+<h3 id="&#x57FA;&#x4E8E;lazylistscopeitems-&#x65B9;&#x6CD5;">&#x57FA;&#x4E8E;LazyListScope.items &#x65B9;&#x6CD5;</h3>
+<p>&#x9664;&#x4E86;&#x76F4;&#x63A5;&#x4F7F;&#x7528;API&#xFF0C;SDK&#x4E2D;&#x540C;&#x6837;&#x63D0;&#x4F9B;&#x4E86;&#x90E8;&#x5206;&#x5185;&#x8054;&#x51FD;&#x6570;&#xFF0C;&#x6D88;&#x9664;&#x5904;&#x7406;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x4EE3;&#x7801;&#x5197;&#x4F59;&#xFF1A;</p>
+<pre><code class="lang-kotlin"><span class="hljs-keyword">inline</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T&gt;</span> LazyListScope.<span class="hljs-title">items</span><span class="hljs-params">(
+    items: <span class="hljs-type">List&lt;T&gt;,
+    noinline key: ((item: T</span>)</span> -&gt; Any)? = null,</span>
+    crossinline itemContent: @Composable LazyItemScope.(item: T) -&gt; <span class="hljs-keyword">Unit</span>
+)
+
+<span class="hljs-keyword">inline</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T&gt;</span> LazyListScope.<span class="hljs-title">itemsIndexed</span><span class="hljs-params">(
+    items: <span class="hljs-type">List&lt;T&gt;,
+    noinline key: ((index: Int, item: T</span>)</span> -&gt; Any)? = null,</span>
+    crossinline itemContent: @Composable LazyItemScope.(index: <span class="hljs-keyword">Int</span>, item: T) -&gt; <span class="hljs-keyword">Unit</span>
+)
+
+<span class="hljs-keyword">inline</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T&gt;</span> LazyListScope.<span class="hljs-title">items</span><span class="hljs-params">(
+    items: <span class="hljs-type">Array&lt;T&gt;,
+    noinline key: ((item: T</span>)</span> -&gt; Any)? = null,</span>
+    crossinline itemContent: @Composable LazyItemScope.(item: T) -&gt; <span class="hljs-keyword">Unit</span>
+)
+
+<span class="hljs-keyword">inline</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T&gt;</span> LazyListScope.<span class="hljs-title">itemsIndexed</span><span class="hljs-params">(
+    items: <span class="hljs-type">Array&lt;T&gt;,
+    noinline key: ((index: Int, item: T</span>)</span> -&gt; Any)? = null,</span>
+    crossinline itemContent: @Composable LazyItemScope.(index: <span class="hljs-keyword">Int</span>, item: T) -&gt; <span class="hljs-keyword">Unit</span>
+)
+</code></pre>
+<p>&#x6309;&#x7167;&#x4EE5;&#x5F80;Android&#x4E2D;&#x7684;&#x5F00;&#x53D1;&#x7ECF;&#x9A8C;&#xFF0C;&#x6211;&#x4EEC;&#x5F88;&#x5BB9;&#x6613;&#x5199;&#x51FA;&#x5982;&#x4E0B;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-kotlin"><span class="hljs-comment">// WorkShop &#x4E2D;&#x7684;&#x5165;&#x53E3;&#x9875;&#x9762;&#xFF0C;&#x679A;&#x4E3E;&#x4E86;&#x5404;&#x4E2A;&#x4F8B;&#x5B50;&#x5BF9;&#x5E94;&#x7684;Activity</span>
+@Composable
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">TestList</span><span class="hljs-params">(activity: <span class="hljs-type">Activity, cases: List&lt;Pair&lt;String, Class&lt;out Activity&gt;&gt;&gt;</span>)</span> {</span>
+    LazyColumn(contentPadding = PaddingValues(horizontal = <span class="hljs-number">16.</span>dp, vertical = <span class="hljs-number">8.</span>dp)) {
+        itemsIndexed(items = cases) { _, item -&gt;
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Spacer(modifier = Modifier.size(<span class="hljs-number">3.</span>dp))
+                Box(
+                    modifier = Modifier
+                        .height(<span class="hljs-number">48.</span>dp)
+                        .fillMaxWidth()
+                        .background(
+                            color = Color.LightGray,
+                            shape = RoundedCornerShape(CornerSize(<span class="hljs-number">6.</span>dp))
+                        )
+                        .clickable {
+                            activity.startActivity(Intent(activity, item.second))
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = item.first, color = MainTxt, textAlign = TextAlign.Center)
+                }
+                Spacer(modifier = Modifier.size(<span class="hljs-number">3.</span>dp))
+            }
+        }
+    }
+}
+
+TestList(
+    activity = this@MainActivity, cases = arrayListOf(
+        <span class="hljs-string">&quot;Layout samples&quot;</span> to P21LayoutSample::<span class="hljs-class"><span class="hljs-keyword">class</span>.<span class="hljs-title">java</span>,
+        <span class="hljs-type">&quot;Draw samples&quot; to P21DrawSample::class.java</span>,
+        <span class="hljs-type">&quot;Text samples&quot; to P26TextSample::class.java</span>,
+        <span class="hljs-type">&quot;TextField samples&quot; to P26TextFieldSample::class.java</span>,
+        <span class="hljs-type">&quot;Button samples&quot; to P26ButtonSample::class.java</span>,
+        <span class="hljs-type">&quot;Icon samples&quot; to P27IconSample::class.java</span>,
+        <span class="hljs-type">&quot;Image samples&quot; to P27ImageSample::class.java</span>,
+        <span class="hljs-type">&quot;Switch</span>,<span class="hljs-type">Checkbox</span>,<span class="hljs-type">RadioButton samples&quot; to P28SwitchRbCbSample::class.java</span>,
+        <span class="hljs-type">&quot;Box</span>,<span class="hljs-type">Row</span>,<span class="hljs-type">Column samples&quot; to P29BoxRowColumnSample::class.java</span>,
+    <span class="hljs-type">)</span></span>
+)
+</code></pre>
+<p>&#x5982;&#x679C;&#x4ECE;Android&#x7684;&#x89C6;&#x89D2;&#x51FA;&#x53D1;&#xFF0C;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x76F8;&#x5F53;&#x4E8E;&#x521B;&#x5EFA; ViewHolder&#x7684;ItemView &#x4EE5;&#x53CA; onBindViewHolder &#x7684;&#x5B9E;&#x73B0;</p>
+<pre><code class="lang-kotlin">Column(
+    horizontalAlignment = Alignment.CenterHorizontally,
+) {
+    Spacer(modifier = Modifier.size(<span class="hljs-number">3.</span>dp))
+    Box(
+        modifier = Modifier
+            .height(<span class="hljs-number">48.</span>dp)
+            .fillMaxWidth()
+            .background(
+                color = Color.LightGray,
+                shape = RoundedCornerShape(CornerSize(<span class="hljs-number">6.</span>dp))
+            )
+            .clickable {
+                activity.startActivity(Intent(activity, item.second))
+            },
+        contentAlignment = Alignment.Center
+    ) {
+        Text(text = item.first, color = MainTxt, textAlign = TextAlign.Center)
+    }
+    Spacer(modifier = Modifier.size(<span class="hljs-number">3.</span>dp))
+}
+</code></pre>
+<p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x6211;&#x4EEC;&#x5229;&#x7528;&#x4E86;ItemView&#x56FA;&#x6709;&#x7684; &quot;&#x7559;&#x767D;&quot; &#x5904;&#x7406;&#x4E86;Item&#x4E4B;&#x95F4;&#x7684;&#x95F4;&#x8DDD;&#xFF0C;&#x663E;&#x7136;&#x8FD9;&#x4E0D;&#x662F;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;&#x65B9;&#x6848;&#xFF01;</p>
+<h3 id="&#x66F4;&#x52A0;&#x4F18;&#x96C5;&#x5730;&#x5904;&#x7406;&#x95F4;&#x8DDD;&#x548C;&#x5BF9;&#x9F50;">&#x66F4;&#x52A0;&#x4F18;&#x96C5;&#x5730;&#x5904;&#x7406;&#x95F4;&#x8DDD;&#x548C;&#x5BF9;&#x9F50;</h3>
+<p>&#x4E0A;&#x6587;&#x4E2D;&#x5DF2;&#x7ECF;&#x63D0;&#x53CA;&#xFF1A;</p>
+<ul>
+<li>contentPadding</li>
+<li>verticalArrangement</li>
+<li>horizontalAlignment</li>
+</ul>
+<p>&#x57FA;&#x4E8E;&#x6B64;&#x6211;&#x4EEC;&#x5BF9;&#x4EE3;&#x7801;&#x8FDB;&#x884C;&#x6539;&#x9020;&#xFF0C;&#x4EE5;&#x51CF;&#x5C11;&#x6CA1;&#x7528;&#x7684;&#x5D4C;&#x5957;</p>
+<pre><code class="lang-kotlin">@Composable
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">TestList</span><span class="hljs-params">(activity: <span class="hljs-type">Activity, cases: List&lt;Pair&lt;String, Class&lt;out Activity&gt;&gt;&gt;</span>)</span> {</span>
+    LazyColumn(
+        contentPadding = PaddingValues(horizontal = <span class="hljs-number">16.</span>dp, vertical = <span class="hljs-number">8.</span>dp),
+        verticalArrangement = spacedBy(<span class="hljs-number">6.</span>dp, Alignment.Top),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        itemsIndexed(items = cases) { _, item -&gt;
+            Box(
+                modifier = Modifier
+                    .height(<span class="hljs-number">48.</span>dp)
+                    .fillMaxWidth()
+                    .background(
+                        color = Color.LightGray,
+                        shape = RoundedCornerShape(CornerSize(<span class="hljs-number">6.</span>dp))
+                    )
+                    .clickable {
+                        activity.startActivity(Intent(activity, item.second))
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = item.first,
+                    color = MainTxt,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+}
+</code></pre>
+<p>&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x4E00;&#x81F4;&#x7684;&#x6548;&#x679C;&#xFF1A;</p>
+<p><img src="post_30/p30_demo1.webp" alt=""></p>
+<h2 id="&#x8BA9;column&#x53EF;&#x6ED1;&#x52A8;">&#x8BA9;Column&#x53EF;&#x6ED1;&#x52A8;</h2>
+<p><em>&#x53C2;&#x8003;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;Row&#x7684;&#x53EF;&#x6ED1;&#x52A8;</em></p>
+<p>&#x6700;&#x5F00;&#x59CB;&#x5728;&#x548C;Modifier&#x6DF7;&#x8138;&#x719F;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x63D0;&#x53CA;&#x4E86; <code>androidx.compose.foundation</code> &#x5305;&#xFF0C;&#x5E76;&#x4E14;&#x542B;&#x6709;&#x5B50;&#x5305;&#xFF1A;
+<code>androidx.compose.foundation.gestures</code>&#xFF0C;&#x987E;&#x540D;&#x601D;&#x4E49;&#xFF0C;&#x540E;&#x8005;&#x548C;&#x624B;&#x52BF;&#x5904;&#x7406;&#x6709;&#x5173;&#x3002;</p>
+<ul>
+<li>androidx.compose.foundation.gestures.ScrollableKt#scrollable</li>
+<li>androidx.compose.foundation.ScrollKt#verticalScroll</li>
+<li>androidx.compose.foundation.ScrollKt#horizontalScroll</li>
+</ul>
+<p>&#x7ECF;&#x8FC7;&#x8FD9;&#x4E00;&#x9636;&#x6BB5;&#x7684;&#x5B66;&#x4E60;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x505A;&#x51FA;&#x4E00;&#x4E2A;&#x7ED3;&#x8BBA;&#xFF1A;</p>
+<blockquote>
+<p>Compose &#x4E2D;&#x5305;&#x542B;&#x4E00;&#x90E8;&#x5206;&#x57FA;&#x672C;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x4EE5;&#x53CA;&#x7ED3;&#x5408;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x573A;&#x666F;&#xFF0C;&#x5728;&#x57FA;&#x672C;&#x51FD;&#x6570;&#x4E0A; &quot;&#x88C5;&#x9970;&quot; &#x51FA;&#x9AD8;&#x7EA7;&#x51FD;&#x6570;</p>
+</blockquote>
+<p>&#x4ECE;&#x547D;&#x540D;&#x4E0A;&#xFF0C;&#x6211;&#x4EEC;&#x5F88;&#x5BB9;&#x6613;&#x5F97;&#x77E5; <code>scrollable</code> &#x662F;&#x6BD4;&#x8F83;&#x57FA;&#x672C;&#x7684;&#x51FD;&#x6570;&#xFF0C;<code>verticalScroll</code>&#xFF0C;<code>horizontalScroll</code> &#x662F;&#x57FA;&#x4E8E; <code>scrollable</code> &#x88C5;&#x9970;&#x51FA;&#x7684;&#x9AD8;&#x7EA7;&#x51FD;&#x6570;&#x3002;</p>
+<p>&#x9605;&#x8BFB;&#x6E90;&#x7801;&#x540E;&#x4E5F;&#x786E;&#x5B9E;&#x9A8C;&#x8BC1;&#x4E86;&#x6211;&#x4EEC;&#x7684;&#x63A8;&#x6D4B;&#x3002;</p>
+<p><em>&#x4EE5; verticalScroll &#x4E3A;&#x4F8B;&#xFF0C;horizontalScroll&#x6682;&#x4E0D;&#x5C55;&#x5F00;</em></p>
+<p>Doc&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
+<blockquote>
+<p>Modify element to allow to scroll vertically when height of the content is bigger than max
+constraints allow. In order to use this modifier, you need to create and own [ScrollState]
+@see [rememberScrollState]</p>
+</blockquote>
+<p>&#x4FEE;&#x9970;&#x5E03;&#x5C40;&#x5143;&#x7D20;&#xFF0C;&#x5F53;&#x5176;&#x5185;&#x5BB9;&#x9AD8;&#x5EA6;&#x8D85;&#x8FC7;&#x6700;&#x5927;&#x5141;&#x8BB8;&#x7684;&#x9650;&#x5236;&#x65F6;&#xFF0C;&#x5141;&#x8BB8;&#x5728;&#x7EB5;&#x5411;&#x8FDB;&#x884C;&#x6EDA;&#x52A8;&#x3002;</p>
+<p><em>&#x6CE8;&#xFF1A;&#x5185;&#x5BB9;&#x6700;&#x5927;&#x9AD8;&#x5EA6;&#x5730;&#x9650;&#x5236;&#x9700;&#x8981;&#x8003;&#x8651;&#x5BB9;&#x5668;&#x7684;&#x9AD8;&#x5EA6;&#x3001;padding&#x3001;offset&#x7B49;&#x5185;&#x5BB9;</em></p>
+<p>&#x4E3A;&#x4E86;&#x4F7F;&#x7528;&#x5B83;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x521B;&#x5EFA;&#x5E76;&#x6301;&#x6709; <code>ScrollState</code> &#x5B9E;&#x4F8B;&#xFF0C;&#x53C2;&#x89C1; <code>rememberScrollState</code></p>
+<p><strong>&#x65B9;&#x6CD5;&#x539F;&#x578B;</strong>&#xFF1A;</p>
+<pre><code class="lang-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> Modifier.<span class="hljs-title">verticalScroll</span><span class="hljs-params">(
+    state: <span class="hljs-type">ScrollState,
+    enabled: Boolean</span> = true,
+    flingBehavior: <span class="hljs-type">FlingBehavior?</span> = null,
+    reverseScrolling: <span class="hljs-type">Boolean</span> = false
+)</span></span>
+</code></pre>
+<ul>
+<li>state&#xFF1A;&#x6EDA;&#x52A8;&#x72B6;&#x6001;&#xFF0C;ScrollState&#x5B9E;&#x4F8B;</li>
+<li>enabled&#xFF1A;&#x5F53;&#x89E6;&#x6478;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x65F6;&#xFF0C;&#x662F;&#x5426;&#x5141;&#x8BB8;&#x6ED1;&#x52A8;</li>
+<li>flingBehavior&#xFF1A;fling&#x5904;&#x7406;&#x903B;&#x8F91;</li>
+<li>reverseScrolling&#xFF1A;&#x662F;&#x5426;&#x53CD;&#x5411;&#x6ED1;&#x52A8;</li>
+</ul>
+<h3 id="demo">Demo</h3>
+<pre><code class="lang-kotlin">Column(
+    modifier = Modifier
+        .fillMaxWidth()
+        .height(<span class="hljs-number">600.</span>dp)
+        .verticalScroll(
+            state = rememberScrollState()
+        )
+
+) {
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .height(<span class="hljs-number">400.</span>dp)
+            .background(Color.Green)
+    )
+
+    Spacer(modifier = Modifier.height(<span class="hljs-number">50.</span>dp))
+
+    Box(
+        Modifier
+            .fillMaxWidth()
+            .height(<span class="hljs-number">400.</span>dp)
+            .background(Color.Blue)
+    )
+
+}
+</code></pre>
+<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x5185;&#x5BB9;&#x9AD8;&#x5EA6;&#x5DF2;&#x7ECF;&#x8D85;&#x8FC7;&#x4E86;&#x6700;&#x5927;&#x9650;&#x5236;&#xFF01;</p>
+<h3 id="&#x6548;&#x679C;">&#x6548;&#x679C;</h3>
+<p><img src="post_30/p30_demo2.gif" alt=""></p>
+<h2 id="&#x7ED3;&#x8BED;">&#x7ED3;&#x8BED;</h2>
+<p>&#x81F3;&#x6B64;&#xFF0C;Compose&#x4E2D;&#x7684;&#x5217;&#x8868;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5B66;&#x4E60;&#x5B8C;&#x6210;&#xFF0C;&#x7ECF;&#x8FC7;&#x7B80;&#x5355;&#x63A2;&#x7D22;Modifier&#x4E2D;&#x6ED1;&#x52A8;&#x7684;&#x76F8;&#x5173;&#x5185;&#x5BB9;&#xFF0C;&#x638C;&#x63E1;&#x4E86;&#x8BA9;Column&#x5728;&#x5185;&#x5BB9;&#x8D85;&#x51FA;&#x5C55;&#x793A;&#x9650;&#x5236;&#x65F6;&#x53EF;&#x4EE5;&#x54CD;&#x5E94;&#x6ED1;&#x52A8;&#x7684;&#x65B9;&#x6848;&#x3002;
+&#x8F83;&#x4E3A;&#x9057;&#x61BE;&#x7684;&#x662F;&#xFF0C;&#x76EE;&#x524D;&#x6211;&#x4EEC;&#x6240;&#x638C;&#x63E1;&#x7684;&#x77E5;&#x8BC6;&#x8FD8;&#x4E0D;&#x8DB3;&#x4EE5;&#x652F;&#x6491;&#x6211;&#x4EEC;&#x7EE7;&#x7EED;&#x63A2;&#x7D22;&#x4E0B;&#x53BB;&#x3002;</p>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x5728;&#x540E;&#x7EED;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x7EE7;&#x7EED;&#x5B66;&#x4E60;&#x76F8;&#x5173;&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#xFF0C;&#x6700;&#x7EC8;&#x4E00;&#x8D77;&#x63A2;&#x7D22;Compose&#x4E2D;&#x6DF1;&#x5C42;&#x6B21;&#x7684;&#x5185;&#x5BB9;</p>
+<p><em>&#x53E6;&#xFF1A;&#x6700;&#x8FD1;&#x7956;&#x4F20;&#x4EE3;&#x7801;&#x6539;&#x7684;&#x6709;&#x70B9;&#x7CBE;&#x795E;&#x5206;&#x88C2;&#xFF0C;&#x6587;&#x7AE0;&#x66F4;&#x65B0;&#x6548;&#x7387;&#x8FD8;&#x662F;&#x6CA1;&#x4E0A;&#x7684;&#x6765;&#x3002;&#x8BFB;&#x8005;&#x670B;&#x53CB;&#x4EEC;&#xFF0C;&#x5982;&#x679C;&#x89C9;&#x5F97;&#x6211;&#x7684;&#x5206;&#x4EAB;&#x5BF9;&#x4F60;&#x6709;&#x4E00;&#x4E9B;&#x5E2E;&#x52A9;&#xFF0C;&#x8FD8;&#x8BF7;&#x70B9;&#x4E2A;&#x8D5E;&#x8BA9;&#x6211;&#x77E5;&#x9053;&#xFF0C;&#x7ED9;&#x4E88;&#x6211;&#x652F;&#x6301;&#x4E0B;&#x53BB;&#x7684;&#x52A8;&#x529B;&#xFF1B;&#x5982;&#x679C;&#x5185;&#x5BB9;&#x5199;&#x7684;&#x4E0D;&#x597D;&#xFF0C;&#x4E5F;&#x70E6;&#x8BF7;&#x7559;&#x4E2A;&#x8A00;&#x628A;&#x60F3;&#x770B;&#x7684;&#x5185;&#x5BB9;&#x544A;&#x77E5;&#x6211;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x540E;&#x7EED;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#x4E00;&#x8D77;&#x4EA4;&#x6D41;&#xFF01;</em></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="post_29.html" class="navigation navigation-prev " aria-label="Previous page: Jetpack Compose | 控件篇（四）-- Box、Row、Column">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../Gradle/" class="navigation navigation-next " aria-label="Next page: Gradle">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动","level":"1.3.6","depth":2,"next":{"title":"Gradle","level":"1.4","depth":1,"path":"Gradle/README.md","ref":"./Gradle/README.md","articles":[{"title":"组件化","level":"1.4.1","depth":2,"path":"Gradle/Modularization/post_18.md","ref":"Gradle/Modularization/post_18.md","articles":[{"title":"三思系列：组件化场景下module依赖优雅实践方案","level":"1.4.1.1","depth":3,"path":"Gradle/Modularization/post_18.md","ref":"Gradle/Modularization/post_18.md","articles":[]}]},{"title":"MavenCentral发布","level":"1.4.2","depth":2,"path":"Gradle/Publish/post_17.md","ref":"Gradle/Publish/post_17.md","articles":[{"title":"迁移到MavenCentral--再不行动起来，你的托管的library就没了","level":"1.4.2.1","depth":3,"path":"Gradle/Publish/post_17.md","ref":"Gradle/Publish/post_17.md","articles":[]}]},{"title":"Gradle | 依赖管理最佳实践","level":"1.4.3","depth":2,"path":"Gradle/post_22.md","ref":"Gradle/post_22.md","articles":[]}]},"previous":{"title":"Jetpack Compose | 控件篇（四）-- Box、Row、Column","level":"1.3.5","depth":2,"path":"Compose/post_29.md","ref":"./Compose/post_29.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Compose/post_30.md","mtime":"2021-10-19T02:31:15.896Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-27T08:32:15.964Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,1186 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="post_29.html" />
+    
+    
+    <link rel="prev" href="post_27.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Android/View/post_1.html">
+            
+                <a href="../Android/View/post_1.html">
+            
+                    
+                    Android
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Android/View/post_1.html">
+            
+                <a href="../Android/View/post_1.html">
+            
+                    
+                    View
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../Android/View/post_1.html">
+            
+                <a href="../Android/View/post_1.html">
+            
+                    
+                    好玩系列：优雅的处理ButterKnife和KAE被废弃
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../Android/View/post_6.html">
+            
+                <a href="../Android/View/post_6.html">
+            
+                    
+                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../Android/View/post_7.html">
+            
+                <a href="../Android/View/post_7.html">
+            
+                    
+                    三思系列：为什么自定义View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../Android/Idea/post_9.html">
+            
+                <a href="../Android/Idea/post_9.html">
+            
+                    
+                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Android/Drawable/">
+            
+                <a href="../Android/Drawable/">
+            
+                    
+                    Drawable
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../Android/Drawable/post_2.html">
+            
+                <a href="../Android/Drawable/post_2.html">
+            
+                    
+                    三思系列：重新认识Drawable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="../Android/Drawable/post_4.html">
+            
+                <a href="../Android/Drawable/post_4.html">
+            
+                    
+                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Android/Mechanism/Message/post_8.html">
+            
+                <a href="../Android/Mechanism/Message/post_8.html">
+            
+                    
+                    消息机制
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" data-path="../Android/Mechanism/Message/post_8.html">
+            
+                <a href="../Android/Mechanism/Message/post_8.html">
+            
+                    
+                    三思系列：Android的消息机制，一文吃透
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Android/Idea/post_14.html">
+            
+                <a href="../Android/Idea/post_14.html">
+            
+                    
+                    兼容
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.4.1" data-path="../Android/Idea/post_14.html">
+            
+                <a href="../Android/Idea/post_14.html">
+            
+                    
+                    好玩系列：让项目中的相册支持Heif格式图片
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Android/Glide/post_15.html">
+            
+                <a href="../Android/Glide/post_15.html">
+            
+                    
+                    Glide
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="../Android/Glide/post_15.html">
+            
+                <a href="../Android/Glide/post_15.html">
+            
+                    
+                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="../Android/Glide/post_16.html">
+            
+                <a href="../Android/Glide/post_16.html">
+            
+                    
+                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Android/KSP/post_24.html">
+            
+                <a href="../Android/KSP/post_24.html">
+            
+                    
+                    KSP
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.1" data-path="../Android/KSP/post_24.html">
+            
+                <a href="../Android/KSP/post_24.html">
+            
+                    
+                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Jetpack Compose
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="post_21.html">
+            
+                <a href="post_21.html">
+            
+                    
+                    Jetpack Compose | 一文理解神奇的Modifier
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="post_26.html">
+            
+                <a href="post_26.html">
+            
+                    
+                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="post_27.html">
+            
+                <a href="post_27.html">
+            
+                    
+                    Jetpack Compose | 控件篇（二） -- Icon，Image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.4" data-path="post_28.html">
+            
+                <a href="post_28.html">
+            
+                    
+                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="post_29.html">
+            
+                <a href="post_29.html">
+            
+                    
+                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="post_30.html">
+            
+                <a href="post_30.html">
+            
+                    
+                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../Gradle/">
+            
+                <a href="../Gradle/">
+            
+                    
+                    Gradle
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../Gradle/Modularization/post_18.html">
+            
+                <a href="../Gradle/Modularization/post_18.html">
+            
+                    
+                    组件化
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1.1" data-path="../Gradle/Modularization/post_18.html">
+            
+                <a href="../Gradle/Modularization/post_18.html">
+            
+                    
+                    三思系列：组件化场景下module依赖优雅实践方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../Gradle/Publish/post_17.html">
+            
+                <a href="../Gradle/Publish/post_17.html">
+            
+                    
+                    MavenCentral发布
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../Gradle/Publish/post_17.html">
+            
+                <a href="../Gradle/Publish/post_17.html">
+            
+                    
+                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../Gradle/post_22.html">
+            
+                <a href="../Gradle/post_22.html">
+            
+                    
+                    Gradle | 依赖管理最佳实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../Groovy/">
+            
+                <a href="../Groovy/">
+            
+                    
+                    Groovy
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../Groovy/why_write_groovy.html">
+            
+                <a href="../Groovy/why_write_groovy.html">
+            
+                    
+                    为什么撰写这个系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../Groovy/post_23.html">
+            
+                <a href="../Groovy/post_23.html">
+            
+                    
+                    Groovy：MOP一文打尽
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Review/post_10.html">
+            
+                <a href="../Review/post_10.html">
+            
+                    
+                    Review
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../Review/post_10.html">
+            
+                <a href="../Review/post_10.html">
+            
+                    
+                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../repo/DaVinCi.html">
+            
+                <a href="../repo/DaVinCi.html">
+            
+                    
+                    个人项目
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../repo/DaVinCi.html">
+            
+                <a href="../repo/DaVinCi.html">
+            
+                    
+                    DaVinCi,取代XML编写Shape或ColorStateList的方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../Review/DataStructure/post_11.html">
+            
+                <a href="../Review/DataStructure/post_11.html">
+            
+                    
+                    数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../Review/DataStructure/post_11.html">
+            
+                <a href="../Review/DataStructure/post_11.html">
+            
+                    
+                    温故：线性表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../Review/DataStructure/post_12.html">
+            
+                <a href="../Review/DataStructure/post_12.html">
+            
+                    
+                    温故：栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../Review/DataStructure/post_13.html">
+            
+                <a href="../Review/DataStructure/post_13.html">
+            
+                    
+                    温故：队列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../info/">
+            
+                <a href="../info/">
+            
+                    
+                    系列说明
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../info/about_view_series.html">
+            
+                <a href="../info/about_view_series.html">
+            
+                    
+                    关于View系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../info/about_sansi_series.html">
+            
+                <a href="../info/about_sansi_series.html">
+            
+                    
+                    关于三思系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../info/about_haowan_series.html">
+            
+                <a href="../info/about_haowan_series.html">
+            
+                    
+                    关于好玩系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../info/about_wengu_series.html">
+            
+                <a href="../info/about_wengu_series.html">
+            
+                    
+                    关于温故系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="jetpack-compose--&#x63A7;&#x4EF6;&#x7BC7;&#xFF08;&#x4E09;&#xFF09;----switch&#x3001;checkbox&#x3001;radiobutton">Jetpack Compose | &#x63A7;&#x4EF6;&#x7BC7;&#xFF08;&#x4E09;&#xFF09; -- Switch&#x3001;CheckBox&#x3001;RadioButton</h1>
+<h2 id="&#x5199;&#x5728;&#x6700;&#x524D;">&#x5199;&#x5728;&#x6700;&#x524D;</h2>
+<p>&#x5728;&#x4E4B;&#x524D;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5B66;&#x4E60;&#x8FC7;Compose &#x4E2D;&#x7684; <code>ImageButton</code>&#x3002;</p>
+<p>&#x672C;&#x7BC7;&#x6211;&#x4EEC;&#x5C06;&#x7EE7;&#x7EED;&#x5B66;&#x4E60; <code>Switch</code> &#x3001; <code>CheckBox</code> &#x3001;<code>RadioButton</code> , &#x8FD9;&#x4E09;&#x4E2A;&#x63A7;&#x4EF6;&#x5728; <code>&#x4EBA;&#x673A;&#x4EA4;&#x4E92;&#x754C;&#x9762;</code> &#x4E2D;&#x4E5F;&#x662F;&#x7531;&#x6765;&#x5DF2;&#x4E45;&#x3002;</p>
+<blockquote>
+<p><em>&#x6587;&#x4E2D;&#x4EE3;&#x7801;&#x5747;&#x57FA;&#x4E8E; 1.0.1&#x7248;&#x672C;</em></p>
+<p><em>&#x5982;&#x65E0;&#x7279;&#x6B8A;&#x8BF4;&#x660E;&#xFF0C;&#x6587;&#x4E2D;&#x7684; <code>Compose</code> &#x5747;&#x6307;&#x4EE3; <code>Jetpack compose</code></em></p>
+<p>&#x6587;&#x4E2D;&#x4EE3;&#x7801;&#x5747;&#x53EF;&#x5728; <a href="https://github.com/leobert-lan/ComposeWorkShop" target="_blank">WorkShop</a> &#x4E2D;&#x83B7;&#x53D6;&#xFF0C;&#x672C;&#x7BC7;&#x4EE3;&#x7801;&#x96C6;&#x4E2D;&#x4E8E; post28 &#x5305;&#x4E0B;</p>
+<p>&#x5B8C;&#x6574;&#x7CFB;&#x5217;&#x76EE;&#x5F55;: <a href="https://leobert-lan.github.io/Compose/" target="_blank">Github Pages</a> | <a href="https://juejin.cn/column/6999815370697605156" target="_blank">&#x6398;&#x91D1;</a> | <a href="https://blog.csdn.net/a774057695/category_11298077.html" target="_blank">csdn</a></p>
+</blockquote>
+<h2 id="switch">Switch</h2>
+<p>&#x5F53;&#x529F;&#x80FD;&#x542B;&#x4E49;&#x5982;&#x540C; <code>&#x5F00;&#x5173;</code> &#x4E00;&#x822C;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8BE5;&#x63A7;&#x4EF6;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&quot;&#x6DF1;&#x8272;&#x6A21;&#x5F0F;&quot;&#x3001;&quot;&#x98DE;&#x884C;&#x6A21;&#x5F0F;&quot;</p>
+<h3 id="&#x4F7F;&#x7528;&#x65B9;&#x5F0F;">&#x4F7F;&#x7528;&#x65B9;&#x5F0F;</h3>
+<pre><code class="lang-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">Switch</span><span class="hljs-params">(
+    checked: <span class="hljs-type">Boolean,
+    onCheckedChange: ((Boolean</span>)</span> -&gt; <span class="hljs-keyword">Unit</span>)?,</span>
+    modifier: Modifier = Modifier,
+    enabled: <span class="hljs-keyword">Boolean</span> = <span class="hljs-literal">true</span>,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    colors: SwitchColors = SwitchDefaults.colors()
+)
+</code></pre>
+<p>&#x7ECF;&#x8FC7;&#x524D;&#x9762;&#x7684;&#x5B66;&#x4E60;&#xFF0C;&#x8FD9;&#x4E9B;&#x53C2;&#x6570;&#x7684;&#x542B;&#x4E49;&#x5E94;&#x8BE5;&#x4E0D;&#x964C;&#x751F;&#x4E86;&#x3002;</p>
+<p>&#x4FEE;&#x6539;&#x914D;&#x8272;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5982;&#x4E0B;API&#x6784;&#x5EFA; <code>SwitchColors</code> &#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;</p>
+<pre><code class="lang-kotlin"><span class="hljs-keyword">object</span> SwitchDefaults {
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">colors</span><span class="hljs-params">(
+        checkedThumbColor: <span class="hljs-type">Color</span> = MaterialTheme.colors.secondaryVariant,
+        checkedTrackColor: <span class="hljs-type">Color</span> = checkedThumbColor,
+        checkedTrackAlpha: <span class="hljs-type">Float</span> = 0.54f,
+        uncheckedThumbColor: <span class="hljs-type">Color</span> = MaterialTheme.colors.surface,
+        uncheckedTrackColor: <span class="hljs-type">Color</span> = MaterialTheme.colors.onSurface,
+        uncheckedTrackAlpha: <span class="hljs-type">Float</span> = 0.38f,
+        disabledCheckedThumbColor: <span class="hljs-type">Color</span> = checkedThumbColor
+            .copy(alpha = ContentAlpha.disabled)</span></span>
+            .compositeOver(MaterialTheme.colors.surface),
+        disabledCheckedTrackColor: Color = checkedTrackColor
+            .copy(alpha = ContentAlpha.disabled)
+            .compositeOver(MaterialTheme.colors.surface),
+        disabledUncheckedThumbColor: Color = uncheckedThumbColor
+            .copy(alpha = ContentAlpha.disabled)
+            .compositeOver(MaterialTheme.colors.surface),
+        disabledUncheckedTrackColor: Color = uncheckedTrackColor
+            .copy(alpha = ContentAlpha.disabled)
+            .compositeOver(MaterialTheme.colors.surface)
+    ): SwitchColors
+}
+</code></pre>
+<p>&#x7ED3;&#x5408;&#x524D;&#x6587;&#x5B66;&#x4E60;&#x7684;&#x77E5;&#x8BC6;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x96BE;&#x63A8;&#x6D4B;&#xFF0C;&#x4E0B;&#x8FF0;&#x7684;&#x4EE3;&#x7801;&#x5E76;&#x4E0D;&#x80FD;&#x771F;&#x6B63;&#x8D77;&#x5230; <code>&#x5F00;&#x5173;</code> &#x7684;&#x529F;&#x80FD;&#xFF1A;</p>
+<pre><code class="lang-kotlin">Switch(checked = <span class="hljs-literal">false</span>, onCheckedChange = {
+    Log.d(<span class="hljs-string">&quot;tag&quot;</span>, <span class="hljs-string">&quot;onCheckChanged:$it&quot;</span>)
+})
+</code></pre>
+<p><em>&#x5B9E;&#x9645;&#x6548;&#x679C;&#x53EF;&#x4F53;&#x9A8C;WorkShop</em></p>
+<p>&#x6211;&#x4EEC;&#x9700;&#x8981;&#x6784;&#x5EFA;&#x4E00;&#x4E2A; <code>&quot;&#x88AB;&#x89C2;&#x6D4B;&quot;</code> &#x7684;&#x6570;&#x636E;&#x6E90;  <em>[&#x6CE8;&#x610F;&#xFF1A;&#x8FD9;&#x4E2A;&#x8BF4;&#x6CD5;&#x867D;&#x7136;&#x6BD4;&#x8F83;&#x5F62;&#x8C61;&#x4F46;&#x5E76;&#x4E0D;&#x51C6;&#x786E;]</em> &#xFF0C;&#x5B83;&#x88AB; <code>Compose&#x6784;&#x5EFA;&#x7684;&#x6811;&#x7684;&#x8282;&#x70B9;</code> &#x6240;&#x89C2;&#x6D4B;&#xFF0C;&#x5373; <code>&#x8BE5;Switch</code>&#xFF0C;&#x5F53;&#x5176;&#x5185;&#x5BB9;&#x53D1;&#x751F;&#x53D8;&#x5316;
+&#x540E;&#xFF0C;&#x53EF;&#x53CD;&#x6620;&#x5230;UI&#x4E0A;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-kotlin"><span class="hljs-variable"><span class="hljs-keyword">var</span> checked by rememberSaveable { mutableStateOf(false) }
+
+Switch(checked</span> = checked, onCheckedChange = {
+    checked = it
+    Log.d(<span class="hljs-string">&quot;tag&quot;</span>, <span class="hljs-string">&quot;onCheckChanged:$it&quot;</span>)
+})
+</code></pre>
+<p>&#x6216;&#x8005;&#xFF1A;</p>
+<pre><code class="lang-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> checked</span> = remember { mutableStateOf(<span class="hljs-literal">false</span>) }
+
+Switch(checked = checked.value, onCheckedChange = {
+    checked.value = it
+    Log.d(<span class="hljs-string">&quot;tag&quot;</span>, <span class="hljs-string">&quot;onCheckChanged:$it&quot;</span>)
+})
+</code></pre>
+<p><em>&#x5F53;&#x7136;&#xFF0C;&#x6309;&#x7167;Compose&#x7684;&#x7528;&#x6CD5;&#xFF0C;&#x8FD9;&#x4E9B;&#x51FD;&#x6570;&#x5FC5;&#x987B;&#x8981;&#x540C;&#x65F6;&#x5B58;&#x5728;&#x4E8E; <code>@Compose</code> &#x7684;&#x51FD;&#x6570;&#x5757;&#x4E2D;&#xFF0C;&#x8FD9;&#x6837;&#x624D;&#x80FD;&#x88AB;&#x76EE;&#x6807;&#x8282;&#x70B9;&#x6240; <code>&quot;&#x89C2;&#x6D4B;&quot;</code></em></p>
+<p><em>&#x6548;&#x679C;&#x5C06;&#x5728;&#x6587;&#x672B;&#x7ED9;&#x51FA;</em></p>
+<h2 id="checkbox">CheckBox</h2>
+<p>&#x5F53;&#x5F62;&#x5F0F;&#x4E3A;&#xFF1A;<code>&#x9009;&#x4E2D;/&#x4E0D;&#x9009;&#x4E2D;</code> &#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8BE5;&#x63A7;&#x4EF6;&#x3002;</p>
+<h3 id="&#x4F7F;&#x7528;&#x65B9;&#x5F0F;">&#x4F7F;&#x7528;&#x65B9;&#x5F0F;</h3>
+<pre><code class="lang-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">Checkbox</span><span class="hljs-params">(
+    checked: <span class="hljs-type">Boolean,
+    onCheckedChange: ((Boolean</span>)</span> -&gt; <span class="hljs-keyword">Unit</span>)?,</span>
+    modifier: Modifier = Modifier,
+    enabled: <span class="hljs-keyword">Boolean</span> = <span class="hljs-literal">true</span>,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    colors: CheckboxColors = CheckboxDefaults.colors()
+)
+</code></pre>
+<p>&#x548C; <code>Switch</code> &#x975E;&#x5E38;&#x76F8;&#x4F3C;&#xFF0C;&#x540C;&#x6837;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x914D;&#x8272;&#xFF1A;</p>
+<pre><code class="lang-kotlin"><span class="hljs-keyword">object</span> CheckboxDefaults {
+
+    @Composable
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">colors</span><span class="hljs-params">(
+        checkedColor: <span class="hljs-type">Color</span> = MaterialTheme.colors.secondary,
+        uncheckedColor: <span class="hljs-type">Color</span> = MaterialTheme.colors.onSurface.copy(alpha = 0.6f)</span>,</span>
+        checkmarkColor: Color = MaterialTheme.colors.surface,
+        disabledColor: Color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
+        disabledIndeterminateColor: Color = checkedColor.copy(alpha = ContentAlpha.disabled)
+    ): CheckboxColors
+}
+</code></pre>
+<p><strong>&#x81F3;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x610F;&#x8BC6;&#x5230;&#xFF0C;<code>Compose</code> &#x56FA;&#x5B9A;&#x4E86; <code>Switch</code> , <code>Checkbox</code> &#x7684;&#x6837;&#x5F0F;&#x98CE;&#x683C;&#xFF0C;&#x5982;&#x679C;&#x5B9A;&#x5236;&#x56FE;&#x6807;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>ImageButton</code> &#x3002;</strong></p>
+<p>&#x5982;&#x4E0B;&#x4EE3;&#x7801;&#x5C06;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x53EF;&#x7528;&#x7684; <code>CheckBox</code></p>
+<pre><code class="lang-kotlin"><span class="hljs-variable"><span class="hljs-keyword">var</span> checked by rememberSaveable { mutableStateOf(false) }
+
+Checkbox(checked</span> = checked, onCheckedChange = {
+    checked = it
+    Log.d(<span class="hljs-string">&quot;tag&quot;</span>, <span class="hljs-string">&quot;onCheckChanged:$it&quot;</span>)
+})
+</code></pre>
+<blockquote>
+<p>&#x4E0D;&#x540C;&#x4E8E;Android&#x539F;&#x751F;&#x63A7;&#x4EF6;&#xFF0C;<code>Compose</code> &#x4E2D;&#x7684; <code>Checkbox</code> &#x65E0;&#x6CD5;&#x6DFB;&#x52A0;&#x6587;&#x5B57; -- &#x8FD9;&#x5F88; <strong>Compose!</strong>.</p>
+<p>Compose &#x8D2F;&#x7A7F;&#x59CB;&#x7EC8;&#x7684;&#x4E00;&#x4E2A;&#x539F;&#x5219;&#x5C31;&#x662F; <code>&#x7EC4;&#x5408;</code> &#xFF0C; &#x663E;&#x7136;&#xFF1A;&#x6587;&#x5B57;&#x90E8;&#x5206;&#x5E94;&#x8BE5;&#x4F7F;&#x7528; Text&#x3002;</p>
+</blockquote>
+<h2 id="radiobutton">RadioButton</h2>
+<p><code>Compose</code> &#x4E2D;&#x5E76;&#x6CA1;&#x6709; <code>RadioButtonGroup</code> &#x7684;&#x5185;&#x5BB9;&#x3002; <em>&#x4E5F;&#x6709;&#x53EF;&#x80FD;&#x662F;&#x6211;&#x6CA1;&#x6709;&#x627E;&#x5230;</em>&#x3002;</p>
+<p>&#x4F46;&#x662F;&#xFF0C;&#x8FD9;&#x5E76;&#x4E0D;&#x91CD;&#x8981;&#xFF01;<code>Compose</code> &#x5E76;&#x4E0D;&#x63A8;&#x5D07;&#x5728;&#x63A7;&#x4EF6;&#x5185;&#x90E8;&#x7EF4;&#x62A4;&#x72B6;&#x6001;&#xFF0C;&#x5426;&#x5219;&#x4F1A;&#x8FDD;&#x80CC; <code>&#x7EAF;&#x51FD;&#x6570;</code> &#x7684;&#x7406;&#x5FF5;&#x3002;&#x800C;&#x4E14;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5F88;&#x8F7B;&#x6613;&#x5730;&#x5229;&#x7528; <code>&#x7EC4;&#x5408;</code> &#x65B9;&#x5F0F;&#x5916;&#x6302;&#x4E00;&#x6BB5;&#x903B;&#x8F91;&#xFF0C;&#x5B9E;&#x73B0;&#x5355;&#x9009;&#x3002;</p>
+<p><em>&#x6CE8;&#x610F;&#xFF1A;&#x6309;&#x7167;&#x4E00;&#x822C;&#x6027;&#x7684;UI&#x8BBE;&#x8BA1;&#x8BED;&#x8A00;&#xFF0C;&#x591A;&#x9009;&#x5E94;&#x8BE5;&#x5229;&#x7528;Checkbox&#xFF0C;&#x5B9E;&#x73B0;&#x601D;&#x8DEF;&#x6709;&#x7C7B;&#x4F3C;&#x4E4B;&#x5904;</em></p>
+<h3 id="&#x5982;&#x4F55;&#x4F7F;&#x7528;">&#x5982;&#x4F55;&#x4F7F;&#x7528;</h3>
+<pre><code class="lang-kotlin">@Composable
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">RadioButton</span><span class="hljs-params">(
+    selected: <span class="hljs-type">Boolean,
+    onClick: ((</span>)</span> -&gt; <span class="hljs-keyword">Unit</span>)?,</span>
+    modifier: Modifier = Modifier,
+    enabled: <span class="hljs-keyword">Boolean</span> = <span class="hljs-literal">true</span>,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    colors: RadioButtonColors = RadioButtonDefaults.colors()
+)
+</code></pre>
+<p>&#x548C;&#x524D;&#x4E24;&#x8005;&#x4E0D;&#x540C;&#xFF0C;<code>RadioButton</code> &#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x662F; <code>&#x70B9;&#x51FB;&#x56DE;&#x8C03;</code> &#x542B;&#x4E49;&#x3002;</p>
+<p><em>&#x9075;&#x7167;UI&#x8BBE;&#x8BA1;&#x8BED;&#x8A00;&#xFF0C;&#x88AB;&#x70B9;&#x51FB;&#x5219;&#x610F;&#x5473;&#x7740; <code>&#x9009;&#x4E2D;</code>&#xFF0C;&#x800C;&#x5728;&#x5355;&#x9009;&#x4E2D;&#xFF0C;&#x901A;&#x8FC7;&#x903B;&#x8F91;&#x4FDD;&#x6301;&#x8BE5;&#x7EC4;&#x4EC5;&#x76EE;&#x6807;&#x9879;&#x88AB;&#x9009;&#x4E2D;&#x3002;</em></p>
+<p>&#x901A;&#x8FC7;&#x4EE5;&#x4E0B;API&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x914D;&#x8272;</p>
+<pre><code class="lang-kotlin"><span class="hljs-keyword">object</span> RadioButtonDefaults {
+
+    @Composable
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">colors</span><span class="hljs-params">(
+        selectedColor: <span class="hljs-type">Color</span> = MaterialTheme.colors.secondary,
+        unselectedColor: <span class="hljs-type">Color</span> = MaterialTheme.colors.onSurface.copy(alpha = 0.6f)</span>,</span>
+        disabledColor: Color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled)
+    ): RadioButtonColors
+}
+</code></pre>
+<p>&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x5355;&#x9009;&#x7EC4;&#xFF1A;</p>
+<pre><code class="lang-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> tags</span> = arrayListOf(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>, <span class="hljs-string">&quot;D&quot;</span>)
+<span class="hljs-variable"><span class="hljs-keyword">val</span> selectedTag</span> = remember { mutableStateOf(<span class="hljs-string">&quot;&quot;</span>) }
+
+Row {
+    tags.forEach {
+        Row {
+            RadioButton(
+                selected = it == selectedTag.value,
+                onClick = {
+                    selectedTag.value = it
+                }
+            )
+
+            Text(text = it)
+        }
+
+        Spacer(modifier = Modifier.width(<span class="hljs-number">20.</span>dp))
+    }
+}
+</code></pre>
+<p>&#x540C;&#x6837;&#xFF0C;&#x8BFB;&#x8005;&#x53EF;&#x4EE5;&#x6309;&#x7167;&#x559C;&#x597D;&#x5229;&#x7528;&#x4EE3;&#x7406;&#x7684;&#x65B9;&#x5F0F;&#x521B;&#x5EFA; <code>&#x53EF;&#x89C2;&#x6D4B;&#x6570;&#x636E;&#x6E90;</code></p>
+<pre><code class="lang-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> tags</span> = arrayListOf(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>, <span class="hljs-string">&quot;D&quot;</span>)
+<span class="hljs-variable"><span class="hljs-keyword">var</span> selectedTag by rememberSaveable { mutableStateOf(&quot;&quot;) }
+
+
+Row {
+    tags.forEach {
+        Row {
+            RadioButton(
+                selected</span> = selectedTag == it,
+                onClick = {
+                    selectedTag = it
+                }
+            )
+
+            Text(text = it,modifier = Modifier.clickable {
+                selectedTag = it
+            })
+        }
+
+        Spacer(modifier = Modifier.width(<span class="hljs-number">20.</span>dp))
+    }
+}
+</code></pre>
+<p>&#x800C;&#x4E14;&#xFF0C;&#x6309;&#x7167;UX&#x7684;&#x8BBE;&#x8BA1;&#x98CE;&#x683C;&#xFF0C;&#x53EF;&#x4EE5;&#x7075;&#x6D3B;&#x7684;&#x4E3A;&#x6587;&#x5B57;&#x90E8;&#x5206;&#x6DFB;&#x52A0;&#x89E6;&#x53D1;&#x3002;</p>
+<blockquote>
+<p>&#x601D;&#x8003;&#xFF1A;&#x5982;&#x4E0B;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x591A;&#x9009;&#x5417;&#xFF1F;</p>
+</blockquote>
+<pre><code class="lang-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> tags</span> = arrayListOf(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>, <span class="hljs-string">&quot;D&quot;</span>)
+<span class="hljs-variable"><span class="hljs-keyword">var</span> selectedItems by rememberSaveable { mutableStateOf(linkedSetOf&lt;String&gt;()) }
+
+Row {
+    tags.forEach {
+        Row {
+            Checkbox(checked</span> = selectedItems.contains(it), onCheckedChange = {selected-&gt;
+                <span class="hljs-keyword">if</span> (selected) {
+                    selectedItems.add(it)
+                } <span class="hljs-keyword">else</span> {
+                    selectedItems.remove(it)
+                }
+                Log.d(<span class="hljs-string">&quot;tag&quot;</span>, <span class="hljs-string">&quot;onCheckChanged:$it,$selected&quot;</span>)
+            })
+
+            Text(text = it)
+        }
+
+        Spacer(modifier = Modifier.width(<span class="hljs-number">20.</span>dp))
+    }
+}
+</code></pre>
+<p>&#x5F53;&#x7136;&#x4E0D;&#x53EF;&#x4EE5;&#xFF01;Set &#x96C6;&#x5408;&#x5185;&#x5BB9;&#x7684;&#x53D8;&#x5316;&#x5E76;&#x65E0;&#x6CD5;&#x88AB;&#x89C2;&#x6D4B;&#xFF01;&#x90A3;&#x4E48;&#x600E;&#x4E48;&#x5904;&#x7406;&#x5462;&#xFF1F;</p>
+<p>&#x4EE5;&#x76EE;&#x524D;&#x6211;&#x4EEC;&#x638C;&#x63E1;&#x7684;&#x77E5;&#x8BC6;&#xFF0C;&#x53EF;&#x4EE5;&#xFF1A;</p>
+<ul>
+<li>&#x5229;&#x7528;&#x4F4D;&#x8FD0;&#x7B97;</li>
+<li>&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x89C2;&#x6D4B;&#x6E90;&#x3001;&#x7EC4;&#x5408;&#x5224;&#x65AD;&#xFF0C;&#x4F46;&#x8FD9;&#x4F1A;&#x88AB;lint&#x6821;&#x9A8C;&#x8B66;&#x544A;</li>
+</ul>
+<pre><code class="lang-kotlin"><span class="hljs-comment">//&#x7EC4;&#x5408;&#x5224;&#x65AD; &#x4F1A;&#x88AB;&#x8B66;&#x544A;&#x7684;&#x505A;&#x6CD5;</span>
+<span class="hljs-variable"><span class="hljs-keyword">val</span> tags</span> = arrayListOf(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>, <span class="hljs-string">&quot;D&quot;</span>)
+<span class="hljs-variable"><span class="hljs-keyword">val</span> selectedItems by rememberSaveable { mutableStateOf(linkedSetOf&lt;String&gt;()) }
+<span class="hljs-keyword">var</span> version by rememberSaveable { mutableStateOf(0) }
+
+Row {
+    tags.forEach {
+        Row {
+            Checkbox(
+                checked</span> = version != <span class="hljs-literal">null</span> &amp;&amp; selectedItems.contains(it),
+                onCheckedChange = { selected -&gt;
+                    <span class="hljs-keyword">if</span> (selected) {
+                        selectedItems.add(it)
+                    } <span class="hljs-keyword">else</span> {
+                        selectedItems.remove(it)
+                    }
+                    version++
+                    Log.d(<span class="hljs-string">&quot;tag&quot;</span>, <span class="hljs-string">&quot;onCheckChanged:$it,$selected&quot;</span>)
+                })
+
+            Text(text = it)
+        }
+
+        Spacer(modifier = Modifier.width(<span class="hljs-number">20.</span>dp))
+    }
+}
+</code></pre>
+<blockquote>
+<p>&#x662F;&#x5426;&#x8FD8;&#x6709;&#x66F4;&#x52A0;&#x4F18;&#x96C5;&#x7684;&#x89E3;&#x6CD5;&#x5462;&#xFF1F;&#x6211;&#x4EEC;&#x5148;&#x4FDD;&#x7559;&#x8FD9;&#x4E00;&#x7591;&#x60D1;&#xFF0C;&#x4F7F;&#x5F97;&#x6211;&#x4EEC;&#x7684;&#x63A2;&#x7D22;&#x8FC7;&#x7A0B;&#x66F4;&#x52A0;&#x7684; <code>&#x5E73;&#x7A33;</code> &#x3001; <code>&#x6709;&#x8DA3;</code> &#xFF0C; &#x800C;&#x4E0D;&#x5FC5;&#x5728;&#x5F00;&#x59CB;&#x9636;&#x6BB5;&#x82B1;&#x8D39;&#x8FC7;&#x591A;&#x7684;&#x7CBE;&#x529B;&#x3002;</p>
+</blockquote>
+<h2 id="&#x6548;&#x679C;">&#x6548;&#x679C;</h2>
+<p><img src="post_28/p28_demo.webp" alt="&#x6548;&#x679C;"></p>
+<h2 id="&#x7ED3;&#x8BED;">&#x7ED3;&#x8BED;</h2>
+<p>&#x5F88;&#x5FEB;&#x53C8;&#x5230;&#x4E86;&#x8FD9;&#x4E00;&#x9636;&#x6BB5;&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x6211;&#x4EEC;&#x53C8;&#x638C;&#x63E1;&#x4E86;&#x65B0;&#x7684;&#x77E5;&#x8BC6;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x4EA7;&#x751F;&#x4E86;&#x66F4;&#x591A;&#x7684;&#x7591;&#x60D1;&#xFF0C;&#x4E0D;&#x8FC7;&#x4E0D;&#x7528;&#x5FC3;&#x6025;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x8C1C;&#x9898;&#x6700;&#x7EC8;&#x90FD;&#x4F1A;&#x89E3;&#x5F00;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="post_27.html" class="navigation navigation-prev " aria-label="Previous page: Jetpack Compose | 控件篇（二） -- Icon，Image">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="post_29.html" class="navigation navigation-next " aria-label="Next page: Jetpack Compose | 控件篇（四）-- Box、Row、Column">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton","level":"1.3.4","depth":2,"next":{"title":"Jetpack Compose | 控件篇（四）-- Box、Row、Column","level":"1.3.5","depth":2,"path":"Compose/post_29.md","ref":"./Compose/post_29.md","articles":[]},"previous":{"title":"Jetpack Compose | 控件篇（二） -- Icon，Image","level":"1.3.3","depth":2,"path":"Compose/post_27.md","ref":"./Compose/post_27.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Compose/post_28.md","mtime":"2021-08-30T01:40:28.275Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-27T08:32:15.964Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
