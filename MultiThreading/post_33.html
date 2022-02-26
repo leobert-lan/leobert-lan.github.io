@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../Gradle/" />
+    <link rel="next" href="post_37.html" />
     
     
     <link rel="prev" href="./" />
@@ -534,6 +534,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.4.2" data-path="post_37.html">
+            
+                <a href="post_37.html">
+            
+                    
+                    Java基础--图解JVM内存模型和JVM线程模型
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -936,7 +949,7 @@
 <h2 id="&#x603B;&#x7EB2;">&#x603B;&#x7EB2;</h2>
 <p>&#x672C;&#x7BC7;&#x4F5C;&#x4E3A;&#x7CFB;&#x5217;&#x7684;&#x603B;&#x7EB2;&#xFF0C;&#x5C06;&#x53D1;&#x6563;&#x6027;&#x7684;&#x8C08;&#x4E00;&#x8C08;Java&#x591A;&#x7EBF;&#x7A0B;&#x7684;&#x5185;&#x5BB9;&#x8981;&#x70B9;&#xFF0C;&#x7CFB;&#x5217;&#x6587;&#x7AE0;&#x5C06;&#x4F9D;&#x6B21;&#x5C55;&#x5F00;&#x3002;</p>
 <p>&#x8C08;&#x5230;&#x591A;&#x7EBF;&#x7A0B;&#xFF0C;&#x7ED5;&#x4E0D;&#x5F00;&#x7684;&#x57FA;&#x672C;&#x6982;&#x5FF5;&#xFF1A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E2D;&#x7684; <code>&#x8FDB;&#x7A0B;</code> &#x548C; <code>&#x7EBF;&#x7A0B;</code> &#x4EE5;&#x53CA; JVM&#x7EBF;&#x7A0B;&#x548C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7EBF;&#x7A0B;&#x7684;&#x5173;&#x7CFB;&#x3002;&#x5728;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x5C06;&#x6D89;&#x53CA;&#x5230;&#xFF1A;<code>JVM&#x5185;&#x5B58;&#x6A21;&#x578B;</code> &#x548C; <code>JVM&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x8FC7;&#x7A0B;</code> &#x7684;&#x77E5;&#x8BC6;&#xFF1B;</p>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x6B64;&#x5904;&#x5C06;&#x4EA7;&#x751F;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#xFF1A;<a href="">Java&#x57FA;&#x7840;--&#x56FE;&#x89E3;JVM&#x5185;&#x5B58;&#x6A21;&#x578B;&#x548C;JVM&#x7EBF;&#x7A0B;&#x6A21;&#x578B;</a> </em> </p>
+<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x6B64;&#x5904;&#x5C06;&#x4EA7;&#x751F;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#xFF1A;<a href="post_37.html">Java&#x57FA;&#x7840;--&#x56FE;&#x89E3;JVM&#x5185;&#x5B58;&#x6A21;&#x578B;&#x548C;JVM&#x7EBF;&#x7A0B;&#x6A21;&#x578B;</a> </em> </p>
 <p>&#x7EE7;&#x800C;&#xFF0C;&#x6211;&#x4EEC;&#x53C8;&#x9700;&#x8981;&#x7406;&#x89E3; <code>&#x4E34;&#x754C;&#x8D44;&#x6E90;</code> &#x548C; <code>&#x4E34;&#x754C;&#x533A;</code> &#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x5E76;&#x4E14;&#x63A5;&#x89E6;&#x5230; <code>&#x9501;</code> &#x3001; <code>&#x5185;&#x5B58;&#x5C4F;&#x969C;</code> &#x3001; <code>CAS</code> &#x3001; <code>AQS</code> &#x7684;&#x77E5;&#x8BC6;&#xFF1B;</p>
 <p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x8FD9;&#x90E8;&#x5206;&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#xFF0C;&#x6211;&#x5C06;&#x4E13;&#x95E8;&#x6C47;&#x603B;&#x4E00;&#x7BC7; <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#x624B;&#x518C;</a>&#xFF0C;&#x5176;&#x5185;&#x5BB9;&#x672A;&#x5FC5;&#x80FD;&#x5B8C;&#x5168;&#x8BE6;&#x5C3D;&#xFF0C;&#x6BCF;&#x4E00;&#x5757;&#x7684;&#x5185;&#x5BB9;&#x5C06;&#x4F1A;&#x5728;&#x5BF9;&#x5E94;&#x7BC7;&#x7AE0;&#x4E2D;&#x8FDB;&#x884C;&#x5C55;&#x5F00;&#x3002;&#x9501;&#x7684;&#x77E5;&#x8BC6;&#x5341;&#x5206;&#x91CD;&#x8981;&#xFF0C;&#x5C06;&#x72EC;&#x7ACB;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#xFF1A;<a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63A7;&#x9762;&#x8BD5;&#xFF0C;&#x4E00;&#x6587;&#x5403;&#x900F;&#x9501;</a></em></p>
 <p>&#x8C08;&#x53CA;&#x4E00;&#x4E2A;&#x4E8B;&#x7269;&#xFF0C;&#x7ED5;&#x4E0D;&#x5F00;&#x5176;&#x751F;&#x547D;&#x5468;&#x671F;&#x3001;&#x7BA1;&#x7406;&#x3001;&#x4F5C;&#x7528;&#x5173;&#x7CFB;&#xFF1B;&#x5BF9;&#x4E8E;&#x7EBF;&#x7A0B;&#x4E5F;&#x662F;&#x5982;&#x6B64;&#x3002;</p>
@@ -950,17 +963,19 @@
 <p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x6B64;&#x5904;&#x5C06;&#x4EA7;&#x751F;&#x4E00;&#x7BC7;&#x6587;&#x7AE0; <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63E1;CompletableFuture&#xFF0C;&#x9A7E;&#x9A6D;&#x5F02;&#x6B65;&#x7F16;&#x7A0B;</a></em></p>
 <p>&#x81F3;&#x6B64;&#xFF0C;&#x6B66;&#x529F;&#x5DF2;&#x7ECF;&#x7EC3;&#x6210;&#xFF0C;&#x4F46;&#x5DE5;&#x6B32;&#x5584;&#x5176;&#x4E8B;&#x5FC5;&#x5148;&#x5229;&#x5176;&#x5668;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x8FD8;&#x6709;&#x5404;&#x7C7B;&#x5DE5;&#x5177;&#x5E2E;&#x52A9;&#x6211;&#x4EEC;&#x5199;&#x597D;&#x591A;&#x7EBF;&#x7A0B;&#x4EE3;&#x7801;&#x3002;</p>
 <p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x6B64;&#x5904;&#x5C06;&#x4EA7;&#x751F;&#x4E00;&#x7BC7;&#x6587;&#x7AE0; <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x5E76;&#x53D1;&#x5DE5;&#x5177;JUC</a></em></p>
-<p>&#x81F3;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x81F3;&#x5C11;&#x4EA7;&#x751F;9&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x4F46;&#x591A;&#x7EBF;&#x7A0B;&#x7684;&#x77E5;&#x8BC6;&#x8FDC;&#x4E0D;&#x6B62;&#x8FD9;&#x4E48;&#x591A;&#xFF0C;&#x521B;&#x4F5C;&#x8FC7;&#x7A0B;&#x4E2D;&#x53EF;&#x80FD;&#x4F1A;&#x8FDB;&#x884C;&#x4E00;&#x5B9A;&#x7684;&#x589E;&#x52A0;</p>
+<p>&#x81F3;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x81F3;&#x5C11;&#x4EA7;&#x751F;9&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x4F46;&#x591A;&#x7EBF;&#x7A0B;&#x7684;&#x77E5;&#x8BC6;&#x8FDC;&#x4E0D;&#x6B62;&#x8FD9;&#x4E48;&#x591A;&#xFF0C;&#x521B;&#x4F5C;&#x8FC7;&#x7A0B;&#x4E2D;&#x53EF;&#x80FD;&#x4F1A;&#x8FDB;&#x884C;&#x589E;&#x52A0;&#xFF0C;&#x5B8C;&#x6210;&#x60C5;&#x51B5;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x4E0B;&#x9762;&#xFF0C;&#x559C;&#x6B22;&#x5728;&#x5176;&#x4ED6;&#x5E73;&#x53F0;&#x9605;&#x8BFB;&#x7684;&#x53EF;&#x8DF3;&#x8F6C;&#x5230;&#x6398;&#x91D1;&#x6216;CSDN</p>
 <p>&#x5B8C;&#x6210;&#x60C5;&#x51B5;&#xFF1A;</p>
-<p>-[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#x624B;&#x518C;</a>
--[ ] <a href="">Java&#x57FA;&#x7840;--&#x56FE;&#x89E3;JVM&#x5185;&#x5B58;&#x6A21;&#x578B;&#x548C;JVM&#x7EBF;&#x7A0B;&#x6A21;&#x578B;</a>
--[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63A7;&#x9762;&#x8BD5;&#xFF0C;&#x4E00;&#x6587;&#x5403;&#x900F;&#x9501;</a>
--[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;&#x8BE6;&#x89E3;</a>
--[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x7684;&#x521B;&#x5EFA;&#x4E0E;&#x7EBF;&#x7A0B;&#x6C60;&#x7BA1;&#x7406;</a>
--[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63E1;Future&#xFF0C;&#x5B9E;&#x73B0;&#x5F02;&#x6B65;&#x7F16;&#x7A0B;</a>
--[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x9A7E;&#x9A6D;&#x5E76;&#x53D1;&#xFF0C;Fork&amp;Join&#x6846;&#x67B6;&#xFF0C;&#x5206;&#x6CBB;&#x7684;&#x827A;&#x672F;</a>
--[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63E1;CompletableFuture&#xFF0C;&#x9A7E;&#x9A6D;&#x5F02;&#x6B65;&#x7F16;&#x7A0B;</a>
--[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x5E76;&#x53D1;&#x5DE5;&#x5177;JUC</a></p>
+<ul>
+<li>-[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#x624B;&#x518C;</a></li>
+<li>-[x] <a href="post_37.html">Java&#x57FA;&#x7840;--&#x56FE;&#x89E3;JVM&#x5185;&#x5B58;&#x6A21;&#x578B;&#x548C;JVM&#x7EBF;&#x7A0B;&#x6A21;&#x578B;</a>, &#x5176;&#x4ED6;&#x5E73;&#x53F0;&#xFF1A;<a href="https://juejin.cn/post/7068941257074016263/" target="_blank">&#x6398;&#x91D1;</a>, <a href="https://blog.csdn.net/a774057695/article/details/123152488" target="_blank">CSDN</a></li>
+<li>-[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63A7;&#x9762;&#x8BD5;&#xFF0C;&#x4E00;&#x6587;&#x5403;&#x900F;&#x9501;</a></li>
+<li>-[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;&#x8BE6;&#x89E3;</a></li>
+<li>-[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x7684;&#x521B;&#x5EFA;&#x4E0E;&#x7EBF;&#x7A0B;&#x6C60;&#x7BA1;&#x7406;</a></li>
+<li>-[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63E1;Future&#xFF0C;&#x5B9E;&#x73B0;&#x5F02;&#x6B65;&#x7F16;&#x7A0B;</a></li>
+<li>-[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x9A7E;&#x9A6D;&#x5E76;&#x53D1;&#xFF0C;Fork&amp;Join&#x6846;&#x67B6;&#xFF0C;&#x5206;&#x6CBB;&#x7684;&#x827A;&#x672F;</a></li>
+<li>-[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63E1;CompletableFuture&#xFF0C;&#x9A7E;&#x9A6D;&#x5F02;&#x6B65;&#x7F16;&#x7A0B;</a></li>
+<li>-[ ] <a href="">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x5E76;&#x53D1;&#x5DE5;&#x5177;JUC</a></li>
+</ul>
 
                                 
                                 </section>
@@ -993,7 +1008,7 @@
                 </a>
                 
                 
-                <a href="../Gradle/" class="navigation navigation-next " aria-label="Next page: Gradle">
+                <a href="post_37.html" class="navigation navigation-next " aria-label="Next page: Java基础--图解JVM内存模型和JVM线程模型">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1004,7 +1019,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"总纲","level":"1.4.1","depth":2,"next":{"title":"Gradle","level":"1.5","depth":1,"path":"Gradle/README.md","ref":"./Gradle/README.md","articles":[{"title":"三思系列：组件化场景下module依赖优雅实践方案","level":"1.5.1","depth":2,"path":"Gradle/Modularization/post_18.md","ref":"Gradle/Modularization/post_18.md","articles":[]},{"title":"迁移到MavenCentral--再不行动起来，你的托管的library就没了","level":"1.5.2","depth":2,"path":"Gradle/Publish/post_17.md","ref":"Gradle/Publish/post_17.md","articles":[]},{"title":"Gradle | 依赖管理最佳实践","level":"1.5.3","depth":2,"path":"Gradle/post_22.md","ref":"Gradle/post_22.md","articles":[]}]},"previous":{"title":"Java多线程","level":"1.4","depth":1,"path":"MultiThreading/README.md","ref":"./MultiThreading/README.md","articles":[{"title":"总纲","level":"1.4.1","depth":2,"path":"MultiThreading/post_33.md","ref":"./MultiThreading/post_33.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"MultiThreading/post_33.md","mtime":"2022-02-25T02:10:59.242Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-02-25T02:46:27.895Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"总纲","level":"1.4.1","depth":2,"next":{"title":"Java基础--图解JVM内存模型和JVM线程模型","level":"1.4.2","depth":2,"path":"MultiThreading/post_37.md","ref":"./MultiThreading/post_37.md","articles":[]},"previous":{"title":"Java多线程","level":"1.4","depth":1,"path":"MultiThreading/README.md","ref":"./MultiThreading/README.md","articles":[{"title":"总纲","level":"1.4.1","depth":2,"path":"MultiThreading/post_33.md","ref":"./MultiThreading/post_33.md","articles":[]},{"title":"Java基础--图解JVM内存模型和JVM线程模型","level":"1.4.2","depth":2,"path":"MultiThreading/post_37.md","ref":"./MultiThreading/post_37.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"MultiThreading/post_33.md","mtime":"2022-02-26T09:12:38.021Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-02-26T09:29:41.604Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
