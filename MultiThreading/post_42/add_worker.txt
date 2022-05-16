@@ -1,0 +1,72 @@
+private boolean addWorker(Runnable firstTask, boolean core) {
+        retry:
+        for (;;) {
+            // 获取状态和线程数量
+            int c = ctl.get();
+            int rs = runStateOf(c);
+
+            //线程池已经关闭时，不再接受新任务，但已经处于队列中的任务还会得到执行
+            if (rs >= SHUTDOWN &&
+                ! (rs == SHUTDOWN &&
+                   firstTask == null &&
+                   ! workQueue.isEmpty()))
+                return false;
+
+            for (;;) {
+                // 取工作线程的数量
+                int wc = workerCountOf(c);
+
+                //如果超过容量最大值（程序设计限制）或 超过核心线程、最大线程限制则添加失败
+                if (wc >= CAPACITY ||
+                    wc >= (core ? corePoolSize : maximumPoolSize))
+                    return false;
+                // cas 操作操作, 更新新的线程数，如果成功，则整个验证流程通过，否则说明存在其他线程中触发了addWorker,需要重新进行数量检测
+                if (compareAndIncrementWorkerCount(c))
+                    break retry;
+                c = ctl.get();  // Re-read ctl
+
+                //既然有其他线程进行了操作，可能线程池状态也发生了改变，需要重新执行完整的检测
+                if (runStateOf(c) != rs)
+                    continue retry;
+            }
+        }
+
+        boolean workerStarted = false;
+        boolean workerAdded = false;
+        Worker w = null;
+        try {
+            w = new Worker(firstTask);
+            final Thread t = w.thread;
+            if (t != null) {
+                final ReentrantLock mainLock = this.mainLock;
+                mainLock.lock();
+                try {
+                    // Recheck while holding lock.
+                    // Back out on ThreadFactory failure or if
+                    // shut down before lock acquired.
+                    int rs = runStateOf(ctl.get());
+
+                    if (rs < SHUTDOWN ||
+                        (rs == SHUTDOWN && firstTask == null)) {
+                        if (t.isAlive()) // precheck that t is startable
+                            throw new IllegalThreadStateException();
+                        workers.add(w);
+                        int s = workers.size();
+                        if (s > largestPoolSize)
+                            largestPoolSize = s;
+                        workerAdded = true;
+                    }
+                } finally {
+                    mainLock.unlock();
+                }
+                if (workerAdded) {
+                    t.start();
+                    workerStarted = true;
+                }
+            }
+        } finally {
+            if (! workerStarted)
+                addWorkerFailed(w);
+        }
+        return workerStarted;
+    }
