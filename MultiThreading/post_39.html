@@ -17,6 +17,18 @@
     
             
                 
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
@@ -57,7 +69,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../Gradle/" />
+    <link rel="next" href="post_42.html" />
     
     
     <link rel="prev" href="post_38.html" />
@@ -573,6 +585,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.4.5" data-path="post_42.html">
+            
+                <a href="post_42.html">
+            
+                    
+                    Java多线程基础--线程的创建与线程池管理
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -766,6 +791,19 @@
             
                     
                     好玩系列：白嫖一个优雅的类图生成工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="../Speculative/post_43.html">
+            
+                <a href="../Speculative/post_43.html">
+            
+                    
+                    初体验：动手搭建"小清新式"局域网文档系统
             
                 </a>
             
@@ -1016,15 +1054,15 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;&#x8BE6;&#x89E3;">Java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;&#x8BE6;&#x89E3;</h1>
-<h2 id="&#x524D;&#x8A00;">&#x524D;&#x8A00;</h2>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;&#x8BE6;&#x89E3;"><b></b>Java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;&#x8BE6;&#x89E3;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;"><b></b>&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;</a></li><ul><li><span class="title-icon "></span><a href="#new-&#x65B0;&#x5EFA;"><b></b>NEW &#x65B0;&#x5EFA;</a></li><li><span class="title-icon "></span><a href="#runnable-&#x53EF;&#x8FD0;&#x884C;"><b></b>RUNNABLE &#x53EF;&#x8FD0;&#x884C;</a></li><li><span class="title-icon "></span><a href="#blocked-&#x963B;&#x585E;"><b></b>BLOCKED &#x963B;&#x585E;</a></li><li><span class="title-icon "></span><a href="#waiting-&#x7B49;&#x5F85;"><b></b>WAITING &#x7B49;&#x5F85;</a></li><li><span class="title-icon "></span><a href="#timedwaiting-&#x8BA1;&#x65F6;&#x7B49;&#x5F85;"><b></b>TIMED_WAITING &#x8BA1;&#x65F6;&#x7B49;&#x5F85;</a></li><li><span class="title-icon "></span><a href="#terminated-&#x7EC8;&#x6B62;"><b></b>TERMINATED &#x7EC8;&#x6B62;</a></li><li><span class="title-icon "></span><a href="#&#x5C0F;&#x7ED3;"><b></b>&#x5C0F;&#x7ED3;</a></li></ul><li><span class="title-icon "></span><a href="#&#x7EBF;&#x7A0B;api&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;"><b></b>&#x7EBF;&#x7A0B;API&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;</a></li><ul><li><span class="title-icon "></span><a href="#object&#x76F8;&#x5173;api"><b></b>Object&#x76F8;&#x5173;API</a></li><li><span class="title-icon "></span><a href="#thread&#x4E2D;&#x76F8;&#x5173;&#x7684;api"><b></b>Thread&#x4E2D;&#x76F8;&#x5173;&#x7684;API</a></li><li><span class="title-icon "></span><a href="#&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x7684;&#x534F;&#x4F5C;"><b></b>&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x7684;&#x534F;&#x4F5C;</a></li></ul></ul></ul></div><a href="#java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;&#x8BE6;&#x89E3;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;&#x8BE6;&#x89E3;"><a name="java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;&#x8BE6;&#x89E3;" class="anchor-navigation-ex-anchor" href="#java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;&#x8BE6;&#x89E3;"><i class="fa fa-link" aria-hidden="true"></i></a>Java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;&#x8BE6;&#x89E3;</h1>
+<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
 <p>&#x5404;&#x4F4D;&#x4EB2;&#x7231;&#x7684;&#x8BFB;&#x8005;&#x670B;&#x53CB;&#xFF0C;&#x6211;&#x6B63;&#x5728;&#x521B;&#x4F5C; <code>Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;</code> &#x6587;&#x7AE0;&#xFF0C;&#x672C;&#x7BC7;&#x6211;&#x4EEC;&#x5C06;&#x68B3;&#x7406;&#x57FA;&#x7840;&#x5185;&#x5BB9;&#xFF1A;<code>&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;</code></p>
 <p>&#x8FD9;&#x662F;&#x975E;&#x5E38;&#x57FA;&#x7840;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x672C;&#x7BC7;&#x4EC5;&#x4ECE; <strong>&#x77E5;&#x8BC6;&#x5B8C;&#x6574;&#x6027;</strong> &#x89D2;&#x5EA6;&#x51FA;&#x53D1;&#xFF0C;&#x505A;&#x4E00;&#x6B21;&#x68B3;&#x7406;&#x3002;</p>
 <p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x672C;&#x7BC7;&#x6309;&#x7167;&#x81EA;&#x5DF1;&#x6709;&#x9650;&#x7684;&#x77E5;&#x8BC6;&#x8FDB;&#x884C;&#x6574;&#x7406;&#xFF0C;&#x5982;&#x6709;&#x8C2C;&#x8BEF;&#xFF0C;&#x8FD8;&#x8BF7;&#x8BFB;&#x8005;&#x5728;&#x8BC4;&#x8BBA;&#x533A;&#x4E0D;&#x541D;&#x6307;&#x51FA;</em></p>
 <blockquote>
 <p>&#x4E86;&#x89E3;&#x7CFB;&#x5217;&#x4EE5;&#x53CA;&#x603B;&#x7EB2;&#xFF1A;<a href="https://leobert-lan.github.io/MultiThreading/post_33.html" target="_blank">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;</a></p>
 </blockquote>
-<h2 id="&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;">&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;</h2>
+<h2 id="&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;"><a name="&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;" class="anchor-navigation-ex-anchor" href="#&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;</h2>
 <p>&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x8BBE;&#x8BA1;&#x4E2D;&#xFF0C;&#x5E7F;&#x4E49;&#x4E0A;&#x5BF9;&#x8C61;&#x5747;&#x5177;&#x5907;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF0C;&#x5728;&#x72ED;&#x4E49;&#x4E0A;&#xFF0C;<code>Thread</code> &#x7C7B;&#x5B9E;&#x4F8B;&#x7684; <code>&#x72B6;&#x6001;</code> &#x72B6;&#x6001;&#x7684;&#x8F6C;&#x53D8;&#x5373;&#x4E3A;&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x3002;</p>
 <p>&#x4F9D;&#x636E;JDK 1.5 &#x5F00;&#x59CB;&#x7684;&#x4EE3;&#x7801;&#xFF0C;Thread&#x5B9E;&#x4F8B;&#x7684;State&#x5B58;&#x5728;6&#x79CD;&#xFF1A;</p>
 <ul>
@@ -1037,13 +1075,13 @@
 </ul>
 <p>&#x5E76;&#x4E14;&#x6709;&#x5982;&#x4E0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x56FE;&#xFF1A;</p>
 <p><img src="post_39/thread_lifecycle1.jpeg" alt=""></p>
-<h3 id="new-&#x65B0;&#x5EFA;">NEW &#x65B0;&#x5EFA;</h3>
+<h3 id="new-&#x65B0;&#x5EFA;"><a name="new-&#x65B0;&#x5EFA;" class="anchor-navigation-ex-anchor" href="#new-&#x65B0;&#x5EFA;"><i class="fa fa-link" aria-hidden="true"></i></a>NEW &#x65B0;&#x5EFA;</h3>
 <p>&#x5C1A;&#x672A; <code>start</code> &#x7684;&#x7EBF;&#x7A0B;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x4ECE;&#x4EE3;&#x7801;&#x4E0A;&#x770B;&#xFF1A;</p>
 <pre><code class="lang-java">Thread thread=<span class="hljs-keyword">new</span> Thread();
         thread.start();
 </code></pre>
 <p>&#x5728;&#x8C03;&#x7528;start&#x524D;&#xFF0C;&#x5373;&#x4E3A; <code>NEW</code> &#x72B6;&#x6001;&#x3002;</p>
-<h3 id="runnable-&#x53EF;&#x8FD0;&#x884C;">RUNNABLE &#x53EF;&#x8FD0;&#x884C;</h3>
+<h3 id="runnable-&#x53EF;&#x8FD0;&#x884C;"><a name="runnable-&#x53EF;&#x8FD0;&#x884C;" class="anchor-navigation-ex-anchor" href="#runnable-&#x53EF;&#x8FD0;&#x884C;"><i class="fa fa-link" aria-hidden="true"></i></a>RUNNABLE &#x53EF;&#x8FD0;&#x884C;</h3>
 <p>&#x5F53;start&#x65B9;&#x6CD5;&#x88AB;&#x8C03;&#x7528;&#x540E;&#xFF0C;&#x5373;&#x8FDB;&#x5165; <code>RUNNABLE</code> &#x72B6;&#x6001;&#xFF0C;&#x6CE8;&#x610F;&#xFF1A;</p>
 <ul>
 <li>start&#x65B9;&#x6CD5;&#x591A;&#x6B21;&#x8C03;&#x7528;&#x5C06;&#x8FD4;&#x56DE; <code>IllegalThreadStateException</code> &#x5F02;&#x5E38;</li>
@@ -1051,9 +1089,9 @@
 &#x5C31;&#x7EEA;&#x72B6;&#x6001;&#x7684;&#x7EBF;&#x7A0B;&#x88AB;&#x5904;&#x7406;&#x5668;&#x8C03;&#x5EA6;&#x83B7;&#x5F97;CPU&#x65F6;&#x95F4;&#x7247;&#xFF0C;&#x5219;&#x53D8;&#x4E3A; <code>running</code></li>
 </ul>
 <p><img src="post_39/thread_runnable.jpeg" alt=""></p>
-<h3 id="blocked-&#x963B;&#x585E;">BLOCKED &#x963B;&#x585E;</h3>
+<h3 id="blocked-&#x963B;&#x585E;"><a name="blocked-&#x963B;&#x585E;" class="anchor-navigation-ex-anchor" href="#blocked-&#x963B;&#x585E;"><i class="fa fa-link" aria-hidden="true"></i></a>BLOCKED &#x963B;&#x585E;</h3>
 <p>&#x6CE8;&#x610F;&#xFF0C;JVM&#x4E2D;&#x7EBF;&#x7A0B;&#x7684;&#x963B;&#x585E;&#x72B6;&#x6001;&#x4E0D;&#x540C;&#x4E8E;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684;I/O&#x963B;&#x585E;&#xFF0C;&#x4EC5;&#x4EC5;&#x662F;&#x5728;&#x7B49;&#x5F85;&#x83B7;&#x53D6;&#x76D1;&#x89C6;&#x5668;&#x9501;&#xFF0C;&#x5728;JVM&#x4E2D;&#xFF0C;&#x53D1;&#x751F;&#x5728;&#x8FDB;&#x5165;&#xFF08;&#x6216;&#x8005; &#x8C03;&#x7528;&#x8FC7; <code>Object#wait()</code> &#x4E4B;&#x540E;&#x91CD;&#x65B0;&#x8FDB;&#x5165;&#xFF09;synchronized &#x5757;/&#x65B9;&#x6CD5;</p>
-<h3 id="waiting-&#x7B49;&#x5F85;">WAITING &#x7B49;&#x5F85;</h3>
+<h3 id="waiting-&#x7B49;&#x5F85;"><a name="waiting-&#x7B49;&#x5F85;" class="anchor-navigation-ex-anchor" href="#waiting-&#x7B49;&#x5F85;"><i class="fa fa-link" aria-hidden="true"></i></a>WAITING &#x7B49;&#x5F85;</h3>
 <p>&#x7EBF;&#x7A0B;&#x8FDB;&#x5165;&#x8FD9;&#x79CD;&#x72B6;&#x6001;&#x610F;&#x5473;&#x7740;&#xFF1A;<strong>&quot;&#x7B49;&#x5F85;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x7279;&#x5B9A;&#x64CD;&#x4F5C;&quot;</strong>&#xFF0C;&#x7B3C;&#x7EDF;&#x7684;&#x4ECE;&#x610F;&#x56FE;&#x4E0A;&#x770B;&#xFF0C;&#x5B83;&#x5728;&#x7B49;&#x5F85;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x7684;&#x6267;&#x884C;&#x7ED3;&#x679C;&#xFF0C;&#x5F53;&#x5BF9;&#x65B9;&#x5B8C;&#x6210;&#x540E;&#x5524;&#x9192;&#x5B83;&#x7EE7;&#x7EED;&#x5DE5;&#x4F5C;&#x3002;</p>
 <ul>
 <li><code>Object#wait()</code> with no timeout</li>
@@ -1061,7 +1099,7 @@
 <li><code>LockSupport#park()</code></li>
 </ul>
 <p>&#x5982;&#x4E0A;&#x4E09;&#x79CD;&#x65B9;&#x5F0F;&#x53EF;&#x4EE5;&#x8BA9;&#x7EBF;&#x7A0B;&#x8FDB;&#x5165; <code>WAITING</code> &#x72B6;&#x6001;&#xFF0C;&#x53EA;&#x80FD;&#x7B49;&#x5F85;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x8FDB;&#x884C;&#x5524;&#x9192;</p>
-<h3 id="timedwaiting-&#x8BA1;&#x65F6;&#x7B49;&#x5F85;">TIMED_WAITING &#x8BA1;&#x65F6;&#x7B49;&#x5F85;</h3>
+<h3 id="timedwaiting-&#x8BA1;&#x65F6;&#x7B49;&#x5F85;"><a name="timedwaiting-&#x8BA1;&#x65F6;&#x7B49;&#x5F85;" class="anchor-navigation-ex-anchor" href="#timedwaiting-&#x8BA1;&#x65F6;&#x7B49;&#x5F85;"><i class="fa fa-link" aria-hidden="true"></i></a>TIMED_WAITING &#x8BA1;&#x65F6;&#x7B49;&#x5F85;</h3>
 <p>&#x7C7B;&#x4F3C;&#x4E8E; <code>WAITING</code> &#x53EA;&#x4E0D;&#x8FC7;&#x8FD9;&#x79CD;&#x7B49;&#x5F85;&#x662F;&#x6709;&#x65F6;&#x9650;&#x7684;&#xFF0C;</p>
 <ul>
 <li>&#x5F53;&#x524D;&#x7EBF;&#x7A0B; <code>Thread#sleep</code> &#x8C03;&#x7528;</li>
@@ -1071,9 +1109,9 @@
 <li><code>LockSupport#parkUntil</code></li>
 </ul>
 <p>&#x4F1A;&#x8FDB;&#x5165;&#x8FD9;&#x79CD;&#x72B6;&#x6001;</p>
-<h3 id="terminated-&#x7EC8;&#x6B62;">TERMINATED &#x7EC8;&#x6B62;</h3>
+<h3 id="terminated-&#x7EC8;&#x6B62;"><a name="terminated-&#x7EC8;&#x6B62;" class="anchor-navigation-ex-anchor" href="#terminated-&#x7EC8;&#x6B62;"><i class="fa fa-link" aria-hidden="true"></i></a>TERMINATED &#x7EC8;&#x6B62;</h3>
 <p>&#x7EBF;&#x7A0B;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x4EFB;&#x52A1;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x540E;&#x8FDB;&#x5165;&#x8FD9;&#x79CD;&#x72B6;&#x6001;&#xFF0C;&#x8FD0;&#x884C;&#x65F6;&#x5F02;&#x5E38;&#x6216;&#x8005;Error&#x4E5F;&#x4F1A;&#x5BFC;&#x81F4;&#x7EBF;&#x7A0B;&#x8FDB;&#x5165;&#x7EC8;&#x6B62;&#x72B6;&#x6001;&#x3002;</p>
-<h3 id="&#x5C0F;&#x7ED3;">&#x5C0F;&#x7ED3;</h3>
+<h3 id="&#x5C0F;&#x7ED3;"><a name="&#x5C0F;&#x7ED3;" class="anchor-navigation-ex-anchor" href="#&#x5C0F;&#x7ED3;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5C0F;&#x7ED3;</h3>
 <p>&#x52A1;&#x5FC5;&#x6CE8;&#x610F;&#xFF0C;&#x4EE5;&#x4E0A;6&#x79CD;&#x72B6;&#x6001;&#x662F;&#x4ECE;jdk1.5&#x5F00;&#x59CB;&#x5F15;&#x5165;&#x7684;&#x3002;</p>
 <p>&#x5728;&#x4E00;&#x4E9B;&#x535A;&#x5BA2;&#x3001;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x76F8;&#x5173;&#x7684;&#x4E66;&#x7C4D;&#x4E2D;&#xFF0C;&#x4F1A;&#x770B;&#x5230;&#x7C7B;&#x4F3C;&#x4E0B;&#x56FE;&#x7684;&#x5185;&#x5BB9;&#xFF1A;</p>
 <p><img src="post_39/os_thread_lifecycle.png" alt=""></p>
@@ -1090,9 +1128,9 @@
 </ul>
 </li>
 </ul>
-<h2 id="&#x7EBF;&#x7A0B;api&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;">&#x7EBF;&#x7A0B;API&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;</h2>
+<h2 id="&#x7EBF;&#x7A0B;api&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;"><a name="&#x7EBF;&#x7A0B;api&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;" class="anchor-navigation-ex-anchor" href="#&#x7EBF;&#x7A0B;api&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7EBF;&#x7A0B;API&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;</h2>
 <p>&#x9664;&#x5374; <code>Thread</code> &#x4E2D;&#x7684;API&#xFF0C;<code>Object</code>&#x4E2D;&#x8FD8;&#x6709;&#x548C;&#x76D1;&#x89C6;&#x5668;&#x9501;&#x6709;&#x5173;&#x7684;API</p>
-<h3 id="object&#x76F8;&#x5173;api">Object&#x76F8;&#x5173;API</h3>
+<h3 id="object&#x76F8;&#x5173;api"><a name="object&#x76F8;&#x5173;api" class="anchor-navigation-ex-anchor" href="#object&#x76F8;&#x5173;api"><i class="fa fa-link" aria-hidden="true"></i></a>Object&#x76F8;&#x5173;API</h3>
 <p>&#x5FC5;&#x987B;&#x5728;&#x540C;&#x6B65;&#x4EE3;&#x7801;&#x4E2D;&#x8C03;&#x7528;&#xFF08;&#x51C6;&#x786E;&#x7684;&#x8BB2;&#xFF1A;&#x83B7;&#x53D6;&#x4E86;&#x5BF9;&#x5E94;&#x7684;&#x9501;&#x65B9;&#x53EF;&#x8C03;&#x7528;&#xFF09;&#xFF0C;&#x5426;&#x5219;&#x629B;&#x51FA; <code>IllegalMonitorStateException</code></p>
 <pre><code class="lang-java">Object#wait()
 </code></pre>
@@ -1130,7 +1168,7 @@
 <pre><code class="lang-java">Object#notifyAll()
 </code></pre>
 <p>&#x5728; <strong>&#x540C;&#x4E00;&#x4E2A;&#x7B49;&#x5F85;&#x963B;&#x585E;&#x6C60;&#x4E2D;</strong> &#x5524;&#x9192;&#x6240;&#x6709;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;</p>
-<h3 id="thread&#x4E2D;&#x76F8;&#x5173;&#x7684;api">Thread&#x4E2D;&#x76F8;&#x5173;&#x7684;API</h3>
+<h3 id="thread&#x4E2D;&#x76F8;&#x5173;&#x7684;api"><a name="thread&#x4E2D;&#x76F8;&#x5173;&#x7684;api" class="anchor-navigation-ex-anchor" href="#thread&#x4E2D;&#x76F8;&#x5173;&#x7684;api"><i class="fa fa-link" aria-hidden="true"></i></a>Thread&#x4E2D;&#x76F8;&#x5173;&#x7684;API</h3>
 <pre><code class="lang-java">static Thread#interrupted()
 </code></pre>
 <p>&#x68C0;&#x6D4B;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x4E2D;&#x65AD;,&#x8C03;&#x7528;&#x540E;&#x5C06;&#x8BE5;&#x7EBF;&#x7A0B;&#x7684;&#x4E2D;&#x65AD;&#x6807;&#x5FD7;&#x4F4D;&#x8BBE;&#x7F6E;&#x4E3A;false</p>
@@ -1152,13 +1190,16 @@
 </code></pre>
 <p>&#x963B;&#x585E;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#xFF0C;&#x7B49;&#x5F85;&#x76EE;&#x6807;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x540E;&#x3001;&#x6216;&#x8005;&#x7B49;&#x5F85;&#x4E86;&#x8BBE;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x540E;&#x5524;&#x9192;</p>
 <p>&#x5176;&#x4ED6;API&#x7565;</p>
-<h3 id="&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x7684;&#x534F;&#x4F5C;">&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x7684;&#x534F;&#x4F5C;</h3>
+<h3 id="&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x7684;&#x534F;&#x4F5C;"><a name="&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x7684;&#x534F;&#x4F5C;" class="anchor-navigation-ex-anchor" href="#&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x7684;&#x534F;&#x4F5C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x7684;&#x534F;&#x4F5C;</h3>
 <p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x7A0B;&#x5E8F;&#x5F80;&#x5F80;&#x88AB;&#x8BBE;&#x8BA1;&#x4E3A;&#x901A;&#x8FC7;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x7684;&#x534F;&#x4F5C;&#x5B8C;&#x6210;&#x4E00;&#x9879;&#x590D;&#x6742;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x800C;&#x6BCF;&#x4E2A;&#x7EBF;&#x7A0B;&#x6240;&#x627F;&#x62C5;&#x7684;&#x804C;&#x8D23;&#x4E5F;&#x88AB;&#x7B80;&#x5316;&#x3002;</p>
 <p>&#x4F46;&#x8FD9;&#x79CD;&#x8BBE;&#x8BA1;&#x65B9;&#x5F0F;&#x6709;&#x5229;&#x4EA6;&#x6709;&#x5F0A;&#xFF0C;&#x6240;&#x9762;&#x5411;&#x7684;&#x95EE;&#x9898;&#x8FC7;&#x4E8E;&#x5177;&#x5316;&#xFF0C;&#x6A21;&#x578B;&#x96BE;&#x4EE5;&#x590D;&#x7528;&#x3002;</p>
 <p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x5F53;&#x7136;&#xFF0C;&#x672C;&#x6587;&#x4E2D;&#x6240;&#x6307;&#x7684;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;&#xFF0C;&#x4EC5;&#x5C40;&#x9650;&#x4E8E;&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x901A;&#x8FC7;&#x76D1;&#x89C6;&#x5668;&#x9501;&#x3001;&#x7EBF;&#x7A0B;API&#x8BA9;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x7684;&#x987A;&#x5E8F;&#x6709;&#x5E8F;&#x53EF;&#x63A7;&#xFF0C;&#x5728;&#x6B64;&#x57FA;&#x7840;&#x4E0A;&#x5B8C;&#x6210;&#x6574;&#x4F53;&#x4EFB;&#x52A1;</em></p>
 <hr>
 <p>&#x672C;&#x7BC7;&#x6587;&#x7AE0;&#x7BC7;&#x5E45;&#x8F83;&#x77ED;&#xFF0C;&#x5185;&#x5BB9;&#x4E5F;&#x8F83;&#x4E3A;&#x57FA;&#x7840;&#x3001;&#x6D45;&#x663E;&#xFF0C;&#x4F46;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x4F9D;&#x65E7;&#x503C;&#x5F97;&#x6DF1;&#x6316;&#xFF0C;&#x4F8B;&#x5982;JVM&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x7EBF;&#x7A0B;&#x7BA1;&#x7406;&#xFF0C;&#x53EF;&#x80FD;&#x77ED;&#x671F;&#x5185;&#x4E0D;&#x4F1A;&#x5F97;&#x5230;&#x660E;&#x663E;&#x7684;&#x63D0;&#x5347;&#x4F46;&#x53EF;&#x4EE5;&#x52A0;&#x6DF1;&#x5BF9;JVM&#x3001;OS&#x3001;&#x7A0B;&#x5E8F;&#x5FAE;&#x89C2;&#x8FD0;&#x884C;&#x8FC7;&#x7A0B;&#x7684;&#x7406;&#x89E3;&#x3002;</p>
 <p>&#x53E6;&#x5916;&#xFF0C;&#x6211;&#x5220;&#x9664;&#x4E86;&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x534F;&#x4F5C;&#x7684;WorkShop&#x5185;&#x5BB9;&#xFF0C;&#x5185;&#x5BB9;&#x8FC7;&#x4E8E;&#x5E72;&#x5DF4;&#x5DF4;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x673A;&#x4F1A;&#xFF0C;&#x6211;&#x66F4;&#x5E0C;&#x671B;&#x4EE5; <a href="https://leobert-lan.github.io/info/about_sansi_series.html" target="_blank">&#x4E09;&#x601D;&#x7CFB;&#x5217;</a> &#x7684;&#x5F62;&#x5F0F;&#x7ED3;&#x5408;&#x5177;&#x4F53;&#x5B9E;&#x4F8B;&#x5C55;&#x5F00;&#x8BA8;&#x8BBA;&#x3002;</p>
+<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
+2022-03-28 17:35:38
+</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
 
                                 
                                 </section>
@@ -1191,7 +1232,7 @@
                 </a>
                 
                 
-                <a href="../Gradle/" class="navigation navigation-next " aria-label="Next page: Gradle">
+                <a href="post_42.html" class="navigation navigation-next " aria-label="Next page: Java多线程基础--线程的创建与线程池管理">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1202,7 +1243,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Java多线程基础--线程生命周期与线程协作详解","level":"1.4.4","depth":2,"next":{"title":"Gradle","level":"1.5","depth":1,"path":"Gradle/README.md","ref":"./Gradle/README.md","articles":[{"title":"三思系列：组件化场景下module依赖优雅实践方案","level":"1.5.1","depth":2,"path":"Gradle/Modularization/post_18.md","ref":"Gradle/Modularization/post_18.md","articles":[]},{"title":"迁移到MavenCentral--再不行动起来，你的托管的library就没了","level":"1.5.2","depth":2,"path":"Gradle/Publish/post_17.md","ref":"Gradle/Publish/post_17.md","articles":[]},{"title":"Gradle | 依赖管理最佳实践","level":"1.5.3","depth":2,"path":"Gradle/post_22.md","ref":"Gradle/post_22.md","articles":[]}]},"previous":{"title":"Java多线程系列--掌控面试，一文吃透Synchronized锁","level":"1.4.3","depth":2,"path":"MultiThreading/post_38.md","ref":"./MultiThreading/post_38.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"MultiThreading/post_39.md","mtime":"2022-04-07T05:36:07.725Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-20T09:42:40.809Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Java多线程基础--线程生命周期与线程协作详解","level":"1.4.4","depth":2,"next":{"title":"Java多线程基础--线程的创建与线程池管理","level":"1.4.5","depth":2,"path":"MultiThreading/post_42.md","ref":"./MultiThreading/post_42.md","articles":[]},"previous":{"title":"Java多线程系列--掌控面试，一文吃透Synchronized锁","level":"1.4.3","depth":2,"path":"MultiThreading/post_38.md","ref":"./MultiThreading/post_38.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"MultiThreading/post_39.md","mtime":"2022-03-28T09:35:38.364Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-06-25T02:33:56.196Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -1210,6 +1251,14 @@
         
     <script src="../gitbook/gitbook.js"></script>
     <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
     
         
         <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>

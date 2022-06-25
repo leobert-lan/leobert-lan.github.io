@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+if (团队具备分享氛围) then (yes)
+    if (具备良好的文档系统) is (yes) then
+      if (学习下docker) is (yes) then
+      else (no)
+        :放弃;
+        stop
+      endif
+    else (no)
+    endif
+else (no)
+    if (强烈的个人使用意愿) is (yes) then
+    else (no)
+      if (学习下docker) is (yes) then
+      else (no)
+        :放弃;
+        stop
+      endif
+    endif
+endif
+:阅读;
+stop
+
+'start
+':ClickServlet.handleRequest();
+':new page;
+'if (Page.onSecurityCheck) then (true)
+'  :Page.onInit();
+'  if (isForward?) then (no)
+'    :Process controls;
+'    if (continue processing?) then (no)
+'      stop
+'    endif
+'
+'    if (isPost?) then (yes)
+'      :Page.onPost();
+'    else (no)
+'      :Page.onGet();
+'    endif
+'    :Page.onRender();
+'  endif
+'else (false)
+'endif
+'
+'if (do redirect?) then (yes)
+'  :redirect process;
+'else
+'  if (do forward?) then (yes)
+'    :Forward request;
+'  else (no)
+'    :Render page template;
+'  endif
+'endif
+'
+'stop
+
+@enduml
