@@ -1,0 +1,1814 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Java IO 系列 | NIO-1.0一文速览 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../Gradle/" />
+    
+    
+    <link rel="prev" href="post_56.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Android/">
+            
+                <a href="../Android/">
+            
+                    
+                    Android
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Android/View/">
+            
+                <a href="../Android/View/">
+            
+                    
+                    View
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../Android/View/post_1.html">
+            
+                <a href="../Android/View/post_1.html">
+            
+                    
+                    好玩系列：优雅的处理ButterKnife和KAE被废弃
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../Android/View/post_6.html">
+            
+                <a href="../Android/View/post_6.html">
+            
+                    
+                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../Android/View/post_7.html">
+            
+                <a href="../Android/View/post_7.html">
+            
+                    
+                    三思系列：为什么自定义View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../Android/Idea/post_9.html">
+            
+                <a href="../Android/Idea/post_9.html">
+            
+                    
+                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Android/Drawable/">
+            
+                <a href="../Android/Drawable/">
+            
+                    
+                    Drawable
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../Android/Drawable/post_2.html">
+            
+                <a href="../Android/Drawable/post_2.html">
+            
+                    
+                    三思系列：重新认识Drawable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="../Android/Drawable/post_4.html">
+            
+                <a href="../Android/Drawable/post_4.html">
+            
+                    
+                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.3" data-path="../Android/Drawable/post_47.html">
+            
+                <a href="../Android/Drawable/post_47.html">
+            
+                    
+                    迟来的续集--Drawable+Animator，将优雅进行到底
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.4" data-path="../Android/Drawable/post_49.html">
+            
+                <a href="../Android/Drawable/post_49.html">
+            
+                    
+                    好玩系列：让ImageSpan动起来
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Android/Mechanism/Message/">
+            
+                <a href="../Android/Mechanism/Message/">
+            
+                    
+                    消息机制
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" data-path="../Android/Mechanism/Message/post_8.html">
+            
+                <a href="../Android/Mechanism/Message/post_8.html">
+            
+                    
+                    三思系列：Android的消息机制，一文吃透
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Android/Idea/post_14/">
+            
+                <a href="../Android/Idea/post_14/">
+            
+                    
+                    兼容
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.4.1" data-path="../Android/Idea/post_14.html">
+            
+                <a href="../Android/Idea/post_14.html">
+            
+                    
+                    好玩系列：让项目中的相册支持Heif格式图片
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Android/Glide/">
+            
+                <a href="../Android/Glide/">
+            
+                    
+                    Glide
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="../Android/Glide/post_15.html">
+            
+                <a href="../Android/Glide/post_15.html">
+            
+                    
+                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="../Android/Glide/post_16.html">
+            
+                <a href="../Android/Glide/post_16.html">
+            
+                    
+                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Android/KSP/">
+            
+                <a href="../Android/KSP/">
+            
+                    
+                    KSP
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.1" data-path="../Android/KSP/post_24.html">
+            
+                <a href="../Android/KSP/post_24.html">
+            
+                    
+                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../Android/Base/">
+            
+                <a href="../Android/Base/">
+            
+                    
+                    基础
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.7.1" data-path="../Android/Base/post_35.html">
+            
+                <a href="../Android/Base/post_35.html">
+            
+                    
+                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../Android/SysApp/">
+            
+                <a href="../Android/SysApp/">
+            
+                    
+                    系统APP
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.8.1" data-path="../Android/SysApp/post_52.html">
+            
+                <a href="../Android/SysApp/post_52.html">
+            
+                    
+                    使用日历丰富产品的用户体验
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../Android/DI/">
+            
+                <a href="../Android/DI/">
+            
+                    
+                    Part4-依赖注入部分
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.9.1" data-path="../Android/DI/post_53.html">
+            
+                <a href="../Android/DI/post_53.html">
+            
+                    
+                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Compose/">
+            
+                <a href="../Compose/">
+            
+                    
+                    Jetpack Compose
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Compose/post_21.html">
+            
+                <a href="../Compose/post_21.html">
+            
+                    
+                    Jetpack Compose | 一文理解神奇的Modifier
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Compose/post_26.html">
+            
+                <a href="../Compose/post_26.html">
+            
+                    
+                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Compose/post_27.html">
+            
+                <a href="../Compose/post_27.html">
+            
+                    
+                    Jetpack Compose | 控件篇（二） -- Icon，Image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Compose/post_28.html">
+            
+                <a href="../Compose/post_28.html">
+            
+                    
+                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Compose/post_29.html">
+            
+                <a href="../Compose/post_29.html">
+            
+                    
+                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../Compose/post_30.html">
+            
+                <a href="../Compose/post_30.html">
+            
+                    
+                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../MultiThreading/">
+            
+                <a href="../MultiThreading/">
+            
+                    
+                    Java多线程
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../MultiThreading/post_33.html">
+            
+                <a href="../MultiThreading/post_33.html">
+            
+                    
+                    总纲
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../MultiThreading/post_37.html">
+            
+                <a href="../MultiThreading/post_37.html">
+            
+                    
+                    Java基础--图解JVM内存模型和JVM线程模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../MultiThreading/post_38.html">
+            
+                <a href="../MultiThreading/post_38.html">
+            
+                    
+                    Java多线程系列--掌控面试，一文吃透Synchronized锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../MultiThreading/post_39.html">
+            
+                <a href="../MultiThreading/post_39.html">
+            
+                    
+                    Java多线程基础--线程生命周期与线程协作详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../MultiThreading/post_42.html">
+            
+                <a href="../MultiThreading/post_42.html">
+            
+                    
+                    Java多线程基础--线程的创建与线程池管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../MultiThreading/post_46.html">
+            
+                <a href="../MultiThreading/post_46.html">
+            
+                    
+                    Java多线程系列--掌握Future，轻松获取异步任务结果
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../MultiThreading/post_50.html">
+            
+                <a href="../MultiThreading/post_50.html">
+            
+                    
+                    Java多线程系列--Fork&Join框架，分治的艺术
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../MultiThreading/post_54.html">
+            
+                <a href="../MultiThreading/post_54.html">
+            
+                    
+                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Java IO系列
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="post_55.html">
+            
+                <a href="post_55.html">
+            
+                    
+                    Java IO 系列总纲
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="post_56.html">
+            
+                <a href="post_56.html">
+            
+                    
+                    Java IO系列 | 经典 IO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.3" data-path="post_57.html">
+            
+                <a href="post_57.html">
+            
+                    
+                    Java IO 系列 | NIO-1.0一文速览
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Gradle/">
+            
+                <a href="../Gradle/">
+            
+                    
+                    Gradle
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../Gradle/Modularization/post_18.html">
+            
+                <a href="../Gradle/Modularization/post_18.html">
+            
+                    
+                    三思系列：组件化场景下module依赖优雅实践方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../Gradle/Publish/post_17.html">
+            
+                <a href="../Gradle/Publish/post_17.html">
+            
+                    
+                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../Gradle/post_22.html">
+            
+                <a href="../Gradle/post_22.html">
+            
+                    
+                    Gradle | 依赖管理最佳实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../Groovy/">
+            
+                <a href="../Groovy/">
+            
+                    
+                    Groovy
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../Groovy/why_write_groovy.html">
+            
+                <a href="../Groovy/why_write_groovy.html">
+            
+                    
+                    为什么撰写这个系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../Groovy/post_23.html">
+            
+                <a href="../Groovy/post_23.html">
+            
+                    
+                    Groovy：MOP一文打尽
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../Review/">
+            
+                <a href="../Review/">
+            
+                    
+                    Review
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../Review/post_10.html">
+            
+                <a href="../Review/post_10.html">
+            
+                    
+                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../Review/post_40.html">
+            
+                <a href="../Review/post_40.html">
+            
+                    
+                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../Review/post_44.html">
+            
+                <a href="../Review/post_44.html">
+            
+                    
+                    谈一谈在两个商业项目中使用MVI架构后的感悟
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../Review/post_45.html">
+            
+                <a href="../Review/post_45.html">
+            
+                    
+                    Review | 这三个坑你遇到了吗？
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../repo/">
+            
+                <a href="../repo/">
+            
+                    
+                    个人项目
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../repo/DaVinCi.html">
+            
+                <a href="../repo/DaVinCi.html">
+            
+                    
+                    DaVinCi,取代XML编写Shape或ColorStateList的方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../Android/Idea/post_32.html">
+            
+                <a href="../Android/Idea/post_32.html">
+            
+                    
+                    好玩系列：白嫖一个优雅的类图生成工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../Speculative/post_43.html">
+            
+                <a href="../Speculative/post_43.html">
+            
+                    
+                    初体验：动手搭建"小清新式"局域网文档系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../repo/post_48.html">
+            
+                <a href="../repo/post_48.html">
+            
+                    
+                    研究良久，终于发现了他代码写的快且bug少的原因
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../Review/DataStructure/">
+            
+                <a href="../Review/DataStructure/">
+            
+                    
+                    数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../Review/DataStructure/post_11.html">
+            
+                <a href="../Review/DataStructure/post_11.html">
+            
+                    
+                    温故：线性表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../Review/DataStructure/post_12.html">
+            
+                <a href="../Review/DataStructure/post_12.html">
+            
+                    
+                    温故：栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../Review/DataStructure/post_13.html">
+            
+                <a href="../Review/DataStructure/post_13.html">
+            
+                    
+                    温故：队列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../Review/README2.html">
+            
+                <a href="../Review/README2.html">
+            
+                    
+                    年终总结&计划
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../Review/post_36.html">
+            
+                <a href="../Review/post_36.html">
+            
+                    
+                    2021年终总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../Review/post_51.html">
+            
+                <a href="../Review/post_51.html">
+            
+                    
+                    关于画一个句号--基于2022年终总结的反思与分享
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../Note/">
+            
+                <a href="../Note/">
+            
+                    
+                    读书笔记
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../Note/post_41.html">
+            
+                <a href="../Note/post_41.html">
+            
+                    
+                    读书笔记：《简约至上--交互式设计四策略》
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../Talk/">
+            
+                <a href="../Talk/">
+            
+                    
+                    杂谈
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../Talk/talk_1.html">
+            
+                <a href="../Talk/talk_1.html">
+            
+                    
+                    杂谈1-2022-11
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../Talk/talk_2_2023-03.html">
+            
+                <a href="../Talk/talk_2_2023-03.html">
+            
+                    
+                    杂篇（二）-- 认识并战胜焦虑
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../info/">
+            
+                <a href="../info/">
+            
+                    
+                    系列说明
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../info/about_view_series.html">
+            
+                <a href="../info/about_view_series.html">
+            
+                    
+                    关于View系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../info/about_sansi_series.html">
+            
+                <a href="../info/about_sansi_series.html">
+            
+                    
+                    关于三思系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../info/about_haowan_series.html">
+            
+                <a href="../info/about_haowan_series.html">
+            
+                    
+                    关于好玩系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="../info/about_wengu_series.html">
+            
+                <a href="../info/about_wengu_series.html">
+            
+                    
+                    关于温故系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Java IO 系列 | NIO-1.0一文速览</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#java-io-&#x7CFB;&#x5217;--nio-10&#x4E00;&#x6587;&#x901F;&#x89C8;"><b></b>Java IO &#x7CFB;&#x5217; | NIO-1.0&#x4E00;&#x6587;&#x901F;&#x89C8;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#nio-10&#x6982;&#x8FF0;"><b></b>NIO-1.0&#x6982;&#x8FF0;</a></li><li><span class="title-icon "></span><a href="#channel&#x6982;&#x8FF0;"><b></b>Channel&#x6982;&#x8FF0;</a></li><li><span class="title-icon "></span><a href="#buffer-&#x6982;&#x8FF0;"><b></b>Buffer &#x6982;&#x8FF0;</a></li><li><span class="title-icon "></span><a href="#channelbuffer-&#x57FA;&#x672C;&#x4F7F;&#x7528;&#x4EE3;&#x7801;&#x793A;&#x4F8B;"><b></b>Channel+Buffer &#x57FA;&#x672C;&#x4F7F;&#x7528;&#x4EE3;&#x7801;&#x793A;&#x4F8B;</a></li><li><span class="title-icon "></span><a href="#selector-&#x6A21;&#x578B;"><b></b>Selector &#x6A21;&#x578B;</a></li><li><span class="title-icon "></span><a href="#selector&#x4F7F;&#x7528;-&#x4E0E;-selectionkey"><b></b>Selector&#x4F7F;&#x7528; &#x4E0E; SelectionKey</a></li><ul><li><span class="title-icon "></span><a href="#selectionkey"><b></b>SelectionKey</a></li><li><span class="title-icon "></span><a href="#selector-&#x5E38;&#x7528;api"><b></b>Selector &#x5E38;&#x7528;API</a></li></ul><li><span class="title-icon "></span><a href="#buffer-api&#x56FE;&#x89E3;"><b></b>Buffer API&#x56FE;&#x89E3;</a></li><ul><li><span class="title-icon "></span><a href="#api"><b></b>API</a></li></ul><li><span class="title-icon "></span><a href="#&#x5520;&#x53E8;&#x51E0;&#x53E5;"><b></b>&#x5520;&#x53E8;&#x51E0;&#x53E5;</a></li></ul></ul></div><a href="#java-io-&#x7CFB;&#x5217;--nio-10&#x4E00;&#x6587;&#x901F;&#x89C8;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="java-io-&#x7CFB;&#x5217;--nio-10&#x4E00;&#x6587;&#x901F;&#x89C8;"><a name="java-io-&#x7CFB;&#x5217;--nio-10&#x4E00;&#x6587;&#x901F;&#x89C8;" class="anchor-navigation-ex-anchor" href="#java-io-&#x7CFB;&#x5217;--nio-10&#x4E00;&#x6587;&#x901F;&#x89C8;"><i class="fa fa-link" aria-hidden="true"></i></a>Java IO &#x7CFB;&#x5217; | NIO-1.0&#x4E00;&#x6587;&#x901F;&#x89C8;</h1>
+<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
+<p>&#x4E0A;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x68B3;&#x7406;&#x4E86;Java &#x7ECF;&#x5178;IO&#xFF0C;&#x867D;&#x672A;&#x8BE6;&#x5C3D;&#xFF0C;&#x4F46;&#x5DF2;&#x57FA;&#x672C;&#x6EE1;&#x8DB3;&#x65E5;&#x5E38;&#x77E5;&#x8BC6;&#x50A8;&#x5907;&#x9700;&#x6C42;&#x3002;</p>
+<p>&#x672C;&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x6211;&#x4EEC;&#x987A;&#x7740;Java IO&#x7684;&#x53D1;&#x5C55;&#x53F2;&#xFF0C;&#x68B3;&#x7406; NIO-1.0 &#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#xFF0C;&#x663E;&#x7136;&#xFF0C;1.0&#x4F53;&#x73B0;&#x4E86;&#x7248;&#x672C;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x6B64;&#x65F6; <code>NIO</code> &#x5E94;&#x89E3;&#x91CA;&#x4E3A; <code>Java new IO</code> &#x66F4;&#x52A0;&#x5408;&#x7406;&#x3002;</p>
+<p>&#x672C;&#x7BC7;&#x5C06;&#x6309;&#x7167;&#x4EE5;&#x4E0B;&#x8109;&#x7EDC;&#x5C55;&#x5F00;&#xFF0C;&#x5DF2;&#x7ECF;&#x719F;&#x7EC3;&#x638C;&#x63E1;&#x7684;&#x7AE0;&#x8282;&#xFF0C;&#x5EFA;&#x8BAE;&#x76F4;&#x63A5;&#x8DF3;&#x8FC7;</p>
+<p><img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/26515eb07b3a464092121a7872caa8aa~tplv-k3u1fbpfcp-watermark.image"></p>
+<h2 id="nio-10&#x6982;&#x8FF0;"><a name="nio-10&#x6982;&#x8FF0;" class="anchor-navigation-ex-anchor" href="#nio-10&#x6982;&#x8FF0;"><i class="fa fa-link" aria-hidden="true"></i></a>NIO-1.0&#x6982;&#x8FF0;</h2>
+<p>&#x5728;&#x5148;&#x524D;&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x63D0;&#x5230;JVM&#x7684;&#x7EBF;&#x7A0B;&#x975E;&#x5E38;&#x8D34;&#x8FD1;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#xFF1B;&#x5728;JAVA&#x7ECF;&#x5178;IO&#x4E2D;&#xFF0C;IO&#x7684;&#x963B;&#x585E;&#x4F1A;&#x4F53;&#x73B0;&#x5230;JVM&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x4E0A;&#x3002;</p>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x5728;&#x9AD8;&#x5E76;&#x53D1;IO&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x5982;&#x679C;&#x4EE5;&quot;&#x7EBF;&#x7A0B;-IO&#x4E00;&#x5BF9;&#x4E00;&quot;&#x7684;&#x65B9;&#x5F0F;&#x5B9E;&#x73B0;&#xFF0C;&#x5F00;&#x542F;&#x3001;&#x8C03;&#x5EA6;&#x7EBF;&#x7A0B;&#x7684;&#x8D44;&#x6E90;&#x6D88;&#x8017;&#x4F1A;&#x6F14;&#x53D8;&#x4E3A;&#x6027;&#x80FD;&#x74F6;&#x9888;&#x3002;</p>
+<p>&#x5728;JAVA 1.4 &#x7684; NIO-1.0 &#x4E2D;&#xFF0C;&#x5BF9;&#x6B64;&#x60C5;&#x51B5;&#x8FDB;&#x884C;&#x4E86;&#x8BBE;&#x8BA1;&#x6539;&#x8FDB;&#xFF0C;&#x4F7F;&#x7528;&#xFF1A;<code>&#x901A;&#x9053;&#xFF08;Channel&#xFF09;</code>+ <code>&#x9009;&#x62E9;&#x5668;&#xFF08;Selector&#xFF09;</code>+ <code>&#x7F13;&#x51B2;&#x533A;&#xFF08;Buffer&#xFF09;</code> &#x5F62;&#x6210;&#x7EC4;&#x5408;&#x62F3;&#x3002;</p>
+<h2 id="channel&#x6982;&#x8FF0;"><a name="channel&#x6982;&#x8FF0;" class="anchor-navigation-ex-anchor" href="#channel&#x6982;&#x8FF0;"><i class="fa fa-link" aria-hidden="true"></i></a>Channel&#x6982;&#x8FF0;</h2>
+<p>&#x7ECF;&#x5178;IO&#x4E2D;&#xFF0C;&#x7ACB;&#x8DB3;&#x4E8E; <strong>&#x6570;&#x636E;&#x7684;&#x6D41;&#x52A8;</strong> &#x7684;&#x89D2;&#x5EA6;&#x8FDB;&#x884C;&#x4E86;&#x62BD;&#x8C61;&#xFF0C;&#x63D0;&#x51FA;&#x4E86; <code>Stream</code>&#xFF0C;&#x5728; NIO-1.0&#x4E2D;&#xFF0C;&#x7ACB;&#x8DB3;&#x4E8E; <strong>IO&#x64CD;&#x4F5C;</strong>&#xFF0C;&#x5BF9;IO&#x4E2D;&#x7684;&#x5173;&#x952E;&#x89D2;&#x8272;&#x8FDB;&#x884C;&#x4E86;&#x62BD;&#x8C61;&#xFF0C;<code>Channel</code> &#x662F;&#x6574;&#x4E2A;&#x64CD;&#x4F5C;&#x7684;&#x4E2D;&#x5FC3;&#x3002;</p>
+<p>JDK&#x6587;&#x6863;&#x4E2D;&#x8FD9;&#x6837;&#x63CF;&#x8FF0;&#xFF1A;</p>
+<blockquote>
+<p>A nexus for I/O operations.</p>
+<p>A channel represents an open connection to an entity such as a hardware device, a file, a network socket, or a program component that is capable of performing one or more distinct I/O operations, for example reading or writing.</p>
+<p>A channel is either open or closed. A channel is open upon creation, and once closed it remains closed. Once a channel is closed, any attempt to invoke an I/O operation upon it will cause a ClosedChannelException to be thrown. Whether or not a channel is open may be tested by invoking its isOpen method.</p>
+<p>Channels are, in general, intended to be safe for multithreaded access as described in the specifications of the interfaces and classes that extend and implement this interface.</p>
+</blockquote>
+<p>&#x5927;&#x4F53;&#x4FE1;&#x606F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<blockquote>
+<p>Channel &#x662F; I/O &#x64CD;&#x4F5C;&#x7684;&#x4E2D;&#x5FC3;&#x3002;</p>
+<ol>
+<li>Channel &#x4EE3;&#x8868;&#x4E0E;&#x5B9E;&#x4F53;(&#x5982;&#x786C;&#x4EF6;&#x8BBE;&#x5907;&#x3001;&#x6587;&#x4EF6;&#x3001;&#x7F51;&#x7EDC;&#x5957;&#x63A5;&#x5B57;&#x6216;&#x7A0B;&#x5E8F;&#x7EC4;&#x4EF6;)&#x7684;&#x6253;&#x5F00;&#x8FDE;&#x63A5;,&#x5B83;&#x80FD;&#x591F;&#x6267;&#x884C;&#x4E00;&#x79CD;&#x6216;&#x591A;&#x79CD;&#x4E0D;&#x540C;&#x7684; I/O &#x64CD;&#x4F5C;,&#x4F8B;&#x5982;&#x8BFB;&#x53D6;&#x6216;&#x5199;&#x5165;&#x3002;</li>
+<li>&#x4E00;&#x4E2A; Channel &#x8981;&#x4E48;&#x6253;&#x5F00;&#x8981;&#x4E48;&#x5173;&#x95ED;&#x3002;Channel &#x5728;&#x521B;&#x5EFA;&#x65F6;&#x6253;&#x5F00;,&#x5173;&#x95ED;&#x540E;&#x5C06;&#x4FDD;&#x6301;&#x5173;&#x95ED;&#x72B6;&#x6001;&#x3002;&#x4E00;&#x65E6; <code>Channel</code> &#x5173;&#x95ED;, &#x5728;&#x5176;&#x4E0A;&#x8C03;&#x7528; I/O &#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x90FD;&#x4F1A;&#x5BFC;&#x81F4;&#x629B;&#x51FA; <code>ClosedChannelException</code>&#x3002;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; isOpen &#x65B9;&#x6CD5;&#x6765;&#x6D4B;&#x8BD5; Channel &#x662F;&#x5426;&#x6253;&#x5F00;&#x3002;</li>
+<li>&#x901A;&#x5E38;,Channel &#x65E8;&#x5728;&#x652F;&#x6301;&#x591A;&#x7EBF;&#x7A0B;&#x8BBF;&#x95EE;&#x5B89;&#x5168;&#xFF0C;&#x4E0E;&#x5176;&#x63A5;&#x53E3;&#x3001;&#x6269;&#x5C55;&#x548C;&#x5B9E;&#x73B0;&#x7C7B;&#x4E2D;&#x6240;&#x9648;&#x8FF0;&#x7684;&#x89C4;&#x8303;&#x4FDD;&#x6301;&#x4E00;&#x81F4;&#x3002;</li>
+</ol>
+</blockquote>
+<p>&#x7528;&#x4E00;&#x4E2A;&#x8349;&#x56FE;&#x63CF;&#x8FF0;&#xFF1A;<code>&#x901A;&#x9053;</code> &#x3001; <code>&#x6570;&#x636E;</code>&#x3001;<code>&#x5E94;&#x7528;</code>&#x3001;<code>&#x8F93;&#x5165;&#x6E90;/&#x8F93;&#x51FA;&#x76EE;&#x6807;</code> &#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#xFF1A;</p>
+<p><img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/27de340b4d81446aaf090395575f8be5~tplv-k3u1fbpfcp-watermark.image"></p>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x5B83;&#x662F; I/O&#x64CD;&#x4F5C;&#x7684;&#x4E2D;&#x5FC3;</p>
+<p>&#x4E3B;&#x8981;&#x7684; <code>Channel</code> &#x7C7B;&#x6709;:</p>
+<ul>
+<li><code>FileChannel</code>: &#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x6587;&#x4EF6;IO</li>
+<li><code>DatagramChannel</code>: &#x4E3B;&#x8981;&#x7528;&#x4E8E;UDP&#x7F51;&#x7EDC;IO</li>
+<li><code>SocketChannel</code>: &#x4E3B;&#x8981;&#x7528;&#x4E8E;TCP&#x7F51;&#x7EDC;IO</li>
+<li><code>ServerSocketChannel</code>: &#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x76D1;&#x542C;TCP&#x8FDE;&#x63A5;</li>
+</ul>
+<p><strong>&#x503C;&#x5F97;&#x6CE8;&#x610F;&#xFF1A;&#x867D;&#x7136;Channel&#x5BA3;&#x79F0;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x4F46;&#x4E0D;&#x4EE3;&#x8868;&#x591A;&#x7EBF;&#x7A0B;&#x5E76;&#x53D1;&#x5199;&#x5165;&#x90FD;&#x662F;&#x5408;&#x7406;&#x7684;&#xFF0C;&#x4ECD;&#x7136;&#x9700;&#x8981;&#x8003;&#x8651;&#x5199;&#x5165;&#x7684;&#x987A;&#x5E8F;&#x548C;&#x4F4D;&#x7F6E;&#xFF0C;&#x4EE5;&#x907F;&#x514D;&#x6570;&#x636E;&#x8986;&#x76D6;&#x7B49;&#x95EE;&#x9898;&#xFF0C;Zero-Copy&#x6682;&#x4E0D;&#x8BA8;&#x8BBA;</strong></p>
+<p>&#x6392;&#x9664;&#x6389;&#x5927;&#x91CF;&#x5E72;&#x6270;&#x540E;&#xFF0C;&#x53EF;&#x6458;&#x51FA;&#x5982;&#x4E0B;UML&#x56FE;&#xFF1A;</p>
+<p><img width="600" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f5fb4bd8d5b46138f9c3a4b0c0774d1~tplv-k3u1fbpfcp-watermark.image"></p>
+<h2 id="buffer-&#x6982;&#x8FF0;"><a name="buffer-&#x6982;&#x8FF0;" class="anchor-navigation-ex-anchor" href="#buffer-&#x6982;&#x8FF0;"><i class="fa fa-link" aria-hidden="true"></i></a>Buffer &#x6982;&#x8FF0;</h2>
+<p><code>Buffer</code> &#x662F;&#x7279;&#x5B9A;&#x57FA;&#x672C;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#x5BB9;&#x5668;, &#x56E0; <code>Channel</code> &#x672C;&#x8EAB;&#x5E76;&#x4E0D;&#x4E13;&#x6CE8;&#x4E8E;&#x5185;&#x5B58;&#x4E2D;&#x5B58;&#x50A8;&#x6570;&#x636E;&#x7684;&#x7EC6;&#x8282;&#xFF0C;&#x5B83;&#x914D;&#x5408; <code>Channel</code> &#x5B9E;&#x73B0;&#x6570;&#x636E;&#x4F20;&#x8F93;&#x3002;</p>
+<p>Buffer &#x53EF;&#x4EE5;&#x4ECE; <code>&#x6570;&#x636E;&#x7C7B;&#x578B;</code> &#x3001;<code>&#x662F;&#x5426;&#x4F7F;&#x7528;&#x5806;&#x5185;&#x5B58;</code>&#x3001;<code>&#x8BBF;&#x95EE;&#x65B9;&#x5F0F;</code> &#x4E09;&#x4E2A;&#x7EF4;&#x5EA6;&#x8FDB;&#x884C;&#x5206;&#x7C7B;</p>
+<blockquote>
+<p>&#x6309;&#x7167;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x5206;&#xFF0C;JDK&#x4E2D;&#x4E3B;&#x8981;&#x5305;&#x542B;&#x6709;:</p>
+</blockquote>
+<ul>
+<li>ByteBuffer</li>
+<li>CharBuffer</li>
+<li>DoubleBuffer</li>
+<li>FloatBuffer</li>
+<li>IntBuffer</li>
+<li>LongBuffer</li>
+<li>ShortBuffer</li>
+</ul>
+<p>&#x89C1;&#x540D;&#x77E5;&#x610F;&#xFF0C;&#x4E0D;&#x5728;&#x8D58;&#x8FF0;&#xFF0C;&#x5747;&#x76F4;&#x63A5;&#x7EE7;&#x627F;&#x81EA;&#x62BD;&#x8C61;&#x7C7B; <code>Buffer</code></p>
+<p><img width="600" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c0075627688e4b69adee4f4fa53d6d4d~tplv-k3u1fbpfcp-watermark.image"></p>
+<p>&#x6574;&#x4F53;&#x5B9E;&#x73B0;&#x601D;&#x8DEF;&#x4E00;&#x81F4;&#xFF0C;&#x6682;&#x4E0D;&#x5C55;&#x5F00;&#x3002;</p>
+<blockquote>
+<p>&#x6309;&#x7167;&#x662F;&#x5426;&#x4F7F;&#x7528;&#x5806;&#x5185;&#x5185;&#x5B58;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;</p>
+</blockquote>
+<ul>
+<li>&#x7EE7;&#x627F;&#x81EA; <code>XXXXBuffer</code> &#x7684; <code>HeapXXXXBuffer</code>&#xFF0C;&#x5982; <code>HeapByteBuffer</code>&#xFF0C;&#x5B83;&#x4EEC;&#x4F7F;&#x7528;JVM&#x53EF;&#x4EE5;&#x7BA1;&#x7406;&#x7684;&#x5806;&#x5185;&#x5185;&#x5B58;&#x3002;</li>
+<li><code>DirectBuffer</code> &#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x5982; <code>DirectByteBuffer</code>&#xFF0C;&#x5B83;&#x4EEC;&#x4F7F;&#x7528;&#x5806;&#x5916;&#x5185;&#x5B58;&#xFF0C;&#x6240;&#x8C13;&#x5806;&#x5916;&#x662F;&#x76F8;&#x5BF9;&#x6982;&#x5FF5;&#xFF0C;&#x6B64;&#x5185;&#x5B58;&#x533A;&#x4E0D;&#x53D7;JVM&#x7BA1;&#x7406;&#xFF0C;&#x4F7F;&#x7528;Unsafe&#x7C7B;&#x81EA;&#x884C;&#x7BA1;&#x7406;</li>
+</ul>
+<blockquote>
+<p>&#x6309;&#x7167;&#x8BBF;&#x95EE;&#x65B9;&#x5F0F;&#x88C2;&#x53D8;&#x51FA; &#x53EA;&#x8BFB;Buffer&#xFF0C;&#x5982; <code>HeapByteBufferR</code>, <code>DirectByteBufferR</code></p>
+</blockquote>
+<h2 id="channelbuffer-&#x57FA;&#x672C;&#x4F7F;&#x7528;&#x4EE3;&#x7801;&#x793A;&#x4F8B;"><a name="channelbuffer-&#x57FA;&#x672C;&#x4F7F;&#x7528;&#x4EE3;&#x7801;&#x793A;&#x4F8B;" class="anchor-navigation-ex-anchor" href="#channelbuffer-&#x57FA;&#x672C;&#x4F7F;&#x7528;&#x4EE3;&#x7801;&#x793A;&#x4F8B;"><i class="fa fa-link" aria-hidden="true"></i></a>Channel+Buffer &#x57FA;&#x672C;&#x4F7F;&#x7528;&#x4EE3;&#x7801;&#x793A;&#x4F8B;</h2>
+<p>&#x4EE5;&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x4E3E;&#x4F8B;&#xFF0C;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;&#x5927;&#x4F53;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> java.io.FileInputStream;
+<span class="hljs-keyword">import</span> java.io.IOException;
+<span class="hljs-keyword">import</span> java.nio.ByteBuffer;
+<span class="hljs-keyword">import</span> java.nio.channels.FileChannel;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileChannelRead</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>{
+        String filePath = <span class="hljs-string">&quot;/path/of/file&quot;</span>;
+        FileInputStream fis = <span class="hljs-keyword">new</span> FileInputStream(filePath);
+        FileChannel channel = fis.getChannel();
+
+        ByteBuffer buffer = ByteBuffer.allocate(<span class="hljs-number">1024</span>);
+
+        <span class="hljs-keyword">while</span> (channel.read(buffer) != -<span class="hljs-number">1</span>) {
+            <span class="hljs-comment">// Prepare for reading</span>
+            buffer.flip();
+
+            <span class="hljs-keyword">while</span> (buffer.hasRemaining()) {
+                <span class="hljs-keyword">byte</span> b = buffer.get();
+                <span class="hljs-comment">// Do something with b</span>
+            }
+
+            <span class="hljs-comment">// Prepare for writing</span>
+            buffer.clear();
+        }
+
+        channel.close();
+        fis.close();
+    }
+}
+</code></pre>
+<h2 id="selector-&#x6A21;&#x578B;"><a name="selector-&#x6A21;&#x578B;" class="anchor-navigation-ex-anchor" href="#selector-&#x6A21;&#x578B;"><i class="fa fa-link" aria-hidden="true"></i></a>Selector &#x6A21;&#x578B;</h2>
+<p>&#x6587;&#x9996;&#x6211;&#x4EEC;&#x63D0;&#x5230;&#xFF1A;</p>
+<blockquote>
+<p>&#x5728;JAVA&#x7ECF;&#x5178;IO&#x4E2D;&#xFF0C;IO&#x7684;&#x963B;&#x585E;&#x4F1A;&#x4F53;&#x73B0;&#x5230;JVM&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x5728;&#x9AD8;&#x5E76;&#x53D1;IO&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x5F00;&#x542F;&#x3001;&#x8C03;&#x5EA6;&#x7EBF;&#x7A0B;&#x7684;&#x8D44;&#x6E90;&#x6D88;&#x8017;&#x4E5F;&#x4F1A;&#x6F14;&#x53D8;&#x4E3A;&#x6027;&#x80FD;&#x74F6;&#x9888;&#x3002;</p>
+</blockquote>
+<p>&#x539F;&#x56E0;&#x5728;&#x4E8E;&#xFF1A;&#x7ECF;&#x5178;IO&#x65E0;&#x6CD5;&#x5728;&#x5355;&#x4E00;&#x7EBF;&#x7A0B;&#x4E2D;&#x5E94;&#x5BF9;&#x591A;&#x4E2A;IO&#x7B49;&#x5F85;&#x6570;&#x636E;&#x5C31;&#x7EEA;&#x7684;&#x573A;&#x666F;&#x3002;</p>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;NIO1.0 &#x9700;&#x8981;&#x89E3;&#x51B3;&#x8FD9;&#x4E00;&#x95EE;&#x9898;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x8BBE;&#x8BA1;&#x6709; <code>Selector</code> &#xFF0C;&#x5B83;&#x5141;&#x8BB8;&#x5355;&#x4E2A;&#x7EBF;&#x7A0B;&#x5904;&#x7406;&#x591A;&#x4E2A; <code>Channel</code>&#xFF0C;&#x5177;&#x4F53;&#x8868;&#x73B0;&#x4E3A;&#xFF1A;
+<code>Selector</code> &#x53EF;&#x68C0;&#x6D4B;&#x591A;&#x4E2A;&#x6CE8;&#x518C;&#x7684;Channel&#x4E0A;&#x662F;&#x5426;&#x6709;&#x65B0;&#x8FDE;&#x63A5;&#x3001;&#x6570;&#x636E;&#x53EF;&#x8BFB;&#x6216;&#x6570;&#x636E;&#x53EF;&#x5199;&#x4E8B;&#x4EF6;&#xFF0C;&#x636E;&#x6B64;&#x9074;&#x9009;&#x51FA;Channel&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#xFF1A;<strong>&#x5355;&#x4E00;&#x7EBF;&#x7A0B;&#x7BA1;&#x7406;&#x591A;&#x4E2A;channel</strong>&#x3002;</p>
+<p>&#x5176;&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#x672C;&#x8D28;&#x4E3A;&#x591A;&#x8DEF;&#x590D;&#x7528;&#x3002;&#x53EF;&#x4EE5;&#x4F53;&#x73B0;&#x4E3A;&#xFF1A;</p>
+<ul>
+<li>&#x5C06; Channel &#x6CE8;&#x518C;&#x5230; Selector &#x4E0A;,&#x5E76;&#x6307;&#x5B9A;&#x76D1;&#x542C;&#x4E8B;&#x4EF6;</li>
+<li>&#x53CD;&#x590D;&#x8C03;&#x7528; selector.select() &#x65B9;&#x6CD5;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x4F1A;&#x4E00;&#x76F4;&#x963B;&#x585E;,&#x76F4;&#x5230;&#x76D1;&#x6D4B;&#x5230; Channel &#x6709;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;</li>
+<li>select() &#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x540E;,&#x53EF;&#x4EE5;&#x901A;&#x8FC7; Selector &#x83B7;&#x5F97;&#x7684; SelectionKey &#x96C6;&#x5408;,&#x5224;&#x65AD;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x7684; Channel</li>
+<li>&#x5BF9; Channel &#x6267;&#x884C; IO &#x64CD;&#x4F5C;</li>
+</ul>
+<p>&#x6A21;&#x578B;&#x793A;&#x610F;&#x56FE;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/71ac73dd54924178912332f420d68b6f~tplv-k3u1fbpfcp-watermark.image?"></p>
+<p><em>&#x6B64;&#x56FE;&#x7247;&#x901A;&#x8FC7;&#x67D0;&#x5EA6;&#x56FE;&#x7247;&#x68C0;&#x7D22;&#x83B7;&#x5F97;&#xFF0C;&#x672A;&#x5F97;&#x5230;&#x5177;&#x4F53;&#x51FA;&#x5904;&#xFF0C;&#x5982;&#x6709;&#x4FB5;&#x6743;&#x8BF7;&#x7559;&#x8A00;&#x8054;&#x7CFB;&#x5220;&#x9664;</em></p>
+<p>Selector&#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x4E0D;&#x518D;&#x5C55;&#x5F00;&#xFF0C;&#x5B83;&#x7531;spi&#x673A;&#x5236;&#x5B9E;&#x73B0;&#x7279;&#x5B9A;&#x63D0;&#x4F9B;&#x3002;&#x5982;&#x679C;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x611F;&#x5174;&#x8DA3;&#xFF0C;&#x53EF;&#x81EA;&#x884C;&#x9605;&#x8BFB; <code>EPollSelectorImpl</code> &#x7B49;&#x6E90;&#x7801;&#x3002;</p>
+<p>JDK&#x4E2D;&#x7684; <code>DefaultSelectorProvider</code> &#x662F;&#x9ED8;&#x8BA4;&#x7684;&#x63D0;&#x4F9B;&#x903B;&#x8F91;&#xFF0C;&#x6839;&#x636E; <code>&#x4E0D;&#x540C;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;</code> &#x521B;&#x5EFA;&#x4E0D;&#x540C;&#x7684; <code>SelectorProvider</code>&#xFF0C;&#x7528;&#x4E8E;&#x63D0;&#x4F9B; <code>SelectorImpl</code>&#xFF1A;</p>
+<ul>
+<li>Windows&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF0C;&#x5219;&#x521B;&#x5EFA; <code>WindowsSelectorProvider</code> &#x5B9E;&#x4F8B;&#x3002;</li>
+<li>MacOS&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF0C;&#x5219;&#x521B;&#x5EFA; <code>KQueueSelectorProvider</code> &#x5B9E;&#x4F8B;&#x3002;</li>
+<li>Linux&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF0C;&#x5219;&#x521B;&#x5EFA; <code>EPollSelectorProvider</code>&#x3001;<code>PollSelectorProvider</code> &#x5B9E;&#x4F8B;&#x3002;</li>
+</ul>
+<h2 id="selector&#x4F7F;&#x7528;-&#x4E0E;-selectionkey"><a name="selector&#x4F7F;&#x7528;-&#x4E0E;-selectionkey" class="anchor-navigation-ex-anchor" href="#selector&#x4F7F;&#x7528;-&#x4E0E;-selectionkey"><i class="fa fa-link" aria-hidden="true"></i></a>Selector&#x4F7F;&#x7528; &#x4E0E; SelectionKey</h2>
+<p><em>&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#xFF0C;&#x53EF;&#x8FD8;&#x8BB0;&#x5F97;&#x4E0A;&#x6587;&#x4E2D;Channel&#x7684;UML&#x7C7B;&#x56FE;&#xFF0C;<code>Selector</code> &#x9762;&#x5411; <code>SelectableChannel</code> &#x56E0;&#x6B64;&#xFF0C;<code>FileChannel</code> &#x662F;&#x65E0;&#x6CD5;&#x4F7F;&#x7528;&#x7684;&#x3002;</em></p>
+<h3 id="selectionkey"><a name="selectionkey" class="anchor-navigation-ex-anchor" href="#selectionkey"><i class="fa fa-link" aria-hidden="true"></i></a>SelectionKey</h3>
+<p><code>SelectionKey</code> &#x662F; &#x53EF;&#x9009;&#x62E9;&#x901A;&#x9053;&#x5728; <code>Selector</code> &#x4E2D;&#x6CE8;&#x518C;&#x7684;&#x4EE4;&#x724C;&#xFF0C; <code>SelectionKey</code> &#x6709;4&#x4E2A;&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-comment">/**
+ * &#x8BFB;&#x4E8B;&#x4EF6;&#xFF1A;0000 0001
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> OP_READ = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">0</span>;
+
+<span class="hljs-comment">/**
+ * &#x5199;&#x4E8B;&#x4EF6;&#xFF1A;0000 0100
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> OP_WRITE = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">2</span>;
+
+<span class="hljs-comment">/**
+ * &#x8FDE;&#x63A5;&#x4E8B;&#x4EF6;&#xFF1A;0000 1000&#xFF0C;&#x8FDE;&#x63A5;&#x64CD;&#x4F5C;&#xFF0C;Client&#x7AEF;&#x652F;&#x6301;&#x7684;&#x4E00;&#x79CD;&#x64CD;&#x4F5C;
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> OP_CONNECT = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">3</span>;
+
+<span class="hljs-comment">/**
+ * &#x63A5;&#x53D7;&#x4E8B;&#x4EF6;&#xFF1A;0001 0000&#xFF0C;&#x53EF;&#x63A5;&#x53D7;&#x64CD;&#x4F5C;&#xFF0C;&#x4EC5;ServerSocketChannel&#x652F;&#x6301;
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> OP_ACCEPT = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">4</span>;
+</code></pre>
+<h4 id="&#x5E38;&#x7528;api"><a name="&#x5E38;&#x7528;api" class="anchor-navigation-ex-anchor" href="#&#x5E38;&#x7528;api"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5E38;&#x7528;API</h4>
+<blockquote>
+<p><code>interestOps()</code></p>
+</blockquote>
+<p>&#x8FD4;&#x56DE;&#x5728;Selector&#x4E2D;&#x6CE8;&#x518C;&#x7684;&#x5173;&#x6CE8;&#x4E8B;&#x4EF6;&#x96C6;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4F4D;&#x8FD0;&#x7B97;&#x53CD;&#x89E3;&#x5224;&#x65AD; <code>Channel</code> &#x662F;&#x5426;&#x5728; <code>Selector</code> &#x4E2D;&#x6CE8;&#x518C;&#x67D0;&#x5173;&#x6CE8;&#x4E8B;&#x4EF6;</p>
+<p>&#x53C2;&#x8003;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>// &#x83B7;&#x53D6;selectionKey &#x5173;&#x6CE8;&#x4E8B;&#x4EF6;&#x96C6;
+int interestSet = selectionKey.interestOps(); 
+
+boolean isInterestedInAccept = (interestSet &amp; SelectionKey.OP_ACCEPT) != 0;
+boolean isInterestedInConnect = interestSet &amp; SelectionKey.OP_CONNECT != 0;
+boolean isInterestedInRead = interestSet &amp; SelectionKey.OP_READ != 0;
+boolean isInterestedInWrite = interestSet &amp; SelectionKey.OP_WRITE != 0;
+</code></pre><blockquote>
+<p><code>readyOps()</code></p>
+</blockquote>
+<p>&#x83B7;&#x53D6;&#x6B64;selectionKey &#x5BF9;&#x5E94;&#x7684;&#x901A;&#x9053;&#x4E0A;&#x5DF2;&#x7ECF;&#x5C31;&#x7EEA;&#x7684;&#x4E8B;&#x4EF6;&#x96C6;&#x3002;&#x53EF;&#x4F7F;&#x7528;&#x4F4D;&#x8FD0;&#x7B97;&#x5224;&#x65AD;&#x76F8;&#x5E94;&#x4E8B;&#x4EF6;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;API&#xFF1A;</p>
+<ul>
+<li>boolean isAcceptable()</li>
+<li>boolean isConnectable()</li>
+<li>boolean isReadable()</li>
+<li>boolean isWritable()</li>
+</ul>
+<blockquote>
+<p><code>channel()</code></p>
+</blockquote>
+<p>&#x83B7;&#x53D6;&#x6CE8;&#x518C;&#x65F6;&#x5BF9;&#x5E94;&#x7684;Channel</p>
+<pre><code>Channel channel = selectionKey.channel();
+</code></pre><blockquote>
+<p><code>selector()</code></p>
+</blockquote>
+<p>&#x83B7;&#x53D6;&#x6CE8;&#x518C;&#x65F6;&#x76EE;&#x6807;Selector</p>
+<pre><code class="lang-java">Selector selector = selectionKey.selector();
+</code></pre>
+<blockquote>
+<p>attachment()</p>
+</blockquote>
+<p>SelectionKey&#x652F;&#x6301;&#x7ED1;&#x5B9A;&#x4E00;&#x4E2A;&#x9644;&#x52A0;&#x5BF9;&#x8C61;</p>
+<pre><code class="lang-java"><span class="hljs-comment">//&#x6CE8;&#x518C;&#x65F6;&#x7ED1;&#x5B9A;</span>
+SelectionKey selectionKey = channel.register(selector,SelectionKey.OP_READ,obj);
+
+<span class="hljs-comment">//&#x66F4;&#x65B0;&#x7ED1;&#x5B9A;</span>
+selectionKey.attach(obj);
+</code></pre>
+<p>&#x901A;&#x8FC7; <code>selectionKey.attachment();</code> &#x53EF;&#x83B7;&#x53D6;&#x8BE5;&#x9644;&#x52A0;&#x5BF9;&#x8C61;&#x3002;</p>
+<p>&#x9700;&#x8981;&#x6CE8;&#x610F;&#xFF1A;&#x5F53;&#x4E0D;&#x518D;&#x9700;&#x8981;&#x8BE5;&#x9644;&#x52A0;&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x9700;&#x89E3;&#x9664;&#x7ED1;&#x5B9A; <code>selectionKey.attach(null)</code>&#xFF0C;&#x5426;&#x5219;&#x5F71;&#x54CD;GC</p>
+<p>SelectionKey&#x7684;&#x5E95;&#x5C42;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#x4E0D;&#x518D;&#x5C55;&#x5F00;&#x3002;</p>
+<h3 id="selector-&#x5E38;&#x7528;api"><a name="selector-&#x5E38;&#x7528;api" class="anchor-navigation-ex-anchor" href="#selector-&#x5E38;&#x7528;api"><i class="fa fa-link" aria-hidden="true"></i></a>Selector &#x5E38;&#x7528;API</h3>
+<blockquote>
+<p>select(),select(timeout),selectNow()</p>
+</blockquote>
+<p>&#x83B7;&#x53D6; &#x5B58;&#x5728;&#x5DF2;&#x5C31;&#x7EEA;&#x4E8B;&#x4EF6;&#x7684;&#x901A;&#x9053; &#x7684;&#x6570;&#x91CF;&#xFF0C;</p>
+<p>&#x5F53;&#x8FD4;&#x56DE;&#x503C;&#x4E0D;&#x4E3A;0&#x65F6;&#xFF0C;&#x53EF;&#x8FDB;&#x884C;IO&#x5904;&#x7406;</p>
+<blockquote>
+<p>selectedKeys()</p>
+</blockquote>
+<p>&#x83B7;&#x53D6;&#x6CE8;&#x518C;&#x4E8E;&#x8BE5; <code>Selector</code> &#x4E0A;&#x7684; <code>&#x4E8B;&#x4EF6;&#x5C31;&#x7EEA;</code> &#x7684; <code>SelectionKey</code>&#xFF0C;&#x53C2;&#x8003;&#x4E0A;&#x6587;&#x4E2D; SelectionKey&#x8FDB;&#x884C;&#x4F7F;&#x7528;&#xFF0C;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#x662F;&#x4E00;&#x4E2A;&#x4F7F;&#x7528;&#x793A;&#x4F8B;&#xFF1A;</p>
+<pre><code>Set&lt;SelectionKey&gt; selectedKeys = selector.selectedKeys();
+
+Iterator&lt;SelectionKey&gt; it = selectedKeys.iterator();
+
+while(it.hasNext()) {
+    SelectionKey key = keyIterator.next();
+
+    if(key.isXXXXable()) {
+     //&#x5904;&#x7406; XXXX &#x4E8B;&#x4EF6;
+    }
+
+   it.remove();
+}
+</code></pre><blockquote>
+<p>wakeUp()</p>
+</blockquote>
+<p>&#x5F53;&#x8C03;&#x7528; <code>select()</code> &#x963B;&#x585E;&#x65F6;&#xFF0C;&#x4E8E;&#x53E6;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x8C03;&#x7528; <code>wakeup()</code> &#x53EF;&#x5F3A;&#x884C;&#x5524;&#x9192;&#x963B;&#x585E;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x5373;select()&#x65B9;&#x6CD5;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x8C03;&#x7528;wakeup()&#x65F6;&#xFF0C;&#x6CA1;&#x6709;&#x7EBF;&#x7A0B;&#x963B;&#x585E;&#x4E8E; <code>select()</code> &#x4E0A;&#xFF0C;&#x4E0B;&#x6B21;&#x8C03;&#x7528; <code>select()</code> &#x5C06;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#xFF0C;&#x4E0D;&#x4F1A;&#x8FDB;&#x5165;&#x963B;&#x585E;&#x72B6;&#x6001;&#x3002;&#x548C; <code>LockSupport.unpark()</code> &#x7C7B;&#x4F3C;&#x3002;</p>
+<blockquote>
+<p><code>close()</code></p>
+</blockquote>
+<p>&#x5173;&#x95ED; <code>Selector</code>&#xFF0C;&#x5DF2;&#x6CE8;&#x518C;&#x7684; <code>SelectionKey</code> &#x5C06;&#x5931;&#x6548;&#xFF0C;&#x4F46;&#x4E0D;&#x5F71;&#x54CD; <code>Channel</code></p>
+<h2 id="buffer-api&#x56FE;&#x89E3;"><a name="buffer-api&#x56FE;&#x89E3;" class="anchor-navigation-ex-anchor" href="#buffer-api&#x56FE;&#x89E3;"><i class="fa fa-link" aria-hidden="true"></i></a>Buffer API&#x56FE;&#x89E3;</h2>
+<p>&#x7F13;&#x51B2;&#x533A;&#x672C;&#x8D28;&#x4E0A;&#x662F;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;,&#x4F46;&#x662F;&#x5B83;&#x901A;&#x8FC7;&#x4E00;&#x7CFB;&#x5217;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x8FFD;&#x8E2A;&#x548C;&#x8BBF;&#x95EE;&#x6570;&#x636E;,&#x8FD9;&#x4F7F;&#x5F97;&#x5B83;&#x770B;&#x8D77;&#x6765;&#x50CF;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#x6216;&#x961F;&#x5217;&#x3002;JDK&#x4E2D;&#x539F;&#x6C41;&#x539F;&#x5473;&#x7684;&#x63CF;&#x8FF0;&#xFF1A;&quot;a linear, finite sequence of elements of a specific
+primitive type.&quot;</p>
+<p>&#x53BB;&#x6389;&#x5176;&#x5305;&#x542B;&#x7684;&#x5185;&#x5BB9;&#x6570;&#x636E;&#x4E0D;&#x8C08;&#xFF0C;&#x7F13;&#x51B2;&#x533A;&#x6709;3&#x4E2A;&#x5C5E;&#x6027;:</p>
+<ul>
+<li>&#x5BB9;&#x91CF;(Capacity):&#x6700;&#x5927;&#x5B58;&#x50A8;&#x91CF;&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x65F6;&#x786E;&#x5B9A;&#xFF0C;&#x4E0D;&#x53EF;&#x6539;&#x53D8;</li>
+<li>&#x4F4D;&#x7F6E;(Position):&#x4E0B;&#x4E00;&#x4E2A;&#x8981;&#x8BFB;&#x6216;&#x5199;&#x7684;&#x5143;&#x7D20;&#x7D22;&#x5F15;</li>
+<li>&#x9650;&#x5236;(Limit):&#x7F13;&#x51B2;&#x533A;&#x4E0D;&#x53EF;&#x64CD;&#x4F5C;&#x7684;&#x4E0B;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;limit &lt;= capacity</li>
+</ul>
+<p>&#x6CBF;&#x7528;&#x4E0A;&#x6587;&#x4E2D;&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x7684;&#x4EE3;&#x7801;&#x793A;&#x4F8B;&#xFF0C;&#x5176;&#x4E3B;&#x8981;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<ul>
+<li>&#x5411; <code>Buffer</code> &#x4E2D;&#x5199;&#x5165;&#x6570;&#x636E;&#xFF0C;&#x5982; <code>channel.read(buffer)</code>&#xFF0C;&#x6B64;&#x65F6;&#x4E3A;&#x5199;&#x6A21;&#x5F0F;</li>
+<li>&#x8C03;&#x7528; <code>flip()</code> &#x5207;&#x6362;&#x4E3A;&#x8BFB;&#x6A21;&#x5F0F;</li>
+<li>&#x4ECE; <code>Buffer</code> &#x4E2D;&#x53D6;&#x51FA;&#x6570;&#x636E;&#xFF0C;&#x5982; <code>buffer.get()</code></li>
+<li>&#x8C03;&#x7528; <code>clear()</code> &#x6216; <code>compact()</code> &#x5207;&#x6362;&#x4E3A;&#x5199;&#x6A21;&#x5F0F;</li>
+</ul>
+<p>&#x91CD;&#x590D;&#x76F4;&#x5230;&#x8BFB;&#x53D6;&#x5B8C;&#x6210;&#xFF08;&#x6216;&#x5F02;&#x5E38;&#xFF09;&#x3002;</p>
+<h3 id="api"><a name="api" class="anchor-navigation-ex-anchor" href="#api"><i class="fa fa-link" aria-hidden="true"></i></a>API</h3>
+<p>&#x4E0B;&#x6587;&#x5C06;&#x7ED3;&#x5408;&#x4EE5;&#x4E0B;Demo&#x4EE3;&#x7801;&#x4ECB;&#x7ECD;API&#xFF0C;&#x56FE;&#x793A;&#x5176;&#x5C5E;&#x6027;&#x53D8;&#x5316;</p>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">demo</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-comment">// &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x957F;&#x5EA6;&#x4E3A;10&#x7684;ByteBuffer</span>
+        ByteBuffer buffer = ByteBuffer.allocate(<span class="hljs-number">10</span>);
+
+        <span class="hljs-comment">// &#x5199;&#x5165;5&#x4E2A;&#x5B57;&#x8282;&#x5230;&#x7F13;&#x51B2;&#x533A;</span>
+        buffer.put((<span class="hljs-keyword">byte</span>) <span class="hljs-number">1</span>);
+        buffer.put((<span class="hljs-keyword">byte</span>) <span class="hljs-number">2</span>);
+        buffer.put((<span class="hljs-keyword">byte</span>) <span class="hljs-number">3</span>);
+        buffer.put((<span class="hljs-keyword">byte</span>) <span class="hljs-number">4</span>);
+        buffer.put((<span class="hljs-keyword">byte</span>) <span class="hljs-number">5</span>);
+
+        <span class="hljs-comment">// &#x7FFB;&#x8F6C;&#x7F13;&#x51B2;&#x533A; &#x51C6;&#x5907;&#x8BFB;&#x53D6; </span>
+        buffer.flip();
+
+        <span class="hljs-comment">// &#x8BFB;&#x53D6;2&#x4E2A;&#x5B57;&#x8282; </span>
+        <span class="hljs-keyword">byte</span> a = buffer.get();
+        <span class="hljs-keyword">byte</span> b = buffer.get();
+
+        buffer.rewind();
+
+        <span class="hljs-comment">// &#x6E05;&#x7A7A;&#x7F13;&#x51B2;&#x533A;  </span>
+        buffer.clear();
+    }
+}
+</code></pre>
+<h4 id="&#x5206;&#x914D;&#x7A7A;&#x95F4;"><a name="&#x5206;&#x914D;&#x7A7A;&#x95F4;" class="anchor-navigation-ex-anchor" href="#&#x5206;&#x914D;&#x7A7A;&#x95F4;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5206;&#x914D;&#x7A7A;&#x95F4;</h4>
+<p>&#x4F7F;&#x7528;JVM&#x5806;&#x5185;&#x5B58;&#x7684;Buffer&#xFF1A;</p>
+<pre><code>ByteBuffer#allocate(int capacity)
+</code></pre><p>&#x4F7F;&#x7528;&#x5806;&#x5916;&#x5185;&#x5B58;&#x7684;Buffer&#xFF1A;</p>
+<pre><code>ByteBuffer#allocateDirect(int capacity)
+</code></pre><p>&#x7533;&#x8BF7;&#x4E00;&#x4E2A;&#x5BB9;&#x91CF;&#x4E3A;10&#x7684;Buffer&#xFF0C;&#x6B64;&#x65F6;&#xFF1A;</p>
+<ul>
+<li>position &#x6307;&#x5411;0</li>
+<li>limit &#x548C; capacity &#x4E3A;10&#xFF0C;&#x6307;&#x5411;&#x6700;&#x5927;&#x7684;&#x4F4D;&#x7F6E;9</li>
+</ul>
+<p><img width="600" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f48c34f0094e4b8481ab7ea7d894075f~tplv-k3u1fbpfcp-watermark.image"></p>
+<h4 id="&#x5411;buffer&#x4E2D;&#x5199;&#x5165;&#x6570;&#x636E;"><a name="&#x5411;buffer&#x4E2D;&#x5199;&#x5165;&#x6570;&#x636E;" class="anchor-navigation-ex-anchor" href="#&#x5411;buffer&#x4E2D;&#x5199;&#x5165;&#x6570;&#x636E;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5411;Buffer&#x4E2D;&#x5199;&#x5165;&#x6570;&#x636E;</h4>
+<p>&#x4EE5;ByteBuffer&#x4E3A;&#x4F8B;,&#x5177;&#x6709;&#x4EE5;&#x4E0B;&#x91CD;&#x8F7D;API&#xFF0C;&#x53C2;&#x6570;&#x89C1;&#x540D;&#x77E5;&#x610F;&#xFF1A;</p>
+<pre><code class="lang-html">ByteBuffer#put(byte b)
+ByteBuffer#put(int index, byte b)
+ByteBuffer#put(ByteBuffer src)
+ByteBuffer#put(byte[])
+ByteBuffer#put(byte[] src, int offset, int length)
+</code></pre>
+<p>&#x800C;&#x5728; <code>CharBuffer</code> &#x7B49;Buffer&#x5B50;&#x7C07;&#x4E2D;&#xFF0C;<strong>&#x9488;&#x5BF9;&#x5176;&#x76EE;&#x6807;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x5177;&#x6709;&#x76F8;&#x5E94;&#x7684;API</strong> &#x3002;</p>
+<p><em>&#x800C;JDK&#x4E2D;&#x4EE5;Byte&#x4E3A;&#x4E3B;&#x8981;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x8FDB;&#x884C;&#x57FA;&#x7840;&#x529F;&#x80FD;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x4E0B;&#x6587;&#x4E2D;&#x5982;&#x65E0;&#x5FC5;&#x8981;&#xFF0C;&#x5C06;&#x53EA;&#x8BA8;&#x8BBA;&#x4EE5;Byte&#x4E3A;&#x76EE;&#x6807;&#x6570;&#x636E;&#x7684;&#x529F;&#x80FD;&#x5B9E;&#x73B0;&#x7C7B;&#x3002;</em></p>
+<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#xFF0C;&#x5982;&#x679C;&#x60A8;&#x5BF9;JAVA&#x7684;&#x6CDB;&#x578B;&#x548C;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x6709;&#x4E00;&#x5B9A;&#x4E86;&#x89E3;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x601D;&#x8003; &quot;&#x4E3A;&#x4F55;JDK&#x4E2D;&#x7684;&#x4EE3;&#x7801;&#x4E0D;&#x5229;&#x7528;&#x6CDB;&#x578B;&#x8FDB;&#x884C;&#x66F4;&#x7CFB;&#x7EDF;&#x6027;&#x7684;&#x62BD;&#x8C61;&quot;&#xFF0C;&#x4F46;&#x6CE8;&#x610F;&#xFF1A;JDK1.4&#x4E2D;&#x5C1A;&#x65E0;&#x6CDB;&#x578B;</em></p>
+<p>&#x4F9D;&#x6B21;&#x5199;&#x5165;5&#x4E2A;byte&#x4E4B;&#x540E;&#xFF1A;</p>
+<ul>
+<li>position &#x6307;&#x5411;5</li>
+<li>limit &#x548C; capacity &#x4E3A;10&#xFF0C;&#x6307;&#x5411;&#x6700;&#x5927;&#x7684;&#x4F4D;&#x7F6E;9</li>
+</ul>
+<p><img width="600" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/55aababd441842ff82ed871cf6acdc6b~tplv-k3u1fbpfcp-watermark.image"></p>
+<h4 id="flip"><a name="flip" class="anchor-navigation-ex-anchor" href="#flip"><i class="fa fa-link" aria-hidden="true"></i></a>flip</h4>
+<p>&#x7FFB;&#x8F6C;Buffer&#xFF1A;</p>
+<pre><code>Buffer#flip()
+
+public Buffer flip() {
+    limit = position;
+    position = 0;
+    mark = -1;
+    return this;
+}
+</code></pre><p>&#x5982;Doc&#x6240;&#x63CF;&#x8FF0;&#xFF0C;flip&#x5E72;&#x4E09;&#x4EF6;&#x4E8B;&#x60C5;&#xFF1A;The limit is set to the current position and then the position is set to zero. If the mark is defined then it is discarded.</p>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x5B83;&#x7684;&#x8BBE;&#x8BA1;&#x610F;&#x56FE;&#x662F;&#x5C06;Buffer&#x4ECE; &quot;&#x5199;&quot; &#x7684;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;&#x5207;&#x6362;&#x5230; &quot;&#x8BFB;&quot; &#x7684;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;&#xFF0C;&#x5E76;&#x9650;&#x5B9A;&#x8BFB;&#x53D6;&#x7684;&#x8FB9;&#x754C;&#x3002;</p>
+<p>&#x5728;&#x5199;&#x5165;5&#x4E2A;&#x6570;&#x636E;&#x540E;flip&#xFF1A;</p>
+<ul>
+<li>position &#x6307;&#x5411;0</li>
+<li>limit &#x4E3A;5, capacity &#x4E3A;10</li>
+</ul>
+<p><img width="600" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1616d5de97b045dc998703c14a1b02bc~tplv-k3u1fbpfcp-watermark.image"></p>
+<h4 id="&#x4ECE;buffer&#x4E2D;&#x8BFB;&#x51FA;&#x6570;&#x636E;"><a name="&#x4ECE;buffer&#x4E2D;&#x8BFB;&#x51FA;&#x6570;&#x636E;" class="anchor-navigation-ex-anchor" href="#&#x4ECE;buffer&#x4E2D;&#x8BFB;&#x51FA;&#x6570;&#x636E;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4ECE;Buffer&#x4E2D;&#x8BFB;&#x51FA;&#x6570;&#x636E;</h4>
+<pre><code>ByteBuffer#get() :byte
+ByteBuffer#get(int index) :byte
+ByteBuffer#get(byte[] dst)
+ByteBuffer#get(byte[] dst, int offset, int length)
+</code></pre><p>&#x53C2;&#x6570;&#x89C1;&#x540D;&#x77E5;&#x610F;&#xFF0C;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;&#x3002;</p>
+<p>&#x7EE7;&#x7EED;flip&#x540E;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x8BFB;&#x53D6;&#x4E24;&#x4E2A;byte&#x6570;&#x636E;&#xFF0C;&#x6B64;&#x65F6;&#xFF1A;</p>
+<ul>
+<li>position &#x6307;&#x5411;2</li>
+<li>limit &#x4E3A;5, capacity &#x4E3A;10</li>
+</ul>
+<p><img width="600" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e3ededd7518041c28d702bbbe7c45ae8~tplv-k3u1fbpfcp-watermark.image"></p>
+<h4 id="rewind"><a name="rewind" class="anchor-navigation-ex-anchor" href="#rewind"><i class="fa fa-link" aria-hidden="true"></i></a>rewind</h4>
+<pre><code>public Buffer rewind() {
+    this.position = 0;
+    this.mark = -1;
+    return this;
+}
+</code></pre><p>&#x4F7F;&#x7528;rewind&#x53EF;&#x4EE5;&#x91CD;&#x7F6E; <code>mark&#x6807;&#x8BB0;</code> &#x548C; <code>position</code>&#xFF0C;&#x6B64;&#x65F6;&#x53EF;&#x4EE5;&#x4ECE;&#x5934;&#x518D;&#x6B21;&#x8BFB;&#x53D6;&#x7F13;&#x51B2;&#x533A;&#x5185;&#x5BB9;&#x3002;</p>
+<h4 id="clear--compact"><a name="clear--compact" class="anchor-navigation-ex-anchor" href="#clear--compact"><i class="fa fa-link" aria-hidden="true"></i></a>clear &amp; compact</h4>
+<pre><code>public Buffer clear() {
+    this.position = 0;
+    this.limit = this.capacity;
+    this.mark = -1;
+    return this;
+}
+
+//HeapByteBuffer
+public ByteBuffer compact() {
+    int var1 = this.position();
+    int var2 = this.limit();
+
+    assert var1 &lt;= var2;
+
+    int var3 = var1 &lt;= var2 ? var2 - var1 : 0;
+    System.arraycopy(this.hb, this.ix(var1), this.hb, this.ix(0), var3);
+    this.position(var3);
+    this.limit(this.capacity());
+    this.discardMark();
+    return this;
+}
+</code></pre><p>clear &#x5C06;&#x91CD;&#x7F6E;&#x6240;&#x6709;&#x5C5E;&#x6027;&#xFF0C;&#x4E0E;&#x521D;&#x59CB;&#x5316;&#x7684;&#x72B6;&#x6001;&#x4E00;&#x81F4;&#xFF0C;&#x4F46;&#x5E76;&#x4E0D;&#x4F1A;&#x6E05;&#x9664;&#x6570;&#x636E;&#x3002;&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x5404;&#x4E2A;&#x6807;&#x8BB0;&#x5DF2;&#x7ECF;&#x4FDD;&#x969C;&#x8BFB;&#x5199;&#x5B89;&#x5168;&#xFF0C;&#x56E0;&#x6B64;&#x5386;&#x53F2;&#x7F13;&#x51B2;&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x810F;&#x6570;&#x636E;&#x95EE;&#x9898;</p>
+<p>compact &#x5C06;&#x6E05;&#x9664;&#x5DF2;&#x8BFB;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x5C06;&#x5C5E;&#x6027;&#x5904;&#x7406;&#x4E3A;&#x6EE1;&#x8DB3; &quot;&#x5728;&#x672A;&#x8BFB;&#x6570;&#x636E;&#x540E;&#x5199;&#x5165;&quot;</p>
+<p><img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cfc82f01d0dd4b91bc12afd974fa367f~tplv-k3u1fbpfcp-watermark.image"></p>
+<h4 id="mark--reset"><a name="mark--reset" class="anchor-navigation-ex-anchor" href="#mark--reset"><i class="fa fa-link" aria-hidden="true"></i></a>mark &amp; reset</h4>
+<p>mark&#x548C;reset&#x9700;&#x8981;&#x5408;&#x5E76;&#x4F7F;&#x7528;, mark&#x7528;&#x4E8E;&#x5728;&#x5F53;&#x524D;position&#x6253;&#x6807;&#x8BB0;&#xFF0C;&#x8FDB;&#x8FC7;&#x4E00;&#x4E9B;&#x884C;&#x4E3A;&#x540E;&#x53EF;&#x80FD;position&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF0C;&#x901A;&#x8FC7;reset&#x5C06;position&#x6062;&#x590D;&#x5230;&#x5148;&#x524D;&#x7684;&#x6807;&#x8BB0;&#x3002;</p>
+<pre><code>public Buffer mark() {
+    this.mark = this.position;
+    return this;
+}
+
+public Buffer reset() {
+    int var1 = this.mark;
+    if (var1 &lt; 0) {
+        throw new InvalidMarkException();
+    } else {
+        this.position = var1;
+        return this;
+    }
+}
+</code></pre><h2 id="&#x5520;&#x53E8;&#x51E0;&#x53E5;"><a name="&#x5520;&#x53E8;&#x51E0;&#x53E5;" class="anchor-navigation-ex-anchor" href="#&#x5520;&#x53E8;&#x51E0;&#x53E5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5520;&#x53E8;&#x51E0;&#x53E5;</h2>
+<p>&#x4E0A;&#x4E2A;&#x6708;&#x7ACB;&#x4E86;&#x4E2A;FLAG&#xFF0C;&#x653E;&#x8A00;&#x7AEF;&#x5348;&#x524D;&#x5199;&#x5B8C;IO&#x7CFB;&#x5217;&#x3002;&#x5728;&#x5185;&#x5FC3;&#x4E5F;&#x5E0C;&#x671B;&#x5728;&#x4ECA;&#x5E74;&#x591A;&#x4EA7;&#x51FA;&#x4E00;&#x4E9B;&#x57FA;&#x7840;&#x6587;&#x7AE0;&#x3002;</p>
+<ul>
+<li>&#x4E00;&#x6765;&#x662F;&#x770B;&#x770B;&#x6E29;&#x6545;&#x662F;&#x5426;&#x80FD;&#x77E5;&#x65B0;&#xFF1B;</li>
+<li>&#x4E8C;&#x6765;&#x662F;&#x57FA;&#x7840;&#x6587;&#x7AE0;&#x5BF9;&#x521A;&#x5165;&#x884C;&#x6216;&#x8005;&#x51C6;&#x5907;&#x5165;&#x884C;&#x7684;&#x5C0F;&#x5144;&#x5F1F;&#x4EEC;&#x5E2E;&#x52A9;&#x5927;&#x4E00;&#x4E9B;&#xFF1B;</li>
+<li>&#x4E09;&#x6765;&#x662F;&#x5BF9;&#x9610;&#x8FF0;&#x7406;&#x5FF5;&#x7C7B;&#x7684;&#x6587;&#x7AE0;&#x8FD8;&#x6CA1;&#x6709;&#x505A;&#x597D;&#x5145;&#x8DB3;&#x7684;&#x51C6;&#x5907;&#xFF1B;</li>
+</ul>
+<p>&#x4F46;&#x8BA1;&#x5212;&#x8D76;&#x4E0D;&#x4E0A;&#x53D8;&#x5316;&#xFF0C;&#x6211;&#x4E5F;&#x672A;&#x80FD;&#x60F3;&#x5230;&#xFF0C;&#x5728;&#x4E0D;&#x6362;&#x5751;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6211;&#x7684;&#x5DE5;&#x4F5C;&#x6027;&#x8D28;&#x53D1;&#x751F;&#x4E86;&#x5DE8;&#x5927;&#x6539;&#x53D8;&#xFF0C;&#x8FD9;&#x79CD;&#x6539;&#x53D8;&#x5C1A;&#x672A;&#x5230;&#x8C08;&#x8BBA;&#x597D;&#x574F;&#x7684;&#x9636;&#x6BB5;&#xFF0C;&#x4F46;&#x786E;&#x5B9E;&#x8981;&#x8017;&#x8D39;&#x592A;&#x591A;&#x5FC3;&#x795E;&#xFF0C;&#x4EE5;&#x81F3;&#x4E8E;&#x6211;&#x7684;&#x96F6;&#x788E;&#x65F6;&#x95F4;&#x5F80;&#x5F80;&#x7528;&#x4E8E;&#x60C5;&#x7EEA;&#x5783;&#x573E;&#x56DE;&#x6536;&#xFF0C;&#x800C;&#x6CA1;&#x5FC3;&#x601D;&#x518D;&#x505A;&#x5B83;&#x987E;&#x3002;</p>
+<p>&#x8FC7;&#x4E8E;&#x7D6E;&#x53E8;&#x4E86;&#x3002;</p>
+<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
+2023-06-05 19:53:44
+</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="post_56.html" class="navigation navigation-prev " aria-label="Previous page: Java IO系列 | 经典 IO">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../Gradle/" class="navigation navigation-next " aria-label="Next page: Gradle">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Java IO 系列 | NIO-1.0一文速览","level":"1.5.3","depth":2,"next":{"title":"Gradle","level":"1.6","depth":1,"path":"Gradle/README.md","ref":"./Gradle/README.md","articles":[{"title":"三思系列：组件化场景下module依赖优雅实践方案","level":"1.6.1","depth":2,"path":"Gradle/Modularization/post_18.md","ref":"Gradle/Modularization/post_18.md","articles":[]},{"title":"迁移到MavenCentral--再不行动起来，你的托管的library就没了","level":"1.6.2","depth":2,"path":"Gradle/Publish/post_17.md","ref":"Gradle/Publish/post_17.md","articles":[]},{"title":"Gradle | 依赖管理最佳实践","level":"1.6.3","depth":2,"path":"Gradle/post_22.md","ref":"Gradle/post_22.md","articles":[]}]},"previous":{"title":"Java IO系列 | 经典 IO","level":"1.5.2","depth":2,"path":"IO/post_56.md","ref":"./IO/post_56.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"IO/post_57.md","mtime":"2023-06-05T11:53:44.122Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-06-05T12:16:53.786Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
