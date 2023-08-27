@@ -1,0 +1,2145 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../Gradle/" />
+    
+    
+    <link rel="prev" href="post_58.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Android/">
+            
+                <a href="../Android/">
+            
+                    
+                    Android
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Android/View/">
+            
+                <a href="../Android/View/">
+            
+                    
+                    View
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../Android/View/post_1.html">
+            
+                <a href="../Android/View/post_1.html">
+            
+                    
+                    好玩系列：优雅的处理ButterKnife和KAE被废弃
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../Android/View/post_6.html">
+            
+                <a href="../Android/View/post_6.html">
+            
+                    
+                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../Android/View/post_7.html">
+            
+                <a href="../Android/View/post_7.html">
+            
+                    
+                    三思系列：为什么自定义View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../Android/Idea/post_9.html">
+            
+                <a href="../Android/Idea/post_9.html">
+            
+                    
+                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Android/Drawable/">
+            
+                <a href="../Android/Drawable/">
+            
+                    
+                    Drawable
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../Android/Drawable/post_2.html">
+            
+                <a href="../Android/Drawable/post_2.html">
+            
+                    
+                    三思系列：重新认识Drawable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="../Android/Drawable/post_4.html">
+            
+                <a href="../Android/Drawable/post_4.html">
+            
+                    
+                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.3" data-path="../Android/Drawable/post_47.html">
+            
+                <a href="../Android/Drawable/post_47.html">
+            
+                    
+                    迟来的续集--Drawable+Animator，将优雅进行到底
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.4" data-path="../Android/Drawable/post_49.html">
+            
+                <a href="../Android/Drawable/post_49.html">
+            
+                    
+                    好玩系列：让ImageSpan动起来
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Android/Mechanism/Message/">
+            
+                <a href="../Android/Mechanism/Message/">
+            
+                    
+                    消息机制
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" data-path="../Android/Mechanism/Message/post_8.html">
+            
+                <a href="../Android/Mechanism/Message/post_8.html">
+            
+                    
+                    三思系列：Android的消息机制，一文吃透
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Android/Idea/post_14/">
+            
+                <a href="../Android/Idea/post_14/">
+            
+                    
+                    兼容
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.4.1" data-path="../Android/Idea/post_14.html">
+            
+                <a href="../Android/Idea/post_14.html">
+            
+                    
+                    好玩系列：让项目中的相册支持Heif格式图片
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Android/Glide/">
+            
+                <a href="../Android/Glide/">
+            
+                    
+                    Glide
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="../Android/Glide/post_15.html">
+            
+                <a href="../Android/Glide/post_15.html">
+            
+                    
+                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="../Android/Glide/post_16.html">
+            
+                <a href="../Android/Glide/post_16.html">
+            
+                    
+                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Android/KSP/">
+            
+                <a href="../Android/KSP/">
+            
+                    
+                    KSP
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.1" data-path="../Android/KSP/post_24.html">
+            
+                <a href="../Android/KSP/post_24.html">
+            
+                    
+                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../Android/Base/">
+            
+                <a href="../Android/Base/">
+            
+                    
+                    基础
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.7.1" data-path="../Android/Base/post_35.html">
+            
+                <a href="../Android/Base/post_35.html">
+            
+                    
+                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../Android/SysApp/">
+            
+                <a href="../Android/SysApp/">
+            
+                    
+                    系统APP
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.8.1" data-path="../Android/SysApp/post_52.html">
+            
+                <a href="../Android/SysApp/post_52.html">
+            
+                    
+                    使用日历丰富产品的用户体验
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../Android/DI/">
+            
+                <a href="../Android/DI/">
+            
+                    
+                    Part4-依赖注入部分
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.9.1" data-path="../Android/DI/post_53.html">
+            
+                <a href="../Android/DI/post_53.html">
+            
+                    
+                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Compose/">
+            
+                <a href="../Compose/">
+            
+                    
+                    Jetpack Compose
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Compose/post_21.html">
+            
+                <a href="../Compose/post_21.html">
+            
+                    
+                    Jetpack Compose | 一文理解神奇的Modifier
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Compose/post_26.html">
+            
+                <a href="../Compose/post_26.html">
+            
+                    
+                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Compose/post_27.html">
+            
+                <a href="../Compose/post_27.html">
+            
+                    
+                    Jetpack Compose | 控件篇（二） -- Icon，Image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Compose/post_28.html">
+            
+                <a href="../Compose/post_28.html">
+            
+                    
+                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Compose/post_29.html">
+            
+                <a href="../Compose/post_29.html">
+            
+                    
+                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../Compose/post_30.html">
+            
+                <a href="../Compose/post_30.html">
+            
+                    
+                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../MultiThreading/">
+            
+                <a href="../MultiThreading/">
+            
+                    
+                    Java多线程
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../MultiThreading/post_33.html">
+            
+                <a href="../MultiThreading/post_33.html">
+            
+                    
+                    总纲
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../MultiThreading/post_37.html">
+            
+                <a href="../MultiThreading/post_37.html">
+            
+                    
+                    Java基础--图解JVM内存模型和JVM线程模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../MultiThreading/post_38.html">
+            
+                <a href="../MultiThreading/post_38.html">
+            
+                    
+                    Java多线程系列--掌控面试，一文吃透Synchronized锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../MultiThreading/post_39.html">
+            
+                <a href="../MultiThreading/post_39.html">
+            
+                    
+                    Java多线程基础--线程生命周期与线程协作详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../MultiThreading/post_42.html">
+            
+                <a href="../MultiThreading/post_42.html">
+            
+                    
+                    Java多线程基础--线程的创建与线程池管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../MultiThreading/post_46.html">
+            
+                <a href="../MultiThreading/post_46.html">
+            
+                    
+                    Java多线程系列--掌握Future，轻松获取异步任务结果
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../MultiThreading/post_50.html">
+            
+                <a href="../MultiThreading/post_50.html">
+            
+                    
+                    Java多线程系列--Fork&Join框架，分治的艺术
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../MultiThreading/post_54.html">
+            
+                <a href="../MultiThreading/post_54.html">
+            
+                    
+                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Java IO系列
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="post_55.html">
+            
+                <a href="post_55.html">
+            
+                    
+                    Java IO 系列总纲
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="post_56.html">
+            
+                <a href="post_56.html">
+            
+                    
+                    Java IO系列 | 经典 IO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="post_57.html">
+            
+                <a href="post_57.html">
+            
+                    
+                    Java IO 系列 | NIO-1.0一文速览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="post_58.html">
+            
+                <a href="post_58.html">
+            
+                    
+                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.5" data-path="post_59.html">
+            
+                <a href="post_59.html">
+            
+                    
+                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Gradle/">
+            
+                <a href="../Gradle/">
+            
+                    
+                    Gradle
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../Gradle/Modularization/post_18.html">
+            
+                <a href="../Gradle/Modularization/post_18.html">
+            
+                    
+                    三思系列：组件化场景下module依赖优雅实践方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../Gradle/Publish/post_17.html">
+            
+                <a href="../Gradle/Publish/post_17.html">
+            
+                    
+                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../Gradle/post_22.html">
+            
+                <a href="../Gradle/post_22.html">
+            
+                    
+                    Gradle | 依赖管理最佳实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../Groovy/">
+            
+                <a href="../Groovy/">
+            
+                    
+                    Groovy
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../Groovy/why_write_groovy.html">
+            
+                <a href="../Groovy/why_write_groovy.html">
+            
+                    
+                    为什么撰写这个系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../Groovy/post_23.html">
+            
+                <a href="../Groovy/post_23.html">
+            
+                    
+                    Groovy：MOP一文打尽
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../Review/">
+            
+                <a href="../Review/">
+            
+                    
+                    Review
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../Review/post_10.html">
+            
+                <a href="../Review/post_10.html">
+            
+                    
+                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../Review/post_40.html">
+            
+                <a href="../Review/post_40.html">
+            
+                    
+                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../Review/post_44.html">
+            
+                <a href="../Review/post_44.html">
+            
+                    
+                    谈一谈在两个商业项目中使用MVI架构后的感悟
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../Review/post_45.html">
+            
+                <a href="../Review/post_45.html">
+            
+                    
+                    Review | 这三个坑你遇到了吗？
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../repo/">
+            
+                <a href="../repo/">
+            
+                    
+                    个人项目
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../repo/DaVinCi.html">
+            
+                <a href="../repo/DaVinCi.html">
+            
+                    
+                    DaVinCi,取代XML编写Shape或ColorStateList的方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../Android/Idea/post_32.html">
+            
+                <a href="../Android/Idea/post_32.html">
+            
+                    
+                    好玩系列：白嫖一个优雅的类图生成工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../Speculative/post_43.html">
+            
+                <a href="../Speculative/post_43.html">
+            
+                    
+                    初体验：动手搭建"小清新式"局域网文档系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../repo/post_48.html">
+            
+                <a href="../repo/post_48.html">
+            
+                    
+                    研究良久，终于发现了他代码写的快且bug少的原因
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="../Review/DataStructure/">
+            
+                <a href="../Review/DataStructure/">
+            
+                    
+                    数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../Review/DataStructure/post_11.html">
+            
+                <a href="../Review/DataStructure/post_11.html">
+            
+                    
+                    温故：线性表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="../Review/DataStructure/post_12.html">
+            
+                <a href="../Review/DataStructure/post_12.html">
+            
+                    
+                    温故：栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="../Review/DataStructure/post_13.html">
+            
+                <a href="../Review/DataStructure/post_13.html">
+            
+                    
+                    温故：队列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="../Review/README2.html">
+            
+                <a href="../Review/README2.html">
+            
+                    
+                    年终总结&计划
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../Review/post_36.html">
+            
+                <a href="../Review/post_36.html">
+            
+                    
+                    2021年终总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="../Review/post_51.html">
+            
+                <a href="../Review/post_51.html">
+            
+                    
+                    关于画一个句号--基于2022年终总结的反思与分享
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../Note/">
+            
+                <a href="../Note/">
+            
+                    
+                    读书笔记
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="../Note/post_41.html">
+            
+                <a href="../Note/post_41.html">
+            
+                    
+                    读书笔记：《简约至上--交互式设计四策略》
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../Talk/">
+            
+                <a href="../Talk/">
+            
+                    
+                    杂谈
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="../Talk/talk_1.html">
+            
+                <a href="../Talk/talk_1.html">
+            
+                    
+                    杂谈1-2022-11
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="../Talk/talk_2_2023-03.html">
+            
+                <a href="../Talk/talk_2_2023-03.html">
+            
+                    
+                    杂篇（二）-- 认识并战胜焦虑
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="../info/">
+            
+                <a href="../info/">
+            
+                    
+                    系列说明
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="../info/about_view_series.html">
+            
+                <a href="../info/about_view_series.html">
+            
+                    
+                    关于View系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="../info/about_sansi_series.html">
+            
+                <a href="../info/about_sansi_series.html">
+            
+                    
+                    关于三思系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="../info/about_haowan_series.html">
+            
+                <a href="../info/about_haowan_series.html">
+            
+                    
+                    关于好玩系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="../info/about_wengu_series.html">
+            
+                <a href="../info/about_wengu_series.html">
+            
+                    
+                    关于温故系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#io&#x7CFB;&#x5217;--&#x4E00;&#x6587;&#x638C;&#x63E1;okhttp&#x4E2D;&#x7684;okio&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E48;ok"><b></b>IO&#x7CFB;&#x5217; | &#x4E00;&#x6587;&#x638C;&#x63E1;OKHTTP&#x4E2D;&#x7684;OKIO&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E48;OK</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#okio&#x7684;&#x4E3B;&#x65E8;&#x4E0E;&#x67B6;&#x6784;"><b></b>okio&#x7684;&#x4E3B;&#x65E8;&#x4E0E;&#x67B6;&#x6784;</a></li><li><span class="title-icon "></span><a href="#&#x4E0E;java&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x7684;&#x5BF9;&#x6BD4;"><b></b>&#x4E0E;Java&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x7684;&#x5BF9;&#x6BD4;</a></li><ul><li><span class="title-icon "></span><a href="#&#x5DEE;&#x5F02;&#x70B9;"><b></b>&#x5DEE;&#x5F02;&#x70B9;</a></li><li><span class="title-icon "></span><a href="#&#x76F8;&#x540C;&#x70B9;"><b></b>&#x76F8;&#x540C;&#x70B9;</a></li></ul><li><span class="title-icon "></span><a href="#source&#x3001;sink-&#x8BE6;&#x89E3;"><b></b>Source&#x3001;Sink &#x8BE6;&#x89E3;</a></li><ul><li><span class="title-icon "></span><a href="#source-&#x4F53;&#x7CFB;"><b></b>Source &#x4F53;&#x7CFB;</a></li><li><span class="title-icon "></span><a href="#sink-&#x4F53;&#x7CFB;"><b></b>Sink &#x4F53;&#x7CFB;</a></li><li><span class="title-icon "></span><a href="#source&#x3001;sink&#x4E0E;io-stream&#x7684;&#x4E92;&#x64CD;&#x4F5C;"><b></b>Source&#x3001;Sink&#x4E0E;I/O-Stream&#x7684;&#x4E92;&#x64CD;&#x4F5C;</a></li></ul><li><span class="title-icon "></span><a href="#buffer-&#x8BE6;&#x89E3;"><b></b>Buffer &#x8BE6;&#x89E3;</a></li><ul><li><span class="title-icon "></span><a href="#&#x6838;&#x5FC3;&#x5B9E;&#x73B0;"><b></b>&#x6838;&#x5FC3;&#x5B9E;&#x73B0;</a></li></ul><li><span class="title-icon "></span><a href="#bytestring-&#x6982;&#x8FF0;"><b></b>ByteString &#x6982;&#x8FF0;</a></li><li><span class="title-icon "></span><a href="#&#x8D85;&#x65F6;&#x673A;&#x5236;"><b></b>&#x8D85;&#x65F6;&#x673A;&#x5236;</a></li><li><span class="title-icon "></span><a href="#&#x7ED3;&#x8BED;"><b></b>&#x7ED3;&#x8BED;</a></li></ul></ul></div><a href="#io&#x7CFB;&#x5217;--&#x4E00;&#x6587;&#x638C;&#x63E1;okhttp&#x4E2D;&#x7684;okio&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E48;ok" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="io&#x7CFB;&#x5217;--&#x4E00;&#x6587;&#x638C;&#x63E1;okhttp&#x4E2D;&#x7684;okio&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E48;ok"><a name="io&#x7CFB;&#x5217;--&#x4E00;&#x6587;&#x638C;&#x63E1;okhttp&#x4E2D;&#x7684;okio&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E48;ok" class="anchor-navigation-ex-anchor" href="#io&#x7CFB;&#x5217;--&#x4E00;&#x6587;&#x638C;&#x63E1;okhttp&#x4E2D;&#x7684;okio&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E48;ok"><i class="fa fa-link" aria-hidden="true"></i></a>IO&#x7CFB;&#x5217; | &#x4E00;&#x6587;&#x638C;&#x63E1;OKHTTP&#x4E2D;&#x7684;OKIO&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x4E48;OK</h1>
+<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
+<p>&#x672C;&#x7BC7;&#x662F; <a href="https://juejin.cn/post/7231540022595141693" target="_blank">IO&#x7CFB;&#x5217;</a>
+&#x7684;&#x7B2C;4&#x7BC7;&#xFF0C;&#x524D;&#x4E09;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5BF9;JAVA&#x7ECF;&#x5178;IO&#x8BBE;&#x8BA1;&#x3001;JAVA&#xFF0D;NIO&#x5185;&#x5BB9;&#x3001;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;IO&#x67B6;&#x6784;&#x57FA;&#x7840;&#x6982;&#x5FF5;&#x3001;Zero&#xFF0D;Copy&#x505A;&#x4E86;&#x8F83;&#x4E3A;&#x7CFB;&#x7EDF;&#x7684;&#x56DE;&#x987E;&#x3002;</p>
+<p>&#x800C;&#x7EDD;&#x5927;&#x90E8;&#x5206;Android&#x5E94;&#x7528;&#x4E2D;&#x90FD;&#x4F1A;&#x6D89;&#x53CA;&#x5230;&#x7F51;&#x7EDC;&#x6A21;&#x5757;&#xFF0C;<code>Retrofit</code>&#x3001;<code>Okhttp</code> &#x51E0;&#x4E4E;&#x662F;&#x5FC5;&#x7528;&#x7684;&#x6846;&#x67B6;&#xFF0C; <code>Okio</code> &#x4F5C;&#x4E3A; <code>Okhttp</code> &#x4E2D;&#x7684;&#x91CD;&#x8981;&#x6A21;&#x5757;&#xFF0C;&#x539F;&#x5148;&#x7528;&#x4E8E;&#x5904;&#x7406;&#x7F51;&#x7EDC;&#x6A21;&#x5757;&#x4E2D;&#x7684;IO&#x95EE;&#x9898;&#xFF0C;&#x968F;&#x7740;&#x5176;&#x9879;&#x76EE;&#x53D1;&#x5C55;&#xFF0C;Okio&#x4E5F;&#x5F00;&#x59CB;&#x9762;&#x5411;&#x5176;&#x4ED6;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x8FD9;&#x4E00;&#x7BC7;&#xFF0C;&#x6211;&#x4EEC;&#x4E00;&#x540C;&#x5BF9;OKIO&#x505A;&#x4E00;&#x6B21;&#x7CFB;&#x7EDF;&#x7684;&#x68B3;&#x7406;&#xFF0C;&#x641E;&#x660E;&#x767D;OKIO&#x4E3A;&#x4EC0;&#x4E48;OK&#xFF0C;&#x505A;&#x5230;&#x5728;&#x9762;&#x8BD5;&#x4E2D;&#x81EA;&#x5982;&#x7684;&#x5439;&#x725B;&#x6279;&#x3001;&#x5728;&#x65E5;&#x5E38;&#x5DE5;&#x4F5C;&#x4E2D;&#x7075;&#x6D3B;&#x4F7F;&#x7528;&#x3002;</p>
+<p><em>&#x7F16;&#x8005;&#x6309;&#xFF1A;&#x9762;&#x8BD5;&#x5439;&#x725B;&#x6279;&#x9700;&#x8981;&#x628A;&#x63E1;&#x5C3A;&#x5EA6;&#xFF0C;&#x907F;&#x514D;&#x8FDC;&#x8D85;&#x5C97;&#x4F4D;&#x9884;&#x671F;&#xFF0C;&#x5BFC;&#x81F4;&#x6D6A;&#x8D39;&#x65F6;&#x95F4;</em></p>
+<p>&#x56E0;&#x6587;&#x7AE0;&#x7BC7;&#x5E45;&#x8F83;&#x957F;&#xFF0C;&#x53EF;&#x7ED3;&#x5408;&#x5185;&#x5BB9;&#x5BFC;&#x56FE;&#x9605;&#x8BFB;&#xFF1A;</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e2d1c33d42e24465ba66782ec42e6aa2~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1682&amp;h=1466&amp;e=png&amp;b=3c3c3c" alt="okio.png"></p>
+<h2 id="okio&#x7684;&#x4E3B;&#x65E8;&#x4E0E;&#x67B6;&#x6784;"><a name="okio&#x7684;&#x4E3B;&#x65E8;&#x4E0E;&#x67B6;&#x6784;" class="anchor-navigation-ex-anchor" href="#okio&#x7684;&#x4E3B;&#x65E8;&#x4E0E;&#x67B6;&#x6784;"><i class="fa fa-link" aria-hidden="true"></i></a>okio&#x7684;&#x4E3B;&#x65E8;&#x4E0E;&#x67B6;&#x6784;</h2>
+<p>&#x5728;OKIO&#x9879;&#x76EE;&#x7684; wiki &#x4E2D;&#xFF0C;&#x5BF9;&#x5176;&#x4E3B;&#x65E8;&#x6709;&#x5982;&#x4E0B;&#x4ECB;&#x7ECD;&#xFF1A;</p>
+<blockquote>
+<p>Okio is a library that complements java.io and java.nio to make it much easier to access, store, and process your data. It started as a component of OkHttp, the capable HTTP client included in Android. It&#x2019;s well-exercised and ready to solve new problems.</p>
+</blockquote>
+<p>&#x7B80;&#x5355;&#x76F4;&#x8BD1;&#x4E3A;&#x4E2D;&#x6587;&#x5982;&#x4E0B;&#xFF1A;</p>
+<blockquote>
+<p>Okio&#x662F;&#x4E00;&#x4E2A;&#x7C7B;&#x5E93;&#xFF0C;&#x5BF9; <code>java.io</code> &#x548C; <code>java.nio</code> &#x8FDB;&#x884C;&#x4E86;&#x8865;&#x5145;&#xFF0C;&#x4F7F;&#x5F97;&#x8BBF;&#x95EE;&#x3001;&#x5B58;&#x50A8;&#x548C;&#x5904;&#x7406;&#x6570;&#x636E;&#x53D8;&#x5F97;&#x66F4;&#x52A0;&#x5BB9;&#x6613;&#x3002;&#x5B83;&#x6700;&#x521D;&#x662F;OkHttp&#x7684;&#x4E00;&#x4E2A;&#x7EC4;&#x4EF6;&#xFF0C;OkHttp&#x662F;&#x5B89;&#x5353;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x529F;&#x80FD;&#x5F3A;&#x5927;&#x7684;HTTP&#x5BA2;&#x6237;&#x7AEF;&#x3002;&#x5B83;&#x975E;&#x5E38;&#x5065;&#x58EE;&#xFF0C;&#x53EF;&#x4EE5;&#x89E3;&#x51B3;&#x65B0;&#x95EE;&#x9898;&#x3002;</p>
+</blockquote>
+<p>&#x7B80;&#x8A00;&#x4E4B;&#xFF1A;&#x4E3A;&#x4E86;&#x66F4;&#x7B80;&#x5355;&#x7684;&#x8BBF;&#x95EE;&#x3001;&#x5B58;&#x50A8;&#x3001;&#x5904;&#x7406;&#x6570;&#x636E;,&#x57FA;&#x4E8E; <code>java.io</code> &#x548C; <code>java.nio</code> &#x8FDB;&#x884C;&#x4E86;&#x529F;&#x80FD;&#x8865;&#x5145;</p>
+<p>wiki&#x4E2D;&#xFF0C;&#x7B80;&#x5355;&#x4ECB;&#x7ECD;&#x4E86;&#x8BBE;&#x8BA1;&#x4E2D;&#x7684;&#x51E0;&#x4E2A;&#x91CD;&#x70B9;&#x89D2;&#x8272;&#xFF1A;</p>
+<ul>
+<li>ByteStrings and Buffers</li>
+<li>Sources and Sinks</li>
+</ul>
+<p>&#x5206;&#x5C42;&#x67B6;&#x6784;&#x4E2D;&#x76F8;&#x5BF9;&#x6241;&#x5E73;&#x3001;&#x7B80;&#x5355;&#xFF1A;&#x5728;&#x5E94;&#x7528;&#x548C;Java IO &#x4E4B;&#x95F4;&#x589E;&#x52A0;&#x4E86;&#x4E00;&#x5C42;&#xFF0C;&#x5373;OKIO&#x672C;&#x8EAB;&#xFF0C;&#x5305;&#x542B; <code>&#x6570;&#x636E;&#x5C01;&#x88C5;</code> &#x3001; <code>&#x8F93;&#x5165;&#x8F93;&#x51FA;</code> &#x3001; <code>&#x8D85;&#x65F6;&#x673A;&#x5236;</code></p>
+<p>&#x4F53;&#x73B0;&#x5728;&#x7C7B;&#x56FE;&#x4E0A;&#x8FD8;&#x662F;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#x7684;&#xFF1A;</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fedeb0bc77f2443489e62d72e907db32~tplv-k3u1fbpfcp-watermark.image?" alt="&#x56FE;&#x7247;.png"></p>
+<p>&#x5728;&#x5E93;&#x5185;&#x90E8;&#xFF0C;<code>ByteStrings</code> &#x7684;&#x4F7F;&#x7528;&#x4E0D;&#x591A;&#xFF0C;&#x5BF9; <code>Buffer</code> &#x6570;&#x636E;&#x5305;&#x88C5;&#x540E;&#x4E3A;&#x4E0A;&#x5C42;&#x5E94;&#x7528;&#x670D;&#x52A1;&#xFF0C;&#x5355;&#x72EC;&#x62CE;&#x51FA;&#x3002;</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ae6e6dcdbd4e4666b063727b186228ac~tplv-k3u1fbpfcp-watermark.image?" alt="KtsampleOkioDiagramReport2.png"></p>
+<p>&#x4FE1;&#x606F;&#x566A;&#x58F0;&#x6BD4;&#x8F83;&#x591A;&#xFF0C;&#x53BB;&#x6389;&#x529F;&#x80FD;&#x88C5;&#x9970;&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#x540E;&#x8F83;&#x4E3A;&#x7CBE;&#x7B80;&#xFF1A;</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2a3eb53e0844ec8a0116ed6eaa9b380~tplv-k3u1fbpfcp-watermark.image?" alt="KtsampleOkioDiagramReport.png"></p>
+<h2 id="&#x4E0E;java&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x7684;&#x5BF9;&#x6BD4;"><a name="&#x4E0E;java&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x7684;&#x5BF9;&#x6BD4;" class="anchor-navigation-ex-anchor" href="#&#x4E0E;java&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x7684;&#x5BF9;&#x6BD4;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E0E;Java&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x7684;&#x5BF9;&#x6BD4;</h2>
+<p>Java&#x7ECF;&#x5178;IO&#x4E2D;&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x5B9A;&#x4E49;&#x4E3A;Stream&#xFF0C;&#x5728; <a href="https://juejin.cn/post/7231804508082159675" target="_blank">&#x7CFB;&#x5217;&#x6587;&#x7AE0;</a> &#x4E2D;&#x8FDB;&#x884C;&#x4E86;&#x4ECB;&#x7ECD;&#x3002;<em>&#x5B57;&#x7B26;&#x6D41;&#x7C7B;&#x4F3C;&#xFF0C;&#x56FE;&#x7565;</em></p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b37be911d88b4b97a3fa12dc1cc0cb8c~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt=""></p>
+<p>&#x5728;JDK&#x7684;IO&#x6846;&#x67B6;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;&#x88C5;&#x9970;&#x6A21;&#x5F0F;&#x5EFA;&#x7ACB;&#x4E86;&#x89C4;&#x6A21;&#x5E9E;&#x5927;&#x3001;&#x529F;&#x80FD;&#x4E30;&#x5BCC;&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x6D41;&#x3002;&#x4ECE;OKIO&#x7684;&#x4E3B;&#x65E8;&#x51FA;&#x53D1;&#xFF0C;&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#x5176;&#x8BBE;&#x8BA1;&#x8005;&#x5E0C;&#x671B;&#x7C7B;&#x5E93;&#x5C3D;&#x53EF;&#x80FD;&#x7B80;&#x5355;&#x3001;&#x6613;&#x6269;&#x5C55;&#x3001;&#x5185;&#x5EFA;&#x90E8;&#x5206;&#x529F;&#x80FD;&#x8DB3;&#x591F;&#x5B8C;&#x5584;&#x3002;&#x56E0;&#x6B64;&#xFF0C;OKIO&#x4F1A;&#x9002;&#x5F53;&#x7684;&#x53E6;&#x8D77;&#x7089;&#x7076;&#xFF0C;&#x4E0D;&#x4F1A;&#x5168;&#x9762;&#x7684;&#x4F7F;&#x7528;JDK&#x4E2D;&#x7684;Stream&#x3002;</p>
+<p>OKIO&#x4E2D;&#x4F7F;&#x7528;&#x4E86;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x8F93;&#x5165;&#x3001;&#x8F93;&#x51FA;&#xFF0C;&#x5373; <code>Source</code> &#x548C; <code>Sink</code> &#xFF0C;&#x6CE8;&#x610F;&#x6DE1;&#x9EC4;&#x8272;&#x3001;&#x6DE1;&#x7C89;&#x8272;&#x90E8;&#x5206;&#xFF1A;</p>
+<blockquote>
+<p>Sink &#x5728;&#x8BA1;&#x7B97;&#x673A;&#x9886;&#x57DF;&#x6709;&#x7279;&#x5B9A;&#x542B;&#x4E49;&#xFF1A;&#x6307;&#x7A0B;&#x5E8F;&#x6216;&#x8005;&#x7EBF;&#x7A0B;&#xFF0C;&#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x5904;&#x7406;&#x6216;&#x8005;&#x53D1;&#x9001;&#x8FD9;&#x4E9B;&#x6570;&#x636E;</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a2a3eb53e0844ec8a0116ed6eaa9b380~tplv-k3u1fbpfcp-watermark.image?" alt="KtsampleOkioDiagramReport.png"></p>
+</blockquote>
+<h3 id="&#x5DEE;&#x5F02;&#x70B9;"><a name="&#x5DEE;&#x5F02;&#x70B9;" class="anchor-navigation-ex-anchor" href="#&#x5DEE;&#x5F02;&#x70B9;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5DEE;&#x5F02;&#x70B9;</h3>
+<p>&#x5728;wiki&#x4E2D;&#x63D0;&#x5230;&#x5982;&#x4E0B;&#x5185;&#x5BB9;&#xFF1A;</p>
+<blockquote>
+<p>An elegant part of the java.io design is how streams can be layered for transformations like encryption and compression. Okio includes its own stream types called Source and Sink that work like InputStream and OutputStream, but with some key differences:</p>
+<ul>
+<li>Timeouts.</li>
+<li>Easy to implement.</li>
+<li>Easy to use.</li>
+<li>No artificial distinction between byte streams and char streams.</li>
+<li>Easy to test.</li>
+</ul>
+</blockquote>
+<p>&#x7B80;&#x5355;&#x7FFB;&#x8BD1;&#x4E0B;&#xFF0C; Java IO&#x7684;&#x8BBE;&#x8BA1;&#x4E2D;&#x6709;&#x4E00;&#x5904;&#x975E;&#x5E38;&#x4F18;&#x96C5;&#xFF1A;&#x53EF;&#x4EE5;&#x8C03;&#x6574;&#x6D41;&#x7684;&#x5206;&#x5C42;&#x5305;&#x88C5;&#x4EE5;&#x5B9E;&#x73B0;&#x52A0;&#x5BC6;&#x3001;&#x538B;&#x7F29;&#x7B49;&#x8F6C;&#x6362;&#x3002;OKIO&#x5305;&#x542B;&#x81EA;&#x6709;&#x7684;&#x6D41;&#x7C7B;&#x578B; <code>Source</code>&#x3001;<code>Sink</code>&#xFF0C;&#x4E0E;Java&#x7684; <code>InputStream</code>&#x3001; <code>OutputStream</code>
+&#x529F;&#x80FD;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x662F;&#x6709;&#x51E0;&#x70B9;&#x5173;&#x952E;&#x7684;&#x4E0D;&#x540C;&#xFF1A;</p>
+<ul>
+<li>&#x8D85;&#x65F6;&#x673A;&#x5236;</li>
+<li>&#x66F4;&#x5BB9;&#x6613;&#x5B9E;&#x73B0;</li>
+<li>&#x66F4;&#x5BB9;&#x6613;&#x4F7F;&#x7528;</li>
+<li>&#x5B57;&#x8282;&#x6D41;&#x3001;&#x5B57;&#x7B26;&#x6D41;&#x4E4B;&#x95F4;&#x6CA1;&#x6709;&#x4EBA;&#x4E3A;&#x7684;&#x5DEE;&#x5F02;</li>
+<li>&#x66F4;&#x5BB9;&#x6613;&#x6D4B;&#x8BD5;</li>
+</ul>
+<p><strong>&#x4ECE;&#x8F93;&#x5165;&#x65B9;&#x9762;&#x770B;</strong>&#xFF1A;</p>
+<p>&#x5728;JDK&#x4E2D;&#xFF0C;<code>InputStream</code> &#x4F7F;&#x7528;&#x591A;&#x79CD;&#x5C42;&#xFF08;&#x4EE5;&#x53CA;&#x590D;&#x5408;&#x5C42;&#xFF09;&#x5904;&#x7406;&#x79CD;&#x7C7B;&#x7E41;&#x591A;&#x7684;&#x5404;&#x7C7B;&#x6570;&#x636E;</p>
+<ul>
+<li><code>DataInputStream</code> &#x7528;&#x4E8E;&#x5904;&#x7406;&#x57FA;&#x7840;&#x6570;&#x636E;&#x7C7B;&#x578B;</li>
+<li><code>BufferedInputStream</code> &#x5904;&#x7406;&#x7F13;&#x51B2;</li>
+<li><code>InputStreamReader</code> &#x5904;&#x7406;&#x6587;&#x672C;&#x5B57;&#x7B26;&#x4E32;</li>
+</ul>
+<p>&#x800C;OKIO&#x5728;&#x8FD9;&#x4E9B;&#x5C42;&#x4E4B;&#x4E0A;&#x5EFA;&#x7ACB;&#x4E86; <code>BufferedSource</code>&#xFF0C;Source&#x907F;&#x514D;&#x4E86;&#x4E00;&#x4E9B;&#x65E0;&#x6CD5;&#x5B9E;&#x73B0; <code>available()</code> &#x65B9;&#x6CD5;&#x7684;&#x56F0;&#x5883;, &#x8F6C;&#x800C;&#x7531;&#x8C03;&#x7528;&#x8005;&#x6307;&#x5B9A;&#x5B83;&#x4EEC;&#x9700;&#x8981;&#x7684;byte&#x4E2A;&#x6570;</p>
+<p>&#x5728;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;Source&#x65F6;&#xFF0C;&#x4E0D;&#x5FC5;&#x64CD;&#x5FC3; <code>read()</code> &#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x96BE;&#x4EE5;&#x6709;&#x6548;&#x5B9E;&#x73B0;&#x4E14;&#x9700;&#x4ECE;257&#x79CD;&#x503C;&#x4E2D;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; &#xFF0C;<em>&#x6CE8;&#xFF1A;null &amp; [0x00&#xFF0C;0xFF]</em></p>
+<p><strong>&#x4ECE;&#x8F93;&#x51FA;&#x65B9;&#x9762;&#x770B;</strong>&#xFF1A;</p>
+<p>&#x7C7B;&#x4F3C;&#x7684;&#xFF0C;&#x5728;JDK&#x4E2D; <code>OutputStream</code> &#x4F7F;&#x7528;&#x591A;&#x79CD;&#x5C42;&#xFF08;&#x4EE5;&#x53CA;&#x590D;&#x5408;&#x5C42;&#xFF09;&#x5904;&#x7406;&#x79CD;&#x7C7B;&#x7E41;&#x591A;&#x7684;&#x5404;&#x7C7B;&#x6570;&#x636E;&#xFF0C;&#x800C;Sink&#x4E5F;&#x975E;&#x5E38;&#x5BB9;&#x6613;&#x91C7;&#x7528;&#x5206;&#x5C42;&#x8BBE;&#x8BA1;</p>
+<h3 id="&#x76F8;&#x540C;&#x70B9;"><a name="&#x76F8;&#x540C;&#x70B9;" class="anchor-navigation-ex-anchor" href="#&#x76F8;&#x540C;&#x70B9;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x76F8;&#x540C;&#x70B9;</h3>
+<ul>
+<li><code>Source</code> &#x3001; <code>Sink</code> &#x7684;&#x529F;&#x80FD;&#x4E0E; <code>InputStream</code> &#x3001; <code>OutputStream</code> &#x3001; <code>Reader</code> &#x3001; <code>Writer</code> &#x76F8;&#x540C;</li>
+<li>&#x4F7F;&#x7528;&#x65F6;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x88C5;&#x9970;&#x8FFD;&#x52A0;&#x529F;&#x80FD;</li>
+</ul>
+<p>&#x5BF9;&#x4E8E;&#x529F;&#x80FD;&#x76F8;&#x540C;&#xFF0C;wiki&#x4E2D;&#x63D0;&#x5230;&#x5982;&#x4E0B;&#x5185;&#x5BB9;&#xFF1A;</p>
+<blockquote>
+<p>Sources and sinks interoperate with InputStream and OutputStream. You can view any Source as an InputStream, and you can view any InputStream as a Source. Similarly for Sink and OutputStream.</p>
+</blockquote>
+<p>&#x4E0B;&#x6587;&#x7684;Source&#x3001;Sink&#x8BE6;&#x89E3;&#x4E2D;&#xFF0C;&#x89E3;&#x6790;&#x4ED6;&#x4EEC;&#x4E0E;IOStream &#x4E3A;&#x4F55; &#x201C;&#x7B49;&#x4EF7;&#x201D;&#x3001;&#x5982;&#x4F55;&#x201C;&#x4E92;&#x64CD;&#x4F5C;&#x201D;</p>
+<h2 id="source&#x3001;sink-&#x8BE6;&#x89E3;"><a name="source&#x3001;sink-&#x8BE6;&#x89E3;" class="anchor-navigation-ex-anchor" href="#source&#x3001;sink-&#x8BE6;&#x89E3;"><i class="fa fa-link" aria-hidden="true"></i></a>Source&#x3001;Sink &#x8BE6;&#x89E3;</h2>
+<h3 id="source-&#x4F53;&#x7CFB;"><a name="source-&#x4F53;&#x7CFB;" class="anchor-navigation-ex-anchor" href="#source-&#x4F53;&#x7CFB;"><i class="fa fa-link" aria-hidden="true"></i></a>Source &#x4F53;&#x7CFB;</h3>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/55d27ea70bc94f1db95aa190a2b1a567~tplv-k3u1fbpfcp-watermark.image?" alt="KtsampleOkio-sourceDiagramReport.png"></p>
+<p>&#x629B;&#x5F00;&#x529F;&#x80FD;&#x7C7B;&#xFF08;&#x538B;&#x7F29;&#x3001;&#x54C8;&#x5E0C;&#x3001;&#x52A0;&#x5BC6;&#x3001;&#x88C5;&#x9970;&#x7B49;&#xFF09;&#xFF0C;&#x4E3B;&#x8981;&#x5173;&#x6CE8;&#xFF1A;</p>
+<ul>
+<li>Source</li>
+<li>BufferedSource</li>
+<li>Buffer</li>
+<li>RealBufferedSource</li>
+</ul>
+<p>Source&#x7684;&#x5B9A;&#x4E49;&#x4E2D;&#x89C4;&#x4E2D;&#x77E9;&#xFF1A;</p>
+<pre><code>interface Source : Closeable {
+
+  @Throws(IOException::class)
+  fun read(sink: Buffer, byteCount: Long): Long
+
+  fun timeout(): Timeout
+
+  @Throws(IOException::class)
+  override fun close()
+}
+</code></pre><p>&#x5176;&#x4E2D;&#x7684; <code>timeout</code> &#x5C06;&#x5728;&#x4E0B;&#x6587;&#x8D85;&#x65F6;&#x673A;&#x5236;&#x7AE0;&#x8282;&#x4E2D;&#x5C55;&#x5F00;&#x3002;</p>
+<p>BufferedSource&#x63A5;&#x53E3;&#x7EA6;&#x5B9A;&#x4F7F;&#x7528; <code>Buffer</code> &#x627F;&#x63A5;&#x5B9E;&#x9645;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x4E14;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x7CFB;&#x5217;&#x65B9;&#x4FBF;&#x4F7F;&#x7528;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x5982;&#xFF1A;</p>
+<ul>
+<li>&#x8BFB;&#x53D6;Int</li>
+<li>&#x8BFB;&#x53D6;Short</li>
+<li>&#x8BFB;&#x53D6;&#x5B57;&#x7B26;&#x4E32;</li>
+<li>&#x5185;&#x5BB9;&#x9009;&#x62E9; &#x7B49;&#xFF0C;&#x4E0D;&#x505A;&#x7F57;&#x5217;</li>
+</ul>
+<p><code>RealBufferedSource</code> &#x5B9E;&#x73B0;&#x4E86; <code>BufferedSource</code> &#x63A5;&#x53E3;&#xFF0C;&#x4ECE;&#x672C;&#x8D28;&#x4E0A;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x662F; <code>Buffer</code> &#x7C7B;&#x7684;&#x4EE3;&#x7406;&#xFF0C;&#x589E;&#x52A0;&#x4E86;&#x8FB9;&#x754C;&#x6821;&#x9A8C;</p>
+<p><code>Buffer</code> &#x5B9E;&#x73B0;&#x4E86; <code>BufferedSource</code> &#x63A5;&#x53E3;&#xFF0C;&#x5305;&#x542B; <strong>&#x8BFB;</strong> &#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;</p>
+<h3 id="sink-&#x4F53;&#x7CFB;"><a name="sink-&#x4F53;&#x7CFB;" class="anchor-navigation-ex-anchor" href="#sink-&#x4F53;&#x7CFB;"><i class="fa fa-link" aria-hidden="true"></i></a>Sink &#x4F53;&#x7CFB;</h3>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f80924dedbd412894570f28664e99ca~tplv-k3u1fbpfcp-watermark.image?" alt="KtsampleOkio-sinkDiagramReport.png"></p>
+<p>&#x629B;&#x5F00;&#x529F;&#x80FD;&#x7C7B;&#xFF08;&#x538B;&#x7F29;&#x3001;&#x54C8;&#x5E0C;&#x3001;&#x52A0;&#x5BC6;&#x3001;&#x88C5;&#x9970;&#x7B49;&#xFF09;&#xFF0C;&#x4E3B;&#x8981;&#x5173;&#x6CE8;&#xFF1A;</p>
+<ul>
+<li>Sink</li>
+<li>BufferedSink</li>
+<li>Buffer</li>
+<li>RealBufferedSink</li>
+</ul>
+<pre><code>interface Sink : Closeable {
+  @Throws(IOException::class)
+  fun write(source: Buffer, byteCount: Long)
+
+  @Throws(IOException::class)
+  fun flush()
+
+  fun timeout(): Timeout
+
+  @Throws(IOException::class)
+  override fun close()
+}
+</code></pre><p>&#x540C;&#x6837;&#xFF0C;Sink&#x63A5;&#x53E3;&#x7684;&#x5B9A;&#x4E49;&#x4E5F;&#x4E2D;&#x89C4;&#x4E2D;&#x77E9;&#x3002;</p>
+<p>&#x7C7B;&#x4F3C;&#x7684;&#xFF0C;<code>BufferedSink</code> &#x63A5;&#x53E3;&#x7EE7;&#x627F;&#x4E86; <code>Sink</code> &#x63A5;&#x53E3;&#xFF0C;&#x7EA6;&#x5B9A;&#x4E86;&#x4F7F;&#x7528; <code>Buffer</code> &#x627F;&#x63A5;&#x5B9E;&#x9645;&#x6570;&#x636E;, <code>RealBufferedSink</code> &#x662F;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#xFF0C;&#x4ECE;&#x672C;&#x8D28;&#x4E0A;&#x662F; <code>Buffer</code> &#x4F5C;&#x4E3A; <code>Sink</code>
+&#x65F6;&#x7684;&#x4EE3;&#x7406;&#xFF0C;&#x8FDB;&#x884C;&#x4E86;&#x8FB9;&#x754C;&#x6821;&#x9A8C;&#x3002;</p>
+<p><code>Buffer</code> &#x5B9E;&#x73B0;&#x4E86; <code>BufferedSink</code> &#x63A5;&#x53E3;&#xFF0C;&#x5305;&#x542B; <strong>&#x5199;</strong> &#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;</p>
+<h3 id="source&#x3001;sink&#x4E0E;io-stream&#x7684;&#x4E92;&#x64CD;&#x4F5C;"><a name="source&#x3001;sink&#x4E0E;io-stream&#x7684;&#x4E92;&#x64CD;&#x4F5C;" class="anchor-navigation-ex-anchor" href="#source&#x3001;sink&#x4E0E;io-stream&#x7684;&#x4E92;&#x64CD;&#x4F5C;"><i class="fa fa-link" aria-hidden="true"></i></a>Source&#x3001;Sink&#x4E0E;I/O-Stream&#x7684;&#x4E92;&#x64CD;&#x4F5C;</h3>
+<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x8BF7;&#x4ED4;&#x7EC6;&#x601D;&#x8003;&#x4E00;&#x4E0B; <code>&#x4E92;&#x64CD;&#x4F5C;</code> &#xFF0C;&#x5176;&#x672C;&#x8D28;&#x662F;&#xFF1A;<strong>&#x4F7F;&#x7528;&#x4E00;&#x79CD;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684;API&#x53BB;&#x64CD;&#x4F5C;&#x53E6;&#x4E00;&#x79CD;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#x7684;API</strong>, &#x8BF7;&#x7559;&#x610F;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;&#x548C;&#x95F4;&#x63A5;&#x64CD;&#x4F5C;&#xFF0C;&#x56FD;&#x5185;&#x7A0B;&#x5E8F;&#x5458;&#x66F4;&#x4E60;&#x60EF;&#x4F7F;&#x7528; &#x201C;&#x8F6C;&#x201D;&#x3001;&#x201C;&#x8F6C;&#x6362;&#x201D; &#xFF0C;&#x7740;&#x773C;&#x70B9;&#x662F;&#x4ECE;&#x4E00;&#x79CD;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x83B7;&#x5F97;&#x53E6;&#x4E00;&#x79CD;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x3002;</em>
+<em>&#x4ECE;&#x8F6C;&#x6362;&#x89D2;&#x5EA6;&#x601D;&#x8003;&#x65F6;&#xFF0C;&#x5BB9;&#x6613;&#x9677;&#x5165;&#x8BEF;&#x533A;&#xFF0C;&#x679A;&#x4E3E;&#x51FA;&#x6CA1;&#x5FC5;&#x8981;&#x5730;&#x8F6C;&#x6362;&#x60C5;&#x51B5;&#x3001;&#x5FFD;&#x7565;&#x6389;&#x5FC5;&#x8981;&#x7684;&#x95F4;&#x63A5;&#x8F6C;&#x6362;&#x3002;</em></p>
+<p>&#x9996;&#x5148;&#x660E;&#x786E;&#x4E00;&#x70B9;&#xFF1A;<strong>&#x5728;&#x57FA;&#x4E8E;I/O-Stream&#x8FDB;&#x884C;&#x8BFB;&#x5199;&#x65F6;&#xFF0C;InputStreamSource&#x3001; OutputStreamSink &#x662F; I/O-Stream&#x7684;&#x8BFB;&#x5199;&#x4EE3;&#x7406;&#xFF1B; I/O-Stream &#x662F; InputStreamSource&#x3001;
+OutputStreamSink &#x7684;&#x8BFB;&#x5199;&#x59D4;&#x6258;&#x3002;</strong></p>
+<p>&#x4F9D;&#x9760;&#x8F6C;&#x6362;API&#xFF1A;</p>
+<pre><code>fun InputStream.source(): Source = InputStreamSource(this, Timeout())
+fun OutputStream.sink(): Sink = OutputStreamSink(this, Timeout())
+</code></pre><p>&#x6392;&#x9664;&#x6B64; <strong>&#x201C;&#x57FA;&#x672C;&#x60C5;&#x51B5;1&#x201D;</strong> &#xFF0C;&#x8FD8;&#x6709;&#x4E00;&#x79CD; <strong>&#x57FA;&#x672C;&#x60C5;&#x51B5;2</strong> &#xFF0C;&#x5373;&#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x4F7F;&#x7528;I/O-Stream&#x7684;API&#x53BB;&#x5B9E;&#x8D28;&#x64CD;&#x4F5C;OKIO&#x3002;&#x4E0D;&#x96BE;&#x60F3;&#x8C61;&#xFF0C;&#x6B64;&#x65F6;&#x5FC5;&#x7136;&#x5B58;&#x5728;&#x7528;OKIO&#x5B9E;&#x73B0;&#x7684;&#x5B9A;&#x5236;&#x4E1A;&#x52A1;&#xFF0C;&#x5373;&#x6570;&#x636E;&#x7684;&#x5B9E;&#x8D28;&#x5904;&#x7406;&#xFF0C;OKIO&#x9009;&#x62E9;&#x4E86; <code>BufferedSink</code>
+&#x548C; <code>BufferedSource</code> &#x800C;&#x975E; <code>Sink</code> &#x3001; <code>Source</code>&#xFF0C;&#x6B64;&#x65F6; <code>BufferedSink</code> &#x548C; <code>BufferedSource</code> &#x662F; I/O-Stream &#x7684;&#x4E1A;&#x52A1;&#x59D4;&#x6258;&#x3002;</p>
+<p>API&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>interface BufferedSink : Sink, WritableByteChannel {
+   //... ignore
+
+  /** Returns an output stream that writes to this sink. */
+  fun outputStream(): OutputStream
+}
+</code></pre><pre><code>interface BufferedSource : Source, ReadableByteChannel {
+  //... ignore
+
+  /** Returns an input stream that reads from this source. */
+  fun inputStream(): InputStream
+}
+</code></pre><h4 id="&#x66F4;&#x590D;&#x6742;&#x7684;&#x60C5;&#x51B5;----&#x57FA;&#x4E8E;&#x57FA;&#x672C;&#x60C5;&#x51B5;&#x52A0;&#x5404;&#x7C7B;&#x4E1A;&#x52A1;&#x7684;&#x7EC4;&#x5408;"><a name="&#x66F4;&#x590D;&#x6742;&#x7684;&#x60C5;&#x51B5;----&#x57FA;&#x4E8E;&#x57FA;&#x672C;&#x60C5;&#x51B5;&#x52A0;&#x5404;&#x7C7B;&#x4E1A;&#x52A1;&#x7684;&#x7EC4;&#x5408;" class="anchor-navigation-ex-anchor" href="#&#x66F4;&#x590D;&#x6742;&#x7684;&#x60C5;&#x51B5;----&#x57FA;&#x4E8E;&#x57FA;&#x672C;&#x60C5;&#x51B5;&#x52A0;&#x5404;&#x7C7B;&#x4E1A;&#x52A1;&#x7684;&#x7EC4;&#x5408;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x66F4;&#x590D;&#x6742;&#x7684;&#x60C5;&#x51B5; -- &#x57FA;&#x4E8E;&#x57FA;&#x672C;&#x60C5;&#x51B5;&#x52A0;&#x5404;&#x7C7B;&#x4E1A;&#x52A1;&#x7684;&#x7EC4;&#x5408;</h4>
+<p>&#x6392;&#x9664;&#x6389;&#x8FD9;&#x4E9B;&#x57FA;&#x672C;&#x60C5;&#x51B5;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x9700;&#x8981;&#x4E92;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x610F;&#x5473;&#x7740;&#x5B58;&#x5728;&#x4E24;&#x5957;&#x6A21;&#x5757;&#xFF0C;&#x4E00;&#x5957;&#x4F7F;&#x7528;Okio&#x7684;Source&#x3001;Sink&#xFF0C;&#x4E00;&#x5957;&#x4F7F;&#x7528;Java&#x7684;InputStream&#x3001;OutputStream&#x3002;&#x5047;&#x5B9A;&#x4F7F;&#x7528;Sink&#x3001;Source&#x7684;&#x6A21;&#x5757;&#x4E3A;A&#xFF0C;&#x4F7F;&#x7528;I/O-Stream&#x7684;&#x6A21;&#x5757;&#x4E3A;B&#x3002;</p>
+<p>&#x4EE5;&#x5199;&#x4E3A;&#x4F8B;&#xFF0C;&#x8FDB;&#x884C;&#x5206;&#x6790;&#xFF0C;&#x6709;&#x4E24;&#x79CD;&#x53EF;&#x80FD;&#xFF1A;</p>
+<ul>
+<li>&#x64CD;&#x4F5C;&#x6A21;&#x5757;A&#xFF0C;&#x6570;&#x636E;&#x4ECE;A&#x6D41;&#x5411;B&#xFF0C;&#x8FDB;&#x800C;&#x5199;&#x5165; (&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;B&#x5B58;&#x5728;&#x4E1A;&#x52A1;&#x5B9A;&#x5236;&#xFF0C;&#x5426;&#x5219;&#x662F;&#x57FA;&#x672C;&#x60C5;&#x51B5;1)</li>
+<li>&#x64CD;&#x4F5C;&#x6A21;&#x5757;B&#xFF0C;&#x6570;&#x636E;&#x4ECE;B&#x6D41;&#x5411;A&#xFF0C;&#x8FDB;&#x800C;&#x5199;&#x5165;&#xFF08;A&#x6700;&#x7EC8;&#x4F7F;&#x7528;&#x4E86;&#x57FA;&#x672C;&#x60C5;&#x51B5;1&#xFF0C;&#x6B64;&#x60C5;&#x51B5;&#x5C5E;&#x4E8E;&#x57FA;&#x672C;&#x60C5;&#x51B5;2&#x7684;&#x590D;&#x6742;&#x7248;&#xFF09;</li>
+</ul>
+<h5 id="1-&#x6570;&#x636E;&#x4ECE;a&#x6D41;&#x5411;b&#xFF0C;&#x8FDB;&#x800C;&#x5199;&#x5165;"><a name="1-&#x6570;&#x636E;&#x4ECE;a&#x6D41;&#x5411;b&#xFF0C;&#x8FDB;&#x800C;&#x5199;&#x5165;" class="anchor-navigation-ex-anchor" href="#1-&#x6570;&#x636E;&#x4ECE;a&#x6D41;&#x5411;b&#xFF0C;&#x8FDB;&#x800C;&#x5199;&#x5165;"><i class="fa fa-link" aria-hidden="true"></i></a>1. &#x6570;&#x636E;&#x4ECE;A&#x6D41;&#x5411;B&#xFF0C;&#x8FDB;&#x800C;&#x5199;&#x5165;</h5>
+<p>&#x5173;&#x6CE8;A&#x6A21;&#x5757;&#x7684;&#x6570;&#x636E;&#x51FA;&#x53E3;&#xFF0C;A&#x6A21;&#x5757;&#x53EF;&#x80FD;&#x7684;&#x8BBE;&#x8BA1;</p>
+<ul>
+<li>A1:&#x63A5;&#x53D7;&#x4E00;&#x4E2A;Sink&#x5B9E;&#x4F8B;&#xFF0C;&#x6216;&#x8005;&#x63A5;&#x53D7;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x6784;&#x5EFA;Sink&#x5B9E;&#x4F8B;</li>
+<li>A2:&#x5BF9;&#x5916;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;Source&#x5B9E;&#x4F8B;&#xFF0C;&#x7531;&#x5916;&#x754C;&#x81EA;&#x884C;&#x6D88;&#x8D39; -- <em>&#x8FD9;&#x79CD;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#x6BD4;&#x8F83;&#x5947;&#x8469;</em></li>
+<li>&#x63A5;&#x53D7;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x63D0;&#x4F9B;&#x5B9E;&#x9645;&#x6570;&#x636E; -- &#x4E0D;&#x5C5E;&#x4E8E;&#x5B9E;&#x9645;&#x8BA8;&#x8BBA;&#x8303;&#x7574;&#xFF0C;&#x5FFD;&#x7565;</li>
+</ul>
+<p>&#x5173;&#x6CE8;B&#x6A21;&#x5757;&#x7684;&#x6570;&#x636E;&#x5165;&#x53E3;&#xFF0C;B&#x6A21;&#x5757;&#x53EF;&#x80FD;&#x7684;&#x8BBE;&#x8BA1;</p>
+<ul>
+<li>B1:&#x63A5;&#x53D7;&#x4E00;&#x4E2A;InputStream&#x5B9E;&#x4F8B;&#xFF0C;&#x6216;&#x8005;&#x63A5;&#x53D7;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x6784;&#x5EFA;InputStream&#x5B9E;&#x4F8B;&#xFF0C;&#x6D88;&#x8D39;&#x5176;&#x6570;&#x636E; -- <em>&#x8FD9;&#x79CD;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#x6BD4;&#x8F83;&#x5947;&#x8469;</em></li>
+<li>B2:&#x5BF9;&#x5916;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;OutputStream&#x5B9E;&#x4F8B;&#xFF0C;&#x7531;&#x5916;&#x754C;&#x63A7;&#x5236;&#x5B9E;&#x9645;&#x5199;</li>
+<li>&#x66B4;&#x9732;&#x4F7F;&#x7528;ByteArray&#x7B49;&#x5199;&#x5165;API -- &#x4E0D;&#x5C5E;&#x4E8E;&#x5B9E;&#x9645;&#x8BA8;&#x8BBA;&#x8303;&#x7574;&#xFF0C;&#x5FFD;&#x7565;</li>
+</ul>
+<h6 id="a1b1-&#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;"><a name="a1b1-&#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;" class="anchor-navigation-ex-anchor" href="#a1b1-&#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;"><i class="fa fa-link" aria-hidden="true"></i></a>A1+B1 &#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;</h6>
+<blockquote>
+<p>A1:&#x63A5;&#x53D7;&#x4E00;&#x4E2A;Sink&#x5B9E;&#x4F8B;&#xFF0C;&#x6216;&#x8005;&#x63A5;&#x53D7;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x6784;&#x5EFA;Sink&#x5B9E;&#x4F8B;</p>
+<p>B1:&#x63A5;&#x53D7;&#x4E00;&#x4E2A;InputStream&#x5B9E;&#x4F8B;&#xFF0C;&#x6216;&#x8005;&#x63A5;&#x53D7;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x6784;&#x5EFA;InputStream&#x5B9E;&#x4F8B;&#xFF0C;&#x6D88;&#x8D39;&#x5176;&#x6570;&#x636E;</p>
+</blockquote>
+<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">demo</span><span class="hljs-params">()</span> {</span>
+        <span class="hljs-comment">//&#x4F7F;&#x7528;Sink&#x3001;Source&#x7684;&#x6A21;&#x5757;A</span>
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> moduleA</span> = A()
+
+        <span class="hljs-comment">//&#x4F7F;&#x7528;I/O-Stream&#x7684;&#x6A21;&#x5757;B</span>
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> moduleB</span> = B()
+
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> buffer</span> = Buffer()
+
+        <span class="hljs-comment">//&#x8BBE;&#x7F6E;&#x6A21;&#x5757;A&#x7684;&#x6570;&#x636E;&#x51FA;&#x53E3;</span>
+        moduleA.setSink(buffer)
+        <span class="hljs-comment">//&#x8BBE;&#x7F6E;&#x6A21;&#x5757;B&#x7684;&#x6570;&#x636E;&#x5165;&#x53E3;</span>
+        moduleB.setInputStream(buffer.inputStream())
+
+        <span class="hljs-comment">//&#x5047;&#x5B9A;&#x6700;&#x7EC8;&#x5199;&#x5165;file&#xFF1A;</span>
+        moduleB.setOutputFile(File(<span class="hljs-string">&quot;/target.txt&quot;</span>))
+
+        <span class="hljs-comment">//&#x8C03;&#x7528;&#x6A21;&#x5757;A&#x5F00;&#x59CB;&#x5199;&#x5165;</span>
+        moduleA.write(<span class="hljs-string">&quot;some thing&quot;</span>)
+    }
+}
+</code></pre>
+<p>&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x9700;&#x8981;&#x5728;Buffer&#x533A;&#x7684;&#x6570;&#x636E;&#x88AB;&#x6D88;&#x8D39;&#x540E;&#xFF0C;&#x8FDB;&#x884C;&#x6E05;&#x7406;&#xFF0C;&#x4EE5;&#x907F;&#x514D;&#x5185;&#x5B58;&#x5360;&#x7528;&#x8D8A;&#x6765;&#x8D8A;&#x591A;&#xFF0C;&#x800C;&#x56E0;&#x4E3A;B&#x6A21;&#x5757;&#x7684;&#x5947;&#x8469;&#x8BBE;&#x8BA1;&#xFF0C;&#x5F80;&#x5F80;&#x5E26;&#x5165;&#x591A;&#x7EBF;&#x7A0B;&#x95EE;&#x9898;&#xFF0C;&#x7F16;&#x7A0B;&#x96BE;&#x5EA6;&#x8F83;&#x5927;</p>
+<h6 id="a1b2-&#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;"><a name="a1b2-&#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;" class="anchor-navigation-ex-anchor" href="#a1b2-&#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;"><i class="fa fa-link" aria-hidden="true"></i></a>A1+B2 &#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;</h6>
+<blockquote>
+<p>A1:&#x63A5;&#x53D7;&#x4E00;&#x4E2A;Sink&#x5B9E;&#x4F8B;&#xFF0C;&#x6216;&#x8005;&#x63A5;&#x53D7;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x6784;&#x5EFA;Sink&#x5B9E;&#x4F8B;</p>
+<p>B2:&#x5BF9;&#x5916;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;OutputStream&#x5B9E;&#x4F8B;&#xFF0C;&#x7531;&#x5916;&#x754C;&#x63A7;&#x5236;&#x5B9E;&#x9645;&#x5199;</p>
+</blockquote>
+<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">demo</span><span class="hljs-params">()</span> {</span>
+        <span class="hljs-comment">//&#x4F7F;&#x7528;Sink&#x3001;Source&#x7684;&#x6A21;&#x5757;A</span>
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> moduleA</span> = A()
+
+        <span class="hljs-comment">//&#x4F7F;&#x7528;I/O-Stream&#x7684;&#x6A21;&#x5757;B </span>
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> moduleB</span> = B()
+        <span class="hljs-comment">//&#x5047;&#x5B9A;&#x5176;&#x5199;&#x5165;&#x65B9;&#x5F0F;&#x4E3A;&#xFF1A;moduleB.writer().write(&quot;xxx&quot;)&#xFF0C; moduleB.writer()&#x83B7;&#x5F97;OutputStream&#x5B9E;&#x4F8B;</span>
+        <span class="hljs-comment">//&#x5047;&#x5B9A;&#x6700;&#x7EC8;&#x5199;&#x5165;file&#xFF1A;</span>
+        moduleB.setOutputFile(File(<span class="hljs-string">&quot;/target.txt&quot;</span>))
+
+        <span class="hljs-comment">//&#x4F7F;&#x7528;B&#x7684;&#x5165;&#x53E3;&#xFF0C;&#x5957;&#x63A5;&#x5230;&#x6A21;&#x5757;A&#x7684;&#x6570;&#x636E;&#x51FA;&#x53E3;</span>
+        moduleA.setSink(moduleB.writer().sink())
+
+        <span class="hljs-comment">//&#x8C03;&#x7528;&#x6A21;&#x5757;A&#x5F00;&#x59CB;&#x5199;&#x5165;</span>
+        moduleA.write(<span class="hljs-string">&quot;some thing&quot;</span>)
+    }
+}
+</code></pre>
+<h6 id="a2b1-&#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;"><a name="a2b1-&#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;" class="anchor-navigation-ex-anchor" href="#a2b1-&#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;"><i class="fa fa-link" aria-hidden="true"></i></a>A2+B1 &#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;</h6>
+<blockquote>
+<p>A2:&#x5BF9;&#x5916;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;Source&#x5B9E;&#x4F8B;&#xFF0C;&#x7531;&#x5916;&#x754C;&#x81EA;&#x884C;&#x6D88;&#x8D39;</p>
+<p>B1:&#x63A5;&#x53D7;&#x4E00;&#x4E2A;InputStream&#x5B9E;&#x4F8B;&#xFF0C;&#x6216;&#x8005;&#x63A5;&#x53D7;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x6784;&#x5EFA;InputStream&#x5B9E;&#x4F8B;&#xFF0C;&#x6D88;&#x8D39;&#x5176;&#x6570;&#x636E;</p>
+</blockquote>
+<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">demo</span><span class="hljs-params">()</span> {</span>
+        <span class="hljs-comment">//&#x4F7F;&#x7528;Sink&#x3001;Source&#x7684;&#x6A21;&#x5757;A</span>
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> moduleA</span> = A()
+
+        <span class="hljs-comment">//&#x4F7F;&#x7528;I/O-Stream&#x7684;&#x6A21;&#x5757;B </span>
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> moduleB</span> = B()
+        <span class="hljs-comment">//&#x5047;&#x5B9A;&#x6700;&#x7EC8;&#x5199;&#x5165;file&#xFF1A;</span>
+        moduleB.setOutputFile(File(<span class="hljs-string">&quot;/target.txt&quot;</span>))
+
+        <span class="hljs-comment">//&#x6B64;&#x60C5;&#x51B5;&#x9700;&#x8981;moduleA.getSource() &#x63D0;&#x4F9B; BufferedSource&#x5B9E;&#x4F8B;&#xFF0C;</span>
+        <span class="hljs-comment">//&#x5982;&#x679C;&#x5B9E;&#x73B0;&#x4E86;Sink&#x800C;&#x5E76;&#x672A;&#x5B9E;&#x73B0;BufferedSource, &#x9700;&#x8981;&#x6A21;&#x5757;&#x63D0;&#x4F9B;&#x8005;&#x81EA;&#x5DF1;&#x8003;&#x8651;&#x63A5;&#x53E3;&#x7CFB;&#x7EDF;&#x7684;&#x8F6C;&#x6362;</span>
+        moduleB.setInputStream(moduleA.getSource().inputStream())
+
+        <span class="hljs-comment">//&#x8C03;&#x7528;&#x6A21;&#x5757;A&#x5F00;&#x59CB;&#x5199;&#x5165;</span>
+        moduleA.write(<span class="hljs-string">&quot;some thing&quot;</span>)
+    }
+}
+</code></pre>
+<h6 id="a2b2-&#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;"><a name="a2b2-&#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;" class="anchor-navigation-ex-anchor" href="#a2b2-&#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;"><i class="fa fa-link" aria-hidden="true"></i></a>A2+B2 &#x60C5;&#x51B5;&#x7684;&#x4F2A;&#x4EE3;&#x7801;</h6>
+<blockquote>
+<p>A2:&#x5BF9;&#x5916;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;Source&#x5B9E;&#x4F8B;&#xFF0C;&#x7531;&#x5916;&#x754C;&#x81EA;&#x884C;&#x6D88;&#x8D39;</p>
+<p>B2:&#x5BF9;&#x5916;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;OutputStream&#x5B9E;&#x4F8B;&#xFF0C;&#x7531;&#x5916;&#x754C;&#x63A7;&#x5236;&#x5B9E;&#x9645;&#x5199;</p>
+</blockquote>
+<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">demo</span><span class="hljs-params">()</span> {</span>
+        <span class="hljs-comment">//&#x4F7F;&#x7528;Sink&#x3001;Source&#x7684;&#x6A21;&#x5757;A</span>
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> moduleA</span> = A()
+
+        <span class="hljs-comment">//&#x4F7F;&#x7528;I/O-Stream&#x7684;&#x6A21;&#x5757;B </span>
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> moduleB</span> = B()
+        <span class="hljs-comment">//&#x5047;&#x5B9A;&#x6700;&#x7EC8;&#x5199;&#x5165;file&#xFF1A;</span>
+        moduleB.setOutputFile(File(<span class="hljs-string">&quot;/target.txt&quot;</span>))
+
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> resultFromA</span> = moduleA.getSource()
+
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> buffer</span> = Buffer()
+        <span class="hljs-keyword">while</span> (resultFromA.read(buffer, count) != <span class="hljs-number">-1</span>) {
+            buffer.writeTo(moduleB.writer())
+            buffer.clear()
+        }
+
+        <span class="hljs-comment">//&#x8C03;&#x7528;&#x6A21;&#x5757;A&#x5F00;&#x59CB;&#x5199;&#x5165;</span>
+        moduleA.write(<span class="hljs-string">&quot;some thing&quot;</span>)
+    }
+}
+</code></pre>
+<h5 id="2-&#x6570;&#x636E;&#x4ECE;b&#x6D41;&#x5411;a&#xFF0C;&#x8FDB;&#x800C;&#x5199;&#x5165;"><a name="2-&#x6570;&#x636E;&#x4ECE;b&#x6D41;&#x5411;a&#xFF0C;&#x8FDB;&#x800C;&#x5199;&#x5165;" class="anchor-navigation-ex-anchor" href="#2-&#x6570;&#x636E;&#x4ECE;b&#x6D41;&#x5411;a&#xFF0C;&#x8FDB;&#x800C;&#x5199;&#x5165;"><i class="fa fa-link" aria-hidden="true"></i></a>2. &#x6570;&#x636E;&#x4ECE;B&#x6D41;&#x5411;A&#xFF0C;&#x8FDB;&#x800C;&#x5199;&#x5165;</h5>
+<p>&#x5173;&#x6CE8;A&#x6A21;&#x5757;&#x7684;&#x6570;&#x636E;&#x5165;&#x53E3;&#xFF0C;A&#x6A21;&#x5757;&#x53EF;&#x80FD;&#x7684;&#x8BBE;&#x8BA1;</p>
+<ul>
+<li>A1:&#x63A5;&#x53D7;&#x4E00;&#x4E2A;Source&#x5B9E;&#x4F8B;&#xFF0C;&#x6216;&#x8005;&#x63A5;&#x53D7;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x6784;&#x5EFA;Source&#x5B9E;&#x4F8B; -- <em>&#x8FD9;&#x79CD;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#x6BD4;&#x8F83;&#x5947;&#x8469;&#xFF0C;&#x5728;&#x4E3B;&#x52A8;&#x62E5;&#x62B1;&#x590D;&#x6742;</em></li>
+<li>A2:&#x5BF9;&#x5916;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;Sink&#x5B9E;&#x4F8B;&#xFF0C;&#x7531;&#x5916;&#x754C;&#x81EA;&#x884C;&#x63A7;&#x5236;&#x5199;&#x5165;</li>
+<li>&#x66B4;&#x9732;&#x4F7F;&#x7528;ByteArray&#x7B49;&#x5199;&#x5165;API -- &#x4E0D;&#x5C5E;&#x4E8E;&#x5B9E;&#x9645;&#x8BA8;&#x8BBA;&#x8303;&#x7574;&#xFF0C;&#x5FFD;&#x7565;</li>
+</ul>
+<p>&#x5173;&#x6CE8;B&#x6A21;&#x5757;&#x7684;&#x6570;&#x636E;&#x51FA;&#x53E3;&#xFF0C;B&#x6A21;&#x5757;&#x53EF;&#x80FD;&#x7684;&#x8BBE;&#x8BA1;</p>
+<ul>
+<li>B1:&#x63A5;&#x53D7;&#x4E00;&#x4E2A;OutputStream&#x5B9E;&#x4F8B;&#xFF0C;&#x6216;&#x8005;&#x63A5;&#x53D7;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x6784;&#x5EFA;OutputStream&#x5B9E;&#x4F8B;</li>
+<li>B2:&#x5BF9;&#x5916;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;InputStream&#x5B9E;&#x4F8B;&#xFF0C;&#x7531;&#x5916;&#x754C;&#x81EA;&#x884C;&#x6D88;&#x8D39;&#x6570;&#x636E; -- <em>&#x8FD9;&#x79CD;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#x6BD4;&#x8F83;&#x5947;&#x8469;</em></li>
+<li>&#x63A5;&#x53D7;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x63D0;&#x4F9B;&#x5B9E;&#x9645;&#x6570;&#x636E; -- &#x4E0D;&#x5C5E;&#x4E8E;&#x5B9E;&#x9645;&#x8BA8;&#x8BBA;&#x8303;&#x7574;&#xFF0C;&#x5FFD;&#x7565;</li>
+</ul>
+<p><em>&#x7B80;&#x5355;&#x5F52;&#x7EB3;&#x4F2A;&#x4EE3;&#x7801;&#x5982;&#x4E0B;</em></p>
+<pre><code>//A1 + B1 &#x540C;&#x6837;&#x4F1A;&#x6709;&#x5185;&#x5B58;&#x91CA;&#x653E;&#x3001;&#x591A;&#x7EBF;&#x7A0B;&#x7F16;&#x7A0B;&#x96BE;&#x5EA6;&#x95EE;&#x9898;
+val buffer = Buffer()
+moduleA.setSource(buffer)
+moduleB.setWriter(buffer.outputStream())
+
+//A1 + B2
+// moduleB.getResult() &#x8FD4;&#x56DE;InputStream&#x5B9E;&#x4F8B;
+moduleA.setSource(moduleB.getResult().source())
+
+//A2 + B1
+moduleB.setWriter(moduleA.getSink().outputStream())
+
+//A2 + B2
+val resultFromB:InputStream = moduleB.getResult()
+val buffer = ByteArray(1024)
+while ((len = in.read(buffer))!=-1) {
+    moduleA.sink().write(buffer,0,len)
+}
+</code></pre><p>&#x5F88;&#x663E;&#x7136;&#xFF0C;OKIO&#x63D0;&#x4F9B;&#x7684;&#x8F6C;&#x5316;&#x65B9;&#x5F0F;&#xFF0C;&#x80FD;&#x591F;&#x6EE1;&#x8DB3;&#x6B63;&#x5E38;&#x7684;&#x8BBE;&#x8BA1;&#xFF0C;&#x800C;&#x5269;&#x4F59;&#x7684;&#x5947;&#x8469;&#x8BBE;&#x8BA1;&#xFF0C;&#x81EA;&#x7136;&#x9700;&#x8981;&#x8BBE;&#x8BA1;&#x8005;&#x81EA;&#x884C;&#x5904;&#x7406;&#x5185;&#x5B58;&#x3001;&#x591A;&#x7EBF;&#x7A0B;&#x95EE;&#x9898;&#x3002;</p>
+<p><strong>&#x800C;&#x8BFB;&#x7684;&#x4F8B;&#x5B50;&#x4E5F;&#x662F;&#x7C7B;&#x4F3C;&#x7684;&#xFF0C;&#x8003;&#x8651;&#x5230;&#x7BC7;&#x5E45;&#x5DF2;&#x7ECF;&#x5F88;&#x957F;&#xFF0C;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x53EF;&#x4EE5;&#x81EA;&#x884C;&#x68B3;&#x7406;&#x3002;</strong></p>
+<p><strong>&#x5728;&#x8BFB;&#x548C;&#x5199;&#x90FD;&#x80FD;&#x591F;&#x5B8C;&#x6210;&#x4E24;&#x5957;&#x7CFB;&#x7EDF;&#x7684;&#x4E92;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x5373;&#x53EF;&#x968F;&#x5FC3;&#x968F;&#x610F;&#x5730;&#x6784;&#x5EFA;&#x51FA;&#x66F4;&#x52A0;&#x590D;&#x6742;&#x7684;&#x5C42;&#x53E0;layer&#xFF0C;&#x4EA6;&#x4E0D;&#x518D;&#x5C55;&#x5F00;</strong></p>
+<h2 id="buffer-&#x8BE6;&#x89E3;"><a name="buffer-&#x8BE6;&#x89E3;" class="anchor-navigation-ex-anchor" href="#buffer-&#x8BE6;&#x89E3;"><i class="fa fa-link" aria-hidden="true"></i></a>Buffer &#x8BE6;&#x89E3;</h2>
+<p>&#x987E;&#x540D;&#x601D;&#x4E49;&#xFF0C;OKIO &#x4E2D;&#x7684; Buffer &#x662F;&#x7279;&#x610F;&#x8BBE;&#x8BA1;&#x7684;&#x7F13;&#x51B2;&#x533A;&#x3002;&#x5B83;&#x5728; <code>&#x6570;&#x636E;&#x5904;&#x7406;</code> &#x548C; <code>&#x6570;&#x636E;&#x8BFB;&#x5199;</code> &#x4E4B;&#x95F4;&#x8FDB;&#x884C;&#x7F13;&#x51B2;</p>
+<p><code>class Buffer : BufferedSource, BufferedSink, Cloneable, ByteChannel</code></p>
+<p>&#x5B83;&#x7684;&#x8BBE;&#x8BA1;&#x610F;&#x56FE;&#x53EF;&#x4EE5;&#x6982;&#x62EC;&#x4E3A;&#x4E09;&#x4E2A;&#x65B9;&#x9762;&#xFF0C;&#x8FD9;&#x4E09;&#x65B9;&#x9762;&#x5E76;&#x4E0D;&#x5B64;&#x7ACB;&#x4E92;&#x65A5;&#xFF1A;</p>
+<ul>
+<li>&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x8BFB;&#x5199;&#x7F13;&#x51B2;&#x533A;</li>
+<li>&#x66F4;&#x65B9;&#x4FBF;&#x7684;API</li>
+<li>&#x548C; Java IO &#x4E92;&#x64CD;&#x4F5C;</li>
+</ul>
+<blockquote>
+<p>&#x66F4;&#x65B9;&#x4FBF;&#x7684;API&#xFF1A;&#x7CFB;&#x5217;&#x6587;&#x7AE0;&#x4E2D;&#x63D0;&#x5230;&#x8FC7;&#xFF0C;&#x6570;&#x636E;&#x7684;&#x5B9E;&#x8D28;&#x5185;&#x5BB9;&#x53EF;&#x4EE5;&#x7F16;&#x7801;&#x6210;ByteArray&#xFF0C;Buffer&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x65B9;&#x4FBF;&#x7684;&#x7F16;&#x89E3;&#x7801;</p>
+<p>&#x548C; Java IO &#x4E92;&#x64CD;&#x4F5C;&#xFF1A;&#x9664;&#x4E86;&#x4E0A;&#x6587;&#x4E2D;&#x5DF2;&#x7ECF;&#x63D0;&#x53CA;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x8FD8;&#x5305;&#x542B; <code>readFrom(input: InputStream)</code> , <code>fun writeTo(out: OutputStream, byteCount: Long = size)</code> &#x7B49;API&#xFF0C;&#x8FD9;&#x4E9B;&#x4E5F;&#x53EF;&#x4EE5;&#x7B97;&#x4E3A;&#x66F4;&#x65B9;&#x4FBF;&#x7684;API</p>
+<p>Buffer&#x5B9E;&#x73B0;&#x4E86;ByteChannel&#x63A5;&#x53E3;&#xFF0C;&#x53EF;&#x4EE5;&#x9002;&#x5E94;NIO&#x7684;&#x8BBE;&#x8BA1;&#x4F53;&#x7CFB;&#xFF0C;&#x5F53;&#x7136;&#x6B64;&#x65F6;&#x5B83;&#x53C8;&#x662F;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x8BFB;&#x5199;&#x7F13;&#x51B2;&#x533A;</p>
+</blockquote>
+<p>API&#x65B9;&#x9762;&#xFF0C;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x53EF;&#x81EA;&#x884C;&#x7814;&#x8BFB;&#x4EE3;&#x7801;&#xFF0C;&#x5185;&#x5BB9;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#x3002;&#x8BA9;&#x6211;&#x4EEC;&#x5C06;&#x7CBE;&#x529B;&#x653E;&#x5728; <code>&#x7F13;&#x51B2;&#x533A;</code> &#x4E0A;&#xFF0C;&#x770B;&#x4E00;&#x770B;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x3002;</p>
+<h3 id="&#x6838;&#x5FC3;&#x5B9E;&#x73B0;"><a name="&#x6838;&#x5FC3;&#x5B9E;&#x73B0;" class="anchor-navigation-ex-anchor" href="#&#x6838;&#x5FC3;&#x5B9E;&#x73B0;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6838;&#x5FC3;&#x5B9E;&#x73B0;</h3>
+<p>&#x79FB;&#x9664;&#x6389;&#x5E72;&#x6270;&#x4EE3;&#x7801;&#x540E;, &#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#x5B83;&#x7684;&#x91CD;&#x70B9;&#x4E3A; <code>head: Segment</code> &#xFF0C;&#x4EE3;&#x7801;&#x7B80;&#x5355;&#x626B;&#x4E00;&#x773C;&#x6709;&#x4E2A;&#x5370;&#x8C61;&#x5373;&#x53EF;&#xFF1A;</p>
+<pre><code>class Buffer : /*BufferedSource, BufferedSink,*/ Cloneable, ByteChannel {
+  internal var head: Segment? = null
+
+  var size: Long = 0L
+    internal set
+
+  @Throws(EOFException::class)
+  override fun readByte(): Byte = commonReadByte()
+  //&#x548C;&#x4E0B;&#x9762;&#x7684;read&#x7C7B;&#x4F3C;&#xFF0C;&#x4EC5;&#x4F5C;&#x4E3A;Source&#x7684;API&#x793A;&#x4F8B;
+
+  @Throws(IOException::class)
+  override fun read(sink: ByteBuffer): Int {
+    val s = head ?: return -1
+
+    val toCopy = minOf(sink.remaining(), s.limit - s.pos)
+    sink.put(s.data, s.pos, toCopy)
+
+    s.pos += toCopy
+    size -= toCopy.toLong()
+
+    if (s.pos == s.limit) {
+      head = s.pop()
+      SegmentPool.recycle(s)
+    }
+
+    return toCopy
+  }
+
+  override fun write(source: ByteArray): Buffer = commonWrite(source)
+  //&#x4E5F;&#x7528;&#x5230;&#x4E86;writableSegment(1)&#xFF0C;&#x53EF;&#x7C7B;&#x6BD4;&#x4E0B;&#x9762;&#x7684;write&#x4EE3;&#x7801;&#xFF0C;&#x4EC5;&#x7559;&#x4F5C;Sink&#x7684;API&#x793A;&#x4F8B;
+
+  @Throws(IOException::class)
+  override fun write(source: ByteBuffer): Int {
+    val byteCount = source.remaining()
+    var remaining = byteCount
+    while (remaining &gt; 0) {
+      val tail = writableSegment(1)
+
+      val toCopy = minOf(remaining, Segment.SIZE - tail.limit)
+      source.get(tail.data, tail.limit, toCopy)
+
+      remaining -= toCopy
+      tail.limit += toCopy
+    }
+
+    size += byteCount.toLong()
+    return byteCount
+  }
+}
+</code></pre><p>&#x800C;Segment&#x662F;&#x4EC0;&#x4E48;&#x5462;&#xFF1F;&#x662F;&#x4E00;&#x4E2A;&#x94FE;&#x8868;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF1A;</p>
+<pre><code>internal class Segment {
+  @JvmField val data: ByteArray
+  @JvmField var pos: Int = 0
+  @JvmField var limit: Int = 0
+  @JvmField var shared: Boolean = false
+  @JvmField var owner: Boolean = false
+  @JvmField var next: Segment? = null
+  @JvmField var prev: Segment? = null
+
+  //ignore
+}
+</code></pre><p>&#x5305;&#x542B;&#x4E86;&#x4E09;&#x79CD;&#x5185;&#x5BB9;&#xFF1A;</p>
+<ul>
+<li>&#x5B9E;&#x9645;&#x6570;&#x636E; data</li>
+<li>&#x6807;&#x8BB0; pos+limit&#x548C;&#x8BFB;&#x5199;&#x6709;&#x5173;&#xFF0C;shared&#x3001;owner&#x548C;&#x6570;&#x636E;&#x4FDD;&#x62A4;&#x6709;&#x5173;</li>
+<li>&#x4E0A;&#x4E0B;&#x6E38;&#x8282;&#x70B9;&#xFF0C;&#x94FE;&#x8868;&#x7684;&#x672C;&#x8D28;</li>
+</ul>
+<p>&#x800C; <code>SegmentPool</code> &#x662F;&#x5F88;&#x5178;&#x578B;&#x7684;&#x6C60;&#x5316;&#x8BBE;&#x8BA1;&#xFF0C;&#x6BD5;&#x7ADF; <code>ByteArray</code> &#x9700;&#x8981;&#x5206;&#x914D;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#xFF0C;&#x4F7F;&#x7528;&#x6C60;&#x5316;&#x53EF;&#x4EE5;&#x5F88;&#x597D;&#x5730;&#x51CF;&#x5C11;&#x65E0;&#x6548;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#xFF08;&#x9891;&#x7E41;&#x5206;&#x914D;&#x56DE;&#x6536;&#xFF09;</p>
+<p>&#x4E0D;&#x96BE;&#x5F97;&#x51FA;&#x603B;&#x7ED3;&#xFF1A;</p>
+<ul>
+<li><code>Segment</code> &#x662F;&#x5B9E;&#x73B0;&#x4E86;&#x65B9;&#x4FBF;&#x4F7F;&#x7528;&#x7684;API&#x7684;ByteArray&#x94FE;&#x8868;</li>
+<li><code>Buffer</code> &#x662F;&#x4F7F;&#x7528; <code>Segment</code> &#x5305;&#x88C5;&#x800C;&#x6210;&#x7684;&#x6570;&#x636E;&#x7F13;&#x51B2;&#x533A;&#xFF0C;&#x5B9E;&#x73B0;&#x4E86;&#x65B9;&#x4FBF;&#x4F7F;&#x7528;&#x7684;API&#xFF0C;&#x5B9E;&#x73B0;&#x4E86;&#x548C;JAVA IO&#x95F4;&#x7684;&#x4E92;&#x64CD;&#x4F5C;</li>
+<li><code>Buffer</code> &#x65E2;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x4E0A;&#x6E38; <code>Source</code> &#x89D2;&#x8272;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x4E0B;&#x6E38; <code>Sink</code> &#x89D2;&#x8272;</li>
+<li>&#x5728;&#x8BBE;&#x8BA1; <code>Buffer</code> &#x548C; <code>Segment</code> &#x65F6;&#xFF0C;&#x7ED3;&#x5408;&#x4E86;&#x65E5;&#x5E38;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x8FDB;&#x884C;&#x4E86;&#x7279;&#x5B9A;&#x4F18;&#x5316;&#xFF0C;&#x4F8B;&#x5982;&#x901A;&#x8FC7;&#x8F6C;&#x79FB;&#x3001;&#x5206;&#x4EAB;&#x6570;&#x636E;&#x800C;&#x975E;&#x62F7;&#x8D1D;&#x5B9E;&#x8D28;&#x6570;&#x636E;</li>
+</ul>
+<h2 id="bytestring-&#x6982;&#x8FF0;"><a name="bytestring-&#x6982;&#x8FF0;" class="anchor-navigation-ex-anchor" href="#bytestring-&#x6982;&#x8FF0;"><i class="fa fa-link" aria-hidden="true"></i></a>ByteString &#x6982;&#x8FF0;</h2>
+<p>&#x5728;Okio&#x4E2D;&#xFF0C;ByteString&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x3001;&#x65B9;&#x4FBF;&#x4F7F;&#x7528;&#x7684;&#x8BBE;&#x8BA1;&#xFF0C;&#x4F46;&#x6BD4;Buffer&#x7B80;&#x5355;&#x7684;&#x591A;&#x3002;</p>
+<p><em>&#x5B83;&#x7684;&#x547D;&#x540D;&#x4E5F;&#x975E;&#x5E38;&#x6709;&#x8DA3;&#xFF0C;&#x8BA1;&#x7B97;&#x673A;&#x9886;&#x57DF;&#x4E2D;&#xFF0C;String&#x4E00;&#x8BCD;&#x5BF9;&#x5E94;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5B83;&#x672C;&#x8EAB;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x66F4;&#x5BBD;&#x6CDB;&#x7684;&#x542B;&#x4E49;&#x5C31;&#x662F;&#x201C;&#x4E00;&#x4E32;&#x201D;&#x3002; &#x5728;&#x4E0D;&#x8DB3;&#x591F;&#x4E25;&#x8C28;&#x7684;&#x8BA8;&#x8BBA;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A; <code>String</code>
+&#x5C31;&#x662F;&#x6307;&#x5B9A;&#x4E86;&#x7F16;&#x7801;&#x7684;CharArray&#x6216;ByteArray&#x3002;&#x800C;CharSequence&#x53C8;&#x592A;&#x8FC7;&#x4E8E;&#x62BD;&#x8C61;&#xFF0C;&#x8BBE;&#x8BA1;&#x8005;&#x4F3C;&#x4E4E;&#x4EC5;&#x5E0C;&#x671B;&#x5C06;&#x4E00;&#x4E9B;&#x7279;&#x5B9A;&#x7684;&#x5177;&#x4F53;&#x60C5;&#x51B5;&#x8FDB;&#x884C;&#x5C01;&#x88C5;&#xFF0C;&#x56E0;&#x6B64;&#x5236;&#x9020;&#x4E86;ByteString&#x3002;</em></p>
+<pre><code>open class ByteString
+internal actual constructor(
+  internal actual val data: ByteArray,
+) : Serializable, Comparable&lt;ByteString&gt; {}
+</code></pre><p><em>
+&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x6211;&#x5728;&#x5F00;&#x53D1;&#x4E00;&#x4E9B;&#x84DD;&#x7259;&#x5E94;&#x7528;&#x65F6;&#xFF0C;&#x6570;&#x636E;&#x4F20;&#x8F93;&#x5C42;&#x548C;&#x5E94;&#x7528;&#x534F;&#x8BAE;&#x5C42;&#x6709;&#x4E00;&#x4E9B;&#x7279;&#x5B9A;&#x7684;&#x6570;&#x636E;&#x64CD;&#x4F5C;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x4FE1;&#x606F;&#x6458;&#x8981;&#x8BA1;&#x7B97;&#x3001;CRC&#x6821;&#x9A8C;&#x3001;AES&#x52A0;&#x89E3;&#x5BC6;&#x3001;Hex-String&#x8F6C;&#x6362;&#x7528;&#x4F5C;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x3002;&#x5728;&#x5F88;&#x591A;&#x5E74;&#x524D;&#x624D;&#x63A5;&#x89E6;Android&#x65F6;&#xFF0C;&#x4F7F;&#x7528;HttpUrlConnection&#xFF0C;&#x5BF9;body&#x4E5F;&#x6709;&#x7C7B;&#x4F3C;&#x7684;&#x5904;&#x7406;&#x3002;&#x5C5E;&#x5B9E;&#x67AF;&#x71E5;&#x7E41;&#x7410;</em></p>
+<p>&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x5185;&#x5BB9;&#x4E0D;&#x53EF;&#x53D8;byte&#x5E8F;&#x5217;&#xFF0C;&#x8FD9;&#x4E00;&#x70B9;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x89C2;&#x6D4B;API&#x53D1;&#x73B0;&#xFF0C;&#x5B83;&#x5E76;&#x4E0D;&#x63D0;&#x4F9B;&#x4FEE;&#x6539;&#x5185;&#x5BB9;&#x7684;&#x76F8;&#x5173;API&#x3002;&#x4F46;&#x5B83;&#x5C01;&#x88C5;&#x4E86;&#x4E00;&#x7CFB;&#x5217;&#x597D;&#x7528;&#x7684;API&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<ul>
+<li>utf8(): String</li>
+<li>string(charset: Charset)</li>
+<li>fun base64()</li>
+<li>fun md5() = digest(&quot;MD5&quot;)</li>
+<li>fun sha1() = digest(&quot;SHA-1&quot;)</li>
+<li>digest(algorithm: String): ByteString &#x7B49;&#x7B49;</li>
+</ul>
+<p>&#x76F8;&#x6BD4;&#x4E8E;&#x5B9A;&#x4E49;&#x4E0E;&#x4F7F;&#x7528;Utility&#x7C7B;&#xFF0C;&#x4EE3;&#x7801;&#x53EF;&#x8BFB;&#x6027;&#x66F4;&#x5F3A;&#x3002;</p>
+<p><strong>&#x503C;&#x5F97;&#x6CE8;&#x610F;</strong> &#xFF1A;&#x867D;&#x7136;&#x5B83;&#x5728;&#x8BBE;&#x8BA1;&#x610F;&#x56FE;&#x4E0A;&#x662F;&#x5185;&#x5BB9;&#x4E0D;&#x53EF;&#x53D8;&#x7684;&#xFF0C;&#x4F46;&#x6CE8;&#x610F;&#x5B83;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x53EA;&#x4FDD;&#x7559;&#x4E86;&#x5F15;&#x7528;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x5BF9;&#x5185;&#x5BB9;&#x8FDB;&#x884C;&#x62F7;&#x8D1D;&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x5B9E;&#x8D28;&#x5185;&#x5BB9;&#x53EF;&#x4EE5;&#x5728;&#x5916;&#x90E8;&#x7BE1;&#x6539;</p>
+<p>&#x5B83;&#x5B9E;&#x73B0;&#x4E86; <code>Comparable</code> &#x63A5;&#x53E3;&#xFF0C;&#x503C;&#x5F97;&#x4E00;&#x63D0;&#x7684;&#x662F;&#xFF0C;&#x5B83;&#x6309;&#x7167;&#x65E0;&#x7B26;&#x53F7;&#x6570;&#x5927;&#x5C0F;&#x8FDB;&#x884C; &#x201C;&#x5B57;&#x5178;&#x5E8F;&#x201D; &#x6BD4;&#x5BF9;&#x3002;</p>
+<ul>
+<li>&quot;&#x5B57;&#x5178;&#x5E8F;&quot; &#x6BD4;&#x5BF9;&#xFF0C;&#x5373;&#x6309;&#x7167;&#x4ECE;&#x5934;&#x5230;&#x5C3E;&#x7684;&#x987A;&#x5E8F;&#xFF0C;&#x4F9D;&#x6B21;&#x6BD4;&#x5BF9;&#xFF0C;&#x8111;&#x8865;&#x4E00;&#x4E0B;&#x82F1;&#x6587;&#x8BCD;&#x5178;&#x3002;</li>
+<li>Byte&#x4F7F;&#x7528;8bit&#x8868;&#x793A;&#xFF0C;0xFF&#xFF08;&#x8865;&#x7801;&#xFF09;&#x5982;&#x679C;&#x89C6;&#x4F5C;&#x7B26;&#x53F7;&#x6570;&#x4E3A;255&#xFF0C;&#x6392;&#x5728;0x00&#x540E;&#x9762;&#xFF0C;&#x5982;&#x679C;&#x89C6;&#x4F5C;&#x6709;&#x7B26;&#x53F7;&#x6570;&#xFF0C;&#x5219;&#x4E3A;-1&#xFF0C;&#x6392;&#x5728;0x00&#x524D;&#x9762;</li>
+</ul>
+<h2 id="&#x8D85;&#x65F6;&#x673A;&#x5236;"><a name="&#x8D85;&#x65F6;&#x673A;&#x5236;" class="anchor-navigation-ex-anchor" href="#&#x8D85;&#x65F6;&#x673A;&#x5236;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8D85;&#x65F6;&#x673A;&#x5236;</h2>
+<p>&#x7B80;&#x5355;&#x601D;&#x8003;&#x4E00;&#x4E0B;&#xFF0C;&#x4F60;&#x7684;BOSS&#x662F;&#x5982;&#x4F55;&#x6309;&#x7167;Deadline&#x6765;&#x68C0;&#x67E5;&#x4F60;&#x7684;&#x5DE5;&#x4F5C;&#x7684;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x6CA1;&#x6709;&#x63D0;&#x524D;&#x544A;&#x77E5;&#x5DF2;&#x5B8C;&#x6210;&#xFF0C;</p>
+<ul>
+<li>&#x6700;&#x7406;&#x60F3;&#x7684;BOSS&#x4F1A;&#x5728;&#x5230;&#x671F;&#x65F6;&#x67E5;&#x4F60;</li>
+<li>&#x5BBD;&#x677E;&#x4E00;&#x70B9;&#x7684;BOSS&#x4F1A;&#x5728;Deadline&#x5F53;&#x5929;&#x6216;&#x63D0;&#x524D;&#x4E00;&#x5929;&#x8FC7;&#x95EE;&#x4E00;&#x4E0B;&#xFF0C;&#x5230;&#x70B9;&#x518D;&#x67E5;&#x4E00;&#x4E0B;</li>
+<li>&#x7126;&#x8651;&#x4E00;&#x70B9;&#x7684;BOSS&#x4F1A;&#x9891;&#x7E41;&#x4E00;&#x70B9;</li>
+<li>&#x6709;&#x6BDB;&#x75C5;&#x7684;BOSS&#x4F1A;&#x4E00;&#x5929;&#x5230;&#x665A;&#x76EF;&#x7740;&#x4F60;</li>
+</ul>
+<p>&#x663E;&#x7136;&#xFF0C;&#x9700;&#x8981;&#x5148;&#x7EA6;&#x5B9A;&#x4E00;&#x4E2A;&#x8D85;&#x65F6;&#x7684;&#x4FE1;&#x606F;&#xFF1A;</p>
+<pre><code>class Timeout {
+  private var hasDeadline = false
+  private var deadlineNanoTime = 0L
+  private var timeoutNanos = 0L
+}
+</code></pre><p>&#x5047;&#x5B9A;&#x6709;&#x4E00;&#x9879;&#x5177;&#x4F53;&#x5DE5;&#x4F5C;&#xFF0C;&#x5F53;&#x4F60;&#x548C;BOSS&#x7EA6;&#x5B9A;&#x597D;&#x65F6;&#x95F4;&#xFF0C;&#x4ED6;&#x4F1A;&#x8BB0;&#x5F55;&#x8FD9;&#x4E00;&#x4FE1;&#x606F;&#xFF0C;&#x5F97;&#x5230;&#x4E00;&#x4E2A;<code>timeout</code>&#xFF0C;<em>&#x5F53;&#x7136;&#xFF0C;&#x5E76;&#x975E;&#x6240;&#x6709;&#x4E8B;&#x60C5;&#x90FD;&#x4F1A;&#x6709;Deadline</em></p>
+<p>&#x6B64;&#x65F6;&#xFF0C;&#x4F60;&#x53BB;&#x6267;&#x884C;&#x8FD9;&#x4E00;&#x4E8B;&#x9879;&#xFF1A;</p>
+<pre><code>timeout.withTimeout {
+    //&#x5177;&#x4F53;&#x7684;&#x4E8B;&#x9879;
+}
+</code></pre><p>&#x800C;&#x4F60;&#x7684;BOSS&#xFF0C;&#x5219;&#x4F1A;&#x6839;&#x636E;&#x662F;&#x5426;&#x6709;&#x771F;&#x5B9E;Deadline&#xFF0C;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x8BB0;&#x5F55;&#x5230;&#x4ED6;&#x7684;&#x68C0;&#x67E5;&#x5355;&#x4E0A;&#x3002;</p>
+<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x4F60;&#x7684;BOSS&#x9700;&#x8981;&#x8DDF;&#x8E2A;&#x7684;&#x4E8B;&#x9879;&#x8FDB;&#x5EA6;&#x6BD4;&#x8F83;&#x591A;&#xFF0C;&#x4ED6;&#x6309;&#x7167;&#x5230;&#x671F;&#x65F6;&#x95F4;&#x5148;&#x540E;&#x987A;&#x5E8F;&#x5BF9;&#x68C0;&#x67E5;&#x5355;&#x5185;&#x5BB9;&#x8FDB;&#x884C;&#x6574;&#x7406;&#xFF0C;&#x8FD9;&#x6837;&#x4ED6;&#x5C31;&#x7701;&#x4E8B;&#x4E86;&#xFF0C;&#x4ED6;&#x53EA;&#x9700;&#x8981;&#x76EF;&#x7740;&#x7B2C;&#x4E00;&#x4E2A;&#x5230;&#x671F;&#x65F6;&#x95F4;&#x8FDB;&#x884C;&#x8FFD;&#x8E2A;&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x5F53;&#x53D1;&#x73B0;&#x8D85;&#x65F6;&#x65F6;&#xFF0C;&#x4ED6;&#x4F1A;&#x5C06;&#x8FD9;&#x4E00;&#x9879;&#x79FB;&#x9664;&#xFF0C;&#x8C03;&#x6574;&#x4ED6;&#x7684;&#x68C0;&#x67E5;&#x5355;&#xFF0C;&#x5E76;&#x901A;&#x62A5;&#x6B64;&#x9879;&#x5DF2;&#x7ECF;&#x8D85;&#x65F6;...</p>
+<p>&#x4E0D;&#x96BE;&#x60F3;&#x8C61;&#xFF0C;&#x5982;&#x679C;&#x4ED6;&#x7684;&#x68C0;&#x67E5;&#x5355;&#x4E0A;&#x6CA1;&#x6709;&#x8FFD;&#x8E2A;&#x9879;&#xFF0C;&#x4ED6;&#x4E0D;&#x4F1A;&#x7ED9;&#x81EA;&#x5DF1;&#x6765;&#x4E00;&#x4E2A;&#x9065;&#x9065;&#x65E0;&#x671F;&#x7684;&#x4F11;&#x5047;&#xFF0C;&#x5426;&#x5219;&#x6709;&#x540E;&#x7EED;&#x4E8B;&#x9879;&#x6CA1;&#x88AB;&#x8DDF;&#x8E2A;&#xFF0C;&#x4ED6;&#x5C31;&#x60E8;&#x4E86;&#xFF0C;&#x4F46;&#x4E00;&#x76F4;&#x76EF;&#x7740;&#x6709;&#x6CA1;&#x6709;&#x65B0;&#x4E8B;&#x9879;&#x4EA7;&#x751F;&#x4F1A;&#x5F88;&#x7D2F;&#xFF0C;&#x6240;&#x4EE5;&#x4ED6;&#x6BCF;&#x4E24;&#x5C0F;&#x65F6;&#x5C31;&#x4F1A;&#x770B;&#x4E00;&#x4E0B;&#xFF0C;&#x662F;&#x5426;&#x6709;&#x4E8B;&#x9879;&#x9700;&#x8981;&#x5199;&#x5165;&#x68C0;&#x67E5;&#x5355;&#x3002;&#x5373;&#x4FBF;&#x5199;&#x5165;&#x68C0;&#x67E5;&#x5355;&#x65F6;&#x6B64;&#x4E8B;&#x5DF2;&#x7ECF;&#x5EF6;&#x671F;&#xFF0C;&#x4F46;&#x4E00;&#x4E2A;2&#x5C0F;&#x65F6;&#x5185;&#x5C31;&#x4F1A;&#x5230;Deadline&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x7A0D;&#x5FAE;&#x62D6;&#x5EF6;&#x4E86;&#x4E00;&#x4F1A;&#x53BB;&#x8FFD;&#x67E5;&#xFF0C;&#x4E5F;&#x6CA1;&#x5565;&#x6BDB;&#x75C5;&#x3002;</p>
+<p>&#x5C06;BOSS&#x7684;&#x8FD9;&#x90E8;&#x5206;&#x5DE5;&#x4F5C;&#x5199;&#x6210;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<details>
+
+```kotlin
+internal fun awaitTimeout(): AsyncTimeout? {
+    // Get the next eligible node.
+    val node = head!!.next
+
+    // The queue is empty. Wait until either something is enqueued or the idle timeout elapses.
+    if (node == null) {
+        val startNanos = System.nanoTime()
+        condition.await(IDLE_TIMEOUT_MILLIS, TimeUnit.MILLISECONDS)
+        return if (head!!.next == null &amp;&amp; System.nanoTime() - startNanos &gt;= IDLE_TIMEOUT_NANOS) {
+            head // The idle timeout elapsed.
+        } else {
+            null // The situation has changed.
+        }
+    }
+
+    var waitNanos = node.remainingNanos(System.nanoTime())
+
+    // The head of the queue hasn&apos;t timed out yet. Await that.
+    if (waitNanos &gt; 0) {
+        condition.await(waitNanos, TimeUnit.NANOSECONDS)
+        return null
+    }
+
+    // The head of the queue has timed out. Remove it.
+    head!!.next = node.next
+    node.next = null
+    return node
+}
+
+private class Watchdog internal constructor() : Thread(&quot;Okio Watchdog&quot;) {
+    init {
+        isDaemon = true
+    }
+
+    override fun run() {
+        while (true) {
+            try {
+                var timedOut: AsyncTimeout? = null
+                AsyncTimeout.lock.withLock {
+                    timedOut = awaitTimeout()
+
+                    // The queue is completely empty. Let this thread exit and let another watchdog thread
+                    // get created on the next call to scheduleTimeout().
+                    if (timedOut === head) {
+                        head = null
+                        return
+                    }
+                }
+
+                // Close the timed out node, if one was found.
+                timedOut?.timedOut()
+            } catch (ignored: InterruptedException) {
+            }
+        }
+    }
+}
+```
+
+</details>
+
+<p>&#x518D;&#x56DE;&#x5230;&#x4F60;&#x8FD9;&#x8FB9;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x7684;&#x5DE5;&#x4F5C;&#x5B8C;&#x6210;&#x4E86;&#xFF0C;&#x4F60;&#x53BB;&#x4F1A;&#x627E;BOSS&#x6C47;&#x62A5;&#x5DE5;&#x4F5C;&#xFF0C;&#x8BA9;&#x4ED6;&#x5904;&#x7406;&#x68C0;&#x67E5;&#x5355;&#xFF1A;</p>
+<pre><code class="lang-kotlin"><span class="hljs-keyword">inline</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T&gt;</span> <span class="hljs-title">withTimeout</span><span class="hljs-params">(block: <span class="hljs-type">(</span>)</span> -&gt; T): T {</span>
+    <span class="hljs-variable"><span class="hljs-keyword">var</span> throwOnTimeout</span> = <span class="hljs-literal">false</span>
+    enter()
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> result</span> = block()
+        throwOnTimeout = <span class="hljs-literal">true</span>
+        <span class="hljs-keyword">return</span> result
+    } <span class="hljs-keyword">catch</span> (e: IOException) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">if</span> (!exit()) e <span class="hljs-keyword">else</span> `access$newTimeoutException`(e)
+    } <span class="hljs-keyword">finally</span> {
+        <span class="hljs-comment">// &#x627E;BOSS&#x6C47;&#x62A5;&#x5DE5;&#x4F5C;&#xFF0C;&#x8BA9;&#x4ED6;&#x5904;&#x7406;&#x68C0;&#x67E5;&#x5355;</span>
+        <span class="hljs-variable"><span class="hljs-keyword">val</span> timedOut</span> = exit()
+        <span class="hljs-keyword">if</span> (timedOut &amp;&amp; throwOnTimeout) <span class="hljs-keyword">throw</span> `access$newTimeoutException`(<span class="hljs-literal">null</span>)
+    }
+}
+</code></pre>
+<p>&#x6B64;&#x65F6;&#x8F6E;&#x5230;BOSS&#x6765;&#x5904;&#x7406;&#xFF0C;&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x4E8B;&#x9879;&#x5E76;&#x6CA1;&#x6709;&#x771F;&#x5B9E;Deadline&#xFF0C;&#x4ED6;&#x5E76;&#x4E0D;&#x4F1A;&#x989D;&#x5916;&#x505A;&#x4EC0;&#x4E48;&#x3002;&#x5426;&#x5219;&#x4ED6;&#x4F1A;&#x91CD;&#x65B0;&#x7EF4;&#x62A4;&#x68C0;&#x67E5;&#x5355;&#x5185;&#x5BB9;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5728;&#x68C0;&#x67E5;&#x5355;&#x4E2D;&#x53D1;&#x73B0;&#x8FD9;&#x4E00;&#x9879;&#xFF0C;&#x5219;&#x8BF4;&#x660E;&#x8BE5;&#x9879;&#x5728;&#x4E4B;&#x524D;&#x901A;&#x62A5;&#x8FC7;&#x5DF2;&#x7ECF;&#x8D85;&#x65F6;&#x3002;</p>
+<pre><code class="lang-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">exit</span><span class="hljs-params">()</span>: <span class="hljs-keyword">Boolean</span> {</span>
+    <span class="hljs-keyword">return</span> cancelScheduledTimeout(this)
+}
+
+<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">cancelScheduledTimeout</span><span class="hljs-params">(node: <span class="hljs-type">AsyncTimeout</span>)</span>: <span class="hljs-keyword">Boolean</span> {</span>
+    AsyncTimeout.lock.withLock {
+        <span class="hljs-keyword">if</span> (!node.inQueue) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+        node.inQueue = <span class="hljs-literal">false</span>
+
+        <span class="hljs-comment">// Remove the node from the linked list.</span>
+        <span class="hljs-variable"><span class="hljs-keyword">var</span> prev</span> = head
+        <span class="hljs-keyword">while</span> (prev != <span class="hljs-literal">null</span>) {
+            <span class="hljs-keyword">if</span> (prev.next === node) {
+                prev.next = node.next
+                node.next = <span class="hljs-literal">null</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+            }
+            prev = prev.next
+        }
+
+        <span class="hljs-comment">// The node wasn&apos;t found in the linked list: it must have timed out!</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+    }
+}
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x6545;&#x4E8B;&#x6F14;&#x793A;&#x4E86;&#x4E00;&#x79CD;&#x5F02;&#x6B65;&#x7684;&#x8D85;&#x65F6;&#x68C0;&#x6D4B;&#x673A;&#x5236;&#xFF0C;&#x5728;Okio&#x4E2D;&#xFF0C;&#x5BF9;&#x5E94;&#x4E86; <code>AsyncTimeout</code> &#x3002;&#x5F53;&#x7136;&#xFF0C;&#x5B9E;&#x9645;&#x573A;&#x666F;&#x4E2D;&#x8FD8;&#x6709;&#x4E00;&#x4E9B;&#x66F4;&#x590D;&#x6742;&#x7684;&#xFF0C;&#x4F8B;&#x5982;&#x4E24;&#x4E2A;&#x4E8B;&#x9879;&#x5408;&#x5E76;&#x3002;</p>
+<p>&#x751A;&#x81F3;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x501F;&#x7528;&#x6B64;&#x673A;&#x5236;&#xFF1A;</p>
+<p>&#x6F14;&#x793A;&#x4EE3;&#x7801;&#xFF1A;</p>
+<details>
+
+```kotlin
+class Job<t>(
+    val block: () -&gt; T,
+    private val onTimeout: ((afterResult: Boolean, result: T?) -&gt; Boolean)? = null
+) {
+    @Volatile
+    private var timeout = false
+
+    @Volatile
+    private var timeoutHandled = false
+
+    @Volatile
+    private var execFinished = false
+
+    fun exec(): T = block().also { result -&gt;
+        execFinished = true
+        if (timeout &amp;&amp; !timeoutHandled) {
+            onTimeout?.let {
+                timeoutHandled = it(true, result)
+            }
+        }
+    }
+
+    fun timeout() {
+        if (execFinished) return
+
+        timeout = true
+        onTimeout?.let {
+            timeoutHandled = it(false, null)
+        }
+    }
+}
+
+class JobsAsyncTimeout<t>(private val job: Job<t>) : AsyncTimeout() {
+    override fun timedOut() {
+        job.timeout()
+    }
+    override fun timeout(timeout: Long, unit: TimeUnit): JobsAsyncTimeout<t> {
+        super.timeout(timeout, unit)
+        return this
+    }
+
+    fun delegate(): () -&gt; T {
+        return {
+            withTimeout {
+                job.exec()
+            }
+        }
+    }
+}
+
+
+fun <t> (() -&gt; T).timeoutJob(
+    timeout: Long,
+    timeUnit: TimeUnit,
+    onTimeout: ((afterResult: Boolean, result: T?) -&gt; Boolean)? = null
+): () -&gt; T {
+    return JobsAsyncTimeout(Job(block = this, onTimeout = onTimeout))
+        .timeout(timeout = timeout, unit = timeUnit)
+        .delegate()
+}
+```
+
+</t></t></t></t></t></details>
+
+<p>&#x4EE5;&#x4E00;&#x4E2A;&#x6548;&#x7387;&#x4F4E;&#x4E0B;&#x7684;&#x9012;&#x5F52;&#x8BA1;&#x7B97;&#x6590;&#x6CE2;&#x90A3;&#x5951;&#x6570;&#x5217;&#x8FDB;&#x884C;&#x6F14;&#x793A;(&#x5982;&#x679C;&#x4F60;&#x7684;&#x673A;&#x5668;&#x6027;&#x80FD;&#x5F02;&#x5E38;&#x7684;&#x597D;&#xFF0C;&#x53EF;&#x4EE5;&#x9002;&#x5F53;&#x8C03;&#x5927;&#x5165;&#x53C2;)&#xFF1A;</p>
+<p>Demo &#x4EE3;&#x7801; :</p>
+<details>
+
+```kotlin
+class Demo {
+    @Test
+    fun testTimeOut() {
+        val fib30 = {
+            fibonacci(30)
+        }.timeoutJob(1, TimeUnit.NANOSECONDS) { afterResult, result -&gt;
+            if (!afterResult) {
+                // &#x5982;&#x679C;&#x662F;&#x53EF;&#x4EE5;&#x6253;&#x65AD;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x6267;&#x884C;&#x6253;&#x65AD;&#xFF1B;&#x9664;&#x975E;&#x4F60;&#x4ECD;&#x7136;&#x60F3;&#x8981;&#x7ED3;&#x679C;,&#x8FD9;&#x6837;&#x4F7F;&#x7528;&#x8D85;&#x65F6;&#x673A;&#x5236;&#x662F;&#x5F88;&#x7275;&#x5F3A;&#x7684;
+                println(&quot;on timeout, callback before result, you should interrupt the job&quot;)
+                // &#x8FD4;&#x56DE;true&#x5219;&#x610F;&#x5473;&#x7740;&#x5DF2;&#x7ECF;&#x6D88;&#x8D39;
+                false
+            } else {
+                //&#x5982;&#x679C; afterResult &#x4E3A;false&#x65F6;&#xFF0C;&#x5DF2;&#x7ECF;&#x8FD4;&#x56DE;true&#xFF0C;&#x5219;&#x4E0D;&#x4F1A;&#x6709;&#x6B64;&#x8F6E;&#x56DE;&#x8C03;
+                //&#x9664;&#x975E;&#x4F60;&#x771F;&#x7684;&#x9700;&#x8981;&#x7ED3;&#x679C;
+
+                println(&quot;on timeout, callback after result, $result&quot;)
+                //&#x8FD4;&#x56DE;true&#x5219;&#x610F;&#x5473;&#x7740;&#x5DF2;&#x7ECF;&#x6D88;&#x8D39;
+                false
+            }
+        }
+
+        //&#x8D85;&#x65F6;&#x662F;&#x4F1A;&#x629B;&#x51FA;InterruptedIOException
+        assertThrows(InterruptedIOException::class.java) {
+            println(&quot;fib100-&gt; ${fib30()}&quot;)
+        }
+    }
+
+    @Throws(Exception::class)
+    fun fibonacci(n: Int): Long {
+        when {
+            n &lt; 0 -&gt; throw Exception(&quot;n&#x4E3A;&#x975E;&#x6CD5;&#x503C;&#xFF01;&quot;)
+            else -&gt; return when (n) {
+                0 -&gt; 0
+                1 -&gt; 1
+                else -&gt; fibonacci(n - 1) + fibonacci(n - 2)
+            }
+        }
+    }
+}
+```
+
+</details>
+
+<h2 id="&#x7ED3;&#x8BED;"><a name="&#x7ED3;&#x8BED;" class="anchor-navigation-ex-anchor" href="#&#x7ED3;&#x8BED;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7ED3;&#x8BED;</h2>
+<p>&#x81F3;&#x6B64;&#xFF0C;IO&#x7CFB;&#x5217;&#x544A;&#x4E00;&#x6BB5;&#x843D;&#x3002;</p>
+<p>&#x6309;&#x7167;&#x60EF;&#x4F8B;&#xFF0C;&#x518D;&#x7D6E;&#x53E8;&#x51E0;&#x53E5;&#x3002;&#x5728;&#x53BB;&#x5E74;&#x653E;&#x7F13;&#x8282;&#x594F;&#x540E;&#xFF0C;&#x8BFB;&#x4E86;&#x4E00;&#x4E9B;&#x4E66;&#x3001;&#x60F3;&#x4E86;&#x4E00;&#x4E9B;&#x4E8B;&#x3001;&#x89C2;&#x4E86;&#x4E00;&#x4E9B;&#x4EBA;&#x3002;&#x8FD1;&#x671F;&#x4E8E;&#x300A;&#x5B5F;&#x5B50;&#x300B;&#x4E2D;&#x5F97;&#x4E00;&#x53E5;&#xFF1A;</p>
+<blockquote>
+<p>&#x6216;&#x52B3;&#x5FC3;&#xFF0C;&#x6216;&#x52B3;&#x529B;&#xFF1B;&#x52B3;&#x5FC3;&#x8005;&#x6CBB;&#x4EBA;&#xFF0C;&#x52B3;&#x529B;&#x8005;&#x6CBB;&#x4E8E;&#x4EBA;&#xFF1B;&#x6CBB;&#x4E8E;&#x4EBA;&#x8005;&#x98DF;&#x4EBA;&#xFF0C;&#x6CBB;&#x4EBA;&#x8005;&#x98DF;&#x4E8E;&#x4EBA;&#xFF1A;&#x5929;&#x4E0B;&#x4E4B;&#x901A;&#x4E49;</p>
+</blockquote>
+<p>&#x4E0B;&#x4E2A;&#x7CFB;&#x5217;&#x8FD8;&#x5728;&#x6784;&#x601D;&#x659F;&#x914C;&#x4E2D;&#xFF0C;&#x4E0B;&#x4E2A;&#x6708;&#x518D;&#x89C1;&#x3002; </p>
+<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
+2023-08-27 15:44:44
+</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="post_58.html" class="navigation navigation-prev " aria-label="Previous page: Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../Gradle/" class="navigation navigation-next " aria-label="Next page: Gradle">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK","level":"1.5.5","depth":2,"next":{"title":"Gradle","level":"1.6","depth":1,"path":"Gradle/README.md","ref":"./Gradle/README.md","articles":[{"title":"三思系列：组件化场景下module依赖优雅实践方案","level":"1.6.1","depth":2,"path":"Gradle/Modularization/post_18.md","ref":"Gradle/Modularization/post_18.md","articles":[]},{"title":"迁移到MavenCentral--再不行动起来，你的托管的library就没了","level":"1.6.2","depth":2,"path":"Gradle/Publish/post_17.md","ref":"Gradle/Publish/post_17.md","articles":[]},{"title":"Gradle | 依赖管理最佳实践","level":"1.6.3","depth":2,"path":"Gradle/post_22.md","ref":"Gradle/post_22.md","articles":[]}]},"previous":{"title":"Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮","level":"1.5.4","depth":2,"path":"IO/post_58.md","ref":"./IO/post_58.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"IO/post_59.md","mtime":"2023-08-27T07:44:44.984Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-08-27T07:49:25.463Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
