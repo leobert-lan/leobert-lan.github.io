@@ -1,0 +1,2033 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../info/" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Android/">
+            
+                <a href="../Android/">
+            
+                    
+                    Android
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Android/View/">
+            
+                <a href="../Android/View/">
+            
+                    
+                    View
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../Android/View/post_1.html">
+            
+                <a href="../Android/View/post_1.html">
+            
+                    
+                    好玩系列：优雅的处理ButterKnife和KAE被废弃
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.2" data-path="../Android/View/post_6.html">
+            
+                <a href="../Android/View/post_6.html">
+            
+                    
+                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.3" data-path="../Android/View/post_7.html">
+            
+                <a href="../Android/View/post_7.html">
+            
+                    
+                    三思系列：为什么自定义View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.1.4" data-path="../Android/Idea/post_9.html">
+            
+                <a href="../Android/Idea/post_9.html">
+            
+                    
+                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../Android/Drawable/">
+            
+                <a href="../Android/Drawable/">
+            
+                    
+                    Drawable
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.2.1" data-path="../Android/Drawable/post_2.html">
+            
+                <a href="../Android/Drawable/post_2.html">
+            
+                    
+                    三思系列：重新认识Drawable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.2" data-path="../Android/Drawable/post_4.html">
+            
+                <a href="../Android/Drawable/post_4.html">
+            
+                    
+                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.3" data-path="../Android/Drawable/post_47.html">
+            
+                <a href="../Android/Drawable/post_47.html">
+            
+                    
+                    迟来的续集--Drawable+Animator，将优雅进行到底
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2.4" data-path="../Android/Drawable/post_49.html">
+            
+                <a href="../Android/Drawable/post_49.html">
+            
+                    
+                    好玩系列：让ImageSpan动起来
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Android/Mechanism/Message/">
+            
+                <a href="../Android/Mechanism/Message/">
+            
+                    
+                    消息机制
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.3.1" data-path="../Android/Mechanism/Message/post_8.html">
+            
+                <a href="../Android/Mechanism/Message/post_8.html">
+            
+                    
+                    三思系列：Android的消息机制，一文吃透
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Android/Idea/post_14/">
+            
+                <a href="../Android/Idea/post_14/">
+            
+                    
+                    兼容
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.4.1" data-path="../Android/Idea/post_14.html">
+            
+                <a href="../Android/Idea/post_14.html">
+            
+                    
+                    好玩系列：让项目中的相册支持Heif格式图片
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../Android/Glide/">
+            
+                <a href="../Android/Glide/">
+            
+                    
+                    Glide
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="../Android/Glide/post_15.html">
+            
+                <a href="../Android/Glide/post_15.html">
+            
+                    
+                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="../Android/Glide/post_16.html">
+            
+                <a href="../Android/Glide/post_16.html">
+            
+                    
+                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../Android/KSP/">
+            
+                <a href="../Android/KSP/">
+            
+                    
+                    KSP
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.6.1" data-path="../Android/KSP/post_24.html">
+            
+                <a href="../Android/KSP/post_24.html">
+            
+                    
+                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../Android/Base/">
+            
+                <a href="../Android/Base/">
+            
+                    
+                    基础
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.7.1" data-path="../Android/Base/post_35.html">
+            
+                <a href="../Android/Base/post_35.html">
+            
+                    
+                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../Android/SysApp/">
+            
+                <a href="../Android/SysApp/">
+            
+                    
+                    系统APP
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.8.1" data-path="../Android/SysApp/post_52.html">
+            
+                <a href="../Android/SysApp/post_52.html">
+            
+                    
+                    使用日历丰富产品的用户体验
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../Android/DI/">
+            
+                <a href="../Android/DI/">
+            
+                    
+                    Part4-依赖注入部分
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.9.1" data-path="../Android/DI/post_53.html">
+            
+                <a href="../Android/DI/post_53.html">
+            
+                    
+                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../Compose/">
+            
+                <a href="../Compose/">
+            
+                    
+                    Jetpack Compose
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../Compose/post_21.html">
+            
+                <a href="../Compose/post_21.html">
+            
+                    
+                    Jetpack Compose | 一文理解神奇的Modifier
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../Compose/post_26.html">
+            
+                <a href="../Compose/post_26.html">
+            
+                    
+                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../Compose/post_27.html">
+            
+                <a href="../Compose/post_27.html">
+            
+                    
+                    Jetpack Compose | 控件篇（二） -- Icon，Image
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../Compose/post_28.html">
+            
+                <a href="../Compose/post_28.html">
+            
+                    
+                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../Compose/post_29.html">
+            
+                <a href="../Compose/post_29.html">
+            
+                    
+                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../Compose/post_30.html">
+            
+                <a href="../Compose/post_30.html">
+            
+                    
+                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../MultiThreading/">
+            
+                <a href="../MultiThreading/">
+            
+                    
+                    Java多线程
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../MultiThreading/post_33.html">
+            
+                <a href="../MultiThreading/post_33.html">
+            
+                    
+                    总纲
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../MultiThreading/post_37.html">
+            
+                <a href="../MultiThreading/post_37.html">
+            
+                    
+                    Java基础--图解JVM内存模型和JVM线程模型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../MultiThreading/post_38.html">
+            
+                <a href="../MultiThreading/post_38.html">
+            
+                    
+                    Java多线程系列--掌控面试，一文吃透Synchronized锁
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../MultiThreading/post_39.html">
+            
+                <a href="../MultiThreading/post_39.html">
+            
+                    
+                    Java多线程基础--线程生命周期与线程协作详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../MultiThreading/post_42.html">
+            
+                <a href="../MultiThreading/post_42.html">
+            
+                    
+                    Java多线程基础--线程的创建与线程池管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../MultiThreading/post_46.html">
+            
+                <a href="../MultiThreading/post_46.html">
+            
+                    
+                    Java多线程系列--掌握Future，轻松获取异步任务结果
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../MultiThreading/post_50.html">
+            
+                <a href="../MultiThreading/post_50.html">
+            
+                    
+                    Java多线程系列--Fork&Join框架，分治的艺术
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../MultiThreading/post_54.html">
+            
+                <a href="../MultiThreading/post_54.html">
+            
+                    
+                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../IO/">
+            
+                <a href="../IO/">
+            
+                    
+                    Java IO系列
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../IO/post_55.html">
+            
+                <a href="../IO/post_55.html">
+            
+                    
+                    Java IO 系列总纲
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../IO/post_56.html">
+            
+                <a href="../IO/post_56.html">
+            
+                    
+                    Java IO系列 | 经典 IO
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../IO/post_57.html">
+            
+                <a href="../IO/post_57.html">
+            
+                    
+                    Java IO 系列 | NIO-1.0一文速览
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../IO/post_58.html">
+            
+                <a href="../IO/post_58.html">
+            
+                    
+                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../IO/post_59.html">
+            
+                <a href="../IO/post_59.html">
+            
+                    
+                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../Gradle/">
+            
+                <a href="../Gradle/">
+            
+                    
+                    Gradle
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../Gradle/Modularization/post_18.html">
+            
+                <a href="../Gradle/Modularization/post_18.html">
+            
+                    
+                    三思系列：组件化场景下module依赖优雅实践方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../Gradle/Publish/post_17.html">
+            
+                <a href="../Gradle/Publish/post_17.html">
+            
+                    
+                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../Gradle/post_22.html">
+            
+                <a href="../Gradle/post_22.html">
+            
+                    
+                    Gradle | 依赖管理最佳实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../Groovy/">
+            
+                <a href="../Groovy/">
+            
+                    
+                    Groovy
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../Groovy/why_write_groovy.html">
+            
+                <a href="../Groovy/why_write_groovy.html">
+            
+                    
+                    为什么撰写这个系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../Groovy/post_23.html">
+            
+                <a href="../Groovy/post_23.html">
+            
+                    
+                    Groovy：MOP一文打尽
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../Review/">
+            
+                <a href="../Review/">
+            
+                    
+                    Review
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../Review/post_10.html">
+            
+                <a href="../Review/post_10.html">
+            
+                    
+                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../Review/post_40.html">
+            
+                <a href="../Review/post_40.html">
+            
+                    
+                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../Review/post_44.html">
+            
+                <a href="../Review/post_44.html">
+            
+                    
+                    谈一谈在两个商业项目中使用MVI架构后的感悟
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../Review/post_45.html">
+            
+                <a href="../Review/post_45.html">
+            
+                    
+                    Review | 这三个坑你遇到了吗？
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="../repo/">
+            
+                <a href="../repo/">
+            
+                    
+                    个人项目
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../repo/DaVinCi.html">
+            
+                <a href="../repo/DaVinCi.html">
+            
+                    
+                    DaVinCi,取代XML编写Shape或ColorStateList的方案
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../Android/Idea/post_32.html">
+            
+                <a href="../Android/Idea/post_32.html">
+            
+                    
+                    好玩系列：白嫖一个优雅的类图生成工具
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="../Speculative/post_43.html">
+            
+                <a href="../Speculative/post_43.html">
+            
+                    
+                    初体验：动手搭建"小清新式"局域网文档系统
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="../repo/post_48.html">
+            
+                <a href="../repo/post_48.html">
+            
+                    
+                    研究良久，终于发现了他代码写的快且bug少的原因
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="../Speculative/post_61.html">
+            
+                <a href="../Speculative/post_61.html">
+            
+                    
+                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../Review/DataStructure/">
+            
+                <a href="../Review/DataStructure/">
+            
+                    
+                    数据结构
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../Review/DataStructure/post_11.html">
+            
+                <a href="../Review/DataStructure/post_11.html">
+            
+                    
+                    温故：线性表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="../Review/DataStructure/post_12.html">
+            
+                <a href="../Review/DataStructure/post_12.html">
+            
+                    
+                    温故：栈
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" data-path="../Review/DataStructure/post_13.html">
+            
+                <a href="../Review/DataStructure/post_13.html">
+            
+                    
+                    温故：队列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../Review/README2.html">
+            
+                <a href="../Review/README2.html">
+            
+                    
+                    年终总结&计划
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="../Review/post_36.html">
+            
+                <a href="../Review/post_36.html">
+            
+                    
+                    2021年终总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="../Review/post_51.html">
+            
+                <a href="../Review/post_51.html">
+            
+                    
+                    关于画一个句号--基于2022年终总结的反思与分享
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.3" data-path="../Review/post_60.html">
+            
+                <a href="../Review/post_60.html">
+            
+                    
+                    突如其来的秋季反思
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../Note/">
+            
+                <a href="../Note/">
+            
+                    
+                    读书笔记
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="../Note/post_41.html">
+            
+                <a href="../Note/post_41.html">
+            
+                    
+                    读书笔记：《简约至上--交互式设计四策略》
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../Talk/">
+            
+                <a href="../Talk/">
+            
+                    
+                    杂谈
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.4.1" data-path="../Talk/talk_1.html">
+            
+                <a href="../Talk/talk_1.html">
+            
+                    
+                    杂谈1-2022-11
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4.2" data-path="../Talk/talk_2_2023-03.html">
+            
+                <a href="../Talk/talk_2_2023-03.html">
+            
+                    
+                    杂篇（二）-- 认识并战胜焦虑
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    半成熟的思考
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="2.5.1" data-path="post_62.html">
+            
+                <a href="post_62.html">
+            
+                    
+                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="../info/">
+            
+                <a href="../info/">
+            
+                    
+                    系列说明
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.6.1" data-path="../info/about_view_series.html">
+            
+                <a href="../info/about_view_series.html">
+            
+                    
+                    关于View系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6.2" data-path="../info/about_sansi_series.html">
+            
+                <a href="../info/about_sansi_series.html">
+            
+                    
+                    关于三思系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6.3" data-path="../info/about_haowan_series.html">
+            
+                <a href="../info/about_haowan_series.html">
+            
+                    
+                    关于好玩系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6.4" data-path="../info/about_wengu_series.html">
+            
+                <a href="../info/about_wengu_series.html">
+            
+                    
+                    关于温故系列
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#&#x597D;&#x73A9;&#x7CFB;&#x5217;--&#x5F53;spi-&#x548C;-&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3001;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x53D1;&#x751F;&#x78B0;&#x649E;&#xFF0C;&#x53EF;&#x4EE5;&#x64E6;&#x51FA;&#x600E;&#x6837;&#x7684;&#x706B;&#x82B1;"><b></b>&#x597D;&#x73A9;&#x7CFB;&#x5217; | &#x5F53;SPI &#x548C; &#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3001;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x53D1;&#x751F;&#x78B0;&#x649E;&#xFF0C;&#x53EF;&#x4EE5;&#x64E6;&#x51FA;&#x600E;&#x6837;&#x7684;&#x706B;&#x82B1;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#spi&#x673A;&#x5236;&#x7B80;&#x4ECB;"><b></b>SPI&#x673A;&#x5236;&#x7B80;&#x4ECB;</a></li><ul><li><span class="title-icon "></span><a href="#demo"><b></b>Demo</a></li></ul><li><span class="title-icon "></span><a href="#&#x9762;&#x5411;&#x95EE;&#x9898;"><b></b>&#x9762;&#x5411;&#x95EE;&#x9898;</a></li><ul><li><span class="title-icon "></span><a href="#&#x539F;&#x56E0;&#x5206;&#x6790;-serviceloader&#x6838;&#x5FC3;&#x4EE3;&#x7801;"><b></b>&#x539F;&#x56E0;&#x5206;&#x6790;-ServiceLoader&#x6838;&#x5FC3;&#x4EE3;&#x7801;</a></li><li><span class="title-icon "></span><a href="#&#x89E3;&#x51B3;&#x65B9;&#x6848;"><b></b>&#x89E3;&#x51B3;&#x65B9;&#x6848;</a></li></ul><li><span class="title-icon "></span><a href="#&#x4E0E;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x78B0;&#x649E;"><b></b>&#x4E0E;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x78B0;&#x649E;</a></li><ul><li><span class="title-icon "></span><a href="#&#x4F7F;&#x7528;factory&#x6A21;&#x5F0F;"><b></b>&#x4F7F;&#x7528;Factory&#x6A21;&#x5F0F;</a></li><li><span class="title-icon "></span><a href="#&#x4F7F;&#x7528;builder&#x6A21;&#x5F0F;"><b></b>&#x4F7F;&#x7528;Builder&#x6A21;&#x5F0F;</a></li><li><span class="title-icon "></span><a href="#&#x4E0E;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x78B0;&#x649E;"><b></b>&#x4E0E;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x78B0;&#x649E;</a></li></ul><li><span class="title-icon "></span><a href="#&#x81EA;&#x5B9A;&#x4E49;serviceloader"><b></b>&#x81EA;&#x5B9A;&#x4E49;ServiceLoader</a></li><li><span class="title-icon "></span><a href="#&#x7ED3;&#x8BED;"><b></b>&#x7ED3;&#x8BED;</a></li></ul></ul></div><a href="#&#x597D;&#x73A9;&#x7CFB;&#x5217;--&#x5F53;spi-&#x548C;-&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3001;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x53D1;&#x751F;&#x78B0;&#x649E;&#xFF0C;&#x53EF;&#x4EE5;&#x64E6;&#x51FA;&#x600E;&#x6837;&#x7684;&#x706B;&#x82B1;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x597D;&#x73A9;&#x7CFB;&#x5217;--&#x5F53;spi-&#x548C;-&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3001;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x53D1;&#x751F;&#x78B0;&#x649E;&#xFF0C;&#x53EF;&#x4EE5;&#x64E6;&#x51FA;&#x600E;&#x6837;&#x7684;&#x706B;&#x82B1;"><a name="&#x597D;&#x73A9;&#x7CFB;&#x5217;--&#x5F53;spi-&#x548C;-&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3001;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x53D1;&#x751F;&#x78B0;&#x649E;&#xFF0C;&#x53EF;&#x4EE5;&#x64E6;&#x51FA;&#x600E;&#x6837;&#x7684;&#x706B;&#x82B1;" class="anchor-navigation-ex-anchor" href="#&#x597D;&#x73A9;&#x7CFB;&#x5217;--&#x5F53;spi-&#x548C;-&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3001;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x53D1;&#x751F;&#x78B0;&#x649E;&#xFF0C;&#x53EF;&#x4EE5;&#x64E6;&#x51FA;&#x600E;&#x6837;&#x7684;&#x706B;&#x82B1;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x597D;&#x73A9;&#x7CFB;&#x5217; | &#x5F53;SPI &#x548C; &#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3001;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x53D1;&#x751F;&#x78B0;&#x649E;&#xFF0C;&#x53EF;&#x4EE5;&#x64E6;&#x51FA;&#x600E;&#x6837;&#x7684;&#x706B;&#x82B1;</h1>
+<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
+<p>&#x524D;&#x6BB5;&#x65F6;&#x95F4;&#x9605;&#x8BFB;&#x5230;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x5173;&#x4E8E;Service-Provider-Interface&#x673A;&#x5236;&#xFF08;SPI&#x673A;&#x5236;&#xFF09;&#xFF0C;&#x5728;&#x8BC4;&#x8BBA;&#x533A;&#x770B;&#x5230;&#x4E00;&#x6761;&#x8BC4;&#x8BBA;&#xFF1A;</p>
+<blockquote>
+<p>spi&#x5B9E;&#x73B0;&#x7C7B;&#x662F;&#x4E0D;&#x662F;&#x53EA;&#x80FD;&#x662F;&#x7A7A;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF1F;</p>
+</blockquote>
+<p>&#x540E;&#x7EED;&#x6211;&#x53C8;&#x56DE;&#x5473;&#x4E86;&#x4E00;&#x4E0B;&#xFF0C;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x53EF;&#x4EE5;&#x5F15;&#x51FA;&#x5F88;&#x591A;&#x6709;&#x8DA3;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x51B3;&#x5B9A;&#x7CFB;&#x7EDF;&#x6027;&#x7684;&#x601D;&#x8003;&#x5E76;&#x5206;&#x4EAB;&#x8BA8;&#x8BBA;&#x4E00;&#x756A;&#x3002;</p>
+<p><em><strong>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x6709;&#x65F6;&#x5019;&#x601D;&#x8003;&#x672A;&#x5FC5;&#x80FD;&#x83B7;&#x5F97;&#x4EE4;&#x4EBA;&#x632F;&#x594B;&#x7684;&#x5B8C;&#x7F8E;&#x7B54;&#x6848;&#xFF0C;&#x4F46;&#x8FD9;&#x79CD;&#x601D;&#x8003;&#x662F;&#x89E6;&#x53D1;&#x8D28;&#x53D8;&#x7684;&#x79EF;&#x7D2F;</strong></em></p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c22ee10a621947f3a38cca27ed01f96d~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1080&amp;h=1779&amp;s=547534&amp;e=png&amp;b=191919" alt="img_2.png"></p>
+<p>&#x56E0;&#x4E3A;&#x8BA8;&#x8BBA;&#x5185;&#x5BB9;&#x7684;scope&#x6BD4;&#x8F83;&#x5E7F;&#xFF0C;&#x800C;&#x6211;&#x7684;&#x884C;&#x6587;&#x601D;&#x8DEF;&#x6BD4;&#x8F83;&#x8DF3;&#x8DC3;&#xFF0C;&#x4E3A;&#x5C3D;&#x53EF;&#x80FD;&#x907F;&#x514D;&#x9605;&#x8BFB;&#x65F6;&#x4E4F;&#x529B;&#xFF0C;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x53EF;&#x53C2;&#x8003;&#x4EE5;&#x4E0B;&#x5BFC;&#x56FE;&#xFF1A;</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4024864ea70a42009e204e87f6849c0c~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2678&amp;h=1982&amp;s=507388&amp;e=png&amp;b=fffdfd" alt="guideline.png"></p>
+<p><a href="https://github.com/leobert-lan/SPIDemo.git" target="_blank">&#x6587;&#x4E2D;&#x6D89;&#x53CA;&#x7684;&#x4EE3;&#x7801;&#x53EF;&#x4E8E;&#x672C;&#x4ED3;&#x5E93;&#x83B7;&#x53D6;</a></p>
+<h2 id="spi&#x673A;&#x5236;&#x7B80;&#x4ECB;"><a name="spi&#x673A;&#x5236;&#x7B80;&#x4ECB;" class="anchor-navigation-ex-anchor" href="#spi&#x673A;&#x5236;&#x7B80;&#x4ECB;"><i class="fa fa-link" aria-hidden="true"></i></a>SPI&#x673A;&#x5236;&#x7B80;&#x4ECB;</h2>
+<blockquote>
+<p>Service provider interface (SPI) is an API intended to be implemented or extended by a third party.
+It can be used to enable framework extension and replaceable components.</p>
+</blockquote>
+<p>Service provider interface &#x662F;&#x80FD;&#x88AB;&#x7B2C;&#x4E09;&#x65B9;&#x7EE7;&#x627F;&#x6216;&#x8005;&#x5B9E;&#x73B0;&#x7684;API&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x4F5C;&#x6846;&#x67B6;&#x6269;&#x5F20;&#x6216;&#x8005;&#x53EF;&#x53D8;&#x7EC4;&#x4EF6;</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7ccd604bf8f9420fa838180d20e74e03~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1994&amp;h=1312&amp;s=134731&amp;e=png&amp;b=ffffff" alt="spi.png"></p>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x6838;&#x5FC3;&#x9700;&#x8981;&#xFF1A;</p>
+<ul>
+<li>&#x9884;&#x5148;&#x5B9A;&#x4E49;&#x670D;&#x52A1;&#x63A5;&#x53E3;&#xFF0C;&#x5373;SPI&#x63A5;&#x53E3;</li>
+<li>&#x7531;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#x7684;&#x6A21;&#x5757;&#x81EA;&#x884C;&#x5B9E;&#x73B0;SPI&#x63A5;&#x53E3;&#xFF0C;&#x5E76;&#x5728;Meta info&#x4E2D;&#x6CE8;&#x518C;</li>
+<li>&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#x7684;&#x6A21;&#x5757;&#x7531;&#x67D0;&#x79CD;&#x673A;&#x5236;&#x88AB;&#x52A0;&#x8F7D;&#xFF0C;<em>&#x4F8B;&#x5982;&#x7F16;&#x8BD1;&#x65F6;&#x3001;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x4E00;&#x822C;&#x4F7F;&#x7528;&#x7F16;&#x8BD1;&#x65F6;&#xFF0C;&#x8FD0;&#x884C;&#x65F6;&#x5C06;&#x6D89;&#x53CA;&#x63D2;&#x4EF6;&#x5316;&#x7B49;</em></li>
+<li>&#x53D1;&#x73B0;&#x5E76;&#x52A0;&#x8F7D;&#x670D;&#x52A1;&#x5B9E;&#x73B0;</li>
+</ul>
+<h3 id="demo"><a name="demo" class="anchor-navigation-ex-anchor" href="#demo"><i class="fa fa-link" aria-hidden="true"></i></a>Demo</h3>
+<p>&#x5B9A;&#x4E49;&#x4EE5;&#x4E0B;module&#xFF0C;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b71444f404e34b2cb19b2152d4cb4a35~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=262&amp;h=96&amp;s=9730&amp;e=png&amp;b=3c3f41" alt="img.png"></p>
+<ul>
+<li>api &#x7528;&#x4E8E;&#x63A5;&#x53E3;&#x548C;&#x6A21;&#x578B;&#x7C7B;&#x5B9A;&#x4E49;</li>
+<li>host &#x4E3A;&#x4E3B;&#x5DE5;&#x7A0B;<ul>
+<li>&#x7F16;&#x7801;&#x65F6;&#xFF0C;&#x4F9D;&#x8D56;api</li>
+<li>&#x7F16;&#x8BD1;&#x65F6;&#xFF0C;&#x4F9D;&#x8D56;api &#x548C; &#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x6A21;&#x5757;</li>
+</ul>
+</li>
+<li>module-a &#x4E00;&#x4E2A;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x6A21;&#x5757;&#xFF0C;&#x4F9D;&#x8D56;api</li>
+</ul>
+<p><em>&#x65B9;&#x4FBF;&#x8D77;&#x89C1;&#xFF0C;&#x4E0D;&#x518D;&#x5B9A;&#x4E49;&#x591A;&#x4E2A;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x6A21;&#x5757;&#xFF0C;&#x5B9E;&#x73B0;&#x7C7B;&#x5747;&#x7F6E;&#x4E8E;module-a&#x4E2D;&#xFF0C;&#x8BFB;&#x8005;&#x5E94;&#x5F53;&#x80FD;&#x591F;&#x7406;&#x89E3;&#xFF0C;host&#x901A;&#x8FC7;&#x7F16;&#x8BD1;&#x65F6;&#x786E;&#x5B9A;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x6A21;&#x5757;&#xFF0C;&#x662F;&#x4E00;&#x79CD;&quot;&#x53EF;&#x53D8;&#x7EC4;&#x4EF6;&quot;&#x7684;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;</em></p>
+<blockquote>
+<ol>
+<li>&#x5728;api&#x4E2D;&#x5B9A;&#x4E49;&#x63A5;&#x53E3;&#xFF1A;</li>
+</ol>
+</blockquote>
+<pre><code class="lang-kotlin">interface DemoApi {
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doSth</span><span class="hljs-params">()</span>: String</span>
+}
+</code></pre>
+<blockquote>
+<ol>
+<li>&#x5728;module-a&#x4E2D;&#x5B9A;&#x4E49;&#x5B9E;&#x73B0;&#x7C7B;</li>
+</ol>
+</blockquote>
+<pre><code class="lang-kotlin">@AutoService(DemoApi::<span class="hljs-class"><span class="hljs-keyword">class</span>)</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModuleADemoApiImpl</span> : <span class="hljs-type">DemoApi {</span></span>
+    <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> {
+        const <span class="hljs-variable"><span class="hljs-keyword">val</span> NAME</span> = <span class="hljs-string">&quot;ModuleADemoApiImpl&quot;</span>
+    }
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doSth</span><span class="hljs-params">()</span>: String {</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;the result by $NAME&quot;</span>
+    }
+}
+</code></pre>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x5728;Meta info&#x4E2D;&#x8FDB;&#x884C;&#x6CE8;&#x518C;&#xFF0C;&#x624B;&#x5DE5;&#x64CD;&#x4F5C;&#x6BD4;&#x8F83;&#x9EBB;&#x70E6;&#xFF0C;&#x76F4;&#x63A5;&#x501F;&#x52A9;Google&#x7684;AutoService&#x3002;</p>
+<p><em>&#x6CE8;&#x610F;&#xFF0C;Demo&#x4E2D;&#x56FE;&#x65B9;&#x4FBF;&#x4F7F;&#x7528;Kotlin&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x4F7F;&#x7528;kapt&#xFF0C;&#x5982;&#x679C;&#x65E5;&#x5E38;&#x4E60;&#x60EF;&#x4F7F;&#x7528;ksp&#xFF0C;Zacsweers&#x63D0;&#x4F9B;&#x4E86;AutoService&#x7684;ksp&#x7248;&#xFF0C;&#x5E76;&#x9700;&#x8981;&#x5904;&#x7406;&#x6253;&#x5305;&#x8D44;&#x6E90;&#x76EE;&#x5F55;</em></p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dadfed12df4c412891d6cc4cb685f21c~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=516&amp;h=219&amp;s=23449&amp;e=png&amp;b=4e4b40" alt="img_1.png"></p>
+<p>&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>osp.leobert.android.module.a.ModuleADemoApiImpl
+</code></pre><p>&#x6A21;&#x5757;&#x52A0;&#x8F7D;&#x5373;&#x4E3A;&#x58F0;&#x660E;dependency&#x5E76;&#x7F16;&#x8BD1;&#xFF0C;&#x7565;&#x53BB;&#x3002;</p>
+<blockquote>
+<p>&#x4F7F;&#x7528;</p>
+</blockquote>
+<pre><code class="lang-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">directLoadDemo</span><span class="hljs-params">()</span> {</span>
+
+    <span class="hljs-variable"><span class="hljs-keyword">val</span> loader</span> = ServiceLoader.load(DemoApi::<span class="hljs-class"><span class="hljs-keyword">class</span>.<span class="hljs-title">java</span>)</span>
+    <span class="hljs-variable"><span class="hljs-keyword">val</span> iterator</span> = loader.iterator()
+    <span class="hljs-variable"><span class="hljs-keyword">var</span> hasNext</span> = <span class="hljs-literal">false</span>
+    <span class="hljs-keyword">do</span> {
+        <span class="hljs-keyword">try</span> {
+            hasNext = iterator.hasNext()
+            <span class="hljs-keyword">if</span> (hasNext) {
+                iterator.next().let {
+                    println(<span class="hljs-string">&quot;find a impl of DemoApi, doSth:&quot;</span>)
+                    println(it.doSth())
+                    println()
+                }
+            }
+        } <span class="hljs-keyword">catch</span> (e: Throwable) {
+            println(<span class="hljs-string">&quot;thr: &quot;</span> + e.message)
+        }
+    } <span class="hljs-keyword">while</span> (hasNext)
+
+    println(<span class="hljs-string">&quot;finish directLoadDemo\r\n&quot;</span>)
+}
+</code></pre>
+<p>&#x8FD0;&#x884C;&#x5C06;&#x5728;&#x63A7;&#x5236;&#x53F0;&#x89C2;&#x6D4B;&#x5230;&#xFF1A;</p>
+<pre><code>find a impl of DemoApi, doSth:
+the result by ModuleADemoApiImpl
+</code></pre><h2 id="&#x9762;&#x5411;&#x95EE;&#x9898;"><a name="&#x9762;&#x5411;&#x95EE;&#x9898;" class="anchor-navigation-ex-anchor" href="#&#x9762;&#x5411;&#x95EE;&#x9898;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9762;&#x5411;&#x95EE;&#x9898;</h2>
+<p>&#x4E0A;&#x6587;&#x5DF2;&#x5E9F;&#x8BF8;&#x591A;&#x7B14;&#x58A8;&#xFF0C;&#x6F14;&#x793A;&#x4E86;SPI&#x7684;&#x4F7F;&#x7528;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x91CD;&#x65B0;&#x56DE;&#x5230;&#x95EE;&#x9898;&#xFF1A;</p>
+<blockquote>
+<p>&#x4F7F;&#x7528;SPI&#x65F6;&#xFF0C;SPI&#x5B9E;&#x73B0;&#x7C7B;&#x662F;&#x4E0D;&#x662F;&#x5FC5;&#x987B;&#x8981;&#x65E0;&#x53C2;&#x6784;&#x9020;&#x51FD;&#x6570;?</p>
+</blockquote>
+<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x8FD9;&#x9700;&#x8981;&#x4ECE;&#x670D;&#x52A1;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x5BFB;&#x627E;&#x7B54;&#x6848;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x5206;&#x6790;&#x4E0B; <code>ServiceLoader</code> &#x4E2D;&#x5173;&#x4E8E;&#x670D;&#x52A1;&#x52A0;&#x8F7D;&#x7684;&#x6838;&#x5FC3;&#x4EE3;&#x7801;&#x3002;</p>
+<h3 id="&#x539F;&#x56E0;&#x5206;&#x6790;-serviceloader&#x6838;&#x5FC3;&#x4EE3;&#x7801;"><a name="&#x539F;&#x56E0;&#x5206;&#x6790;-serviceloader&#x6838;&#x5FC3;&#x4EE3;&#x7801;" class="anchor-navigation-ex-anchor" href="#&#x539F;&#x56E0;&#x5206;&#x6790;-serviceloader&#x6838;&#x5FC3;&#x4EE3;&#x7801;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x539F;&#x56E0;&#x5206;&#x6790;-ServiceLoader&#x6838;&#x5FC3;&#x4EE3;&#x7801;</h3>
+<blockquote>
+<p>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x5199;&#x8FD9;&#x4E00;&#x6BB5;&#xFF1F;</p>
+<p>SPI&#x662F;&#x4E00;&#x79CD;&#x673A;&#x5236;&#xFF0C;&#x65E2;&#x7136;&#x662F;&#x673A;&#x5236;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x6709;&#x591A;&#x79CD;&#x5B9E;&#x73B0;&#x624B;&#x6BB5;&#xFF0C;&#x8FD9;&#x91CC;&#x662F;Java&#x4E2D;&#x63D0;&#x4F9B;&#x7684;&#x4E00;&#x79CD;&#x624B;&#x6BB5;&#xFF01;</p>
+<p>&#x9605;&#x8BFB;&#x4E86;&#x89E3;&#x8FD9;&#x4E00;&#x624B;&#x6BB5;&#x7684;&#x5B9E;&#x73B0;&#x53EF;&#x4EE5;&#x5E2E;&#x52A9;&#x7406;&#x89E3;&#x673A;&#x5236;&#xFF0C;&#x5E76;&#x4E14;&#x80FD;&#x4E3E;&#x4E00;&#x53CD;&#x4E09;&#x5730;&#x8054;&#x60F3;&#x5230;&#x5176;&#x4ED6;&#x624B;&#x6BB5;.&#x552F;&#x6709;&#x81EA;&#x884C;&#x9605;&#x8BFB;&#x624D;&#x80FD;&#x6709;&#x6700;&#x6DF1;&#x5730;&#x4F53;&#x4F1A;&#xFF01;</p>
+</blockquote>
+<p>&#x8BFB;&#x8005;&#x5E94;&#x5F53;&#x7559;&#x610F;&#x5230;&#xFF0C;&#x670D;&#x52A1;&#x53D1;&#x73B0;&#x548C;&#x670D;&#x52A1;&#x52A0;&#x8F7D;&#x7684;&#x6838;&#x5FC3;&#x662F;ServiceLoader&#xFF0C;&#x7B54;&#x6848;&#x4E5F;&#x5728;&#x5176;&#x4E2D;&#x3002;</p>
+<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x53EF;&#x80FD;&#x5927;&#x90E8;&#x5206;&#x8BFB;&#x8005;&#x90FD;&#x662F;Android&#x5F00;&#x53D1;&#x8005;&#xFF0C;&#x6211;&#x6311;&#x9009;android.jar&#x4E2D;&#x7684;&#x4EE3;&#x7801;&#x3002;&#x6CE8;&#x610F;&#xFF0C;JDK&#x4E2D;&#x4E0D;&#x540C;&#x7248;&#x672C;&#x7684;&#x6E90;&#x7801;&#x4E0D;&#x4E00;&#x81F4;&#xFF1B;Android&#x53D1;&#x5C55;&#x5386;&#x7A0B;&#x4E2D;&#x53EF;&#x80FD;&#x4E5F;&#x53D1;&#x751F;&#x8FC7;&#x6F14;&#x53D8;&#xFF0C;&#x672A;&#x5BFB;&#x627E;&#x8BC1;&#x636E;</em></p>
+<p>&#x6211;&#x4EEC;&#x5148;&#x5173;&#x6CE8;&#x4E24;&#x4E2A;&#x6838;&#x5FC3;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<ul>
+<li><code>static &lt;S&gt; ServiceLoader&lt;S&gt; load(Class&lt;S&gt; service)</code></li>
+<li><code>Iterator&lt;S&gt; iterator()</code></li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ServiceLoader</span> </span>{
+    <span class="hljs-keyword">private</span> LazyIterator lookupIterator;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;S&gt; <span class="hljs-function">ServiceLoader&lt;S&gt; <span class="hljs-title">load</span><span class="hljs-params">(Class&lt;S&gt; service)</span> </span>{
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
+        <span class="hljs-keyword">return</span> ServiceLoader.load(service, cl);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Iterator&lt;S&gt; <span class="hljs-title">iterator</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Iterator&lt;S&gt;() {
+            Iterator&lt;Map.Entry&lt;String, S&gt;&gt; knownProviders = providers.entrySet().iterator();
+
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>{
+                <span class="hljs-keyword">if</span> (knownProviders.hasNext())
+                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+                <span class="hljs-keyword">return</span> lookupIterator.hasNext();
+            }
+
+            <span class="hljs-function"><span class="hljs-keyword">public</span> S <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>{
+                <span class="hljs-keyword">if</span> (knownProviders.hasNext())
+                    <span class="hljs-keyword">return</span> knownProviders.next().getValue();
+                <span class="hljs-keyword">return</span> lookupIterator.next();
+            }
+
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">()</span> </span>{
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+            }
+        };
+    }
+}
+</code></pre>
+<p>&#x5F88;&#x660E;&#x663E;&#xFF0C;&#x670D;&#x52A1;&#x53D1;&#x73B0;&#x548C;&#x670D;&#x52A1;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x4E2D;&#x9700;&#x8981;&#x5229;&#x7528; <code>ClassLoader</code>&#xFF0C;<em>&#x76F8;&#x5173;&#x77E5;&#x8BC6;&#x4E0D;&#x518D;&#x5C55;&#x5F00;&#xFF0C;&#x6B64;&#x5904;&#x53EF;&#x5F15;&#x53D1;&#x5927;&#x91CF;&#x9ED1;&#x79D1;&#x6280;&#x8054;&#x60F3;</em></p>
+<p><code>knownProviders</code> &#x662F;&#x5DF2;&#x52A0;&#x8F7D;&#x5B9E;&#x4F8B;&#x7684;&#x6C60;&#xFF0C;&#x4E0D;&#x662F;&#x91CD;&#x70B9;&#xFF0C;&#x91CD;&#x70B9;&#x662F; <code>lookupIterator</code></p>
+<p>&#x8FD9;&#x90E8;&#x5206;&#x4EE3;&#x7801;&#x7565;&#x957F;&#xFF0C;&#x6838;&#x5FC3;&#x70B9;&#x5728;&#x4E8E;&#xFF1A;</p>
+<ul>
+<li>&#x57FA;&#x4E8E; <code>ClassLoader</code> &#x52A0;&#x8F7D;&#x6307;&#x5B9A;&#x7684;Resource&#xFF0C;&#x5373; <code>META-INF/services/{&#x63A5;&#x53E3;&#x7C7B;&#x540D;}</code>&#xFF0C;&#x8FD8;&#x8BB0;&#x5F97;AutoService&#x751F;&#x6210;&#x7684;&#x6587;&#x4EF6;&#x5417;&#xFF1F;</li>
+<li>&#x89E3;&#x6790;&#x5185;&#x5BB9;&#x83B7;&#x5F97;&#x7C7B;&#x540D;</li>
+<li>&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x52A0;&#x8F7D;&#x7C7B;</li>
+<li>&#x8C03;&#x7528; <code>Class#newInstance()</code> &#x83B7;&#x5F97;&#x5B9E;&#x4F8B;</li>
+</ul>
+<blockquote>
+<p><code>Class#newInstance()</code> &#x5236;&#x7EA6;&#x4E86;&#x670D;&#x52A1;&#x5B9E;&#x73B0;&#x7C7B;&#x5FC5;&#x987B;&#x8981;&#x6709;&#x65E0;&#x53C2;&#x6784;&#x9020;&#x51FD;&#x6570;&#x3002;</p>
+</blockquote>
+<p>&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF0C;&#x6CDB;&#x8BFB;&#x4F53;&#x4F1A;&#x5373;&#x53EF;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LazyIterator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Iterator</span>&lt;<span class="hljs-title">S</span>&gt; </span>{
+
+    Class&lt;S&gt; service;
+    ClassLoader loader;
+    Enumeration&lt;URL&gt; configs = <span class="hljs-keyword">null</span>;
+    Iterator&lt;String&gt; pending = <span class="hljs-keyword">null</span>;
+    String nextName = <span class="hljs-keyword">null</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">LazyIterator</span><span class="hljs-params">(Class&lt;S&gt; service, ClassLoader loader)</span> </span>{
+        <span class="hljs-keyword">this</span>.service = service;
+        <span class="hljs-keyword">this</span>.loader = loader;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNextService</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">if</span> (nextName != <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        }
+        <span class="hljs-keyword">if</span> (configs == <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">try</span> {
+                String fullName = PREFIX + service.getName();
+                <span class="hljs-keyword">if</span> (loader == <span class="hljs-keyword">null</span>)
+                    configs = ClassLoader.getSystemResources(fullName);
+                <span class="hljs-keyword">else</span>
+                    configs = loader.getResources(fullName);
+            } <span class="hljs-keyword">catch</span> (IOException x) {
+                fail(service, <span class="hljs-string">&quot;Error locating configuration files&quot;</span>, x);
+            }
+        }
+        <span class="hljs-keyword">while</span> ((pending == <span class="hljs-keyword">null</span>) || !pending.hasNext()) {
+            <span class="hljs-keyword">if</span> (!configs.hasMoreElements()) {
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+            }
+            pending = parse(service, configs.nextElement());
+        }
+        nextName = pending.next();
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> S <span class="hljs-title">nextService</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">if</span> (!hasNextService())
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NoSuchElementException();
+        String cn = nextName;
+        nextName = <span class="hljs-keyword">null</span>;
+        Class&lt;?&gt; c = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">try</span> {
+            c = Class.forName(cn, <span class="hljs-keyword">false</span>, loader);
+        } <span class="hljs-keyword">catch</span> (ClassNotFoundException x) {
+            fail(service, <span class="hljs-string">&quot;Provider &quot;</span> + cn + <span class="hljs-string">&quot; not found&quot;</span>, x);
+        }
+        <span class="hljs-keyword">if</span> (!service.isAssignableFrom(c)) {
+            ClassCastException cce = <span class="hljs-keyword">new</span> ClassCastException(service.getCanonicalName() + <span class="hljs-string">&quot; is not assignable from &quot;</span> + c.getCanonicalName());
+            fail(service, <span class="hljs-string">&quot;Provider &quot;</span> + cn + <span class="hljs-string">&quot; not a subtype&quot;</span>, cce);
+        }
+        <span class="hljs-keyword">try</span> {
+            S p = service.cast(c.newInstance());
+            providers.put(cn, p);
+            <span class="hljs-keyword">return</span> p;
+        } <span class="hljs-keyword">catch</span> (Throwable x) {
+            fail(service, <span class="hljs-string">&quot;Provider &quot;</span> + cn + <span class="hljs-string">&quot; could not be instantiated&quot;</span>, x);
+        }
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error();          <span class="hljs-comment">// This cannot happen</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> hasNextService();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> S <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> nextService();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();
+    }
+}
+</code></pre>
+<h3 id="&#x89E3;&#x51B3;&#x65B9;&#x6848;"><a name="&#x89E3;&#x51B3;&#x65B9;&#x6848;" class="anchor-navigation-ex-anchor" href="#&#x89E3;&#x51B3;&#x65B9;&#x6848;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x89E3;&#x51B3;&#x65B9;&#x6848;</h3>
+<p>&#x4E25;&#x683C;&#x6765;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x9879;&#x76EE;&#x4E2D;&#xFF1A;</p>
+<ul>
+<li>&#x6709;<strong>&#x4E25;&#x8C28;&#x4E14;&#x5065;&#x58EE;&#x4E14;&#x5168;&#x9762;</strong> &#x7684; &#x5BF9;&#x8C61;&#x751F;&#x547D;&#x5468;&#x671F;&#x7BA1;&#x7406;&#xFF0C;&#x5E76;&#x4E14;&#x4E0E;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#x5316;&#x65F6;&#x95F4;&#x65E0;&#x5173;&#x8054;</li>
+<li>&#x901A;&#x8FC7;&#x5176;&#x4ED6;&#x9014;&#x5F84;&#xFF0C;&#x4E0D;&#x4F9D;&#x9760;&#x6784;&#x9020;&#x5668;&#x505A;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;</li>
+</ul>
+<p>&#x90A3;&#x4E48;&#x5C06;&#x53EF;&#x6D88;&#x706D;&#x6E90;&#x5934;&#x95EE;&#x9898;&#xFF0C;&#x5373;&#xFF1A;&#x6CA1;&#x6709;&#x4F7F;&#x7528;&#x6709;&#x53C2;&#x6784;&#x9020;&#x5668;&#x7684;&#x5FC5;&#x8981;&#x3002;&#x4F46;&#x73B0;&#x5B9E;&#x6BD4;&#x8F83;&#x9AA8;&#x611F;&#xFF0C;&#x8FD9;&#x79CD;&#x5047;&#x8BBE;&#x8FC7;&#x4E8E;&#x7406;&#x60F3;&#x5316;&#xFF0C;&#x5E76;&#x4E14;&#x4F1A;&#x5BF9;&#x7F16;&#x7801;&#x4E60;&#x60EF;&#x5E26;&#x6765;&#x5F88;&#x591A;&#x51B2;&#x51FB;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x975E;&#x8981;&#x4F7F;&#x7528;&#x542B;&#x53C2;&#x6784;&#x9020;&#x5668;&#xFF0C;&#x6709;&#x4EE5;&#x4E0B;&#x601D;&#x8DEF;&#xFF1A;</p>
+<ul>
+<li>&#x6697;&#x5EA6;&#x9648;&#x4ED3;&#xFF0C;&#x4E0D;&#x76F4;&#x63A5;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#x5B9E;&#x73B0;&#xFF0C;&#x800C;&#x662F;&#x57FA;&#x4E8E;SPI&#x673A;&#x5236;&#x548C;&#x73B0;&#x6709;&#x5B9E;&#x73B0;&#xFF0C;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x65B0;&#x670D;&#x52A1;&#xFF0C;&#x8BE5;&#x670D;&#x52A1;&#x6EE1;&#x8DB3;&quot;&#x521B;&#x5EFA;&#x3001;&#x83B7;&#x53D6;&#x7279;&#x5B9A;&#x670D;&#x52A1;&quot;&#x7684;&#x9700;&#x6C42;&#xFF0C;<strong>&#x5C06;&#x5B9E;&#x4F8B;&#x7684;&#x521B;&#x5EFA;&#x8FC7;&#x7A0B;&#x4E0E;&#x83B7;&#x53D6;&#x8FC7;&#x7A0B;&#x5206;&#x79BB;</strong>
+&#x3002;&#x901A;&#x4FD7;&#x5730;&#x8BB2;&#xFF0C;&#x5B9A;&#x4E49;&#x7684;Interface&#x4E3A;&#x76EE;&#x6807;api-Interface&#x7684;Factory&#x6216;&#x8005;Builder</li>
+<li>&#x529B;&#x5927;&#x7816;&#x98DE;&#xFF0C;&#x81EA;&#x5B9E;&#x73B0;SPI&#x673A;&#x5236;&#xFF0C;&#x901A;&#x4FD7;&#x5730;&#x8BB2;&#xFF0C;&#x5373;&#x81EA;&#x5B9A;&#x4E49;ServiceLoader</li>
+</ul>
+<h2 id="&#x4E0E;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x78B0;&#x649E;"><a name="&#x4E0E;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x78B0;&#x649E;" class="anchor-navigation-ex-anchor" href="#&#x4E0E;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x78B0;&#x649E;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E0E;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x78B0;&#x649E;</h2>
+<p>&#x6362;&#x4E2A;&#x89D2;&#x5EA6;&#x770B;&#x5F85;&#x95EE;&#x9898;&#xFF0C;&#x4F7F;&#x7528; <code>ServiceLoader</code> &#x65F6;&#xFF0C;&#x5176;&#x540C;&#x65F6;&#x5B9E;&#x73B0;&#x4E86;&#xFF1A;</p>
+<ul>
+<li>&#x670D;&#x52A1;&#x53D1;&#x73B0;</li>
+<li>&#x670D;&#x52A1;&#x52A0;&#x8F7D;&#xFF08;&#x5B9E;&#x4F8B;&#x5316;&#xFF09;</li>
+</ul>
+<p>&#x95EE;&#x9898;&#x5728;&#x4E8E;&#xFF0C;&#x5B9E;&#x4F8B;&#x5316;&#x65B9;&#x5F0F;&#x4E0D;&#x6EE1;&#x8DB3;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x8005;&#x671F;&#x671B;&#xFF0C;&#x800C;&#x670D;&#x52A1;&#x4F7F;&#x7528;&#x8005;&#x5173;&#x5FC3;&#x70B9;&#x5728;&#x4E8E;&#x53D1;&#x73B0;&#x670D;&#x52A1;&#x5E76;&#x4F7F;&#x7528;&#x670D;&#x52A1;&#xFF0C;&#x6B64;&#x65F6;&#x5219;&#x4E0D;&#x96BE;&#x60F3;&#x5230;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3002;</p>
+<p>&#x5982;Factory&#x6A21;&#x5757;&#xFF0C;&#x5176;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x65E0;&#x9700;&#x5BF9;&#x4F7F;&#x7528;&#x8005;&#x66B4;&#x9732;&#x521B;&#x5EFA;&#x7684;&#x903B;&#x8F91;&#x3002;</p>
+<h3 id="&#x4F7F;&#x7528;factory&#x6A21;&#x5F0F;"><a name="&#x4F7F;&#x7528;factory&#x6A21;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#&#x4F7F;&#x7528;factory&#x6A21;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F7F;&#x7528;Factory&#x6A21;&#x5F0F;</h3>
+<p>&#x6B64;&#x65F6;&#xFF0C;SPI&#x63A5;&#x53E3;&#x4E0D;&#x518D;&#x662F;&#x539F;&#x670D;&#x52A1;&#x63A5;&#x53E3;&#xFF0C;&#x800C;&#x662F;&#x539F;&#x670D;&#x52A1;&#x63A5;&#x53E3;&#x7684;Factory</p>
+<h4 id="demo_1"><a name="demo_1" class="anchor-navigation-ex-anchor" href="#demo_1"><i class="fa fa-link" aria-hidden="true"></i></a>Demo</h4>
+<pre><code class="lang-kotlin">interface DemoApiFactory {
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">create</span><span class="hljs-params">()</span>: DemoApi</span>
+}
+</code></pre>
+<p>&#x6A21;&#x5757;&#x63D0;&#x4F9B;Factory&#x5B9E;&#x73B0;</p>
+<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeOp</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">execute</span><span class="hljs-params">()</span>: String {</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;[result of SomeOp $this]&quot;</span>
+    }
+}
+
+<span class="hljs-comment">//@AutoService(DemoApi::class)</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModuleADemoApiImpl2</span></span>(<span class="hljs-variable"><span class="hljs-keyword">val</span> someOp</span>: SomeOp) : DemoApi {
+    <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> {
+        const <span class="hljs-variable"><span class="hljs-keyword">val</span> NAME</span> = <span class="hljs-string">&quot;ModuleADemoApiImpl2&quot;</span>
+    }
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doSth</span><span class="hljs-params">()</span>: String {</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;${someOp.execute()} - the result by $NAME&quot;</span>
+    }
+
+    @AutoService(DemoApiFactory::<span class="hljs-class"><span class="hljs-keyword">class</span>)</span>
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Factory</span> : <span class="hljs-type">DemoApiFactory {</span></span>
+        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">create</span><span class="hljs-params">()</span>: DemoApi {</span>
+            <span class="hljs-keyword">return</span> ModuleADemoApiImpl2(SomeOp())
+        }
+    }
+}
+</code></pre>
+<p>&#x4F7F;&#x7528;</p>
+<pre><code class="lang-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">useFactoryDemo</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-variable"><span class="hljs-keyword">val</span> loader</span> = ServiceLoader.load(DemoApiFactory::<span class="hljs-class"><span class="hljs-keyword">class</span>.<span class="hljs-title">java</span>)</span>
+    <span class="hljs-variable"><span class="hljs-keyword">val</span> iterator</span> = loader.iterator()
+    <span class="hljs-variable"><span class="hljs-keyword">var</span> hasNext</span> = <span class="hljs-literal">false</span>
+    <span class="hljs-keyword">do</span> {
+        <span class="hljs-keyword">try</span> {
+            hasNext = iterator.hasNext()
+            <span class="hljs-keyword">if</span> (hasNext) {
+                iterator.next().create().let {
+                    println(<span class="hljs-string">&quot;find a impl of DemoApi, doSth:&quot;</span>)
+                    println(it.doSth())
+                    println()
+                }
+            }
+        } <span class="hljs-keyword">catch</span> (e: Throwable) {
+            println(<span class="hljs-string">&quot;thr: &quot;</span> + e.message)
+        }
+    } <span class="hljs-keyword">while</span> (hasNext)
+
+    println(<span class="hljs-string">&quot;finish useFactoryDemo\r\n&quot;</span>)
+}
+</code></pre>
+<pre><code>find a impl of DemoApi, doSth:
+[result of SomeOp osp.leobert.android.module.a.SomeOp@26ba2a48]
+ - the result by ModuleADemoApiImpl2
+
+finish useFactoryDemo
+</code></pre><h4 id="&#x95EE;&#x9898;"><a name="&#x95EE;&#x9898;" class="anchor-navigation-ex-anchor" href="#&#x95EE;&#x9898;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x95EE;&#x9898;</h4>
+<p>&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;Demo&#x4E2D;&#x7684;&#x60C5;&#x51B5;&#x6A21;&#x62DF;&#x7684;&#x975E;&#x5E38;&#x7B80;&#x5355;,&#x800C;&#x5B9E;&#x9645;&#x60C5;&#x51B5;&#x5F80;&#x5F80;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x83B7;&#x53D6;&#x6784;&#x9020;&#x5668;&#x6240;&#x9700;&#x7684;&#x53C2;&#x6570;&#x5F80;&#x5F80;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#xFF0C;&#x53EF;&#x80FD;&#x6765;&#x81EA;&#x4E0D;&#x540C;&#x6A21;&#x5757;</p>
+<p>&#x6B64;&#x65F6;&#x53EF;&#x4E0E;Builder&#x6A21;&#x5F0F;&#x76F8;&#x7ED3;&#x5408;&#xFF0C;<em>&#x5982;&#x679C;Builder&#x5DF2;&#x5B58;&#x5728;&#x6709;&#x53C2;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x5728;&#x4E0D;&#x4FEE;&#x6539;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x53EF;&#x7EE7;&#x7EED;&#x5957;&#x7528;Factory</em>&#x3002;</p>
+<h3 id="&#x4F7F;&#x7528;builder&#x6A21;&#x5F0F;"><a name="&#x4F7F;&#x7528;builder&#x6A21;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#&#x4F7F;&#x7528;builder&#x6A21;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F7F;&#x7528;Builder&#x6A21;&#x5F0F;</h3>
+<pre><code class="lang-kotlin">interface DemoApi {
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doSth</span><span class="hljs-params">()</span>: String</span>
+
+    interface Builder {
+
+        <span class="hljs-variable"><span class="hljs-keyword">var</span> foo</span>: Foo
+
+        <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">build</span><span class="hljs-params">()</span>: DemoApi</span>
+
+        interface Factory {
+            <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">create</span><span class="hljs-params">()</span>: Builder</span>
+        }
+    }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
+    <span class="hljs-variable"><span class="hljs-keyword">val</span> createdAt</span> = Throwable().stackTrace[<span class="hljs-number">1</span>].toString()
+}
+</code></pre>
+<blockquote>
+<p>&#x6A21;&#x62DF;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x9700;&#x8981;&#x7684;&#x53C2;&#x6570;&#x5206;&#x522B;&#x7531;&#x5F53;&#x524D;&#x6A21;&#x5757;&#x548C;&#x5BBF;&#x4E3B;&#x6A21;&#x5757;&#x63D0;&#x4F9B;&#xFF0C;&#x56E0;&#x800C;&#x4F7F;&#x7528;Builder&#x5C06;&#x8FC7;&#x7A0B;&#x5206;&#x79BB;</p>
+</blockquote>
+<pre><code class="lang-kotlin"><span class="hljs-comment">//@AutoService(DemoApi::class)</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModuleADemoApiImpl3</span></span>(<span class="hljs-variable"><span class="hljs-keyword">val</span> someOp</span>: SomeOp, <span class="hljs-variable"><span class="hljs-keyword">val</span> needProvideByHost</span>: Foo) : DemoApi {
+    <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> {
+        const <span class="hljs-variable"><span class="hljs-keyword">val</span> NAME</span> = <span class="hljs-string">&quot;ModuleADemoApiImpl3&quot;</span>
+    }
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doSth</span><span class="hljs-params">()</span>: String {</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;${someOp.execute()} ,param2 create at${needProvideByHost.createdAt} - the result by $NAME&quot;</span>
+    }
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Builder</span></span>(<span class="hljs-variable"><span class="hljs-keyword">val</span> someOp</span>: SomeOp) : DemoApi.Builder {
+        <span class="hljs-keyword">override</span> lateinit <span class="hljs-variable"><span class="hljs-keyword">var</span> foo</span>: Foo
+        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">build</span><span class="hljs-params">()</span>: DemoApi {</span>
+            <span class="hljs-keyword">return</span> ModuleADemoApiImpl3(someOp, foo)
+        }
+
+        @AutoService(DemoApi.Builder.Factory::<span class="hljs-class"><span class="hljs-keyword">class</span>)</span>
+        <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Factory</span> : <span class="hljs-type">DemoApi.Builder.Factory {</span></span>
+            <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">create</span><span class="hljs-params">()</span>: DemoApi.Builder {</span>
+                <span class="hljs-comment">//the logic to get SomeOp instance,it may be complex</span>
+                <span class="hljs-variable"><span class="hljs-keyword">val</span> someOp</span> = SomeOp()
+                <span class="hljs-keyword">return</span> Builder(someOp)
+            }
+        }
+    }
+}
+</code></pre>
+<p>&#x4F7F;&#x7528;&#xFF1A;</p>
+<pre><code class="lang-kotlin">
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">useBuilderDemo</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-variable"><span class="hljs-keyword">val</span> loader</span> = ServiceLoader.load(DemoApi.Builder.Factory::<span class="hljs-class"><span class="hljs-keyword">class</span>.<span class="hljs-title">java</span>)</span>
+    <span class="hljs-variable"><span class="hljs-keyword">val</span> iterator</span> = loader.iterator()
+    <span class="hljs-variable"><span class="hljs-keyword">var</span> hasNext</span> = <span class="hljs-literal">false</span>
+    <span class="hljs-keyword">do</span> {
+        <span class="hljs-keyword">try</span> {
+            hasNext = iterator.hasNext()
+            <span class="hljs-keyword">if</span> (hasNext) {
+                iterator.next().create().let {
+                    it.foo = Foo()
+                    it.build()
+                }.let {
+                    println(<span class="hljs-string">&quot;find a impl of DemoApi, doSth:&quot;</span>)
+                    println(it.doSth())
+                    println()
+                }
+            }
+        } <span class="hljs-keyword">catch</span> (e: Throwable) {
+            println(<span class="hljs-string">&quot;thr: &quot;</span> + e.message)
+        }
+    } <span class="hljs-keyword">while</span> (hasNext)
+
+    println(<span class="hljs-string">&quot;finish useBuilderDemo\r\n&quot;</span>)
+}
+</code></pre>
+<p>&#x7ED3;&#x679C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>find a impl of DemoApi, doSth:
+[result of SomeOp osp.leobert.android.module.a.SomeOp@180bc464] ,
+param2 create at osp.leobert.android.host.MyClassKt.useBuilderDemo(MyClass.kt:75)
+ - the result by ModuleADemoApiImpl3
+
+finish useBuilderDemo
+</code></pre><blockquote>
+<p>&#x7136;&#x5373;&#x4FBF;&#x5982;&#x6B64;&#xFF0C;&#x5B9E;&#x9645;&#x9879;&#x76EE;&#x4E2D;&#xFF0C;&#x4F9D;&#x65E7;&#x4F1A;&#x6709;&#x8BF8;&#x591A;&#x9EBB;&#x70E6;&#x3002;&#x4F9D;&#x8D56;&#x83B7;&#x53D6;&#x6216;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#xFF0C;&#x6C38;&#x8FDC;&#x4F1A;&#x9762;&#x4E34;&#x6781;&#x7AEF;&#x590D;&#x6742;&#x7684;&#x60C5;&#x51B5;&#x3002;&#x6211;&#x4EEC;&#x6A21;&#x62DF;&#x7684;&#x60C5;&#x51B5;&#x6C38;&#x8FDC;&#x6BD4;&#x4E0D;&#x4E0A;&#x5B9E;&#x9645;&#x60C5;&#x51B5;&#x590D;&#x6742;&#x3002;</p>
+<p>&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x5E94;&#x5F53;&#x80FD;&#x591F;&#x7406;&#x89E3;&#xFF0C;&#x5F53;&#x9762;&#x4E34;&#x6781;&#x7AEF;&#x590D;&#x6742;&#x7684;&#x60C5;&#x51B5;&#x65F6;&#xFF0C;&#x4F8B;&#x5982;&#x53C2;&#x6570;&#x6765;&#x81EA;3&#x4E2A;&#x751A;&#x81F3;&#x66F4;&#x591A;&#x6A21;&#x5757;&#x65F6;&#xFF0C;&#x5373;&#x4FBF;&#x5229;&#x7528;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x4ECD;&#x80FD;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#xFF0C;&#x4F46;&#x5176;&#x8BBE;&#x8BA1;&#x548C;&#x7406;&#x89E3;&#x6210;&#x672C;&#x5DF2;&#x7136;&#x6781;&#x9AD8;&#xFF01;</p>
+</blockquote>
+<h3 id="&#x4E0E;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x78B0;&#x649E;"><a name="&#x4E0E;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x78B0;&#x649E;" class="anchor-navigation-ex-anchor" href="#&#x4E0E;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x78B0;&#x649E;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E0E;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x78B0;&#x649E;</h3>
+<p>&#x867D;&#x7136;&#x4ECE;&#x5E7F;&#x4E49;&#x4E0A;&#x770B;&#xFF0C;SPI&#x673A;&#x5236;&#x4E5F;&#x662F;&#x4E00;&#x79CD;&#x7279;&#x5B9A;&#x573A;&#x666F;&#x4E0B;&#x7684;DI&#x5B9E;&#x73B0;&#xFF0C;&#x672C;&#x7AE0;&#x8282;&#x6682;&#x4E0D;&#x65E0;&#x9650;&#x6269;&#x5C55;&#xFF0C;&#x4EC5;&#x5728;&#x4E0B;&#x4E2A;&#x7AE0;&#x8282;&#x4E2D;&#x7559;&#x4E0B;&#x5F00;&#x7AEF;&#x3002;</p>
+<p>&#x5F53;&#x4E0E;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x7684;&#x624B;&#x6BB5;&#x76F8;&#x78B0;&#x649E;&#x65F6;&#xFF0C;&#x53EF;&#x8003;&#x8651;&#x4E24;&#x4E2A;&#x65B9;&#x5411;&#xFF1A;</p>
+<ul>
+<li>&#x670D;&#x52A1;&#x6A21;&#x5757;&#x5185;&#x90E8;&#x4F7F;&#x7528;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#xFF0C;&#x8003;&#x91CF;SPI(ServiceLoader)&#x662F;&#x5426;&#x53EF;&#x65E0;&#x7F1D;&#x8854;&#x63A5;&#x6A21;&#x5757;&#x5185;DI</li>
+<li>&#x529B;&#x5927;&#x7816;&#x98DE;&#xFF0C;&#x81EA;&#x5B9E;&#x73B0;SPI&#x673A;&#x5236;&#xFF0C;&#x901A;&#x4FD7;&#x5730;&#x8BB2;&#xFF0C;&#x5373;&#x81EA;&#x5B9A;&#x4E49;ServiceLoader&#xFF0C;&#x5E76;&#x5728;&#x5176;&#x4E2D;&#x65E0;&#x7F1D;&#x8854;&#x63A5;DI</li>
+</ul>
+<h4 id="&#x4E0E;dagger2&#x517C;&#x5BB9;&#x6027;&#x63A2;&#x5BFB;"><a name="&#x4E0E;dagger2&#x517C;&#x5BB9;&#x6027;&#x63A2;&#x5BFB;" class="anchor-navigation-ex-anchor" href="#&#x4E0E;dagger2&#x517C;&#x5BB9;&#x6027;&#x63A2;&#x5BFB;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E0E;Dagger2&#x517C;&#x5BB9;&#x6027;&#x63A2;&#x5BFB;</h4>
+<blockquote>
+<p>&#x9996;&#x5148;&#x53EF;&#x4EE5;&#x660E;&#x786E;&#x4E00;&#x70B9;&#xFF1A;<code>@AutoService</code> &#x5FC5;&#x987B;&#x6CE8;&#x89E3;&#x4E8E;&#x975E;&#x62BD;&#x8C61;&#x7C7B;&#x4E0A;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x5047;&#x5982;ServiceLoader&#x53EF;&#x4EE5;&#x548C;Dagger2&#x751F;&#x6210;&#x7684;&#x4EE3;&#x7801;&#x517C;&#x5BB9;&#xFF0C;&#x4E5F;&#x9700;&#x8981;&#x624B;&#x52A8;&#x6CE8;&#x518C; <em>&#xFF08;&#x6216;&#x8005;&#x81EA;&#x6269;&#x5C55;Dagger2&#x7684;&#x7F16;&#x8BD1;&#xFF0C;&#x5BF9;&#x751F;&#x6210;&#x7C7B;&#x6DFB;&#x52A0;&#x6807;&#x8BB0;&#xFF09;</em></p>
+<p>&#x5176;&#x6B21;&#xFF0C;&#x4E0D;&#x96BE;&#x901A;&#x8FC7;&#x601D;&#x8003;&#x5F97;&#x51FA;&#x7ED3;&#x8BBA;&#xFF1A;ServiceLoader &#x76F4;&#x63A5;&#x52A0;&#x8F7D; Dagger2 &#x7684;&#x751F;&#x6210;&#x7C7B;&#xFF0C;&#x5C06;&#x4F1A;&#x7834;&#x574F;Dagger2&#x5BF9;&#x4F9D;&#x8D56;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x7BA1;&#x7406;&#x3002;&#x5373;&#x4FBF;&#x6A21;&#x4EFF; <code>Anvil</code>&#xFF08;&#x7C7B;&#x4F3C;Hilt&#xFF09;&#x8FDB;&#x884C;&#x4E00;&#x7CFB;&#x5217;&#x81EA;&#x5B9A;&#x4E49;&#x6269;&#x5C55;&#xFF0C;&#x4E5F;&#x65E0;&#x6CD5;&#x964D;&#x4F4E;&#x8BBE;&#x8BA1;&#x96BE;&#x5EA6;&#xFF0C;&#x4E0D;&#x518D;&#x5C55;&#x5F00;&#x8BA8;&#x8BBA;&#x3002;</p>
+</blockquote>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x53EF;&#x9760;&#x7684;&#x5B9E;&#x73B0;&#x601D;&#x8DEF;&#x4E3A;&#xFF1A;SPI&#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#x7C7B;&#x4F9D;&#x8D56; <code>DaggerComponent</code> &#xFF0C;&#x5E76;&#x636E;&#x6B64;&#x8FDB;&#x5165;Dagger&#x7684;&#x4E16;&#x754C;&#x83B7;&#x53D6;&#x5230;&#x76EE;&#x6807;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#x3002;&#x4F2A;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApiFactoryImpl</span> : <span class="hljs-type">ApiFactory {</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">create</span><span class="hljs-params">(foo: <span class="hljs-type">Foo</span>)</span>: Api {</span>
+        <span class="hljs-keyword">return</span> DaggerComponent.create().provideApi(foo)
+    }
+}
+</code></pre>
+<p><em>&#x6CE8;&#x610F;&#xFF0C;&#x4F2A;&#x4EE3;&#x7801;&#x4EC5;&#x793A;&#x610F;&#xFF0C;&#x5B9E;&#x9645;&#x7F16;&#x5199;&#x65F6;&#x4ECD;&#x9700;&#x8981;&#x8003;&#x8651;Component&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x63A7;&#x5236;&#xFF0C;&#x4EE5;&#x907F;&#x514D;&#x4EA7;&#x751F;&#x6F5C;&#x5728;BUG</em></p>
+<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x7531;&#x5BBF;&#x4E3B;&#x6A21;&#x5757;&#x63D0;&#x4F9B;&#x7684;&#x4F9D;&#x8D56;&#x4F7F;&#x7528; <code>@Assisted</code> &#x6CE8;&#x89E3;&#x6807;&#x8BB0;&#xFF0C;&#x5176;&#x4ED6;&#x4F9D;&#x8D56;&#x901A;&#x8FC7; <code>Dagger2</code> &#x8FDB;&#x884C;&#x7BA1;&#x7406;</p>
+<p>&#x91CD;&#x65B0;&#x5B9A;&#x4E49;SPI&#x63A5;&#x53E3;&#xFF1A;</p>
+<pre><code class="lang-kotlin">interface DemoApiFactory2 {
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">create</span><span class="hljs-params">(foo: <span class="hljs-type">Foo</span>)</span>: DemoApi</span>
+}
+</code></pre>
+<p>&#x670D;&#x52A1;&#x6A21;&#x5757;&#x5185;&#x90E8;&#x4F7F;&#x7528; DI&#xFF1A;</p>
+<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModuleADemoApiImpl4</span></span>
+@AssistedInject constructor(
+    <span class="hljs-variable"><span class="hljs-keyword">val</span> someOp</span>: SomeOp,
+    @Assisted <span class="hljs-variable"><span class="hljs-keyword">val</span> needProvideByHost</span>: Foo
+) : DemoApi {
+
+    <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> {
+        const <span class="hljs-variable"><span class="hljs-keyword">val</span> NAME</span> = <span class="hljs-string">&quot;ModuleADemoApiImpl4&quot;</span>
+    }
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doSth</span><span class="hljs-params">()</span>: String {</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;${someOp.execute()} ,param2 create at${needProvideByHost.createdAt} - the result by $NAME&quot;</span>
+    }
+
+    @AutoService(DemoApiFactory2::<span class="hljs-class"><span class="hljs-keyword">class</span>)</span>
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpiFactory</span> : <span class="hljs-type">DemoApiFactory2 {</span></span>
+        <span class="hljs-comment">//&#x6CE8;&#x610F;&#xFF0C;&#x4EC5;&#x793A;&#x4F8B;&#x4EE3;&#x7801;&#xFF0C;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x65F6;&#x9700;&#x4E25;&#x683C;&#x9075;&#x5FAA;Component&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x9700;&#x6C42;&#x83B7;&#x53D6;&#x5B9E;&#x4F8B;</span>
+        <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> factory by lazy {
+            DaggerAppComponent.create().provideFactory()
+        }
+
+        override fun create(foo</span>: Foo): DemoApi {
+            <span class="hljs-keyword">return</span> factory.create(foo)
+        }
+    }
+
+    @AssistedFactory
+    abstract <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Factory</span> </span>{
+        abstract <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">create</span><span class="hljs-params">(@Assisted needProvideByHost: <span class="hljs-type">Foo</span>)</span>: ModuleADemoApiImpl4</span>
+    }
+}
+</code></pre>
+<p>DI&#x90E8;&#x5206;&#x7684;&#x4EE3;&#x7801;&#x5FFD;&#x7565;&#xFF0C;&#x8BE6;&#x89C1;&#x4ED3;&#x5E93;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x601D;&#x8DEF;&#x53EF;&#x4EE5;&#x89E3;&#x51B3;&#x91C7;&#x7528;&#x591A;&#x79CD;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x5E26;&#x6765;&#x7684;&#x7F16;&#x7801;&#x590D;&#x6742;&#x5EA6;&#x95EE;&#x9898;&#x3002;</p>
+<blockquote>
+<p>&#x90A3;&#x4E48;&#xFF0C;&#x662F;&#x5426;&#x5F97;&#x5230;&#x4E86;&#x94F6;&#x5F39;&#x5462;&#xFF1F;&#x7B54;&#x6848;&#x662F;&#x5426;&#x5B9A;&#x7684;&#xFF01;SPI&#x673A;&#x5236;&#x7684;&#x8BBE;&#x8BA1;&#x662F;&quot;&#x8F7B;&#x91CF;&#x7EA7;&quot;&#x7684;&#xFF0C;&#x5F53;&#x6309;&#x7167;&#x8FD9;&#x4E00;&#x601D;&#x8DEF;&#xFF0C;&#x5B8C;&#x7F8E;&#x89E3;&#x51B3;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x548C;&#x4F9D;&#x8D56;&#x7BA1;&#x7406;&#x96BE;&#x70B9;&#x65F6;&#xFF08;&#x663E;&#x7136;&#x5B83;&#x9700;&#x8981;&#x62E5;&#x6709;&#x4E00;&#x79CD;&#x805A;&#x5408;&#x80FD;&#x529B;&#x65B9;&#x53EF;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#xFF09;&#xFF0C;&#x7B80;&#x5355;&#x63A8;&#x7406;&#x5373;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#xFF1A;</p>
+<p>&#x5373;&#x4FBF;&#x4E0D;&#x4F7F;&#x7528;SPI&#x673A;&#x5236;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x57FA;&#x4E8E;&#x6B64;&#x65F6;&#x7684;DI&#x6846;&#x67B6;&#x7684;&#x805A;&#x5408;&#x80FD;&#x529B;&#xFF0C;&#x5B9E;&#x73B0;&#xFF1A;enable framework extension and replaceable components &#x7684;&#x76EE;&#x6807;</p>
+<p>&#x4EE3;&#x4EF7;&#x662F;&#x6BCF;&#x4E2A;framework extension &#x90FD;&#x88AB;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x4E09;&#x65B9;DI&#x6846;&#x67B6;&#x6240;&#x6346;&#x7ED1;&#xFF0C;&#x8FD9;&#x663E;&#x7136;&#x4E0D;&#x662F;&#x597D;&#x4E3B;&#x610F;&#xFF01;</p>
+<p><em><strong>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x53EF;&#x80FD;&#x6211;&#x8FD9;&#x6837;&#x8868;&#x8FF0;&#x5F88;&#x4E0D;&#x4FBF;&#x4E8E;&#x7406;&#x89E3;&#xFF0C;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x53EF;&#x4EE5;&#x4ECE;SpringBoot&#x7684;&#x76F8;&#x5173;&#x77E5;&#x8BC6;&#x8FDB;&#x884C;&#x6A2A;&#x5411;&#x5BF9;&#x6BD4;&#x7406;&#x89E3;&#xFF1A;</strong></em></p>
+<p>&#x5728;SpringBoot&#x4E2D;&#x6709; <code>spring.factories</code>,&#x5B83;&#x53EF;&#x4EE5;&#x5728;&#x4E0D;&#x4FB5;&#x5165;&#x4EE3;&#x7801;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4F7F;&#x7528;&#x7B2C;&#x4E09;&#x65B9;Jar&#x5305;&#x4E2D;&#x7684;Bean&#xFF0C;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x4E0E;JDK&#x4E2D;SPI&#x673A;&#x5236;&#x5B9E;&#x73B0;&#x57FA;&#x672C;&#x7C7B;&#x4F3C;&#xFF0C;
+&#x4F46;SpringBoot&#x672C;&#x8EAB;&#x5C31;&#x8574;&#x542B;IOC&#x5BB9;&#x5668;&#xFF0C;&#x53EA;&#x8981;&#x4F7F;&#x7528;SpringBoot&#x751F;&#x6001;&#x5219;&#x610F;&#x5473;&#x7740;&#x63A5;&#x53D7;&#x4E86;&#x5B83;&#x7684;DI&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x65E0;&#x89C6;DI&#x6846;&#x67B6;&#x6346;&#x7ED1;</p>
+</blockquote>
+<h2 id="&#x81EA;&#x5B9A;&#x4E49;serviceloader"><a name="&#x81EA;&#x5B9A;&#x4E49;serviceloader" class="anchor-navigation-ex-anchor" href="#&#x81EA;&#x5B9A;&#x4E49;serviceloader"><i class="fa fa-link" aria-hidden="true"></i></a>&#x81EA;&#x5B9A;&#x4E49;ServiceLoader</h2>
+<p>&#x8BFB;&#x5230;&#x6B64;&#x5904;&#x7684;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x8FDB;&#x884C;&#x8FD9;&#x6B21;&#x601D;&#x8003;&#x4E2D;&#x6700;&#x5173;&#x952E;&#x7684;&#x4E00;&#x6B65;&#xFF01;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x6536;&#x96C6;&#x5230;&#x8BF8;&#x591A;&#x601D;&#x8DEF;&#x7684;&#x5F0A;&#x7AEF;&#xFF0C;&#x5982;&#x679C;&#x81EA;&#x5B9A;&#x4E49;ServiceLoader&#x5B9E;&#x73B0;SPI&#x673A;&#x5236;&#xFF0C;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;&#x5E94;&#x5F53;&#x5982;&#x4F55;&#xFF1F;</p>
+<p><strong>&#x6B63;&#x5982;&#x6211;&#x524D;&#x6587;&#x6240;&#x8A00;&#xFF0C;&#x8FD9;&#x91CC;&#x4EC5;&#x4EC5;&#x53EA;&#x6709;&#x5F00;&#x7AEF;&#xFF0C;&#x6CA1;&#x6709;&#x6700;&#x7EC8;&#x7B54;&#x6848;&#xFF0C;&#x53EA;&#x6709;&#x4E00;&#x4E9B;&#x601D;&#x8DEF;&#x63D0;&#x4F9B;&#x53C2;&#x8003;</strong>&#xFF1A;</p>
+<ul>
+<li>1.&#x670D;&#x52A1;&#x53D1;&#x73B0;&#x90E8;&#x5206;:<ul>
+<li>&#x7ED3;&#x5408;&#x6CE8;&#x518C;&#x6E05;&#x5355;&#x3001;&#x53CD;&#x5C04;&#x624B;&#x6BB5;&#x7B49;&#xFF0C;&#x5E94;&#x5F53;&#x83B7;&#x5F97;&#x662F;&#x5426;&#x6709;&#x5B9E;&#x73B0;&#x7C7B;</li>
+</ul>
+</li>
+<li>2.&#x670D;&#x52A1;&#x52A0;&#x8F7D;&#x90E8;&#x5206;&#xFF1A;<ul>
+<li>&#x7ED3;&#x5408;&#x6CE8;&#x518C;&#x6E05;&#x5355;&#x3001;&#x53CD;&#x5C04;&#x624B;&#x6BB5;&#x7B49;&#xFF0C;&#x5E94;&#x5F53;&#x83B7;&#x5F97;&#x5B9E;&#x73B0;&#x7C7B;&#x7684;&#x6784;&#x5EFA;&#x9014;&#x5F84;&#x548C;&#x6240;&#x9700;&#x4F9D;&#x8D56;</li>
+</ul>
+</li>
+</ul>
+<p>ServiceLoader&#x4E2D;&#x5904;&#x7406;&#x7B2C;&#x4E00;&#x70B9;&#x65F6;&#xFF0C;&#x5C06;&#x6240;&#x6709;&#x7684;&#x6CE8;&#x518C;&#x7C7B;&#x53CD;&#x5C04;&#x904D;&#x5386;&#xFF0C;&#x5229;&#x7528;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#x5B9E;&#x73B0;&#x76EE;&#x6807;&#x3002;&#x5904;&#x7406;&#x7B2C;&#x4E8C;&#x70B9;&#x65F6;&#xFF0C;&#x76F4;&#x63A5;&#x53CD;&#x5C04;&#x65E0;&#x53C2;&#x6784;&#x9020;&#x5668;&#xFF0C;&#x81F4;&#x4F7F;&#x5B58;&#x5728;&#x4E00;&#x5B9A;&#x9650;&#x5236;&#x3002;</p>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x5728;&#x8BBE;&#x8BA1;&#x65F6;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#xFF1A;</p>
+<ul>
+<li>&#x6CE8;&#x518C;&#x6E05;&#x5355;&#x4E2D;&#x53EF;&#x4EE5;&#x83B7;&#x77E5;&#x670D;&#x52A1;&#x5B9E;&#x73B0;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x5316;&#x8DEF;&#x5F84;</li>
+<li>&#x6CE8;&#x518C;&#x6E05;&#x5355;&#x4E2D;&#x53EF;&#x4EE5;&#x83B7;&#x77E5;&#x670D;&#x52A1;&#x5B9E;&#x73B0;&#x7C7B;&#x5B9E;&#x4F8B;&#x5316;&#x65F6;&#x9700;&#x8981;&#x7684;&#x4F9D;&#x8D56;&#x4FE1;&#x606F;</li>
+<li>&#x5C06;ServiceLoader&#x8BBE;&#x8BA1;&#x4E3A;&#x8F7B;&#x91CF;&#x7EA7;&#x7684;IOC&#x5BB9;&#x5668;&#xFF0C;&#x6487;&#x53BB;&#x8BFB;&#x5199;&#x751F;&#x547D;&#x5468;&#x671F;&#x7BA1;&#x7406;&#xFF0C;&#x4EC5;&#x63D0;&#x4F9B;&#x6709;&#x9650;&#x7684;&#x4F9D;&#x8D56;&#x83B7;&#x53D6;&#x9014;&#x5F84;</li>
+</ul>
+<p>&#x4F8B;&#x5982;&#xFF1A;&#x6CE8;&#x518C;&#x6E05;&#x5355;&#x5185;&#x5BB9;&#x53EF;&#x4EE5;&#x8BBE;&#x8BA1;&#x4E3A;&#xFF1A;</p>
+<p><code>{Interface/abstract class}:{Implement Class}#construcor({Param Type1},{Param Type2})</code></p>
+<pre><code class="lang-kotlin">osp.leobert.android.api.DemoApi:osp.leobert.android.module.a.ModuleADemoApiImpl4#ModuleADemoApiImpl4(osp.leobert.android.module.a.SomeOp,osp.leobert.android.api.Foo)
+
+<span class="hljs-comment">//&#x65B9;&#x4FBF;&#x9605;&#x8BFB;&#xFF0C;&#x8FDB;&#x884C;&#x6362;&#x884C;&#xFF1A;</span>
+osp.leobert.android.api.DemoApi:
+    osp.leobert.android.module.a.ModuleADemoApiImpl4#
+        ModuleADemoApiImpl4(
+          osp.leobert.android.module.a.SomeOp,
+          osp.leobert.android.api.Foo
+        )
+</code></pre>
+<h2 id="&#x7ED3;&#x8BED;"><a name="&#x7ED3;&#x8BED;" class="anchor-navigation-ex-anchor" href="#&#x7ED3;&#x8BED;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7ED3;&#x8BED;</h2>
+<p>&#x6700;&#x8FD1;&#x5199;&#x6587;&#x7AE0;&#x65F6;&#xFF0C;&#x6709;&#x4E00;&#x4E9B;&#x82E6;&#x607C;&#xFF1A;&#x5BF9;&#x4E8E;&#x5355;&#x7EAF;&#x7684;&#x77E5;&#x8BC6;&#x70B9;&#xFF0C;&#x4E0D;&#x592A;&#x613F;&#x610F;&#x52A8;&#x7B14;&#xFF1B;&#x800C;&#x5BB9;&#x6613;&#x53D1;&#x6563;&#x7684;&#x77E5;&#x8BC6;&#xFF0C;&#x53D1;&#x6563;&#x51FA;&#x53BB;&#x53C8;&#x96BE;&#x4EE5;&#x6536;&#x675F;&#x3002;</p>
+<p>&#x6700;&#x8FD1;&#x4E5F;&#x5728;&#x601D;&#x8003;&#xFF0C;&#x5E0C;&#x5180;&#x5BFB;&#x627E;&#x5230;&#x6E90;&#x4E8E;&#x5185;&#x5FC3;&#x6DF1;&#x5904;&#x7684;&#x65E0;&#x7A77;&#x529B;&#x91CF;&#xFF0C;&#x89E3;&#x5F00;&#x675F;&#x7F1A;&#x7CBE;&#x795E;&#x7684;&#x67B7;&#x9501;&#xFF0C;&#x7167;&#x4EAE;&#x524D;&#x884C;&#x7684;&#x9053;&#x8DEF;&#x3002;</p>
+<p>&#x524D;&#x6BB5;&#x65F6;&#x95F4;&#x8BFB;&#x5230;&#x4E00;&#x53E5;&#x8BDD;&#xFF0C;&#x5206;&#x4EAB;&#x7ED9;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#xFF1A;</p>
+<blockquote>
+<p>there are three pillars in life: health, time, and money. At any given moment, most people have at most two. If you&apos;re fortunate enough to have all three, you make the most of it while you can. </p>
+</blockquote>
+<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
+2023-12-16 23:29:23
+</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 半成熟的思考">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../info/" class="navigation navigation-next " aria-label="Next page: 系列说明">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花","level":"2.5.1","depth":2,"next":{"title":"系列说明","level":"2.6","depth":1,"path":"info/README.md","ref":"./info/README.md","articles":[{"title":"关于View系列","level":"2.6.1","depth":2,"path":"info/about_view_series.md","ref":"./info/about_view_series.md","articles":[]},{"title":"关于三思系列","level":"2.6.2","depth":2,"path":"info/about_sansi_series.md","ref":"./info/about_sansi_series.md","articles":[]},{"title":"关于好玩系列","level":"2.6.3","depth":2,"path":"info/about_haowan_series.md","ref":"./info/about_haowan_series.md","articles":[]},{"title":"关于温故系列","level":"2.6.4","depth":2,"path":"info/about_wengu_series.md","ref":"./info/about_wengu_series.md","articles":[]}]},"previous":{"title":"半成熟的思考","level":"2.5","depth":1,"path":"Thought/README.md","ref":"./Thought/README.md","articles":[{"title":"好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花","level":"2.5.1","depth":2,"path":"Thought/post_62.md","ref":"./Thought/post_62.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Thought/post_62.md","mtime":"2023-12-16T15:29:23.331Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-12-16T15:29:34.176Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
