@@ -1,1489 +1,214 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>好玩系列：让项目中的相册支持Heif格式图片 · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>好玩系列：让项目中的相册支持Heif格式图片 - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="../Glide/" />
-    
-    
-    <link rel="prev" href="post_14/" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../../">
-            
-                <a href="../../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../View/">
-            
-                <a href="../View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../View/post_1.html">
-            
-                <a href="../View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../View/post_6.html">
-            
-                <a href="../View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../View/post_7.html">
-            
-                <a href="../View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="post_9.html">
-            
-                <a href="post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../Drawable/">
-            
-                <a href="../Drawable/">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="../Drawable/post_2.html">
-            
-                <a href="../Drawable/post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="../Drawable/post_4.html">
-            
-                <a href="../Drawable/post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="../Drawable/post_47.html">
-            
-                <a href="../Drawable/post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.4" data-path="../Drawable/post_49.html">
-            
-                <a href="../Drawable/post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../Mechanism/Message/">
-            
-                <a href="../Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../Mechanism/Message/post_8.html">
-            
-                <a href="../Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="post_14/">
-            
-                <a href="post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter active" data-level="1.2.4.1" data-path="post_14.html">
-            
-                <a href="post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="../Glide/">
-            
-                <a href="../Glide/">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.5.1" data-path="../Glide/post_15.html">
-            
-                <a href="../Glide/post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5.2" data-path="../Glide/post_16.html">
-            
-                <a href="../Glide/post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../KSP/">
-            
-                <a href="../KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../KSP/post_24.html">
-            
-                <a href="../KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../Base/">
-            
-                <a href="../Base/">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.7.1" data-path="../Base/post_35.html">
-            
-                <a href="../Base/post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../SysApp/">
-            
-                <a href="../SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../SysApp/post_52.html">
-            
-                <a href="../SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../DI/">
-            
-                <a href="../DI/">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.9.1" data-path="../DI/post_53.html">
-            
-                <a href="../DI/post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../../Compose/">
-            
-                <a href="../../Compose/">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="../../Compose/post_21.html">
-            
-                <a href="../../Compose/post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../../Compose/post_26.html">
-            
-                <a href="../../Compose/post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="../../Compose/post_27.html">
-            
-                <a href="../../Compose/post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="../../Compose/post_28.html">
-            
-                <a href="../../Compose/post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="../../Compose/post_29.html">
-            
-                <a href="../../Compose/post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="../../Compose/post_30.html">
-            
-                <a href="../../Compose/post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../../MultiThreading/">
-            
-                <a href="../../MultiThreading/">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../../MultiThreading/post_33.html">
-            
-                <a href="../../MultiThreading/post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../../MultiThreading/post_37.html">
-            
-                <a href="../../MultiThreading/post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="../../MultiThreading/post_38.html">
-            
-                <a href="../../MultiThreading/post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="../../MultiThreading/post_39.html">
-            
-                <a href="../../MultiThreading/post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="../../MultiThreading/post_42.html">
-            
-                <a href="../../MultiThreading/post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.6" data-path="../../MultiThreading/post_46.html">
-            
-                <a href="../../MultiThreading/post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="../../MultiThreading/post_50.html">
-            
-                <a href="../../MultiThreading/post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="../../MultiThreading/post_54.html">
-            
-                <a href="../../MultiThreading/post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="../../IO/">
-            
-                <a href="../../IO/">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="../../IO/post_55.html">
-            
-                <a href="../../IO/post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="../../IO/post_56.html">
-            
-                <a href="../../IO/post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="../../IO/post_57.html">
-            
-                <a href="../../IO/post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="../../IO/post_58.html">
-            
-                <a href="../../IO/post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="../../IO/post_59.html">
-            
-                <a href="../../IO/post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../../Gradle/">
-            
-                <a href="../../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../../Gradle/Modularization/post_18.html">
-            
-                <a href="../../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../../Gradle/Publish/post_17.html">
-            
-                <a href="../../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../../Gradle/post_22.html">
-            
-                <a href="../../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../../Groovy/">
-            
-                <a href="../../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../../Groovy/why_write_groovy.html">
-            
-                <a href="../../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../../Groovy/post_23.html">
-            
-                <a href="../../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="../../Review/">
-            
-                <a href="../../Review/">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="../../Review/post_10.html">
-            
-                <a href="../../Review/post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="../../Review/post_40.html">
-            
-                <a href="../../Review/post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.3" data-path="../../Review/post_44.html">
-            
-                <a href="../../Review/post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="../../Review/post_45.html">
-            
-                <a href="../../Review/post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../../repo/">
-            
-                <a href="../../repo/">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../../repo/DaVinCi.html">
-            
-                <a href="../../repo/DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="post_32.html">
-            
-                <a href="post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../../Speculative/post_43.html">
-            
-                <a href="../../Speculative/post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../../repo/post_48.html">
-            
-                <a href="../../repo/post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../../Speculative/post_61.html">
-            
-                <a href="../../Speculative/post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="../../Review/DataStructure/">
-            
-                <a href="../../Review/DataStructure/">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1.1" data-path="../../Review/DataStructure/post_11.html">
-            
-                <a href="../../Review/DataStructure/post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="../../Review/DataStructure/post_12.html">
-            
-                <a href="../../Review/DataStructure/post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="../../Review/DataStructure/post_13.html">
-            
-                <a href="../../Review/DataStructure/post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="../../Review/README2.html">
-            
-                <a href="../../Review/README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="../../Review/post_36.html">
-            
-                <a href="../../Review/post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="../../Review/post_51.html">
-            
-                <a href="../../Review/post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="../../Review/post_60.html">
-            
-                <a href="../../Review/post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="../../Review/post_63.html">
-            
-                <a href="../../Review/post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="../../Review/post_64.html">
-            
-                <a href="../../Review/post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../../Note/">
-            
-                <a href="../../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../../Note/post_41.html">
-            
-                <a href="../../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../../Talk/">
-            
-                <a href="../../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../../Talk/talk_1.html">
-            
-                <a href="../../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../../Talk/talk_2_2023-03.html">
-            
-                <a href="../../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../../Thought/">
-            
-                <a href="../../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../../Thought/post_62.html">
-            
-                <a href="../../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../../info/">
-            
-                <a href="../../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../../info/about_view_series.html">
-            
-                <a href="../../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../../info/about_sansi_series.html">
-            
-                <a href="../../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../../info/about_haowan_series.html">
-            
-                <a href="../../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../../info/about_wengu_series.html">
-            
-                <a href="../../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >好玩系列：让项目中的相册支持Heif格式图片</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x76F8;&#x518C;&#x652F;&#x6301;heif&#x683C;&#x5F0F;&#x56FE;&#x7247;"><b></b>&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x76F8;&#x518C;&#x652F;&#x6301;Heif&#x683C;&#x5F0F;&#x56FE;&#x7247;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#&#x80CC;&#x666F;"><b></b>&#x80CC;&#x666F;</a></li><li><span class="title-icon "></span><a href="#iso-base-media-file-format"><b></b>ISO Base Media File Format</a></li><li><span class="title-icon "></span><a href="#&#x901A;&#x8FC7;contentresolver&#x67E5;&#x8BE2;heif&#x683C;&#x5F0F;&#x6587;&#x4EF6;"><b></b>&#x901A;&#x8FC7;ContentResolver&#x67E5;&#x8BE2;Heif&#x683C;&#x5F0F;&#x6587;&#x4EF6;</a></li><li><span class="title-icon "></span><a href="#&#x89E3;&#x7801;&#x4E0E;&#x56FE;&#x7247;&#x663E;&#x793A;"><b></b>&#x89E3;&#x7801;&#x4E0E;&#x56FE;&#x7247;&#x663E;&#x793A;</a></li><li><span class="title-icon "></span><a href="#&#x5C1D;&#x8BD5;&#x5411;glide&#x63A5;&#x5165;heif&#x89E3;&#x7801;&#x5668;"><b></b>&#x5C1D;&#x8BD5;&#x5411;Glide&#x63A5;&#x5165;Heif&#x89E3;&#x7801;&#x5668;</a></li><ul><li><span class="title-icon "></span><a href="#nokia&#x7684;sdk"><b></b>Nokia&#x7684;SDK</a></li><li><span class="title-icon "></span><a href="#&#x770B;&#x4E0B;android-p"><b></b>&#x770B;&#x4E0B;Android P</a></li></ul><li><span class="title-icon "></span><a href="#&#x9050;&#x60F3;"><b></b>&#x9050;&#x60F3;</a></li></ul></ul></div><a href="#&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x76F8;&#x518C;&#x652F;&#x6301;heif&#x683C;&#x5F0F;&#x56FE;&#x7247;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x76F8;&#x518C;&#x652F;&#x6301;heif&#x683C;&#x5F0F;&#x56FE;&#x7247;"><a name="&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x76F8;&#x518C;&#x652F;&#x6301;heif&#x683C;&#x5F0F;&#x56FE;&#x7247;" class="anchor-navigation-ex-anchor" href="#&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x76F8;&#x518C;&#x652F;&#x6301;heif&#x683C;&#x5F0F;&#x56FE;&#x7247;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x76F8;&#x518C;&#x652F;&#x6301;Heif&#x683C;&#x5F0F;&#x56FE;&#x7247;</h1>
-<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
-<p>&#x76EE;&#x524D;&#x5E02;&#x9762;&#x4E0A;&#x7684;&#x6210;&#x719F;&#x7684;APP&#xFF0C;&#x5176;&#x7528;&#x6237;&#x4F53;&#x7CFB;&#x4E2D;&#x5747;&#x5B58;&#x5728; <code>&#x8BBE;&#x7F6E;&#x5934;&#x50CF;</code> &#x7684;&#x529F;&#x80FD;&#xFF0C;&#x8003;&#x8651;&#x5230;&#x5C3A;&#x5BF8;&#x89C4;&#x8303;&#x95EE;&#x9898;&#xFF0C;&#x4E00;&#x822C;&#x4F1A;&#x52A0;&#x5165; <code>&#x56FE;&#x7247;&#x88C1;&#x526A;</code> &#x529F;&#x80FD;&#xFF1B;
-&#x8003;&#x8651;&#x5230;&#x9875;&#x9762;UI&#x7EDF;&#x4E00;&#x5EA6;&#x95EE;&#x9898;&#xFF0C;&#x751A;&#x81F3;&#x4F1A;&#x5728;&#x5E94;&#x7528;&#x5185;&#x5B9E;&#x73B0; <code>&#x76F8;&#x518C;</code>&#x529F;&#x80FD;&#x3002;&#x636E;&#x6B64;&#x63A8;&#x65AD;&#xFF1A;&#x5404;&#x4F4D;&#x7684;&#x9879;&#x76EE;&#x4E2D;&#xFF0C;&#x4F1A;&#x9047;&#x5230; <code>Heif&#x683C;&#x5F0F;&#x56FE;&#x7247;</code> &#x9700;&#x8981;&#x517C;&#x5BB9;&#x7684;&#x9700;&#x6C42;&#x3002;</p>
-<p>&#x7B14;&#x8005;&#x76EE;&#x524D;&#x53C2;&#x4E0E;&#x7684;&#x5546;&#x4E1A;&#x9879;&#x76EE;&#xFF0C;&#x4E5F;&#x88AB;&#x5E02;&#x573A;&#x8981;&#x6C42;&#x5BF9;Heif&#x56FE;&#x7247;&#x8FDB;&#x884C;&#x9002;&#x914D;&#x3002;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x8BB0;&#x5F55;&#x4E86;&#x6211;&#x5728;&#x8FD9;&#x4EF6;&#x4E8B;&#x60C5;&#x4E0A; <code>&#x6298;&#x817E;</code> &#x7684;&#x8FC7;&#x7A0B;&#x3002;</p>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Idea/post_14.html" class="active"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="好玩系列让项目中的相册支持heif格式图片"><a class="header" href="#好玩系列让项目中的相册支持heif格式图片">好玩系列：让项目中的相册支持Heif格式图片</a></h1>
+<h2 id="前言"><a class="header" href="#前言">前言</a></h2>
+<p>目前市面上的成熟的APP，其用户体系中均存在 <code>设置头像</code> 的功能，考虑到尺寸规范问题，一般会加入 <code>图片裁剪</code> 功能；
+考虑到页面UI统一度问题，甚至会在应用内实现 <code>相册</code>功能。据此推断：各位的项目中，会遇到 <code>Heif格式图片</code> 需要兼容的需求。</p>
+<p>笔者目前参与的商业项目，也被市场要求对Heif图片进行适配。这篇文章，记录了我在这件事情上 <code>折腾</code> 的过程。</p>
 <blockquote>
-<p>&#x597D;&#x73A9;&#x7CFB;&#x5217;&#x662F;&#x6211;&#x8FDB;&#x884C; <code>&#x65B0;&#x4E8B;&#x7269;&#x5B9E;&#x8DF5;</code> &#x3001; <code>&#x5C1D;&#x8BD5;&#x521B;&#x9020;</code> &#x7684;&#x8BB0;&#x5F55;&#xFF0C;<a href="https://github.com/leobert-lan/Blog/blob/main/info/%E5%85%B3%E4%BA%8E%E5%A5%BD%E7%8E%A9%E7%B3%BB%E5%88%97.md" target="_blank">&#x4E86;&#x89E3;&#x66F4;&#x591A;</a></p>
+<p>好玩系列是我进行 <code>新事物实践</code> 、 <code>尝试创造</code> 的记录，<a href="https://github.com/leobert-lan/Blog/blob/main/info/%E5%85%B3%E4%BA%8E%E5%A5%BD%E7%8E%A9%E7%B3%BB%E5%88%97.md">了解更多</a></p>
 </blockquote>
-<h2 id="&#x80CC;&#x666F;"><a name="&#x80CC;&#x666F;" class="anchor-navigation-ex-anchor" href="#&#x80CC;&#x666F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x80CC;&#x666F;</h2>
-<p>HEIF&#x683C;&#x5F0F;&#x7684;&#x5168;&#x540D;&#x4E3A; High Efficiency Image File Format&#xFF08;&#x9AD8;&#x6548;&#x7387;&#x56FE;&#x6863;&#x683C;&#x5F0F;&#xFF09;&#xFF0C;&#x662F;&#x7531;&#x52A8;&#x6001;&#x56FE;&#x50CF;&#x4E13;&#x5BB6;&#x7EC4;&#xFF08;MPEG&#xFF09;&#x5728;2013&#x5E74;&#x63A8;&#x51FA;&#x7684;&#x65B0;&#x683C;&#x5F0F;&#xFF0C;<a href="https://nokiatech.github.io/heif/" target="_blank">&#x4E86;&#x89E3;&#x66F4;&#x591A;</a></p>
-<p><a href="https://github.com/nokiatech/heif" target="_blank">&#x4E86;&#x89E3;Heif&#x6574;&#x4E2A;&#x9879;&#x76EE;</a></p>
-<p><a href="https://github.com/nokiatech/heif_conformance" target="_blank">&#x6D4B;&#x8BD5;&#x6587;&#x4EF6;</a></p>
-<p><em>&#x7B14;&#x8005;&#x6CE8;&#xFF1A;&#x5370;&#x8C61;&#x4E2D;&#xFF0C;iOS&#x7CFB;&#x7EDF;&#x5927;&#x7EA6;&#x5728;16&#x5E74;&#x5C31;&#x5168;&#x9762;&#x652F;&#x6301;&#x8FD9;&#x4E00;&#x7C7B;&#x578B;&#x7684;&#x6587;&#x4EF6;&#x4E86;&#xFF0C;&#x800C;Android&#x5927;&#x7EA6;&#x662F;&#x4E09;&#x5E74;&#x524D;&#xFF0C;&#x5728;Android P&#x63A8;&#x51FA;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5BA3;&#x5E03;&#x539F;&#x751F;&#x652F;&#x6301;Heif&#x6587;&#x4EF6;</em></p>
-<p>&#x968F;&#x7740;&#x5E02;&#x573A;&#x4E0A;&#x7684;Android&#x673A;&#x5668;&#x5DF2;&#x7ECF;&#x5927;&#x9762;&#x79EF;&#x8FC7;&#x6E21;&#x5230; <code>Android Q</code>&#xFF0C;&#x4ECE;&#x8FD9;&#x4E00;&#x70B9;&#x770B;&#xFF0C;&#x786E;&#x5B9E;&#x5230;&#x4E86;&#x8BE5;&#x9002;&#x914D;&#x7684;&#x9636;&#x6BB5;&#x4E86;&#x3002;</p>
+<h2 id="背景"><a class="header" href="#背景">背景</a></h2>
+<p>HEIF格式的全名为 High Efficiency Image File Format（高效率图档格式），是由动态图像专家组（MPEG）在2013年推出的新格式，<a href="https://nokiatech.github.io/heif/">了解更多</a></p>
+<p><a href="https://github.com/nokiatech/heif">了解Heif整个项目</a></p>
+<p><a href="https://github.com/nokiatech/heif_conformance">测试文件</a></p>
+<p><em>笔者注：印象中，iOS系统大约在16年就全面支持这一类型的文件了，而Android大约是三年前，在Android P推出的时候，宣布原生支持Heif文件</em></p>
+<p>随着市场上的Android机器已经大面积过渡到 <code>Android Q</code>，从这一点看，确实到了该适配的阶段了。</p>
 <blockquote>
-<p>&#x76EE;&#x6807;&#xFF0C;&#x81F3;&#x5C11;&#x5B9E;&#x73B0;Android P&#x53CA;&#x5176;&#x4EE5;&#x4E0A;&#x7684;&#x9002;&#x914D;&#xFF0C;&#x5C1D;&#x8BD5;&#x5411;&#x66F4;&#x4F4E;&#x7248;&#x672C;&#x9002;&#x914D;</p>
+<p>目标，至少实现Android P及其以上的适配，尝试向更低版本适配</p>
 </blockquote>
-<h2 id="iso-base-media-file-format"><a name="iso-base-media-file-format" class="anchor-navigation-ex-anchor" href="#iso-base-media-file-format"><i class="fa fa-link" aria-hidden="true"></i></a>ISO Base Media File Format</h2>
+<h2 id="iso-base-media-file-format"><a class="header" href="#iso-base-media-file-format">ISO Base Media File Format</a></h2>
 <blockquote>
-<p>HEIF&#x683C;&#x5F0F;&#x662F;&#x57FA;&#x4E8E; ISO Base Media File Format&#x683C;&#x5F0F;&#x884D;&#x751F;&#x51FA;&#x6765;&#x7684;&#x56FE;&#x50CF;&#x5C01;&#x88C5;&#x683C;&#x5F0F;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x7684;&#x6587;&#x4EF6;&#x683C;&#x5F0F;&#x540C;&#x6837;&#x7B26;&#x5408;ISO Base Media File Format (ISO/IEC 14496-12)&#x4E2D;&#x7684;&#x5B9A;&#x4E49;&#xFF08; ISOBMFF&#xFF09;&#x3002;</p>
-<p>&#x6587;&#x4EF6;&#x4E2D;&#x6240;&#x6709;&#x7684;&#x6570;&#x636E;&#x90FD;&#x5B58;&#x50A8;&#x5728;&#x79F0;&#x4E3A;Box&#x7684;&#x6570;&#x636E;&#x5757;&#x7ED3;&#x6784;&#x4E2D;&#xFF0C;&#x6BCF;&#x4E2A;&#x6587;&#x4EF6;&#x7531;&#x82E5;&#x5E72;&#x4E2A;Box&#x7EC4;&#x6210;&#xFF0C;&#x6BCF;&#x4E2A;Box&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x7C7B;&#x578B;&#x548C;&#x957F;&#x5EA6;&#x3002;&#x5728;&#x4E00;&#x4E2A;Box&#x4E2D;&#x8FD8;&#x53EF;&#x4EE5;&#x5305;&#x542B;&#x5B50;Box&#xFF0C;&#x6700;&#x7EC8;&#x7531;&#x4E00;&#x7CFB;&#x5217;&#x7684;Box&#x7EC4;&#x6210;&#x5B8C;&#x6574;&#x7684;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#xFF0C;&#x7ED3;&#x6784;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF0C;&#x56FE;&#x4E2D;&#x6BCF;&#x4E2A;&#x65B9;&#x5757;&#x5373;&#x4EE3;&#x8868;&#x4E00;&#x4E2A;Box&#x3002;</p>
-<p>&#x6211;&#x4EEC;&#x5E38;&#x89C1;&#x7684;MP4&#x6587;&#x4EF6;&#x540C;&#x6837;&#x662F;ISOBMFF&#x7ED3;&#x6784;&#xFF0C;&#x6240;&#x4EE5;HEIF&#x6587;&#x4EF6;&#x7ED3;&#x6784;&#x548C;MP4&#x6587;&#x4EF6;&#x7ED3;&#x6784;&#x57FA;&#x672C;&#x4E00;&#x81F4;&#xFF0C;&#x53EA;&#x662F;&#x7528;&#x5230;&#x7684;Box&#x7C7B;&#x578B;&#x6709;&#x533A;&#x522B;&#x3002;</p>
-<p>HEIF&#x6587;&#x4EF6;&#x5982;&#x679C;&#x662F;&#x5355;&#x5E45;&#x7684;&#x9759;&#x6001;&#x56FE;&#x7247;&#x7684;&#x8BDD;&#xFF0C;&#x4F7F;&#x7528;item&#x7684;&#x5F62;&#x5F0F;&#x4FDD;&#x5B58;&#x6570;&#x636E;&#xFF0C;&#x6240;&#x6709;item&#x5355;&#x72EC;&#x89E3;&#x7801;&#xFF1B;&#x5982;&#x679C;&#x4FDD;&#x5B58;&#x7684;&#x4E3A;&#x56FE;&#x7247;&#x5E8F;&#x5217;&#x7684;&#x8BDD;&#xFF0C;&#x4F7F;&#x7528;track&#x7684;&#x65B9;&#x5F0F;&#x4FDD;&#x5B58;&#x3002;</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/2926667-337a35837bb3325e.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200" alt=""></p>
-<p>&#x4F5C;&#x8005;&#xFF1A;&#x91D1;&#x5C71;&#x89C6;&#x9891;&#x4E91;
-&#x94FE;&#x63A5;&#xFF1A;<a href="https://www.jianshu.com/p/b016d10a087d" target="_blank">https://www.jianshu.com/p/b016d10a087d</a>
-&#x6765;&#x6E90;&#xFF1A;&#x7B80;&#x4E66;
-&#x8457;&#x4F5C;&#x6743;&#x5F52;&#x4F5C;&#x8005;&#x6240;&#x6709;</p>
+<p>HEIF格式是基于 ISO Base Media File Format格式衍生出来的图像封装格式，所以它的文件格式同样符合ISO Base Media File Format (ISO/IEC 14496-12)中的定义（ ISOBMFF）。</p>
+<p>文件中所有的数据都存储在称为Box的数据块结构中，每个文件由若干个Box组成，每个Box有自己的类型和长度。在一个Box中还可以包含子Box，最终由一系列的Box组成完整的文件内容，结构如下图所示，图中每个方块即代表一个Box。</p>
+<p>我们常见的MP4文件同样是ISOBMFF结构，所以HEIF文件结构和MP4文件结构基本一致，只是用到的Box类型有区别。</p>
+<p>HEIF文件如果是单幅的静态图片的话，使用item的形式保存数据，所有item单独解码；如果保存的为图片序列的话，使用track的方式保存。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2926667-337a35837bb3325e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200" alt="" /></p>
+<p>作者：金山视频云
+链接：https://www.jianshu.com/p/b016d10a087d
+来源：简书
+著作权归作者所有</p>
 </blockquote>
-<h2 id="&#x901A;&#x8FC7;contentresolver&#x67E5;&#x8BE2;heif&#x683C;&#x5F0F;&#x6587;&#x4EF6;"><a name="&#x901A;&#x8FC7;contentresolver&#x67E5;&#x8BE2;heif&#x683C;&#x5F0F;&#x6587;&#x4EF6;" class="anchor-navigation-ex-anchor" href="#&#x901A;&#x8FC7;contentresolver&#x67E5;&#x8BE2;heif&#x683C;&#x5F0F;&#x6587;&#x4EF6;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x901A;&#x8FC7;ContentResolver&#x67E5;&#x8BE2;Heif&#x683C;&#x5F0F;&#x6587;&#x4EF6;</h2>
-<p>&#x7CFB;&#x7EDF;&#x901A;&#x8FC7;ContentProvider&#x5411;&#x5176;&#x4ED6;&#x5E94;&#x7528;&#x66B4;&#x9732;&#x56FE;&#x7247;&#x7B49;&#x5185;&#x5BB9;&#x4FE1;&#x606F;&#x3002;&#x76EE;&#x524D; <code>&#x5C1A;&#x672A;&#x67E5;&#x8BE2;&#x76F8;&#x5173;&#x6587;&#x6863;</code> &#xFF0C;&#x672A;&#x786E;&#x5B9A; <code>Android&#x76F8;&#x518C;&#x5411;&#x5176;&#x4ED6;&#x5E94;&#x7528;&#x63D0;&#x4F9B;&#x4E86;Heif&#x6587;&#x4EF6;&#x67E5;&#x8BE2;&#x652F;&#x6301;</code></p>
-<p>&#x901A;&#x8FC7;&#x67E5;&#x8BE2;&#x6211;&#x4EEC;&#x5F97;&#x5230;Heif&#x6587;&#x4EF6;&#x7684; <code>&#x4E3B;&#x8981;&#x7684;</code> &#x6269;&#x5C55;&#x540D;&#x4E3A; <code>heic</code> &#x3001; <code>heif</code>.</p>
-<pre><code class="lang-java">ContentResolver contentResolver = context.getContentResolver();
-String sort = MediaStore.Images.Media.DATE_MODIFIED + <span class="hljs-string">&quot; desc &quot;</span>;
-String selection = MediaStore.Images.Media.MIME_TYPE + <span class="hljs-string">&quot;=?&quot;</span>;
-String[] selectionArgs = <span class="hljs-keyword">new</span> String[]{<span class="hljs-string">&quot;image/heic&quot;</span>};
+<h2 id="通过contentresolver查询heif格式文件"><a class="header" href="#通过contentresolver查询heif格式文件">通过ContentResolver查询Heif格式文件</a></h2>
+<p>系统通过ContentProvider向其他应用暴露图片等内容信息。目前 <code>尚未查询相关文档</code> ，未确定 <code>Android相册向其他应用提供了Heif文件查询支持</code></p>
+<p>通过查询我们得到Heif文件的 <code>主要的</code> 扩展名为 <code>heic</code> 、 <code>heif</code>.</p>
+<pre><code class="language-java">ContentResolver contentResolver = context.getContentResolver();
+String sort = MediaStore.Images.Media.DATE_MODIFIED + " desc ";
+String selection = MediaStore.Images.Media.MIME_TYPE + "=?";
+String[] selectionArgs = new String[]{"image/heic"};
 
 String[] projection = {MediaStore.Images.Media._ID, MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME,
         MediaStore.Images.ImageColumns.DATE_MODIFIED};
@@ -1496,52 +221,54 @@ Cursor cursor = contentResolver.query(
         sort
 );
 </code></pre>
-<p>&#x6211;&#x4EEC;&#x5728;&#x6D4B;&#x8BD5;&#x6587;&#x4EF6;&#x4E2D;&#x53EA;&#x627E;&#x5230;&#x4E86; <code>heic</code>, &#x5C31;&#x5148;&#x53EA;&#x6D4B;&#x4E00;&#x79CD;&#x3002;</p>
-<p>&#x6211;&#x4EEC;&#x53D1;&#x73B0;&#xFF0C;&#x7CFB;&#x7EDF;&#x652F;&#x6301;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x662F;&#x53EF;&#x4EE5;&#x67E5;&#x8BE2;&#x5230;&#x6570;&#x636E;&#x7684;&#x3002;<em>PS&#xFF0C;&#x5BFC;&#x5165;&#x6570;&#x636E;&#x5230;&#x624B;&#x673A;&#x540E;&#xFF0C;&#x6700;&#x597D;&#x91CD;&#x542F;&#x4E0B;</em></p>
-<h2 id="&#x89E3;&#x7801;&#x4E0E;&#x56FE;&#x7247;&#x663E;&#x793A;"><a name="&#x89E3;&#x7801;&#x4E0E;&#x56FE;&#x7247;&#x663E;&#x793A;" class="anchor-navigation-ex-anchor" href="#&#x89E3;&#x7801;&#x4E0E;&#x56FE;&#x7247;&#x663E;&#x793A;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x89E3;&#x7801;&#x4E0E;&#x56FE;&#x7247;&#x663E;&#x793A;</h2>
-<p>&#x6211;&#x4EEC;&#x5FFD;&#x7565;&#x6389;Android&#x7248;&#x672C;&#x76F8;&#x5E94;&#x7684;&#x9002;&#x914D;&#x95EE;&#x9898;&#xFF0C;&#x5047;&#x5B9A;&#x5DF2;&#x7ECF;&#x5F97;&#x5230;&#x4E86;&#x76F8;&#x5E94;&#x6587;&#x4EF6;&#x7684; Uri, &#x9879;&#x76EE;&#x4E2D;Glide-4.12.0&#x7248;&#x672C;&#x5DF2;&#x7ECF;&#x5904;&#x7406;&#x4E86;&#x9002;&#x914D;&#x3002;</p>
-<p><code>&#x6211;&#x4EEC;&#x53BB;&#x63A2;&#x7D22;&#x4E00;&#x4E0B;&#xFF0C;&#x662F;&#x81EA;&#x884C;&#x6DFB;&#x52A0;&#x7684;&#x89E3;&#x7801;&#x5668;&#xFF0C;&#x8FD8;&#x662F;&#x4F9D;&#x8D56;&#x4E8E;&#x7CFB;&#x7EDF;API</code></p>
-<p><a href="https://github.com/bumptech/glide/blob/9c6eae7dccd4570dd2914fc2be84631f7b3b570e/library/src/main/java/com/bumptech/glide/load/resource/bitmap/ExifInterfaceImageHeaderParser.java" target="_blank">ExifInterfaceImageHeaderParser &#x63D0;&#x53CA;&#x5185;&#x5BB9;</a></p>
+<p>我们在测试文件中只找到了 <code>heic</code>, 就先只测一种。</p>
+<p>我们发现，系统支持的情况下，是可以查询到数据的。<em>PS，导入数据到手机后，最好重启下</em></p>
+<h2 id="解码与图片显示"><a class="header" href="#解码与图片显示">解码与图片显示</a></h2>
+<p>我们忽略掉Android版本相应的适配问题，假定已经得到了相应文件的 Uri, 项目中Glide-4.12.0版本已经处理了适配。</p>
+<p><code>我们去探索一下，是自行添加的解码器，还是依赖于系统API</code></p>
+<p><a href="https://github.com/bumptech/glide/blob/9c6eae7dccd4570dd2914fc2be84631f7b3b570e/library/src/main/java/com/bumptech/glide/load/resource/bitmap/ExifInterfaceImageHeaderParser.java">ExifInterfaceImageHeaderParser 提及内容</a></p>
 <pre><code>/**
  * Uses {@link ExifInterface} to parse orientation data.
  *
- * &lt;p&gt;ExifInterface supports the HEIF format on OMR1+. Glide&apos;s {@link DefaultImageHeaderParser}
- * doesn&apos;t currently support HEIF. In the future we should reconcile these two classes, but for now
- * this is a simple way to ensure that HEIF files are oriented correctly on platforms where they&apos;re
+ * &lt;p&gt;ExifInterface supports the HEIF format on OMR1+. Glide's {@link DefaultImageHeaderParser}
+ * doesn't currently support HEIF. In the future we should reconcile these two classes, but for now
+ * this is a simple way to ensure that HEIF files are oriented correctly on platforms where they're
  * supported.
  */
-</code></pre><p>&#x6587;&#x6863;&#x4E2D;&#x63D0;&#x5230;&#xFF0C;&#x7CFB;&#x7EDF;&#x7248;&#x672C; <code>O_MR1+</code> &#x4E2D;&#x5DF2;&#x7ECF;&#x652F;&#x6301;&#x4E86; <code>HEIF</code>&#xFF0C;&#x4F46;&#x662F;&#x76EE;&#x524D;&#x7684; <code>DefaultImageHeaderParser</code> &#x8FD8;&#x4E0D;&#x652F;&#x6301;&#xFF0C;&#x672A;&#x6765;&#x4F1A;&#x7EFC;&#x5408;&#x8003;&#x8651;&#x8FD9;&#x4E24;&#x4E2A;&#x7C7B;&#xFF08;&#x7CFB;&#x7EDF;Exif&#x76F8;&#x5173;&#x7C7B;&#x548C;DefaultImageHeaderParser&#xFF09;&#xFF0C;&#x4F46;&#x76EE;&#x524D;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x786E;&#x4FDD;HEIF&#x5728;&#x53D7;&#x652F;&#x6301;&#x7684;&#x5E73;&#x53F0;&#x4E0A;&#x88AB;&#x6B63;&#x786E;&#x5904;&#x7406;&#x56FE;&#x7247;&#x65B9;&#x5411;&#x3002;</p>
-<p><a href="https://github.com/bumptech/glide/blob/5acc99f8fc7e772aeef8aa959ff2a9c203ab1aa6/library/src/main/java/com/bumptech/glide/Glide.java" target="_blank">Glide &#x7C7B;&#x4E2D;&#x63D0;&#x53CA;&#x7684;&#x5185;&#x5BB9;</a></p>
-<pre><code>// Right now we&apos;re only using this parser for HEIF images, which are only supported on OMR1+.
+</code></pre>
+<p>文档中提到，系统版本 <code>O_MR1+</code> 中已经支持了 <code>HEIF</code>，但是目前的 <code>DefaultImageHeaderParser</code> 还不支持，未来会综合考虑这两个类（系统Exif相关类和DefaultImageHeaderParser），但目前，这是一个简单的方式，确保HEIF在受支持的平台上被正确处理图片方向。</p>
+<p><a href="https://github.com/bumptech/glide/blob/5acc99f8fc7e772aeef8aa959ff2a9c203ab1aa6/library/src/main/java/com/bumptech/glide/Glide.java">Glide 类中提及的内容</a></p>
+<pre><code>// Right now we're only using this parser for HEIF images, which are only supported on OMR1+.
 // If we need this for other file types, we should consider removing this restriction.
 if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O_MR1) {
   registry.register(new ExifInterfaceImageHeaderParser());
 }
-</code></pre><p>&#x76EE;&#x524D;&#x4EC5;&#x7528;&#x4E8E;&#x89E3;&#x6790;HEIF&#x6587;&#x4EF6;&#x7684;&#x5934;&#x4FE1;&#x606F;&#x3002;</p>
-<p>&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;Glide&#x52A0;&#x8F7D;&#x662F;&#x5148;&#x83B7;&#x53D6;&#x6D41;&#xFF0C;&#x89E3;&#x6790;&#x5934;&#x4FE1;&#x606F;&#xFF0C;&#x5229;&#x7528;&#x5BF9;&#x5E94;&#x7684;&#x89E3;&#x7801;&#x5668;&#x5904;&#x7406;&#x3002;&#x800C;&#x52A0;&#x8F7D;&#x6B64;&#x7C7B;&#x6027;&#x8D28;&#x7684;&#x56FE;&#x7247;&#x65F6;&#xFF0C;&#x662F;&#x5148;&#x89E3;&#x7801;&#x4E3A;Bitmap&#xFF0C;&#x5728;&#x8FDB;&#x884C; <code>&#x88C5;&#x9970;</code> , &#x800C;Bitmap&#x7684;&#x89E3;&#x7801;&#x662F;&#x5229;&#x7528;&#x4E86;&#x7CFB;&#x7EDF;API&#xFF0C;&#x89C1;BitmapFactory.</p>
-<p>&#x6240;&#x4EE5;&#xFF0C;&#x5982;&#x679C;&#x9879;&#x76EE;&#x4E2D;&#x4F7F;&#x7528;&#x4E86;Glide&#xFF08;<em>&#x4F3C;&#x4E4E;&#x9AD8;&#x4E8E;4.10.0&#x5373;&#x5177;&#x6709;&#x529F;&#x80FD;&#xFF0C;&#x6CA1;&#x6709;&#x4ED4;&#x7EC6;&#x67E5;&#x9605;</em>&#xFF09;&#xFF0C;&#x800C;&#x624B;&#x673A;&#x4E5F;&#x652F;&#x6301;&#x4E86;HEIF&#xFF0C;&#x90A3;&#x4E48;&#x5E94;&#x7528;&#x5C31;&#x53EF;&#x4EE5;&#x652F;&#x6301;Heif&#x663E;&#x793A;&#x4E86;&#x3002;</p>
-<p>Glide&#x5B98;&#x65B9;&#x5BF9;&#x4E8E; <code>&#x81EA;&#x5B9A;&#x4E49;&#x89E3;&#x7801;&#x5668;</code> &#x8FD8;&#x662F;&#x6301;&#x4FDD;&#x5B88;&#x6001;&#x5EA6;&#x7684;&#x3002;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x8981;&#x8BD5;&#x4E00;&#x4E0B;&#xFF0C;&#x5C1D;&#x8BD5;&#x5728;Glide&#x4E2D;&#x63A5;&#x5165;Heif&#x89E3;&#x7801;&#x5668;&#x3002;</p>
-<hr>
-<p>&#x81F3;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E86;&#x57FA;&#x672C;&#x76EE;&#x6807;&#xFF1A;</p>
+</code></pre>
+<p>目前仅用于解析HEIF文件的头信息。</p>
+<p>我们知道，Glide加载是先获取流，解析头信息，利用对应的解码器处理。而加载此类性质的图片时，是先解码为Bitmap，在进行 <code>装饰</code> , 而Bitmap的解码是利用了系统API，见BitmapFactory.</p>
+<p>所以，如果项目中使用了Glide（<em>似乎高于4.10.0即具有功能，没有仔细查阅</em>），而手机也支持了HEIF，那么应用就可以支持Heif显示了。</p>
+<p>Glide官方对于 <code>自定义解码器</code> 还是持保守态度的。但是我们要试一下，尝试在Glide中接入Heif解码器。</p>
+<hr />
+<p>至此，我们已经完成了基本目标：</p>
 <ul>
-<li>&#x501F;&#x7528;&#x5E73;&#x53F0;&#x81EA;&#x8EAB;&#x517C;&#x5BB9;&#x6027;&#xFF08;&#x5F53;&#x7136;&#x4E5F;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x6839;&#x636E;&#x7248;&#x672C;&#x9002;&#x914D;&#x67E5;&#x8BE2;&#x8BED;&#x53E5;&#xFF09;&#xFF0C;&#x5229;&#x7528; <code>ContentResolver</code> &#x83B7;&#x53D6; Heif&#x683C;&#x5F0F;&#x7684;&#x56FE;&#x7247;</li>
-<li>&#x501F;&#x52A9;Glide&#x5DF2;&#x6709;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x76F4;&#x63A5;&#x5728;&#x652F;&#x6301;&#x7684;&#x5E73;&#x53F0;&#x7248;&#x672C;&#x4E0A;&#x89E3;&#x7801;&#x3001;&#x6784;&#x5EFA;Bitmap&#x3001;&#x6784;&#x5EFA;&#x76F8;&#x5E94;Drawable&#x3001;&#x5448;&#x73B0;&#x3002;</li>
+<li>借用平台自身兼容性（当然也可以自己根据版本适配查询语句），利用 <code>ContentResolver</code> 获取 Heif格式的图片</li>
+<li>借助Glide已有的实现，直接在支持的平台版本上解码、构建Bitmap、构建相应Drawable、呈现。</li>
 </ul>
-<p>Glide&#x5B98;&#x65B9;&#x63D0;&#x4F9B;&#x4E86;&#x652F;&#x6301;&#xFF0C;&#x662F;&#x4E00;&#x4EF6;&#x503C;&#x5F97;&#x5E86;&#x5E78;&#x7684;&#x4E8B;&#x60C5;&#x3002;</p>
-<p><em>&#x56E0;&#x4E3A;&#x9879;&#x76EE;&#x4E2D;&#x4EC5;&#x4F7F;&#x7528;&#x4E86;Glide&#xFF0C;&#x7B14;&#x8005;&#x6CA1;&#x6709;&#x7EE7;&#x7EED;&#x5BF9;Fresco&#x5C55;&#x5F00;&#x8C03;&#x7814;&#x3002;&#x800C;Fresco&#x4F5C;&#x4E3A;&#x4E00;&#x6B3E;&#x4F18;&#x79C0;&#x7684;&#x56FE;&#x7247;&#x52A0;&#x8F7D;&#x6846;&#x67B6;&#xFF0C;&#x5E76;&#x4E14;&#x6709;&#x5E9E;&#x5927;&#x7684;&#x793E;&#x533A;&#x652F;&#x6301;&#xFF0C;&#x76F2;&#x76EE;&#x63A8;&#x6D4B;&#x5176;&#x4EA6;&#x5B9E;&#x73B0;&#x4E86;&#x5185;&#x90E8;&#x652F;&#x6301;&#x3002;</em></p>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x5C55;&#x5F00;&#x5411;&#x66F4;&#x4F4E;&#x7248;&#x672C;&#x9002;&#x914D;&#x7684;&#x5C1D;&#x8BD5;&#x3002;&#x5F53;&#x7136;&#xFF0C;&#x8FD9; <code>&#x4EC5;&#x9650;&#x4E8E;</code> &#x89E3;&#x7801;&#x3001;&#x5448;&#x73B0;&#x73AF;&#x8282;&#xFF0C;&#x5E76;&#x4E0D;&#x8003;&#x8651; <code>ContentProvider</code>&#xFF0C; <code>ContentResolver</code> &#x5728;&#x4F4E;&#x7248;&#x672C;&#x4E0A;&#x5BF9;&#x4E8E;Heif&#x683C;&#x5F0F;&#x6587;&#x4EF6;&#x7684;&#x9002;&#x914D;&#x3002;</p>
-<hr>
-<h2 id="&#x5C1D;&#x8BD5;&#x5411;glide&#x63A5;&#x5165;heif&#x89E3;&#x7801;&#x5668;"><a name="&#x5C1D;&#x8BD5;&#x5411;glide&#x63A5;&#x5165;heif&#x89E3;&#x7801;&#x5668;" class="anchor-navigation-ex-anchor" href="#&#x5C1D;&#x8BD5;&#x5411;glide&#x63A5;&#x5165;heif&#x89E3;&#x7801;&#x5668;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5C1D;&#x8BD5;&#x5411;Glide&#x63A5;&#x5165;Heif&#x89E3;&#x7801;&#x5668;</h2>
+<p>Glide官方提供了支持，是一件值得庆幸的事情。</p>
+<p><em>因为项目中仅使用了Glide，笔者没有继续对Fresco展开调研。而Fresco作为一款优秀的图片加载框架，并且有庞大的社区支持，盲目推测其亦实现了内部支持。</em></p>
+<p>接下来展开向更低版本适配的尝试。当然，这 <code>仅限于</code> 解码、呈现环节，并不考虑 <code>ContentProvider</code>， <code>ContentResolver</code> 在低版本上对于Heif格式文件的适配。</p>
+<hr />
+<h2 id="尝试向glide接入heif解码器"><a class="header" href="#尝试向glide接入heif解码器">尝试向Glide接入Heif解码器</a></h2>
 <blockquote>
-<p>&#x5C06;&#x5B98;&#x65B9;&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#x96C6;&#x5BFC;&#x5165; <code>&#x652F;&#x6301;Heif</code> &#x7684;&#x5C0F;&#x7C73;&#x3001;&#x534E;&#x4E3A;&#x90E8;&#x5206;&#x673A;&#x578B;&#x540E;&#xFF0C;&#x6211;&#x53D1;&#x73B0;&#x90E8;&#x5206;&#x56FE;&#x7247;&#x672A;&#x88AB;&#x7CFB;&#x7EDF;&#x652F;&#x6301;&#xFF0C;&#x63D0;&#x793A;&#x6587;&#x4EF6;&#x635F;&#x6BC1;&#x6216;&#x8005;&#x4E0D;&#x53D7;&#x652F;&#x6301;&#x3002;</p>
+<p>将官方测试数据集导入 <code>支持Heif</code> 的小米、华为部分机型后，我发现部分图片未被系统支持，提示文件损毁或者不受支持。</p>
 </blockquote>
-<p>&#x53E6;&#x5916;&#xFF0C;&#x51B2;&#x7740;&#x597D;&#x73A9;&#xFF0C;&#x6211;&#x503C;&#x5F97;&#x6298;&#x817E;&#x4E00;&#x4E0B;&#x3002;</p>
-<p><strong>&#x5FC5;&#x987B;&#x7533;&#x660E;</strong>&#xFF1A;&#x4E0B;&#x9762;&#x7684;&#x5B9E;&#x8DF5;&#x53EA;&#x662F;&#x4ECE;&#x597D;&#x73A9;&#x89D2;&#x5EA6;&#x51FA;&#x53D1;&#x7684;&#xFF0C;<code>&#x5E76;&#x672A;&#x8003;&#x8651;</code> &#x5065;&#x58EE;&#x6027;&#x548C;&#x5168;&#x573A;&#x666F;&#x8986;&#x76D6;&#x3002;</p>
-<p>&#x6211;&#x8BA1;&#x5212;&#x5C06;Heif&#x6587;&#x4EF6;&#x653E;&#x5165;Assets&#x8D44;&#x6E90;&#xFF0C;&#x6309;&#x7167;&#x6211;&#x4EEC;&#x5BF9;Glide&#x7684;&#x4E86;&#x89E3;&#xFF0C;&#x5176;&#x89E3;&#x7801;&#x8DEF;&#x5F84;&#x8D77;&#x59CB;&#x70B9;&#x662F;&#xFF1A;<code>android.content.res.AssetManager$AssetInputStream</code></p>
-<pre><code class="lang-kotlin">@GlideModule
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomGlideModule</span> : <span class="hljs-type">AppGlideModule</span></span>() {
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">registerComponents</span><span class="hljs-params">(context: <span class="hljs-type">Context, glide: Glide, registry: Registry</span>)</span> {</span>
-        <span class="hljs-keyword">if</span> (Build.VERSION.SDK_INT <span class="hljs-type">&lt; Build.VERSION_CODES.O_MR1) {
+<p>另外，冲着好玩，我值得折腾一下。</p>
+<p><strong>必须申明</strong>：下面的实践只是从好玩角度出发的，<code>并未考虑</code> 健壮性和全场景覆盖。</p>
+<p>我计划将Heif文件放入Assets资源，按照我们对Glide的了解，其解码路径起始点是：<code>android.content.res.AssetManager$AssetInputStream</code></p>
+<pre><code class="language-kotlin">@GlideModule
+class CustomGlideModule : AppGlideModule() {
+    override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
+        if (Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.O_MR1) {
             registry.register(object : ImageHeaderParser {
                 override fun getType(`is`: InputStream): ImageHeaderParser.ImageType {
                     return ImageHeaderParser.ImageType.UNKNOWN
@@ -1569,188 +296,150 @@ if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O_MR1) {
     }
 
 }
-</span></code></pre>
-<p>&#x8FD9;&#x6837;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x5F97;&#x5230;&#x8FD9;&#x6837;&#x4E00;&#x6761;&#x89E3;&#x7801;&#x8DEF;&#x5F84;&#xFF1A;</p>
+</code></pre>
+<p>这样，我们会得到这样一条解码路径：</p>
 <pre><code>DecodePath{ 
-    dataClass=class android.content.res.AssetManager$AssetInputStream, 
-    decoders=[
-        osp.leobert.android.heifdemo.CustomBitmapDecoder@5c4ee9e,
-        com.bumptech.glide.load.resource.bitmap.StreamBitmapDecoder@1c1ed7f
-    ],
-    transcoder=com.bumptech.glide.load.resource.transcode.BitmapDrawableTranscoder@529014c
+	dataClass=class android.content.res.AssetManager$AssetInputStream, 
+	decoders=[
+		osp.leobert.android.heifdemo.CustomBitmapDecoder@5c4ee9e,
+		com.bumptech.glide.load.resource.bitmap.StreamBitmapDecoder@1c1ed7f
+	],
+	transcoder=com.bumptech.glide.load.resource.transcode.BitmapDrawableTranscoder@529014c
 }
-</code></pre><p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x8003;&#x8651;&#x89E3;&#x7801;&#x5668;&#x7684;&#x63A5;&#x5165;&#x3002;</p>
-<h3 id="nokia&#x7684;sdk"><a name="nokia&#x7684;sdk" class="anchor-navigation-ex-anchor" href="#nokia&#x7684;sdk"><i class="fa fa-link" aria-hidden="true"></i></a>Nokia&#x7684;SDK</h3>
-<p>Nokia&#x7684;Heif&#x5E93;&#xFF1A;<a href="https://github.com/nokiatech/heif" target="_blank">&#x94FE;&#x63A5;</a></p>
-<p>&#x8349;&#x7387;&#x4E86;&#xFF0C;&#x7ECF;&#x8FC7;&#x4E00;&#x756A;&#x6E90;&#x7801;&#x7814;&#x8BFB;&#xFF0C;&#x53D1;&#x73B0;&#x53EA;&#x6709;&#x8BFB;&#x5199;&#x8FC7;&#x7A0B;&#x5C01;&#x88C5;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x53EA;&#x6709; <code>&#x6700;&#x57FA;&#x7840;</code> &#x7684;&#x534F;&#x8BAE;&#x5C01;&#x5305;&#x3001;&#x62C6;&#x5305;&#xFF0C;&#x60F3;&#x8981;&#x771F;&#x6B63;&#x5728;Android&#x4E0A;&#x4F7F;&#x7528;&#xFF0C;&#x8FD8;&#x6709;&#x5F88;&#x591A;&#x4E8B;&#x60C5;&#x8981;&#x5904;&#x7406;&#x3002;</p>
-<p><img src="post_14/a1.jpeg" alt=""></p>
-<h3 id="&#x770B;&#x4E0B;android-p"><a name="&#x770B;&#x4E0B;android-p" class="anchor-navigation-ex-anchor" href="#&#x770B;&#x4E0B;android-p"><i class="fa fa-link" aria-hidden="true"></i></a>&#x770B;&#x4E0B;Android P</h3>
-<p>&#x6211;&#x4EEC;&#x77E5;&#x9053;&#xFF0C;Android P&#x539F;&#x751F;&#x652F;&#x6301;&#x4E86;Heif&#xFF0C;&#x67E5;&#x4E00;&#x4E0B;&#x8D44;&#x6599;&#xFF0C;&#x5176;&#x5E95;&#x5C42;&#x652F;&#x6301;&#x5982;&#x4E0B;&#xFF1A;</p>
-<p><img src="https://image-static.segmentfault.com/352/543/3525433938-5bcd76c4a185b_articlex" alt=""></p>
-<hr>
-<p>&#x4E00;&#x756A;&#x601D;&#x8003;&#x540E;&#xFF0C;&#x53D1;&#x73B0; <code>&#x6210;&#x672C;&#x8FC7;&#x5927;</code>&#x3002;</p>
-<p>&#x518D;&#x9644;&#x4E0A; Glide &#x9002;&#x7528;&#x7684;Decoder&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomBitmapDecoder</span></span>(<span class="hljs-variable"><span class="hljs-keyword">val</span> context</span>: Context, <span class="hljs-variable"><span class="hljs-keyword">val</span> bitmapPool</span>: BitmapPool) : ResourceDecoder<span class="hljs-type">&lt;InputStream, Bitmap&gt;</span> {
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">handles</span><span class="hljs-params">(source: <span class="hljs-type">InputStream, options: Options</span>)</span>: <span class="hljs-keyword">Boolean</span> {</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+</code></pre>
+<p>接下来我们需要考虑解码器的接入。</p>
+<h3 id="nokia的sdk"><a class="header" href="#nokia的sdk">Nokia的SDK</a></h3>
+<p>Nokia的Heif库：<a href="https://github.com/nokiatech/heif">链接</a></p>
+<p>草率了，经过一番源码研读，发现只有读写过程封装，相当于只有 <code>最基础</code> 的协议封包、拆包，想要真正在Android上使用，还有很多事情要处理。</p>
+<p><img src="post_14/a1.jpeg" alt="" /></p>
+<h3 id="看下android-p"><a class="header" href="#看下android-p">看下Android P</a></h3>
+<p>我们知道，Android P原生支持了Heif，查一下资料，其底层支持如下：</p>
+<p><img src="https://image-static.segmentfault.com/352/543/3525433938-5bcd76c4a185b_articlex" alt="" /></p>
+<hr />
+<p>一番思考后，发现 <code>成本过大</code>。</p>
+<p>再附上 Glide 适用的Decoder：</p>
+<pre><code class="language-kotlin">class CustomBitmapDecoder(val context: Context, val bitmapPool: BitmapPool) : ResourceDecoder&lt;InputStream, Bitmap&gt; {
+    override fun handles(source: InputStream, options: Options): Boolean {
+        return true
     }
 
-    @Throws(IOException::<span class="hljs-class"><span class="hljs-keyword">class</span>)</span>
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">toByteArray</span><span class="hljs-params">(input: <span class="hljs-type">InputStream</span>)</span>: ByteArray? {</span>
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> output</span> = ByteArrayOutputStream()
+    @Throws(IOException::class)
+    fun toByteArray(input: InputStream): ByteArray? {
+        val output = ByteArrayOutputStream()
         copy(input, output)
-        <span class="hljs-keyword">return</span> output.toByteArray()
+        return output.toByteArray()
     }
 
-    @Throws(IOException::<span class="hljs-class"><span class="hljs-keyword">class</span>)</span>
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">copy</span><span class="hljs-params">(input: <span class="hljs-type">InputStream, output: OutputStream</span>)</span>: <span class="hljs-keyword">Int</span> {</span>
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> count</span> = copyLarge(input, output)
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> (count &gt; <span class="hljs-number">2147483647</span>L) {
-            <span class="hljs-number">-1</span>
-        } <span class="hljs-keyword">else</span> count.toInt()
+    @Throws(IOException::class)
+    fun copy(input: InputStream, output: OutputStream): Int {
+        val count = copyLarge(input, output)
+        return if (count &gt; 2147483647L) {
+            -1
+        } else count.toInt()
     }
 
-    @Throws(IOException::<span class="hljs-class"><span class="hljs-keyword">class</span>)</span>
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">copyLarge</span><span class="hljs-params">(input: <span class="hljs-type">InputStream, output: OutputStream</span>)</span>: <span class="hljs-keyword">Long</span> {</span>
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> buffer</span> = ByteArray(<span class="hljs-number">4096</span>)
-        <span class="hljs-variable"><span class="hljs-keyword">var</span> count</span> = <span class="hljs-number">0</span>L
-        <span class="hljs-variable"><span class="hljs-keyword">var</span> n</span> = <span class="hljs-number">0</span>
-        <span class="hljs-keyword">while</span> (<span class="hljs-number">-1</span> != input.read(buffer).also { n = it }) {
-            output.write(buffer, <span class="hljs-number">0</span>, n)
+    @Throws(IOException::class)
+    fun copyLarge(input: InputStream, output: OutputStream): Long {
+        val buffer = ByteArray(4096)
+        var count = 0L
+        var n = 0
+        while (-1 != input.read(buffer).also { n = it }) {
+            output.write(buffer, 0, n)
             count += n.toLong()
         }
-        <span class="hljs-keyword">return</span> count
+        return count
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">decode</span><span class="hljs-params">(source: <span class="hljs-type">InputStream, width: Int, height: Int, options: Options</span>)</span>: Resource<span class="hljs-type">&lt;Bitmap&gt;</span>? {</span>
+    override fun decode(source: InputStream, width: Int, height: Int, options: Options): Resource&lt;Bitmap&gt;? {
 
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> heif</span> = HEIF()
-        <span class="hljs-keyword">try</span> {
-            <span class="hljs-variable"><span class="hljs-keyword">val</span> byteArray</span> = toByteArray(source)
-            <span class="hljs-comment">// Load the file</span>
+        val heif = HEIF()
+        try {
+            val byteArray = toByteArray(source)
+            // Load the file
             heif.load(ByteArrayInputStream(byteArray))
 
-            <span class="hljs-comment">// Get the primary image</span>
-            <span class="hljs-variable"><span class="hljs-keyword">val</span> primaryImage</span> = heif.primaryImage
+            // Get the primary image
+            val primaryImage = heif.primaryImage
 
-            <span class="hljs-comment">// Check the type, assuming that it&apos;s a HEVC image</span>
-            <span class="hljs-keyword">if</span> (primaryImage <span class="hljs-keyword">is</span> HEVCImageItem) {
-<span class="hljs-comment">//                val decoderConfig = primaryImage.decoderConfig.config</span>
+            // Check the type, assuming that it's a HEVC image
+            if (primaryImage is HEVCImageItem) {
+//                val decoderConfig = primaryImage.decoderConfig.config
 
-                <span class="hljs-variable"><span class="hljs-keyword">val</span> imageData</span> = primaryImage.itemDataAsArray
-                <span class="hljs-comment">// Feed the data to a decoder</span>
+                val imageData = primaryImage.itemDataAsArray
+                // Feed the data to a decoder
 
-                <span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> 2021/3/23 find a decoder to generate Bitmap when not upon Android P</span>
-                <span class="hljs-keyword">return</span> BitmapResource.obtain(
-                        BitmapFactory.decodeByteArray(imageData, <span class="hljs-number">0</span>, imageData.size),
+                // FIXME: 2021/3/23 find a decoder to generate Bitmap when not upon Android P
+                return BitmapResource.obtain(
+                        BitmapFactory.decodeByteArray(imageData, 0, imageData.size),
                         bitmapPool
                 )
             }
-        } <span class="hljs-comment">// All exceptions thrown by the HEIF library are of the same type</span>
-        <span class="hljs-comment">// Check the error code to see what happened</span>
-        <span class="hljs-keyword">catch</span> (e: Exception) {
+        } // All exceptions thrown by the HEIF library are of the same type
+        // Check the error code to see what happened
+        catch (e: Exception) {
             e.printStackTrace()
-        } <span class="hljs-keyword">finally</span> {
+        } finally {
             heif.release()
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>
+        return null
     }
 }
 </code></pre>
-<p>&#x5982;&#x679C;&#x627E;&#x5230;&#x4E86;&#x4E00;&#x4E2A;&#x89E3;&#x7801;&#x5668;&#xFF0C;&#x5728;Android P&#x4EE5;&#x4E0B;&#x652F;&#x6301;&#x89E3;&#x7801;&#x6216;&#x8F6C;&#x7801;&#xFF0C;&#x5C01;&#x88C5;&#x4E3A;Bitmap&#xFF0C;&#x5C31; <code>&#x53EF;&#x4EE5;&#x5728;&#x4F4E;&#x7248;&#x672C;&#x4E0A;&#x9002;&#x914D;</code> &#x4E86;&#x3002;&#x5F53;&#x7136;&#x8FD8;&#x9700;&#x8981;&#x5B8C;&#x6210;&#xFF1A;<code>&#x9002;&#x914D;&#x6240;&#x6709;&#x53EF;&#x80FD;&#x7684;&#x89E3;&#x7801;&#x8DEF;&#x5F84;</code>&#xFF0C;<code>&#x5934;&#x4FE1;&#x606F;&#x5904;&#x7406;</code> &#x5DE5;&#x4F5C;&#x3002;</p>
-<p>&#x8FD9;&#x6B21;&#x5C1D;&#x8BD5;&#xFF0C; <code>&#x4EE5;&#x5931;&#x8D25;&#x544A;&#x7EC8;</code>&#x3002;</p>
-<p>&#x5C45;&#x7136;&#x7FFB;&#x8F66;&#x4E86;&#xFF0C;<img src="post_14/jljt.gif" alt=""></p>
-<h2 id="&#x9050;&#x60F3;"><a name="&#x9050;&#x60F3;" class="anchor-navigation-ex-anchor" href="#&#x9050;&#x60F3;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9050;&#x60F3;</h2>
-<p>&#x529B;&#x5927;&#x7816;&#x98DE;&#xFF1F;&#x96C6;&#x6210;ImageMagick&#x4E4B;&#x7C7B;&#x7684;&#x5E93;&#xFF0C;&#x76F4;&#x63A5;&#x5B9E;&#x73B0;&#x56FE;&#x7247;&#x8F6C;&#x7801;&#xFF0C;&#x6210;&#x672C;&#x6709;&#x70B9;&#x8FC7;&#x5927;&#x4E86;&#xFF0C;&#x5148;&#x4E0D;&#x6298;&#x817E;&#x3002;</p>
-<p>&#x672C;&#x6B21;&#x5B9E;&#x8DF5;&#xFF0C;&#x6211;&#x4EEC;&#x5B9E;&#x73B0;&#x4E86;&#x57FA;&#x672C;&#x76EE;&#x6807;&#xFF0C;&#x9AD8;&#x7EA7;&#x76EE;&#x6807;&#x56E0;&#x4E3A;&#x521D;&#x6B65;&#x8C03;&#x7814;&#x4E0D;&#x5145;&#x5206;&#x4EE5;&#x5931;&#x8D25;&#x544A;&#x7EC8;&#xFF0C;&#x4F46;&#x662F;&#x4E5F;&#x589E;&#x957F;&#x4E86;&#x77E5;&#x8BC6;&#x3002;</p>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2021-10-07 15:40:14
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+<p>如果找到了一个解码器，在Android P以下支持解码或转码，封装为Bitmap，就 <code>可以在低版本上适配</code> 了。当然还需要完成：<code>适配所有可能的解码路径</code>，<code>头信息处理</code> 工作。</p>
+<p>这次尝试， <code>以失败告终</code>。</p>
+<p>居然翻车了，<img src="post_14/jljt.gif" alt="" /></p>
+<h2 id="遐想"><a class="header" href="#遐想">遐想</a></h2>
+<p>力大砖飞？集成ImageMagick之类的库，直接实现图片转码，成本有点过大了，先不折腾。</p>
+<p>本次实践，我们实现了基本目标，高级目标因为初步调研不充分以失败告终，但是也增长了知识。</p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../Android/Idea/post_14/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../Android/Glide/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="post_14/" class="navigation navigation-prev " aria-label="Previous page: 兼容">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="../Glide/" class="navigation navigation-next " aria-label="Next page: Glide">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../Android/Idea/post_14/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../Android/Glide/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"好玩系列：让项目中的相册支持Heif格式图片","level":"1.2.4.1","depth":3,"next":{"title":"Glide","level":"1.2.5","depth":2,"path":"Android/Glide/README.md","ref":"./Android/Glide/README.md","articles":[{"title":"三思系列：Glide 4.X全方位认知 -- 模块职责概览","level":"1.2.5.1","depth":3,"path":"Android/Glide/post_15.md","ref":"./Android/Glide/post_15.md","articles":[]},{"title":"三思系列：Glide 4.X加载过程一文掌握 | Glide（二）","level":"1.2.5.2","depth":3,"path":"Android/Glide/post_16.md","ref":"./Android/Glide/post_16.md","articles":[]}]},"previous":{"title":"兼容","level":"1.2.4","depth":2,"path":"Android/Idea/post_14/README.md","ref":"./Android/Idea/post_14/README.md","articles":[{"title":"好玩系列：让项目中的相册支持Heif格式图片","level":"1.2.4.1","depth":3,"path":"Android/Idea/post_14.md","ref":"./Android/Idea/post_14.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Android/Idea/post_14.md","mtime":"2021-10-07T07:40:14.824Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"../..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../../gitbook/gitbook.js"></script>
-    <script src="../../gitbook/theme.js"></script>
-    
-        
-        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-

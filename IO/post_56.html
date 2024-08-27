@@ -1,1682 +1,371 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Java IO系列 | 经典 IO · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Java IO系列 | 经典 IO - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="post_57.html" />
-    
-    
-    <link rel="prev" href="post_55.html" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../Android/">
-            
-                <a href="../Android/">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../Android/View/">
-            
-                <a href="../Android/View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../Android/View/post_1.html">
-            
-                <a href="../Android/View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../Android/View/post_6.html">
-            
-                <a href="../Android/View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../Android/View/post_7.html">
-            
-                <a href="../Android/View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="../Android/Idea/post_9.html">
-            
-                <a href="../Android/Idea/post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../Android/Drawable/">
-            
-                <a href="../Android/Drawable/">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="../Android/Drawable/post_2.html">
-            
-                <a href="../Android/Drawable/post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="../Android/Drawable/post_4.html">
-            
-                <a href="../Android/Drawable/post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="../Android/Drawable/post_47.html">
-            
-                <a href="../Android/Drawable/post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.4" data-path="../Android/Drawable/post_49.html">
-            
-                <a href="../Android/Drawable/post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../Android/Mechanism/Message/">
-            
-                <a href="../Android/Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../Android/Mechanism/Message/post_8.html">
-            
-                <a href="../Android/Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../Android/Idea/post_14/">
-            
-                <a href="../Android/Idea/post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.4.1" data-path="../Android/Idea/post_14.html">
-            
-                <a href="../Android/Idea/post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="../Android/Glide/">
-            
-                <a href="../Android/Glide/">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.5.1" data-path="../Android/Glide/post_15.html">
-            
-                <a href="../Android/Glide/post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5.2" data-path="../Android/Glide/post_16.html">
-            
-                <a href="../Android/Glide/post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../Android/KSP/">
-            
-                <a href="../Android/KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../Android/KSP/post_24.html">
-            
-                <a href="../Android/KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../Android/Base/">
-            
-                <a href="../Android/Base/">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.7.1" data-path="../Android/Base/post_35.html">
-            
-                <a href="../Android/Base/post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../Android/SysApp/">
-            
-                <a href="../Android/SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../Android/SysApp/post_52.html">
-            
-                <a href="../Android/SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../Android/DI/">
-            
-                <a href="../Android/DI/">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.9.1" data-path="../Android/DI/post_53.html">
-            
-                <a href="../Android/DI/post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../Compose/">
-            
-                <a href="../Compose/">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="../Compose/post_21.html">
-            
-                <a href="../Compose/post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../Compose/post_26.html">
-            
-                <a href="../Compose/post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="../Compose/post_27.html">
-            
-                <a href="../Compose/post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="../Compose/post_28.html">
-            
-                <a href="../Compose/post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="../Compose/post_29.html">
-            
-                <a href="../Compose/post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="../Compose/post_30.html">
-            
-                <a href="../Compose/post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../MultiThreading/">
-            
-                <a href="../MultiThreading/">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../MultiThreading/post_33.html">
-            
-                <a href="../MultiThreading/post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../MultiThreading/post_37.html">
-            
-                <a href="../MultiThreading/post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="../MultiThreading/post_38.html">
-            
-                <a href="../MultiThreading/post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="../MultiThreading/post_39.html">
-            
-                <a href="../MultiThreading/post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="../MultiThreading/post_42.html">
-            
-                <a href="../MultiThreading/post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.6" data-path="../MultiThreading/post_46.html">
-            
-                <a href="../MultiThreading/post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="../MultiThreading/post_50.html">
-            
-                <a href="../MultiThreading/post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="../MultiThreading/post_54.html">
-            
-                <a href="../MultiThreading/post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="post_55.html">
-            
-                <a href="post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.5.2" data-path="post_56.html">
-            
-                <a href="post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="post_57.html">
-            
-                <a href="post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="post_58.html">
-            
-                <a href="post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="post_59.html">
-            
-                <a href="post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../Gradle/">
-            
-                <a href="../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../Gradle/Modularization/post_18.html">
-            
-                <a href="../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../Gradle/Publish/post_17.html">
-            
-                <a href="../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../Gradle/post_22.html">
-            
-                <a href="../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../Groovy/">
-            
-                <a href="../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../Groovy/why_write_groovy.html">
-            
-                <a href="../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../Groovy/post_23.html">
-            
-                <a href="../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="../Review/">
-            
-                <a href="../Review/">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="../Review/post_10.html">
-            
-                <a href="../Review/post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="../Review/post_40.html">
-            
-                <a href="../Review/post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.3" data-path="../Review/post_44.html">
-            
-                <a href="../Review/post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="../Review/post_45.html">
-            
-                <a href="../Review/post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../repo/">
-            
-                <a href="../repo/">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../repo/DaVinCi.html">
-            
-                <a href="../repo/DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../Android/Idea/post_32.html">
-            
-                <a href="../Android/Idea/post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../Speculative/post_43.html">
-            
-                <a href="../Speculative/post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../repo/post_48.html">
-            
-                <a href="../repo/post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../Speculative/post_61.html">
-            
-                <a href="../Speculative/post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="../Review/DataStructure/">
-            
-                <a href="../Review/DataStructure/">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1.1" data-path="../Review/DataStructure/post_11.html">
-            
-                <a href="../Review/DataStructure/post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="../Review/DataStructure/post_12.html">
-            
-                <a href="../Review/DataStructure/post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="../Review/DataStructure/post_13.html">
-            
-                <a href="../Review/DataStructure/post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="../Review/README2.html">
-            
-                <a href="../Review/README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="../Review/post_36.html">
-            
-                <a href="../Review/post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="../Review/post_51.html">
-            
-                <a href="../Review/post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="../Review/post_60.html">
-            
-                <a href="../Review/post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="../Review/post_63.html">
-            
-                <a href="../Review/post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="../Review/post_64.html">
-            
-                <a href="../Review/post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../Note/">
-            
-                <a href="../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../Note/post_41.html">
-            
-                <a href="../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../Talk/">
-            
-                <a href="../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../Talk/talk_1.html">
-            
-                <a href="../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../Talk/talk_2_2023-03.html">
-            
-                <a href="../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../Thought/">
-            
-                <a href="../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../Thought/post_62.html">
-            
-                <a href="../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../info/">
-            
-                <a href="../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../info/about_view_series.html">
-            
-                <a href="../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../info/about_sansi_series.html">
-            
-                <a href="../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../info/about_haowan_series.html">
-            
-                <a href="../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../info/about_wengu_series.html">
-            
-                <a href="../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Java IO系列 | 经典 IO</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#java-io&#x7CFB;&#x5217;--&#x7ECF;&#x5178;-io"><b></b>Java IO&#x7CFB;&#x5217; | &#x7ECF;&#x5178; IO</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#java-&#x7ECF;&#x5178;io-&#x6982;&#x8FF0;"><b></b>JAVA &#x7ECF;&#x5178;IO &#x6982;&#x8FF0;</a></li><ul><li><span class="title-icon "></span><a href="#&#x6D41;&#x6A21;&#x578B;&#x4E0E;&#x5206;&#x7C7B;"><b></b>&#x6D41;&#x6A21;&#x578B;&#x4E0E;&#x5206;&#x7C7B;</a></li><li><span class="title-icon "></span><a href="#&#x4F18;&#x70B9;"><b></b>&#x4F18;&#x70B9;</a></li><li><span class="title-icon "></span><a href="#&#x5C40;&#x9650;&#x6027;"><b></b>&#x5C40;&#x9650;&#x6027;</a></li></ul><li><span class="title-icon "></span><a href="#&#x5B57;&#x8282;&#x6D41;"><b></b>&#x5B57;&#x8282;&#x6D41;</a></li><ul><li><span class="title-icon "></span><a href="#uml"><b></b>UML</a></li></ul><li><span class="title-icon "></span><a href="#&#x5B57;&#x7B26;&#x6D41;"><b></b>&#x5B57;&#x7B26;&#x6D41;</a></li><ul><li><span class="title-icon "></span><a href="#uml_1"><b></b>UML</a></li></ul><li><span class="title-icon "></span><a href="#&#x7F13;&#x51B2;&#x6D41;"><b></b>&#x7F13;&#x51B2;&#x6D41;</a></li><li><span class="title-icon "></span><a href="#&#x6253;&#x5370;&#x6D41;"><b></b>&#x6253;&#x5370;&#x6D41;</a></li><li><span class="title-icon "></span><a href="#&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x6D41;"><b></b>&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x6D41;</a></li><li><span class="title-icon "></span><a href="#&#x7ED3;&#x8BED;"><b></b>&#x7ED3;&#x8BED;</a></li></ul></ul></div><a href="#java-io&#x7CFB;&#x5217;--&#x7ECF;&#x5178;-io" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="java-io&#x7CFB;&#x5217;--&#x7ECF;&#x5178;-io"><a name="java-io&#x7CFB;&#x5217;--&#x7ECF;&#x5178;-io" class="anchor-navigation-ex-anchor" href="#java-io&#x7CFB;&#x5217;--&#x7ECF;&#x5178;-io"><i class="fa fa-link" aria-hidden="true"></i></a>Java IO&#x7CFB;&#x5217; | &#x7ECF;&#x5178; IO</h1>
-<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
-<p>Android &#x5F00;&#x53D1;&#x4E2D;&#x4E0D;&#x53EF;&#x907F;&#x514D;&#x4F1A;&#x63A5;&#x89E6;&#x5230;IO&#xFF0C;&#x672C;&#x7BC7;&#x4F5C;&#x4E3A;&#x7CFB;&#x5217;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x7BC7;&#xFF0C;&#x5C06;&#x548C;&#x5927;&#x5BB6;&#x4E00;&#x540C;&#x82B1;&#x8D39;5&#x5206;&#x949F;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x68B3;&#x7406; &#x7ECF;&#x5178;IO &#x7684;&#x77E5;&#x8BC6;&#x3002;</p>
-<p>&#x91CD;&#x70B9;&#x5185;&#x5BB9;&#x8111;&#x56FE;&#x5982;&#x4E0B;&#xFF0C;&#x6587;&#x7AE0;&#x4EA6;&#x6309;&#x7167;&#x6B64;&#x7ED3;&#x6784;&#x5C55;&#x5F00;&#xFF0C;&#x5982;&#x5DF2;&#x719F;&#x7EC3;&#x638C;&#x63E1;&#xFF0C;&#x53EF;&#x8DF3;&#x8FC7;</p>
-<p><img width="600" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e30f7a31900446f0ad56e53124d564e8~tplv-k3u1fbpfcp-watermark.image"></p>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x5728;&#x4E00;&#x4E9B;&#x6587;&#x7AE0;&#x3001;&#x8D44;&#x6599;&#x4E2D;&#xFF0C;&#x5C06;JDK1.4&#x524D;&#x7684;IO&#x5185;&#x5BB9;&#xFF0C;&#x79F0;&#x4E3A; <code>&#x7ECF;&#x5178;IO</code>&#x3001; <code>BIO</code> &#x3001; <code>&#x6807;&#x51C6;IO</code> &#x3001; <code>Blocking IO</code> &#x3001;<code>&#x4F20;&#x7EDF;IO</code> &#x3001; <code>Java IO</code>&#x3002; &#x90FD;&#x6709;&#x4E00;&#x5B9A;&#x7684;&#x9053;&#x7406;&#xFF0C;&#x4F46;&#x6CE8;&#x610F; <code>BIO</code>
-&#x3001;<code>Blocking IO</code> &#x6B64;&#x7C7B;&#x79F0;&#x8C13;&#x53EF;&#x80FD;&#x5F15;&#x8D77;&#x6DF7;&#x6DC6;&#x3002;&#x672C;&#x7CFB;&#x5217;&#x4E2D;&#x4EE5; <code>&#x7ECF;&#x5178;IO</code> &#x6307;&#x4EE3;JDK1.4 &#x524D;&#x7684;IO</em></p>
-<h2 id="java-&#x7ECF;&#x5178;io-&#x6982;&#x8FF0;"><a name="java-&#x7ECF;&#x5178;io-&#x6982;&#x8FF0;" class="anchor-navigation-ex-anchor" href="#java-&#x7ECF;&#x5178;io-&#x6982;&#x8FF0;"><i class="fa fa-link" aria-hidden="true"></i></a>JAVA &#x7ECF;&#x5178;IO &#x6982;&#x8FF0;</h2>
-<h3 id="&#x6D41;&#x6A21;&#x578B;&#x4E0E;&#x5206;&#x7C7B;"><a name="&#x6D41;&#x6A21;&#x578B;&#x4E0E;&#x5206;&#x7C7B;" class="anchor-navigation-ex-anchor" href="#&#x6D41;&#x6A21;&#x578B;&#x4E0E;&#x5206;&#x7C7B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6D41;&#x6A21;&#x578B;&#x4E0E;&#x5206;&#x7C7B;</h3>
-<p><img width="600" alt="desc" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b37be911d88b4b97a3fa12dc1cc0cb8c~tplv-k3u1fbpfcp-watermark.image"></p>
-<p>&#x5728;&#x7ECF;&#x5178;IO&#x4E2D;&#xFF0C;&#x6D41;(stream)&#x662F;&#x5BF9;&#x6570;&#x636E;&#x4F20;&#x8F93;&#x7684;&#x603B;&#x79F0;&#x3002;&#x6D41;&#x4EE3;&#x8868;&#x6570;&#x636E;&#x7684;&#x6D41;&#x52A8;&#x3002;</p>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../IO/post_56.html" class="active"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="java-io系列--经典-io"><a class="header" href="#java-io系列--经典-io">Java IO系列 | 经典 IO</a></h1>
+<h2 id="前言"><a class="header" href="#前言">前言</a></h2>
+<p>Android 开发中不可避免会接触到IO，本篇作为系列中的第一篇，将和大家一同花费5分钟的时间，梳理 经典IO 的知识。</p>
+<p>重点内容脑图如下，文章亦按照此结构展开，如已熟练掌握，可跳过</p>
+<img width="600" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e30f7a31900446f0ad56e53124d564e8~tplv-k3u1fbpfcp-watermark.image"/>
+<p><em>作者按：在一些文章、资料中，将JDK1.4前的IO内容，称为 <code>经典IO</code>、 <code>BIO</code> 、 <code>标准IO</code> 、 <code>Blocking IO</code> 、<code>传统IO</code> 、 <code>Java IO</code>。 都有一定的道理，但注意 <code>BIO</code>
+、<code>Blocking IO</code> 此类称谓可能引起混淆。本系列中以 <code>经典IO</code> 指代JDK1.4 前的IO</em></p>
+<h2 id="java-经典io-概述"><a class="header" href="#java-经典io-概述">JAVA 经典IO 概述</a></h2>
+<h3 id="流模型与分类"><a class="header" href="#流模型与分类">流模型与分类</a></h3>
+<img width="600" alt="desc" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b37be911d88b4b97a3fa12dc1cc0cb8c~tplv-k3u1fbpfcp-watermark.image"/>
+<p>在经典IO中，流(stream)是对数据传输的总称。流代表数据的流动。</p>
 <ul>
-<li>&#x6309; <code>&#x64CD;&#x4F5C;&#x5355;&#x4F4D;</code> &#xFF0C;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;<ul>
-<li><code>&#x5B57;&#x8282;&#x6D41;</code> &#xFF0C;&#x64CD;&#x4F5C;&#x5BF9;&#x8C61;&#x4E3A;&#x5B57;&#x8282;</li>
-<li><code>&#x5B57;&#x7B26;&#x6D41;</code> &#xFF0C;&#x64CD;&#x4F5C;&#x5BF9;&#x8C61;&#x4E3A;&#x5B57;&#x7B26;&#xFF0C;&#x6D89;&#x53CA;&#x5230;&#x7F16;&#x7801;</li>
+<li>按 <code>操作单位</code> ，可以分为
+<ul>
+<li><code>字节流</code> ，操作对象为字节</li>
+<li><code>字符流</code> ，操作对象为字符，涉及到编码</li>
 </ul>
 </li>
-<li>&#x6309; <code>&#x6570;&#x636E;&#x6D41;&#x65B9;&#x5411;</code> &#xFF0C; &#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#xFF1A;<ul>
-<li><code>&#x8F93;&#x5165;&#x6D41;</code> &#xFF0C; &#x8F93;&#x5165;&#x6D41;&#x4EE3;&#x8868;&#x4ECE;&#x67D0;&#x4E2A;&#x5730;&#x65B9;(&#x786C;&#x76D8;&#x3001;&#x5185;&#x5B58;&#x3001;&#x7F51;&#x7EDC;&#x7B49;)&#x8BFB;&#x5165;&#x5185;&#x5B58;</li>
-<li><code>&#x8F93;&#x51FA;&#x6D41;</code> &#xFF0C; &#x8F93;&#x51FA;&#x6D41;&#x4EE3;&#x8868;&#x4ECE;&#x5185;&#x5B58;&#x5199;&#x51FA;&#x5230;&#x67D0;&#x4E2A;&#x5730;&#x65B9;</li>
+<li>按 <code>数据流方向</code> ， 可以分为：
+<ul>
+<li><code>输入流</code> ， 输入流代表从某个地方(硬盘、内存、网络等)读入内存</li>
+<li><code>输出流</code> ， 输出流代表从内存写出到某个地方</li>
 </ul>
 </li>
-<li>&#x6309; <code>&#x529F;&#x80FD;&#x7C7B;&#x578B;</code> &#xFF0C; &#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#xFF1A;<ul>
-<li><code>&#x8282;&#x70B9;&#x6D41;</code> &#xFF0C; &#x8282;&#x70B9;&#x6D41;&#x4EE3;&#x8868;&#x6570;&#x636E;&#x7684;&#x6E90;&#x5934;&#x548C;&#x7EC8;&#x70B9;&#xFF0C;&#x5E38;&#x89C1;&#x7684;&#x6709;&#x6587;&#x4EF6;&#x6D41;&#x3001;&#x6570;&#x7EC4;&#x6D41;&#x548C;&#x7BA1;&#x9053;&#x6D41;&#x7B49;</li>
-<li><code>&#x5904;&#x7406;&#x6D41;</code> &#xFF0C; &#x5904;&#x7406;&#x6D41;&#x662F;&#x8FDE;&#x63A5;&#x5728;&#x8282;&#x70B9;&#x6D41;&#x4E4B;&#x4E0A;&#xFF0C;&#x4E3A;&#x8282;&#x70B9;&#x6D41;&#x63D0;&#x4F9B;&#x67D0;&#x79CD;&#x989D;&#x5916;&#x7684;&#x529F;&#x80FD;,&#x5982;&#x7F13;&#x51B2;&#x3001;&#x8F6C;&#x6362;&#x7B49;</li>
+<li>按 <code>功能类型</code> ， 可以分为：
+<ul>
+<li><code>节点流</code> ， 节点流代表数据的源头和终点，常见的有文件流、数组流和管道流等</li>
+<li><code>处理流</code> ， 处理流是连接在节点流之上，为节点流提供某种额外的功能,如缓冲、转换等</li>
 </ul>
 </li>
 </ul>
-<h3 id="&#x4F18;&#x70B9;"><a name="&#x4F18;&#x70B9;" class="anchor-navigation-ex-anchor" href="#&#x4F18;&#x70B9;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F18;&#x70B9;</h3>
-<p>&#x4E0D;&#x96BE;&#x60F3;&#x8C61;&#xFF0C;IO&#x7684; <code>&#x573A;&#x666F;</code> &#x548C; <code>&#x5904;&#x7406;&#x8FC7;&#x7A0B;</code> &#x662F;&#x591A;&#x800C;&#x7E41;&#x6742;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981; <code>&#x52A0;&#x4EE5;&#x62BD;&#x8C61;</code> &#x3001;&#x5E76; <code>&#x5EFA;&#x7ACB;&#x7C7B;&#x7C07;</code>&#xFF0C;&#x4EE5;&#x6EE1;&#x8DB3;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;&#x7684;&#x901A;&#x7528;&#x6027;&#x548C;&#x6269;&#x5C55;&#x6027;&#xFF0C;&#x800C; <code>&#x6D41;</code> &#x7684;&#x62BD;&#x8C61;&#x975E;&#x5E38;&#x8D34;&#x5207;&#xFF0C;&#x5305;&#x542B;&#x4E86;&#x6700;&#x57FA;&#x7840;&#x7684;&#x64CD;&#x4F5C;API&#x3002;
-<strong>&#x5BF9;&#x4E8E;&#x8C03;&#x7528;&#x65B9;&#x800C;&#x8A00;&#x975E;&#x5E38;&#x53CB;&#x597D;</strong>&#x3002;</p>
-<h3 id="&#x5C40;&#x9650;&#x6027;"><a name="&#x5C40;&#x9650;&#x6027;" class="anchor-navigation-ex-anchor" href="#&#x5C40;&#x9650;&#x6027;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5C40;&#x9650;&#x6027;</h3>
-<p>&#x7ECF;&#x5178;IO &#x8BBE;&#x8BA1;&#x4E2D;&#x91C7;&#x7528; <code>&#x540C;&#x6B65;&#x963B;&#x585E;&#x673A;&#x5236;</code> &#x3002;&#x4EE5;&#x8BFB;&#x4E3A;&#x4F8B;&#xFF0C;&#x8C03;&#x7528; <code>read()</code> &#x65B9;&#x6CD5;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x6570;&#x636E;&#x5C1A;&#x672A;&#x5C31;&#x7EEA;&#xFF0C;&#x7EBF;&#x7A0B;&#x4F1A;&#x963B;&#x585E;&#x3002;&#x8FD9;&#x4F1A;&#x964D;&#x4F4E;&#x7A0B;&#x5E8F;&#x7684;&#x8FD0;&#x884C;&#x6548;&#x7387;&#xFF0C;&#x5728;&#x7F51;&#x7EDC;IO&#x4E2D;&#x66F4;&#x52A0;&#x660E;&#x663E;&#x3002;</p>
-<p>&#x5BF9;&#x4E8E;IO&#x8D1F;&#x8377;&#x8F83;&#x5C0F;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x7A0B;&#x5E8F;&#xFF0C;&#x5C1A;&#x53EF;&#x63A5;&#x53D7;&#xFF0C;&#x4F46;&#x5BF9;&#x4E8E; <code>&#x9AD8;&#x8D1F;&#x8F7D;</code> &#x3001;<code>&#x9AD8;&#x5E76;&#x53D1;</code> &#x7684;&#x670D;&#x52A1;&#x5668;&#x73AF;&#x5883;&#xFF0C;&#x7ECF;&#x5178;IO&#x5B58;&#x5728;&#x660E;&#x663E;&#x7684;&#x74F6;&#x9888;&#xFF0C;&#x5E76;&#x4E0D;&#x80FD;&#x5145;&#x5206;&#x53D1;&#x6325;&#x786C;&#x4EF6;&#x6027;&#x80FD;&#x548C;&#x5E26;&#x5BBD;&#x3002;</p>
-<h2 id="&#x5B57;&#x8282;&#x6D41;"><a name="&#x5B57;&#x8282;&#x6D41;" class="anchor-navigation-ex-anchor" href="#&#x5B57;&#x8282;&#x6D41;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5B57;&#x8282;&#x6D41;</h2>
-<p>&#x6309;&#x7167;&#x6570;&#x636E;&#x6D41;&#x65B9;&#x5411;&#xFF0C;JDK&#x4E2D;&#x8BBE;&#x8BA1;&#x6709;&#x4E24;&#x4E2A;&#x57FA;&#x7C7B;&#xFF1A;</p>
+<h3 id="优点"><a class="header" href="#优点">优点</a></h3>
+<p>不难想象，IO的 <code>场景</code> 和 <code>处理过程</code> 是多而繁杂的，因此需要 <code>加以抽象</code> 、并 <code>建立类簇</code>，以满足程序设计的通用性和扩展性，而 <code>流</code> 的抽象非常贴切，包含了最基础的操作API。
+<strong>对于调用方而言非常友好</strong>。</p>
+<h3 id="局限性"><a class="header" href="#局限性">局限性</a></h3>
+<p>经典IO 设计中采用 <code>同步阻塞机制</code> 。以读为例，调用 <code>read()</code> 方法时，如果数据尚未就绪，线程会阻塞。这会降低程序的运行效率，在网络IO中更加明显。</p>
+<p>对于IO负荷较小的客户端程序，尚可接受，但对于 <code>高负载</code> 、<code>高并发</code> 的服务器环境，经典IO存在明显的瓶颈，并不能充分发挥硬件性能和带宽。</p>
+<h2 id="字节流"><a class="header" href="#字节流">字节流</a></h2>
+<p>按照数据流方向，JDK中设计有两个基类：</p>
 <ul>
-<li><code>InputStream</code> &#x8BFB;&#x53D6;&#x5B57;&#x8282;&#x6570;&#x636E;&#x7684;&#x62BD;&#x8C61;&#x7236;&#x7C7B;</li>
-<li><code>OutputStream</code> &#x5199;&#x51FA;&#x5B57;&#x8282;&#x6570;&#x636E;&#x7684;&#x62BD;&#x8C61;&#x7236;&#x7C7B;</li>
+<li><code>InputStream</code> 读取字节数据的抽象父类</li>
+<li><code>OutputStream</code> 写出字节数据的抽象父类</li>
 </ul>
-<h3 id="uml"><a name="uml" class="anchor-navigation-ex-anchor" href="#uml"><i class="fa fa-link" aria-hidden="true"></i></a>UML</h3>
-<p>JDK&#x4E2D;&#x4E3B;&#x8981;&#x7684;&#x7C7B;UML&#x56FE;&#x5982;&#x4E0B;&#xFF1A;</p>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x6BCF;&#x4E2A;&#x5B50;&#x7C7B;&#x7684;&#x5177;&#x4F53;&#x4F5C;&#x7528;&#x4E0D;&#x518D;&#x5C55;&#x5F00;&#xFF0C;&#x5982;&#x60A8;&#x5C1A;&#x4E0D;&#x6E05;&#x695A;&#x90E8;&#x5206;&#x7C7B;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x53EF;&#x76F4;&#x63A5;&#x9605;&#x8BFB;JDK&#x4E2D;&#x7684;&#x6CE8;&#x91CA;</em></p>
-<p><img width="600" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/12158bd37e164a2ea047778527bd4c98~tplv-k3u1fbpfcp-watermark.image"></p>
-<p><img width="600" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2d0d8f5a1bf840e5954fb1348ba7eaa6~tplv-k3u1fbpfcp-watermark.image"></p>
+<h3 id="uml"><a class="header" href="#uml">UML</a></h3>
+<p>JDK中主要的类UML图如下：</p>
+<p><em>作者按：每个子类的具体作用不再展开，如您尚不清楚部分类的作用，可直接阅读JDK中的注释</em></p>
+<img width="600" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/12158bd37e164a2ea047778527bd4c98~tplv-k3u1fbpfcp-watermark.image"/>
+<img width="600" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2d0d8f5a1bf840e5954fb1348ba7eaa6~tplv-k3u1fbpfcp-watermark.image"/>
 <ul>
-<li><code>FileInputStream</code> &#x548C; <code>FileOutputStream</code>:&#x7528;&#x4E8E;&#x8BFB;&#x5199;&#x6587;&#x4EF6;</li>
-<li><code>BufferedInputStream</code> &#x548C; <code>BufferedOutputStream</code>:&#x5E26;&#x7F13;&#x51B2;&#x7684;&#x6587;&#x4EF6;&#x6D41;,&#x53EF;&#x4EE5;&#x63D0;&#x9AD8;&#x8BFB;&#x5199;&#x6548;&#x7387;</li>
-<li><code>DataInputStream</code> &#x548C; <code>DataOutputStream</code>:&#x7528;&#x4E8E;&#x8BFB;&#x5199;&#x57FA;&#x672C;&#x6570;&#x636E;&#x7C7B;&#x578B;</li>
-<li><code>ByteArrayInputStream</code> &#x548C; <code>ByteArrayOutputStream</code>:&#x64CD;&#x4F5C;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x5B57;&#x8282;&#x6570;&#x7EC4;</li>
-<li><code>ObjectInputStream</code> &#x548C; <code>ObjectOutputStream</code>:&#x7528;&#x4E8E;&#x8BFB;&#x5199;&#x53EF;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x5BF9;&#x8C61;</li>
+<li><code>FileInputStream</code> 和 <code>FileOutputStream</code>:用于读写文件</li>
+<li><code>BufferedInputStream</code> 和 <code>BufferedOutputStream</code>:带缓冲的文件流,可以提高读写效率</li>
+<li><code>DataInputStream</code> 和 <code>DataOutputStream</code>:用于读写基本数据类型</li>
+<li><code>ByteArrayInputStream</code> 和 <code>ByteArrayOutputStream</code>:操作内存中的字节数组</li>
+<li><code>ObjectInputStream</code> 和 <code>ObjectOutputStream</code>:用于读写可序列化的对象</li>
 </ul>
-<p><em>&#x5F53;&#x4E0B;&#xFF0C;&#x5E94;&#x7528;&#x4E2D; <code>ObjectInputStream</code>&#x3001;<code>ObjectOutputStream</code> &#x4F7F;&#x7528;&#x76F8;&#x5BF9;&#x8F83;&#x5C11;&#xFF0C;&#x4E00;&#x822C;&#x4F1A;&#x5C06;&#x5176;&#x5E8F;&#x5217;&#x5316;&#x4E3A;JSON&#x3001;XML&#x5B58;&#x50A8;&#x6216;&#x6620;&#x5C04;&#x5230;&#x6570;&#x636E;&#x5E93;&#x3002;</em></p>
-<p>&#x5BF9;&#x8C61;&#x7C7B;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;&#x4EE5;&#x4E0B;&#x6761;&#x4EF6;&#xFF1A;</p>
+<p><em>当下，应用中 <code>ObjectInputStream</code>、<code>ObjectOutputStream</code> 使用相对较少，一般会将其序列化为JSON、XML存储或映射到数据库。</em></p>
+<p>对象类必须满足以下条件：</p>
 <ul>
-<li>&#x5B9E;&#x73B0; <code>java.io.Serializable</code> &#x63A5;&#x53E3;&#x3002;</li>
-<li>&#x8BE5;&#x7C7B; <code>&#x9664;transient&#x5173;&#x952E;&#x5B57;&#x4FEE;&#x9970;</code> &#x7684;&#x6240;&#x6709;&#x5C5E;&#x6027;&#x5FC5;&#x987B;&#x662F;&#x53EF;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x3002;</li>
+<li>实现 <code>java.io.Serializable</code> 接口。</li>
+<li>该类 <code>除transient关键字修饰</code> 的所有属性必须是可序列化的。</li>
 </ul>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>{
-        <span class="hljs-comment">// &#x5199;&#x5BF9;&#x8C61;</span>
-        ObjectOutputStream oos = <span class="hljs-keyword">new</span> ObjectOutputStream(<span class="hljs-keyword">new</span> FileOutputStream(<span class="hljs-string">&quot;object.txt&quot;</span>));
-        oos.writeObject(<span class="hljs-keyword">new</span> Person(<span class="hljs-string">&quot;&#x5F20;&#x4E09;&quot;</span>, <span class="hljs-number">25</span>));
+<pre><code class="language-java">class Demo {
+    public static void main(String[] args) throws Exception{
+        // 写对象
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("object.txt"));
+        oos.writeObject(new Person("张三", 25));
         oos.close();
 
-        <span class="hljs-comment">// &#x8BFB;&#x5BF9;&#x8C61;</span>
-        ObjectInputStream ois = <span class="hljs-keyword">new</span> ObjectInputStream(<span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-string">&quot;object.txt&quot;</span>));
+        // 读对象
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("object.txt"));
         Person p = (Person) ois.readObject();
         ois.close();
 
-        System.out.println(p.getName() + <span class="hljs-string">&quot;, &quot;</span> + p.getAge());
-        <span class="hljs-comment">// &#x5F20;&#x4E09;, 25</span>
+        System.out.println(p.getName() + ", " + p.getAge());
+        // 张三, 25
     }
 }
 </code></pre>
-<h2 id="&#x5B57;&#x7B26;&#x6D41;"><a name="&#x5B57;&#x7B26;&#x6D41;" class="anchor-navigation-ex-anchor" href="#&#x5B57;&#x7B26;&#x6D41;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5B57;&#x7B26;&#x6D41;</h2>
-<p>&#x6309;&#x7167;&#x6570;&#x636E;&#x6D41;&#x7684;&#x65B9;&#x5411;&#xFF0C;JDK&#x4E2D;&#x8BBE;&#x8BA1;&#x6709;&#x4E24;&#x5927;&#x57FA;&#x7C7B;&#xFF1A;</p>
+<h2 id="字符流"><a class="header" href="#字符流">字符流</a></h2>
+<p>按照数据流的方向，JDK中设计有两大基类：</p>
 <ul>
-<li><code>Reader</code> :&#x8BFB;&#x53D6;&#x5B57;&#x7B26;&#x6570;&#x636E;&#x7684;&#x62BD;&#x8C61;&#x7236;&#x7C7B;&#x3002;</li>
-<li><code>Writer</code> :&#x5199;&#x51FA;&#x5B57;&#x7B26;&#x6570;&#x636E;&#x7684;&#x62BD;&#x8C61;&#x7236;&#x7C7B;&#x3002;</li>
+<li><code>Reader</code> :读取字符数据的抽象父类。</li>
+<li><code>Writer</code> :写出字符数据的抽象父类。</li>
 </ul>
-<h3 id="uml_1"><a name="uml_1" class="anchor-navigation-ex-anchor" href="#uml_1"><i class="fa fa-link" aria-hidden="true"></i></a>UML</h3>
-<p>JDK&#x4E2D;&#x4E3B;&#x8981;&#x7684;&#x7C7B;UML&#x56FE;&#x5982;&#x4E0B;&#xFF1A;</p>
-<p><img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7ec3a5ac25154cfeaaeecbf6c6b833de~tplv-k3u1fbpfcp-watermark.image"></p>
-<p><img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f1eb46d280c44f479fbbe4f0de6b202c~tplv-k3u1fbpfcp-watermark.image"></p>
+<h3 id="uml-1"><a class="header" href="#uml-1">UML</a></h3>
+<p>JDK中主要的类UML图如下：</p>
+<img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7ec3a5ac25154cfeaaeecbf6c6b833de~tplv-k3u1fbpfcp-watermark.image"/>
+<img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f1eb46d280c44f479fbbe4f0de6b202c~tplv-k3u1fbpfcp-watermark.image"/>
 <ul>
-<li><code>FileReader</code> &#x548C; <code>FileWriter</code> :&#x7528;&#x4E8E;&#x8BFB;&#x53D6;&#x548C;&#x5199;&#x5165;&#x5B57;&#x7B26;&#x6587;&#x4EF6;</li>
-<li><code>BufferedReader</code> &#x548C; <code>BufferedWriter</code> :&#x5E26;&#x7F13;&#x51B2;&#x7684;&#x6587;&#x4EF6;&#x5B57;&#x7B26;&#x6D41;,&#x53EF;&#x4EE5;&#x63D0;&#x9AD8;&#x8BFB;&#x5199;&#x6548;&#x7387;</li>
-<li><code>CharArrayReader</code> &#x548C; <code>CharArrayWriter</code> :&#x8BFB;&#x53D6;&#x548C;&#x5199;&#x5165;&#x5185;&#x5B58;&#x5B57;&#x7B26;&#x6570;&#x7EC4;</li>
-<li><code>PipedReader</code> &#x548C; <code>PipedWriter</code> :pipe&#x8F93;&#x5165;&#x6D41;&#x3001;&#x8F93;&#x51FA;&#x6D41;,&#x7EBF;&#x7A0B;&#x95F4;&#x901A;&#x4FE1;  </li>
-<li><code>InputStreamReader</code> &#x548C; <code>OutputStreamWriter</code>:&#x5C06;&#x5B57;&#x8282;&#x6D41;&#x8F6C;&#x5316;&#x4E3A;&#x5B57;&#x7B26;&#x6D41;,&#x4F5C;&#x4E3A;&#x6865;&#x6881;&#x4F7F;&#x7528;</li>
+<li><code>FileReader</code> 和 <code>FileWriter</code> :用于读取和写入字符文件</li>
+<li><code>BufferedReader</code> 和 <code>BufferedWriter</code> :带缓冲的文件字符流,可以提高读写效率</li>
+<li><code>CharArrayReader</code> 和 <code>CharArrayWriter</code> :读取和写入内存字符数组</li>
+<li><code>PipedReader</code> 和 <code>PipedWriter</code> :pipe输入流、输出流,线程间通信</li>
+<li><code>InputStreamReader</code> 和 <code>OutputStreamWriter</code>:将字节流转化为字符流,作为桥梁使用</li>
 </ul>
-<p><em>&#x4E0D;&#x518D;&#x5C55;&#x793A;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;</em></p>
-<h2 id="&#x7F13;&#x51B2;&#x6D41;"><a name="&#x7F13;&#x51B2;&#x6D41;" class="anchor-navigation-ex-anchor" href="#&#x7F13;&#x51B2;&#x6D41;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7F13;&#x51B2;&#x6D41;</h2>
-<p>&#x7F13;&#x51B2;&#x6D41;&#x5185;&#x90E8;&#x6709;&#x4E00;&#x4E2A;&#x7F13;&#x51B2;&#x533A;,&#x53EF;&#x4EE5;&#x51CF;&#x5C11;&#x5B9E;&#x9645;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x7684;&#x6B21;&#x6570;,&#x4ECE;&#x800C;&#x63D0;&#x9AD8;&#x6D41;&#x7684;&#x8BFB;&#x53D6;&#x3001;&#x5199;&#x5165;&#x6548;&#x7387;&#x3002;</p>
-<p>&#x7F13;&#x51B2;&#x6D41;&#x662F;&#x4E00;&#x79CD;&#x52A0;&#x5F3A;&#x7684;&#x6D41;, &#x5185;&#x90E8;&#x62E5;&#x6709;&#x4E00;&#x4E2A; <code>&#x7F13;&#x51B2;&#x533A;</code> ,&#x53EF;&#x4EE5; <strong>&#x51CF;&#x5C11;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x6B21;&#x6570;,&#x4ECE;&#x800C;&#x63D0;&#x9AD8;&#x8BFB;&#x5199;&#x6548;&#x7387;</strong> &#x3002;</p>
-<p>Java &#x63D0;&#x4F9B;&#x4E86;&#x4EE5;&#x4E0B;&#x7684;&#x7F13;&#x51B2;&#x6D41;:</p>
+<p><em>不再展示使用方式</em></p>
+<h2 id="缓冲流"><a class="header" href="#缓冲流">缓冲流</a></h2>
+<p>缓冲流内部有一个缓冲区,可以减少实际读取数据的次数,从而提高流的读取、写入效率。</p>
+<p>缓冲流是一种加强的流, 内部拥有一个 <code>缓冲区</code> ,可以 <strong>减少系统调用的次数,从而提高读写效率</strong> 。</p>
+<p>Java 提供了以下的缓冲流:</p>
 <ul>
-<li>&#x5B57;&#x8282;&#x7F13;&#x51B2;&#x6D41; <code>BufferedInputStream</code> &#x548C; <code>BufferedOutputStream</code> : &#x5BF9; <code>FileInputStream</code> &#x548C; <code>FileOutputStream</code>  &#x52A0;&#x4EE5;&#x7F13;&#x51B2;</li>
-<li>&#x5B57;&#x7B26;&#x7F13;&#x51B2;&#x6D41; <code>BufferedReader</code> &#x548C; <code>BufferedWriter</code> : &#x5BF9; <code>FileReader</code> &#x548C; <code>FileWriter</code> &#x52A0;&#x4EE5;&#x7F13;&#x51B2;</li>
+<li>字节缓冲流 <code>BufferedInputStream</code> 和 <code>BufferedOutputStream</code> : 对 <code>FileInputStream</code> 和 <code>FileOutputStream</code>  加以缓冲</li>
+<li>字符缓冲流 <code>BufferedReader</code> 和 <code>BufferedWriter</code> : 对 <code>FileReader</code> 和 <code>FileWriter</code> 加以缓冲</li>
 </ul>
-<h2 id="&#x6253;&#x5370;&#x6D41;"><a name="&#x6253;&#x5370;&#x6D41;" class="anchor-navigation-ex-anchor" href="#&#x6253;&#x5370;&#x6D41;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6253;&#x5370;&#x6D41;</h2>
-<p><code>PrintStream</code> &#x548C; <code>PrintWriter</code> &#x53EF;&#x4EE5;&#x6253;&#x5370;&#x5404;&#x79CD;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;<code>PrintWriter</code> &#x7684;&#x6253;&#x5370;&#x683C;&#x5F0F;&#x66F4;&#x52A0;&#x4E30;&#x5BCC;&#x4E00;&#x4E9B;,&#x652F;&#x6301;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x683C;&#x5F0F;&#x5316;&#x8F93;&#x51FA;&#x3002;</p>
-<p>&#x4E24;&#x8005;&#x4E3B;&#x8981;&#x533A;&#x522B;:</p>
+<h2 id="打印流"><a class="header" href="#打印流">打印流</a></h2>
+<p><code>PrintStream</code> 和 <code>PrintWriter</code> 可以打印各种数据类型，<code>PrintWriter</code> 的打印格式更加丰富一些,支持字符串的格式化输出。</p>
+<p>两者主要区别:</p>
 <ul>
-<li><code>PrintStream</code> &#x662F;&#x5B57;&#x8282;&#x6D41;, <code>PrintWriter</code> &#x662F;&#x5B57;&#x7B26;&#x6D41;&#x3002;</li>
-<li><code>PrintStream</code> &#x4E0D;&#x652F;&#x6301;&#x5199;&#x5165;&#x6587;&#x4EF6;&#x4E4B;&#x5916;&#x7684;&#x5176;&#x4ED6;sink, &#x4F46; <code>PrintWriter</code> &#x652F;&#x6301;&#x3002;</li>
-<li>&#x5728;API&#x4E30;&#x5BCC;&#x6027;&#x4E0A;&#xFF0C;<code>PrintStream</code> &#x53EA;&#x6709; <code>print()</code> &#x548C; <code>println()</code> &#x4E24;&#x4E2A;&#x6253;&#x5370;API, <code>PrintWriter</code> &#x66F4;&#x4E30;&#x5BCC;,&#x4E14;&#x652F;&#x6301;&#x683C;&#x5F0F;&#x5316;&#x8F93;&#x51FA;&#x3002;</li>
-<li><code>PrintWriter</code> &#x53EF;&#x80FD;&#x629B;&#x51FA; <code>IOException</code>&#x3002;</li>
+<li><code>PrintStream</code> 是字节流, <code>PrintWriter</code> 是字符流。</li>
+<li><code>PrintStream</code> 不支持写入文件之外的其他sink, 但 <code>PrintWriter</code> 支持。</li>
+<li>在API丰富性上，<code>PrintStream</code> 只有 <code>print()</code> 和 <code>println()</code> 两个打印API, <code>PrintWriter</code> 更丰富,且支持格式化输出。</li>
+<li><code>PrintWriter</code> 可能抛出 <code>IOException</code>。</li>
 </ul>
-<p><code>PrintStream</code> &#x5B58;&#x5728;&#x5C11;&#x8BB8;&#x6027;&#x80FD;&#x4F18;&#x52BF;&#xFF0C;&#x4F46;&#x5728;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B; PrintWriter &#x6BD4; PrintStream &#x66F4;&#x5B9E;&#x7528;&#x3002;</p>
-<h2 id="&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x6D41;"><a name="&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x6D41;" class="anchor-navigation-ex-anchor" href="#&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x6D41;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x6D41;</h2>
-<p><code>RandomAccessFile</code> &#x53EF;&#x4EE5;&#x968F;&#x673A;&#x8BBF;&#x95EE;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x4EFB;&#x610F;&#x4F4D;&#x7F6E;&#xFF0C;&#x5B83;&#x65E2;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x8F93;&#x5165;&#x6D41;&#x4E5F;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x8F93;&#x51FA;&#x6D41;&#x3002;</p>
-<p>&#x5B83;&#x5177;&#x6709;&#x4E24;&#x4E2A;&#x6784;&#x9020;&#x65B9;&#x6CD5;:</p>
+<p><code>PrintStream</code> 存在少许性能优势，但在大多数情况下 PrintWriter 比 PrintStream 更实用。</p>
+<h2 id="随机访问流"><a class="header" href="#随机访问流">随机访问流</a></h2>
+<p><code>RandomAccessFile</code> 可以随机访问文件中的任意位置，它既可以作为输入流也可以作为输出流。</p>
+<p>它具有两个构造方法:</p>
 <ul>
 <li><code>RandomAccessFile(File file, String mode)</code></li>
 <li><code>RandomAccessFile(String name, String mode)</code></li>
 </ul>
-<p><code>mode&#x53C2;&#x6570;</code> &#x6307;&#x5B9A;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x7684;&#x6A21;&#x5F0F;,&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;:</p>
+<p><code>mode参数</code> 指定打开文件的模式,有以下几种:</p>
 <ul>
-<li>r: &#x53EA;&#x8BFB;&#x6A21;&#x5F0F;</li>
-<li>rw: &#x8BFB;&#x5199;&#x6A21;&#x5F0F;</li>
-<li>rws: &#x8BFB;&#x5199;&#x540C;&#x6B65;&#x6A21;&#x5F0F;</li>
-<li>rwd: &#x8BFB;&#x5199;,&#x540C;&#x6B65;&#x5143;&#x6570;&#x636E;</li>
+<li>r: 只读模式</li>
+<li>rw: 读写模式</li>
+<li>rws: 读写同步模式</li>
+<li>rwd: 读写,同步元数据</li>
 </ul>
 <blockquote>
-<p><code>rws</code>,&#x6BD4;rw&#x7684;&#x5199;&#x591A;&#x4E86;&#x540C;&#x6B65;&#xFF0C;&#x540C;&#x6B65;&#x5199;&#x5165;&#x6307;&#x7684;&#x662F;&#x5C06;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x548C;&#x5143;&#x6570;&#x636E;&#x540C;&#x6B65;&#x5199;&#x5165;&#x78C1;&#x76D8;,&#x4FDD;&#x8BC1;&#x6570;&#x636E;&#x4E0D;&#x4E22;&#x5931;&#x3002;</p>
-<p>&#x4F8B;&#x5982;,&#x6211;&#x4EEC;&#x5199;&#x5165;&#x4E00;&#x4E9B;&#x6570;&#x636E;,&#x5173;&#x95ED;&#x6D41;&#x540E;,&#x6570;&#x636E;&#x5B9E;&#x9645;&#x4E0A;&#x8FD8;&#x5728;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684;&#x7F13;&#x51B2;&#x533A;,&#x8FD8;&#x6CA1;&#x6709;&#x771F;&#x6B63;&#x5199;&#x5165;&#x78C1;&#x76D8;&#xFF0C;&#x5982;&#x679C;&#x7CFB;&#x7EDF;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#xFF0C;&#x7F13;&#x51B2;&#x533A;&#x6570;&#x636E;&#x4F1A;&#x4E22;&#x5931;&#x3002;</p>
-<p><code>rwd</code>,&#x6BD4;rw&#x591A;&#x4E86;&#x540C;&#x6B65;&#x5143;&#x6570;&#x636E;&#xFF0C;&#x5143;&#x6570;&#x636E;&#x662F;&#x63CF;&#x8FF0;&#x6570;&#x636E;&#x5C5E;&#x6027;&#x548C;&#x7ED3;&#x6784;&#x7684;&#x4FE1;&#x606F;,&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4F1A;&#x7EF4;&#x62A4;&#x6BCF;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x5143;&#x6570;&#x636E;,&#x5982;:</p>
+<p><code>rws</code>,比rw的写多了同步，同步写入指的是将文件内容和元数据同步写入磁盘,保证数据不丢失。</p>
+<p>例如,我们写入一些数据,关闭流后,数据实际上还在操作系统的缓冲区,还没有真正写入磁盘，如果系统出现异常，缓冲区数据会丢失。</p>
+<p><code>rwd</code>,比rw多了同步元数据，元数据是描述数据属性和结构的信息,文件系统会维护每个文件的元数据,如:</p>
 <ul>
-<li>&#x6587;&#x4EF6;&#x5927;&#x5C0F;</li>
-<li>&#x521B;&#x5EFA;&#x65F6;&#x95F4;</li>
-<li>&#x6700;&#x540E;&#x4FEE;&#x6539;&#x65F6;&#x95F4;</li>
-<li>&#x6587;&#x4EF6;&#x6743;&#x9650;</li>
-<li>&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#x7B49;
-rwd&#x6A21;&#x5F0F;&#x4F1A;&#x5728;&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x540E;&#x81EA;&#x52A8;&#x66F4;&#x65B0;&#x6587;&#x4EF6;&#x7684;&#x5143;&#x6570;&#x636E;,&#x4FDD;&#x8BC1;&#x5143;&#x6570;&#x636E;&#x7684;&#x540C;&#x6B65;&#x6027;</li>
+<li>文件大小</li>
+<li>创建时间</li>
+<li>最后修改时间</li>
+<li>文件权限</li>
+<li>文件类型等
+rwd模式会在修改文件内容后自动更新文件的元数据,保证元数据的同步性</li>
 </ul>
 </blockquote>
-<p>&#x5728;&#x6587;&#x4EF6;&#x65AD;&#x70B9;&#x7EED;&#x4F20;&#x9700;&#x6C42;&#x573A;&#x666F;&#x4E0B;&#xFF0C;<code>RandomAccessFile</code> &#x5177;&#x6709;&#x6781;&#x9AD8;&#x9002;&#x7528;&#x6027;&#xFF0C;&#x7ED3;&#x5408;&#x5207;&#x7247;&#x5904;&#x7406;&#x7684;&#x601D;&#x8DEF;&#xFF0C;&#x53EF;&#x4EE5;&#x5145;&#x5206;&#x53D1;&#x6325;&#x5E26;&#x5BBD;&#x548C;&#x591A;&#x6838;&#x591A;&#x7EBF;&#x7A0B;&#x4F18;&#x52BF;&#x3002;</p>
-<h2 id="&#x7ED3;&#x8BED;"><a name="&#x7ED3;&#x8BED;" class="anchor-navigation-ex-anchor" href="#&#x7ED3;&#x8BED;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7ED3;&#x8BED;</h2>
-<p>&#x672C;&#x7BC7;&#x6587;&#x7AE0;&#x7B80;&#x5355;&#x68B3;&#x7406;&#x4E86;Java &#x7ECF;&#x5178;IO&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#xFF0C;&#x5E76;&#x672A;&#x6DF1;&#x5165;&#xFF0C;&#x5E94;&#x5BF9;&#x5BA2;&#x6237;&#x7AEF;&#x4E2D;&#x7684;&#x9700;&#x6C42;&#x573A;&#x666F;&#x5DF2;&#x57FA;&#x672C;&#x591F;&#x7528;&#xFF0C;&#x4E0B;&#x4E00;&#x7BC7;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x7EE7;&#x7EED;&#x68B3;&#x7406;Java NIO&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#x3002; </p>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2023-05-10 22:08:26
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+<p>在文件断点续传需求场景下，<code>RandomAccessFile</code> 具有极高适用性，结合切片处理的思路，可以充分发挥带宽和多核多线程优势。</p>
+<h2 id="结语"><a class="header" href="#结语">结语</a></h2>
+<p>本篇文章简单梳理了Java 经典IO的基础知识，并未深入，应对客户端中的需求场景已基本够用，下一篇，我们将继续梳理Java NIO的基础知识。</p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../IO/post_55.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../IO/post_57.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="post_55.html" class="navigation navigation-prev " aria-label="Previous page: Java IO 系列总纲">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="post_57.html" class="navigation navigation-next " aria-label="Next page: Java IO 系列 | NIO-1.0一文速览">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../IO/post_55.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../IO/post_57.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Java IO系列 | 经典 IO","level":"1.5.2","depth":2,"next":{"title":"Java IO 系列 | NIO-1.0一文速览","level":"1.5.3","depth":2,"path":"IO/post_57.md","ref":"./IO/post_57.md","articles":[]},"previous":{"title":"Java IO 系列总纲","level":"1.5.1","depth":2,"path":"IO/post_55.md","ref":"./IO/post_55.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"IO/post_56.md","mtime":"2023-05-10T14:08:26.295Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../gitbook/gitbook.js"></script>
-    <script src="../gitbook/theme.js"></script>
-    
-        
-        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-

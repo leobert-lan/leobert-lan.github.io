@@ -1,1514 +1,239 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Java多线程系列--掌控面试，一文吃透Synchronized锁 · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Java多线程系列--掌控面试，一文吃透Synchronized锁 - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="post_39.html" />
-    
-    
-    <link rel="prev" href="post_37.html" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../Android/">
-            
-                <a href="../Android/">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../Android/View/">
-            
-                <a href="../Android/View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../Android/View/post_1.html">
-            
-                <a href="../Android/View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../Android/View/post_6.html">
-            
-                <a href="../Android/View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../Android/View/post_7.html">
-            
-                <a href="../Android/View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="../Android/Idea/post_9.html">
-            
-                <a href="../Android/Idea/post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../Android/Drawable/">
-            
-                <a href="../Android/Drawable/">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="../Android/Drawable/post_2.html">
-            
-                <a href="../Android/Drawable/post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="../Android/Drawable/post_4.html">
-            
-                <a href="../Android/Drawable/post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="../Android/Drawable/post_47.html">
-            
-                <a href="../Android/Drawable/post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.4" data-path="../Android/Drawable/post_49.html">
-            
-                <a href="../Android/Drawable/post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../Android/Mechanism/Message/">
-            
-                <a href="../Android/Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../Android/Mechanism/Message/post_8.html">
-            
-                <a href="../Android/Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../Android/Idea/post_14/">
-            
-                <a href="../Android/Idea/post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.4.1" data-path="../Android/Idea/post_14.html">
-            
-                <a href="../Android/Idea/post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="../Android/Glide/">
-            
-                <a href="../Android/Glide/">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.5.1" data-path="../Android/Glide/post_15.html">
-            
-                <a href="../Android/Glide/post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5.2" data-path="../Android/Glide/post_16.html">
-            
-                <a href="../Android/Glide/post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../Android/KSP/">
-            
-                <a href="../Android/KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../Android/KSP/post_24.html">
-            
-                <a href="../Android/KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../Android/Base/">
-            
-                <a href="../Android/Base/">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.7.1" data-path="../Android/Base/post_35.html">
-            
-                <a href="../Android/Base/post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../Android/SysApp/">
-            
-                <a href="../Android/SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../Android/SysApp/post_52.html">
-            
-                <a href="../Android/SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../Android/DI/">
-            
-                <a href="../Android/DI/">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.9.1" data-path="../Android/DI/post_53.html">
-            
-                <a href="../Android/DI/post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../Compose/">
-            
-                <a href="../Compose/">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="../Compose/post_21.html">
-            
-                <a href="../Compose/post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../Compose/post_26.html">
-            
-                <a href="../Compose/post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="../Compose/post_27.html">
-            
-                <a href="../Compose/post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="../Compose/post_28.html">
-            
-                <a href="../Compose/post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="../Compose/post_29.html">
-            
-                <a href="../Compose/post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="../Compose/post_30.html">
-            
-                <a href="../Compose/post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="post_33.html">
-            
-                <a href="post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="post_37.html">
-            
-                <a href="post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.4.3" data-path="post_38.html">
-            
-                <a href="post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="post_39.html">
-            
-                <a href="post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="post_42.html">
-            
-                <a href="post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.6" data-path="post_46.html">
-            
-                <a href="post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="post_50.html">
-            
-                <a href="post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="post_54.html">
-            
-                <a href="post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="../IO/">
-            
-                <a href="../IO/">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="../IO/post_55.html">
-            
-                <a href="../IO/post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="../IO/post_56.html">
-            
-                <a href="../IO/post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="../IO/post_57.html">
-            
-                <a href="../IO/post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="../IO/post_58.html">
-            
-                <a href="../IO/post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="../IO/post_59.html">
-            
-                <a href="../IO/post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../Gradle/">
-            
-                <a href="../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../Gradle/Modularization/post_18.html">
-            
-                <a href="../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../Gradle/Publish/post_17.html">
-            
-                <a href="../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../Gradle/post_22.html">
-            
-                <a href="../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../Groovy/">
-            
-                <a href="../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../Groovy/why_write_groovy.html">
-            
-                <a href="../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../Groovy/post_23.html">
-            
-                <a href="../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="../Review/">
-            
-                <a href="../Review/">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="../Review/post_10.html">
-            
-                <a href="../Review/post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="../Review/post_40.html">
-            
-                <a href="../Review/post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.3" data-path="../Review/post_44.html">
-            
-                <a href="../Review/post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="../Review/post_45.html">
-            
-                <a href="../Review/post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../repo/">
-            
-                <a href="../repo/">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../repo/DaVinCi.html">
-            
-                <a href="../repo/DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../Android/Idea/post_32.html">
-            
-                <a href="../Android/Idea/post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../Speculative/post_43.html">
-            
-                <a href="../Speculative/post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../repo/post_48.html">
-            
-                <a href="../repo/post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../Speculative/post_61.html">
-            
-                <a href="../Speculative/post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="../Review/DataStructure/">
-            
-                <a href="../Review/DataStructure/">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1.1" data-path="../Review/DataStructure/post_11.html">
-            
-                <a href="../Review/DataStructure/post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="../Review/DataStructure/post_12.html">
-            
-                <a href="../Review/DataStructure/post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="../Review/DataStructure/post_13.html">
-            
-                <a href="../Review/DataStructure/post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="../Review/README2.html">
-            
-                <a href="../Review/README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="../Review/post_36.html">
-            
-                <a href="../Review/post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="../Review/post_51.html">
-            
-                <a href="../Review/post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="../Review/post_60.html">
-            
-                <a href="../Review/post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="../Review/post_63.html">
-            
-                <a href="../Review/post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="../Review/post_64.html">
-            
-                <a href="../Review/post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../Note/">
-            
-                <a href="../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../Note/post_41.html">
-            
-                <a href="../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../Talk/">
-            
-                <a href="../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../Talk/talk_1.html">
-            
-                <a href="../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../Talk/talk_2_2023-03.html">
-            
-                <a href="../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../Thought/">
-            
-                <a href="../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../Thought/post_62.html">
-            
-                <a href="../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../info/">
-            
-                <a href="../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../info/about_view_series.html">
-            
-                <a href="../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../info/about_sansi_series.html">
-            
-                <a href="../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../info/about_haowan_series.html">
-            
-                <a href="../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../info/about_wengu_series.html">
-            
-                <a href="../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Java多线程系列--掌控面试，一文吃透Synchronized锁</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63A7;&#x9762;&#x8BD5;&#xFF0C;&#x4E00;&#x6587;&#x5403;&#x900F;synchronized&#x9501;"><b></b>Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63A7;&#x9762;&#x8BD5;&#xFF0C;&#x4E00;&#x6587;&#x5403;&#x900F;Synchronized&#x9501;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#&#x524D;&#x6587;&#x62FE;&#x9057;----java&#x5BF9;&#x8C61;&#x7ED3;&#x6784;"><b></b>&#x524D;&#x6587;&#x62FE;&#x9057; -- JAVA&#x5BF9;&#x8C61;&#x7ED3;&#x6784;</a></li><ul><li><span class="title-icon "></span><a href="#java&#x5BF9;&#x8C61;&#x5934;"><b></b>Java&#x5BF9;&#x8C61;&#x5934;</a></li></ul><li><span class="title-icon "></span><a href="#&#x9501;&#x7684;&#x5E38;&#x89C1;&#x6982;&#x5FF5;&#x3001;&#x5206;&#x7C7B;"><b></b>&#x9501;&#x7684;&#x5E38;&#x89C1;&#x6982;&#x5FF5;&#x3001;&#x5206;&#x7C7B;</a></li><ul><li><span class="title-icon "></span><a href="#&#x4E50;&#x89C2;&#x9501;--&#x60B2;&#x89C2;&#x9501;"><b></b>&#x4E50;&#x89C2;&#x9501; / &#x60B2;&#x89C2;&#x9501;</a></li><li><span class="title-icon "></span><a href="#&#x72EC;&#x4EAB;&#x9501;--&#x5171;&#x4EAB;&#x9501;"><b></b>&#x72EC;&#x4EAB;&#x9501; / &#x5171;&#x4EAB;&#x9501;</a></li><li><span class="title-icon "></span><a href="#&#x53EF;&#x91CD;&#x5165;&#x9501;--&#x975E;&#x53EF;&#x91CD;&#x5165;&#x9501;"><b></b>&#x53EF;&#x91CD;&#x5165;&#x9501; / &#x975E;&#x53EF;&#x91CD;&#x5165;&#x9501;</a></li><li><span class="title-icon "></span><a href="#&#x516C;&#x5E73;&#x9501;--&#x975E;&#x516C;&#x5E73;&#x9501;"><b></b>&#x516C;&#x5E73;&#x9501; / &#x975E;&#x516C;&#x5E73;&#x9501;</a></li><li><span class="title-icon "></span><a href="#&#x4E92;&#x65A5;&#x9501;&#x3001;&#x8BFB;&#x5199;&#x9501;"><b></b>&#x4E92;&#x65A5;&#x9501;&#x3001;&#x8BFB;&#x5199;&#x9501;</a></li><li><span class="title-icon "></span><a href="#&#x5206;&#x6BB5;&#x9501;"><b></b>&#x5206;&#x6BB5;&#x9501;</a></li><li><span class="title-icon "></span><a href="#&#x504F;&#x5411;&#x9501;--&#x8F7B;&#x91CF;&#x7EA7;&#x9501;--&#x91CD;&#x91CF;&#x7EA7;&#x9501;"><b></b>&#x504F;&#x5411;&#x9501; / &#x8F7B;&#x91CF;&#x7EA7;&#x9501; / &#x91CD;&#x91CF;&#x7EA7;&#x9501;</a></li><li><span class="title-icon "></span><a href="#&#x81EA;&#x65CB;&#x9501;"><b></b>&#x81EA;&#x65CB;&#x9501;</a></li></ul><li><span class="title-icon "></span><a href="#synchronized&#x9501;"><b></b>Synchronized&#x9501;</a></li><ul><li><span class="title-icon "></span><a href="#&#x9501;&#x5347;&#x7EA7;"><b></b>&#x9501;&#x5347;&#x7EA7;</a></li></ul><li><span class="title-icon "></span><a href="#&#x4E00;&#x6BB5;&#x5F88;&#x957F;&#x7684;&#x540E;&#x8BB0;"><b></b>&#x4E00;&#x6BB5;&#x5F88;&#x957F;&#x7684;&#x540E;&#x8BB0;</a></li><ul><li><span class="title-icon "></span><a href="#jdk&#x4E2D;&#x7684;lock&#x63A5;&#x53E3;"><b></b>JDK&#x4E2D;&#x7684;Lock&#x63A5;&#x53E3;</a></li><li><span class="title-icon "></span><a href="#&#x771F;&#x6B63;&#x7684;&#x540E;&#x8BB0;"><b></b>&#x771F;&#x6B63;&#x7684;&#x540E;&#x8BB0;</a></li></ul></ul></ul></div><a href="#java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63A7;&#x9762;&#x8BD5;&#xFF0C;&#x4E00;&#x6587;&#x5403;&#x900F;synchronized&#x9501;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63A7;&#x9762;&#x8BD5;&#xFF0C;&#x4E00;&#x6587;&#x5403;&#x900F;synchronized&#x9501;"><a name="java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63A7;&#x9762;&#x8BD5;&#xFF0C;&#x4E00;&#x6587;&#x5403;&#x900F;synchronized&#x9501;" class="anchor-navigation-ex-anchor" href="#java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63A7;&#x9762;&#x8BD5;&#xFF0C;&#x4E00;&#x6587;&#x5403;&#x900F;synchronized&#x9501;"><i class="fa fa-link" aria-hidden="true"></i></a>Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63A7;&#x9762;&#x8BD5;&#xFF0C;&#x4E00;&#x6587;&#x5403;&#x900F;Synchronized&#x9501;</h1>
-<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
-<p>&#x5404;&#x4F4D;&#x4EB2;&#x7231;&#x7684;&#x8BFB;&#x8005;&#x670B;&#x53CB;&#xFF0C;&#x6211;&#x6B63;&#x5728;&#x521B;&#x4F5C; <code>Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;</code> &#x6587;&#x7AE0;&#xFF0C;&#x672C;&#x7BC7;&#x6211;&#x4EEC;&#x5C06;&#x5206;&#x6790;&#x91CD;&#x70B9;&#x5185;&#x5BB9;&#xFF1A;<code>&#x9501;</code></p>
-<p>&#x9501;&#x662F; <strong>&#x9762;&#x8BD5;&#x4E2D;&#x7684;&#x5E38;&#x5BA2;</strong> &#xFF0C;&#x4E5F;&#x662F;&#x591A;&#x7EBF;&#x7A0B;&#x7F16;&#x7801;&#x4E2D; <strong>&#x5FC5;&#x4E0D;&#x53EF;&#x5C11;</strong> &#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x4E3A;&#x4E86; <strong>&quot;&#x9762;&#x8BD5;&#x80DC;&#x5229;&quot;</strong> &#xFF0C;&#x8FD8;&#x662F; <strong>&quot;&#x5199;&#x51FA;&#x9AD8;&#x8D28;&#x91CF;&#x7684;&#x4EE3;&#x7801;&quot;</strong> &#xFF0C;&#x6211;&#x4EEC;&#x90FD;&#x9700;&#x8981;&#x638C;&#x63E1;&#x5B83;&#x3002;</p>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x672C;&#x7BC7;&#x6309;&#x7167;&#x81EA;&#x5DF1;&#x6709;&#x9650;&#x7684;&#x77E5;&#x8BC6;&#x8FDB;&#x884C;&#x6574;&#x7406;&#xFF0C;&#x5982;&#x6709;&#x8C2C;&#x8BEF;&#xFF0C;&#x8FD8;&#x8BF7;&#x8BFB;&#x8005;&#x5728;&#x8BC4;&#x8BBA;&#x533A;&#x4E0D;&#x541D;&#x6307;&#x51FA;</em></p>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_38.html" class="active"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="java多线程系列--掌控面试一文吃透synchronized锁"><a class="header" href="#java多线程系列--掌控面试一文吃透synchronized锁">Java多线程系列--掌控面试，一文吃透Synchronized锁</a></h1>
+<h2 id="前言"><a class="header" href="#前言">前言</a></h2>
+<p>各位亲爱的读者朋友，我正在创作 <code>Java多线程系列</code> 文章，本篇我们将分析重点内容：<code>锁</code></p>
+<p>锁是 <strong>面试中的常客</strong> ，也是多线程编码中 <strong>必不可少</strong> 的内容，无论是为了 <strong>"面试胜利"</strong> ，还是 <strong>"写出高质量的代码"</strong> ，我们都需要掌握它。</p>
+<p><em>作者按：本篇按照自己有限的知识进行整理，如有谬误，还请读者在评论区不吝指出</em></p>
 <blockquote>
-<p>&#x4E86;&#x89E3;&#x7CFB;&#x5217;&#x4EE5;&#x53CA;&#x603B;&#x7EB2;&#xFF1A;<a href="https://leobert-lan.github.io/MultiThreading/post_33.html" target="_blank">Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;</a></p>
+<p>了解系列以及总纲：<a href="https://leobert-lan.github.io/MultiThreading/post_33.html">Java多线程系列</a></p>
 </blockquote>
-<p>&#x672C;&#x6587;&#x7BC7;&#x5E45;&#x8F83;&#x957F;&#xFF0C;&#x5185;&#x5BB9;&#x8F83;&#x4E3A;&#x8DF3;&#x8DC3;&#xFF0C;&#x53EF;&#x53C2;&#x8003;&#x5BFC;&#x56FE;&#x9605;&#x8BFB;&#xFF1A;</p>
-<p><img src="post_38/guide.png" alt=""></p>
-<h2 id="&#x524D;&#x6587;&#x62FE;&#x9057;----java&#x5BF9;&#x8C61;&#x7ED3;&#x6784;"><a name="&#x524D;&#x6587;&#x62FE;&#x9057;----java&#x5BF9;&#x8C61;&#x7ED3;&#x6784;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x6587;&#x62FE;&#x9057;----java&#x5BF9;&#x8C61;&#x7ED3;&#x6784;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x6587;&#x62FE;&#x9057; -- JAVA&#x5BF9;&#x8C61;&#x7ED3;&#x6784;</h2>
-<p>&#x5148;&#x524D;&#x5DF2;&#x7ECF;&#x53D1;&#x5E03;&#x8FC7;&#x4E00;&#x7BC7;&#x7CFB;&#x5217;&#x6587;&#x7AE0;&#xFF1A;<a href="https://juejin.cn/post/7068941257074016263" target="_blank">&#x514B;&#x670D;&#x7126;&#x8651;--&#x56FE;&#x89E3;JVM&#x5185;&#x5B58;&#x6A21;&#x578B;&#x548C;JVM&#x7EBF;&#x7A0B;&#x6A21;&#x578B;</a></p>
-<p>&#x5176;&#x4E2D;&#x8FD8;&#x6709;&#x4E00;&#x5904;&#x5173;&#x952E;&#x77E5;&#x8BC6;&#x6CA1;&#x6709;&#x5C55;&#x5F00;&#xFF1A;&quot;Java&#x5BF9;&#x8C61;&#x5305;&#x542B;&#x54EA;&#x4E9B;&#x5185;&#x5BB9;&quot;&#xFF0C;&#x8FD9;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x548C;&#x9501;&#x7684;&#x5B9E;&#x73B0;&#x6709;&#x5173;&#xFF0C;&#x672C;&#x7BC7;&#x5C06;&#x7531;&#x6B64;&#x7EE7;&#x7EED;&#x5C55;&#x5F00;&#x3002;</p>
-<p>&#x5355;&#x5200;&#x76F4;&#x5165;&#xFF0C;&#x5728;HotSpot&#x865A;&#x62DF;&#x673A;&#x4E2D;&#xFF0C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#x53EF;&#x4EE5;&#x88AB;&#x5212;&#x5206;&#x51FA;&#x4E09;&#x5757;&#x4FE1;&#x606F;&#xFF1A;</p>
+<p>本文篇幅较长，内容较为跳跃，可参考导图阅读：</p>
+<p><img src="./post_38/guide.png" alt="" /></p>
+<h2 id="前文拾遗----java对象结构"><a class="header" href="#前文拾遗----java对象结构">前文拾遗 -- JAVA对象结构</a></h2>
+<p>先前已经发布过一篇系列文章：<a href="https://juejin.cn/post/7068941257074016263">克服焦虑--图解JVM内存模型和JVM线程模型</a></p>
+<p>其中还有一处关键知识没有展开："Java对象包含哪些内容"，这部分内容和锁的实现有关，本篇将由此继续展开。</p>
+<p>单刀直入，在HotSpot虚拟机中，一个对象实例可以被划分出三块信息：</p>
 <ul>
-<li>&#x5BF9;&#x8C61;&#x5934; Header</li>
-<li>&#x5B9E;&#x4F8B;&#x6570;&#x636E; Instance Data&#xFF0C;&#x4EA6;&#x6709;&#x79F0;&#x4E4B;&#x5BF9;&#x8C61;&#x4F53;</li>
-<li>&#x5BF9;&#x9F50;&#x586B;&#x5145; Padding</li>
+<li>对象头 Header</li>
+<li>实例数据 Instance Data，亦有称之对象体</li>
+<li>对齐填充 Padding</li>
 </ul>
-<p>&#x5176;&#x4E2D;&#x5BF9;&#x9F50;&#x586B;&#x5145;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#xFF0C;&#x5B9E;&#x4F8B;&#x6570;&#x636E;&#x662F;&#x4F9B;&#x7ED9; <code>&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x903B;&#x8F91;</code> &#x4F7F;&#x7528;&#x7684;&#xFF0C;&#x5B58;&#x50A8;&#x4E86;&#x5B9E;&#x4F8B;&#x7684;&#x5B57;&#x6BB5;&#x4FE1;&#x606F;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x91CD;&#x70B9;&#x63A2;&#x8BA8;&#x5BF9;&#x8C61;&#x5934;&#x3002;</p>
-<h3 id="java&#x5BF9;&#x8C61;&#x5934;"><a name="java&#x5BF9;&#x8C61;&#x5934;" class="anchor-navigation-ex-anchor" href="#java&#x5BF9;&#x8C61;&#x5934;"><i class="fa fa-link" aria-hidden="true"></i></a>Java&#x5BF9;&#x8C61;&#x5934;</h3>
-<p>&#x5BF9;&#x8C61;&#x5934;&#x90E8;&#x5206;&#x7684;&#x4FE1;&#x606F;&#x4E3B;&#x8981;&#x9762;&#x5411;JVM&#xFF0C;&#x5305;&#x542B;&#xFF1A;</p>
+<p>其中对齐填充可能存在，实例数据是供给 <code>应用程序逻辑</code> 使用的，存储了实例的字段信息。接下来重点探讨对象头。</p>
+<h3 id="java对象头"><a class="header" href="#java对象头">Java对象头</a></h3>
+<p>对象头部分的信息主要面向JVM，包含：</p>
 <ul>
 <li>Mark Word</li>
-<li>kclass, &#x5BF9;&#x8C61;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#x7684;&#x5143;&#x6570;&#x636E;&#x6307;&#x9488;</li>
-<li>array length &#xFF0C;&#x4EC5;&#x6570;&#x7EC4;&#x5BF9;&#x8C61;&#x624D;&#x62E5;&#x6709;</li>
+<li>kclass, 对象对应的类的元数据指针</li>
+<li>array length ，仅数组对象才拥有</li>
 </ul>
-<p>&#x6574;&#x4F53;&#x5212;&#x5206;&#x5982;&#x56FE;&#x6240;&#x793A;&#xFF1A;</p>
-<p><img src="post_38/jvm_header.jpeg" alt=""></p>
-<p><em>&#x56FE;&#x7247;&#x6765;&#x81EA;&#x7F51;&#x7EDC;&#x641C;&#x7D22;&#xFF0C;&#x6C34;&#x5370;&#x4E3A;Java&#x5E2E;&#x5E2E;</em></p>
-<h4 id="mark-word"><a name="mark-word" class="anchor-navigation-ex-anchor" href="#mark-word"><i class="fa fa-link" aria-hidden="true"></i></a>Mark Word</h4>
-<p>Mark Word &#x7528;&#x4E8E;&#x5B58;&#x50A8;&#x5BF9;&#x8C61;&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#xFF1A; <code>&#x54C8;&#x5E0C;</code>&#x3001;<code>GC&#x5206;&#x4EE3;&#x5E74;&#x9F84;</code>&#x3001;<code>&#x9501;&#x72B6;&#x6001;&#x6807;&#x5FD7;</code>&#x3001;<code>&#x7EBF;&#x7A0B;&#x6301;&#x6709;&#x7684;&#x9501;</code>&#x3001;<code>&#x504F;&#x5411;&#x7EBF;&#x7A0B;ID</code>&#x3001;<code>&#x504F;&#x5411;&#x65F6;&#x95F4;&#x6233;</code> &#x7B49;&#x3002;</p>
-<p>&#x67E5;&#x627E; HotSpot&#x4E2D;markOop&#x7684;doc&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-comment">// The markOop describes the header of an object.</span>
-<span class="hljs-comment">// Note that the mark is not a real oop but just a word.</span>
-<span class="hljs-comment">// It is placed in the oop hierarchy for historical reasons.</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">// Bit-format of an object header (most significant first, big endian layout below):</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">//  32 bits:</span>
-<span class="hljs-comment">//  --------</span>
-<span class="hljs-comment">//  hash:25 ------------&gt;| age:4    biased_lock:1 lock:2 (normal object)</span>
-<span class="hljs-comment">//  JavaThread*:23 epoch:2 age:4    biased_lock:1 lock:2 (biased object)</span>
-<span class="hljs-comment">//  size:32 ------------------------------------------&gt;| (CMS free block)</span>
-<span class="hljs-comment">//  PromotedObject*:29 ----------&gt;| promo_bits:3 -----&gt;| (CMS promoted object)</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">//  64 bits:</span>
-<span class="hljs-comment">//  --------</span>
-<span class="hljs-comment">//  unused:25 hash:31 --&gt;| unused:1   age:4    biased_lock:1 lock:2 (normal object)</span>
-<span class="hljs-comment">//  JavaThread*:54 epoch:2 unused:1   age:4    biased_lock:1 lock:2 (biased object)</span>
-<span class="hljs-comment">//  PromotedObject*:61 ---------------------&gt;| promo_bits:3 -----&gt;| (CMS promoted object)</span>
-<span class="hljs-comment">//  size:64 -----------------------------------------------------&gt;| (CMS free block)</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">//  unused:25 hash:31 --&gt;| cms_free:1 age:4    biased_lock:1 lock:2 (COOPs &amp;&amp; normal object)</span>
-<span class="hljs-comment">//  JavaThread*:54 epoch:2 cms_free:1 age:4    biased_lock:1 lock:2 (COOPs &amp;&amp; biased object)</span>
-<span class="hljs-comment">//  narrowOop:32 unused:24 cms_free:1 unused:4 promo_bits:3 -----&gt;| (COOPs &amp;&amp; CMS promoted object)</span>
-<span class="hljs-comment">//  unused:21 size:35 --&gt;| cms_free:1 unused:7 ------------------&gt;| (COOPs &amp;&amp; CMS free block)</span>
+<p>整体划分如图所示：</p>
+<p><img src="./post_38/jvm_header.jpeg" alt="" /></p>
+<p><em>图片来自网络搜索，水印为Java帮帮</em></p>
+<h4 id="mark-word"><a class="header" href="#mark-word">Mark Word</a></h4>
+<p>Mark Word 用于存储对象运行时数据： <code>哈希</code>、<code>GC分代年龄</code>、<code>锁状态标志</code>、<code>线程持有的锁</code>、<code>偏向线程ID</code>、<code>偏向时间戳</code> 等。</p>
+<p>查找 HotSpot中markOop的doc如下：</p>
+<pre><code class="language-java">// The markOop describes the header of an object.
+// Note that the mark is not a real oop but just a word.
+// It is placed in the oop hierarchy for historical reasons.
+//
+// Bit-format of an object header (most significant first, big endian layout below):
+//
+//  32 bits:
+//  --------
+//  hash:25 ------------&gt;| age:4    biased_lock:1 lock:2 (normal object)
+//  JavaThread*:23 epoch:2 age:4    biased_lock:1 lock:2 (biased object)
+//  size:32 ------------------------------------------&gt;| (CMS free block)
+//  PromotedObject*:29 ----------&gt;| promo_bits:3 -----&gt;| (CMS promoted object)
+//
+//  64 bits:
+//  --------
+//  unused:25 hash:31 --&gt;| unused:1   age:4    biased_lock:1 lock:2 (normal object)
+//  JavaThread*:54 epoch:2 unused:1   age:4    biased_lock:1 lock:2 (biased object)
+//  PromotedObject*:61 ---------------------&gt;| promo_bits:3 -----&gt;| (CMS promoted object)
+//  size:64 -----------------------------------------------------&gt;| (CMS free block)
+//
+//  unused:25 hash:31 --&gt;| cms_free:1 age:4    biased_lock:1 lock:2 (COOPs &amp;&amp; normal object)
+//  JavaThread*:54 epoch:2 cms_free:1 age:4    biased_lock:1 lock:2 (COOPs &amp;&amp; biased object)
+//  narrowOop:32 unused:24 cms_free:1 unused:4 promo_bits:3 -----&gt;| (COOPs &amp;&amp; CMS promoted object)
+//  unused:21 size:35 --&gt;| cms_free:1 unused:7 ------------------&gt;| (COOPs &amp;&amp; CMS free block)
 </code></pre>
-<p><em>32&#x4F4D;&#x548C;64&#x4F4D;&#x7684;&#x865A;&#x62DF;&#x673A;&#xFF08;&#x672A;&#x5F00;&#x542F;&#x538B;&#x7F29;&#x6307;&#x9488;&#xFF09;&#x4E2D;&#x5206;&#x522B;&#x4E3A;32bit&#x548C;64bit&#xFF0C;&#x5F00;&#x542F;&#x538B;&#x7F29;&#x540E;&#x4E3A;32bit</em></p>
-<p>&#x68B3;&#x7406;64&#x4F4D;&#x865A;&#x62DF;&#x673A;&#x4E94;&#x79CD;&#x72B6;&#x6001;&#x4E0B;&#x7684;&#x5BF9;&#x8C61;&#x5934;&#xFF1A;</p>
-<pre><code class="lang-commandline">|------------------------------------------------------------------------------------------------------------------|
+<p><em>32位和64位的虚拟机（未开启压缩指针）中分别为32bit和64bit，开启压缩后为32bit</em></p>
+<p>梳理64位虚拟机五种状态下的对象头：</p>
+<pre><code class="language-commandline">|------------------------------------------------------------------------------------------------------------------|
 |                                     Object Header(128bits)                                                       |
 |---------------------|--------------------------------------------------------------------------------------------|
 |       State         |                                   Mark Word(64bits)               |  Klass Word(64bits)    |
@@ -1524,352 +249,313 @@
 |     Marked for GC   |                                                           |lock:2 | OOP to metadata object |
 |---------------------|--------------------------------------------------------------------------------------------|
 </code></pre>
-<p><em>&#x6392;&#x7248;&#x4E0D;&#x65B9;&#x4FBF;&#x7684;&#x8BDD;&#x770B;&#x4E0B;&#x56FE;&#xFF1A;</em></p>
-<p><img src="post_38/jvm_header_64.png" alt=""></p>
-<p>&#x5982;&#x679C;&#x8FD0;&#x884C;&#x5728; HotSpot openJdk VM &#x4E0A;&#xFF0C;&#x53EF;&#x4EE5;&#x501F;&#x52A9;&#xFF1A;&quot;org.openjdk.jol:jol-core:0.9&quot; &#x6253;&#x5370;&#x5BF9;&#x8C61;&#x5934;&#x8FDB;&#x884C;&#x5BF9;&#x7167;&#x3002;</p>
-<p><a href="https://blog.csdn.net/qdh186/article/details/96162413" target="_blank">&#x4E94;&#x79CD;&#x72B6;&#x6001;&#x4E0B;&#x5206;&#x6790;&#x5BF9;&#x8C61;&#x5934;&#x7684;&#x4E00;&#x4EFD;&#x53C2;&#x8003;&#x535A;&#x5BA2;</a></p>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x6B64;&#x5904;&#x7684;&#x77E5;&#x8BC6;&#x6211;&#x4EEC;&#x7559;&#x4E00;&#x4E2A;&#x5370;&#x8C61;&#x5373;&#x53EF;&#xFF0C;Android&#x540C;&#x5B66;&#x53EF;&#x80FD;&#x53EA;&#x80FD;&#x62FF;&#x6765;&#x5439;&#x725B;</em></p>
-<p>&#x5F52;&#x7EB3;&#x540E;&#x77E5;&#x8BC6;&#x6982;&#x8981;&#x5982;&#x56FE;&#xFF1A;</p>
-<p><img src="post_38/jvm_obj_structure.png" alt=""></p>
-<p><em>&#x6CE8;&#xFF1A;32&#x4F4D;</em></p>
-<h2 id="&#x9501;&#x7684;&#x5E38;&#x89C1;&#x6982;&#x5FF5;&#x3001;&#x5206;&#x7C7B;"><a name="&#x9501;&#x7684;&#x5E38;&#x89C1;&#x6982;&#x5FF5;&#x3001;&#x5206;&#x7C7B;" class="anchor-navigation-ex-anchor" href="#&#x9501;&#x7684;&#x5E38;&#x89C1;&#x6982;&#x5FF5;&#x3001;&#x5206;&#x7C7B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9501;&#x7684;&#x5E38;&#x89C1;&#x6982;&#x5FF5;&#x3001;&#x5206;&#x7C7B;</h2>
-<p>&#x6211;&#x4EEC;&#x5E73;&#x65F6;&#x4F1A;&#x542C;&#x5230;&#x5173;&#x4E8E;&#x9501;&#x7684;&#x5404;&#x79CD;&#x6982;&#x5FF5;&#x540D;&#x8BCD;&#xFF0C;&#x524D;&#x6587;&#x7684;&#x8868;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x770B;&#x5230;&#x4E86; <code>&#x504F;&#x5411;&#x9501;</code> <code>&#x8F7B;&#x91CF;&#x7EA7;&#x9501;</code> <code>&#x91CD;&#x91CF;&#x7EA7;&#x9501;</code> &#x7684;&#x8EAB;&#x5F71;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x7B80;&#x5355;&#x804A;&#x4E00;&#x804A;&#x5206;&#x7C7B;&#x4EE5;&#x53CA;&#x5E38;&#x89C1;&#x6982;&#x5FF5;&#x3002;</p>
-<h3 id="&#x4E50;&#x89C2;&#x9501;--&#x60B2;&#x89C2;&#x9501;"><a name="&#x4E50;&#x89C2;&#x9501;--&#x60B2;&#x89C2;&#x9501;" class="anchor-navigation-ex-anchor" href="#&#x4E50;&#x89C2;&#x9501;--&#x60B2;&#x89C2;&#x9501;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E50;&#x89C2;&#x9501; / &#x60B2;&#x89C2;&#x9501;</h3>
-<p>&#x4E50;&#x89C2;&#x9501;&#x548C;&#x60B2;&#x89C2;&#x9501;&#x662F;&#x4E00;&#x79CD;&#x76F8;&#x5BF9;&#x7684; <strong>&#x6001;&#x5EA6;</strong> &#x3002;&#x5728;&#x5E76;&#x53D1;&#x7684;&#x80CC;&#x666F;&#x4E0B;&#xFF0C;&#x8BBF;&#x95EE;&#x4E34;&#x754C;&#x533A;&#x65F6; <strong>&#x53EF;&#x80FD;&#x4F1A;</strong> &#x53D1;&#x751F; &quot;&#x51B2;&#x7A81;&quot;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x6001;&#x5EA6;&#x6F14;&#x53D8;&#x51FA;&#x4E0D;&#x540C;&#x7684;&#x7B56;&#x7565;&#x3002;</p>
-<p><strong>&#x60B2;&#x89C2;</strong> &#x5730;&#x770B;&#xFF0C;&#x53EF;&#x4EE5; <strong>&#x8BA4;&#x4E3A;&#x51B2;&#x7A81;&#x4E00;&#x5B9A;&#x4F1A;&#x53D1;&#x751F;</strong> &#xFF1A;&#x8BBF;&#x95EE;&#x4E34;&#x754C;&#x533A;&#x65F6;&#xFF0C;&#x81EA;&#x8EAB;&#x7EBF;&#x7A0B;&#x7684;&#x5199;&#x5165;&#x884C;&#x4E3A;&#x4E00;&#x5B9A;&#x4F1A;&#x5F71;&#x54CD;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#xFF0C;&#x81EA;&#x8EAB;&#x7EBF;&#x7A0B;&#x7684;&#x8BFB;&#x53D6;&#x884C;&#x4E3A;&#x4E00;&#x5B9A;&#x4F1A;&#x53D7;&#x5230;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x7684;&#x5199;&#x5165;&#x5F71;&#x54CD;&#xFF01; &#x6240;&#x4EE5; <strong>&#x5FC5;&#x987B;&#x8981;&#x8FDB;&#x884C;&#x9501;&#x4FDD;&#x62A4;</strong> &#xFF0C;&#x901A;&#x8FC7; &quot;&#x72EC;&#x5360;&quot;&#xFF0C;&quot;&#x6392;&#x4ED6;&quot; &#x7B49;&#x7279;&#x6027;&#xFF0C;&#x4FDD;&#x969C;&#x65E0;&#x51B2;&#x7A81;&#x3002;
-&#x5373;&#xFF1A;<strong>&#x60B2;&#x89C2;&#x5730;&#x8BA4;&#x4E3A;&#xFF0C;&#x4E0D;&#x52A0;&#x9501;&#x7684;&#x5E76;&#x53D1;&#x64CD;&#x4F5C;&#x4E00;&#x5B9A;&#x4F1A;&#x51FA;&#x73B0;&#x51B2;&#x7A81;&#xFF0C;&#x5FC5;&#x987B;&#x52A0;&#x9501;</strong></p>
-<p><strong>&#x4E50;&#x89C2;</strong> &#x5730;&#x770B;&#xFF0C;&#x53EF;&#x4EE5; <strong>&#x8BA4;&#x4E3A;&#x53D1;&#x751F;&#x51B2;&#x7A81;&#x662F;&#x573A;&#x666F;&#x9650;&#x5B9A;&#x7684;&#x4E8B;&#x4EF6;</strong> &#xFF1A;&#x8BFB;&#x4E0D;&#x4F1A;&#x6709;&#x51B2;&#x7A81;&#xFF0C;&#x4F46;&#x5199;&#x5165;&#x5B58;&#x5728;&#x51B2;&#x7A81;&#x53EF;&#x80FD;&#x3002;&#x6240;&#x4EE5; <strong>&#x53EA;&#x6709;&#x5728;&#x5199;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x8FDB;&#x884C;&#x51B2;&#x7A81;&#x68C0;&#x6D4B;&#xFF0C;&#x68C0;&#x6D4B;&#x5230;&#x51B2;&#x7A81;&#x65F6;&#x64CD;&#x4F5C;&#x5C31;&#x4F1A;&#x5931;&#x8D25;&#xFF0C;&#x8FD4;&#x56DE;&#x9519;&#x8BEF;&#x4FE1;&#x606F;</strong></p>
-<p>&#x5728;Java&#x4E2D;&#xFF0C;&#x60B2;&#x89C2;&#x9501;&#x5373;&#x5404;&#x79CD;&#x5B9E;&#x9645;&#x7684;&#x9501;&#x5B9E;&#x73B0;&#xFF0C;&#x800C;&#x4E50;&#x89C2;&#x9501;&#x5373;&#x65E0;&#x9501;&#x7F16;&#x7A0B;&#xFF0C;&#x8F6C;&#x4E3A;&#x4F7F;&#x7528;CAS&#x7B97;&#x6CD5;&#x3002;</p>
-<h3 id="&#x72EC;&#x4EAB;&#x9501;--&#x5171;&#x4EAB;&#x9501;"><a name="&#x72EC;&#x4EAB;&#x9501;--&#x5171;&#x4EAB;&#x9501;" class="anchor-navigation-ex-anchor" href="#&#x72EC;&#x4EAB;&#x9501;--&#x5171;&#x4EAB;&#x9501;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x72EC;&#x4EAB;&#x9501; / &#x5171;&#x4EAB;&#x9501;</h3>
-<p>&#x9501;&#x53EF;&#x4EE5;&#x88AB;&#x8BBF;&#x95EE;&#x8005;&#x72EC;&#x4EAB;&#x6216;&#x8005;&#x5171;&#x4EAB;&#xFF0C;&#x76F4;&#x767D;&#x5730;&#x8BB2;&#xFF1A;&#x72EC;&#x4EAB;&#x9501;&#x5728;&#x67D0;&#x4E00;&#x65F6;&#x95F4;&#x70B9;&#xFF0C;&#x53EA;&#x80FD;&#x88AB;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x83B7;&#x53D6;&#xFF0C;&#x5176;&#x5B83;&#x7EBF;&#x7A0B;&#x5FC5;&#x987B;&#x7B49;&#x5F85;&#x9501;&#x88AB;&#x6301;&#x6709;&#x8005;&#x91CA;&#x653E;&#x4E4B;&#x540E;&#xFF0C;&#x624D;&#x53EF;&#x80FD;&#x83B7;&#x53D6;&#x5230;&#x9501;&#xFF0C;&#x800C;&#x5171;&#x4EAB;&#x9501;&#x53EF;&#x4EE5;&#x88AB;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x83B7;&#x53D6;&#x3002;</p>
-<p>&#x72EC;&#x4EAB;&#x9501;&#x53C8;&#x79F0;&#x72EC;&#x5360;&#x9501;&#x3001;&#x6392;&#x5B83;&#x9501;&#x3002;</p>
-<p>&#x663E;&#x7136;&#xFF0C;&#x5171;&#x4EAB;&#x9501;&#x8BA4;&#x4E3A;&#x6301;&#x6709;&#x5B83;&#x7684;&#x7EBF;&#x7A0B;&#x4EEC;&#x5728;&#x5E76;&#x53D1;&#x64CD;&#x4F5C;&#x65F6;&#x5E76;&#x4E0D;&#x4F1A;&#x53D1;&#x751F;&#x51B2;&#x7A81;&#x3002;</p>
-<h3 id="&#x53EF;&#x91CD;&#x5165;&#x9501;--&#x975E;&#x53EF;&#x91CD;&#x5165;&#x9501;"><a name="&#x53EF;&#x91CD;&#x5165;&#x9501;--&#x975E;&#x53EF;&#x91CD;&#x5165;&#x9501;" class="anchor-navigation-ex-anchor" href="#&#x53EF;&#x91CD;&#x5165;&#x9501;--&#x975E;&#x53EF;&#x91CD;&#x5165;&#x9501;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x53EF;&#x91CD;&#x5165;&#x9501; / &#x975E;&#x53EF;&#x91CD;&#x5165;&#x9501;</h3>
-<p>&#x4ECE;&#x6982;&#x5FF5;&#x4E0A;&#x770B;&#xFF1A;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5728;&#x6301;&#x6709;&#x4E00;&#x4E2A;&#x9501;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5B83;&#x5185;&#x90E8;&#x80FD;&#x5426;&#x518D;&#x6B21;&#xFF08;&#x591A;&#x6B21;&#xFF09;&#x7533;&#x8BF7;&#x8BE5;&#x9501;&#xFF0C;&#x5982;&#x679C;&#x53EF;&#x4EE5;&#x5219;&#x4E3A;&#x53EF;&#x91CD;&#x5165;&#x9501;&#xFF0C;&#x5426;&#x5219;&#x4E3A;&#x4E0D;&#x53EF;&#x91CD;&#x5165;&#x9501;&#x3002;</p>
-<p>&#x663E;&#x7136;&#x6613;&#x89C1;&#xFF1A;<code>&#x4E0D;&#x53EF;&#x91CD;&#x5165;</code> &#x5C06;&#x5927;&#x5927;&#x589E;&#x52A0; <code>&#x6B7B;&#x9501;</code> &#x7684;&#x673A;&#x7387;&#x3002;</p>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x4F46;&#x5728;&#x7EBF;&#x7A0B;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x5B9E;&#x73B0;&#x7C7B;&#x4F3C;&#x534F;&#x7A0B;&#x7684;&#x673A;&#x5236;&#x65F6;&#xFF0C;&#x975E;&#x53EF;&#x91CD;&#x5165;&#x5C06;&#x5177;&#x6709;&#x91CD;&#x8981;&#x610F;&#x4E49;&#x3002;</em></p>
-<h3 id="&#x516C;&#x5E73;&#x9501;--&#x975E;&#x516C;&#x5E73;&#x9501;"><a name="&#x516C;&#x5E73;&#x9501;--&#x975E;&#x516C;&#x5E73;&#x9501;" class="anchor-navigation-ex-anchor" href="#&#x516C;&#x5E73;&#x9501;--&#x975E;&#x516C;&#x5E73;&#x9501;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x516C;&#x5E73;&#x9501; / &#x975E;&#x516C;&#x5E73;&#x9501;</h3>
-<p>&#x9501;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x7ADE;&#x4E89;&#x83B7;&#x53D6;&#xFF0C;&#x516C;&#x5E73; / &#x975E;&#x516C;&#x5E73;&#x6307;&#x7684;&#x662F; &#x662F;&#x5426;&#x6309;&#x7167;&quot;&#x5148;&#x6765;&#x540E;&#x5230;&quot;&#x83B7;&#x53D6;&#x9501;&#x3002;</p>
-<p>&#x5982;&#x679C;&#x6309;&#x7167;&#x7533;&#x8BF7;&#x987A;&#x5E8F;&#x5206;&#x914D;&#x9501;&#xFF0C;&#x5219;&#x4E3A;&#x516C;&#x5E73;&#x9501;&#xFF0C;&#x5426;&#x5219;&#x4E3A;&#x975E;&#x516C;&#x5E73;&#x9501;&#x3002;</p>
-<p>&#x6211;&#x4EEC;&#x5E38;&#x7528;&#x7684;Synchronized&#x5373;&#x975E;&#x516C;&#x5E73;&#x9501;&#xFF0C;Java&#x7684;&#x53EF;&#x91CD;&#x5165;&#x9501;&#xFF08;ReentrantLock&#xFF09;&#x9ED8;&#x8BA4;&#x4E3A;&#x975E;&#x516C;&#x5E73;&#x9501;&#xFF0C;&#x4F46;&#x53EF;&#x4EE5;&#x5B9E;&#x4F8B;&#x5316;&#x4E3A;&#x516C;&#x5E73;&#x9501;&#x3002;</p>
-<p>&#x975E;&#x516C;&#x5E73;&#x9501;&#x7684;&#x4F18;&#x70B9;&#x5728;&#x4E8E;&#x541E;&#x5410;&#x91CF;&#x6BD4;&#x516C;&#x5E73;&#x9501;&#x5927;&#x3002;</p>
-<h3 id="&#x4E92;&#x65A5;&#x9501;&#x3001;&#x8BFB;&#x5199;&#x9501;"><a name="&#x4E92;&#x65A5;&#x9501;&#x3001;&#x8BFB;&#x5199;&#x9501;" class="anchor-navigation-ex-anchor" href="#&#x4E92;&#x65A5;&#x9501;&#x3001;&#x8BFB;&#x5199;&#x9501;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E92;&#x65A5;&#x9501;&#x3001;&#x8BFB;&#x5199;&#x9501;</h3>
-<p>&#x72EC;&#x4EAB;&#x9501;&#x3001;&#x5171;&#x4EAB;&#x9501;&#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#xFF0C;&#x8BFB;&#x5199;&#x9501;&#x4F5C;&#x4E3A;&#x8BFB;&#x6A21;&#x5F0F;&#x65F6;&#x662F;&#x5171;&#x4EAB;&#x9501;&#x3002;</p>
-<p>Java&#x4E2D;&#x7684; <code>ReentrantLock</code> &#x662F;&#x4E92;&#x65A5;&#x9501;&#xFF0C;<code>ReadWriteLock</code> &#x662F;&#x8BFB;&#x5199;&#x9501;&#x5B9E;&#x73B0;&#x3002;</p>
-<h3 id="&#x5206;&#x6BB5;&#x9501;"><a name="&#x5206;&#x6BB5;&#x9501;" class="anchor-navigation-ex-anchor" href="#&#x5206;&#x6BB5;&#x9501;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5206;&#x6BB5;&#x9501;</h3>
-<p>&#x5206;&#x6BB5;&#x9501;&#x5E76;&#x975E;&#x662F;&#x4E00;&#x79CD;&#x9501;&#xFF0C;&#x800C;&#x662F;&#x4E00;&#x79CD;&#x63D0;&#x9AD8;&#x6548;&#x7387;&#x7684;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#xFF0C;&#x5C06;&#x4E34;&#x754C;&#x533A;&#x8FDB;&#x884C;&#x5212;&#x5206;&#xFF0C;&#x5F53;&#x67D0;&#x4E00;&#x5757;&#x533A;&#x57DF;&#x7684;&#x5199;&#x5165;&#x5E76;&#x4E0D;&#x5F71;&#x54CD;&#x5176;&#x4ED6;&#x533A;&#x57DF;&#x7684;&#x8BFB;&#x53D6;&#x65F6;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x91C7;&#x7528;&#x5206;&#x6BB5;&#x7684;&#x601D;&#x8DEF;&#xFF0C; &#x5BF9;&#x5199;&#x5165;&#x533A;&#x57DF;&#x52A0;&#x9501;&#xFF0C;&#x8BFB;&#x53D6;&#x5176;&#x4ED6;&#x533A;&#x57DF;&#x5219;&#x65E0;&#x9700;&#x7ADE;&#x4E89;&#x9501;&#x4ECE;&#x800C;&#x63D0;&#x9AD8;&#x6548;&#x7387;&#xFF0C;&#x4F8B;&#x5982; <code>ConcurrentHashMap</code>
-&#x5C31;&#x91C7;&#x7528;&#x4E86;&#x8FD9;&#x4E00;&#x8BBE;&#x8BA1;</p>
-<h3 id="&#x504F;&#x5411;&#x9501;--&#x8F7B;&#x91CF;&#x7EA7;&#x9501;--&#x91CD;&#x91CF;&#x7EA7;&#x9501;"><a name="&#x504F;&#x5411;&#x9501;--&#x8F7B;&#x91CF;&#x7EA7;&#x9501;--&#x91CD;&#x91CF;&#x7EA7;&#x9501;" class="anchor-navigation-ex-anchor" href="#&#x504F;&#x5411;&#x9501;--&#x8F7B;&#x91CF;&#x7EA7;&#x9501;--&#x91CD;&#x91CF;&#x7EA7;&#x9501;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x504F;&#x5411;&#x9501; / &#x8F7B;&#x91CF;&#x7EA7;&#x9501; / &#x91CD;&#x91CF;&#x7EA7;&#x9501;</h3>
-<p>&#x4E13;&#x6307; <code>synchronized</code> &#x7684;&#x4E09;&#x79CD;&#x9501;&#x72B6;&#x6001;&#xFF0C;&#x5E76;&#x4E14;&#x5173;&#x7CFB;&#x5230;&#x540E;&#x6587;&#x4E2D;&#x7684; <code>&#x9501;&#x5347;&#x7EA7;</code> &#x90E8;&#x5206;&#x3002;</p>
-<p>&#x5728;&#x524D;&#x6587;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x82B1;&#x4E86;&#x5F88;&#x591A;&#x7BC7;&#x5E45;&#x68B3;&#x7406; <code>&#x5BF9;&#x8C61;&#x5934;</code> &#x4E2D;&#x7684; <code>Mark Word</code>&#xFF0C;&#x5176;&#x4E2D;&#x6709;&#x4E09;&#x79CD;&#x72B6;&#x6001;&#xFF1A;Biased&#xFF0C;Lightweight Locked&#xFF0C;Heavyweight Locked &#x4E8E;&#x6B64;&#x5BF9;&#x5E94;&#x3002;</p>
+<p><em>排版不方便的话看下图：</em></p>
+<p><img src="./post_38/jvm_header_64.png" alt="" /></p>
+<p>如果运行在 HotSpot openJdk VM 上，可以借助："org.openjdk.jol:jol-core:0.9" 打印对象头进行对照。</p>
+<p><a href="https://blog.csdn.net/qdh186/article/details/96162413">五种状态下分析对象头的一份参考博客</a></p>
+<p><em>作者按：此处的知识我们留一个印象即可，Android同学可能只能拿来吹牛</em></p>
+<p>归纳后知识概要如图：</p>
+<p><img src="./post_38/jvm_obj_structure.png" alt="" /></p>
+<p><em>注：32位</em></p>
+<h2 id="锁的常见概念分类"><a class="header" href="#锁的常见概念分类">锁的常见概念、分类</a></h2>
+<p>我们平时会听到关于锁的各种概念名词，前文的表中，我们也看到了 <code>偏向锁</code> <code>轻量级锁</code> <code>重量级锁</code> 的身影，接下来简单聊一聊分类以及常见概念。</p>
+<h3 id="乐观锁--悲观锁"><a class="header" href="#乐观锁--悲观锁">乐观锁 / 悲观锁</a></h3>
+<p>乐观锁和悲观锁是一种相对的 <strong>态度</strong> 。在并发的背景下，访问临界区时 <strong>可能会</strong> 发生 "冲突"，不同的态度演变出不同的策略。</p>
+<p><strong>悲观</strong> 地看，可以 <strong>认为冲突一定会发生</strong> ：访问临界区时，自身线程的写入行为一定会影响其他线程，自身线程的读取行为一定会受到其他线程的写入影响！ 所以 <strong>必须要进行锁保护</strong> ，通过 "独占"，"排他" 等特性，保障无冲突。
+即：<strong>悲观地认为，不加锁的并发操作一定会出现冲突，必须加锁</strong></p>
+<p><strong>乐观</strong> 地看，可以 <strong>认为发生冲突是场景限定的事件</strong> ：读不会有冲突，但写入存在冲突可能。所以 <strong>只有在写操作时，进行冲突检测，检测到冲突时操作就会失败，返回错误信息</strong></p>
+<p>在Java中，悲观锁即各种实际的锁实现，而乐观锁即无锁编程，转为使用CAS算法。</p>
+<h3 id="独享锁--共享锁"><a class="header" href="#独享锁--共享锁">独享锁 / 共享锁</a></h3>
+<p>锁可以被访问者独享或者共享，直白地讲：独享锁在某一时间点，只能被一个线程获取，其它线程必须等待锁被持有者释放之后，才可能获取到锁，而共享锁可以被多个线程获取。</p>
+<p>独享锁又称独占锁、排它锁。</p>
+<p>显然，共享锁认为持有它的线程们在并发操作时并不会发生冲突。</p>
+<h3 id="可重入锁--非可重入锁"><a class="header" href="#可重入锁--非可重入锁">可重入锁 / 非可重入锁</a></h3>
+<p>从概念上看：一个线程在持有一个锁的时候，它内部能否再次（多次）申请该锁，如果可以则为可重入锁，否则为不可重入锁。</p>
+<p>显然易见：<code>不可重入</code> 将大大增加 <code>死锁</code> 的机率。</p>
+<p><em>作者按：但在线程的基础上实现类似协程的机制时，非可重入将具有重要意义。</em></p>
+<h3 id="公平锁--非公平锁"><a class="header" href="#公平锁--非公平锁">公平锁 / 非公平锁</a></h3>
+<p>锁需要通过竞争获取，公平 / 非公平指的是 是否按照"先来后到"获取锁。</p>
+<p>如果按照申请顺序分配锁，则为公平锁，否则为非公平锁。</p>
+<p>我们常用的Synchronized即非公平锁，Java的可重入锁（ReentrantLock）默认为非公平锁，但可以实例化为公平锁。</p>
+<p>非公平锁的优点在于吞吐量比公平锁大。</p>
+<h3 id="互斥锁读写锁"><a class="header" href="#互斥锁读写锁">互斥锁、读写锁</a></h3>
+<p>独享锁、共享锁的具体实现，读写锁作为读模式时是共享锁。</p>
+<p>Java中的 <code>ReentrantLock</code> 是互斥锁，<code>ReadWriteLock</code> 是读写锁实现。</p>
+<h3 id="分段锁"><a class="header" href="#分段锁">分段锁</a></h3>
+<p>分段锁并非是一种锁，而是一种提高效率的设计思路，将临界区进行划分，当某一块区域的写入并不影响其他区域的读取时，就可以采用分段的思路， 对写入区域加锁，读取其他区域则无需竞争锁从而提高效率，例如 <code>ConcurrentHashMap</code>
+就采用了这一设计</p>
+<h3 id="偏向锁--轻量级锁--重量级锁"><a class="header" href="#偏向锁--轻量级锁--重量级锁">偏向锁 / 轻量级锁 / 重量级锁</a></h3>
+<p>专指 <code>synchronized</code> 的三种锁状态，并且关系到后文中的 <code>锁升级</code> 部分。</p>
+<p>在前文中，我们花了很多篇幅梳理 <code>对象头</code> 中的 <code>Mark Word</code>，其中有三种状态：Biased，Lightweight Locked，Heavyweight Locked 于此对应。</p>
 <ul>
-<li>&#x504F;&#x5411;&#x9501;&#x72B6;&#x6001;&#xFF1A;&#x540C;&#x6B65;&#x4EE3;&#x7801;&#x4E00;&#x76F4;&#x88AB;&#x540C;&#x4E00;&#x7EBF;&#x7A0B;&#x8BBF;&#x95EE;&#x65F6;&#xFF0C;&#x8BE5;&#x7EBF;&#x7A0B;&#x4F1A;&#x81EA;&#x52A8;&#x83B7;&#x53D6;&#x9501;&#xFF0C;&#x964D;&#x4F4E;&#x83B7;&#x53D6;&#x9501;&#x7684;&#x4EE3;&#x4EF7;&#x3002;</li>
-<li>&#x8F7B;&#x91CF;&#x7EA7;&#x9501;&#x72B6;&#x6001;&#xFF1A;&#x5728;&#x504F;&#x5411;&#x9501;&#x72B6;&#x6001;&#x65F6;&#xFF0C;&#x4E00;&#x65E6;&#x53E6;&#x4E00;&#x7EBF;&#x7A0B;&#x7ADE;&#x4E89;&#x8BE5;&#x9501;&#xFF0C;&#x5219;&#x5347;&#x7EA7;&#x4E3A;&#x8F7B;&#x91CF;&#x7EA7;&#x9501;&#xFF0C;&#x7ADE;&#x4E89;&#x7684;&#x7EBF;&#x7A0B;&#x901A;&#x8FC7; <code>&#x6709;&#x9650;&#x7684;&#x81EA;&#x65CB;</code> &#x5C1D;&#x8BD5;&#x83B7;&#x53D6;&#x9501;&#xFF0C;&#x5982;&#x679C;&#x9501;&#x7684;&#x6301;&#x6709;&#x8005;&#x5728;&#x6B64;&#x8FC7;&#x7A0B;&#x4E2D; <strong>&#x91CA;&#x653E;&#x4E86;&#x9501;</strong> &#xFF0C; &#x5E76;&#x88AB;&#x8BE5;&#x7EBF;&#x7A0B;&#x6210;&#x529F;&#x83B7;&#x53D6;&#x9501;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x963B;&#x585E;&#xFF0C;&#x51CF;&#x5C11;&#x7EBF;&#x7A0B;&#x5207;&#x6362;&#xFF0C;<em>
-&#x6302;&#x8D77;&#x548C;&#x6062;&#x590D;&#x7EBF;&#x7A0B;&#x662F;&#x8F83;&#x4E3A;&#x6602;&#x8D35;&#x7684;</em>&#x3002;</li>
-<li>&#x91CD;&#x91CF;&#x7EA7;&#x9501;&#x72B6;&#x6001;&#xFF1A;&#x5F53;&#x7EBF;&#x7A0B;&#x5B8C;&#x6210;&#x4E86;&#x6709;&#x9650;&#x7684;&#x81EA;&#x65CB;&#x540E;&#x4F9D;&#x65E7;&#x672A;&#x80FD;&#x83B7;&#x5F97;&#x9501;&#xFF0C;&#x5C06;&#x4E0D;&#x5F97;&#x4E0D;&#x8FDB;&#x884C;&#x963B;&#x585E;&#x4EE5;&#x514D;&#x7A7A;&#x8017;CPU&#xFF0C;&#x6B64;&#x65F6;&#x9501;&#x5347;&#x7EA7;&#x4E3A;&#x91CD;&#x91CF;&#x7EA7;&#x9501;</li>
+<li>偏向锁状态：同步代码一直被同一线程访问时，该线程会自动获取锁，降低获取锁的代价。</li>
+<li>轻量级锁状态：在偏向锁状态时，一旦另一线程竞争该锁，则升级为轻量级锁，竞争的线程通过 <code>有限的自旋</code> 尝试获取锁，如果锁的持有者在此过程中 <strong>释放了锁</strong> ， 并被该线程成功获取锁，则可以避免阻塞，减少线程切换，*
+挂起和恢复线程是较为昂贵的*。</li>
+<li>重量级锁状态：当线程完成了有限的自旋后依旧未能获得锁，将不得不进行阻塞以免空耗CPU，此时锁升级为重量级锁</li>
 </ul>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x6309;&#x7167;Java&#x7684;&#x7EBF;&#x7A0B;&#x6A21;&#x578B;&#xFF0C;<strong>&#x4EC5;&#x591A;&#x6838;CPU&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x91C7;&#x7528;&#x8F7B;&#x91CF;&#x7EA7;&#x9501;&#x5E76;&#x5229;&#x7528;&#x81EA;&#x65CB;&#x624D;&#x6709;&#x610F;&#x4E49;</strong>&#x3002;&#x5982;&#x679C;&#x662F;&#x5355;&#x6838;CPU&#xFF0C;&#x5E76;&#x4E0D;&#x5B58;&#x5728;&#x771F;&#x6B63;&#x7684;&#x65F6;&#x95F4;&#x610F;&#x4E49;&#x4E0A;&#x7684;&#x7EBF;&#x7A0B;&#x5E76;&#x53D1;&#xFF0C;&#x81EA;&#x65CB;&#x65F6;&#xFF0C;&#x6301;&#x6709;&#x9501;&#x7684;&#x7EBF;&#x7A0B;&#x662F;&#x6302;&#x8D77;&#x7684;&#xFF0C;&#x5E76;&#x65E0;&#x91CA;&#x653E;&#x9501;&#x7684;&#x53EF;&#x80FD;</p>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;Java&#x7684;&#x7EBF;&#x7A0B;&#x6A21;&#x578B;&#x53EF;&#x53C2;&#x89C1;&#x62D9;&#x4F5C;&#xFF1A;<a href="https://juejin.cn/post/7068941257074016263" target="_blank">&#x514B;&#x670D;&#x7126;&#x8651;--&#x56FE;&#x89E3;JVM&#x5185;&#x5B58;&#x6A21;&#x578B;&#x548C;JVM&#x7EBF;&#x7A0B;&#x6A21;&#x578B;</a></em></p>
-<h3 id="&#x81EA;&#x65CB;&#x9501;"><a name="&#x81EA;&#x65CB;&#x9501;" class="anchor-navigation-ex-anchor" href="#&#x81EA;&#x65CB;&#x9501;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x81EA;&#x65CB;&#x9501;</h3>
-<p>&#x57FA;&#x4E8E;CAS&#x5229;&#x7528;&#x81EA;&#x65CB;&#x53BB;&#x7ADE;&#x4E89;&#x9501;&#x5B9E;&#x73B0;&#x540C;&#x6B65;&#x7684;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x5982;&#x524D;&#x6587;&#x6240;&#x8A00;&#xFF0C;&#x53D1;&#x751F;&#x7ADE;&#x4E89;&#x800C;&#x4EA7;&#x751F;&#x81EA;&#x65CB;&#x65F6;&#xFF0C;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x4E0D;&#x4F1A;&#x963B;&#x585E;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x4F1A;&#x76F4;&#x63A5;&#x5BFC;&#x81F4;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#xFF0C;&#x51CF;&#x5C11;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;&#x7684;&#x5F00;&#x9500;&#xFF0C;
-&#x4F46;&#x5982;&#x679C;&#x4E00;&#x76F4;&#x7ADE;&#x4E89;&#x4E0D;&#x5230;&#x9501;&#xFF0C;&#x5C06;&#x9020;&#x6210;CPU&#x7A7A;&#x8F6C;&#xFF0C;&#x6240;&#x8C13;&#x7684;busy-waiting&#x3002;&#x5BF9;&#x4E8E;&#x8BA1;&#x7B97;&#x5BC6;&#x96C6;&#x578B;&#x7A0B;&#x5E8F;&#x800C;&#x8A00;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x5E26;&#x6765;&#x8D1F;&#x9762;&#x6548;&#x679C;&#x3002;</p>
-<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5229;&#x7528;Atomic&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684; <code>&#x53EF;&#x91CD;&#x5165;&#x81EA;&#x65CB;&#x9501;</code></p>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReentrantSpinLock</span> </span>{
-    <span class="hljs-keyword">private</span> AtomicReference&lt;Thread&gt; cas = <span class="hljs-keyword">new</span> AtomicReference&lt;Thread&gt;();
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> count;
+<p>不难理解，按照Java的线程模型，<strong>仅多核CPU情况下，采用轻量级锁并利用自旋才有意义</strong>。如果是单核CPU，并不存在真正的时间意义上的线程并发，自旋时，持有锁的线程是挂起的，并无释放锁的可能</p>
+<p><em>作者按：Java的线程模型可参见拙作：<a href="https://juejin.cn/post/7068941257074016263">克服焦虑--图解JVM内存模型和JVM线程模型</a></em></p>
+<h3 id="自旋锁"><a class="header" href="#自旋锁">自旋锁</a></h3>
+<p>基于CAS利用自旋去竞争锁实现同步的一种方式，如前文所言，发生竞争而产生自旋时，当前线程不会阻塞，所以不会直接导致系统调用，减少上下文切换的开销，
+但如果一直竞争不到锁，将造成CPU空转，所谓的busy-waiting。对于计算密集型程序而言，可能会带来负面效果。</p>
+<p>我们可以利用Atomic实现一个简单的 <code>可重入自旋锁</code></p>
+<pre><code class="language-java">public class ReentrantSpinLock {
+    private AtomicReference&lt;Thread&gt; cas = new AtomicReference&lt;Thread&gt;();
+    private int count;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span> </span>{
+    public void lock() {
         Thread current = Thread.currentThread();
-        <span class="hljs-keyword">if</span> (current == cas.get()) {
+        if (current == cas.get()) {
             count++;
-            <span class="hljs-keyword">return</span>;
+            return;
         }
-        <span class="hljs-keyword">while</span> (!cas.compareAndSet(<span class="hljs-keyword">null</span>, current)) {
-            <span class="hljs-comment">// Do nothing</span>
+        while (!cas.compareAndSet(null, current)) {
+            // Do nothing
         }
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">unlock</span><span class="hljs-params">()</span> </span>{
+    public void unlock() {
         Thread cur = Thread.currentThread();
-        <span class="hljs-keyword">if</span> (cur == cas.get()) {
-            <span class="hljs-keyword">if</span> (count &gt; <span class="hljs-number">0</span>) {
+        if (cur == cas.get()) {
+            if (count &gt; 0) {
                 count--;
-            } <span class="hljs-keyword">else</span> {
-                cas.compareAndSet(cur, <span class="hljs-keyword">null</span>);
+            } else {
+                cas.compareAndSet(cur, null);
             }
         }
     }
 }
 </code></pre>
-<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x516C;&#x5E73;&#x9501;&#x3001;&#x72EC;&#x4EAB;&#x9501;</p>
-<h2 id="synchronized&#x9501;"><a name="synchronized&#x9501;" class="anchor-navigation-ex-anchor" href="#synchronized&#x9501;"><i class="fa fa-link" aria-hidden="true"></i></a>Synchronized&#x9501;</h2>
-<p><code>synchronized</code> &#x4F5C;&#x4E3A;Java&#x5173;&#x952E;&#x5B57;&#xFF0C;&#x63D0;&#x4F9B;&#x540C;&#x6B65;&#x80FD;&#x529B;&#xFF0C;&#x5176;&#x6838;&#x5FC3;&#x4F9D;&#x8D56;&#x4E8E;Java&#x5BF9;&#x8C61;&#x7684;&#x5BF9;&#x8C61;&#x5934;&#xFF0C;&#x5F53;&#x4E00;&#x4E2A;&#x7C7B;&#x5BF9;&#x8C61;&#x88AB;&#x4F5C;&#x4E3A;synchronized&#x9501;&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x5176;&#x5373;&#x4E3A; <code>Monitor</code>&#xFF0C;JVM&#x901A;&#x8FC7;
-<strong>&#x8FDB;&#x5165;&#x3001;&#x9000;&#x51FA;Monitor</strong> &#x6765;&#x5B9E;&#x73B0;&#x540C;&#x6B65;</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
+<p>很显然，这也是一个非公平锁、独享锁</p>
+<h2 id="synchronized锁"><a class="header" href="#synchronized锁">Synchronized锁</a></h2>
+<p><code>synchronized</code> 作为Java关键字，提供同步能力，其核心依赖于Java对象的对象头，当一个类对象被作为synchronized锁对象时，其即为 <code>Monitor</code>，JVM通过
+<strong>进入、退出Monitor</strong> 来实现同步</p>
+<pre><code class="language-java">class Foo {
 
-    <span class="hljs-function"><span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">static</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> </span>{
+    synchronized static foo() {
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span> </span>{
+    synchronized void bar() {
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">baz</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">synchronized</span> (Foo.class) {
-            <span class="hljs-comment">//&#x540C;&#x6B65;&#x5757;</span>
+    void baz() {
+        synchronized (Foo.class) {
+            //同步块
         }
     }
 }
 </code></pre>
-<p>&#x5982;&#x4E0A;&#x4EE3;&#x7801;&#x4E2D;&#x5C55;&#x793A;&#x4E86;&#x4E09;&#x79CD;&#x540C;&#x6B65;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<p>如上代码中展示了三种同步的方式：</p>
 <ul>
-<li><code>foo()</code> &#x4E2D;&#x9501;&#x5BF9;&#x5E94;&#x7684;Monitor&#x4E3A; <code>Foo.class</code></li>
-<li><code>bar()</code> &#x4E2D;&#x9501;&#x5BF9;&#x5E94;&#x7684;Monitor&#x4E3A; Foo &#x7684;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;</li>
-<li><code>baz()</code> &#x4E2D;&#x7684;&#x540C;&#x6B65;&#x5757;&#x53EF;&#x4EE5;&#x7528;&#x4EFB;&#x610F;&#x7684;&#x5BF9;&#x8C61;&#x4F5C;&#x4E3A;Monitor&#xFF0C;&#x6F14;&#x793A;&#x90E8;&#x5206;&#x4F7F;&#x7528;&#x4E86; <code>Foo.class</code> &#x4F5C;&#x4E3A;Monitor</li>
+<li><code>foo()</code> 中锁对应的Monitor为 <code>Foo.class</code></li>
+<li><code>bar()</code> 中锁对应的Monitor为 Foo 的对象实例</li>
+<li><code>baz()</code> 中的同步块可以用任意的对象作为Monitor，演示部分使用了 <code>Foo.class</code> 作为Monitor</li>
 </ul>
-<p>&#x6CE8;&#x610F;&#xFF0C;Monitor&#x7684;&#x9009;&#x53D6;&#x52A1;&#x5FC5;&#x614E;&#x91CD;&#xFF0C;&#x4E0D;&#x4EC5;&#x4EC5;&#x8981;&#x4ECE; <code>&#x540C;&#x6B65;</code> &#x7684;&#x9700;&#x6C42;&#x89D2;&#x5EA6;&#x51FA;&#x53D1;&#xFF0C;&#x907F;&#x514D;&#x6027;&#x80FD;&#x635F;&#x8017;&#xFF0C;&#x4E5F;&#x8981;&#x6CE8;&#x610F;&#x9501;&#x65E0;&#x6CD5;&#x6B63;&#x5E38;&#x751F;&#x6548;&#x7684;&#x95EE;&#x9898;&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
-<p>&#x6211;&#x4EEC;&#x6A21;&#x62DF;5&#x4E2A;&#x7EBF;&#x7A0B;&#x540C;&#x65F6;&#x7ADE;&#x4E89;&#x4E00;&#x4E2A;&#x6570;&#xFF08;&#x521D;&#x59CB;&#x503C;&#x4E3A;6&#xFF09;&#x5E76;&#x505A; <code>--</code> &#x8FD0;&#x7B97;&#xFF0C;&#x8BFB;&#x8005;&#x662F;&#x5426;&#x8BA4;&#x4E3A;&#x5B83;&#x4F1A;&#x6309;&#x7167; <code>5&#x3001;4&#x3001;3&#x3001;2&#x3001;1</code> &#x7684;&#x987A;&#x5E8F;&#x8F93;&#x51FA;&#xFF1F;</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
+<p>注意，Monitor的选取务必慎重，不仅仅要从 <code>同步</code> 的需求角度出发，避免性能损耗，也要注意锁无法正常生效的问题。例如：</p>
+<p>我们模拟5个线程同时竞争一个数（初始值为6）并做 <code>--</code> 运算，读者是否认为它会按照 <code>5、4、3、2、1</code> 的顺序输出？</p>
+<pre><code class="language-java">class Foo {
 
-  Integer integer = <span class="hljs-number">6</span>;
+  Integer integer = 6;
 
-  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">minus</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-keyword">synchronized</span> (integer) {
-      <span class="hljs-keyword">if</span> (integer &gt; <span class="hljs-number">0</span>) {
+  void minus() {
+    synchronized (integer) {
+      if (integer &gt; 0) {
         integer--;
       }
-      System.out.println(Thread.currentThread().getId() + <span class="hljs-string">&quot; -&gt; i:&quot;</span> + integer);
+      System.out.println(Thread.currentThread().getId() + " -&gt; i:" + integer);
     }
   }
 
-  <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>{
-    <span class="hljs-keyword">final</span> Foo foo;
-    <span class="hljs-keyword">final</span> CountDownLatch latch;
+  static class MThread extends Thread {
+    final Foo foo;
+    final CountDownLatch latch;
 
     MThread(Foo foo, CountDownLatch latch) {
-      <span class="hljs-keyword">this</span>.foo = foo;
-      <span class="hljs-keyword">this</span>.latch = latch;
+      this.foo = foo;
+      this.latch = latch;
     }
 
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
-      <span class="hljs-keyword">super</span>.run();
-      <span class="hljs-keyword">try</span> {
+    @Override
+    public void run() {
+      super.run();
+      try {
         latch.await();
         foo.minus();
-      } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+      } catch (InterruptedException e) {
         e.printStackTrace();
       }
 
     }
   }
 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
-    Foo foo = <span class="hljs-keyword">new</span> Foo();
-    CountDownLatch latch = <span class="hljs-keyword">new</span> CountDownLatch(<span class="hljs-number">1</span>);
+  public static void main(String[] args) {
+    Foo foo = new Foo();
+    CountDownLatch latch = new CountDownLatch(1);
 
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
-      <span class="hljs-keyword">new</span> MThread(foo,latch).start();
+    for (int i = 0; i &lt; 5; i++) {
+      new MThread(foo,latch).start();
     }
     latch.countDown();
-    <span class="hljs-keyword">try</span> {
-      Thread.sleep(<span class="hljs-number">1000</span>);
-    } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
       e.printStackTrace();
     }
   }
 }
 </code></pre>
-<p>&#x591A;&#x6267;&#x884C;&#x51E0;&#x6B21;&#x5C31;&#x4F1A;&#x53D1;&#x73B0; <code>&#x53EF;&#x80FD;</code> &#x4F1A;&#x50CF;&#x4E0B;&#x9762;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x5B83;&#x5E76;&#x975E;&#x662F;&#x4E00;&#x4E2A;&#x540C;&#x6B65;&#x60C5;&#x51B5;&#x7684;&#x7ED3;&#x679C;&#xFF0C;<em>&#x5982;&#x679C;&#x60F3;&#x8981;&#x66F4;&#x987A;&#x5229;&#x7684;&#x6A21;&#x62DF;&#x95EE;&#x9898;&#x7684;&#x51FA;&#x73B0;&#xFF0C;&#x589E;&#x5927;&#x7EBF;&#x7A0B;&#x6570;&#x5373;&#x53EF;</em></p>
-<pre><code class="lang-java">&gt; Task :Foo.main()
-<span class="hljs-number">13</span> -&gt; i:<span class="hljs-number">3</span>
-<span class="hljs-number">15</span> -&gt; i:<span class="hljs-number">4</span>
-<span class="hljs-number">12</span> -&gt; i:<span class="hljs-number">3</span>
-<span class="hljs-number">14</span> -&gt; i:<span class="hljs-number">1</span>
-<span class="hljs-number">11</span> -&gt; i:<span class="hljs-number">2</span>
+<p>多执行几次就会发现 <code>可能</code> 会像下面的结果，它并非是一个同步情况的结果，<em>如果想要更顺利的模拟问题的出现，增大线程数即可</em></p>
+<pre><code class="language-java">&gt; Task :Foo.main()
+13 -&gt; i:3
+15 -&gt; i:4
+12 -&gt; i:3
+14 -&gt; i:1
+11 -&gt; i:2
 </code></pre>
-<p>&#x5982;&#x679C;&#x8BFB;&#x8005;&#x6CE8;&#x610F;&#x4E86;lint&#xFF0C;&#x4F1A;&#x6CE8;&#x610F;&#x5230;&#x63D0;&#x793A;&#xFF1A;Synchronization on a non-final field &apos;integer&apos;</p>
-<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x5E76;&#x672A;&#x91C7;&#x7528;&#x6B63;&#x786E;&#x7684;Monitor&#xFF0C;&#x5728; <code>integer--</code> &#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;integer&#x5B9E;&#x4F8B;&#x5DF2;&#x7ECF;&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF1A;</p>
-<pre><code class="lang-java">System.out.println(Thread.currentThread().getId() + 
-        <span class="hljs-string">&quot; -&gt; i:&quot;</span> + integer+<span class="hljs-string">&quot;,&quot;</span>+System.identityHashCode(integer));
+<p>如果读者注意了lint，会注意到提示：Synchronization on a non-final field 'integer'</p>
+<p>很显然，上面的代码并未采用正确的Monitor，在 <code>integer--</code> 的过程中，integer实例已经发生变化：</p>
+<pre><code class="language-java">System.out.println(Thread.currentThread().getId() + 
+        " -&gt; i:" + integer+","+System.identityHashCode(integer));
 </code></pre>
-<p>&#x6211;&#x4EEC;&#x589E;&#x52A0;identityHashCode&#xFF0C;&#x5E76;&#x589E;&#x5927;&#x5E76;&#x53D1;&#x6570;&#x91CF;&#x5230;10&#xFF0C;&#x8F93;&#x51FA;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-number">13</span> -&gt; i:<span class="hljs-number">0</span>,<span class="hljs-number">482590393</span>
-<span class="hljs-number">15</span> -&gt; i:<span class="hljs-number">1</span>,<span class="hljs-number">1722967101</span>
-<span class="hljs-number">11</span> -&gt; i:<span class="hljs-number">3</span>,<span class="hljs-number">1130778910</span>
-<span class="hljs-number">16</span> -&gt; i:<span class="hljs-number">0</span>,<span class="hljs-number">482590393</span>
-<span class="hljs-number">17</span> -&gt; i:<span class="hljs-number">0</span>,<span class="hljs-number">482590393</span>
-<span class="hljs-number">20</span> -&gt; i:<span class="hljs-number">0</span>,<span class="hljs-number">482590393</span>
-<span class="hljs-number">12</span> -&gt; i:<span class="hljs-number">4</span>,<span class="hljs-number">685260083</span>
-<span class="hljs-number">14</span> -&gt; i:<span class="hljs-number">2</span>,<span class="hljs-number">1983109557</span>
-<span class="hljs-number">19</span> -&gt; i:<span class="hljs-number">0</span>,<span class="hljs-number">482590393</span>
-<span class="hljs-number">18</span> -&gt; i:<span class="hljs-number">0</span>,<span class="hljs-number">482590393</span>
+<p>我们增加identityHashCode，并增大并发数量到10，输出如下：</p>
+<pre><code class="language-java">13 -&gt; i:0,482590393
+15 -&gt; i:1,1722967101
+11 -&gt; i:3,1130778910
+16 -&gt; i:0,482590393
+17 -&gt; i:0,482590393
+20 -&gt; i:0,482590393
+12 -&gt; i:4,685260083
+14 -&gt; i:2,1983109557
+19 -&gt; i:0,482590393
+18 -&gt; i:0,482590393
 </code></pre>
-<p>&#x663E;&#x7136;&#xFF0C;<strong>&#x9501;&#x4E86;&#x4E2A;&#x5BC2;&#x5BDE;</strong> &#x3002;<em>&#x5F53;&#x7136;&#xFF0C;&#x8BE5;&#x95EE;&#x9898;&#x6DF1;&#x5165;&#x7814;&#x7A76;&#x4E0B;&#x53BB;&#xFF0C;&#x8BFB;&#x8005;&#x53EF;&#x4EE5;&#x4E00;&#x76F4;&#x6316;&#x5230;&#x52A8;&#x6001;&#x5E38;&#x91CF;&#x6C60;&#xFF0C;&#x4E0D;&#x518D;&#x5C55;&#x5F00;</em>&#x3002;</p>
-<p>&#x6240;&#x4EE5;&#xFF0C;&#x7F16;&#x7801;&#x4E2D;&#x4E00;&#x5B9A;&#x8981;&#x4FDD;&#x6301;&#x597D;&#x4E60;&#x60EF;&#xFF1A;<code>Monitor&#x5BF9;&#x8C61;&#x4E0D;&#x53EF;&#x53D8;</code>&#xFF0C;&#x65E0;&#x5F62;&#x4E2D;&#x5C31;&#x907F;&#x5F00;&#x4E86;bug&#x3002;</p>
-<h3 id="&#x9501;&#x5347;&#x7EA7;"><a name="&#x9501;&#x5347;&#x7EA7;" class="anchor-navigation-ex-anchor" href="#&#x9501;&#x5347;&#x7EA7;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9501;&#x5347;&#x7EA7;</h3>
-<p>&#x524D;&#x6587;&#x5DF2;&#x7ECF;&#x63D0;&#x5230;&#x4E86;&#x9501;&#x7684;&#x5347;&#x7EA7;&#xFF1A;</p>
+<p>显然，<strong>锁了个寂寞</strong> 。<em>当然，该问题深入研究下去，读者可以一直挖到动态常量池，不再展开</em>。</p>
+<p>所以，编码中一定要保持好习惯：<code>Monitor对象不可变</code>，无形中就避开了bug。</p>
+<h3 id="锁升级"><a class="header" href="#锁升级">锁升级</a></h3>
+<p>前文已经提到了锁的升级：</p>
 <blockquote>
-<p>&#x504F;&#x5411;&#x9501; -&gt; &#x8F7B;&#x91CF;&#x7EA7;&#x9501; -&gt; &#x91CD;&#x91CF;&#x7EA7;&#x9501; , &#x9501;&#x7684;&#x5347;&#x7EA7;&#x662F;&#x5355;&#x5411;&#x7684;</p>
+<p>偏向锁 -&gt; 轻量级锁 -&gt; 重量级锁 , 锁的升级是单向的</p>
 </blockquote>
-<p>&#x8FD9;&#x5176;&#x5B9E;&#x662F; <code>synchronized</code> &#x5185;&#x90E8;&#x5B9E;&#x73B0;&#x4E0A;&#x5BF9;&#x9501;&#x65B9;&#x5F0F;&#x7684;&#x4F18;&#x5316;</p>
-<h4 id="&#x8F6C;&#x6362;&#x539F;&#x56E0;"><a name="&#x8F6C;&#x6362;&#x539F;&#x56E0;" class="anchor-navigation-ex-anchor" href="#&#x8F6C;&#x6362;&#x539F;&#x56E0;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F6C;&#x6362;&#x539F;&#x56E0;</h4>
-<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x8FD9;&#x4E00;&#x8FC7;&#x7A0B;&#x5145;&#x5206;&#x8003;&#x8651;&#x5404;&#x79CD;&#x9501;&#x7684;&#x4F18;&#x70B9;&#x548C;&#x7F3A;&#x70B9;&#xFF0C;&#x5728;&#x76F8;&#x5E94;&#x573A;&#x666F;&#x4E0B;&#x4EE5;&#x671F;&#x83B7;&#x5F97;&#x6700;&#x597D;&#x7684;&#x6027;&#x80FD;&#x3002;</p>
+<p>这其实是 <code>synchronized</code> 内部实现上对锁方式的优化</p>
+<h4 id="转换原因"><a class="header" href="#转换原因">转换原因</a></h4>
+<p>很显然，这一过程充分考虑各种锁的优点和缺点，在相应场景下以期获得最好的性能。</p>
 <ul>
-<li>&#x504F;&#x5411;&#x9501;&#xFF1A;&#x6CA1;&#x6709;&#x81EA;&#x65CB;&#x3001;&#x6CA1;&#x6709;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#xFF0C;&#x6240;&#x4EE5; <strong>&#x6D88;&#x8017;&#x5C11;&#x6027;&#x80FD;&#x9AD8;</strong> &#xFF0C;&#x5E76;&#x4E14;&#x5177;&#x6709;&#x53EF;&#x91CD;&#x5165;&#x7279;&#x6027;&#xFF0C;&#x5728; <code>&#x540C;&#x4E00;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x540C;&#x6B65;&#x4EE3;&#x7801;</code> &#x573A;&#x666F;&#x4E0B;&#x662F;&#x6700;&#x4F18;&#x9009;&#x62E9;&#xFF0C;&#x4F46;&#x5B83;&#x5177;&#x6709; <strong>&#x64A4;&#x9500;&#x9501;&#x6D88;&#x8017;&#x9AD8;</strong> &#x7684;&#x7F3A;&#x70B9;&#x3002;</li>
-<li>&#x8F7B;&#x91CF;&#x7EA7;&#x9501;&#xFF1A;&#x524D;&#x9762;&#x5DF2;&#x7ECF;&#x63D0;&#x5230;&#xFF0C;&#x7528;CAS&#x53D6;&#x4EE3;&#x4E86;&#x963B;&#x585E;&#xFF0C;&#x5728; <code>&#x9501;&#x6301;&#x6709;&#x65F6;&#x95F4;&#x77ED;</code> &#x7684;&#x573A;&#x666F;&#x4E0B;&#x662F;&#x6700;&#x4F18;&#x9009;&#x62E9;&#xFF0C;&#x53EF;&#x8FFD;&#x6C42; <code>&#x5FEB;&#x901F;&#x54CD;&#x5E94;</code> &#xFF0C;&#x4F46;&#x7F3A;&#x70B9;&#x662F;&#x77ED;&#x65F6;&#x95F4;&#x5185;&#x65E0;&#x6CD5;&#x83B7;&#x53D6;&#x9501;&#x65F6;&#xFF0C;&#x81EA;&#x65CB;&#x6D88;&#x8017;CPU&#x8D44;&#x6E90;&#x3002;</li>
-<li>&#x91CD;&#x91CF;&#x7EA7;&#x9501;&#xFF1A;&#x5177;&#x5907; <code>&#x5927;&#x541E;&#x5410;&#x91CF;</code> &#xFF0C;&#x672A;&#x7ADE;&#x4E89;&#x5230;&#x9501;&#x7684;&#x7EBF;&#x7A0B;&#x4E0D;&#x4F1A;&#x81EA;&#x65CB;&#x6D88;&#x8017;&#x8D44;&#x6E90;&#xFF0C;&#x9002;&#x5408; <code>&#x9501;&#x5360;&#x7528;&#x65F6;&#x95F4;&#x957F;&#xFF0C;&#x541E;&#x5410;&#x91CF;&#x9700;&#x6C42;&#x5927;</code> &#x7684;&#x573A;&#x666F;</li>
+<li>偏向锁：没有自旋、没有系统调用，所以 <strong>消耗少性能高</strong> ，并且具有可重入特性，在 <code>同一线程执行同步代码</code> 场景下是最优选择，但它具有 <strong>撤销锁消耗高</strong> 的缺点。</li>
+<li>轻量级锁：前面已经提到，用CAS取代了阻塞，在 <code>锁持有时间短</code> 的场景下是最优选择，可追求 <code>快速响应</code> ，但缺点是短时间内无法获取锁时，自旋消耗CPU资源。</li>
+<li>重量级锁：具备 <code>大吞吐量</code> ，未竞争到锁的线程不会自旋消耗资源，适合 <code>锁占用时间长，吞吐量需求大</code> 的场景</li>
 </ul>
-<p>&#x800C;&#x4ECE; <strong>&#x504F;&#x5411;&#x9501;&#x5230;&#x8F7B;&#x91CF;&#x7EA7;&#x9501;</strong>&#xFF0C;&#x610F;&#x5473;&#x7740;&#x591A;&#x7EBF;&#x7A0B;&#x7ADE;&#x4E89;&#xFF0C;&#x5047;&#x5B9A;&#x9501;&#x7684;&#x6301;&#x6709;&#x65F6;&#x95F4;&#x4E0D;&#x4F1A;&#x592A;&#x957F;&#xFF0C;&#x6709;&#x9650;&#x7684;&#x81EA;&#x65CB;&#x53EF;&#x4EE5;&#x7B49;&#x5230;&#x6301;&#x6709;&#x8005;&#x91CA;&#x653E;&#x9501;&#xFF0C;&#x800C;&#x5F53; <strong>&#x8F7B;&#x91CF;&#x7EA7;&#x9501;&#x5347;&#x7EA7;&#x5230;&#x91CD;&#x91CF;&#x7EA7;&#x9501;</strong> &#xFF0C;&#x610F;&#x5473;&#x7740;&#x8FD9;&#x4E00; <strong>&#x5047;&#x8BBE;&#x4E0D;&#x6210;&#x7ACB;</strong> &#xFF0C;&#x81EA;&#x65CB;&#x53EA;&#x662F;&#x5728;&#x767D;&#x767D;&#x6D88;&#x8017;&#xFF0C;&#x901A;&#x8FC7;&#x6302;&#x8D77;&#x548C;&#x7B49;&#x5F85;&#x5524;&#x9192;&#x4EE5;&#x63D0;&#x5347;&#x541E;&#x5410;&#x91CF;</p>
-<h4 id="&#x8F6C;&#x6362;&#x8FC7;&#x7A0B;"><a name="&#x8F6C;&#x6362;&#x8FC7;&#x7A0B;" class="anchor-navigation-ex-anchor" href="#&#x8F6C;&#x6362;&#x8FC7;&#x7A0B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F6C;&#x6362;&#x8FC7;&#x7A0B;</h4>
-<p><img src="post_38/Synchronization.gif" alt=""></p>
-<p>&#x4ECE;OpenJdk&#x7684; <a href="[https:/wiki.openjdk.java.net/display/HotSpot/Synchronization">WIKI -- Synchronization</a> &#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x8FD9;&#x5F20;&#x56FE;&#x3002;</p>
-<p>&#x4E3A;&#x5E7F;&#x6CDB;&#x6D41;&#x4F20;&#x7684;&#x4E0B;&#x56FE;&#x7684;&#x539F;&#x7248;
-<img src="post_38/synchronized2.png" alt=""></p>
-<p>&#x4E00;&#x56FE;&#x80DC;&#x5343;&#x8A00;&#xFF0C;&#x56FE;&#x4E2D;&#x8868;&#x73B0;&#x7684;&#x975E;&#x5E38;&#x660E;&#x786E;&#xFF0C;&#x8BFB;&#x8005;&#x53EF;&#x4EE5;&#x7ED3;&#x5408;WIKI&#x5185;&#x5BB9;&#x81EA;&#x884C;&#x7406;&#x89E3;&#xFF0C;&#x4E0D;&#x518D;&#x591A;&#x505A;&#x8D58;&#x8FF0;&#x3002;</p>
-<p>&#x7ECF;&#x5E38;&#x5728;&#x8BFE;&#x7A0B;&#x5E7F;&#x544A;&#x4E2D;&#x51FA;&#x73B0;&#x7684;&#x4E00;&#x5F20;&#x56FE;&#x5982;&#x4E0B;,&#x6536;&#x85CF;&#x4E0D;&#x7B49;&#x4E8E;&#x5B66;&#x4F1A;&#xFF1A;</p>
-<p><img src="post_38/java_sync.jpg" alt=""></p>
-<p><em>&#x56FE;&#x7247;&#x6C34;&#x5370;Blog.Dreamtobe.cn</em></p>
-<h2 id="&#x4E00;&#x6BB5;&#x5F88;&#x957F;&#x7684;&#x540E;&#x8BB0;"><a name="&#x4E00;&#x6BB5;&#x5F88;&#x957F;&#x7684;&#x540E;&#x8BB0;" class="anchor-navigation-ex-anchor" href="#&#x4E00;&#x6BB5;&#x5F88;&#x957F;&#x7684;&#x540E;&#x8BB0;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E00;&#x6BB5;&#x5F88;&#x957F;&#x7684;&#x540E;&#x8BB0;</h2>
-<p>&#x5728;&#x62DF;&#x5B9A;&#x7CFB;&#x5217;&#x5927;&#x7EB2;&#x65F6;&#xFF0C;&#x672C;&#x7BC7;&#x7684;&#x539F;&#x540D;&#x4E3A;&#xFF1A;<code>Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63A7;&#x9762;&#x8BD5;&#xFF0C;&#x4E00;&#x6587;&#x5403;&#x900F;&#x9501;</code>&#xFF0C;&#x7136;&#x800C;&#x5199;&#x81F3; <code>JDK&#x4E2D;&#x7684;Lock&#x63A5;&#x53E3;</code> &#x65F6;&#xFF0C;
-&#x540E;&#x77E5;&#x540E;&#x89C9;&#x7684;&#x610F;&#x8BC6;&#x5230;&#x5C06; <strong>&#x4E0D;&#x5F97;&#x4E0D;&#x6DF1;&#x5165;&#x6E90;&#x7801;</strong> &#x5E76;&#x4E14;&#x6D89;&#x53CA;&#x5230; <code>AQS</code>&#xFF0C;AQS&#x7684;&#x5185;&#x5BB9;&#x5728;&#x5927;&#x7EB2;&#x4E2D;&#x5DF2;&#x6709;&#x5355;&#x7BC7;&#x8BA1;&#x5212;&#xFF0C;&#x5C55;&#x5F00;&#x5219;&#x7BC7;&#x5E45;&#x8FC7;&#x957F;&#x4E0D;&#x5229;&#x4E8E;&#x9605;&#x8BFB;&#xFF0C;&#x4E0D;&#x5C55;&#x5F00;&#x5219;&#x5B9E;&#x5728;&#x65E0;&#x5185;&#x5BB9;&#x53EF;&#x5199;&#x3002;</p>
-<p>&#x539F;&#x7AE0;&#x8282;&#x5185;&#x5BB9;&#x6743;&#x4E14;&#x4F5C;&#x4E3A; <strong>&#x5F00;&#x7AEF;</strong> &#x3001; <strong>&#x5F15;&#x5B50;</strong> &#x7559;&#x4E8E;&#x6587;&#x672B;&#xFF1A;</p>
-<h3 id="jdk&#x4E2D;&#x7684;lock&#x63A5;&#x53E3;"><a name="jdk&#x4E2D;&#x7684;lock&#x63A5;&#x53E3;" class="anchor-navigation-ex-anchor" href="#jdk&#x4E2D;&#x7684;lock&#x63A5;&#x53E3;"><i class="fa fa-link" aria-hidden="true"></i></a>JDK&#x4E2D;&#x7684;Lock&#x63A5;&#x53E3;</h3>
-<p>&#x5728;Jdk1.5&#x4E4B;&#x540E;&#xFF0C;&#x5B58;&#x5728;Lock&#x63A5;&#x53E3;&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Lock</span> </span>{
-    <span class="hljs-comment">//&#x83B7;&#x53D6;&#x9501;</span>
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lock</span><span class="hljs-params">()</span></span>;
+<p>而从 <strong>偏向锁到轻量级锁</strong>，意味着多线程竞争，假定锁的持有时间不会太长，有限的自旋可以等到持有者释放锁，而当 <strong>轻量级锁升级到重量级锁</strong> ，意味着这一 <strong>假设不成立</strong> ，自旋只是在白白消耗，通过挂起和等待唤醒以提升吞吐量</p>
+<h4 id="转换过程"><a class="header" href="#转换过程">转换过程</a></h4>
+<p><img src="./post_38/Synchronization.gif" alt="" /></p>
+<p>从OpenJdk的 <a href="%5Bhttps://wiki.openjdk.java.net/display/HotSpot/Synchronization">WIKI -- Synchronization</a> 可以得到这张图。</p>
+<p>为广泛流传的下图的原版
+<img src="./post_38/synchronized2.png" alt="" /></p>
+<p>一图胜千言，图中表现的非常明确，读者可以结合WIKI内容自行理解，不再多做赘述。</p>
+<p>经常在课程广告中出现的一张图如下,收藏不等于学会：</p>
+<p><img src="./post_38/java_sync.jpg" alt="" /></p>
+<p><em>图片水印Blog.Dreamtobe.cn</em></p>
+<h2 id="一段很长的后记"><a class="header" href="#一段很长的后记">一段很长的后记</a></h2>
+<p>在拟定系列大纲时，本篇的原名为：<code>Java多线程系列--掌控面试，一文吃透锁</code>，然而写至 <code>JDK中的Lock接口</code> 时，
+后知后觉的意识到将 <strong>不得不深入源码</strong> 并且涉及到 <code>AQS</code>，AQS的内容在大纲中已有单篇计划，展开则篇幅过长不利于阅读，不展开则实在无内容可写。</p>
+<p>原章节内容权且作为 <strong>开端</strong> 、 <strong>引子</strong> 留于文末：</p>
+<h3 id="jdk中的lock接口"><a class="header" href="#jdk中的lock接口">JDK中的Lock接口</a></h3>
+<p>在Jdk1.5之后，存在Lock接口：</p>
+<pre><code class="language-java">public interface Lock {
+    //获取锁
+    void lock();
 
-    <span class="hljs-comment">//&#x83B7;&#x53D6;&#x9501;&#xFF0C;&#x5982;&#x679C;&#x7EBF;&#x7A0B;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF08;&#x672A;&#x83B7;&#x53D6;&#x5230;&#x800C;&#x8FDB;&#x5165;&#x963B;&#x585E;&#xFF09;&#x88AB;&#x4E2D;&#x65AD;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;</span>
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lockInterruptibly</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException</span>;
+    //获取锁，如果线程阻塞状态（未获取到而进入阻塞）被中断则抛出异常
+    void lockInterruptibly() throws InterruptedException;
 
-    <span class="hljs-comment">//&#x5C1D;&#x8BD5;&#x83B7;&#x53D6;&#x9501;</span>
-    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">tryLock</span><span class="hljs-params">()</span></span>;
+    //尝试获取锁
+    boolean tryLock();
 
-    <span class="hljs-comment">//&#x5728;&#x7ED9;&#x5B9A;&#x65F6;&#x95F4;&#x5185;&#x5C1D;&#x8BD5;&#x83B7;&#x53D6;&#x9501;&#xFF0C;</span>
-    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">tryLock</span><span class="hljs-params">(<span class="hljs-keyword">long</span> var1, TimeUnit var3)</span> <span class="hljs-keyword">throws</span> InterruptedException</span>;
+    //在给定时间内尝试获取锁，
+    boolean tryLock(long var1, TimeUnit var3) throws InterruptedException;
 
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">unlock</span><span class="hljs-params">()</span></span>;
+    void unlock();
 
-    <span class="hljs-function">Condition <span class="hljs-title">newCondition</span><span class="hljs-params">()</span></span>;
+    Condition newCondition();
 }
 </code></pre>
-<p>&#x524D;&#x56DB;&#x4E2A;API&#x5747;&#x4E3A;&#x83B7;&#x53D6;&#x9501;&#x7684;API&#xFF0C;<code>unlock</code> &#x91CA;&#x653E;&#x9501;&#xFF0C;&#x901A;&#x8FC7;Condition&#x63D0;&#x4F9B;&#x7EBF;&#x7A0B;&#x901A;&#x4FE1;&#x80FD;&#x529B;. <em>Condition&#x5C06;&#x5728;&#x4EE5;&#x540E;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#x5C55;&#x5F00;</em></p>
-<p>&#x6709;&#x522B;&#x4E8E;&#x8BED;&#x8A00;&#x5173;&#x952E;&#x5B57; <code>synchronized</code> , &#x5728;&#x4F7F;&#x7528;&#x89D2;&#x5EA6;&#x4E0A;&#xFF0C;Lock&#x5C06;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x8005;&#x81EA;&#x884C;&#x83B7;&#x53D6;&#x9501;&#x3001;&#x91CA;&#x653E;&#x9501;&#x3002;&#x5728;&#x5185;&#x90E8;&#x5B9E;&#x73B0;&#x4E0A;&#xFF0C;&#x533A;&#x522B;&#x4E8E; <code>Monitor&#x6A21;&#x5F0F;</code> &#xFF0C;&#x589E;&#x52A0;&#x4E86;&#x66F4;&#x4E30;&#x5BCC;&#x7684;&#x529F;&#x80FD;&#xFF1A;</p>
+<p>前四个API均为获取锁的API，<code>unlock</code> 释放锁，通过Condition提供线程通信能力. <em>Condition将在以后的文章中展开</em></p>
+<p>有别于语言关键字 <code>synchronized</code> , 在使用角度上，Lock将需要使用者自行获取锁、释放锁。在内部实现上，区别于 <code>Monitor模式</code> ，增加了更丰富的功能：</p>
 <ul>
-<li>&#x652F;&#x6301; <code>&#x9501;&#x7684;&#x516C;&#x5E73;&#x6027;</code></li>
-<li>&#x83B7;&#x53D6; <code>&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x8C03;&#x7528;lock&#x7684;&#x6B21;&#x6570;</code></li>
-<li>&#x83B7;&#x53D6; <code>&#x7B49;&#x5F85;&#x9501;&#x7684;&#x7EBF;&#x7A0B;&#x6570;</code></li>
-<li>&#x67E5;&#x8BE2; <code>&#x662F;&#x5426;&#x5B58;&#x5728;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#x83B7;&#x53D6;&#x8BE5;&#x9501;</code></li>
-<li>&#x67E5;&#x8BE2; <code>&#x6307;&#x5B9A;&#x7684;&#x7EBF;&#x7A0B;&#x662F;&#x5426;&#x5728;&#x7B49;&#x5F85;&#x83B7;&#x53D6;&#x8BE5;&#x9501;</code></li>
-<li>&#x67E5;&#x8BE2; <code>&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x662F;&#x5426;&#x6301;&#x6709;&#x8BE5;&#x9501;</code></li>
-<li>&#x5224;&#x65AD; <code>&#x9501;&#x662F;&#x5426;&#x5DF2;&#x88AB;&#x6301;&#x6709;</code></li>
-<li>&#x52A0;&#x9501;&#x65F6;&#x5982;&#x679C;&#x4E2D;&#x65AD;&#x5219;&#x4E0D;&#x52A0;&#x9501;&#xFF0C;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
-<li><code>&#x5C1D;&#x8BD5;&#x83B7;&#x53D6;&#x9501;</code> &#x7684;&#x673A;&#x5236;&#xFF0C;&#x5982;&#x679C;&#x9501;&#x672A;&#x88AB;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x6301;&#x6709;&#x5219;&#x6210;&#x529F;&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;&#x5931;&#x8D25;&#xFF0C;&#x4E0D;&#x4F1A;&#x76F4;&#x63A5;&#x8FDB;&#x5165;&#x963B;&#x585E;</li>
+<li>支持 <code>锁的公平性</code></li>
+<li>获取 <code>当前线程调用lock的次数</code></li>
+<li>获取 <code>等待锁的线程数</code></li>
+<li>查询 <code>是否存在线程等待获取该锁</code></li>
+<li>查询 <code>指定的线程是否在等待获取该锁</code></li>
+<li>查询 <code>当前线程是否持有该锁</code></li>
+<li>判断 <code>锁是否已被持有</code></li>
+<li>加锁时如果中断则不加锁，抛出异常</li>
+<li><code>尝试获取锁</code> 的机制，如果锁未被其他线程持有则成功，否则返回失败，不会直接进入阻塞</li>
 </ul>
-<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;<strong>&#x9650;&#x4E8E;&#x76EE;&#x6807;&#x548C;&#x7BC7;&#x5E45;&#xFF0C;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x4E0D;&#x4F1A;&#x518D;&#x548C;&#x8BF8;&#x4F4D;&#x8BFB;&#x8005;&#x4E00;&#x540C;&#x63A2;&#x7D22;&#x6E90;&#x7801;</strong>&#xFF0C;&#x5199;&#x81F3;&#x6B64;&#x5904;&#xFF0C;&#x6211;&#x610F;&#x8BC6;&#x5230;&#x771F;&#x7684;&#x65E0;&#x6CD5;&#x505A;&#x5230;&#x6807;&#x9898;&#x4E2D;&#x8BF4;&#x7684;&#xFF1A;&quot;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x5403;&#x900F;&#x9501;&quot;&#x3002;
-JDK&#x4E2D;&#x8FD8;&#x6709;&#x9501;&#x5B9E;&#x73B0;&#xFF0C;&#x4F8B;&#x5982;&#x5E38;&#x7528;&#x7684;&#xFF1A;</p>
+<p>很显然，<strong>限于目标和篇幅，这篇文章不会再和诸位读者一同探索源码</strong>，写至此处，我意识到真的无法做到标题中说的："一篇文章吃透锁"。
+JDK中还有锁实现，例如常用的：</p>
 <ul>
 <li>ReentrantLock</li>
-<li>ReadWriteLock&#xFF0C;&#x4E00;&#x822C;&#x4F7F;&#x7528;&#x5B9E;&#x73B0;&#x7C7B; <code>ReentrantReadWriteLock</code></li>
+<li>ReadWriteLock，一般使用实现类 <code>ReentrantReadWriteLock</code></li>
 </ul>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x4E00;&#x65E6;&#x5F00;&#x59CB;&#x6DF1;&#x5165;&#xFF0C;&#x5C06;&#x52BF;&#x5FC5;&#x8C08;&#x53CA;AQS&#xFF0C;&#x6309;&#x7167;&#x8BA1;&#x5212;&#xFF0C;&#x8FD9;&#x5C06;&#x4E8E;&#x540E;&#x7EED;&#x6587;&#x7AE0;&#x4E2D;&#x5C55;&#x5F00;&#xFF0C;&#x6545;&#x672C;&#x7BC7;&#x4E0D;&#x518D;&#x5C55;&#x5F00;&#x3002;&#x671B;&#x8BFB;&#x8005;&#x89C1;&#x8C05;</em></p>
-<h3 id="&#x771F;&#x6B63;&#x7684;&#x540E;&#x8BB0;"><a name="&#x771F;&#x6B63;&#x7684;&#x540E;&#x8BB0;" class="anchor-navigation-ex-anchor" href="#&#x771F;&#x6B63;&#x7684;&#x540E;&#x8BB0;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x771F;&#x6B63;&#x7684;&#x540E;&#x8BB0;</h3>
-<p>&#x8FD9;&#x4E00;&#x7BC7;&#x53C8;&#x65AD;&#x65AD;&#x7EED;&#x7EED;&#x5199;&#x4E86;&#x8D85;&#x8FC7;&#x4E00;&#x5468;&#xFF0C;&#x671F;&#x95F4;&#x6211;&#x4E5F;&#x4E00;&#x5EA6;&#x6000;&#x7591;&#xFF0C;&#x8FD9;&#x4E2A;&#x7CFB;&#x5217;&#x8981;&#x4E0D;&#x8981;&#x7EE7;&#x7EED;&#x4E0B;&#x53BB;&#xFF0C;&#x5BF9;&#x4E8E;&#x8BFB;&#x8005;&#x800C;&#x8A00;&#xFF0C;&#x4E70;&#x672C;&#x4E66;&#x94BB;&#x7814;&#x53EF;&#x80FD;&#x662F;&#x6BD4;&#x770B;&#x672C;&#x7CFB;&#x5217;&#x66F4;&#x52A0;&#x5B9E;&#x5728;&#x7684;&#x884C;&#x4E3A;&#xFF0C;<code>&#x52D8;&#x6821;&#x540E;&#x7684;&#x77E5;&#x8BC6;&#x51C6;&#x786E;&#x6027;</code> &#x3001; <code>&#x6587;&#x5B57;&#x7684;&#x51C6;&#x786E;&#x6027;</code> &#x3001;
-<code>&#x8868;&#x8FBE;&#x7684;&#x7ED3;&#x6784;&#x6027;</code> &#x90FD;&#x66F4;&#x80DC;&#x4E00;&#x7B79;&#xFF0C;&#x535A;&#x5BA2;&#x4EC5;&#x80FD;&#x9760;&#x788E;&#x7247;&#x5316;&#x7279;&#x6027;&#x5360;&#x70B9;&#x4FBF;&#x5B9C;&#x3002;</p>
-<p>&#x4F46;&#x4E00;&#x4EF6;&#x4E8B;&#x60C5;&#x575A;&#x5B9A;&#x4E86;&#x6211;&#x5C06;&#x5B83;&#x5199;&#x4E0B;&#x53BB;&#x7684;&#x4FE1;&#x5FF5;&#xFF0C;&#x6211;&#x7FFB;&#x770B;&#x4E86;&#x5F80;&#x5E74;&#x7684;&#x535A;&#x5BA2;&#xFF0C;&#x6E05;&#x6670;&#x7684;&#x610F;&#x8BC6;&#x5230;&#xFF1A;</p>
+<p><em>作者按：一旦开始深入，将势必谈及AQS，按照计划，这将于后续文章中展开，故本篇不再展开。望读者见谅</em></p>
+<h3 id="真正的后记"><a class="header" href="#真正的后记">真正的后记</a></h3>
+<p>这一篇又断断续续写了超过一周，期间我也一度怀疑，这个系列要不要继续下去，对于读者而言，买本书钻研可能是比看本系列更加实在的行为，<code>勘校后的知识准确性</code> 、 <code>文字的准确性</code> 、
+<code>表达的结构性</code> 都更胜一筹，博客仅能靠碎片化特性占点便宜。</p>
+<p>但一件事情坚定了我将它写下去的信念，我翻看了往年的博客，清晰的意识到：</p>
 <ul>
-<li>&#x5C06;&#x8111;&#x6D77;&#x4E2D;&#x7684;&#x77E5;&#x8BC6;&#xFF0C;&#x6574;&#x7406;&#x540E;&#x518D;&#x505A; <code>&#x7ED3;&#x6784;&#x5316;&#x7684;&#x8F93;&#x51FA;</code> &#xFF0C;&#x53EF;&#x4EE5;&#x7262;&#x9760;&#x5730;&#x638C;&#x63E1;&#x8FD9;&#x4E9B;&#x77E5;&#x8BC6;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x4EFB;&#x610F;&#x65F6;&#x523B;&#x90FD;&#x53EF;&#x4EE5;&#x5B8C;&#x6210;&#x6D41;&#x7545;&#x7684;&#x8868;&#x8FBE;</li>
-<li>&#x901A;&#x8FC7;&#x5BF9;&#x6BD4;&#xFF0C;&#x6E05;&#x6670;&#x7684;&#x770B;&#x5230;&#x81EA;&#x5DF1;&#x7684;&#x6210;&#x957F;</li>
-<li>&#x6587;&#x5B57;&#x529F;&#x529B;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x953B;&#x70BC;&#x5F97;&#x5230;&#x957F;&#x8DB3;&#x63D0;&#x5347; </li>
+<li>将脑海中的知识，整理后再做 <code>结构化的输出</code> ，可以牢靠地掌握这些知识，并且在任意时刻都可以完成流畅的表达</li>
+<li>通过对比，清晰的看到自己的成长</li>
+<li>文字功力可以通过锻炼得到长足提升</li>
 </ul>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2022-03-19 21:52:13
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../MultiThreading/post_37.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../MultiThreading/post_39.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="post_37.html" class="navigation navigation-prev " aria-label="Previous page: Java基础--图解JVM内存模型和JVM线程模型">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="post_39.html" class="navigation navigation-next " aria-label="Next page: Java多线程基础--线程生命周期与线程协作详解">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../MultiThreading/post_37.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../MultiThreading/post_39.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Java多线程系列--掌控面试，一文吃透Synchronized锁","level":"1.4.3","depth":2,"next":{"title":"Java多线程基础--线程生命周期与线程协作详解","level":"1.4.4","depth":2,"path":"MultiThreading/post_39.md","ref":"./MultiThreading/post_39.md","articles":[]},"previous":{"title":"Java基础--图解JVM内存模型和JVM线程模型","level":"1.4.2","depth":2,"path":"MultiThreading/post_37.md","ref":"./MultiThreading/post_37.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"MultiThreading/post_38.md","mtime":"2022-03-19T13:52:13.391Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../gitbook/gitbook.js"></script>
-    <script src="../gitbook/theme.js"></script>
-    
-        
-        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-

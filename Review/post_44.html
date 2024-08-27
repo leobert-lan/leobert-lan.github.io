@@ -1,1726 +1,451 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>谈一谈在两个商业项目中使用MVI架构后的感悟 · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>谈一谈在两个商业项目中使用MVI架构后的感悟 - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="post_45.html" />
-    
-    
-    <link rel="prev" href="post_40.html" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../Android/">
-            
-                <a href="../Android/">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../Android/View/">
-            
-                <a href="../Android/View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../Android/View/post_1.html">
-            
-                <a href="../Android/View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../Android/View/post_6.html">
-            
-                <a href="../Android/View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../Android/View/post_7.html">
-            
-                <a href="../Android/View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="../Android/Idea/post_9.html">
-            
-                <a href="../Android/Idea/post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../Android/Drawable/">
-            
-                <a href="../Android/Drawable/">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="../Android/Drawable/post_2.html">
-            
-                <a href="../Android/Drawable/post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="../Android/Drawable/post_4.html">
-            
-                <a href="../Android/Drawable/post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="../Android/Drawable/post_47.html">
-            
-                <a href="../Android/Drawable/post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.4" data-path="../Android/Drawable/post_49.html">
-            
-                <a href="../Android/Drawable/post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../Android/Mechanism/Message/">
-            
-                <a href="../Android/Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../Android/Mechanism/Message/post_8.html">
-            
-                <a href="../Android/Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../Android/Idea/post_14/">
-            
-                <a href="../Android/Idea/post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.4.1" data-path="../Android/Idea/post_14.html">
-            
-                <a href="../Android/Idea/post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="../Android/Glide/">
-            
-                <a href="../Android/Glide/">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.5.1" data-path="../Android/Glide/post_15.html">
-            
-                <a href="../Android/Glide/post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5.2" data-path="../Android/Glide/post_16.html">
-            
-                <a href="../Android/Glide/post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../Android/KSP/">
-            
-                <a href="../Android/KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../Android/KSP/post_24.html">
-            
-                <a href="../Android/KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../Android/Base/">
-            
-                <a href="../Android/Base/">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.7.1" data-path="../Android/Base/post_35.html">
-            
-                <a href="../Android/Base/post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../Android/SysApp/">
-            
-                <a href="../Android/SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../Android/SysApp/post_52.html">
-            
-                <a href="../Android/SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../Android/DI/">
-            
-                <a href="../Android/DI/">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.9.1" data-path="../Android/DI/post_53.html">
-            
-                <a href="../Android/DI/post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../Compose/">
-            
-                <a href="../Compose/">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="../Compose/post_21.html">
-            
-                <a href="../Compose/post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../Compose/post_26.html">
-            
-                <a href="../Compose/post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="../Compose/post_27.html">
-            
-                <a href="../Compose/post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="../Compose/post_28.html">
-            
-                <a href="../Compose/post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="../Compose/post_29.html">
-            
-                <a href="../Compose/post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="../Compose/post_30.html">
-            
-                <a href="../Compose/post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../MultiThreading/">
-            
-                <a href="../MultiThreading/">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../MultiThreading/post_33.html">
-            
-                <a href="../MultiThreading/post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../MultiThreading/post_37.html">
-            
-                <a href="../MultiThreading/post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="../MultiThreading/post_38.html">
-            
-                <a href="../MultiThreading/post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="../MultiThreading/post_39.html">
-            
-                <a href="../MultiThreading/post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="../MultiThreading/post_42.html">
-            
-                <a href="../MultiThreading/post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.6" data-path="../MultiThreading/post_46.html">
-            
-                <a href="../MultiThreading/post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="../MultiThreading/post_50.html">
-            
-                <a href="../MultiThreading/post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="../MultiThreading/post_54.html">
-            
-                <a href="../MultiThreading/post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="../IO/">
-            
-                <a href="../IO/">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="../IO/post_55.html">
-            
-                <a href="../IO/post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="../IO/post_56.html">
-            
-                <a href="../IO/post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="../IO/post_57.html">
-            
-                <a href="../IO/post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="../IO/post_58.html">
-            
-                <a href="../IO/post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="../IO/post_59.html">
-            
-                <a href="../IO/post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../Gradle/">
-            
-                <a href="../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../Gradle/Modularization/post_18.html">
-            
-                <a href="../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../Gradle/Publish/post_17.html">
-            
-                <a href="../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../Gradle/post_22.html">
-            
-                <a href="../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../Groovy/">
-            
-                <a href="../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../Groovy/why_write_groovy.html">
-            
-                <a href="../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../Groovy/post_23.html">
-            
-                <a href="../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="post_10.html">
-            
-                <a href="post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="post_40.html">
-            
-                <a href="post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.8.3" data-path="post_44.html">
-            
-                <a href="post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="post_45.html">
-            
-                <a href="post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../repo/">
-            
-                <a href="../repo/">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../repo/DaVinCi.html">
-            
-                <a href="../repo/DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../Android/Idea/post_32.html">
-            
-                <a href="../Android/Idea/post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../Speculative/post_43.html">
-            
-                <a href="../Speculative/post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../repo/post_48.html">
-            
-                <a href="../repo/post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../Speculative/post_61.html">
-            
-                <a href="../Speculative/post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="DataStructure/">
-            
-                <a href="DataStructure/">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1.1" data-path="DataStructure/post_11.html">
-            
-                <a href="DataStructure/post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="DataStructure/post_12.html">
-            
-                <a href="DataStructure/post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="DataStructure/post_13.html">
-            
-                <a href="DataStructure/post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="README2.html">
-            
-                <a href="README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="post_36.html">
-            
-                <a href="post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="post_51.html">
-            
-                <a href="post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="post_60.html">
-            
-                <a href="post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="post_63.html">
-            
-                <a href="post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="post_64.html">
-            
-                <a href="post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../Note/">
-            
-                <a href="../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../Note/post_41.html">
-            
-                <a href="../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../Talk/">
-            
-                <a href="../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../Talk/talk_1.html">
-            
-                <a href="../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../Talk/talk_2_2023-03.html">
-            
-                <a href="../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../Thought/">
-            
-                <a href="../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../Thought/post_62.html">
-            
-                <a href="../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../info/">
-            
-                <a href="../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../info/about_view_series.html">
-            
-                <a href="../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../info/about_sansi_series.html">
-            
-                <a href="../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../info/about_haowan_series.html">
-            
-                <a href="../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../info/about_wengu_series.html">
-            
-                <a href="../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >谈一谈在两个商业项目中使用MVI架构后的感悟</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#&#x8C08;&#x4E00;&#x8C08;&#x5728;&#x4E24;&#x4E2A;&#x5546;&#x4E1A;&#x9879;&#x76EE;&#x4E2D;&#x4F7F;&#x7528;mvi&#x67B6;&#x6784;&#x540E;&#x7684;&#x611F;&#x609F;"><b></b>&#x8C08;&#x4E00;&#x8C08;&#x5728;&#x4E24;&#x4E2A;&#x5546;&#x4E1A;&#x9879;&#x76EE;&#x4E2D;&#x4F7F;&#x7528;MVI&#x67B6;&#x6784;&#x540E;&#x7684;&#x611F;&#x609F;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><ul><li><span class="title-icon "></span><a href="#&#x4E24;&#x4E2A;&#x9879;&#x76EE;&#x7684;&#x57FA;&#x672C;&#x60C5;&#x51B5;"><b></b>&#x4E24;&#x4E2A;&#x9879;&#x76EE;&#x7684;&#x57FA;&#x672C;&#x60C5;&#x51B5;</a></li></ul><li><span class="title-icon "></span><a href="#&#x4ECE;&#x67B6;&#x6784;&#x7684;&#x7406;&#x5FF5;&#x51FA;&#x53D1;"><b></b>&#x4ECE;&#x67B6;&#x6784;&#x7684;&#x7406;&#x5FF5;&#x51FA;&#x53D1;</a></li><ul><li><span class="title-icon "></span><a href="#mvi&#x7684;&#x7406;&#x5FF5;"><b></b>MVI&#x7684;&#x7406;&#x5FF5;</a></li></ul><li><span class="title-icon "></span><a href="#&#x5355;&#x5411;&#x6570;&#x636E;&#x6D41;&#x52A8;"><b></b>&#x5355;&#x5411;&#x6570;&#x636E;&#x6D41;&#x52A8;</a></li><ul><li><span class="title-icon "></span><a href="#mvc&#x3001;mvp&#x4E2D;&#x7684;&#x75DB;&#x70B9;"><b></b>MVC&#x3001;MVP&#x4E2D;&#x7684;&#x75DB;&#x70B9;</a></li><li><span class="title-icon "></span><a href="#mvvm&#x89E3;&#x51B3;ui&#x66F4;&#x65B0;&#x4EE3;&#x7801;&#x6DF7;&#x4E71;&#x95EE;&#x9898;"><b></b>MVVM&#x89E3;&#x51B3;UI&#x66F4;&#x65B0;&#x4EE3;&#x7801;&#x6DF7;&#x4E71;&#x95EE;&#x9898;</a></li><li><span class="title-icon "></span><a href="#&#x7528;intent&#x7075;&#x6D3B;&#x51B3;&#x5B9A;&#x4F55;&#x65F6;&#x8C03;&#x7528;model"><b></b>&#x7528;Intent&#x7075;&#x6D3B;&#x51B3;&#x5B9A;&#x4F55;&#x65F6;&#x8C03;&#x7528;Model</a></li></ul><li><span class="title-icon "></span><a href="#&#x5355;&#x4E00;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;"><b></b>&#x5355;&#x4E00;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;</a></li><ul><li><span class="title-icon "></span><a href="#&#x4F55;&#x4E3A;&#x5355;&#x4E00;"><b></b>&#x4F55;&#x4E3A;&#x5355;&#x4E00;</a></li></ul><li><span class="title-icon "></span><a href="#&#x8981;&#x60F3;&#x4F18;&#x96C5;&#xFF0C;&#x9700;&#x8981;&#x5DE5;&#x5177;"><b></b>&#x8981;&#x60F3;&#x4F18;&#x96C5;&#xFF0C;&#x9700;&#x8981;&#x5DE5;&#x5177;</a></li><ul><li><span class="title-icon "></span><a href="#&#x91C7;&#x7528;&#x54CD;&#x5E94;&#x5F0F;&#x6D41;&#xFF0C;&#x907F;&#x514D;&#x547D;&#x4EE4;&#x5F0F;&#x7F16;&#x7801;"><b></b>&#x91C7;&#x7528;&#x54CD;&#x5E94;&#x5F0F;&#x6D41;&#xFF0C;&#x907F;&#x514D;&#x547D;&#x4EE4;&#x5F0F;&#x7F16;&#x7801;</a></li><li><span class="title-icon "></span><a href="#&#x91C7;&#x7528;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x6846;&#x67B6;"><b></b>&#x91C7;&#x7528;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x6846;&#x67B6;</a></li></ul><li><span class="title-icon "></span><a href="#&#x4F55;&#x4E3A;&#x72B6;&#x6001;&#x3001;&#x4F55;&#x4E3A;&#x4E8B;&#x4EF6;&#x3002;&#x6700;&#x540E;&#x7684;&#x4E00;&#x516C;&#x91CC;"><b></b>&#x4F55;&#x4E3A;&#x72B6;&#x6001;&#x3001;&#x4F55;&#x4E3A;&#x4E8B;&#x4EF6;&#x3002;&#x6700;&#x540E;&#x7684;&#x4E00;&#x516C;&#x91CC;</a></li><ul><li><span class="title-icon "></span><a href="#&#x5173;&#x4E8E;gui&#x7A0B;&#x5E8F;&#x7684;&#x8BA4;&#x77E5;"><b></b>&#x5173;&#x4E8E;GUI&#x7A0B;&#x5E8F;&#x7684;&#x8BA4;&#x77E5;</a></li><li><span class="title-icon "></span><a href="#first-order-logic"><b></b>First-Order logic</a></li><li><span class="title-icon "></span><a href="#&#x5206;&#x79BB;&#x72B6;&#x6001;&#x548C;&#x4E8B;&#x4EF6;&#xFF0C;&#x4E0D;&#x662F;&#x5403;&#x9971;&#x6491;&#x5F97;"><b></b>&#x5206;&#x79BB;&#x72B6;&#x6001;&#x548C;&#x4E8B;&#x4EF6;&#xFF0C;&#x4E0D;&#x662F;&#x5403;&#x9971;&#x6491;&#x5F97;</a></li><li><span class="title-icon "></span><a href="#&#x5982;&#x4F55;&#x533A;&#x5206;event&#x548C;state"><b></b>&#x5982;&#x4F55;&#x533A;&#x5206;Event&#x548C;State</a></li><li><span class="title-icon "></span><a href="#&#x4E8B;&#x4EF6;&#x7C98;&#x6027;&#x5BFC;&#x81F4;&#x91CD;&#x590D;&#xFF1F;&#x53EA;&#x662F;&#x6846;&#x67B6;&#x8BBE;&#x8BA1;&#x7684;bug"><b></b>&#x4E8B;&#x4EF6;&#x7C98;&#x6027;&#x5BFC;&#x81F4;&#x91CD;&#x590D;&#xFF1F;&#x53EA;&#x662F;&#x6846;&#x67B6;&#x8BBE;&#x8BA1;&#x7684;bug</a></li><li><span class="title-icon "></span><a href="#&#x51C6;&#x786E;&#x7684;&#x3001;&#x7075;&#x6D3B;&#x7684;event&#x4F53;&#x7CFB;"><b></b>&#x51C6;&#x786E;&#x7684;&#x3001;&#x7075;&#x6D3B;&#x7684;Event&#x4F53;&#x7CFB;</a></li></ul><li><span class="title-icon "></span><a href="#&#x7ED3;&#x8BED;"><b></b>&#x7ED3;&#x8BED;</a></li></ul></ul></div><a href="#&#x8C08;&#x4E00;&#x8C08;&#x5728;&#x4E24;&#x4E2A;&#x5546;&#x4E1A;&#x9879;&#x76EE;&#x4E2D;&#x4F7F;&#x7528;mvi&#x67B6;&#x6784;&#x540E;&#x7684;&#x611F;&#x609F;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x8C08;&#x4E00;&#x8C08;&#x5728;&#x4E24;&#x4E2A;&#x5546;&#x4E1A;&#x9879;&#x76EE;&#x4E2D;&#x4F7F;&#x7528;mvi&#x67B6;&#x6784;&#x540E;&#x7684;&#x611F;&#x609F;"><a name="&#x8C08;&#x4E00;&#x8C08;&#x5728;&#x4E24;&#x4E2A;&#x5546;&#x4E1A;&#x9879;&#x76EE;&#x4E2D;&#x4F7F;&#x7528;mvi&#x67B6;&#x6784;&#x540E;&#x7684;&#x611F;&#x609F;" class="anchor-navigation-ex-anchor" href="#&#x8C08;&#x4E00;&#x8C08;&#x5728;&#x4E24;&#x4E2A;&#x5546;&#x4E1A;&#x9879;&#x76EE;&#x4E2D;&#x4F7F;&#x7528;mvi&#x67B6;&#x6784;&#x540E;&#x7684;&#x611F;&#x609F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8C08;&#x4E00;&#x8C08;&#x5728;&#x4E24;&#x4E2A;&#x5546;&#x4E1A;&#x9879;&#x76EE;&#x4E2D;&#x4F7F;&#x7528;MVI&#x67B6;&#x6784;&#x540E;&#x7684;&#x611F;&#x609F;</h1>
-<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
-<p>MVI&#x5E76;&#x975E;&#x65B0;&#x5174;&#x4E8B;&#x7269;&#xFF0C;&#x5728;2020&#x5E74;&#x65F6;&#x4EA6;&#x66FE;&#x6709;&#x901A;&#x8FC7;&#x64B0;&#x5199;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x4E0E;&#x8BF8;&#x4F4D;&#x8BFB;&#x8005;&#x63A2;&#x8BA8;&#x4E00;&#x4E8C;&#x7684;&#x5FF5;&#x5934;&#x3002;</p>
-<p>&#x5F53;&#x65F6;&#x9879;&#x76EE;&#x91C7;&#x7528;MVP&#x5206;&#x5C42;&#x8BBE;&#x8BA1;&#xFF0C;&#x7EC4;&#x5458;&#x7684;&#x4EE3;&#x7801;&#x98CE;&#x683C;&#x5DEE;&#x5F02;&#x4E5F;&#x8F83;&#x5927;&#xFF0C;&#x4EE3;&#x7801;&#x4E2D;&#x7C7B;&#x804C;&#x8D23;&#x8D4B;&#x4E88;&#x4E0E;&#x5C01;&#x88C5;&#x98CE;&#x683C;&#x5404;&#x6210;&#x4E00;&#x5957;&#xFF0C;&#x968F;&#x7740;&#x4E1A;&#x52A1;&#x6025;&#x901F;&#x81A8;&#x80C0;&#xFF0C;&#x4EE3;&#x7801;&#x8D8A;&#x53D1;&#x6DF7;&#x4E71;&#x3002;&#x8BD5;&#x56FE;&#x7528; <code>MVI&#x67B6;&#x6784;</code> + <code>&#x5355;&#x5411;&#x6D41;</code> &#x5F62;&#x6210; <code>&#x63A3;&#x8098;</code> &#x5E26;&#x6765;&#x4E00;&#x81F4;&#x98CE;&#x683C;&#x3002;
-&#x4F46;&#x8FD9;&#x79CD;&#x505A;&#x6CD5;&#x4E0D;&#x591F;&#x4EE5;&#x4EBA;&#x4E3A;&#x672C;&#xFF0C;&#x6700;&#x7EC8;&#x91C7;&#x7528; <strong>&quot;&#x5728;MVP&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x8FDB;&#x884C;&#x4E86;&#x9002;&#x5F53;&#x6539;&#x9020;+&#x8BBE;&#x8BA1;&#x7EA6;&#x5B9A;&#x7684;&#x65B9;&#x5F0F;&quot;</strong> &#x89E3;&#x51B3;&#x4E86;&#x95EE;&#x9898;&#xFF0C;&#x5E76;&#x672A;&#x5C06;MVI&#x6295;&#x5165;&#x5230;&#x5546;&#x4E1A;&#x9879;&#x76EE;&#x4E2D;&#xFF0C;&#x4E8E;&#x662F; <strong>&#x653E;&#x5F03;&#x4E86;&#x7EB8;&#x4E0A;&#x8C08;&#x5175;</strong>&#x3002;</p>
-<p>&#x5728;&#x534A;&#x5E74;&#x524D;&#x7EC8;&#x4E8E;&#x6709;&#x673A;&#x4F1A;&#x5728;&#x5546;&#x4E1A;&#x9879;&#x76EE;&#x4E2D;&#x8FDB;&#x884C;&#x5B9E;&#x8DF5;&#xFF0C;&#x540C;&#x8BF8;&#x4F4D;&#x8C08;&#x4E00;&#x8C08;&#x4F7F;&#x7528;&#x540E;&#x7684; <strong>&#x4E2A;&#x4EBA;&#x611F;&#x609F;</strong> &#xFF0C;&#x5E76;&#x85C9;&#x6B64;&#x8BB2;&#x900F;MVI&#x7B49;&#x67B6;&#x6784;&#x3002;</p>
-<p>&#x6240;&#x6709;&#x5185;&#x5BB9;&#x5C06;&#x6309;&#x7167;&#x4EE5;&#x4E0B;&#x8981;&#x70B9;&#x5C55;&#x5F00;&#xFF1A;</p>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../Review/post_44.html" class="active"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="谈一谈在两个商业项目中使用mvi架构后的感悟"><a class="header" href="#谈一谈在两个商业项目中使用mvi架构后的感悟">谈一谈在两个商业项目中使用MVI架构后的感悟</a></h1>
+<h2 id="前言"><a class="header" href="#前言">前言</a></h2>
+<p>MVI并非新兴事物，在2020年时亦曾有通过撰写一篇文章与诸位读者探讨一二的念头。</p>
+<p>当时项目采用MVP分层设计，组员的代码风格差异也较大，代码中类职责赋予与封装风格各成一套，随着业务急速膨胀，代码越发混乱。试图用 <code>MVI架构</code> + <code>单向流</code> 形成 <code>掣肘</code> 带来一致风格。
+但这种做法不够以人为本，最终采用 <strong>"在MVP的基础上进行了适当改造+设计约定的方式"</strong> 解决了问题，并未将MVI投入到商业项目中，于是 <strong>放弃了纸上谈兵</strong>。</p>
+<p>在半年前终于有机会在商业项目中进行实践，同诸位谈一谈使用后的 <strong>个人感悟</strong> ，并藉此讲透MVI等架构。</p>
+<p>所有内容将按照以下要点展开：</p>
 <ul>
-<li>&#x4ECE;&#x67B6;&#x6784;&#x7684;&#x7406;&#x5FF5;&#x51FA;&#x53D1; -- <strong>&#x7B80;&#x5355;&#x5217;&#x660E;&#x5404;&#x79CD; <code>MVX</code> &#x7684;&#x7406;&#x5FF5;</strong> &#xFF0C; <em>MVX&#xFF1A;&#x6307;&#x4EE3; MVC&#x3001;MVP&#x3001;MVVM&#x3001;MVI</em></li>
-<li>&#x62E5;&#x62B1;&#x590D;&#x6742;&#x7684;&#x540C;&#x65F6;&#x5B9E;&#x73B0;&#x7B80;&#x5316; -- <strong>&#x901A;&#x8FC7;&#x5BF9;&#x6BD4;&#x7406;&#x89E3;&#x5355;&#x5411;&#x6570;&#x636E;&#x6D41;&#x52A8;&#x6240;&#x89E3;&#x51B3;&#x7684;&#x75DB;&#x70B9;&#x3001;&#x8BBE;&#x8BA1;Intent&#x7684;&#x539F;&#x56E0;&#x7B49;&#x95EE;&#x9898;</strong></li>
-<li>&#x5355;&#x4E00;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;&#xFF0C;&#x4E0D;&#x53EF;&#x50F5;&#x5316;&#x4FE1;&#x5949;</li>
-<li>&#x8981;&#x60F3;&#x4F18;&#x96C5;&#xFF0C;&#x9700;&#x8981;&#x5DE5;&#x5177; -- <strong>&#x501F;&#x52A9;&#x58F0;&#x660E;&#x5F0F;&#x3001;&#x54CD;&#x5E94;&#x5F0F;&#x7F16;&#x7A0B;&#x5DE5;&#x5177;&#xFF0C;&#x6784;&#x5EFA;<code>&#x6D41;</code></strong>&#xFF0C;<em>&#x5C4F;&#x853D;&#x547D;&#x4EE4;&#x5F0F;&#x7F16;&#x7A0B;&#x4E2D;&#x7684;&#x7EC6;&#x8282;&#xFF0C;&#x540C;&#x6837;&#x662F;&#x805A;&#x7126;&#x548C;&#x7B80;&#x5316;</em> </li>
-<li>&#x72B6;&#x6001;&#x548C;&#x4E8B;&#x4EF6;&#x5206;&#x5BB6;&#xFF0C;&#x7EDD;&#x4E0D;&#x662F;&#x5403;&#x9971;&#x4E86;&#x6491;&#x7684; -- <strong>&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x88C2;&#x53D8;&#x51FA;&#x72B6;&#x6001;&#x548C;&#x4E8B;&#x4EF6;&#xFF0C;&#x5982;&#x4F55;&#x754C;&#x5B9A;</strong></li>
+<li>从架构的理念出发 -- <strong>简单列明各种 <code>MVX</code> 的理念</strong> ， <em>MVX：指代 MVC、MVP、MVVM、MVI</em></li>
+<li>拥抱复杂的同时实现简化 -- <strong>通过对比理解单向数据流动所解决的痛点、设计Intent的原因等问题</strong></li>
+<li>单一可信数据源，不可僵化信奉</li>
+<li>要想优雅，需要工具 -- <strong>借助声明式、响应式编程工具，构建<code>流</code></strong>，<em>屏蔽命令式编程中的细节，同样是聚焦和简化</em></li>
+<li>状态和事件分家，绝不是吃饱了撑的 -- <strong>为什么要裂变出状态和事件，如何界定</strong></li>
 </ul>
-<p><em>&#x5185;&#x5BB9;&#x4F1A;&#x5F88;&#x957F;&#xFF0C;&#x6211;&#x4F1A;&#x914C;&#x60C5;&#x518D;&#x5199;&#x4E00;&#x4E9B; <code>&#x89E3;</code> &#xFF0C;&#x7ED3;&#x5408;&#x5B9E;&#x4F8B;&#x548C;&#x4EE3;&#x7801;&#x6F14;&#x793A;&#x5185;&#x5BB9;&#x3002;</em></p>
-<h3 id="&#x4E24;&#x4E2A;&#x9879;&#x76EE;&#x7684;&#x57FA;&#x672C;&#x60C5;&#x51B5;"><a name="&#x4E24;&#x4E2A;&#x9879;&#x76EE;&#x7684;&#x57FA;&#x672C;&#x60C5;&#x51B5;" class="anchor-navigation-ex-anchor" href="#&#x4E24;&#x4E2A;&#x9879;&#x76EE;&#x7684;&#x57FA;&#x672C;&#x60C5;&#x51B5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E24;&#x4E2A;&#x9879;&#x76EE;&#x7684;&#x57FA;&#x672C;&#x60C5;&#x51B5;</h3>
-<p>&#x76F8;&#x6BD4;&#x4E8E;&#x4E4B;&#x524D;&#x7684;&#x5DE8;&#x578B;&#x9879;&#x76EE;&#xFF0C;<strong>&#x8FD9;&#x4E24;&#x4E2A;&#x9879;&#x76EE;&#x7684;&#x4E1A;&#x52A1;&#x91CF;&#x5747;&#x4E0D;&#x5927;</strong>&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x57FA;&#x4E8E;&#x84DD;&#x7259;&#x548C;&#x5C40;&#x57DF;&#x7F51;&#x7684;&#x64CD;&#x63A7;&#x7C7B;APP&#xFF0C;&#x4E0B;&#x5348;&#x7B80;&#x79F0;APP-A&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x5185;&#x90E8;&#x4F7F;&#x7528;&#x7684;&#x5DE5;&#x5177;&#xFF0C;&#x5206;&#x6790;&#x516C;&#x53F8;&#x5404;&#x4E2A;&#x4EA7;&#x54C1;&#x7684;&#x65E5;&#x5FD7;&#xFF0C;&#x7B80;&#x79F0;APP-B&#x3002;</p>
-<p>&#x867D;&#x7136;&#x4ED6;&#x4EEC;&#x7684;&#x4E1A;&#x52A1;&#x6DF1;&#x5EA6;&#x8981;&#x6BD4;&#x4E00;&#x822C;&#x7684;APP&#x8981;&#x6DF1;&#xFF0C;&#x4F46;&#x5728; <strong>&#x672C;&#x8D28;&#x4E0A;&#x4E00;&#x81F4;</strong> &#xFF0C;&#x6BD5;&#x7ADF;&#x540C;&#x7C7B;&#x578B;&#x4E1A;&#x52A1;&#x91CF;&#x518D;&#x591A;&#x4E5F;&#x4EC5;&#x4EC5;&#x662F;&#x91CD;&#x590D;&#x8FD0;&#x7528;&#x4E00;&#x5957;&#x6A21;&#x5F0F; &#xFF0C;&#x5E76;&#x4E0D;&#x5F71;&#x54CD;&#x672C;&#x8D28;&#x3002;</p>
-<p><strong>&#x548C;&#x8BF8;&#x591A;&#x9879;&#x76EE;&#x7684;&#x672C;&#x8D28;&#x4E00;&#x81F4;</strong>&#xFF0C;&#x5747;&#x7B26;&#x5408;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#x7684;&#x903B;&#x8F91;&#x5206;&#x5C42;&#xFF0C;&#x5E76;&#x5728;&#x4EBA;&#x673A;&#x4EA4;&#x4E92;&#x8FC7;&#x7A0B;&#x4E2D;&#x6267;&#x884C;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#xFF1A;</p>
-<p><img src="post_44/img.png" alt="img.png"></p>
+<p><em>内容会很长，我会酌情再写一些 <code>解</code> ，结合实例和代码演示内容。</em></p>
+<h3 id="两个项目的基本情况"><a class="header" href="#两个项目的基本情况">两个项目的基本情况</a></h3>
+<p>相比于之前的巨型项目，<strong>这两个项目的业务量均不大</strong>，一个是基于蓝牙和局域网的操控类APP，下午简称APP-A，一个是内部使用的工具，分析公司各个产品的日志，简称APP-B。</p>
+<p>虽然他们的业务深度要比一般的APP要深，但在 <strong>本质上一致</strong> ，毕竟同类型业务量再多也仅仅是重复运用一套模式 ，并不影响本质。</p>
+<p><strong>和诸多项目的本质一致</strong>，均符合如下图所示的逻辑分层，并在人机交互过程中执行业务逻辑：</p>
+<p><img src="post_44/img.png" alt="img.png" /></p>
 <ul>
-<li>APP-A &#x662F;Android&#x9879;&#x76EE;&#xFF0C;&#x56FE;&#x65B9;&#x4FBF;&#x7EAF;kotlin</li>
-<li>APP-B &#x662F; Compose-Desktop&#x9879;&#x76EE;&#xFF0C;&#x4E0D;&#x5F97;&#x4E0D;kotlin</li>
+<li>APP-A 是Android项目，图方便纯kotlin</li>
+<li>APP-B 是 Compose-Desktop项目，不得不kotlin</li>
 </ul>
-<p>&#x8FC7;&#x4E8E;&#x7D6E;&#x53E8;&#x4E86;&#xFF0C;&#x6211;&#x4EEC;&#x8FDB;&#x5165;&#x6B63;&#x6587;&#x3002;</p>
-<h2 id="&#x4ECE;&#x67B6;&#x6784;&#x7684;&#x7406;&#x5FF5;&#x51FA;&#x53D1;"><a name="&#x4ECE;&#x67B6;&#x6784;&#x7684;&#x7406;&#x5FF5;&#x51FA;&#x53D1;" class="anchor-navigation-ex-anchor" href="#&#x4ECE;&#x67B6;&#x6784;&#x7684;&#x7406;&#x5FF5;&#x51FA;&#x53D1;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4ECE;&#x67B6;&#x6784;&#x7684;&#x7406;&#x5FF5;&#x51FA;&#x53D1;</h2>
+<p>过于絮叨了，我们进入正文。</p>
+<h2 id="从架构的理念出发"><a class="header" href="#从架构的理念出发">从架构的理念出发</a></h2>
 <blockquote>
-<p>&#x8C28;&#x8BB0;&#xFF0C;&#x5B9E;&#x9645;&#x60C5;&#x51B5;&#x4E2D;&#xFF0C;MVI&#x3001;MVVM&#x8FD9;&#x4E9B;&#x67B6;&#x6784;&#x5747;&#x5148;&#x7531;Web&#x5E94;&#x7528;&#x9886;&#x57DF;&#x63D0;&#x51FA;&#xFF0C;&#x7528;&#x4E8E;&#x89E3;&#x51B3;&#x6D4F;&#x89C8;&#x5668;Web&#x5E94;&#x7528;&#x7814;&#x53D1;&#x4E2D;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
-<p>&#x5728;&#x540E;&#x7EED;&#x7684;&#x5E94;&#x7528;&#x9886;&#x57DF;&#x53D1;&#x5C55;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x5B58;&#x5728;&#x5171;&#x6027;&#x95EE;&#x9898;&#xFF0C;&#x4FBF;&#x5F15;&#x5165;&#x4E86;&#x8FD9;&#x4E9B;&#x8BBE;&#x8BA1;&#xFF0C;&#x5E76;&#x7ED3;&#x5408;&#x81EA;&#x8EAB;&#x7279;&#x70B9;&#x8FDB;&#x884C;&#x4E86;&#x62D3;&#x5C55;&#x3002;</p>
+<p>谨记，实际情况中，MVI、MVVM这些架构均先由Web应用领域提出，用于解决浏览器Web应用研发中的问题。</p>
+<p>在后续的应用领域发展过程中，存在共性问题，便引入了这些设计，并结合自身特点进行了拓展。</p>
 </blockquote>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x804A;&#x4E00;&#x804A;&#x7406;&#x5FF5;&#xFF0C;&#x4E0D;&#x6BD4;&#x6B66;&#x529F;&#x3002;</p>
-<p><img src="post_44/idea.jpg" alt=""></p>
-<p><em>&#x56FE;&#x7247;&#x51FA;&#x81EA;&#x7535;&#x5F71;&#x4E00;&#x4EE3;&#x5B97;&#x5E08;</em></p>
-<h3 id="mvi&#x7684;&#x7406;&#x5FF5;"><a name="mvi&#x7684;&#x7406;&#x5FF5;" class="anchor-navigation-ex-anchor" href="#mvi&#x7684;&#x7406;&#x5FF5;"><i class="fa fa-link" aria-hidden="true"></i></a>MVI&#x7684;&#x7406;&#x5FF5;</h3>
-<p><code>MVI</code> &#x8131;&#x80CE;&#x4E8E; <code>Model View Intent</code></p>
+<p>接下来我们聊一聊理念，不比武功。</p>
+<p><img src="./post_44/idea.jpg" alt="" /></p>
+<p><em>图片出自电影一代宗师</em></p>
+<h3 id="mvi的理念"><a class="header" href="#mvi的理念">MVI的理念</a></h3>
+<p><code>MVI</code> 脱胎于 <code>Model View Intent</code></p>
 <ul>
-<li>Intent&#xFF1A;&#x9A71;&#x52A8;model&#x53D1;&#x751F;&#x6539;&#x53D8;&#x7684;&#x610F;&#x56FE;&#xFF0C;&#x4EE5;UI&#x4E2D;&#x7684;&#x4E8B;&#x4EF6;&#x6700;&#x4E3A;&#x5E38;&#x89C1;&#xFF1B;</li>
-<li>Model&#xFF1A;&#x4E1A;&#x52A1;&#x6A21;&#x578B;&#xFF0C;&#x5305;&#x542B;&#x6570;&#x636E;&#x548C;&#x903B;&#x8F91;&#xFF0C;&#x662F;&#x5BF9;&#x5E94; <code>&#x5BA2;&#x89C2;&#x5B9E;&#x4F53;</code> &#x7684; <code>&#x7A0B;&#x5E8F;&#x5EFA;&#x6A21;</code>&#xFF1B;</li>
-<li>View&#xFF1A;&#x8868;&#x73B0;&#x5C42;&#x7684;&#x89C6;&#x56FE;&#xFF0C;&#x4EE5;UI&#x65B9;&#x5F0F;&#x5448;&#x73B0;Model&#x7684;&#x72B6;&#x6001;&#xFF08;&#x4EE5;&#x53CA;&#x4E8B;&#x4EF6;&#xFF09;&#xFF0C;&#x63A5;&#x53D7;&#x7528;&#x6237;&#x8F93;&#x5165;&#xFF0C;&#x8F6C;&#x6362;&#x4E3A;UI&#x4E8B;&#x4EF6;</li>
+<li>Intent：驱动model发生改变的意图，以UI中的事件最为常见；</li>
+<li>Model：业务模型，包含数据和逻辑，是对应 <code>客观实体</code> 的 <code>程序建模</code>；</li>
+<li>View：表现层的视图，以UI方式呈现Model的状态（以及事件），接受用户输入，转换为UI事件</li>
 </ul>
-<p>&#x5B98;&#x65B9;&#x7684;&#x8FD9;&#x5E45;&#x56FE;&#x5F88;&#x597D;&#x7684;&#x5448;&#x73B0;&#x4E86;&#x4E09;&#x8005;&#x4E4B;&#x95F4;&#x7684;&#x9A71;&#x52A8;&#x5173;&#x7CFB;&#xFF1A;</p>
-<p><img src="post_44/mvi-1.png" alt=""></p>
-<p>&#x8FD9;&#x5F20;&#x56FE;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x5B83;&#x6452;&#x5F03;&#x4E86;&#x9A71;&#x52A8;&#x65B9;&#x5F0F;&#x7684;&#x7EC6;&#x8282;&#xFF0C;&#x53EA;&#x4F53;&#x73B0;&#x4E86;&#x89D2;&#x8272;&#x4E0E;&#x9A71;&#x52A8;&#x5173;&#x7CFB;&#x3002;</p>
-<p>&#x6CE8;&#x610F;&#xFF0C;&#x53EA;&#x8981;&#x8BBE;&#x8BA1;&#x4E2D;&#x6EE1;&#x8DB3; <code>&#x89D2;&#x8272;&#x548C;&#x9A71;&#x52A8;&#x5173;&#x7CFB;</code> &#x7B26;&#x5408;&#x4E0A;&#x56FE;&#xFF0C;&#x5C31;&#x662F;MVI&#x67B6;&#x6784;&#x8BBE;&#x8BA1;&#xFF0C;&#x5E76;&#x4E0D;&#x9650;&#x5236; <code>&#x9A71;&#x52A8;&#x65B9;&#x5F0F;&#x7684;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;</code></p>
-<p><em>&#x7ECF;&#x5178;&#x7684;MVI&#x9A71;&#x52A8;&#x7EC6;&#x8282;&#x8981;&#x6BD4;&#x4E0A;&#x56FE;&#x590D;&#x6742;&#x5F88;&#x591A;&#xFF0C;&#x4E0B;&#x6587;&#x518D;&#x804A;&#x3002;</em></p>
-<p>&#x4ECE;&#x8F6F;&#x4EF6;&#x8BBE;&#x8BA1;&#x7684;&#x539F;&#x5219;&#x51FA;&#x53D1;&#xFF1A;<code>&#x804C;&#x8D23;&#x5206;&#x79BB;&#x5E76;&#x5C01;&#x88C5;</code> &#x7684;&#x76EE;&#x7684;&#x662F; <code>&#x89E3;&#x8026;</code> &#x3001; <code>&#x53EF;&#x72EC;&#x7ACB;&#x53D8;&#x5316;</code>&#x3001;<code>&#x590D;&#x7528;</code>&#x3002;</p>
-<p>&#x663E;&#x7136;&#xFF0C;&#x533A;&#x522B;&#x4E8E; <code>MVVM</code> &#x3001; <code>MVP</code> &#x3001; <code>MVC</code>&#xFF0C;&#x89D2;&#x8272;&#x4E0A;&#x7684;&#x5DEE;&#x522B;&#x5728;&#x4E8E; ViewModel&#x3001;Presenter&#x3001;Controller&#x3001;Intent&#x56DB;&#x8005;&#xFF0C;&#x800C;&#x5B83;&#x4EEC;&#x53C8;&#x662F;View&#x548C;Model&#x4E4B;&#x95F4;&#x7684;&#x7EBD;&#x5E26;&#x3002;&#x9664;&#x6B64;&#x4E4B;&#x5916;&#xFF0C;V&#x548C;M&#x4EA6;&#x7A0D;&#x6709;&#x4E0D;&#x540C;&#x3002;</p>
-<h4 id="mvc&#x3001;mvp"><a name="mvc&#x3001;mvp" class="anchor-navigation-ex-anchor" href="#mvc&#x3001;mvp"><i class="fa fa-link" aria-hidden="true"></i></a>MVC&#x3001;MVP</h4>
-<p>MVC&#x3001;MVP &#x4E2D;&#xFF0C;C&#x548C;P&#x7684;&#x804C;&#x8D23;&#x4F53;&#x73B0;&#x4E3A; <code>&#x63A7;&#x5236;&#x3001;&#x8C03;&#x5EA6;</code>&#x3002;</p>
-<p>MVP&#x4E2D; <code>V</code> &#x548C; <code>M</code> &#x5B8C;&#x5168;&#x89E3;&#x8026;&#x53EF;&#x72EC;&#x7ACB;&#x53D8;&#x5316;&#xFF0C;MVC&#x4E2D; <code>M</code> &#x76F4;&#x63A5;&#x64CD;&#x4F5C; <code>V</code> &#x8026;&#x5408;&#x9AD8;&#xFF0C;&#x5728;web&#x5E94;&#x7528;&#x4E2D;&#xFF0C;<code>C</code> &#x9700;&#x8981;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;DOM&#x3002;</p>
-<h4 id="mvvm"><a name="mvvm" class="anchor-navigation-ex-anchor" href="#mvvm"><i class="fa fa-link" aria-hidden="true"></i></a>MVVM</h4>
-<p>MVVM&#x4E2D;&#xFF0C;&#x63D0;&#x5021; <code>&#x6570;&#x636E;&#x9A71;&#x52A8;</code>&#xFF0C; <code>&#x6570;&#x636E;&#x6E90;</code> &#x88AB;&#x5265;&#x79BB;&#x5230; <code>VM</code> &#x4E2D;&#xFF0C;&#x5728; <code>&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x6846;&#x67B6;</code> &#x7684;&#x52A0;&#x6301;&#x4E0B;&#xFF0C;View&#x5C42;&#x7684;&#x8F93;&#x5165;&#x53CD;&#x6620;&#x4E3A;&#x6570;&#x636E;&#x7684;&#x53D8;&#x5316;&#xFF0C;&#x6570;&#x636E;&#x7684;&#x53D8;&#x5316;&#x9A71;&#x52A8;&#x89C6;&#x56FE;&#x5185;&#x5BB9;&#x3002;</p>
-<p>&#x663E;&#x7136;&#xFF0C;VM&#x7684;&#x804C;&#x8D23;&#x9650;&#x4E8E;&#x7EF4;&#x62A4;&#x6570;&#x636E;&#x72B6;&#x6001;&#xFF0C;<em>&#x5982;&#x6709;&#x5FC5;&#x8981;&#xFF0C;&#x9A71;&#x52A8;View&#x5C42;&#x6D88;&#x8D39;&#x6570;&#x636E;&#x72B6;&#x6001;&#xFF0C;</em> &#x4E0D;&#x5FC5;&#x518D;&#x5173;&#x6CE8;&#x5982;&#x4F55;&#x64CD;&#x4F5C;&#x89C6;&#x56FE;&#x3002;</p>
-<p><em>&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x6846;&#x67B6;&#x5DF2;&#x7ECF;&#x5F15;&#x5165;&#x89C2;&#x5BDF;&#x8005;&#x6A21;&#x5F0F;&#x5B9E;&#x73B0;&#xFF0C;&#x53EF;&#x54CD;&#x5E94;&#x5F0F;&#x9A71;&#x52A8;&#xFF0C;VM&#x4E00;&#x822C;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x5173;&#x5FC3; <strong>&#x54CD;&#x5E94;&#x5F0F;&#x9A71;&#x52A8;&#x548C;&#x4E0B;&#x6E38;&#x89C2;&#x5BDF;&#x8005;&#x751F;&#x547D;&#x5468;&#x671F;&#x95EE;&#x9898;</strong></em></p>
-<p>&#x7B80;&#x5355;&#x601D;&#x8003;&#x4E4B;&#x540E;&#x4F1A;&#x53D1;&#x73B0;MVVM&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x5B83;&#x7684;&#x4FA7;&#x91CD;&#x70B9;&#x5728;&#x4E8E; <code>&#x5229;&#x7528;&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x8BA9;&#x5F00;&#x53D1;&#x8005;&#x4E13;&#x6CE8;&#x4E8E;&#x6570;&#x636E;&#x72B6;&#x6001;&#x7684;&#x7EF4;&#x62A4;&#xFF0C;&#x4ECE;&#x64CD;&#x4F5C;&#x89C6;&#x56FE;&#x66F4;&#x65B0;&#x4E2D;&#x5F97;&#x4EE5;&#x89E3;&#x653E;</code>&#xFF0C;&#x5B83;&#x96BE;&#x4EE5;&#x89E3;&#x51B3; <code>&#x65E0;&#x5929;&#x7136;&#x72B6;&#x6001;</code> &#x95EE;&#x9898;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x6309;&#x94AE;&#x70B9;&#x51FB;&#x8FD9;&#x7C7B;&#x4E8B;&#x4EF6;&#x3002;</p>
-<h4 id="mvi"><a name="mvi" class="anchor-navigation-ex-anchor" href="#mvi"><i class="fa fa-link" aria-hidden="true"></i></a>MVI</h4>
-<p>&#x5728;MVI&#x4E2D;&#xFF0C;&#x7ED3;&#x5408;&#x4E1A;&#x52A1;&#x80CC;&#x666F;&#x5C06;UI&#x4E8B;&#x4EF6;&#x7B49;&#x5185;&#x5BB9;&#x8F6C;&#x6362;&#x4E3A; <code>Intent</code> &#xFF0C;&#x9A71;&#x52A8;Model&#x5C42;&#x4E1A;&#x52A1;&#xFF0C;Model&#x5C42;&#x7684;&#x4E1A;&#x52A1;&#x7ED3;&#x679C;&#x53CD;&#x6620;&#x4E3A; <code>&#x89C6;&#x56FE;&#x72B6;&#x6001;</code> + <code>&#x4E8B;&#x4EF6;</code>&#x3002;</p>
-<p>&#x56E0;&#x6B64;View&#x5C42;&#x548C;Model&#x5C42;&#x4E4B;&#x95F4;&#x5DF2;&#x7ECF;&#x89E3;&#x8026;&#xFF0C;&#x5E76;&#x53EF;&#x4EE5;&#x5438;&#x6536;MVVM&#x4E2D;&#x7684;&#x4F18;&#x70B9;&#x91C7;&#x7528;&#x5982;&#x4E0B;&#x8BBE;&#x8BA1;&#xFF1A;</p>
+<p>官方的这幅图很好的呈现了三者之间的驱动关系：</p>
+<p><img src="./post_44/mvi-1.png" alt="" /></p>
+<p>这张图非常简单，它摒弃了驱动方式的细节，只体现了角色与驱动关系。</p>
+<p>注意，只要设计中满足 <code>角色和驱动关系</code> 符合上图，就是MVI架构设计，并不限制 <code>驱动方式的实现细节</code></p>
+<p><em>经典的MVI驱动细节要比上图复杂很多，下文再聊。</em></p>
+<p>从软件设计的原则出发：<code>职责分离并封装</code> 的目的是 <code>解耦</code> 、 <code>可独立变化</code>、<code>复用</code>。</p>
+<p>显然，区别于 <code>MVVM</code> 、 <code>MVP</code> 、 <code>MVC</code>，角色上的差别在于 ViewModel、Presenter、Controller、Intent四者，而它们又是View和Model之间的纽带。除此之外，V和M亦稍有不同。</p>
+<h4 id="mvcmvp"><a class="header" href="#mvcmvp">MVC、MVP</a></h4>
+<p>MVC、MVP 中，C和P的职责体现为 <code>控制、调度</code>。</p>
+<p>MVP中 <code>V</code> 和 <code>M</code> 完全解耦可独立变化，MVC中 <code>M</code> 直接操作 <code>V</code> 耦合高，在web应用中，<code>C</code> 需要直接操作DOM。</p>
+<h4 id="mvvm"><a class="header" href="#mvvm">MVVM</a></h4>
+<p>MVVM中，提倡 <code>数据驱动</code>， <code>数据源</code> 被剥离到 <code>VM</code> 中，在 <code>双向绑定框架</code> 的加持下，View层的输入反映为数据的变化，数据的变化驱动视图内容。</p>
+<p>显然，VM的职责限于维护数据状态，<em>如有必要，驱动View层消费数据状态，</em> 不必再关注如何操作视图。</p>
+<p><em>一般来说，双向绑定框架已经引入观察者模式实现，可响应式驱动，VM一般没有必要关心 <strong>响应式驱动和下游观察者生命周期问题</strong></em></p>
+<p>简单思考之后会发现MVVM的问题，它的侧重点在于 <code>利用双向绑定让开发者专注于数据状态的维护，从操作视图更新中得以解放</code>，它难以解决 <code>无天然状态</code> 问题，例如：按钮点击这类事件。</p>
+<h4 id="mvi"><a class="header" href="#mvi">MVI</a></h4>
+<p>在MVI中，结合业务背景将UI事件等内容转换为 <code>Intent</code> ，驱动Model层业务，Model层的业务结果反映为 <code>视图状态</code> + <code>事件</code>。</p>
+<p>因此View层和Model层之间已经解耦，并可以吸收MVVM中的优点采用如下设计：</p>
 <ul>
-<li>&#x5C06;&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x9000;&#x5316;&#x4E3A;&#x5355;&#x5411;&#x7ED1;&#x5B9A;&#xFF0C;View&#x5C42;&#x6D88;&#x8D39;UI&#x72B6;&#x6001;&#x6D41;&#x548C;&#x4E8B;&#x4EF6;&#x6D41;&#xFF0C;&#x8FD9;&#x4E5F;&#x610F;&#x5473;&#x7740;UI&#x72B6;&#x6001;&#x7684;&#x804C;&#x8D23;&#x7CBE;&#x7B80;&#xFF0C;&#x5B83;&#x4E0D;&#x518D;&#x627F;&#x8F7D;View&#x5C42;&#x7684;&#x7528;&#x6237;&#x8F93;&#x5165;&#x7B49;&#x4E8B;&#x4EF6;</li>
-<li>&#x5C06;UI&#x72B6;&#x6001;&#x72EC;&#x7ACB;&#xFF0C;Model&#x5C42;&#x4EC5;&#x4EA7;&#x751F; <code>UI&#x72B6;&#x6001;&#x7684;&#x5C40;&#x90E8;&#x53D8;&#x5316;</code> &#x548C; <code>&#x4E8B;&#x4EF6;</code></li>
+<li>将双向绑定退化为单向绑定，View层消费UI状态流和事件流，这也意味着UI状态的职责精简，它不再承载View层的用户输入等事件</li>
+<li>将UI状态独立，Model层仅产生 <code>UI状态的局部变化</code> 和 <code>事件</code></li>
 </ul>
-<p>&#x4E0B;&#x56FE;&#x4E3A;&#x7ECF;&#x5178;&#x7684;MVI&#x539F;&#x7406;&#x793A;&#x610F;&#x56FE;&#xFF1A;</p>
-<p><img src="post_44/mvi-2.png" alt=""></p>
-<p>&#x5728;&#x4E0A;&#x6587;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x8BA8;&#x8BBA;&#x4E86;&#x5404;&#x4E2A;&#x89D2;&#x8272;&#x7684;&#x804C;&#x8D23;&#xFF0C;&#x4E0B;&#x9762;&#x9010;&#x6B65;&#x5C55;&#x5F00;&#x8BA8;&#x8BBA;&#x89D2;&#x8272;&#x5177;&#x5907;&#x7684;&#x7279;&#x6027;&#x548C;&#x7EC6;&#x8282;&#x77E5;&#x8BC6;&#x3002;</p>
-<p>&#x5728;&#x6B64;&#x4E4B;&#x524D;&#xFF0C;&#x8FD8;&#x8BF7;&#x8C28;&#x8BB0;&#xFF1A;&#x5408;&#x9002;&#x7684;&#x624D;&#x662F;&#x6700;&#x597D;&#x7684;</p>
+<p>下图为经典的MVI原理示意图：</p>
+<p><img src="./post_44/mvi-2.png" alt="" /></p>
+<p>在上文中，我们已经讨论了各个角色的职责，下面逐步展开讨论角色具备的特性和细节知识。</p>
+<p>在此之前，还请谨记：合适的才是最好的</p>
 <blockquote>
-<p>&#x6CA1;&#x6709;&#x7EDD;&#x5BF9;&#x7684;&#x6700;&#x597D;&#x7684;&#x8BBE;&#x8BA1;&#xFF0C;&#x53EA;&#x6709;&#x6700;&#x5408;&#x9002;&#x7684;&#x8BBE;&#x8BA1;&#x3002;</p>
+<p>没有绝对的最好的设计，只有最合适的设计。</p>
 </blockquote>
-<p>&#x518D;&#x597D;&#x7684;&#x67B6;&#x6784;&#xFF0C;&#x90FD;&#x9700;&#x8981;&#x9075;&#x5FAA;&#x5176;&#x7406;&#x5FF5;&#x5E76;&#x7ED3;&#x5408;&#x9879;&#x76EE;&#x56E0;&#x5730;&#x5236;&#x5B9C;&#x5730;&#x8FDB;&#x884C;&#x8C03;&#x6574;&#xFF0C;&#x4EE5;&#x83B7;&#x5F97;&#x6700;&#x4F73;&#x4F7F;&#x7528;&#x6548;&#x679C;&#x3002;&#x6240;&#x4EE5;&#x8BF7;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x52A1;&#x5FC5;&#x5728;&#x9605;&#x8BFB;&#x65F6;&#xFF0C;&#x7ED3;&#x5408;&#x81EA;&#x8EAB;&#x9879;&#x76EE;&#x7684;&#x60C5;&#x51B5;&#x4ED4;&#x7EC6;&#x601D;&#x8003;&#x4EE5;&#x4E0B;&#x95EE;&#x9898;&#xFF1A;</p>
+<p>再好的架构，都需要遵循其理念并结合项目因地制宜地进行调整，以获得最佳使用效果。所以请读者诸君务必在阅读时，结合自身项目的情况仔细思考以下问题：</p>
 <ul>
-<li><strong>&#x5F15;&#x5165;&#x65B0;&#x6846;&#x67B6;&#x6240;&#x89E3;&#x51B3;&#x7684;&#x75DB;&#x70B9;&#x3001;&#x884D;&#x751F;&#x7684;&#x95EE;&#x9898;&#x3001;&#x662F;&#x5426;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x6846;&#x67B6;&#x8C03;&#x6574;&#xFF1F;</strong></li>
-<li><strong>&#x6846;&#x67B6;&#x4E2D;&#x7684;&#x89D2;&#x8272;&#x529F;&#x80FD;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x51FA;&#x73B0;&#xFF0C;&#x53C8;&#x6709;&#x600E;&#x6837;&#x7684;&#x5C40;&#x9650;&#xFF1F;</strong></li>
+<li><strong>引入新框架所解决的痛点、衍生的问题、是否需要进行框架调整？</strong></li>
+<li><strong>框架中的角色功能，为什么出现，又有怎样的局限？</strong></li>
 </ul>
-<h2 id="&#x5355;&#x5411;&#x6570;&#x636E;&#x6D41;&#x52A8;"><a name="&#x5355;&#x5411;&#x6570;&#x636E;&#x6D41;&#x52A8;" class="anchor-navigation-ex-anchor" href="#&#x5355;&#x5411;&#x6570;&#x636E;&#x6D41;&#x52A8;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5355;&#x5411;&#x6570;&#x636E;&#x6D41;&#x52A8;</h2>
+<h2 id="单向数据流动"><a class="header" href="#单向数据流动">单向数据流动</a></h2>
 <blockquote>
-<p>MVI&#x62E5;&#x62B1;&#x4E86;&#x7ED3;&#x6784;&#x590D;&#x6742;&#xFF0C;&#x4F46;&#x80FD;&#x591F;&#x7075;&#x6D3B;&#x5E94;&#x5BF9;&#x4E1A;&#x52A1;&#x7F16;&#x7801;&#x65F6;&#x7684;&#x5404;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x6309;&#x90E8;&#x5C31;&#x73ED;&#x5373;&#x53EF;&#x3002;</p>
+<p>MVI拥抱了结构复杂，但能够灵活应对业务编码时的各种情况，按部就班即可。</p>
 </blockquote>
-<p>&#x4ECE;MVI&#x539F;&#x7406;&#x56FE;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x6E05;&#x6670;&#x7684;&#x770B;&#x5230; <strong>&quot;&#x6570;&#x636E;&quot;</strong> &#x7684;&#x6D41;&#x52A8;&#x65B9;&#x5411;&#x3002;
-&#x8D77;&#x59CB;&#x4E8E; <code>Intent</code>&#xFF0C;&#x7ECF;&#x8FC7;&#x5206;&#x7C7B;&#x548C;&#x9009;&#x62E9;&#x6027;&#x6D88;&#x8D39;&#x540E;&#x4EA7;&#x751F; <code>Result</code>&#xFF0C;&#x5BF9;&#x5E94;&#x7684;reducer&#x51FD;&#x6570;&#x8BA1;&#x7B97;&#x540E;&#xFF0C;&#x5F97;&#x5230;&#x6700;&#x65B0;&#x7684; <code>State</code> <em>&#xFF08;&#x4EE5;&#x53CA;&#x88C2;&#x53D8;&#x51FA;&#x5FC5;&#x8981;&#x7684; <code>Event</code>&#xFF0C;&#x56FE;&#x4E2D;&#x672A;&#x4F53;&#x73B0;&#xFF09;</em> &#xFF0C;&#x9A71;&#x52A8;&#x89C6;&#x56FE;&#x3002;</p>
-<p>&#x6CE8;&#x610F;&#xFF1A;</p>
+<p>从MVI原理图中，可以清晰的看到 <strong>"数据"</strong> 的流动方向。
+起始于 <code>Intent</code>，经过分类和选择性消费后产生 <code>Result</code>，对应的reducer函数计算后，得到最新的 <code>State</code> <em>（以及裂变出必要的 <code>Event</code>，图中未体现）</em> ，驱动视图。</p>
+<p>注意：</p>
 <ul>
-<li><code>&#x5355;&#x5411;</code> &#x662F;&#x6307; <strong>&#x5355;&#x4E00;&#x65B9;&#x5411;</strong> </li>
-<li>&#x6B64;&#x5904;&#x7684; <code>&#x6570;&#x636E;</code> &#x662F;&#x5E7F;&#x4E49;&#x7684;&#x3001;&#x5BBD;&#x6CDB;&#x7684;&#x3002;</li>
-<li>&#x4EC5;&#x63CF;&#x8FF0;&#x6570;&#x636E;&#x6D41;&#x7684; <strong>&#x53D8;&#x5316;&#x65B9;&#x5411;</strong> &#xFF0C;&#x4E0E;&#x6570;&#x636E;&#x6D41;&#x7684;&#x6570;&#x91CF;&#x65E0;&#x5173;&#xFF0C;&#x4F46;&#x4E00;&#x822C; <strong>&#x5F62;&#x6210;&#x6709;&#x6548;&#x5DE5;&#x4F5C;</strong> &#x5747;&#x9700;&#x8981;&#x4E24;&#x6761;&#x6570;&#x636E;&#x6D41;&#xFF08;&#x4E0A;&#x884C;&#x6570;&#x636E;&#x6D41;&#x548C;&#x4E0B;&#x884C;&#x6570;&#x636E;&#x6D41;&#xFF09;</li>
+<li><code>单向</code> 是指 <strong>单一方向</strong></li>
+<li>此处的 <code>数据</code> 是广义的、宽泛的。</li>
+<li>仅描述数据流的 <strong>变化方向</strong> ，与数据流的数量无关，但一般 <strong>形成有效工作</strong> 均需要两条数据流（上行数据流和下行数据流）</li>
 </ul>
-<p>&#x5373;&#x9A71;&#x52A8;&#x6570;&#x636E;&#x6D41;&#x53D8;&#x5316;&#x7684;&#x65B9;&#x5411;&#x662F;&#x552F;&#x4E00;&#x7684;&#xFF0C;&#x5728;&#x82F1;&#x6587;&#x4E2D;&#x7684;&#x672F;&#x8BED;&#x4E3A;&#xFF1A;<code>Unidirectional Data Flow</code> &#x7B80;&#x79F0; <code>UDF</code>&#x3002;</p>
-<h3 id="mvc&#x3001;mvp&#x4E2D;&#x7684;&#x75DB;&#x70B9;"><a name="mvc&#x3001;mvp&#x4E2D;&#x7684;&#x75DB;&#x70B9;" class="anchor-navigation-ex-anchor" href="#mvc&#x3001;mvp&#x4E2D;&#x7684;&#x75DB;&#x70B9;"><i class="fa fa-link" aria-hidden="true"></i></a>MVC&#x3001;MVP&#x4E2D;&#x7684;&#x75DB;&#x70B9;</h3>
-<p>&#x524D;&#x6587;&#x6211;&#x4EEC;&#x63D0;&#x5230;&#xFF0C;&#x5728;MVC&#x548C;MVP&#x4E2D;&#xFF0C;&#x7740;&#x773C;&#x4E8E; <strong>&#x63A7;&#x5236;&#x3001;&#x8C03;&#x5EA6;</strong> &#xFF0C;&#x5E76;&#x4E0D;&#x5F3A;&#x8C03; <code>&#x6570;&#x636E;&#x6D41;</code> &#x7684;&#x6982;&#x5FF5;&#x3002;</p>
-<p>View&#x548C;Model&#x95F4;&#x4E4B;&#x95F4;&#x7684;&#x4EA4;&#x4E92;&#xFF0C;&#x4E00;&#x822C;&#x6709;&#x4E24;&#x79CD;&#x7F16;&#x7801;&#x98CE;&#x683C;&#xFF1A;&#x53CC;&#x5411;&#x7684;API&#x8C03;&#x7528;&#x3001;&#x5355;&#x5411;&#x7684;API&#x8C03;&#x7528;+&#x56DE;&#x8C03;&#xFF1A;</p>
-<p><em>&#x6CE8;&#x610F;&#xFF1A;&#x4EE5;&#x4E0B;&#x4E24;&#x56FE;&#x5E76;&#x672A;&#x4F53;&#x73B0;Controller&#x548C;Presenter&#x7EC6;&#x8282;&#xFF0C;&#x4EC5;&#x8868;&#x610F;&#xFF0C;&#x4ECE;View&#x5C42;&#x51FA;&#x53D1;&#x7684;API&#x8C03;&#x7528;&#x548C;&#x56DE;&#x5230;View&#x5C42;&#x7684;UI&#x66F4;&#x65B0;</em></p>
-<p><img src="post_44/flow-mvc.png" alt="img.png"></p>
-<p>&#x53CC;&#x5411;API&#x8C03;&#x7528;&#x5982;&#x4E0A;&#x56FE;&#x3002;</p>
-<p><img src="post_44/flow-mvc2.png" alt="img.png"></p>
-<p>&#x5355;&#x5411;API&#x8C03;&#x7528;+&#x56DE;&#x8C03;&#x66F4;&#x65B0;UI&#x5982;&#x4E0A;&#x56FE;&#x3002;</p>
-<p>&#x663E;&#x800C;&#x6613;&#x89C1;&#xFF0C;&#x8FD9;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x65E0;&#x6CD5;&#x7EE7;&#x7EED;&#x62BD;&#x8C61;&#xFF0C;&#x9700;&#x6839;&#x636E;&#x5B9E;&#x9645;&#x4E1A;&#x52A1;&#x8FDB;&#x884C;&#x547D;&#x4EE4;&#x5F0F;&#x7F16;&#x7801;&#x3002;&#x5F53;UI&#x590D;&#x6742;&#x65F6;&#xFF0C;&#x96BE;&#x4EE5;&#x5199;&#x51FA;&#x6E05;&#x6670;&#x3001;&#x6613;&#x8BFB;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x7EF4;&#x62A4;&#x96BE;&#x5EA6;&#x6FC0;&#x589E;&#x3002;</p>
-<h3 id="mvvm&#x89E3;&#x51B3;ui&#x66F4;&#x65B0;&#x4EE3;&#x7801;&#x6DF7;&#x4E71;&#x95EE;&#x9898;"><a name="mvvm&#x89E3;&#x51B3;ui&#x66F4;&#x65B0;&#x4EE3;&#x7801;&#x6DF7;&#x4E71;&#x95EE;&#x9898;" class="anchor-navigation-ex-anchor" href="#mvvm&#x89E3;&#x51B3;ui&#x66F4;&#x65B0;&#x4EE3;&#x7801;&#x6DF7;&#x4E71;&#x95EE;&#x9898;"><i class="fa fa-link" aria-hidden="true"></i></a>MVVM&#x89E3;&#x51B3;UI&#x66F4;&#x65B0;&#x4EE3;&#x7801;&#x6DF7;&#x4E71;&#x95EE;&#x9898;</h3>
-<p>&#x524D;&#x6587;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x63D0;&#x5230;&#xFF1A;MVVM&#x4E2D;&#x901A;&#x8FC7;&#x7ED1;&#x5B9A;&#x6846;&#x67B6;&#xFF0C;&#x5C06;UI&#x4E8B;&#x4EF6;&#x8F6C;&#x5316;&#x4E3A;&#x6570;&#x636E;&#x53D8;&#x5316;&#xFF0C;&#x9A71;&#x52A8;&#x4E1A;&#x52A1;&#xFF1B;&#x4E1A;&#x52A1;&#x7ED3;&#x679C;&#x8868;&#x73B0;&#x4E3A;&#x6570;&#x636E;&#x53D8;&#x5316;&#xFF0C;&#x9A71;&#x52A8;UI&#x66F4;&#x65B0;&#x3002;</p>
-<p><img src="post_44/flow-mvvm.png" alt="img.png"></p>
-<p>&#x663E;&#x800C;&#x6613;&#x89C1;&#xFF0C;<strong>&#x7EF4;&#x62A4;&#x6734;&#x7D20;&#x7684;&#x6570;&#x636E;&#x8981;&#x6BD4;&#x76F4;&#x63A5;&#x7EF4;&#x62A4;&#x590D;&#x6742;&#x7684;UI&#x8981;&#x7B80;&#x5355;</strong>&#x3002;</p>
-<p>&#x4F46;&#x95EE;&#x9898;&#x4E5F;&#x540C;&#x65F6;&#x4EA7;&#x751F;&#xFF0C;data1&#x7684;&#x53D8;&#x5316;&#x6709;&#x4E24;&#x4E2A;&#x53EF;&#x80FD;&#x7684;&#x539F;&#x56E0;&#xFF1A;</p>
+<p>即驱动数据流变化的方向是唯一的，在英文中的术语为：<code>Unidirectional Data Flow</code> 简称 <code>UDF</code>。</p>
+<h3 id="mvcmvp中的痛点"><a class="header" href="#mvcmvp中的痛点">MVC、MVP中的痛点</a></h3>
+<p>前文我们提到，在MVC和MVP中，着眼于 <strong>控制、调度</strong> ，并不强调 <code>数据流</code> 的概念。</p>
+<p>View和Model间之间的交互，一般有两种编码风格：双向的API调用、单向的API调用+回调：</p>
+<p><em>注意：以下两图并未体现Controller和Presenter细节，仅表意，从View层出发的API调用和回到View层的UI更新</em></p>
+<p><img src="post_44/flow-mvc.png" alt="img.png" /></p>
+<p>双向API调用如上图。</p>
+<p><img src="post_44/flow-mvc2.png" alt="img.png" /></p>
+<p>单向API调用+回调更新UI如上图。</p>
+<p>显而易见，这两种方式无法继续抽象，需根据实际业务进行命令式编码。当UI复杂时，难以写出清晰、易读的代码，维护难度激增。</p>
+<h3 id="mvvm解决ui更新代码混乱问题"><a class="header" href="#mvvm解决ui更新代码混乱问题">MVVM解决UI更新代码混乱问题</a></h3>
+<p>前文我们已经提到：MVVM中通过绑定框架，将UI事件转化为数据变化，驱动业务；业务结果表现为数据变化，驱动UI更新。</p>
+<p><img src="post_44/flow-mvvm.png" alt="img.png" /></p>
+<p>显而易见，<strong>维护朴素的数据要比直接维护复杂的UI要简单</strong>。</p>
+<p>但问题也同时产生，data1的变化有两个可能的原因：</p>
 <ul>
-<li>Model&#x5C42;&#x4E1A;&#x52A1;&#x7ED3;&#x679C;&#x4F7F;&#x5176;&#x53D8;&#x5316;&#xFF0C;&#x5E76;&#x671F;&#x671B;&#x5B83;&#x9A71;&#x52A8;UI&#x66F4;&#x65B0;</li>
-<li>View&#x5C42;&#x53D1;&#x751F;&#x4E8B;&#x4EF6;&#xFF0C;&#x53CD;&#x9988;&#x6570;&#x636E;&#x53D8;&#x5316;&#xFF0C;&#x5E76;&#x671F;&#x671B;&#x5B83;&#x9A71;&#x52A8;Model&#x5C42;&#x903B;&#x8F91;</li>
+<li>Model层业务结果使其变化，并期望它驱动UI更新</li>
+<li>View层发生事件，反馈数据变化，并期望它驱动Model层逻辑</li>
 </ul>
-<p>&#x56E0;&#x6B64;&#xFF0C;&#x6846;&#x67B6;&#x9700;&#x8981;&#x8003;&#x8651;&#x6807;&#x8BC6;&#x6570;&#x636E;&#x53D8;&#x5316;&#x6765;&#x6E90;&#x3001;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x624B;&#x6BB5;&#x6D88;&#x9664;&#x65B9;&#x5411;&#x6027;&#x6240;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
-<p>&#x5E76;&#x4E14;MVVM&#x96BE;&#x4EE5;&#x7075;&#x6D3B;&#x51B3;&#x5B9A;&#x7684; &quot;&#x4F55;&#x65F6;&#x8C03;&#x7528;Model&#x5C42;&#x903B;&#x8F91;&quot;&#xFF0C;&#x5373;&#x5927;&#x591A;&#x6570;&#x4E1A;&#x52A1;&#x4E2D;&#xFF0C;&#x90FD;&#x9700;&#x8981;&#x7ED3;&#x5408;&#x591A;&#x4E2A;&#x5C5E;&#x6027;&#x7684;&#x53D8;&#x5316;&#x5F62;&#x6210;&#x7EC4;&#x5408;&#x6761;&#x4EF6;&#x6765;&#x9A71;&#x52A8;Model&#x5C42;&#x903B;&#x8F91;&#x3002;</p>
-<p><strong>&#x672C;&#x7BC7;&#x5E76;&#x4E0D;&#x91CD;&#x70B9;&#x8BA8;&#x8BBA;MVVM&#xFF0C;&#x6545;&#x4E0D;&#x518D;&#x5C55;&#x5F00;MVVM&#x89E3;&#x51B3;&#x5FAA;&#x73AF;&#x66F4;&#x65B0;&#x7684;&#x65B9;&#x6848;&#xFF0C;&#x4EE5;&#x53CA;&#x884D;&#x751F;&#x7684;&#x95EE;&#x9898;&#x3002;</strong></p>
-<p>&#x5C3D;&#x7BA1;&#x5982;&#x6B64;&#xFF0C;MVVM&#x4E2D;&#x7684;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x4F9D;&#x65E7;&#x89E3;&#x51B3;&#x4E86;View&#x5C42;&#x66F4;&#x65B0;&#x7E41;&#x6742;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
-<h3 id="&#x7528;intent&#x7075;&#x6D3B;&#x51B3;&#x5B9A;&#x4F55;&#x65F6;&#x8C03;&#x7528;model"><a name="&#x7528;intent&#x7075;&#x6D3B;&#x51B3;&#x5B9A;&#x4F55;&#x65F6;&#x8C03;&#x7528;model" class="anchor-navigation-ex-anchor" href="#&#x7528;intent&#x7075;&#x6D3B;&#x51B3;&#x5B9A;&#x4F55;&#x65F6;&#x8C03;&#x7528;model"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7528;Intent&#x7075;&#x6D3B;&#x51B3;&#x5B9A;&#x4F55;&#x65F6;&#x8C03;&#x7528;Model</h3>
-<p>&#x65E2;&#x7136;&#x6570;&#x636E;&#x9A71;&#x52A8;UI&#x6709;&#x6781;&#x5927;&#x7684;&#x76CA;&#x5904;&#xFF0C;&#x4E14;View&#x5C42;&#x4E8B;&#x4EF6;&#x9A71;&#x52A8;ViewModel&#x7684;&#x6570;&#x636E;&#x53D8;&#x5316;&#x6709;&#x5F88;&#x591A;&#x5F0A;&#x7AEF; <em>&#xFF08;&#x9700;&#x8981;&#x5EFA;&#x7ACB;&#x5F88;&#x9AD8;&#x7684;&#x590D;&#x6742;&#x5EA6;&#xFF09;</em> &#xFF0C;&#x90A3;&#x81EA;&#x7136;&#x9700;&#x8981; <strong>&#x8D8B;&#x5229;&#x907F;&#x5BB3;</strong></p>
-<p><img src="post_44/flow-mvi.png" alt="img.png"></p>
-<p>&#x4EC5;&#x4FDD;&#x7559;&#x6570;&#x636E;&#x9A71;&#x52A8;UI&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x5E76;&#x589E;&#x52A0;Intent&#x7528;&#x4EE5;&#x9A71;&#x52A8;Model&#x5C42;&#x4E1A;&#x52A1;</p>
-<p>&#x5728;&#x4E8E; <code>MVC/MVP</code> &#x4EE5;&#x53CA; <code>MVVM</code> &#x5BF9;&#x6BD4;&#x540E;&#x4E0D;&#x96BE;&#x5F97;&#x51FA;&#x7ED3;&#x8BBA;&#xFF1A;</p>
+<p>因此，框架需要考虑标识数据变化来源、或者其他手段消除方向性所带来的问题。</p>
+<p>并且MVVM难以灵活决定的 "何时调用Model层逻辑"，即大多数业务中，都需要结合多个属性的变化形成组合条件来驱动Model层逻辑。</p>
+<p><strong>本篇并不重点讨论MVVM，故不再展开MVVM解决循环更新的方案，以及衍生的问题。</strong></p>
+<p>尽管如此，MVVM中的数据绑定依旧解决了View层更新繁杂的问题。</p>
+<h3 id="用intent灵活决定何时调用model"><a class="header" href="#用intent灵活决定何时调用model">用Intent灵活决定何时调用Model</a></h3>
+<p>既然数据驱动UI有极大的益处，且View层事件驱动ViewModel的数据变化有很多弊端 <em>（需要建立很高的复杂度）</em> ，那自然需要 <strong>趋利避害</strong></p>
+<p><img src="post_44/flow-mvi.png" alt="img.png" /></p>
+<p>仅保留数据驱动UI的部分，并增加Intent用以驱动Model层业务</p>
+<p>在于 <code>MVC/MVP</code> 以及 <code>MVVM</code> 对比后不难得出结论：</p>
 <ul>
-<li>MVC/MVP&#x4E2D;&#xFF0C;View&#x5C42;&#x901A;&#x8FC7;&#x8C03;&#x7528;C/P&#x5C42;API&#x7684;&#x65B9;&#x5F0F;&#x6700;&#x7EC8;&#x8C03;&#x7528;&#x5230;Model&#x5C42;&#x4E1A;&#x52A1;&#xFF0C;&#x65B9;&#x5F0F;&#x8D28;&#x6734;&#x3001;&#x65E0;&#x96BE;&#x5EA6;&#x3002;&#x4F46;&#x4E1A;&#x52A1;&#x91CF;&#x89C4;&#x6A21;&#x589E;&#x5927;&#x540E;&#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#x6570;&#x4E5F;&#x4F1A;&#x589E;&#x591A;&#xFF0C;&#x5BFC;&#x81F4;C/P&#x5C42;&#x5C3E;&#x5927;&#x4E0D;&#x6389;&#xFF0C;&#x96BE;&#x4EE5;&#x91CD;&#x7528;&#x3002;</li>
-<li>MVVM&#x4E2D;&#xFF0C;VM&#x5C42;&#x603B;&#x662F;&#x9700;&#x8981;&#x5229;&#x7528; <code>&#x6280;&#x5DE7;</code> &#x8FDB;&#x884C;&#x6A21;&#x578B;&#x6982;&#x5FF5;&#x8F6C;&#x6362;&#xFF0C;&#x4EE5;&#x6EE1;&#x8DB3;&#x4E1A;&#x52A1;&#x54CD;&#x5E94;&#x6EE1;&#x8DB3;&#x5B9E;&#x9645;&#x9700;&#x6C42;&#xFF0C;&#x9700;&#x8981;&#x5F88;&#x6DF1;&#x539A;&#x7684;&#x8BBE;&#x8BA1;&#x7ECF;&#x9A8C;&#x624D;&#x80FD;&#x5199;&#x51FA;&#x975E;&#x5E38;&#x4F18;&#x79C0;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x8FD9;&#x5E76;&#x4E0D;&#x53CB;&#x597D;&#x3002;</li>
+<li>MVC/MVP中，View层通过调用C/P层API的方式最终调用到Model层业务，方式质朴、无难度。但业务量规模增大后接口方法数也会增多，导致C/P层尾大不掉，难以重用。</li>
+<li>MVVM中，VM层总是需要利用 <code>技巧</code> 进行模型概念转换，以满足业务响应满足实际需求，需要很深厚的设计经验才能写出非常优秀的代码，这并不友好。</li>
 </ul>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x6211;&#x4E2A;&#x4EBA;&#x8BA4;&#x4E3A;&#x4E00;&#x4E2A;&#x53CB;&#x597D;&#x7684;&#x8BBE;&#x8BA1;&#xFF0C;&#x4E0D;&#x5E94;&#x5F53;&#x5251;&#x8D70;&#x504F;&#x950B;&#xFF0C;&#x800C;&#x5E94;&#x5F53;&#x5927;&#x5DE7;&#x4E0D;&#x5DE5;&#xFF0C;&#x80FD;&#x591F;&#x4EE5;&#x529B;&#x7834;&#x6CD5;&#xFF0C;&#x8FBE;&#x6210; &quot;&#x4F7F;&#x7528;&#x8005;&#x53EA;&#x9700;&#x8981;&#x5403;&#x900F;&#x7406;&#x8BBA;&#x5C31;&#x53EF;&#x4EE5;&#x89E3;&#x51B3;&#x5404;&#x7C7B;&#x95EE;&#x9898;&quot; &#x7684;&#x76EE;&#x6807;&#x3002;</em></p>
-<p>&#x800C;MVI&#x5728;&#x67B6;&#x6784;&#x89D2;&#x8272;&#x4E2D;&#x8BBE;&#x8BA1;&#x4E86;Intent&#x7684;&#x89D2;&#x8272;&#xFF1A;</p>
+<p><em>作者按：我个人认为一个友好的设计，不应当剑走偏锋，而应当大巧不工，能够以力破法，达成 "使用者只需要吃透理论就可以解决各类问题" 的目标。</em></p>
+<p>而MVI在架构角色中设计了Intent的角色：</p>
 <ul>
-<li>&#x5B83;&#x5305;&#x542B;&#x4E86;&#x4E1A;&#x52A1;&#x8C03;&#x7528;&#x7684;&#x610F;&#x56FE;&#x548C;&#x6570;&#x636E;</li>
-<li>&#x4ECE;&#x8BBE;&#x8BA1;&#x4E0A;&#x53EF;&#x6EE1;&#x8DB3; <code>&#x8C03;&#x7528;</code> &#x4E0E; <code>&#x5B9E;&#x73B0;</code> &#x7684;&#x5206;&#x79BB;</li>
-<li>&#x67B6;&#x6784;&#x6A21;&#x578B;&#x4E2D;&#x4EE5;Intent&#x6D41;&#x7684;&#x5F62;&#x5F0F;&#x51FA;&#x73B0;&#xFF0C;&#x4E0B;&#x6E38;&#x5BF9;&#x5176;&#x7684; <code>&#x7B5B;&#x9009;</code> &#x3001;<code>&#x8F6C;&#x6362;</code> &#x3001; <code>&#x6D88;&#x8D39;</code> &#x7B49;&#x884C;&#x4E3A;&#x53EF;&#x9075;&#x5FAA; <code>FP&#x8303;&#x5F0F;</code> <em>&#xFF08;&#x5373;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;&#x8303;&#x5F0F;&#x3001;Functional Programming Patterns&#xFF09;</em> &#xFF0C;&#x903B;&#x8F91;&#x7684;&#x590D;&#x7528;&#x7C92;&#x5EA6;&#x4E3A;&#x65B9;&#x6CD5;&#x7EA7;&#xFF0C;&#x590D;&#x7528;&#x5EA6;&#x66F4;&#x9AD8;&#x66F4;&#x7075;&#x6D3B;</li>
-<li>&#x89E3;&#x51B3;&#x4E86;MVVM&#x4E2D;&#x7684;&#x65B9;&#x5411;&#x6027;&#x95EE;&#x9898;&#x3001;MVC/MVP &#x4E2D;&#x7684;&#x7075;&#x6D3B;&#x5EA6;&#x95EE;&#x9898;&#x7B49;</li>
+<li>它包含了业务调用的意图和数据</li>
+<li>从设计上可满足 <code>调用</code> 与 <code>实现</code> 的分离</li>
+<li>架构模型中以Intent流的形式出现，下游对其的 <code>筛选</code> 、<code>转换</code> 、 <code>消费</code> 等行为可遵循 <code>FP范式</code> <em>（即函数式编程范式、Functional Programming Patterns）</em> ，逻辑的复用粒度为方法级，复用度更高更灵活</li>
+<li>解决了MVVM中的方向性问题、MVC/MVP 中的灵活度问题等</li>
 </ul>
-<h2 id="&#x5355;&#x4E00;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;"><a name="&#x5355;&#x4E00;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;" class="anchor-navigation-ex-anchor" href="#&#x5355;&#x4E00;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5355;&#x4E00;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;</h2>
-<p>&#x6211;&#x731C;&#x6D4B;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x90FD;&#x66FE;&#x542C;&#x8FC7;&#x8FD9;&#x4E2A;&#x8BCD;&#xFF0C;&#x5C06; <code>&#x5355;&#x4E00;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;</code> &#x62C6;&#x89E3;&#x4E00;&#x4E0B;&#xFF1A;</p>
+<h2 id="单一可信数据源"><a class="header" href="#单一可信数据源">单一可信数据源</a></h2>
+<p>我猜测读者诸君都曾听过这个词，将 <code>单一可信数据源</code> 拆解一下：</p>
 <ul>
-<li>&#x5355;&#x4E00;</li>
-<li>&#x53EF;&#x4FE1;</li>
-<li>&#x6570;&#x636E;&#x6E90;</li>
+<li>单一</li>
+<li>可信</li>
+<li>数据源</li>
 </ul>
-<p>&#x5728;MVI&#x80CC;&#x666F;&#x4E0B;&#xFF0C;<code>&#x6570;&#x636E;&#x6E90;</code> &#x6307;&#x7684;&#x662F;&#x89C6;&#x56FE;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5B9E;&#x4F53;&#xFF0C;&#x5B83;&#x4EE3;&#x8868;&#x89C6;&#x56FE;&#x7684;&#x5185;&#x5BB9;&#x72B6;&#x6001;&#x3002;</p>
-<p>&#x53EF;&#x4FE1;&#x6307;&#x4ECE;&#x6570;&#x636E;&#x6E90;&#x4E2D;&#x83B7;&#x53D6;&#x7684;&#x6570;&#x636E;&#x662F; <code>&#x6700;&#x65B0;&#x7684;</code>&#x3001;<code>&#x5B8C;&#x6574;&#x7684;</code>&#x3001;<code>&#x53EF;&#x9760;&#x7684;</code>&#xFF0C;&#x5426;&#x5219;&#x662F;&#x4E0D;&#x53EF;&#x4FE1;&#x7684;&#xFF0C;<em>&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x7406;&#x7531;&#x5728;&#x7F16;&#x7801;&#x4E2D;&#x4F7F;&#x7528;&#x4E0D;&#x53EF;&#x4FE1;&#x7684;&#x6570;&#x636E;&#x6E90;</em>&#x3002;</p>
-<p>&#x5355;&#x4E00;&#x662F;&#x6307;&#x8FD9;&#x6837;&#x7684;&#x6570;&#x636E;&#x6E90;&#x4EC5;&#x4E00;&#x4E2A;&#x3002;</p>
-<p>&#x5728;&#x7ECF;&#x5178;&#x8BBE;&#x8BA1;&#x4E2D;&#xFF0C;&#x5176;&#x5185;&#x6DB5;&#x5982;&#x4E0B;&#x56FE;:</p>
-<p><img src="post_44/mvi-ssot.png" alt="img.png"></p>
+<p>在MVI背景下，<code>数据源</code> 指的是视图对应的数据实体，它代表视图的内容状态。</p>
+<p>可信指从数据源中获取的数据是 <code>最新的</code>、<code>完整的</code>、<code>可靠的</code>，否则是不可信的，<em>我们没有理由在编码中使用不可信的数据源</em>。</p>
+<p>单一是指这样的数据源仅一个。</p>
+<p>在经典设计中，其内涵如下图:</p>
+<p><img src="post_44/mvi-ssot.png" alt="img.png" /></p>
 <ul>
-<li>&#x6309;&#x7167;&#x89C6;&#x56FE;&#x7684; <strong>&#x6240;&#x6709;&#x7684;</strong> &#x5185;&#x5BB9;&#x72B6;&#x6001;&#xFF0C;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x4E0D;&#x53EF;&#x53D8;&#x7684; <code>ViewState</code> </li>
-<li>&#x6309;&#x7167;&#x4E1A;&#x52A1;&#x521D;&#x59CB;&#x5316; ViewState &#x5B9E;&#x4F8B;</li>
-<li>Model&#x4E1A;&#x52A1;&#x751F;&#x6210;&#x9A71;&#x52A8; ViewState&#x53D8;&#x5316;&#x7684;Result</li>
-<li>&#x8BA1;&#x7B97;&#x51FA;&#x65B0;&#x72B6;&#x6001;&#xFF0C;Reduce(Pre-ViewState,Result) -&gt; New-ViewState</li>
-<li>&#x66F4;&#x65B0;&#x6570;&#x636E;&#x6E90;</li>
-<li>View&#x5C42;&#x6D88;&#x8D39;ViewState</li>
+<li>按照视图的 <strong>所有的</strong> 内容状态，定义一个不可变的 <code>ViewState</code></li>
+<li>按照业务初始化 ViewState 实例</li>
+<li>Model业务生成驱动 ViewState变化的Result</li>
+<li>计算出新状态，Reduce(Pre-ViewState,Result) -&gt; New-ViewState</li>
+<li>更新数据源</li>
+<li>View层消费ViewState</li>
 </ul>
-<p>&#x501F;&#x52A9;&#x4E8E;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x6846;&#x67B6;&#xFF0C;&#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;&#x5730;&#x89E3;&#x51B3;&#x89C6;&#x56FE;&#x66F4;&#x65B0;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<p>借助于数据绑定框架，可以很方便地解决视图更新的问题。</p>
 <blockquote>
-<p>&#x60F3;&#x8C61;&#x4E00;&#x4E0B;&#xFF0C;&#x6B64;&#x65F6;&#x9875;&#x9762;UI&#x975E;&#x5E38;&#x590D;&#x6742;&#x2026;&#x2026;</p>
-<p><img src="img.png" alt="img.png"></p>
+<p>想象一下，此时页面UI非常复杂……</p>
+<p><img src="img.png" alt="img.png" /></p>
 </blockquote>
-<p>&#x5982;&#x679C;&#x50F5;&#x5316;&#x7684;&#x4FE1;&#x5949;&#x8FD9;&#x6837;&#x7684; <code>&#x5355;&#x4E00;</code> &#xFF0C;&#x60C5;&#x51B5;&#x4F1A;&#x5982;&#x4F55;&#x5462;&#xFF1F;</p>
+<p>如果僵化的信奉这样的 <code>单一</code> ，情况会如何呢？</p>
 <ul>
-<li>&#x590D;&#x6742;&#xFF08;&#x5927;&#x91CF;&#x5C5E;&#x6027;&#xFF09;&#x7684;ViewState</li>
-<li>&#x590D;&#x6742;&#x7684;UI&#x66F4;&#x65B0;&#x8BA1;&#x7B97;&#xFF0C;<em>e.g. 100&#x4E2A;&#x5C5E;&#x6027;&#x53D8;&#x4E86;2&#x4E2A;&#xFF0C;&#x4F9D;&#x7136;&#x9700;&#x8981;&#x8BA1;&#x7B97;98&#x4E2A;&#x5C5E;&#x6027;&#x672A;&#x53D8;&#x6216;&#x8005;&#x5168;&#x91CF;&#x5F3A;&#x5236;&#x66F4;&#x65B0;</em></li>
+<li>复杂（大量属性）的ViewState</li>
+<li>复杂的UI更新计算，<em>e.g. 100个属性变了2个，依然需要计算98个属性未变或者全量强制更新</em></li>
 </ul>
-<p>&#x5728; APP-A&#x548C;APP-B&#x4E2D;&#xFF0C;&#x6211;&#x5206;&#x522B;&#x4F7F;&#x7528;&#x4E86; DataBinding&#x548C;Compose&#xFF0C;&#x4F46;&#x5747;&#x65E0;&#x6CD5;&#x907F;&#x514D;&#x8BE5;&#x95EE;&#x9898;&#x3002;</p>
-<h3 id="&#x4F55;&#x4E3A;&#x5355;&#x4E00;"><a name="&#x4F55;&#x4E3A;&#x5355;&#x4E00;" class="anchor-navigation-ex-anchor" href="#&#x4F55;&#x4E3A;&#x5355;&#x4E00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F55;&#x4E3A;&#x5355;&#x4E00;</h3>
-<p>&#x4ECE;&#x673A;&#x5668;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x7684;&#x539F;&#x7406;&#x4E0A;&#x770B;&#xFF0C;&#x6211;&#x4EEC;&#x65E0;&#x6CD5;&#x5B9E;&#x73B0; <strong>&#x591A;&#x4E2A;&#x5185;&#x5BB9;&#x4E00;&#x81F4;&#x7684;&#x6570;&#x636E;&#x6E90;</strong> &#x5728; <strong>&#x4EFB;&#x610F;&#x65F6;&#x523B;</strong> &#x6EE1;&#x8DB3; <code>&#x6700;&#x65B0;&#x7684;</code>&#x3001;<code>&#x53EF;&#x9760;&#x7684;</code>&#x3002;</p>
-<p>&#x5C06;&#x89C6;&#x56FE;&#x89C6;&#x4E3A;&#x4E00;&#x4E2A;&#x6574;&#x4F53;&#xFF0C;&#x89C4;&#x5B9A;&#x5B83;&#x53EA;&#x62E5;&#x6709; <strong>&#x4E00;&#x4E2A;</strong> &#x53EF;&#x4FE1;&#x7684;&#x6570;&#x636E;&#x6E90;&#x3002;&#x5728;&#x6B64;&#x57FA;&#x7840;&#x4E0A;&#x770B;&#x5C40;&#x90E8;&#x7684;&#x89C6;&#x56FE;&#xFF0C;&#x5B83;&#x4EEC;&#x4E5F;&#x987A;&#x5176;&#x81EA;&#x7136;&#x5730;&#x4EC5;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x53EF;&#x4FE1;&#x7684;&#x6570;&#x636E;&#x6E90;&#x3002;</p>
-<p>&#x53CD;&#x8FC7;&#x6765;&#x770B;&#xFF0C;&#x5F53;&#x4EFB;&#x610F;&#x7684;&#x5C40;&#x90E8;&#x89C6;&#x56FE;&#x4EC5;&#x5177;&#x6709;&#x4E00;&#x4E2A;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;&#x65F6;&#xFF0C;&#x6574;&#x4F53;&#x89C6;&#x56FE;&#x4E5F;&#x4EC5;&#x6709;&#x4E00;&#x4E2A;&#x903B;&#x8F91;&#x4E0A;&#x7684;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;&#x3002;</p>
-<p>&#x636E;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5BF9; <code>&#x7ECF;&#x5178;MVI&#x5B9E;&#x73B0;</code> &#x8FDB;&#x884C;&#x4E00;&#x5B9A;&#x7A0B;&#x5EA6;&#x7684;&#x6539;&#x9020;&#xFF0C;&#x5C06;ViewState&#x8FDB;&#x884C;&#x5C40;&#x90E8;&#x5206;&#x89E3;&#xFF0C;&#x4F7F;&#x5F97;UI&#x7ED1;&#x5B9A;&#x90E8;&#x5206;&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x66F4; <strong>&#x6E05;&#x6670;&#x3001;&#x5E72;&#x51C0;</strong>&#x3002;</p>
-<p><em>&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x590D;&#x6742;&#x5EA6;&#x4E0D;&#x4F1A;&#x51ED;&#x7A7A;&#x6D88;&#x5931;&#xFF0C;&#x6211;&#x4EEC;&#x4E3A;&#x4E86;&#x8BA9; &quot;UI&#x7ED1;&#x5B9A;&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x66F4;&#x6E05;&#x6670;&#x3001;&#x5E72;&#x51C0;&quot;&#x3001;&quot;&#x66F4;&#x65B0;UI&#x7684;&#x8BA1;&#x7B97;&#x91CF;&#x66F4;&#x5C11;&quot;&#xFF0C;&#x5C06;&#x590D;&#x6742;&#x5EA6;&#x8F6C;&#x79FB;&#x5230;&#x4E86;ViewState&#x7684;&#x62C6;&#x5206;&#x3002;&#x62C6;&#x5206;&#x540E;&#xFF0C;&#x5C06;&#x5177;&#x6709; <strong>&#x591A;&#x4E2A;&#x89C6;&#x56FE;&#x90E8;&#x4EF6;&#x7684;&#x5355;&#x4E00;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;</strong>&#xFF0C;&#x6CE8;&#x610F;&#xFF0C;&#x4E3A;&#x4E86;&#x4E0D;&#x5F15;&#x8D77;&#x989D;&#x5916;&#x7684;&#x9EBB;&#x70E6;&#x3001;&#x5E76;&#x4E14;&#x4FBF;&#x4E8E;&#x7EF4;&#x62A4;&#x6269;&#x5C55;&#xFF0C;&#x5EFA;&#x8BAE;&#x9075;&#x5B88;&#x4EE5;&#x4E0B;&#x6761;&#x4EF6;&#xFF1A;</em></p>
+<p>在 APP-A和APP-B中，我分别使用了 DataBinding和Compose，但均无法避免该问题。</p>
+<h3 id="何为单一"><a class="header" href="#何为单一">何为单一</a></h3>
+<p>从机器执行程序的原理上看，我们无法实现 <strong>多个内容一致的数据源</strong> 在 <strong>任意时刻</strong> 满足 <code>最新的</code>、<code>可靠的</code>。</p>
+<p>将视图视为一个整体，规定它只拥有 <strong>一个</strong> 可信的数据源。在此基础上看局部的视图，它们也顺其自然地仅拥有一个可信的数据源。</p>
+<p>反过来看，当任意的局部视图仅具有一个可信数据源时，整体视图也仅有一个逻辑上的可信数据源。</p>
+<p>据此，我们可以对 <code>经典MVI实现</code> 进行一定程度的改造，将ViewState进行局部分解，使得UI绑定部分的业务逻辑更 <strong>清晰、干净</strong>。</p>
+<p><em>请注意，复杂度不会凭空消失，我们为了让 "UI绑定的业务逻辑更清晰、干净"、"更新UI的计算量更少"，将复杂度转移到了ViewState的拆分。拆分后，将具有 <strong>多个视图部件的单一可信数据源</strong>，注意，为了不引起额外的麻烦、并且便于维护扩展，建议遵守以下条件：</em></p>
 <ul>
-<li>&#x57FA;&#x4E8E;&#x4E1A;&#x52A1;&#x9700;&#x6C42;&#xFF0C;&#x7EC4;&#x5408;&#x6570;&#x636E;&#x6E90;&#x5F62;&#x6210;&#x65B0;&#x6570;&#x636E;&#x6E90;</li>
-<li>&#x4E0D;&#x5728;&#x6570;&#x636E;&#x6E90;&#x7684;&#x903B;&#x8F91;&#x8303;&#x56F4;&#x4E4B;&#x5916;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x6E90;&#x7EC4;&#x5408;&#x64CD;&#x4F5C;</li>
+<li>基于业务需求，组合数据源形成新数据源</li>
+<li>不在数据源的逻辑范围之外进行数据源组合操作</li>
 </ul>
 <blockquote>
-<p>&#x4E3E;&#x4E2A;&#x865A;&#x62DF;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;&#x7528;&#x6237;&#x9700;&#x8981;&#x5B9E;&#x540D;&#x8BA4;&#x8BC1; &#x4E14; &#x5173;&#x6CE8;&#x535A;&#x4E3B; &#xFF0C;&#x624D;&#x5728;&#x754C;&#x9762;&#x4E0A;&#x663E;&#x793A;&#x67D0;&#x529F;&#x80FD;&#x6309;&#x94AE;&#x3002;&#x4E0B;&#x9762;&#x4F7F;&#x7528;&#x4EE3;&#x7801;&#x5206;&#x522B;&#x6F14;&#x793A;&#x3002;</p>
+<p>举个虚拟的例子：用户需要实名认证 且 关注博主 ，才在界面上显示某功能按钮。下面使用代码分别演示。</p>
 </blockquote>
-<p><em>&#x8003;&#x8651;&#x5230;RxJava&#x7684;&#x5E7F;&#x6CDB;&#x5EA6;&#x4F9D;&#x65E7;&#x9AD8;&#x4E8E;Kotlin-Coroutine+flow&#xFF0C;&#x6570;&#x636E;&#x6D41;&#x7684;&#x5B9E;&#x73B0;&#x91C7;&#x7528;RxJava</em></p>
-<p><em>&#x6CE8;&#x610F;&#xFF0C;&#x8003;&#x8651;&#x5230;&#x8BFB;&#x8005;&#x53EF;&#x80FD;&#x4F1A;&#x7F16;&#x5199;demo&#x505A;UDF&#x5C40;&#x90E8;&#x7684;&#x9A8C;&#x8BC1;&#xFF0C;&#x4E0B;&#x6587;&#x4E2D;&#x7684;&#x4EE3;&#x7801;&#x4EE5;&#x793A;&#x4F8B;&#x76EE;&#x7684;&#x4E3A;&#x4E3B;&#xFF0C;&#x517C;&#x987E;&#x7F16;&#x5199;&#x573A;&#x666F;&#x5192;&#x70DF;&#x7684;&#x65B9;&#x4FBF;&#x6027;&#xFF0C;&#x6D41;&#x7684;&#x7C7B;&#x578B;&#x4E0D;&#x4E00;&#x5B9A;&#x662F;&#x6784;&#x5EFA;&#x5B8C;&#x6574;UDF&#x7684;&#x6700;&#x4F73;&#x9009;&#x62E9;&#x3002;</em></p>
-<h4 id="&#x7ECF;&#x5178;&#x5B9E;&#x73B0;"><a name="&#x7ECF;&#x5178;&#x5B9E;&#x73B0;" class="anchor-navigation-ex-anchor" href="#&#x7ECF;&#x5178;&#x5B9E;&#x73B0;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7ECF;&#x5178;&#x5B9E;&#x73B0;</h4>
-<p>&#x5728;&#x7ECF;&#x5178;MVI&#x5B9E;&#x73B0;&#x4E2D;&#xFF0C;&#x9700;&#x8981;&#x5148;&#x5B9A;&#x4E49;ViewState</p>
-<pre><code class="lang-kotlin">data <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ViewState</span></span>(
-    <span class="hljs-comment">/*unique id of current login user*/</span>
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> userId</span>: <span class="hljs-keyword">Int</span>,
-    <span class="hljs-comment">/*true if the current login user has complete real-name verified*/</span>
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> realNameVerified</span>: <span class="hljs-keyword">Boolean</span>,
-    <span class="hljs-comment">/*true if the current login user has followed the author*/</span>
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> hasFollowAuthor</span>: <span class="hljs-keyword">Boolean</span>
+<p><em>考虑到RxJava的广泛度依旧高于Kotlin-Coroutine+flow，数据流的实现采用RxJava</em></p>
+<p><em>注意，考虑到读者可能会编写demo做UDF局部的验证，下文中的代码以示例目的为主，兼顾编写场景冒烟的方便性，流的类型不一定是构建完整UDF的最佳选择。</em></p>
+<h4 id="经典实现"><a class="header" href="#经典实现">经典实现</a></h4>
+<p>在经典MVI实现中，需要先定义ViewState</p>
+<pre><code class="language-kotlin">data class ViewState(
+    /*unique id of current login user*/
+    val userId: Int,
+    /*true if the current login user has complete real-name verified*/
+    val realNameVerified: Boolean,
+    /*true if the current login user has followed the author*/
+    val hasFollowAuthor: Boolean
 ) {
 }
 </code></pre>
-<p>&#x5E76;&#x5B9A;&#x4E49;ViewModel&#xFF0C;&#x521B;&#x5EFA;ViewState&#x6D41;&#xFF0C;&#x5FFD;&#x7565;&#x6389;&#x5176;&#x521D;&#x59CB;&#x5316;&#x548C;&#x5176;&#x4ED6;&#x90E8;&#x5206;</p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VM</span> </span>{
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> viewState</span> = BehaviorSubject.create<span class="hljs-type">&lt;ViewState&gt;</span>()
+<p>并定义ViewModel，创建ViewState流，忽略掉其初始化和其他部分</p>
+<pre><code class="language-kotlin">class VM {
+    val viewState = BehaviorSubject.create&lt;ViewState&gt;()
 
-    <span class="hljs-comment">//ignore</span>
+    //ignore
 }
 </code></pre>
-<p>&#x5E76;&#x5B9A;&#x4E49;View&#x5C42;&#xFF0C;&#x5FFD;&#x7565;&#x6389;&#x5176;&#x4ED6;&#x90E8;&#x5206;&#xFF0C;&#x7B80;&#x5355;&#x8D77;&#x89C1;&#x6682;&#x65F6;&#x4E0D;&#x4F7F;&#x7528;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x6846;&#x67B6;</p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">View</span> </span>{
+<p>并定义View层，忽略掉其他部分，简单起见暂时不使用数据绑定框架</p>
+<pre><code class="language-kotlin">class View {
 
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> vm</span> = VM()
-    lateinit <span class="hljs-variable"><span class="hljs-keyword">var</span> imgRealNameVerified</span>: ImageView
-    lateinit <span class="hljs-variable"><span class="hljs-keyword">var</span> cbHasFollowAuthor</span>: CheckBox
-    lateinit <span class="hljs-variable"><span class="hljs-keyword">var</span> someButton</span>: Button
+    private val vm = VM()
+    lateinit var imgRealNameVerified: ImageView
+    lateinit var cbHasFollowAuthor: CheckBox
+    lateinit var someButton: Button
 
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">()</span> {</span>
-        <span class="hljs-comment">//ignore view initialize</span>
+    fun onCreate() {
+        //ignore view initialize
 
         vm.viewState.subscribe {
             render(it)
         }
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">render</span><span class="hljs-params">(state: <span class="hljs-type">ViewState</span>)</span> {</span>
+    private fun render(state: ViewState) {
         imgRealNameVerified.isVisible = state.realNameVerified
         cbHasFollowAuthor.isChecked = state.hasFollowAuthor
         someButton.isVisible = state.realNameVerified &amp;&amp; state.hasFollowAuthor
 
-        <span class="hljs-comment">//ignore other</span>
+        //ignore other
     }
 }
 </code></pre>
-<p>&#x5728;JS&#x4E2D;&#xFF0C;JSON&#x5E76;&#x4E0D;&#x80FD;&#x9644;&#x52A0;&#x903B;&#x8F91;&#xFF0C;&#x57FA;&#x672C;&#x7B49;&#x4EF7;&#x4E8E;Java&#x4E2D;&#x7684;POJO&#xFF0C;&#x6545;&#x5728;&#x6570;&#x636E;&#x6E90;&#x5916;&#x90E8;&#x5904;&#x7406;&#x7B80;&#x5355;&#x903B;&#x8F91;&#x7684;&#x60C5;&#x51B5;&#x8F83;&#x4E3A;&#x5E38;&#x89C1;&#x3002;&#x800C;&#x5728;Java&#x3001;Kotlin&#x4E2D;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x9002;&#x5F53;&#x7684;&#x4F18;&#x5316;&#xFF0C;&#x9002;&#x5F53;&#x5C01;&#x88C5;&#xFF0C;&#x4F7F;&#x5F97;&#x4EE3;&#x7801;&#x66F4;&#x52A0;&#x5E72;&#x51C0;&#x4FBF;&#x4E8E;&#x7EF4;&#x62A4;&#xFF1A;</p>
-<pre><code class="lang-kotlin">data <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ViewState</span></span>(
-    <span class="hljs-comment">//ignore</span>
+<p>在JS中，JSON并不能附加逻辑，基本等价于Java中的POJO，故在数据源外部处理简单逻辑的情况较为常见。而在Java、Kotlin中可以进行适当的优化，适当封装，使得代码更加干净便于维护：</p>
+<pre><code class="language-kotlin">data class ViewState(
+    //ignore
 ) {
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">isSomeFuncEnabled</span><span class="hljs-params">()</span>:<span class="hljs-keyword">Boolean</span> = realNameVerified &amp;&amp; hasFollowAuthor</span>
+    fun isSomeFuncEnabled():Boolean = realNameVerified &amp;&amp; hasFollowAuthor
 }
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">View</span> </span>{
-    <span class="hljs-comment">//ignore</span>
-
-    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">render</span><span class="hljs-params">(state: <span class="hljs-type">ViewState</span>)</span> {</span>
-        <span class="hljs-comment">//...</span>
-
+class View {
+    //ignore
+    
+    private fun render(state: ViewState) {
+        //...
+        
         someButton.isVisible = state.isSomeFuncEnabled()
     }
 }
 </code></pre>
-<h4 id="&#x62C6;&#x5206;&#x5B9E;&#x73B0;"><a name="&#x62C6;&#x5206;&#x5B9E;&#x73B0;" class="anchor-navigation-ex-anchor" href="#&#x62C6;&#x5206;&#x5B9E;&#x73B0;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x62C6;&#x5206;&#x5B9E;&#x73B0;</h4>
-<p>&#x4F9D;&#x65E7;&#x5148;&#x5B9A;&#x4E49;&#x903B;&#x8F91;&#x4E0A;&#x5B8C;&#x6574;&#x7684;ViewState&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ComposedViewState</span></span>(
-    <span class="hljs-comment">/*unique id of current login user*/</span>
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> userId</span>: <span class="hljs-keyword">Int</span>,
+<h4 id="拆分实现"><a class="header" href="#拆分实现">拆分实现</a></h4>
+<p>依旧先定义逻辑上完整的ViewState：</p>
+<pre><code class="language-kotlin">class ComposedViewState(
+    /*unique id of current login user*/
+    val userId: Int,
 ) {
 
-    <span class="hljs-comment">/**
+    /**
      * real-name-verified observable subject,feed true if the current login user has complete real-name verified
-     * */</span>
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> realNameVerified</span> = BehaviorSubject.create<span class="hljs-type">&lt;Boolean&gt;</span>()
+     * */
+    val realNameVerified = BehaviorSubject.create&lt;Boolean&gt;()
 
-    <span class="hljs-comment">/**
+    /**
      * follow-author observable subject, feed true if the current login user has followed the author
-     * */</span>
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> hasFollowAuthor</span> = BehaviorSubject.create<span class="hljs-type">&lt;Boolean&gt;</span>()
+     * */
+    val hasFollowAuthor = BehaviorSubject.create&lt;Boolean&gt;()
 
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> someFuncEnabled</span> = BehaviorSubject.combineLatest(realNameVerified, hasFollowAuthor) { a, b -&gt; a &amp;&amp; b }
+    val someFuncEnabled = BehaviorSubject.combineLatest(realNameVerified, hasFollowAuthor) { a, b -&gt; a &amp;&amp; b }
 }
 </code></pre>
-<p>&#x5B9A;&#x4E49;ViewModel&#xFF0C;&#x5B50;&#x6A21;&#x5757;&#x6570;&#x636E;&#x6D41;&#x5747;&#x5DF2;&#x5B9A;&#x4E49;&#xFF0C;&#x6545;&#x800C;&#x65E0;&#x9700;&#x518D;&#x5B9A;&#x4E49;&#x5168;ViewState&#x7684;&#x6D41;</p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VM</span></span>(<span class="hljs-variable"><span class="hljs-keyword">val</span> userId</span>: <span class="hljs-keyword">Int</span>) {
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> viewState</span> = ComposedViewState(userId)
-    <span class="hljs-comment">//ignore</span>
+<p>定义ViewModel，子模块数据流均已定义，故而无需再定义全ViewState的流</p>
+<pre><code class="language-kotlin">class VM(val userId: Int) {
+    val viewState = ComposedViewState(userId)
+    //ignore
 }
 </code></pre>
-<p>&#x7F16;&#x5199;View&#x5C42;&#x7684;UI&#x7ED1;&#x5B9A;&#xFF0C;&#x540C;&#x6837;&#x7B80;&#x5355;&#x8D77;&#x89C1;&#xFF0C;&#x4E0D;&#x4F7F;&#x7528;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x6846;&#x67B6;</p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">View</span> </span>{
+<p>编写View层的UI绑定，同样简单起见，不使用数据绑定框架</p>
+<pre><code class="language-kotlin">class View {
 
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> vm</span> = VM(<span class="hljs-number">1</span>)
-    lateinit <span class="hljs-variable"><span class="hljs-keyword">var</span> imgRealNameVerified</span>: ImageView
-    lateinit <span class="hljs-variable"><span class="hljs-keyword">var</span> cbHasFollowAuthor</span>: CheckBox
-    lateinit <span class="hljs-variable"><span class="hljs-keyword">var</span> someButton</span>: Button
+    private val vm = VM(1)
+    lateinit var imgRealNameVerified: ImageView
+    lateinit var cbHasFollowAuthor: CheckBox
+    lateinit var someButton: Button
 
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">()</span> {</span>
-        <span class="hljs-comment">//ignore view initialize</span>
+    fun onCreate() {
+        //ignore view initialize
         bindViewStateWithUI()
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">bindViewStateWithUI</span><span class="hljs-params">()</span> {</span>
+    private fun bindViewStateWithUI() {
         vm.viewState.realNameVerified.subscribe {
             renderSection1(it)
         }
@@ -1732,70 +457,70 @@
         vm.viewState.someFuncEnabled.subscribe {
             renderSection3(it)
         }
-        <span class="hljs-comment">//...</span>
+        //...
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">renderSection1</span><span class="hljs-params">(foo:<span class="hljs-type">Boolean</span>)</span> {</span>
+    private fun renderSection1(foo:Boolean) {
         imgRealNameVerified.isVisible = foo
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">renderSection2</span><span class="hljs-params">(foo:<span class="hljs-type">Boolean</span>)</span> {</span>
+    private fun renderSection2(foo:Boolean) {
         cbHasFollowAuthor.isChecked = foo
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">renderSection3</span><span class="hljs-params">(foo:<span class="hljs-type">Boolean</span>)</span> {</span>
+    private fun renderSection3(foo:Boolean) {
         someButton.isVisible = foo
     }
 }
 </code></pre>
-<p>&#x4F8B;&#x5B50;&#x8F83;&#x4E3A;&#x7B80;&#x5355;&#xFF0C;&#x5728;&#x5B9E;&#x9645;&#x9879;&#x76EE;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x9047;&#x5230;&#x590D;&#x6742;&#x9875;&#x9762;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x5206;&#x5757;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;</p>
-<p><em>&#x6CE8;&#x610F;&#xFF1A;&#x5B9E;&#x9645;&#x60C5;&#x51B5;&#x4E2D;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x5C06;&#x6BCF;&#x4E00;&#x4E2A;&#x5B50;&#x6570;&#x636E;&#x6E90;&#x62C6;&#x5206;&#x5230;&#x4E00;&#x4E2A;View&#x7EA7;&#x522B;&#x7684;&#x63A7;&#x4EF6;&#xFF0C;&#x90A3;&#x6837;&#x8FC7;&#x4E8E;&#x5570;&#x55E6;&#xFF0C;&#x4F8B;&#x5B50;&#x56E0;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x800C;&#x65E0;&#x6CD5;&#x4E30;&#x6EE1;&#x8D77;&#x6765;&#x3002;
-e.g. &#x9488;&#x5BF9;&#x6BCF;&#x4E00;&#x5757;&#x89C6;&#x56FE;&#x533A;&#xFF0C;&#x4F8B;&#x5982;&#x4F5C;&#x8005;&#x533A;&#x57DF;&#xFF0C;&#x5B9A;&#x4E49;&#x5B50;ViewState&#x7C7B;&#xFF0C;&#x521B;&#x5EFA;&#x5176;&#x6570;&#x636E;&#x6D41;&#x5373;&#x53EF;&#x3002;</em></p>
+<p>例子较为简单，在实际项目中，如果遇到复杂页面，则可以分块进行处理。</p>
+<p><em>注意：实际情况中，并没有必要将每一个子数据源拆分到一个View级别的控件，那样过于啰嗦，例子因非常简单而无法丰满起来。
+e.g. 针对每一块视图区，例如作者区域，定义子ViewState类，创建其数据流即可。</em></p>
 <blockquote>
-<p>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x52A1;&#x5FC5;&#x8BC4;&#x4F30;&#xFF0C;&#x5728;&#x4E00;&#x6B21;Model&#x4E1A;&#x52A1;&#x4EA7;&#x751F;&#x7684;Result&#x4E2D;&#xFF0C;&#x4F1A;&#x5F15;&#x8D77;&#x6570;&#x636E;&#x6D41;&#x4E0B;&#x6E38;&#x7684;&#x66F4;&#x65B0;&#x6B21;&#x6570;&#x3002;
-&#x4E3A;&#x907F;&#x514D;&#x4EA7;&#x751F;&#x4E0D;&#x53EF;&#x9884;&#x671F;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x53EF;&#x901A;&#x8FC7;&#x7C7B;&#x4F3C;&#x4EE5;&#x4E0B;&#x65B9;&#x5F0F;&#xFF0C;&#x4F7F;&#x4E0B;&#x6E38;&#x54CD;&#x5E94;&#x6B21;&#x6570;&#x8868;&#x73B0;&#x548C;&#x7ECF;&#x5178;&#x5B9E;&#x73B0;&#x7684;&#x60C5;&#x51B5;&#x4E00;&#x81F4;&#x3002;</p>
+<p>作者按：务必评估，在一次Model业务产生的Result中，会引起数据流下游的更新次数。
+为避免产生不可预期的问题，可通过类似以下方式，使下游响应次数表现和经典实现的情况一致。</p>
 </blockquote>
-<p>&#x989D;&#x5916;&#x5B9A;&#x4E49;PartialChange&#x6D41;&#x6216;&#x8005;&#x529F;&#x80FD;&#x7B49;&#x4EF7;&#x7684;&#x6D41;&#xFF0C;&#x5B83;&#x7528;&#x4E8E;&#x6807;&#x8BC6; <code>reduce</code> &#x8BA1;&#x7B97;&#x7684;&#x5F00;&#x59CB;&#x548C;&#x7ED3;&#x675F;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x6B64;&#x671F;&#x95F4;&#x7684;&#x6570;&#x636E;&#x6D41;&#x7684;&#x53D8;&#x5316;&#x5EF6;&#x8FDF;&#x5230;&#x6700;&#x540E;&#x53D1;&#x9001;&#x7EC8;&#x6001;</p>
-<p><em>&#x66F4;&#x52A0;&#x63A8;&#x8350;&#x5B9A;&#x4E49;&#x529F;&#x80FD;&#x4E0A;&#x7B49;&#x4EF7;&#x7684;&#x6D41;</em></p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ComposedViewState</span></span>(
-    <span class="hljs-comment">/*unique id of current login user*/</span>
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> userId</span>: <span class="hljs-keyword">Int</span>,
+<p>额外定义PartialChange流或者功能等价的流，它用于标识 <code>reduce</code> 计算的开始和结束，可以将此期间的数据流的变化延迟到最后发送终态</p>
+<p><em>更加推荐定义功能上等价的流</em></p>
+<pre><code class="language-kotlin">class ComposedViewState(
+    /*unique id of current login user*/
+    val userId: Int,
 ) {
 
-    internal <span class="hljs-variable"><span class="hljs-keyword">val</span> changes</span> = BehaviorSubject.create<span class="hljs-type">&lt;PartialChange&gt;</span>()
+    internal val changes = BehaviorSubject.create&lt;PartialChange&gt;()
+    
+    //ignore
 
-    <span class="hljs-comment">//ignore</span>
-
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> someFuncEnabled</span> =
+    val someFuncEnabled =
         BehaviorSubject.combineLatest(realNameVerified, hasFollowAuthor) { a, b -&gt; a &amp;&amp; b }.sync(PartialChange.Tag, changes)
 }
 
-<span class="hljs-keyword">inline</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;<span class="hljs-keyword">reified</span> T, S&gt;</span> Observable<span class="hljs-type">&lt;T&gt;</span>.<span class="hljs-title">sync</span><span class="hljs-params">(tag: <span class="hljs-type">S, sync: BehaviorSubject&lt;S&gt;</span>)</span>: Observable<span class="hljs-type">&lt;T&gt;</span> {</span>
-    <span class="hljs-keyword">return</span> BehaviorSubject.combineLatest(this, sync) { source, syncItem -&gt;
-        <span class="hljs-keyword">if</span> (syncItem == tag) {
+inline fun &lt;reified T, S&gt; Observable&lt;T&gt;.sync(tag: S, sync: BehaviorSubject&lt;S&gt;): Observable&lt;T&gt; {
+    return BehaviorSubject.combineLatest(this, sync) { source, syncItem -&gt;
+        if (syncItem == tag) {
             syncItem
-        } <span class="hljs-keyword">else</span> {
+        } else {
             source
         }
-    }.filter { it <span class="hljs-keyword">is</span> T }.cast(T::<span class="hljs-class"><span class="hljs-keyword">class</span>.<span class="hljs-title">java</span>)</span>
+    }.filter { it is T }.cast(T::class.java)
 }
 </code></pre>
-<p>&#x4FEE;&#x6539;PartialChange&#xFF0C;&#x4E3A;reduce&#x51FD;&#x6570;&#x6DFB;&#x52A0;&#x8FB9;&#x754C;&#xFF1A;</p>
-<p><em>PartialChange&#x662F;Model&#x4EA7;&#x751F;&#x7684;Result&#x7684;&#x8868;&#x73B0;&#x7269;&#xFF0C;&#x5C01;&#x88C5;&#x4E86;ViewState&#x7684;reduce&#x51FD;&#x6570;&#x903B;&#x8F91;&#xFF0C;&#x5373;&#x5982;&#x4F55;&#x4ECE; Pre-ViewState &#x751F;&#x6210; &#x65B0; ViewState</em></p>
-<pre><code class="lang-kotlin">sealed <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PartialChange</span> </span>{
-    <span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">reduce</span><span class="hljs-params">(state: <span class="hljs-type">ComposedViewState</span>)</span> {</span>
+<p>修改PartialChange，为reduce函数添加边界：</p>
+<p><em>PartialChange是Model产生的Result的表现物，封装了ViewState的reduce函数逻辑，即如何从 Pre-ViewState 生成 新 ViewState</em></p>
+<pre><code class="language-kotlin">sealed class PartialChange {
+    open fun reduce(state: ComposedViewState) {
 
     }
 
-    <span class="hljs-comment">/**
-     * &#x540C;&#x6B65;&#x6807;&#x8BB0;&#xFF0C;&#x4ECE;&#x5934;&#x5F00;&#x59CB;&#x5230;&#x771F;&#x5B9E;PartialChange&#x4E4B;&#x95F4;&#xFF0C;&#x6D41;&#x7684;&#x72B6;&#x6001;&#x751F;&#x6548;
-     * */</span>
-    <span class="hljs-keyword">object</span> Tag : PartialChange()
+    /**
+     * 同步标记，从头开始到真实PartialChange之间，流的状态生效
+     * */
+    object Tag : PartialChange()
 
-    <span class="hljs-keyword">object</span> None : PartialChange()
+    object None : PartialChange()
 
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span></span>(<span class="hljs-variable"><span class="hljs-keyword">val</span> a</span>: <span class="hljs-keyword">Boolean</span>, <span class="hljs-variable"><span class="hljs-keyword">val</span> b</span>: <span class="hljs-keyword">Boolean</span>) : PartialChange() {
-        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">reduce</span><span class="hljs-params">(state: <span class="hljs-type">ComposedViewState</span>)</span> {</span>
+    class Foo(val a: Boolean, val b: Boolean) : PartialChange() {
+        override fun reduce(state: ComposedViewState) {
             state.changes.onNext(Tag)
             state.realNameVerified.onNext(a)
             state.hasFollowAuthor.onNext(b)
@@ -1804,219 +529,180 @@ e.g. &#x9488;&#x5BF9;&#x6BCF;&#x4E00;&#x5757;&#x89C6;&#x56FE;&#x533A;&#xFF0C;&#x
     }
 }
 </code></pre>
-<h2 id="&#x8981;&#x60F3;&#x4F18;&#x96C5;&#xFF0C;&#x9700;&#x8981;&#x5DE5;&#x5177;"><a name="&#x8981;&#x60F3;&#x4F18;&#x96C5;&#xFF0C;&#x9700;&#x8981;&#x5DE5;&#x5177;" class="anchor-navigation-ex-anchor" href="#&#x8981;&#x60F3;&#x4F18;&#x96C5;&#xFF0C;&#x9700;&#x8981;&#x5DE5;&#x5177;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8981;&#x60F3;&#x4F18;&#x96C5;&#xFF0C;&#x9700;&#x8981;&#x5DE5;&#x5177;</h2>
-<h3 id="&#x91C7;&#x7528;&#x54CD;&#x5E94;&#x5F0F;&#x6D41;&#xFF0C;&#x907F;&#x514D;&#x547D;&#x4EE4;&#x5F0F;&#x7F16;&#x7801;"><a name="&#x91C7;&#x7528;&#x54CD;&#x5E94;&#x5F0F;&#x6D41;&#xFF0C;&#x907F;&#x514D;&#x547D;&#x4EE4;&#x5F0F;&#x7F16;&#x7801;" class="anchor-navigation-ex-anchor" href="#&#x91C7;&#x7528;&#x54CD;&#x5E94;&#x5F0F;&#x6D41;&#xFF0C;&#x907F;&#x514D;&#x547D;&#x4EE4;&#x5F0F;&#x7F16;&#x7801;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x91C7;&#x7528;&#x54CD;&#x5E94;&#x5F0F;&#x6D41;&#xFF0C;&#x907F;&#x514D;&#x547D;&#x4EE4;&#x5F0F;&#x7F16;&#x7801;</h3>
-<p>&#x60F3;&#x6765;&#x8FD9;&#x4E00;&#x70B9;&#x5DF2;&#x4E0D;&#x9700;&#x8981;&#x591A;&#x505A;&#x89E3;&#x91CA;&#x3002;</p>
-<p>&#x5728;Android&#x4E2D;&#xFF0C;&#x5B58;&#x5728; <code>LiveData</code> &#x7EC4;&#x4EF6;&#xFF0C;&#x5B83;&#x901A;&#x8FC7;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x5F0F;&#x5C01;&#x88C5;&#x4E86;&#x53EF;&#x89C2;&#x6D4B;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4F46;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#x7B80;&#x5355;&#x4E5F;&#x9650;&#x5236;&#x4E86;&#x5B83;&#x7684;&#x529F;&#x80FD; <strong>&#x4E0D;&#x591F;&#x5F3A;&#x5927;</strong> &#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528; <code>RxJava</code> &#x6216;&#x8005; <code>Kotlin-Coroutine &amp; flow</code> &#x6784;&#x5EFA;&#x6570;&#x636E;&#x6D41;&#x3002;</p>
-<p>&#x672C;&#x8282;&#x4FBF;&#x4E0D;&#x518D;&#x5C55;&#x5F00;&#x3002;</p>
-<h3 id="&#x91C7;&#x7528;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x6846;&#x67B6;"><a name="&#x91C7;&#x7528;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x6846;&#x67B6;" class="anchor-navigation-ex-anchor" href="#&#x91C7;&#x7528;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x6846;&#x67B6;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x91C7;&#x7528;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x6846;&#x67B6;</h3>
-<p>&#x91C7;&#x7528; <code>jetpack-compose</code> &#x6216;&#x8005; <code>DataBinding</code> &#x5747;&#x53EF;&#x4EE5;&#x79FB;&#x9664;&#x67AF;&#x71E5;&#x7684;UI&#x547D;&#x4EE4;&#x5F0F;&#x903B;&#x8F91;&#xFF0C;&#x5728;APP-A&#x4E2D;&#x6211;&#x4F7F;&#x7528;&#x4E86;DataBinding&#xFF0C;&#x5728;APP-B&#x4E2D;&#x6211;&#x4F7F;&#x7528;&#x4E86;Compose&#x3002;</p>
-<p>&#x5728; ViewState&#x7684;&#x4EE3;&#x7801;&#x5F88;&#x68D2;&#x65F6;&#xFF0C;&#x5747;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x4F18;&#x79C0;&#x7684;&#x7F16;&#x7A0B;&#x4F53;&#x9A8C;&#xFF0C;&#x4ECE;&#x5570;&#x55E6;&#x7684;UI&#x4E2D;&#x89E3;&#x653E;&#x51FA;&#x6765;&#x3002;</p>
+<h2 id="要想优雅需要工具"><a class="header" href="#要想优雅需要工具">要想优雅，需要工具</a></h2>
+<h3 id="采用响应式流避免命令式编码"><a class="header" href="#采用响应式流避免命令式编码">采用响应式流，避免命令式编码</a></h3>
+<p>想来这一点已不需要多做解释。</p>
+<p>在Android中，存在 <code>LiveData</code> 组件，它通过简单的方式封装了可观测的数据，但实现方式简单也限制了它的功能 <strong>不够强大</strong> 。因此，建议使用 <code>RxJava</code> 或者 <code>Kotlin-Coroutine &amp; flow</code> 构建数据流。</p>
+<p>本节便不再展开。</p>
+<h3 id="采用数据绑定框架"><a class="header" href="#采用数据绑定框架">采用数据绑定框架</a></h3>
+<p>采用 <code>jetpack-compose</code> 或者 <code>DataBinding</code> 均可以移除枯燥的UI命令式逻辑，在APP-A中我使用了DataBinding，在APP-B中我使用了Compose。</p>
+<p>在 ViewState的代码很棒时，均可以获得优秀的编程体验，从啰嗦的UI中解放出来。</p>
 <blockquote>
-<p>&#x4F5C;&#x8005;&#x7684;&#x4E2A;&#x4EBA;&#x89C2;&#x70B9;:</p>
-<p>&#x5173;&#x4E8E;Compose&#x3002;Compose&#x4F9D;&#x65E7;&#x5C5E;&#x4E8E;&#x8F83;&#x65B0;&#x7684;&#x4E8B;&#x7269;&#xFF0C;&#x5728;&#x5546;&#x4E1A;&#x9879;&#x76EE;&#x4E2D;&#x4F7F;&#x7528;&#x5B58;&#x5728;&#x5B66;&#x4E60;&#x95E8;&#x69DB;&#x548C;&#x9020;&#x8F6E;&#x5DE5;&#x4F5C;&#x3002;&#x5728;&#x76EE;&#x6807;&#x7528;&#x6237;&#x5177;&#x6709;&#x8F83;&#x9AD8;&#x5BB9;&#x5FCD;&#x5EA6;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5DF2;&#x7136;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x5C1D;&#x8BD5;&#x3002;</p>
-<p>&#x5173;&#x4E8E;DataBinding&#x3002;&#x4E00;&#x4E2A;&#x8FD1;&#x4E4E;&#x6BC1;&#x8A89;&#x53C2;&#x534A;&#x7684;&#x5DE5;&#x5177;&#xFF0C;&#x5173;&#x4E8E;&#x5B83;&#x7684;&#x6279;&#x5224;&#xFF0C;&#x5927;&#x591A;&#x96C6;&#x4E2D;&#x4E8E;&#xFF1A;<strong>xml&#x4E2D;&#x5B9E;&#x73B0;&#x7684;&#x903B;&#x8F91;&#x96BE;&#x4EE5;&#x9605;&#x8BFB;&#x3001;&#x7EF4;&#x62A4;</strong>&#xFF0C;&#x8FD9;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x5BF9;DataBinding&#x8BBE;&#x8BA1;&#x7684;&#x8BEF;&#x89E3;&#x800C;&#x5E26;&#x6765;&#x7684;&#x9519;&#x8BEF;&#x4F7F;&#x7528;&#x3002;</p>
-<p>DataBinding&#x672C;&#x8EAB;&#x5177;&#x6709;&#x751F;&#x6210;VM&#x5C42;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x4F46;&#x8FD9;&#x4E00;&#x529F;&#x80FD;&#x5E76;&#x4E0D;&#x8DB3;&#x591F;&#x5F3A;&#x5927;&#xFF0C;&#x4E14;&#x6CA1;&#x6709;&#x5B8C;&#x5584;&#x7684;&#x4F7F;&#x7528;&#x6307;&#x5BFC;&#xFF0C;&#x800C;&#x5728;&#x5B98;&#x65B9;Demo&#x4E2D;&#x8FC7;&#x5EA6;&#x5BA3;&#x4F20;&#x4E86;&#x5B83;&#xFF0C;&#x5BFC;&#x81F4;&#x5927;&#x5BB6;&#x8BA4;&#x4E3A;DataBinding&#x5C31;&#x8BE5;&#x8FD9;&#x6837;&#x4F7F;&#x7528;&#x3002;</p>
-<p>&#x4EC5;&#x4F7F;&#x7528;&#x57FA;&#x7840;&#x7684;&#x6570;&#x636E;&#x7ED1;&#x5B9A;&#x529F;&#x80FD;&#x3001;&#x548C;Resource&#x6216;&#x8005;Context&#x6709;&#x5173;&#x7684;&#x529F;&#x80FD;&#xFF08;&#x4F8B;&#x5982;&#x5B57;&#x7B26;&#x4E32;&#x6A21;&#x677F;&#xFF09;&#x3001;&#x7EC4;&#x4EF6;&#x751F;&#x547D;&#x5468;&#x671F;&#x7ED1;&#x5B9A;&#x7B49;&#xFF0C;&#x9002;&#x5EA6;&#x81EA;&#x5B9A;&#x4E49;&#x7ED1;&#x5B9A;&#x3002;</p>
+<p>作者的个人观点:</p>
+<p>关于Compose。Compose依旧属于较新的事物，在商业项目中使用存在学习门槛和造轮工作。在目标用户具有较高容忍度的情况下，已然可以进行尝试。</p>
+<p>关于DataBinding。一个近乎毁誉参半的工具，关于它的批判，大多集中于：<strong>xml中实现的逻辑难以阅读、维护</strong>，这实际上是对DataBinding设计的误解而带来的错误使用。</p>
+<p>DataBinding本身具有生成VM层的功能，但这一功能并不足够强大，且没有完善的使用指导，而在官方Demo中过度宣传了它，导致大家认为DataBinding就该这样使用。</p>
+<p>仅使用基础的数据绑定功能、和Resource或者Context有关的功能（例如字符串模板）、组件生命周期绑定等，适度自定义绑定。</p>
 </blockquote>
-<h2 id="&#x4F55;&#x4E3A;&#x72B6;&#x6001;&#x3001;&#x4F55;&#x4E3A;&#x4E8B;&#x4EF6;&#x3002;&#x6700;&#x540E;&#x7684;&#x4E00;&#x516C;&#x91CC;"><a name="&#x4F55;&#x4E3A;&#x72B6;&#x6001;&#x3001;&#x4F55;&#x4E3A;&#x4E8B;&#x4EF6;&#x3002;&#x6700;&#x540E;&#x7684;&#x4E00;&#x516C;&#x91CC;" class="anchor-navigation-ex-anchor" href="#&#x4F55;&#x4E3A;&#x72B6;&#x6001;&#x3001;&#x4F55;&#x4E3A;&#x4E8B;&#x4EF6;&#x3002;&#x6700;&#x540E;&#x7684;&#x4E00;&#x516C;&#x91CC;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F55;&#x4E3A;&#x72B6;&#x6001;&#x3001;&#x4F55;&#x4E3A;&#x4E8B;&#x4EF6;&#x3002;&#x6700;&#x540E;&#x7684;&#x4E00;&#x516C;&#x91CC;</h2>
-<p>&#x9996;&#x5148;&#x533A;&#x522B;&#x4E8E;&#x4E0A;&#x6587;&#x63D0;&#x5230;&#x7684;UI&#x4E8B;&#x4EF6;&#xFF0C;&#x8FD9;&#x91CC;&#x7684;&#x72B6;&#x6001;&#x548C;&#x4E8B;&#x4EF6;&#x5747;&#x4EA7;&#x751F;&#x4E8E;&#x6570;&#x636E;&#x6D41;&#x7684;&#x672B;&#x6BB5;&#xFF0C;&#x800C;UI&#x4E8B;&#x4EF6;&#x5904;&#x4E8E;&#x6570;&#x636E;&#x6D41;&#x7684;&#x9996;&#x6BB5;&#x3002;</p>
+<h2 id="何为状态何为事件最后的一公里"><a class="header" href="#何为状态何为事件最后的一公里">何为状态、何为事件。最后的一公里</a></h2>
+<p>首先区别于上文提到的UI事件，这里的状态和事件均产生于数据流的末段，而UI事件处于数据流的首段。</p>
 <blockquote>
-<p>UI&#x4E8B;&#x4EF6;&#x5C5E;&#x4E8E;&#xFF1A;A possible action that the user can perform that is monitored by an application or the operating system (event listener). When an event occurs an event handler is called which performs a specific task</p>
+<p>UI事件属于：A possible action that the user can perform that is monitored by an application or the operating system (event listener). When an event occurs an event handler is called which performs a specific task</p>
 </blockquote>
-<p>&#x5728;&#x5C55;&#x5F00;&#x4E4B;&#x524D;&#xFF0C;&#x5148;&#x7528;&#x4E00;&#x5F20;&#x56FE;&#x56DE;&#x987E;&#x603B;&#x7ED3;&#x4E0A;&#x6587;&#x4E2D;&#x5BF9;&#x4E8E; <code>&#x5355;&#x5411;&#x6570;&#x636E;&#x6D41;</code> &amp; <code>&#x5355;&#x4E00;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;</code> &#x7684;&#x77E5;&#x8BC6;</p>
-<p><img src="post_44/MVI-UDF.png" alt="img_1.png"></p>
-<p>&#x5728; <strong>&#x5355;&#x5411;&#x6570;&#x636E;&#x6D41;&#x52A8;</strong> &#x7AE0;&#x8282;&#x4E2D;&#xFF0C;&#x63D0;&#x5230;&#x4E86;MVI&#x7684;UDF&#x8BBE;&#x8BA1;&#xFF1A;</p>
+<p>在展开之前，先用一张图回顾总结上文中对于 <code>单向数据流</code> &amp; <code>单一可信数据源</code> 的知识</p>
+<p><img src="post_44/MVI-UDF.png" alt="img_1.png" /></p>
+<p>在 <strong>单向数据流动</strong> 章节中，提到了MVI的UDF设计：</p>
 <ul>
-<li>&#x7CFB;&#x7EDF;&#x6355;&#x83B7;&#x7684;UI&#x4E8B;&#x4EF6;&#x3001;&#x5176;&#x4ED6;&#x4FA6;&#x542C;&#x4E8B;&#x4EF6;&#xFF08;&#x4F8B;&#x5982;&#x7184;&#x5C4F;&#x3001;&#x5E94;&#x7528;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E8B;&#x4EF6;&#xFF09;&#xFF0C;&#x751F;&#x6210;Intent&#xFF0C;&#x538B;&#x5165;Intent&#x6D41;&#x4E2D;</li>
-<li>ViewModel&#x5C42;&#x4E2D;&#x7B5B;&#x9009;&#x3001;&#x8F6C;&#x6362;&#x3001;&#x5904;&#x7406;Intent&#xFF0C;&#x5B9E;&#x9645;&#x662F;&#x4F7F;&#x7528;Model&#x5C42;&#x4E1A;&#x52A1;&#xFF0C;&#x4EA7;&#x751F;&#x4E1A;&#x52A1;&#x7ED3;&#x679C;&#xFF0C;&#x5373;PartialChange</li>
-<li>PartialChange&#x7ECF;&#x8FC7;Reducer&#x8BA1;&#x7B97;&#x5904;&#x7406;&#x5F97;&#x5230;&#x6700;&#x65B0;&#x7684;ViewState&#xFF0C;&#x538B;&#x5165;ViewState&#x6D41;</li>
-<li>View&#x5C42;&#xFF08;&#x5E7F;&#x4E49;&#x7684;&#x8868;&#x73B0;&#x5C42;&#xFF09;&#x54CD;&#x5E94;&#x5E76;&#x5448;&#x73B0;&#x6700;&#x65B0;&#x7684;ViewState</li>
+<li>系统捕获的UI事件、其他侦听事件（例如熄屏、应用生命周期事件），生成Intent，压入Intent流中</li>
+<li>ViewModel层中筛选、转换、处理Intent，实际是使用Model层业务，产生业务结果，即PartialChange</li>
+<li>PartialChange经过Reducer计算处理得到最新的ViewState，压入ViewState流</li>
+<li>View层（广义的表现层）响应并呈现最新的ViewState</li>
 </ul>
-<p>&#x5728; <strong>&#x5355;&#x4E00;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;</strong> &#x7AE0;&#x8282;&#x4E2D;&#xFF0C;&#x63D0;&#x5230;View&#x5C42;&#x5E94;&#x5F53;&#x91C7;&#x7528; <code>&#x5355;&#x4E00;&#x53EF;&#x4FE1;&#x6570;&#x636E;&#x6E90;</code></p>
-<p>&#x5728;&#x8FD9;&#x5F20;&#x56FE;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4EC5;&#x4F53;&#x73B0;&#x4E86; <code>&#x72B6;&#x6001;</code> &#x5373; ViewState&#x3002;</p>
-<h3 id="&#x5173;&#x4E8E;gui&#x7A0B;&#x5E8F;&#x7684;&#x8BA4;&#x77E5;"><a name="&#x5173;&#x4E8E;gui&#x7A0B;&#x5E8F;&#x7684;&#x8BA4;&#x77E5;" class="anchor-navigation-ex-anchor" href="#&#x5173;&#x4E8E;gui&#x7A0B;&#x5E8F;&#x7684;&#x8BA4;&#x77E5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5173;&#x4E8E;GUI&#x7A0B;&#x5E8F;&#x7684;&#x8BA4;&#x77E5;</h3>
-<p>&#x5728;&#x5C55;&#x5F00;&#x524D;&#xFF0C;&#x5148;&#x804A;&#x70B9;&#x7406;&#x5FF5;&#x4E0A;&#x7684;&#x5185;&#x5BB9;&#x3002;&#x8BF7;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x601D;&#x8003;&#x4E0B;&#x81EA;&#x5DF1;&#x5BF9;&#x4E8E;GUI&#x7A0B;&#x5E8F;&#x7684;&#x8BA4;&#x77E5;&#x3002;</p>
+<p>在 <strong>单一可信数据源</strong> 章节中，提到View层应当采用 <code>单一可信数据源</code></p>
+<p>在这张图中，我们仅体现了 <code>状态</code> 即 ViewState。</p>
+<h3 id="关于gui程序的认知"><a class="header" href="#关于gui程序的认知">关于GUI程序的认知</a></h3>
+<p>在展开前，先聊点理念上的内容。请读者诸君思考下自己对于GUI程序的认知。</p>
 <blockquote>
-<p>&#x4F5C;&#x8005;&#x7684;&#x7406;&#x89E3;&#xFF1A;</p>
-<p>&#x7A0B;&#x5E8F;&#x72ED;&#x4E49;&#x4E0A;&#x662F;&#x8BA1;&#x7B97;&#x673A;&#x80FD;&#x8BC6;&#x522B;&#x548C;&#x6267;&#x884C;&#x7684;&#x4E00;&#x7EC4;&#x6307;&#x4EE4;&#x96C6;&#xFF0C;&#x7F16;&#x7A0B;&#x5DE5;&#x4F5C;&#x662F;&#x5728;&#x7A0B;&#x5E8F;&#x4E16;&#x754C;&#x5BF9; <code>&#x5BA2;&#x89C2;&#x5B9E;&#x4F53;</code> &#x3001; <code>&#x4E1A;&#x52A1;&#x903B;&#x8F91;</code> &#x8FDB;&#x884C; &#x5EFA;&#x6A21;&#x548C;&#x903B;&#x8F91;&#x8868;&#x8FBE;&#x3002;</p>
-<p>&#x800C;GUI&#x7A0B;&#x5E8F;&#x62E5;&#x6709; <code>&#x7528;&#x6237;&#x56FE;&#x5F62;&#x754C;&#x9762;</code> , &#x9664;&#x4E86;&#x7ED3;&#x5408;&#x786C;&#x4EF6;&#x63A5;&#x6536;&#x7528;&#x6237;&#x4EA4;&#x4E92;&#x8F93;&#x5165;&#x5916;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06; <code>&#x7A0B;&#x5E8F;&#x4E16;&#x754C;&#x4E2D;&#x7684;&#x6A21;&#x578B;</code> &#x4EE5; <code>&#x7528;&#x6237;&#x56FE;&#x5F62;&#x754C;&#x9762;</code> &#x7B49;&#x65B9;&#x5F0F;&#x8868;&#x73B0;&#x7ED9;&#x7528;&#x6237;&#x3002;</p>
-<p>&#x8868;&#x73B0;&#x51FA;&#x6765;&#x7684;&#x5185;&#x5BB9;&#x4EE3;&#x8868;&#x7740;&#x5BA2;&#x89C2;&#x5B9E;&#x4F53;</p>
-<p>&#x5176;&#x672C;&#x8D28;&#x76EE;&#x7684;&#x5728;&#x4E8E;&#xFF1A;&#x901A;&#x8FC7; <strong>&#x63CF;&#x8FF0;&#x7279;&#x5F81;&#x5C5E;&#x6027;</strong> &#x3001; <strong>&#x63CF;&#x8FF0;&#x53D8;&#x5316;&#x8FC7;&#x7A0B;</strong> &#x7B49;&#x65B9;&#x5F0F;&#x8BA9;&#x7528;&#x6237;&#x611F;&#x77E5;&#x5E76;&#x7406;&#x89E3; <code>&#x5BA2;&#x89C2;&#x5B9E;&#x4F53;</code></p>
+<p>作者的理解：</p>
+<p>程序狭义上是计算机能识别和执行的一组指令集，编程工作是在程序世界对 <code>客观实体</code> 、 <code>业务逻辑</code> 进行 建模和逻辑表达。</p>
+<p>而GUI程序拥有 <code>用户图形界面</code> , 除了结合硬件接收用户交互输入外，可以将 <code>程序世界中的模型</code> 以 <code>用户图形界面</code> 等方式表现给用户。</p>
+<p>表现出来的内容代表着客观实体</p>
+<p>其本质目的在于：通过 <strong>描述特征属性</strong> 、 <strong>描述变化过程</strong> 等方式让用户感知并理解 <code>客观实体</code></p>
 </blockquote>
-<p>&#x800C;&#x9664;&#x4E86;&#x901A;&#x8FC7; <strong>&#x7A0B;&#x5E8F;&#x8BED;&#x8A00;&#x63CF;&#x8FF0;</strong> &#x3001; <strong>&#x7A0B;&#x5E8F;&#x4E16;&#x754C;&#x6A21;&#x62DF;&#x5C55;&#x73B0;</strong> &#x5916;&#xFF0C;&#x540C;&#x6837;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <strong>&#x81EA;&#x7136;&#x8BED;&#x8A00;&#x63CF;&#x8FF0;</strong> &#x8FBE;&#x5230;&#x76EE;&#x7684;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;&#x4EA7;&#x54C1;&#x7ECF;&#x7406;&#x7684;&#x5DE5;&#x4F5C;&#x3002;</p>
-<p><em>&#x5F53;&#x7136;&#xFF0C;&#x4EA7;&#x54C1;&#x7ECF;&#x7406;&#x5F80;&#x5F80;&#x9700;&#x8981;&#x501F;&#x52A9;&#x4E00;&#x4E9B;&#x5DE5;&#x5177;&#x6765;&#x63D0;&#x5347;&#x81EA;&#x5DF1;&#x7684;&#x81EA;&#x7136;&#x8BED;&#x8A00;&#x8868;&#x8FBE;&#x80FD;&#x529B;&#xFF0C;&#x4F46;&#x65E0;&#x5948;&#x7684;&#x662F;&#x80FD;&#x7528;&#x6570;&#x5B66;&#x516C;&#x5F0F;&#x548C;&#x903B;&#x8F91;&#x63A8;&#x6F14;&#x8868;&#x8FBE;&#x9700;&#x6C42;&#x7684;&#x4EA7;&#x54C1;&#x7ECF;&#x7406;&#x592A;&#x5C11;&#x89C1;&#x4E86;&#x3002;</em></p>
-<p>&#x5199;&#x8FD9;&#x6BB5;&#x53EA;&#x662F;&#x4E3A;&#x4E86;&#x5F15;&#x5165; <code>&#x4ED6;&#x5C71;&#x4E4B;&#x77F3;</code> &#x3002;</p>
-<h3 id="first-order-logic"><a name="first-order-logic" class="anchor-navigation-ex-anchor" href="#first-order-logic"><i class="fa fa-link" aria-hidden="true"></i></a>First-Order logic</h3>
-<p>&#x5728;&#x6570;&#x5B66;&#x3001;&#x54F2;&#x5B66;&#x3001;&#x8BED;&#x8A00;&#x5B66;&#x3001;&#x8BA1;&#x7B97;&#x673A;&#x79D1;&#x5B66;&#x4E2D;&#xFF0C;&#x6709;&#x4E00;&#x4E2A;&#x6982;&#x5FF5; <code>First-Order logic</code>&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x4EA7;&#x54C1;&#x9700;&#x6C42;&#x8FD8;&#x662F;&#x8BA1;&#x7B97;&#x673A;&#x7A0B;&#x5E8F;&#xFF0C;<strong>&#x90FD;&#x53EF;&#x4EE5;&#x5EFA;&#x7ACB;FOL&#x8868;&#x8FBE;</strong>&#x3002;</p>
-<p><em>&#x5F53;&#x7136;&#xFF0C;&#x672C;&#x7BC7;&#x4E0D;&#x8BA8;&#x8BBA;FOL&#xFF0C;&#x90A3;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x5E9E;&#x5927;&#x4E14;&#x504F;&#x79BB;&#x4E3B;&#x9898;&#x7684;&#x4E8B;&#x60C5;&#x3002;&#x6211;&#x4EC5;&#x4EC5;&#x662F;&#x60F3;&#x501F;&#x7528;&#x5176;&#x4E2D;&#x7684;&#x6982;&#x5FF5;&#x3002;</em></p>
-<p>FOL&#x8868;&#x8FBE; Event&#x6216;&#x8005;State&#x65F6;&#xFF1A;</p>
+<p>而除了通过 <strong>程序语言描述</strong> 、 <strong>程序世界模拟展现</strong> 外，同样可以通过 <strong>自然语言描述</strong> 达到目的，这也是产品经理的工作。</p>
+<p><em>当然，产品经理往往需要借助一些工具来提升自己的自然语言表达能力，但无奈的是能用数学公式和逻辑推演表达需求的产品经理太少见了。</em></p>
+<p>写这段只是为了引入 <code>他山之石</code> 。</p>
+<h3 id="first-order-logic"><a class="header" href="#first-order-logic">First-Order logic</a></h3>
+<p>在数学、哲学、语言学、计算机科学中，有一个概念 <code>First-Order logic</code>，无论是产品需求还是计算机程序，<strong>都可以建立FOL表达</strong>。</p>
+<p><em>当然，本篇不讨论FOL，那是一个很庞大且偏离主题的事情。我仅仅是想借用其中的概念。</em></p>
+<p>FOL表达 Event或者State时：</p>
 <ul>
-<li>Event &#x4F53;&#x73B0;&#x7684;&#x662F;&#x7279;&#x5B9A;&#x7684;&#x53D8;&#x5316;</li>
-<li>State &#x4F53;&#x73B0;&#x7684;&#x662F;&#x5BA2;&#x89C2;&#x5B9E;&#x4F53;&#x5728;&#x4EFB;&#x610F;&#x65F6;&#x523B;&#x90FD;&#x9002;&#x7528;&#x7684;&#x4E00;&#x7EC4;&#x60C5;&#x51B5;&#xFF0C;&#x5373;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x5185;&#x65E0;&#x53D8;&#x5316;&#x7684;&#x6761;&#x4EF6;&#x6216;&#x8005;&#x7279;&#x5F81;</li>
+<li>Event 体现的是特定的变化</li>
+<li>State 体现的是客观实体在任意时刻都适用的一组情况，即一段时间内无变化的条件或者特征</li>
 </ul>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x53D8;&#x5316;&#x662F;&#x77AC;&#x65F6;&#x7684;&#xFF0C;&#x8FDE;&#x7EED;&#x7684;&#x53D8;&#x5316;&#x662F;&#x53EF;&#x5206;&#x7684;&#x3002;</p>
-<p>&#x4F46;&#x5728;&#x4EBA;&#x673A;&#x4EA4;&#x4E92;&#x4E2D;&#xFF0C;&#x77AC;&#x65F6;&#x610F;&#x4E49;&#x5F88;&#x5C0F;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x76EE;&#x7684;&#x5728;&#x4E8E;&#x8BA9;&#x7528;&#x6237;&#x611F;&#x77E5;&#x3002;</p>
-<p>&#x4F8B;&#x5982;&#xFF1A;&quot;&#x597D;&#x53CB;&#x5411;&#x4F60;&#x53D1;&#x9001;&#x4E86;&#x4E00;&#x6761;&#x6D88;&#x606F;&#x7684;&#x573A;&#x666F;&#x4E2D;&quot;&#xFF0C;&#x6D88;&#x606F;&#x62B5;&#x8FBE;&#x5C31;&#x662F;Event&#xFF0C;&#x5B83;&#x80CC;&#x540E;&#x6F5C;&#x85CF;&#x7740; &quot;&#x6D88;&#x606F;&#x6570;&#x7684;&#x53D8;&#x5316;&quot;&#x3001;&quot;&#x6700;&#x65B0;&#x6D88;&#x606F;&#x5185;&#x5BB9;&#x7684;&#x53D8;&#x5316;&quot; &#x7B49;&#x3002; &#x5728;&#x5E38;&#x89C1;&#x7684;&#x8BBE;&#x8BA1;&#x4E2D;:</p>
+<p>不难理解，变化是瞬时的，连续的变化是可分的。</p>
+<p>但在人机交互中，瞬时意义很小，我们的目的在于让用户感知。</p>
+<p>例如："好友向你发送了一条消息的场景中"，消息抵达就是Event，它背后潜藏着 "消息数的变化"、"最新消息内容的变化" 等。 在常见的设计中:</p>
 <ul>
-<li>&#x5E94;&#x7528;&#x9700;&#x8981;&#x5F39;&#x51FA;&#x4E00;&#x4E2A;&#x6C14;&#x6CE1;&#x901A;&#x77E5;&#x7528;&#x6237;&#x8FD9;&#x4E00;&#x4E8B;&#x4EF6;</li>
-<li>&#x5E94;&#x7528;&#x9700;&#x8981;&#x66F4;&#x65B0;&#x6D88;&#x606F;&#x6570;&#xFF0C;&#x6D88;&#x606F;&#x5217;&#x8868;&#x5185;&#x5BB9;&#x7B49;&#xFF0C;&#x4EE5;&#x5448;&#x73B0;&#x51FA;&#x6700;&#x65B0;&#x7684;State</li>
+<li>应用需要弹出一个气泡通知用户这一事件</li>
+<li>应用需要更新消息数，消息列表内容等，以呈现出最新的State</li>
 </ul>
-<p>&#x800C;&#x4E3A;&#x4E86;&#x8BA9;&#x7528;&#x6237;&#x611F;&#x77E5;&#x5230;&#xFF0C;&#x6C14;&#x6CE1;&#x5448;&#x73B0;&#x65F6;&#x957F;&#x5E76;&#x4E0D;&#x662F;&#x77AC;&#x65F6;&#x7684;&#xFF0C;&#x4F46;&#x5728;&#x4EA7;&#x54C1;&#x4EA4;&#x4E92;&#x8BBE;&#x8BA1;&#x4E2D;&#x4F9D;&#x65E7;&#x5C06;&#x5176;&#x5B9A;&#x4E49;&#x4E3A;&#x4E8B;&#x4EF6;&#x3002;</p>
-<h3 id="&#x5206;&#x79BB;&#x72B6;&#x6001;&#x548C;&#x4E8B;&#x4EF6;&#xFF0C;&#x4E0D;&#x662F;&#x5403;&#x9971;&#x6491;&#x5F97;"><a name="&#x5206;&#x79BB;&#x72B6;&#x6001;&#x548C;&#x4E8B;&#x4EF6;&#xFF0C;&#x4E0D;&#x662F;&#x5403;&#x9971;&#x6491;&#x5F97;" class="anchor-navigation-ex-anchor" href="#&#x5206;&#x79BB;&#x72B6;&#x6001;&#x548C;&#x4E8B;&#x4EF6;&#xFF0C;&#x4E0D;&#x662F;&#x5403;&#x9971;&#x6491;&#x5F97;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5206;&#x79BB;&#x72B6;&#x6001;&#x548C;&#x4E8B;&#x4EF6;&#xFF0C;&#x4E0D;&#x662F;&#x5403;&#x9971;&#x6491;&#x5F97;</h3>
+<p>而为了让用户感知到，气泡呈现时长并不是瞬时的，但在产品交互设计中依旧将其定义为事件。</p>
+<h3 id="分离状态和事件不是吃饱撑得"><a class="header" href="#分离状态和事件不是吃饱撑得">分离状态和事件，不是吃饱撑得</a></h3>
 <blockquote>
-<p>&#x770B;&#x5C71;&#x662F;&#x5C71;&#x3001;&#x770B;&#x6C34;&#x662F;&#x6C34;</p>
+<p>看山是山、看水是水</p>
 </blockquote>
-<p>&#x6B64;&#x65F6;&#x6B64;&#x523B;&#xFF0C;&#x7B54;&#x6848;&#x5DF2;&#x7ECF;&#x5F88;&#x660E;&#x663E;&#x3002;</p>
-<p>&#x5728;&#x901A;&#x7528;&#x7684;&#x4EA7;&#x54C1;&#x8BBE;&#x8BA1;&#x4E2D;&#xFF0C;&#x72B6;&#x6001;&#x548C;&#x4E8B;&#x4EF6;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x610F;&#x4E49;&#xFF0C;&#x5982;&#x679C;&#x7A0B;&#x5E8F;&#x4E2D;&#x4E0D;&#x5206;&#x79BB;&#x51FA;&#x4E24;&#x8005;&#xFF0C;&#x5219;&#x5FC5;&#x7136;&#x662F;&#x81EA;&#x627E;&#x9EBB;&#x70E6;&#xFF0C;&#x8FD9;&#x662F;&#x516C;&#x7136;&#x6311;&#x8845; <code>&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7F16;&#x7A0B;</code> &#x7684;&#x884C;&#x4E3A;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x660E;&#x786E;&#x5B9A;&#x4E49;&#x4E0D;&#x540C;&#x7684;Class&#xFF0C;&#x5219;&#x52BF;&#x5FC5;&#x5BFC;&#x81F4;&#x4EE3;&#x7801;&#x6DF7;&#x4E71;&#x4E0D;&#x582A;&#xFF0C;&#x6BD5;&#x7ADF;&#x8FD9;&#x662F;&#x8FDD;&#x80CC;&#x7F16;&#x7A0B;&#x539F;&#x5219;&#x7684;&#x4E8B;&#x60C5;&#x3002;</p>
-<p>&#x5728;&#x5927;&#x591A;MVVM&#x8BBE;&#x8BA1;&#x4E2D;&#xFF0C;&#x72B6;&#x6001;&#x548C;&#x4E8B;&#x4EF6;&#x672A;&#x5206;&#x5BB6;&#xFF0C;&#x5BFC;&#x81F4;bug&#x4E1B;&#x751F;&#xFF0C;&#x8FD9;&#x4E00;&#x70B9;&#x4FBF;&#x4E0D;&#x518D;&#x5C55;&#x5F00;&#x3002;</p>
-<h3 id="&#x5982;&#x4F55;&#x533A;&#x5206;event&#x548C;state"><a name="&#x5982;&#x4F55;&#x533A;&#x5206;event&#x548C;state" class="anchor-navigation-ex-anchor" href="#&#x5982;&#x4F55;&#x533A;&#x5206;event&#x548C;state"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5982;&#x4F55;&#x533A;&#x5206;Event&#x548C;State</h3>
-<p>State&#x662F;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x5185;&#x65E0;&#x53D8;&#x5316;&#x7684;&#x6761;&#x4EF6;&#x6216;&#x8005;&#x7279;&#x5F81;&#xFF0C;&#x5B83;&#x5929;&#x7136;&#x7684; <strong>&#x5951;&#x5408;</strong> &#x4E86;&#x4F4D;&#x4E8E;&#x8868;&#x73B0;&#x5C42;&#x7684;&#x4E3B;&#x4F53;&#x5185;&#x5BB9;&#x6240;&#x5BF9;&#x5E94;&#x7684; <strong>&#x6570;&#x636E;&#x6A21;&#x578B;&#x7279;&#x5F81;</strong>&#x3002;</p>
-<p>Event&#x662F;&#x7279;&#x5B9A;&#x7684;&#x53D8;&#x5316;&#xFF0C;&#x5B83;&#x5728;&#x8868;&#x73B0;&#x5C42;&#x4F53;&#x73B0;&#xFF0C;&#x4F46;&#x4E0E;State&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0D;&#x4E00;&#x81F4;&#xFF0C;&#x4E14;&#x5E76;&#x65E0;&#x4E00;&#x4E00;&#x5BF9;&#x5E94;&#x7684;&#x5173;&#x7CFB;&#x3002;</p>
-<p>&#x57FA;&#x4E8E;&#x7ECF;&#x9A8C;&#x4E3B;&#x4E49;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x673A;&#x68B0;&#x5730;&#x3001;&#x7B3C;&#x7EDF;&#x5730;&#x8BA4;&#x4E3A;&#xFF1A;&#x9875;&#x9762;&#x4E3B;&#x4F53;&#x9759;&#x6001;&#x5185;&#x5BB9;&#x6240;&#x9700;&#x8981;&#x7684;&#x6570;&#x636E;&#x5C5E;&#x4E8E;State&#x8303;&#x7574;&#xFF0C;&#x6C14;&#x6CE1;&#x63D0;&#x9192;&#x7B49;&#x77ED;&#x6682;&#x7684;&#x7269;&#x4F53;&#x6240;&#x9700;&#x8981;&#x7684;&#x6570;&#x636E;&#x5C5E;&#x4E8E;Event&#x8303;&#x7574;&#x3002;</p>
-<p>&#x4ECE;&#x903B;&#x8F91;&#x63A8;&#x6F14;&#x7684;&#x89D2;&#x5EA6;&#x51FA;&#x53D1;&#xFF0C;&#x8FDB;&#x884C; <strong>&#x7B49;&#x4EF7;&#x903B;&#x8F91;&#x63A8;&#x65AD;</strong> &#x548C; <strong>&#x6761;&#x4EF6;&#x9650;&#x5B9A;&#x4E0B;&#x7684;&#x903B;&#x8F91;&#x63A8;&#x65AD;</strong> &#xFF0C;&#x4E00;&#x5B9A;&#x5E8F;&#x5217;&#x7684;Event&#x53EF;&#x4EE5;&#x6A21;&#x578B;&#x8F6C;&#x6362;&#x4E3A;State&#x3002;</p>
-<h3 id="&#x4E8B;&#x4EF6;&#x7C98;&#x6027;&#x5BFC;&#x81F4;&#x91CD;&#x590D;&#xFF1F;&#x53EA;&#x662F;&#x6846;&#x67B6;&#x8BBE;&#x8BA1;&#x7684;bug"><a name="&#x4E8B;&#x4EF6;&#x7C98;&#x6027;&#x5BFC;&#x81F4;&#x91CD;&#x590D;&#xFF1F;&#x53EA;&#x662F;&#x6846;&#x67B6;&#x8BBE;&#x8BA1;&#x7684;bug" class="anchor-navigation-ex-anchor" href="#&#x4E8B;&#x4EF6;&#x7C98;&#x6027;&#x5BFC;&#x81F4;&#x91CD;&#x590D;&#xFF1F;&#x53EA;&#x662F;&#x6846;&#x67B6;&#x8BBE;&#x8BA1;&#x7684;bug"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E8B;&#x4EF6;&#x7C98;&#x6027;&#x5BFC;&#x81F4;&#x91CD;&#x590D;&#xFF1F;&#x53EA;&#x662F;&#x6846;&#x67B6;&#x8BBE;&#x8BA1;&#x7684;bug</h3>
+<p>此时此刻，答案已经很明显。</p>
+<p>在通用的产品设计中，状态和事件有不同的意义，如果程序中不分离出两者，则必然是自找麻烦，这是公然挑衅 <code>面向对象编程</code> 的行为。如果不明确定义不同的Class，则势必导致代码混乱不堪，毕竟这是违背编程原则的事情。</p>
+<p>在大多MVVM设计中，状态和事件未分家，导致bug丛生，这一点便不再展开。</p>
+<h3 id="如何区分event和state"><a class="header" href="#如何区分event和state">如何区分Event和State</a></h3>
+<p>State是一段时间内无变化的条件或者特征，它天然的 <strong>契合</strong> 了位于表现层的主体内容所对应的 <strong>数据模型特征</strong>。</p>
+<p>Event是特定的变化，它在表现层体现，但与State的生命周期不一致，且并无一一对应的关系。</p>
+<p>基于经验主义，我们可以机械地、笼统地认为：页面主体静态内容所需要的数据属于State范畴，气泡提醒等短暂的物体所需要的数据属于Event范畴。</p>
+<p>从逻辑推演的角度出发，进行 <strong>等价逻辑推断</strong> 和 <strong>条件限定下的逻辑推断</strong> ，一定序列的Event可以模型转换为State。</p>
+<h3 id="事件粘性导致重复只是框架设计的bug"><a class="header" href="#事件粘性导致重复只是框架设计的bug">事件粘性导致重复？只是框架设计的bug</a></h3>
 <blockquote>
-<p>&#x770B;&#x5C71;&#x4E0D;&#x662F;&#x5C71;&#xFF0C;&#x770B;&#x6C34;&#x4E0D;&#x662F;&#x6C34;</p>
+<p>看山不是山，看水不是水</p>
 </blockquote>
-<p>&#x524D;&#x9762;&#x63D0;&#x5230;&#xFF0C;State&#x662F;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x5185;&#x65E0;&#x53D8;&#x5316;&#x7684;&#x6761;&#x4EF6;&#x6216;&#x8005;&#x7279;&#x5F81;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;&#x4E2D;State&#x5177;&#x6709;&#x7C98;&#x6027;&#x7684;&#x7279;&#x5F81;&#x3002;</p>
-<p>&#x5982;&#x679C;Event&#x4E5F;&#x8BBE;&#x8BA1;&#x51FA;&#x8FD9;&#x6837;&#x7684;&#x7C98;&#x6027;&#x7279;&#x5F81;&#x5E76;&#x9020;&#x6210;&#x91CD;&#x590D;&#x6D88;&#x8D39;&#xFF0C;&#x660E;&#x663E;&#x662F;&#x8FDD;&#x80CC;&#x9700;&#x6C42;&#x7684;&#xFF0C;&#x65E0;&#x7591;&#x662F;&#x6846;&#x67B6;&#x8BBE;&#x8BA1;&#x7684;Bug&#x3002;&#x6B64;&#x95EE;&#x9898;&#x5728;&#x5404;&#x5927;&#x8BBA;&#x575B;&#x4E2D;&#x5F88;&#x5E38;&#x89C1;&#x3002;</p>
-<p><em>&#x6CE8;&#x610F;&#xFF0C;&#x6211;&#x4EEC;&#x65E0;&#x6CD5;&#x8131;&#x79BB;&#x5B9E;&#x9645;&#x9700;&#x6C42;&#x53BB;&#x4E8C;&#x5143;&#x5316;&#x7684;&#x8BA8;&#x8BBA;&#x4E8B;&#x4EF6;&#x672C;&#x8EAB;&#x8BE5;&#x4E0D;&#x8BE5;&#x6709;&#x7C98;&#x6027;&#x7279;&#x5F81;&#xFF0C;&#x53EA;&#x80FD;&#x7ED3;&#x5408;&#x5B9E;&#x9645;&#x8BA8;&#x8BBA;&#x6846;&#x67B6;&#x529F;&#x80FD;&#x662F;&#x5426;&#x5B58;&#x5728;bug</em></p>
-<p>&#x5982;&#x679C;&#x8981;&#x5B9E;&#x73B0;&#x4EE5;&#x529B;&#x7834;&#x6CD5;&#xFF0C;&#x5728;&#x6846;&#x67B6;&#x8BBE;&#x8BA1;&#x5C42;&#x9762;&#x4E0A; <strong>Event&#x4F53;&#x7CFB;&#x7684;&#x8BBE;&#x8BA1;&#x8981;&#x6BD4;State&#x4F53;&#x7CFB;&#x8981;&#x590D;&#x6742;</strong> &#x3002;&#x56E0;&#x4E3A;&#x4ECE;&#x4EA4;&#x4E92;&#x8BBE;&#x8BA1;&#x4E0A;&#xFF1A;</p>
+<p>前面提到，State是一段时间内无变化的条件或者特征，所以在程序设计中State具有粘性的特征。</p>
+<p>如果Event也设计出这样的粘性特征并造成重复消费，明显是违背需求的，无疑是框架设计的Bug。此问题在各大论坛中很常见。</p>
+<p><em>注意，我们无法脱离实际需求去二元化的讨论事件本身该不该有粘性特征，只能结合实际讨论框架功能是否存在bug</em></p>
+<p>如果要实现以力破法，在框架设计层面上 <strong>Event体系的设计要比State体系要复杂</strong> 。因为从交互设计上：</p>
 <ul>
-<li>State &#x53EA;&#x9700;&#x8981;&#x8003;&#x8651;&#x5448;&#x73B0;&#x7684;&#x51C6;&#x786E;&#x6027;&#x548C;&#x53CA;&#x65F6;&#x6027;&#xFF0C;<em>&#x9664;&#x53BB;&#x7F8E;&#x89C2;&#x3001;&#x53EF;&#x7406;&#x89E3;&#x6027;&#x7B49;&#x7B49;</em></li>
-<li>Event &#x9700;&#x8981;&#x8003;&#x8651;&#x51C6;&#x786E;&#x6027;&#x3001;&#x4F18;&#x5148;&#x7EA7;&#x3001;&#x53CA;&#x65F6;&#x6027;&#x3001;&#x6309;&#x6761;&#x4EF6;&#x4E22;&#x5F03;&#x7B49;&#x7B49;&#xFF0C;<em>&#x9664;&#x53BB;&#x7F8E;&#x89C2;&#x3001;&#x53EF;&#x7406;&#x89E3;&#x6027;&#x7B49;&#x7B49;</em></li>
+<li>State 只需要考虑呈现的准确性和及时性，<em>除去美观、可理解性等等</em></li>
+<li>Event 需要考虑准确性、优先级、及时性、按条件丢弃等等，<em>除去美观、可理解性等等</em></li>
 </ul>
-<p>&#x4E3E;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x95EE;&#x9898;&#x5BFC;&#x81F4;&#x7684;Web-API&#x8C03;&#x7528;&#x5931;&#x8D25;&#x9700;&#x8981;&#x4F7F;&#x7528;Toast&#x63D0;&#x793A;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x5931;&#x8D25;</p>
-<p>&#x4E0D;&#x96BE;&#x60F3;&#x8C61;&#xFF1A;</p>
+<p>举个例子：网络连接问题导致的Web-API调用失败需要使用Toast提示网络连接失败</p>
+<p>不难想象：</p>
 <ul>
-<li>&#x53EF;&#x80FD;&#x4E00;&#x77AC;&#x95F4;&#x7684;&#x65AD;&#x5F00;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;&#x591A;&#x4E2A;&#x8FDE;&#x63A5;&#x5747;&#x8FD4;&#x56DE;&#x5931;&#x8D25;</li>
-<li>&#x53EF;&#x80FD;&#x8FDE;&#x63A5;&#x95EE;&#x9898;&#x672A;&#x4FEE;&#x590D;&#xFF0C;10&#x79D2;&#x524D;&#x8BF7;&#x6C42;&#x5931;&#x8D25;&#xFF0C;&#x5F53;&#x524D;&#x8BF7;&#x6C42;&#x53C8;&#x5931;&#x8D25;&#x4E86;</li>
+<li>可能一瞬间的断开网络连接，会导致多个连接均返回失败</li>
+<li>可能连接问题未修复，10秒前请求失败，当前请求又失败了</li>
 </ul>
-<p>&#x96BE;&#x9053;&#x8FDE;&#x7EED;&#x5F39;&#x51FA;&#x5417;&#xFF1F;&#x96BE;&#x9053;&#x548C;&#x4E0A;&#x4E00;&#x6B21;Event&#x4E00;&#x81F4;&#x5C31;&#x4E0D;&#x6D88;&#x8D39;&#x5417;&#xFF1F;...</p>
-<p>&#x6216;&#x8BB8;&#x60A8;&#x4F1A;&#x4F7F;&#x7528;&#x4E00;&#x4E9B; <code>&#x5251;&#x8D70;&#x504F;&#x950B;&#x7684;&#x6280;&#x5DE7;</code> &#x6765;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#xFF0C;&#x4F46;&#x6280;&#x5DE7;&#x603B;&#x662F;&#x5EFA;&#x7ACB;&#x5728;&#x7279;&#x5B9A;&#x6761;&#x4EF6;&#x4E0B;&#x751F;&#x6548;&#x7684;&#xFF0C;&#x4E00;&#x65E6;&#x6761;&#x4EF6;&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF0C;&#x5C31;&#x4F1A;&#x5E26;&#x6765;&#x70E6;&#x607C;&#xFF0C;&#x60A8;&#x5F88;&#x96BE;&#x63A7;&#x5236;&#x4E0A;&#x6E38;&#x7684;PM&#x548C;&#x4EA4;&#x4E92;&#x8BBE;&#x8BA1;&#x5E08;&#x3002;</p>
-<p>&#x6240;&#x4EE5;&#x5728;&#x6846;&#x67B6;&#x5C42;&#x9762;&#x9700;&#x8981;&#x9488;&#x5BF9;&#x4EA7;&#x54C1;&#x3001;&#x4EA4;&#x4E92;&#x8BBE;&#x8BA1;&#x7684;&#x6CDB;&#x5316;&#x7406;&#x5FF5;&#xFF0C;&#x8BBE;&#x8BA1;&#x51C6;&#x786E;&#x7684;&#x3001;&#x7075;&#x6D3B;&#x7684;Event&#x4F53;&#x7CFB;&#x3002;</p>
-<h3 id="&#x51C6;&#x786E;&#x7684;&#x3001;&#x7075;&#x6D3B;&#x7684;event&#x4F53;&#x7CFB;"><a name="&#x51C6;&#x786E;&#x7684;&#x3001;&#x7075;&#x6D3B;&#x7684;event&#x4F53;&#x7CFB;" class="anchor-navigation-ex-anchor" href="#&#x51C6;&#x786E;&#x7684;&#x3001;&#x7075;&#x6D3B;&#x7684;event&#x4F53;&#x7CFB;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x51C6;&#x786E;&#x7684;&#x3001;&#x7075;&#x6D3B;&#x7684;Event&#x4F53;&#x7CFB;</h3>
+<p>难道连续弹出吗？难道和上一次Event一致就不消费吗？...</p>
+<p>或许您会使用一些 <code>剑走偏锋的技巧</code> 来解决问题，但技巧总是建立在特定条件下生效的，一旦条件发生变化，就会带来烦恼，您很难控制上游的PM和交互设计师。</p>
+<p>所以在框架层面需要针对产品、交互设计的泛化理念，设计准确的、灵活的Event体系。</p>
+<h3 id="准确的灵活的event体系"><a class="header" href="#准确的灵活的event体系">准确的、灵活的Event体系</a></h3>
 <blockquote>
-<p>&#x770B;&#x5C71;&#x8FD8;&#x662F;&#x5C71;&#xFF0C;&#x770B;&#x6C34;&#x8FD8;&#x662F;&#x6C34;</p>
+<p>看山还是山，看水还是水</p>
 </blockquote>
-<p>&#x56DE;&#x5230;FOL&#x4E2D;&#xFF0C;&#x4E3A;&#x4E86;&#x66F4;&#x52A0;&#x51C6;&#x786E;&#x7684;&#x8868;&#x8FBE;Event&#x548C;State&#x7684;&#x542B;&#x4E49;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x4E00;&#x4E9B;&#x989D;&#x5916;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;<code>&#x53C2;&#x4E0E;&#x8005;</code>&#x3001;<code>&#x5730;&#x70B9;</code>&#x3001;<code>&#x65F6;&#x95F4;</code> &#x7B49;&#x3002;</p>
-<p>&#x60F3;&#x901A;&#x8FD9;&#x4E00;&#x70B9;&#x4F1A;&#x53D1;&#x73B0;&#xFF0C;&#x4EA7;&#x54C1;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;Event&#x4E8B;&#x4EF6;&#x3001;&#x53CA;&#x5176;&#x6D88;&#x8D39;&#x903B;&#x8F91;&#x5747;&#x542B;&#x6709;&#x9690;&#x85CF;&#x5C5E;&#x6027;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<p>回到FOL中，为了更加准确的表达Event和State的含义，还需要一些额外的参数，例如：<code>参与者</code>、<code>地点</code>、<code>时间</code> 等。</p>
+<p>想通这一点会发现，产品中定义的Event事件、及其消费逻辑均含有隐藏属性，例如：</p>
 <ul>
-<li>&#x53D1;&#x751F;&#x65F6;&#x95F4;</li>
-<li>&#x5BA2;&#x89C2;&#x6709;&#x6548;&#x671F;</li>
-<li>&#x5224;&#x65AD;&#x6709;&#x6548;&#x7684;&#x6761;&#x4EF6;&#xFF08;&#x5982;&#x5448;&#x73B0;&#x7684;&#x6761;&#x4EF6;&#xFF09;</li>
-<li>&#x5224;&#x65AD;&#x5931;&#x6548;&#x7684;&#x6761;&#x4EF6; &#xFF0C;&#x7528;&#x4E8E;&#x5B9E;&#x73B0;&#x63D0;&#x524D;&#x5931;&#x6548;</li>
+<li>发生时间</li>
+<li>客观有效期</li>
+<li>判断有效的条件（如呈现的条件）</li>
+<li>判断失效的条件 ，用于实现提前失效</li>
 </ul>
-<p><em>&#x4EA7;&#x54C1;&#x7ECF;&#x7406;&#x548C;&#x4EA4;&#x4E92;&#x8BBE;&#x8BA1;&#x5E08;&#x4E00;&#x822C;&#x4F1A;&#x4F7F;&#x7528; &quot;&#x54CD;&#x5E94;&#x65F6;&#x95F4;&quot;&#x3001;&quot;&#x4F18;&#x5148;&#x7EA7;&quot; &#x7B49;&#x8BCD;&#x63CF;&#x8FF0;&#x5B83;&#x4EEC;&#xFF0C;&#x4F46;&#x4E00;&#x822C;&#x4E0D;&#x4E25;&#x8C28;&#x3001;&#x4E0D;&#x6210;&#x4F53;&#x7CFB;&#xFF0C;&#x5E26;&#x6765;&#x671F;&#x671B;&#x4E0D;&#x4E00;&#x81F4;&#x7684;&#x95EE;&#x9898;</em></p>
-<p>&#x53CD;&#x89C2;State&#x6D41;&#xFF0C;&#x5B83;&#x4EE3;&#x8868;&#x4E86;&#x754C;&#x9762;&#x4E3B;&#x4F53;&#x5185;&#x5BB9;&#x5728;&#x65F6;&#x95F4;&#x8F74;&#x4E0A;&#x7684;&#x5B8C;&#x6574;&#x53D8;&#x5316;&#xFF0C;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x65F6;&#x95F4;&#x70B9;&#x5747;&#x53EF;&#x4EE5;&#x5F97;&#x51FA;&#x754C;&#x9762;&#x5185;&#x5BB9;&#x6240;&#x5BF9;&#x5E94;&#x7684;&#x6761;&#x4EF6;&#x548C;&#x7279;&#x5F81;&#x3002;&#x4E00;&#x65E6;State&#x6D41;&#x4E2D;&#x51FA;&#x73B0;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x5B83;&#x5747;&#x88AB;&#x53CA;&#x65F6;&#x7684;&#x3001;&#x51C6;&#x786E;&#x7684;&#x5728;&#x8868;&#x73B0;&#x5C42;&#x4E88;&#x4EE5;&#x4F53;&#x73B0;&#x3002;</p>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x4E00;&#x4E2A;State&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E3A; <code>&#x4ECE;init&#x6216;&#x8005;reducer&#x8BA1;&#x7B97;&#x751F;&#x6210;&#x5F00;&#x59CB;</code> &#x81F3; <code>reducer&#x8BA1;&#x7B97;&#x51FA;&#x65B0;State&#x3001;&#x5BBF;&#x4E3B;&#x751F;&#x547D;&#x671F;&#x7ED3;&#x675F;&#x4E3A;&#x6B62;</code>&#xFF0C;&#x5728;State&#x6D41;&#x4E2D;&#x5DF2;&#x7136;&#x6697;&#x542B;&#xFF1A;</p>
+<p><em>产品经理和交互设计师一般会使用 "响应时间"、"优先级" 等词描述它们，但一般不严谨、不成体系，带来期望不一致的问题</em></p>
+<p>反观State流，它代表了界面主体内容在时间轴上的完整变化，任意一个时间点均可以得出界面内容所对应的条件和特征。一旦State流中出现一个新的状态，它均被及时的、准确的在表现层予以体现。</p>
+<p>不难理解，一个State的生命周期为 <code>从init或者reducer计算生成开始</code> 至 <code>reducer计算出新State、宿主生命期结束为止</code>，在State流中已然暗含：</p>
 <ul>
-<li>State&#x4E4B;&#x95F4;&#x65E0;&#x751F;&#x547D;&#x5468;&#x671F;&#x91CD;&#x53E0;</li>
-<li>&#x6240;&#x6709;State&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x76F8;&#x52A0;&#x53EF;&#x586B;&#x6EE1;&#x65F6;&#x95F4;&#x8F74;</li>
+<li>State之间无生命周期重叠</li>
+<li>所有State的生命周期相加可填满时间轴</li>
 </ul>
 <blockquote>
-<p>&#x524D;&#x6587;&#x63D0;&#x5230;Event&#x662F;&#x77AC;&#x65F6;&#x7684;&#xFF0C;&#x6240;&#x4EE5;Event&#x672C;&#x8EAB;&#x5E76;&#x6CA1;&#x6709;&#x5B9E;&#x8D28;&#x610F;&#x4E49;&#x4E0A;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF0C;&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x8868;&#x8FF0;&#xFF0C;&#x6211;&#x4EEC;&#x5C06; &quot;Event&#x4ECE;&#x751F;&#x6210;&#x5230;&#x5728;&#x8868;&#x73B0;&#x5C42;&#x4E0D;&#x53EF;&#x89C2;&#x6D4B;&#x7684;&#x9636;&#x6BB5;&quot; &#x5B9A;&#x4E49;&#x4E3A;Event&#x751F;&#x547D;&#x5468;&#x671F;</p>
+<p>前文提到Event是瞬时的，所以Event本身并没有实质意义上的生命周期，为了方便表述，我们将 "Event从生成到在表现层不可观测的阶段" 定义为Event生命周期</p>
 </blockquote>
-<p>&#x800C;Event&#x6D41; <strong>&#x4E0D;&#x540C;&#x4E8E;</strong> State&#x6D41; &#xFF0C;&#x56E0;&#x4E3A;Event&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x60C5;&#x51B5;&#x66F4;&#x52A0;&#x590D;&#x6742;&#xFF1A;</p>
+<p>而Event流 <strong>不同于</strong> State流 ，因为Event的生命周期情况更加复杂：</p>
 <ul>
-<li>Event&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x751F;&#x547D;&#x5468;&#x671F;&#x91CD;&#x53E0;</li>
-<li>&#x6240;&#x6709;Event&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x76F8;&#x52A0;&#x53EF;&#x80FD;&#x65E0;&#x6CD5;&#x8986;&#x76D6;&#x5B8C;&#x6574;&#x7684;&#x65F6;&#x95F4;&#x8F74;</li>
+<li>Event可能存在生命周期重叠</li>
+<li>所有Event的生命周期相加可能无法覆盖完整的时间轴</li>
 </ul>
-<p><strong>&#x9700;&#x8981;&#x989D;&#x5916;&#x8BBE;&#x8BA1;&#x5B9E;&#x73B0;</strong> &#x3002;&#x5B9E;&#x73B0;&#x8FD9;&#x4E00;&#x70B9;&#x540E;&#xFF0C;&#x4ECE;Event&#x6D41;&#x4E2D;&#x5206;&#x6D41;&#xFF08;&#x4EE5;&#x53CA;&#x88C2;&#x53D8;+&#x7EC4;&#x5408;&#xFF09;&#x51FA;&#x7684; <strong>&#x5B50;&#x6D41;</strong> &#x5C06;&#x548C;State&#x6D41; <strong>&#x6027;&#x8D28;&#x4E00;&#x81F4;</strong>&#x3002;</p>
-<p>&#x6B64;&#x523B;&#xFF0C;&#x60A8;&#x4F1A;&#x53D1;&#x73B0;&#xFF0C;&#x6839;&#x636E;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x4E8B;&#x4EF6;&#x4EA4;&#x4E92;&#x63A7;&#x4EF6;&#x6240;&#x5BF9;&#x5E94;&#x7684;&#x4EA4;&#x4E92;&#x7279;&#x5F81;&#xFF0C;&#x53C8;&#x5C06;Event&#x6D41;&#x7ED3;&#x5408;&#x6761;&#x4EF6;&#x6D41;&#x884D;&#x751F;&#x51FA;&#x5404;&#x4E2A;State&#x6D41;&#x3002;&#x5B8C;&#x6574;&#x7684;&#x6570;&#x636E;&#x6D41;&#x7EC6;&#x8282;&#x5982;&#x4E0B;&#xFF1A;</p>
-<p><img src="post_44/mvi-udf2.png" alt=""></p>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x5728;&#x56FE;&#x4E2D;&#x7701;&#x7565;&#x4E86;Event&#x5206;&#x6D41;&#x8F6C;&#x53D8;&#x4E3A;&#x5B50;State&#x6D41;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x9700;&#x8981;&#x9075;&#x5FAA;&#x7279;&#x5B9A;&#x4EA7;&#x54C1;&#x4EA4;&#x4E92;&#x673A;&#x5236;</em></p>
-<h2 id="&#x7ED3;&#x8BED;"><a name="&#x7ED3;&#x8BED;" class="anchor-navigation-ex-anchor" href="#&#x7ED3;&#x8BED;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7ED3;&#x8BED;</h2>
-<p>&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x4ECE;5&#x6708;&#x8BA1;&#x5212;&#x5199;&#xFF0C;&#x5230;6&#x6708;&#x52A8;&#x7B14;&#xFF0C;&#x65AD;&#x65AD;&#x7EED;&#x7EED;&#xFF0C;&#x8349;&#x7A3F;&#x5199;&#x4E86;&#x5F88;&#x957F;&#xFF0C;&#x51E0;&#x7ECF;&#x5220;&#x6539;&#x4F9D;&#x65E7;&#x7559;&#x6709;&#x5F88;&#x957F;&#x7684;&#x7BC7;&#x5E45;&#xFF0C;&#x867D;&#x5DF2;&#x7AED;&#x529B;&#x5C3D;&#x667A;&#xFF0C;&#x4F46;&#x4EFB;&#x89C9;&#x6587;&#x5B57;&#x4E0A;&#x6709;&#x8868;&#x610F;&#x672A;&#x901A;&#x900F;&#x4E4B;&#x5904;&#xFF0C;&#x6B22;&#x8FCE;&#x5728;&#x8BC4;&#x8BBA;&#x533A;&#x8BA8;&#x8BBA;&#x3002;</p>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2022-09-07 07:49:05
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+<p><strong>需要额外设计实现</strong> 。实现这一点后，从Event流中分流（以及裂变+组合）出的 <strong>子流</strong> 将和State流 <strong>性质一致</strong>。</p>
+<p>此刻，您会发现，根据不同类型的事件交互控件所对应的交互特征，又将Event流结合条件流衍生出各个State流。完整的数据流细节如下：</p>
+<p><img src="./post_44/mvi-udf2.png" alt="" /></p>
+<p><em>作者按：在图中省略了Event分流转变为子State流的过程，因为它需要遵循特定产品交互机制</em></p>
+<h2 id="结语"><a class="header" href="#结语">结语</a></h2>
+<p>这篇文章，从5月计划写，到6月动笔，断断续续，草稿写了很长，几经删改依旧留有很长的篇幅，虽已竭力尽智，但任觉文字上有表意未通透之处，欢迎在评论区讨论。</p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Review/post_40.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../Review/post_45.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="post_40.html" class="navigation navigation-prev " aria-label="Previous page: 三思系列：前人用GreenDao留下的坑，全线被扣了绩效">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="post_45.html" class="navigation navigation-next " aria-label="Next page: Review | 这三个坑你遇到了吗？">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Review/post_40.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../Review/post_45.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"谈一谈在两个商业项目中使用MVI架构后的感悟","level":"1.8.3","depth":2,"next":{"title":"Review | 这三个坑你遇到了吗？","level":"1.8.4","depth":2,"path":"Review/post_45.md","ref":"./Review/post_45.md","articles":[]},"previous":{"title":"三思系列：前人用GreenDao留下的坑，全线被扣了绩效","level":"1.8.2","depth":2,"path":"Review/post_40.md","ref":"./Review/post_40.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Review/post_44.md","mtime":"2022-09-06T23:49:05.766Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../gitbook/gitbook.js"></script>
-    <script src="../gitbook/theme.js"></script>
-    
-        
-        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-

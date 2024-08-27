@@ -1,1466 +1,191 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>三思系列：Glide 4.X加载过程一文掌握 | Glide（二） · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>三思系列：Glide 4.X加载过程一文掌握 | Glide（二） - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="../KSP/" />
-    
-    
-    <link rel="prev" href="post_15.html" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../../">
-            
-                <a href="../../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../View/">
-            
-                <a href="../View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../View/post_1.html">
-            
-                <a href="../View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../View/post_6.html">
-            
-                <a href="../View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../View/post_7.html">
-            
-                <a href="../View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="../Idea/post_9.html">
-            
-                <a href="../Idea/post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../Drawable/">
-            
-                <a href="../Drawable/">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="../Drawable/post_2.html">
-            
-                <a href="../Drawable/post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="../Drawable/post_4.html">
-            
-                <a href="../Drawable/post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="../Drawable/post_47.html">
-            
-                <a href="../Drawable/post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.4" data-path="../Drawable/post_49.html">
-            
-                <a href="../Drawable/post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../Mechanism/Message/">
-            
-                <a href="../Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../Mechanism/Message/post_8.html">
-            
-                <a href="../Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../Idea/post_14/">
-            
-                <a href="../Idea/post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.4.1" data-path="../Idea/post_14.html">
-            
-                <a href="../Idea/post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.5.1" data-path="post_15.html">
-            
-                <a href="post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.2.5.2" data-path="post_16.html">
-            
-                <a href="post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../KSP/">
-            
-                <a href="../KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../KSP/post_24.html">
-            
-                <a href="../KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../Base/">
-            
-                <a href="../Base/">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.7.1" data-path="../Base/post_35.html">
-            
-                <a href="../Base/post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../SysApp/">
-            
-                <a href="../SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../SysApp/post_52.html">
-            
-                <a href="../SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../DI/">
-            
-                <a href="../DI/">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.9.1" data-path="../DI/post_53.html">
-            
-                <a href="../DI/post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../../Compose/">
-            
-                <a href="../../Compose/">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="../../Compose/post_21.html">
-            
-                <a href="../../Compose/post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../../Compose/post_26.html">
-            
-                <a href="../../Compose/post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="../../Compose/post_27.html">
-            
-                <a href="../../Compose/post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="../../Compose/post_28.html">
-            
-                <a href="../../Compose/post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="../../Compose/post_29.html">
-            
-                <a href="../../Compose/post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="../../Compose/post_30.html">
-            
-                <a href="../../Compose/post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../../MultiThreading/">
-            
-                <a href="../../MultiThreading/">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../../MultiThreading/post_33.html">
-            
-                <a href="../../MultiThreading/post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../../MultiThreading/post_37.html">
-            
-                <a href="../../MultiThreading/post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="../../MultiThreading/post_38.html">
-            
-                <a href="../../MultiThreading/post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="../../MultiThreading/post_39.html">
-            
-                <a href="../../MultiThreading/post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="../../MultiThreading/post_42.html">
-            
-                <a href="../../MultiThreading/post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.6" data-path="../../MultiThreading/post_46.html">
-            
-                <a href="../../MultiThreading/post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="../../MultiThreading/post_50.html">
-            
-                <a href="../../MultiThreading/post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="../../MultiThreading/post_54.html">
-            
-                <a href="../../MultiThreading/post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="../../IO/">
-            
-                <a href="../../IO/">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="../../IO/post_55.html">
-            
-                <a href="../../IO/post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="../../IO/post_56.html">
-            
-                <a href="../../IO/post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="../../IO/post_57.html">
-            
-                <a href="../../IO/post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="../../IO/post_58.html">
-            
-                <a href="../../IO/post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="../../IO/post_59.html">
-            
-                <a href="../../IO/post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../../Gradle/">
-            
-                <a href="../../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../../Gradle/Modularization/post_18.html">
-            
-                <a href="../../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../../Gradle/Publish/post_17.html">
-            
-                <a href="../../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../../Gradle/post_22.html">
-            
-                <a href="../../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../../Groovy/">
-            
-                <a href="../../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../../Groovy/why_write_groovy.html">
-            
-                <a href="../../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../../Groovy/post_23.html">
-            
-                <a href="../../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="../../Review/">
-            
-                <a href="../../Review/">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="../../Review/post_10.html">
-            
-                <a href="../../Review/post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="../../Review/post_40.html">
-            
-                <a href="../../Review/post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.3" data-path="../../Review/post_44.html">
-            
-                <a href="../../Review/post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="../../Review/post_45.html">
-            
-                <a href="../../Review/post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../../repo/">
-            
-                <a href="../../repo/">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../../repo/DaVinCi.html">
-            
-                <a href="../../repo/DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../Idea/post_32.html">
-            
-                <a href="../Idea/post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../../Speculative/post_43.html">
-            
-                <a href="../../Speculative/post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../../repo/post_48.html">
-            
-                <a href="../../repo/post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../../Speculative/post_61.html">
-            
-                <a href="../../Speculative/post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="../../Review/DataStructure/">
-            
-                <a href="../../Review/DataStructure/">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1.1" data-path="../../Review/DataStructure/post_11.html">
-            
-                <a href="../../Review/DataStructure/post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="../../Review/DataStructure/post_12.html">
-            
-                <a href="../../Review/DataStructure/post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="../../Review/DataStructure/post_13.html">
-            
-                <a href="../../Review/DataStructure/post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="../../Review/README2.html">
-            
-                <a href="../../Review/README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="../../Review/post_36.html">
-            
-                <a href="../../Review/post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="../../Review/post_51.html">
-            
-                <a href="../../Review/post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="../../Review/post_60.html">
-            
-                <a href="../../Review/post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="../../Review/post_63.html">
-            
-                <a href="../../Review/post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="../../Review/post_64.html">
-            
-                <a href="../../Review/post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../../Note/">
-            
-                <a href="../../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../../Note/post_41.html">
-            
-                <a href="../../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../../Talk/">
-            
-                <a href="../../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../../Talk/talk_1.html">
-            
-                <a href="../../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../../Talk/talk_2_2023-03.html">
-            
-                <a href="../../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../../Thought/">
-            
-                <a href="../../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../../Thought/post_62.html">
-            
-                <a href="../../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../../info/">
-            
-                <a href="../../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../../info/about_view_series.html">
-            
-                <a href="../../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../../info/about_sansi_series.html">
-            
-                <a href="../../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../../info/about_haowan_series.html">
-            
-                <a href="../../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../../info/about_wengu_series.html">
-            
-                <a href="../../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;glide-4x&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x4E00;&#x6587;&#x638C;&#x63E1;--glide&#xFF08;&#x4E8C;&#xFF09;"><b></b>&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;Glide 4.X&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x4E00;&#x6587;&#x638C;&#x63E1; | Glide&#xFF08;&#x4E8C;&#xFF09;</a></li><ul><li><span class="title-icon "></span><a href="#&#x653B;&#x575A;&#x7A81;&#x7834;&#x53E3;"><b></b>&#x653B;&#x575A;&#x7A81;&#x7834;&#x53E3;</a></li><li><span class="title-icon "></span><a href="#request&#x7684;&#x6784;&#x5EFA;"><b></b>Request&#x7684;&#x6784;&#x5EFA;</a></li><li><span class="title-icon "></span><a href="#request&#x7684;&#x89E6;&#x53D1;"><b></b>Request&#x7684;&#x89E6;&#x53D1;</a></li><li><span class="title-icon "></span><a href="#request&#x6267;&#x884C;&#x7EC6;&#x8282;"><b></b>Request&#x6267;&#x884C;&#x7EC6;&#x8282;</a></li><ul><li><span class="title-icon "></span><a href="#&#x72B6;&#x6001;&#x6982;&#x89C8;"><b></b>&#x72B6;&#x6001;&#x6982;&#x89C8;</a></li><li><span class="title-icon "></span><a href="#request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E00;"><b></b>Request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E00;</a></li><li><span class="title-icon "></span><a href="#request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E8C;----&#x8D44;&#x6E90;&#x52A0;&#x8F7D;"><b></b>Request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E8C; -- &#x8D44;&#x6E90;&#x52A0;&#x8F7D;</a></li><li><span class="title-icon "></span><a href="#request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E09;----&#x8D44;&#x6E90;&#x4F7F;&#x7528;"><b></b>Request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E09; -- &#x8D44;&#x6E90;&#x4F7F;&#x7528;</a></li></ul><li><span class="title-icon "></span><a href="#&#x5185;&#x5BB9;&#x603B;&#x7ED3;"><b></b>&#x5185;&#x5BB9;&#x603B;&#x7ED3;</a></li><li><span class="title-icon "></span><a href="#&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;"><b></b>&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;</a></li></ul></ul></div><a href="#&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;glide-4x&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x4E00;&#x6587;&#x638C;&#x63E1;--glide&#xFF08;&#x4E8C;&#xFF09;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;glide-4x&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x4E00;&#x6587;&#x638C;&#x63E1;--glide&#xFF08;&#x4E8C;&#xFF09;"><a name="&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;glide-4x&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x4E00;&#x6587;&#x638C;&#x63E1;--glide&#xFF08;&#x4E8C;&#xFF09;" class="anchor-navigation-ex-anchor" href="#&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;glide-4x&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x4E00;&#x6587;&#x638C;&#x63E1;--glide&#xFF08;&#x4E8C;&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;Glide 4.X&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x4E00;&#x6587;&#x638C;&#x63E1; | Glide&#xFF08;&#x4E8C;&#xFF09;</h1>
-<p>&#x4E0A;&#x4E00;&#x7BC7;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x9605;&#x8BFB;Glide&#x521D;&#x59CB;&#x5316;&#x7684;&#x4E3B;&#x8981;&#x4EE3;&#x7801;&#xFF0C;&#x5BF9;Glide&#x4E2D;&#x7684;&#x6A21;&#x5757;&#x8FDB;&#x884C;&#x4E86;&#x804C;&#x8D23;&#x68B3;&#x7406;&#x3002;&#x8FD9;&#x4E00;&#x7BC7;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x524D;&#x6587;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x5BF9;Glide&#x7684; <code>&#x8D44;&#x6E90;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;</code> &#x8FDB;&#x884C;&#x68B3;&#x7406;&#x3002;</p>
-<p>&#x5F53;&#x7136;&#xFF0C;&#x901A;&#x8FC7;&#x535A;&#x6587;&#x6765;&#x770B; <code>&#x5927;&#x7BC7;&#x5E45;</code> &#x7684;&#x4EE3;&#x7801;&#x662F;&#x76F8;&#x5F53; <code>&#x67AF;&#x71E5;&#x4E4F;&#x5473;</code> &#x7684;&#xFF0C;&#x4E3A;&#x4E86;&#x8BA9;&#x9605;&#x8BFB;&#x4F53;&#x9A8C;&#x66F4;&#x4F73;&#xFF0C;&#x672C;&#x6587;&#x4E2D;&#x4F1A;&#x76F4;&#x63A5;&#x7528; <code>UML&#x56FE;</code> &#x4EE3;&#x66FF;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x7684; <code>&#x4EE3;&#x7801;&#x62F7;&#x8D1D;</code>&#x3002;</p>
-<p><em>&#x6CE8;&#xFF1A;&#x672C;&#x6587;&#x57FA;&#x4E8E;Glide 4.12.0&#x3002;&#x53E6;&#xFF1A;&#x6211;&#x7684;UML&#x529F;&#x5E95;&#x4E0D;&#x592A;&#x7262;&#xFF0C;&#x6587;&#x4E2D;&#x6D89;&#x53CA;&#x7684;UML&#x56FE;&#x672A;&#x5FC5;&#x662F;&#x6700;&#x6070;&#x5F53;&#x7684;&#xFF0C;&#x5982;&#x56FE;&#x7C7B;&#x578B;&#x6216;&#x8005;&#x6807;&#x8BC6;&#x9519;&#x7528;&#xFF0C;&#x5982;&#x679C;&#x8BFB;&#x8005;&#x5BF9;&#x6B64;&#x6709;&#x6240;&#x5EFA;&#x6811;&#xFF0C;&#x6211;&#x771F;&#x8BDA;&#x7684;&#x5E0C;&#x671B;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x7559;&#x8A00;&#x533A;&#x7559;&#x4E0B;&#x5B9D;&#x8D35;&#x7684;&#x53C2;&#x8003;&#x610F;&#x89C1;&#x3002;</em></p>
-<p>&#x518D;&#x6B21;&#x4ECB;&#x7ECD;&#x4E0B;&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;</p>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../../Android/Glide/post_16.html" class="active"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="三思系列glide-4x加载过程一文掌握--glide二"><a class="header" href="#三思系列glide-4x加载过程一文掌握--glide二">三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></h1>
+<p>上一篇中，我们通过阅读Glide初始化的主要代码，对Glide中的模块进行了职责梳理。这一篇，我们在前文的基础上，对Glide的 <code>资源加载过程</code> 进行梳理。</p>
+<p>当然，通过博文来看 <code>大篇幅</code> 的代码是相当 <code>枯燥乏味</code> 的，为了让阅读体验更佳，本文中会直接用 <code>UML图</code> 代替绝大多数的 <code>代码拷贝</code>。</p>
+<p><em>注：本文基于Glide 4.12.0。另：我的UML功底不太牢，文中涉及的UML图未必是最恰当的，如图类型或者标识错用，如果读者对此有所建树，我真诚的希望你可以在留言区留下宝贵的参考意见。</em></p>
+<p>再次介绍下三思系列：</p>
 <blockquote>
-<p>&#x4E09;&#x601D;&#x7CFB;&#x5217;&#x662F;&#x6211;&#x6700;&#x65B0;&#x7684;&#x5B66;&#x4E60;&#x3001;&#x603B;&#x7ED3;&#x5F62;&#x5F0F;&#xFF0C;&#x7740;&#x91CD;&#x4E8E;:<strong>&#x95EE;&#x9898;&#x5206;&#x6790;</strong>&#x3001;<strong>&#x6280;&#x672F;&#x79EF;&#x7D2F;</strong>&#x3001;<strong>&#x89C6;&#x91CE;&#x62D3;&#x5C55;</strong>&#xFF0C;<a href="https://leobert-lan.github.io/info/about_sansi_series.html" target="_blank">&#x4E86;&#x89E3;&#x66F4;&#x591A;</a></p>
+<p>三思系列是我最新的学习、总结形式，着重于:<strong>问题分析</strong>、<strong>技术积累</strong>、<strong>视野拓展</strong>，<a href="https://leobert-lan.github.io/info/about_sansi_series.html">了解更多</a></p>
 </blockquote>
-<hr>
-<h2 id="&#x653B;&#x575A;&#x7A81;&#x7834;&#x53E3;"><a name="&#x653B;&#x575A;&#x7A81;&#x7834;&#x53E3;" class="anchor-navigation-ex-anchor" href="#&#x653B;&#x575A;&#x7A81;&#x7834;&#x53E3;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x653B;&#x575A;&#x7A81;&#x7834;&#x53E3;</h2>
-<p>&#x5728;&#x7B2C;&#x4E00;&#x7BC7;&#x6536;&#x5C3E;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x603B;&#x7ED3;&#x4E86;&#x6DF1;&#x5EA6;&#x5206;&#x6790;&#x65F6;&#x7684;&#x7A81;&#x7834;&#x53E3;&#xFF0C;&#x548C;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x5F3A;&#x5173;&#x8054;&#x7684;&#x5185;&#x5BB9;&#x6458;&#x5F55;&#x5982;&#x4E0B;&#xFF1A;</p>
+<hr />
+<h2 id="攻坚突破口"><a class="header" href="#攻坚突破口">攻坚突破口</a></h2>
+<p>在第一篇收尾时，我们总结了深度分析时的突破口，和加载过程强关联的内容摘录如下：</p>
 <blockquote>
-<p>&#x8D44;&#x6E90;&#x83B7;&#x53D6;</p>
+<p>资源获取</p>
 <ul>
 <li>RequestManagerRetriever</li>
 <li>RequestManager</li>
@@ -1468,384 +193,347 @@
 <li>Request</li>
 <li>DefaultConnectivityMonitorFactory</li>
 </ul>
-<p>&#x6838;&#x5FC3;&#x6D41;&#x7A0B;</p>
+<p>核心流程</p>
 <ul>
 <li>Engine</li>
 </ul>
-<p>&#x8D44;&#x6E90;Model&#x52A0;&#x8F7D;&#x5668;</p>
+<p>资源Model加载器</p>
 <ul>
 <li><code>ModelLoaderFactory</code></li>
-<li><code>ModelLoader</code> &#x7B49;</li>
+<li><code>ModelLoader</code> 等</li>
 </ul>
 </blockquote>
-<p>&#x5982;&#x679C;&#x8BFB;&#x8005;&#x5728;&#x9605;&#x8BFB;&#x672C;&#x6587;&#x65F6;&#xFF0C;&#x624B;&#x8FB9;&#x521A;&#x597D;&#x6709;Glide&#x7684;&#x6E90;&#x7801;&#xFF0C;&#x53EF;&#x4EE5;&#x914D;&#x5408;&#x9605;&#x8BFB;&#x3002;</p>
-<h2 id="request&#x7684;&#x6784;&#x5EFA;"><a name="request&#x7684;&#x6784;&#x5EFA;" class="anchor-navigation-ex-anchor" href="#request&#x7684;&#x6784;&#x5EFA;"><i class="fa fa-link" aria-hidden="true"></i></a>Request&#x7684;&#x6784;&#x5EFA;</h2>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;Glide&#x5728;&#x8BBE;&#x8BA1;&#x65F6;&#xFF0C;&#x5C06; <code>&#x8D44;&#x6E90;&#x52A0;&#x8F7D;</code> &amp; <code>&#x8D44;&#x6E90;&#x5904;&#x7406;</code> &amp; <code>&#x8D44;&#x6E90;&#x4F7F;&#x7528;</code> &#x7B49;&#x6307;&#x4EE4;&#x63CF;&#x8FF0;&#x5C01;&#x88C5;&#x5728;&#x4E86; <code>Request</code> &#x5B9E;&#x73B0;&#x7C7B;&#x4E2D;&#x3002;</p>
-<p>&#x6700;&#x7B80;&#x5355;&#x7684;&#x4F7F;&#x7528;Sample&#x4EE3;&#x7801;&#xFF1A;</p>
+<p>如果读者在阅读本文时，手边刚好有Glide的源码，可以配合阅读。</p>
+<h2 id="request的构建"><a class="header" href="#request的构建">Request的构建</a></h2>
+<p>不难理解，Glide在设计时，将 <code>资源加载</code> &amp; <code>资源处理</code> &amp; <code>资源使用</code> 等指令描述封装在了 <code>Request</code> 实现类中。</p>
+<p>最简单的使用Sample代码：</p>
 <pre><code>// Samples/imgur
 // com.bumptech.glide.samples.imgur.MainActivity
 
 ImgurGlide.with(vh.imageView)
       .load(image.link)
       .into(vh.imageView);
-</code></pre><p>&#x8C03;&#x7528; Glide.with &#x5F97;&#x5230; <code>RequestManagerRetriever</code> &#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x8FDB;&#x4E00;&#x6B65;&#x8C03;&#x7528; RequestManagerRetriever.get &#x5F97;&#x5230; <code>RequestManager</code> &#x5B9E;&#x4F8B;</p>
-<p>&#x800C;&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x5219;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF0C;<em>&#x76F8;&#x6BD4;&#x4E8E;&#x6B64;&#x56FE;&#xFF0C;&#x4EE5;&#x6587;&#x5B57;&#x5F62;&#x5F0F;&#x63CF;&#x8FF0;&#x7684;&#x8FC7;&#x7A0B;&#x7565;&#x663E;&#x5570;&#x55E6;</em></p>
-<p><img src="uml/FetchResourceSequence1.png" alt=""></p>
-<p>&#x56FE;&#x4E2D;&#x7684; 1&#x3001;2&#x3001;3 &#x8868;&#x793A;&#x4E86;Request&#x7684;&#x521B;&#x5EFA;&#x8FC7;&#x7A0B;&#x3002;</p>
-<p>&#x5F53;&#x521B;&#x5EFA;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x9700;&#x8981;&#x6267;&#x884C; Request&#xFF0C;&#x4F46;&#x9700;&#x8981;&#x6CE8;&#x610F;&#xFF0C;Glide&#x5904;&#x7406;&#x4E86;&#x4E00;&#x4E2A; <code>&#x5F88;&#x91CD;&#x8981;</code> &#x7684;&#x95EE;&#x9898;&#xFF1A;</p>
+</code></pre>
+<p>调用 Glide.with 得到 <code>RequestManagerRetriever</code> 实例，并进一步调用 RequestManagerRetriever.get 得到 <code>RequestManager</code> 实例</p>
+<p>而接下来的过程，则如下图所示，<em>相比于此图，以文字形式描述的过程略显啰嗦</em></p>
+<p><img src="./uml/FetchResourceSequence1.png" alt="" /></p>
+<p>图中的 1、2、3 表示了Request的创建过程。</p>
+<p>当创建完成后，需要执行 Request，但需要注意，Glide处理了一个 <code>很重要</code> 的问题：</p>
 <blockquote>
-<p>Target&#x590D;&#x7528;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x4E0E;Resource&#x5E76;&#x975E; <code>&#x4E00;&#x4E00;&#x5BF9;&#x5E94;</code></p>
+<p>Target复用场景下，与Resource并非 <code>一一对应</code></p>
 </blockquote>
-<p>&#x5E76;&#x4E14;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x5728; <code>&#x7F51;&#x7EDC;&#x73AF;&#x5883;&#x53D8;&#x5316;</code>&#x3001; <code>&#x751F;&#x547D;&#x5468;&#x671F;&#x534F;&#x540C;</code> &#x7B49;&#x80CC;&#x666F;&#x4E0B;&#x88AB;&#x653E;&#x5927;&#x3002;</p>
-<p>&#x6240;&#x4EE5;&#x5728;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x8BF7;&#x6C42;&#x524D;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x4E00;&#x5C42;&#x5224;&#x65AD;&#xFF1A;</p>
+<p>并且这个问题在 <code>网络环境变化</code>、 <code>生命周期协同</code> 等背景下被放大。</p>
+<p>所以在开始执行请求前，还需要进行一层判断：</p>
 <blockquote>
-<p>&#x5BF9;&#x4E8E;&#x8BE5;Target&#xFF0C;<code>&#x672C;&#x6B21;</code> &#x8BF7;&#x6C42;&#x7684;Request&#x662F;&#x5426;&#x4E0E; <code>&#x524D;&#x6B21;</code> &#x8BF7;&#x6C42;&#x7684;Request&#x4E00;&#x81F4;&#xFF1F;</p>
+<p>对于该Target，<code>本次</code> 请求的Request是否与 <code>前次</code> 请求的Request一致？</p>
 </blockquote>
 <ul>
-<li>&#x4E00;&#x81F4;&#xFF0C;&#x6267;&#x884C;&#x524D;&#x6B21;&#x8BF7;&#x6C42;</li>
-<li>&#x4E0D;&#x4E00;&#x81F4;&#xFF0C;&#x6E05;&#x7A7A;&#x4E0E;target&#x7ED1;&#x5B9A;&#x7684;&#x5404;&#x79CD;&#x5173;&#x7CFB;&#xFF1B;&#x8BBE;&#x7F6E;&#x672C;&#x6B21;&#x8BF7;&#x6C42;&#xFF1B;&#x6267;&#x884C;&#x8BF7;&#x6C42;</li>
+<li>一致，执行前次请求</li>
+<li>不一致，清空与target绑定的各种关系；设置本次请求；执行请求</li>
 </ul>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RequestBuilder</span> </span>{
-    <span class="hljs-keyword">private</span> &lt;Y extends Target&lt;TranscodeType&gt;&gt; <span class="hljs-function">Y <span class="hljs-title">into</span><span class="hljs-params">(
+<pre><code class="language-java">class RequestBuilder {
+    private &lt;Y extends Target&lt;TranscodeType&gt;&gt; Y into(
             @NonNull Y target,
             @Nullable RequestListener&lt;TranscodeType&gt; targetListener,
-            @NonNull RequestOptions options)</span> </span>{
-        <span class="hljs-comment">//...</span>
+            @NonNull RequestOptions options) {
+        //...
 
         options = options.autoClone();
         Request request = buildRequest(target, targetListener, options);
 
         Request previous = target.getRequest();
-        <span class="hljs-keyword">if</span> (request.isEquivalentTo(previous)
+        if (request.isEquivalentTo(previous)
                 &amp;&amp; !isSkipMemoryCacheWithCompletePreviousRequest(options, previous)) {
             request.recycle();
-            <span class="hljs-keyword">if</span> (!Preconditions.checkNotNull(previous).isRunning()) {
+            if (!Preconditions.checkNotNull(previous).isRunning()) {
                 previous.begin();
             }
-            <span class="hljs-keyword">return</span> target;
+            return target;
         }
 
         requestManager.clear(target);
         target.setRequest(request);
         requestManager.track(target, request);
 
-        <span class="hljs-keyword">return</span> target;
+        return target;
     }
 }
 </code></pre>
-<p><em>&#x5176;&#x4ED6;&#x4EE3;&#x7801;&#x5FFD;&#x7565;</em></p>
-<h2 id="request&#x7684;&#x89E6;&#x53D1;"><a name="request&#x7684;&#x89E6;&#x53D1;" class="anchor-navigation-ex-anchor" href="#request&#x7684;&#x89E6;&#x53D1;"><i class="fa fa-link" aria-hidden="true"></i></a>Request&#x7684;&#x89E6;&#x53D1;</h2>
-<p>&#x524D;&#x6587;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x9605;&#x8BFB;&#x5230;&#x4E86; <code>&#x65B0;Request</code> &#x7684;&#x89E6;&#x53D1;&#x73AF;&#x8282;&#xFF0C;&#x5165;&#x53E3;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RequestManager</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">track</span><span class="hljs-params">(@NonNull Target&lt;?&gt; target, @NonNull Request request)</span> </span>{
+<p><em>其他代码忽略</em></p>
+<h2 id="request的触发"><a class="header" href="#request的触发">Request的触发</a></h2>
+<p>前文中，我们已经阅读到了 <code>新Request</code> 的触发环节，入口代码如下：</p>
+<pre><code class="language-java">class RequestManager {
+    void track(@NonNull Target&lt;?&gt; target, @NonNull Request request) {
         targetTracker.track(target);
         requestTracker.runRequest(request);
     }
 }
 </code></pre>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x6316;&#x6398;&#x4E0B;Request&#x89E6;&#x53D1;&#x6D41;&#x7A0B;&#x7EC6;&#x8282;&#xFF0C;&#x4F9D;&#x65E7;&#x5148;&#x770B;&#x56FE;&#xFF1A;</p>
-<p><img src="uml/FetchResourceSequence2.png" alt=""></p>
-<p><code>1&#x3001;2</code> &#x4E24;&#x6B65;&#x5BF9;&#x5E94;&#x4E86; <code>RequestManager#track(Target&lt;?&gt; target, Request request)</code>, &#x6807;&#x7B7E;&#x4E2D;&#x5907;&#x6CE8;&#x4E86;<code>1</code> &#x5904;&#x4E3A; <code>&#x751F;&#x547D;&#x5468;&#x671F;&#x76D1;&#x6D4B;</code></p>
+<p>接下来挖掘下Request触发流程细节，依旧先看图：</p>
+<p><img src="./uml/FetchResourceSequence2.png" alt="" /></p>
+<p><code>1、2</code> 两步对应了 <code>RequestManager#track(Target&lt;?&gt; target, Request request)</code>, 标签中备注了<code>1</code> 处为 <code>生命周期监测</code></p>
 <blockquote>
-<p>&#x7B80;&#x8981;&#x6269;&#x5C55;&#xFF1A;<code>TargetTracker</code> &#x662F;&#x4E00;&#x4E2A; <code>&#x7EC4;&#x5408;&#x6A21;&#x5F0F;</code> &#x5B9E;&#x73B0;&#xFF0C;&#x5B9E;&#x73B0;&#x4E86; Glide &#x4E2D;&#x7684; <code>LifecycleListener</code>&#xFF0C;&#x5F53;&#x5173;&#x8054;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x4EA7;&#x751F;&#x53D8;&#x5316;&#x65F6;&#xFF0C;&#x8FD9;&#x4E9B;&#x53D8;&#x5316;&#x4F1A;&#x88AB;&#x611F;&#x77E5;&#xFF0C;&#x5E76;&#x4E14;
-<code>TargetTracker</code> &#x4F1A;&#x88AB;&#x56DE;&#x8C03;&#xFF0C;&#x5B9E;&#x73B0;&#x8BF7;&#x6C42;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x534F;&#x540C;&#x7BA1;&#x7406;&#x3002;</p>
+<p>简要扩展：<code>TargetTracker</code> 是一个 <code>组合模式</code> 实现，实现了 Glide 中的 <code>LifecycleListener</code>，当关联的对象的生命周期产生变化时，这些变化会被感知，并且
+<code>TargetTracker</code> 会被回调，实现请求的生命周期协同管理。</p>
 </blockquote>
-<p>&#x800C; <code>2</code> &#x5219;&#x5F00;&#x59CB;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#xFF1A;</p>
+<p>而 <code>2</code> 则开始处理请求：</p>
 <ul>
-<li>&#x5982;&#x679C;&#x5F53;&#x524D; RequestTracker &#x662F;&#x8FD0;&#x884C;&#x4E2D;&#x7684;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8C03;&#x7528; <code>Request#begin()</code> &#x6267;&#x884C;&#x8BF7;&#x6C42;&#xFF1B; <code>5</code></li>
-<li>&#x5426;&#x5219;&#x52A0;&#x5165;&#x7B49;&#x5F85;&#x961F;&#x5217;&#xFF0C;&#x5F53; <code>resumeRequests</code> &#x6216; <code>restartRequests</code> &#x88AB;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x8FDB;&#x5165;&#x8FD0;&#x884C;&#x72B6;&#x6001;&#xFF0C;&#x8C03;&#x7528; <code>Request#begin()</code> &#x6267;&#x884C;&#x8BF7;&#x6C42;&#xFF1B; <code>3&#x3001;4</code></li>
+<li>如果当前 RequestTracker 是运行中的，则直接调用 <code>Request#begin()</code> 执行请求； <code>5</code></li>
+<li>否则加入等待队列，当 <code>resumeRequests</code> 或 <code>restartRequests</code> 被调用时，进入运行状态，调用 <code>Request#begin()</code> 执行请求； <code>3、4</code></li>
 </ul>
-<h2 id="request&#x6267;&#x884C;&#x7EC6;&#x8282;"><a name="request&#x6267;&#x884C;&#x7EC6;&#x8282;" class="anchor-navigation-ex-anchor" href="#request&#x6267;&#x884C;&#x7EC6;&#x8282;"><i class="fa fa-link" aria-hidden="true"></i></a>Request&#x6267;&#x884C;&#x7EC6;&#x8282;</h2>
-<p>&#x5728;&#x5F00;&#x59CB;&#x9605;&#x8BFB;&#x8BF7;&#x6C42;&#x7EC6;&#x8282;&#x4E4B;&#x524D;&#xFF0C;&#x4E0D;&#x59A8;&#x5148;&#x4E86;&#x89E3;&#x4E0B;Request&#x4E2D;&#x7684;&#x72B6;&#x6001;&#x673A;&#x5236;&#x3002;</p>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;Request&#x7684;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x662F; <code>&#x590D;&#x6742;&#x7684;</code>&#xFF0C;&#x8BBE;&#x8BA1;&#x4E2D;&#xFF0C;&#x5C06;&#x5176;&#x8BBE;&#x8BA1;&#x6210;&#x4E0D;&#x540C;&#x7684; <code>&#x5207;&#x9762;&#x8FC7;&#x7A0B;</code> &#xFF0C;&#x5904;&#x4E8E;&#x4E0D;&#x540C;&#x7684;&#x72B6;&#x6001;&#x65F6;&#xFF0C;&#x5904;&#x7406;&#x5BF9;&#x5E94;&#x7684;&#x5207;&#x9762;&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x964D;&#x4F4E;&#x5916;&#x90E8;&#x8C03;&#x5EA6;&#x65F6;&#x7684;&#x590D;&#x6742;&#x5EA6;&#x3002;</p>
-<h3 id="&#x72B6;&#x6001;&#x6982;&#x89C8;"><a name="&#x72B6;&#x6001;&#x6982;&#x89C8;" class="anchor-navigation-ex-anchor" href="#&#x72B6;&#x6001;&#x6982;&#x89C8;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x72B6;&#x6001;&#x6982;&#x89C8;</h3>
-<p>&#x72B6;&#x6001;&#x7684;&#x679A;&#x4E3E;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">enum</span> Status {
-    <span class="hljs-comment">/**
+<h2 id="request执行细节"><a class="header" href="#request执行细节">Request执行细节</a></h2>
+<p>在开始阅读请求细节之前，不妨先了解下Request中的状态机制。</p>
+<p>不难理解：Request的整个过程是 <code>复杂的</code>，设计中，将其设计成不同的 <code>切面过程</code> ，处于不同的状态时，处理对应的切面，这样可以降低外部调度时的复杂度。</p>
+<h3 id="状态概览"><a class="header" href="#状态概览">状态概览</a></h3>
+<p>状态的枚举如下：</p>
+<pre><code class="language-java">private enum Status {
+    /**
      * Created but not yet running.
-     */</span>
+     */
     PENDING,
-    <span class="hljs-comment">/**
+    /**
      * In the process of fetching media.
-     */</span>
+     */
     RUNNING,
-    <span class="hljs-comment">/**
+    /**
      * Waiting for a callback given to the Target to be called to 
      * determine target dimensions.
-     */</span>
+     */
     WAITING_FOR_SIZE,
-    <span class="hljs-comment">/**
+    /**
      * Finished loading media successfully.
-     */</span>
+     */
     COMPLETE,
-    <span class="hljs-comment">/**
+    /**
      * Failed to load media, may be restarted.
-     */</span>
+     */
     FAILED,
-    <span class="hljs-comment">/**
+    /**
      * Cancelled by the user, may not be restarted.
-     */</span>
+     */
     CANCELLED,
-    <span class="hljs-comment">/**
+    /**
      * Cleared by the user with a placeholder set, may not be restarted.
-     */</span>
+     */
     CLEARED,
-    <span class="hljs-comment">/**
+    /**
      * Temporarily paused by the system, may be restarted.
-     */</span>
+     */
     PAUSED,
   }
 </code></pre>
-<p>&#x9605;&#x8BFB;&#x4EE3;&#x7801;&#x540E;&#xFF0C;&#x6574;&#x7406;&#x4E3B;&#x8981;&#x7684;&#x72B6;&#x6001;&#x53D8;&#x5316;&#x56FE;&#x5982;&#x4E0B;&#xFF1A;<em>&#x5728;&#x9605;&#x8BFB;&#x5904;&#x7406;&#x7EC6;&#x8282;&#x65F6;&#xFF0C;&#x8FD8;&#x4F1A;&#x63D0;&#x5230;&#x76F8;&#x5E94;&#x7684;&#x5185;&#x5BB9;</em></p>
-<p><img src="uml/state.png" alt=""></p>
-<h3 id="request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E00;"><a name="request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E00;" class="anchor-navigation-ex-anchor" href="#request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E00;"><i class="fa fa-link" aria-hidden="true"></i></a>Request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E00;</h3>
-<p>&#x8FD9;&#x4E00;&#x5C0F;&#x8282;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x6D89;&#x53CA;&#x8FD9;&#x4E09;&#x4E2A;&#x7EC6;&#x8282;&#xFF1A;</p>
+<p>阅读代码后，整理主要的状态变化图如下：<em>在阅读处理细节时，还会提到相应的内容</em></p>
+<p><img src="./uml/state.png" alt="" /></p>
+<h3 id="request处理流程一"><a class="header" href="#request处理流程一">Request处理流程一</a></h3>
+<p>这一小节，我们将涉及这三个细节：</p>
 <ul>
-<li>&#x5C3A;&#x5BF8;&#x83B7;&#x53D6; </li>
-<li>&#x5FC5;&#x8981;&#x7684;PlaceHolder&#x8BBE;&#x7F6E;</li>
-<li>&#x5411;Engine &#x53D1;&#x8D77;&#x52A0;&#x8F7D;&#x8BF7;&#x6C42;</li>
+<li>尺寸获取</li>
+<li>必要的PlaceHolder设置</li>
+<li>向Engine 发起加载请求</li>
 </ul>
-<p><img src="uml/FetchResourceSequence3.png" alt=""></p>
-<p>&#x5982;&#x524D;&#x6587;&#x6240;&#x63D0;&#x53CA;:</p>
+<p><img src="./uml/FetchResourceSequence3.png" alt="" /></p>
+<p>如前文所提及:</p>
 <ul>
-<li>&#x5F53;&#x8D44;&#x6E90;&#x65E0;&#x6CD5;&#x901A;&#x8FC7;&#x6821;&#x9A8C;&#xFF0C;&#x5C06;&#x76F4;&#x63A5;&#x8FDB;&#x5165; FAILED</li>
-<li>&#x5F53;&#x4E00;&#x5207;&#x90FD;&#x5DF2;&#x51C6;&#x5907;&#x5C31;&#x7EEA;&#xFF0C;&#x5373; COMPLETE&#xFF0C;&#x5219;&#x8FDB;&#x5165;&#x8D44;&#x6E90;&#x5904;&#x7406;&#x6D41;&#x7A0B; <code>onResourceReady</code></li>
+<li>当资源无法通过校验，将直接进入 FAILED</li>
+<li>当一切都已准备就绪，即 COMPLETE，则进入资源处理流程 <code>onResourceReady</code></li>
 </ul>
-<p>&#x5426;&#x5219;&#x8FDB;&#x5165; <code>WAITING_FOR_SIZE</code>&#xFF0C;&#x5E76;&#x5904;&#x7406;&#x5C3A;&#x5BF8;&#x5904;&#x7406;</p>
+<p>否则进入 <code>WAITING_FOR_SIZE</code>，并处理尺寸处理</p>
 <ul>
-<li>&#x5982;&#x679C;&#x5DF2;&#x7ECF;&#x6D4B;&#x91CF;&#x8FC7;&#x7684;&#x5C3A;&#x5BF8;&#x662F;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x8FDB;&#x5165; <code>onSizeReady</code>&#xFF1B; <code>2&#x3001;11</code></li>
-<li>&#x5426;&#x5219;&#x83B7;&#x53D6;&#x5C3A;&#x5BF8;&#xFF0C;&#x5E76;&#x6302;Callback&#xFF1B; <code>3&#x3001;5&#x3001;6&#x3001;7&#x3001;8&#x3001;9&#x3001;10&#x3001;11</code></li>
+<li>如果已经测量过的尺寸是合法的，进入 <code>onSizeReady</code>； <code>2、11</code></li>
+<li>否则获取尺寸，并挂Callback； <code>3、5、6、7、8、9、10、11</code></li>
 </ul>
-<p><em>&#x6CE8;&#x610F;&#xFF1A;&#x5F53;onSizeReady&#x540E;&#xFF0C;&#x72B6;&#x6001;&#x5C06;&#x53D8;&#x4E3A; RUNNING&#xFF0C;&#x8FDB;&#x5165;&#x8D44;&#x6E90;&#x83B7;&#x53D6;&#x6D41;&#x7A0B;&#xFF0C;&#x5373;<code>11</code>&#xFF0C;&#x5E76;&#x4E14;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x5FC5;&#x8981;&#x5904;&#x7406;PlaceHolder&#x4E14;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#xFF0C;&#x5219;&#x4F1A;&#x5728;begin&#x65F6;&#x5904;&#x7406;PlaceHolder&#x8BBE;&#x7F6E;&#xFF0C;&#x5373;<code>4</code></em></p>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#x65F6;&#xFF0C;Target&#x7684;&#x5C3A;&#x5BF8;&#x672A;&#x5FC5;&#x5904;&#x4E8E;&#x53EF;&#x6D4B;&#x91CF;&#x72B6;&#x6001;&#xFF0C;Glide&#x5185;&#x5229;&#x7528;&#x4E86;ViewTree&#x7684;&#x56DE;&#x8C03;&#x673A;&#x5236;&#xFF0C;&#x4EE5;ViewTarget&#x4E3A;&#x4F8B;&#xFF0C;&#x5F53;&#x8BE5;Target&#x8FDB;&#x5165; <code>PreDraw&#x72B6;&#x6001;</code> &#x65F6;&#xFF0C;
-&#x5F00;&#x59CB;&#x6D4B;&#x91CF;&#x5C3A;&#x5BF8;&#xFF0C;&#x51C6;&#x786E;&#x7684;&#x8BB2;&#x662F; <code>&#x83B7;&#x53D6;&#x5C3A;&#x5BF8;</code>&#x3002;</p>
-<p>&#x81F3;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x5373;&#x5C06;&#x9605;&#x8BFB;&#x5230;&#x4E86; <code>&#x8D44;&#x6E90;&#x52A0;&#x8F7D;</code> &#x8FC7;&#x7A0B;&#x3002;</p>
-<h3 id="request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E8C;----&#x8D44;&#x6E90;&#x52A0;&#x8F7D;"><a name="request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E8C;----&#x8D44;&#x6E90;&#x52A0;&#x8F7D;" class="anchor-navigation-ex-anchor" href="#request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E8C;----&#x8D44;&#x6E90;&#x52A0;&#x8F7D;"><i class="fa fa-link" aria-hidden="true"></i></a>Request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E8C; -- &#x8D44;&#x6E90;&#x52A0;&#x8F7D;</h3>
-<p>&#x8FD9;&#x4E00;&#x5C0F;&#x8282;&#xFF0C;&#x6211;&#x4EEC;&#x4E13;&#x6CE8;&#x4E8E;&#x4E00;&#x4E2A;&#x6D41;&#x7A0B;&#x7EC6;&#x8282;&#xFF1A;<code>&#x8D44;&#x6E90;&#x52A0;&#x8F7D;</code> &#x8FC7;&#x7A0B;</p>
-<p>&#x7B80;&#x5355;&#x60F3;&#x8C61;&#x4E00;&#x4E0B;&#xFF0C;&#x4E00;&#x4E2A;&#x5A92;&#x4F53;&#x8D44;&#x6E90;&#xFF0C;&#x5B83;&#x7684;&#x771F;&#x8EAB;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x4E8E;&#xFF1A;&quot;&#x7F51;&#x7EDC;&#x4E2D;&#x7684;&#x67D0;&#x53F0;&#x4E3B;&#x673A;&quot;&#xFF0C;&quot;&#x672C;&#x5730;&#x7684;&#x78C1;&#x76D8;&#x7684;&#x7528;&#x6237;&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x4E0B;&quot;&#xFF0C;&quot;&#x5F53;&#x524D;&#x5E94;&#x7528;&#x7684;&#x6838;&#x5FC3;&#x8D44;&#x6E90;&#x76EE;&#x5F55;&#x4E0B;&quot; &#x7B49;&#x7B49;&#x3002;</p>
-<p>&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x8D44;&#x6E90;&#x65F6;&#xFF0C;<code>&#x5747;&#x4ECE;&#x539F;&#x59CB;&#x4F4D;&#x7F6E;&#x83B7;&#x53D6;</code> &#x7684;&#x65B9;&#x5F0F;&#x662F;&#x4E0D;&#x53EF;&#x53D6;&#x7684;&#xFF0C;&#x9664;&#x4E86; <code>&#x6700;&#x5927;&#x7684;&#x83B7;&#x53D6;&#x6210;&#x672C;</code> &#x5916;&#xFF0C;&#x8FD8;&#x989D;&#x5916;&#x4ED8;&#x8BF8; <code>&#x52A0;&#x8F7D;&#x65F6;&#x95F4;&#x3001;&#x89E3;&#x6790;&#x7B97;&#x529B;&#x6210;&#x672C;</code>&#x3002;</p>
+<p><em>注意：当onSizeReady后，状态将变为 RUNNING，进入资源获取流程，即<code>11</code>，并且，如果有必要处理PlaceHolder且满足条件，则会在begin时处理PlaceHolder设置，即<code>4</code></em></p>
+<p>不难理解：处理请求时，Target的尺寸未必处于可测量状态，Glide内利用了ViewTree的回调机制，以ViewTarget为例，当该Target进入 <code>PreDraw状态</code> 时，
+开始测量尺寸，准确的讲是 <code>获取尺寸</code>。</p>
+<p>至此，我们即将阅读到了 <code>资源加载</code> 过程。</p>
+<h3 id="request处理流程二----资源加载"><a class="header" href="#request处理流程二----资源加载">Request处理流程二 -- 资源加载</a></h3>
+<p>这一小节，我们专注于一个流程细节：<code>资源加载</code> 过程</p>
+<p>简单想象一下，一个媒体资源，它的真身可能存在于："网络中的某台主机"，"本地的磁盘的用户文件目录下"，"当前应用的核心资源目录下" 等等。</p>
+<p>使用这些资源时，<code>均从原始位置获取</code> 的方式是不可取的，除了 <code>最大的获取成本</code> 外，还额外付诸 <code>加载时间、解析算力成本</code>。</p>
 <blockquote>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x5728;&#x8D44;&#x6E90;&#x6709;&#x6548;&#x65F6;&#x9650;&#x53EF;&#x88AB;&#x4FE1;&#x4EFB;&#x7684;&#x524D;&#x63D0;&#x4E0B;&#xFF0C;&#x6709;&#x5FC5;&#x8981;&#x8BBE;&#x8BA1;&#x7F13;&#x5B58;&#x673A;&#x5236;&#xFF0C;<code>&#x727A;&#x7272;&#x7A7A;&#x95F4;&#x6362;&#x53D6;&#x65F6;&#x95F4;&#x548C;&#x7B97;&#x529B;</code> &#x3002;</p>
-<p>&#x4E0B;&#x4E00;&#x7BC7;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x6DF1;&#x5165;Glide&#x7684;&#x7F13;&#x5B58;&#x673A;&#x5236;&#xFF0C;&#x6316;&#x6398;&#x7EC6;&#x8282;&#xFF1B;&#x5728;&#x672C;&#x7BC7;&#x4E2D;&#xFF0C;&#x8BFB;&#x8005;&#x4EC5;&#x9700;&#x8981;&#x5148;&#x8BB0;&#x4F4F;&#xFF1A;</p>
+<p>不难理解：在资源有效时限可被信任的前提下，有必要设计缓存机制，<code>牺牲空间换取时间和算力</code> 。</p>
+<p>下一篇中，我们将深入Glide的缓存机制，挖掘细节；在本篇中，读者仅需要先记住：</p>
 <ul>
-<li>Glide &#x8BBE;&#x8BA1;&#x4E86;&#x7F13;&#x5B58;</li>
-<li>&#x7F13;&#x5B58;&#x5305;&#x542B; <code>&#x5185;&#x5B58;&#x7F13;&#x5B58;</code>&#xFF0C;<code>&#x78C1;&#x76D8;&#x7F13;&#x5B58;</code>&#xFF1B;&#x5185;&#x5B58;&#x7F13;&#x5B58;&#x4E2D;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x7EA7;&#x522B;&#xFF1A;<code>&#x5DF2;&#x52A0;&#x8F7D;&#x6FC0;&#x6D3B;&#x7684;&#x7F13;&#x5B58;</code>&#x3001;<code>LRU&#x7F13;&#x5B58;&#x4EE5;&#x53CA;&#x6620;&#x5C04;</code>&#xFF1B; &#x78C1;&#x76D8;&#x7F13;&#x5B58;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x7EA7;&#x522B;&#xFF1A;<code>&#x5DF2;&#x89E3;&#x7801;&#x6570;&#x636E;</code>&#xFF0C;<code>&#x539F;&#x59CB;&#x6570;&#x636E;</code></li>
-<li>&#x4E0D;&#x540C;&#x7684;&#x7F13;&#x5B58;&#x4F7F;&#x7528;&#x7B56;&#x7565;&#xFF0C;&#x540C;&#x65F6;&#x5BF9;&#x5E94;&#x4E86;&#x7F13;&#x5B58;&#x7684;<code>&#x5B58;&#x50A8;</code>&#x3001;<code>&#x83B7;&#x53D6;</code></li>
+<li>Glide 设计了缓存</li>
+<li>缓存包含 <code>内存缓存</code>，<code>磁盘缓存</code>；内存缓存中包含两个级别：<code>已加载激活的缓存</code>、<code>LRU缓存以及映射</code>； 磁盘缓存包含两个级别：<code>已解码数据</code>，<code>原始数据</code></li>
+<li>不同的缓存使用策略，同时对应了缓存的<code>存储</code>、<code>获取</code></li>
 </ul>
 </blockquote>
-<p>&#x6574;&#x4E2A;&#x52A0;&#x8F7D;&#x6D41;&#x7A0B;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;3&#x4E2A;&#x73AF;&#x8282;&#xFF1A;</p>
+<p>整个加载流程可以分为3个环节：</p>
 <ul>
-<li>&#x751F;&#x6210;key</li>
-<li>&#x4ECE;&#x5185;&#x5B58;&#x7F13;&#x5B58;&#x4E2D;&#x83B7;&#x53D6;</li>
-<li>&#x4F7F;&#x7528;EngineJob &#x4ECE;&#x78C1;&#x76D8;&#x7F13;&#x5B58;&#x4E2D;&#x83B7;&#x53D6;</li>
+<li>生成key</li>
+<li>从内存缓存中获取</li>
+<li>使用EngineJob 从磁盘缓存中获取</li>
 </ul>
-<p>&#x540C;&#x6837;&#x5148;&#x7ED9;&#x51FA;&#x56FE;&#xFF1A;<em>&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x9605;&#x8BFB;&#xFF0C;&#x5C06;&#x6D41;&#x7A0B;&#x5207;&#x5206;&#x6210;&#x4E86;5&#x5F20;&#x56FE;</em></p>
-<p><img src="uml/FetchResourceSequence4_1-0.png" alt="">
-<img src="uml/FetchResourceSequence4_1-1.png" alt="">
-<img src="uml/FetchResourceSequence4_1-2.png" alt="">
-<img src="uml/FetchResourceSequence4_2-0.png" alt="">
-<img src="uml/FetchResourceSequence4_2-1.png" alt=""></p>
-<hr>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x9010;&#x6B65;&#x5206;&#x6790;</p>
-<p><img src="uml/FetchResourceSequence4_1-0.png" alt=""></p>
-<p><code>1&#x3001;2</code>&#x662F;&#x751F;&#x6210;key&#x8FC7;&#x7A0B;&#xFF0C;<strong>&#x6CE8;&#x610F;&#xFF1A;KEY&#x7684;&#x751F;&#x6210;&#x65B9;&#x5F0F;&#x4E2D;&#xFF0C;&#x9690;&#x85CF;&#x7740;&#x5371;&#x9669;</strong>&#x3002;</p>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x5BF9;&#x540C;&#x4E00;&#x4E2A;&#x5A92;&#x4F53;&#x8D44;&#x6E90;&#xFF0C;&#x91C7;&#x7528;&#x4E0D;&#x540C;&#x7684;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#xFF0C;&#x5F97;&#x5230;&#x7684;&#x7ED3;&#x679C;&#x5B58;&#x5728;&#x5DEE;&#x522B;&#xFF0C;&#x7F13;&#x5B58;&#x65F6;&#xFF0C;&#x5FC5;&#x987B; <code>&#x5B8C;&#x6574;&#x7684;</code> &#x8003;&#x8651;&#x5230;&#x8FD9;&#x4E9B;&#x5904;&#x7406;&#x5DEE;&#x522B;&#xFF0C;&#x5426;&#x5219;&#x4F1A;&#x51FA;&#x73B0; <code>&#x8D44;&#x6E90;&#x9519;&#x7528;</code>&#x3002;<em>&#x672C;&#x6587;&#x5148;&#x4E0D;&#x5BF9;&#x6B64;&#x8FDB;&#x884C;&#x5C55;&#x5F00;</em></p>
-<hr>
-<p><img src="uml/FetchResourceSequence4_1-1.png" alt=""></p>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x6267;&#x884C; <code>loadFromActiveResources</code>,&#x5373;&#x4ECE; <code>&#x5DF2;&#x52A0;&#x8F7D;&#x6FC0;&#x6D3B;&#x7684;&#x7F13;&#x5B58;</code> &#x4E2D;&#x83B7;&#x53D6;</p>
-<p>&#x5982;&#x679C;&#x4E0D;&#x5141;&#x8BB8;&#x4F7F;&#x7528;&#x5185;&#x5B58;&#x7F13;&#x5B58;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;null&#x8FDB;&#x5165;&#x4E0B;&#x4E00;&#x7EA7;&#x7F13;&#x5B58;&#x83B7;&#x53D6;</p>
-<p>&#x5982;&#x679C;&#x5F97;&#x5230;&#x4E86;&#x7F13;&#x5B58;&#x8D44;&#x6E90;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8FD0;&#x7528;&#xFF1B;&#x5426;&#x5219;&#x8FDB;&#x5165;&#x4E0B;&#x4E00;&#x7EA7;&#x7F13;&#x5B58;&#x83B7;&#x53D6;</p>
-<hr>
-<p>&#x6B64;&#x65F6;&#xFF0C;&#x6FC0;&#x6D3B;&#x7F13;&#x5B58;&#x672A;&#x53D6;&#x5230;&#x76EE;&#x6807;&#x8D44;&#x6E90;&#xFF0C;&#x5C06;&#x8FDB;&#x5165;LRU&#x5185;&#x5B58;&#x7F13;&#x5B58;&#x83B7;&#x53D6;</p>
-<p><img src="uml/FetchResourceSequence4_1-2.png" alt=""></p>
-<p>&#x540C;&#x6837;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x5141;&#x8BB8;&#x4F7F;&#x7528;&#x5185;&#x5B58;&#x7F13;&#x5B58;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;null&#x8FDB;&#x5165;&#x4E0B;&#x4E00;&#x7EA7;&#x7F13;&#x5B58;&#x83B7;&#x53D6;</p>
-<p>&#x5982;&#x679C;&#x5F97;&#x5230;&#x4E86;&#x7F13;&#x5B58;&#x8D44;&#x6E90;&#xFF0C;<em>&#x5C06;&#x4ECE;LRU&#x5185;&#x5B58;&#x7F13;&#x5B58;&#x4E2D;&#x88AB;remove&#xFF0C;&#x505A;LRU&#x6807;&#x8BB0;&#x7EF4;&#x62A4;&#xFF0C;&#x5E76;&#x88AB;&#x52A0;&#x8F7D;&#x5230; <code>&#x6FC0;&#x6D3B;&#x7F13;&#x5B58;</code> &#x4E2D;&#x6FC0;&#x6D3B;</em>&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8FD0;&#x7528;&#xFF1B;&#x5426;&#x5219;&#x8FDB;&#x5165;&#x4E0B;&#x4E00;&#x7EA7;&#x7F13;&#x5B58;&#x83B7;&#x53D6;&#x3002;</p>
-<hr>
-<p>&#x81F3;&#x6B64;&#xFF0C;&#x5185;&#x5B58;&#x7F13;&#x5B58;&#x65E0;&#x6CD5;&#x652F;&#x6301;&#x76EE;&#x6807;&#x8D44;&#x6E90;&#x7684;&#x83B7;&#x53D6;&#xFF0C;&#x9700;&#x8981;&#x8F6C;&#x5411;&#x78C1;&#x76D8;&#x7F13;&#x5B58;</p>
-<p><em>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x8FD9;&#x91CC;&#x7684;&#x5185;&#x5728;&#x7EC6;&#x8282;&#x4F1A;&#x5F88;&#x590D;&#x6742;&#x3002;&#x5C06;&#x5728;&#x7F13;&#x5B58;&#x5206;&#x6790;&#x7BC7;&#x7AE0;&#x4E2D;&#x5C55;&#x5F00;</em></p>
-<p>&#x540C;&#x6837;&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x5F53;&#x7EC6;&#x8282;&#x975E;&#x5E38;&#x590D;&#x6742;&#x65F6;&#xFF0C;&#x6709;&#x5FC5;&#x8981;&#x8FDB;&#x884C; <code>&#x5C01;&#x88C5;</code> &#xFF0C;<code>&#x9690;&#x85CF;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;</code>&#xFF0C;&#x5BF9;&#x8C03;&#x7528;&#x8005;&#x63D0;&#x4F9B;&#x8BED;&#x4E49;&#x6070;&#x5F53;&#x7684; <code>API</code> &#x5373;&#x53EF;&#x3002;</p>
-<p>Glide&#x4E2D;&#xFF0C;&#x5C06;&#x8FD9;&#x4E9B;&#x7EC6;&#x8282;&#x5C01;&#x88C5;&#x4E3A; EngineJob &#x548C; DecodeJob&#xFF1B;</p>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x8FD9;&#x79CD;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x662F; <code>&#x76F8;&#x5BF9;&#x8017;&#x65F6;</code> &#x7684;&#xFF0C;&#x6CA1;&#x6709;&#x5FC5;&#x8981; <code>&#x963B;&#x585E;&#x5F0F;</code> &#x7B49;&#x5F85;&#x7ED3;&#x679C;&#x4EE5;&#x4F7F;&#x7528;&#xFF1B;&#x56E0;&#x6B64;&#xFF0C;&#x5728;&#x52A0;&#x8F7D;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x5B8C;&#x5168;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x4EE5;&#x4E0B;&#x573A;&#x666F;&#xFF1A; <code>&#x540C;&#x4E00;&#x8D44;&#x6E90;</code> &#x88AB; <code>&#x591A;&#x6B21;&#x8981;&#x6C42;</code> &#x52A0;&#x8F7D;&#x3002;
-&#x4E8E;&#x662F;&#xFF0C;&#x5BF9;Job&#x53EF;&#x4EE5;&#x8FDB;&#x884C; <code>&#x590D;&#x7528;</code> &#xFF0C;&#x83B7;&#x53D6;&#x5230;&#x8FD8;&#x5728;&#x52A0;&#x8F7D;&#x4E2D;&#x7684;Job&#x65F6;&#xFF0C;&#x589E;&#x52A0;&#x56DE;&#x8C03;&#x5373;&#x53EF;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF1A;</p>
-<p><img src="uml/FetchResourceSequence4_2-0.png" alt=""></p>
-<p>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x53EF;&#x590D;&#x7528;&#x7684;Job&#xFF0C;&#x5219;&#x521B;&#x5EFA;&#x76F8;&#x5E94;&#x7684;Job&#xFF0C;&#x7EF4;&#x62A4;Job&#x8D44;&#x6E90;&#x6C60;&#xFF0C;&#x8BBE;&#x7F6E;&#x56DE;&#x8C03;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#xFF1A;
-<img src="uml/FetchResourceSequence4_2-1.png" alt=""></p>
-<h3 id="request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E09;----&#x8D44;&#x6E90;&#x4F7F;&#x7528;"><a name="request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E09;----&#x8D44;&#x6E90;&#x4F7F;&#x7528;" class="anchor-navigation-ex-anchor" href="#request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E09;----&#x8D44;&#x6E90;&#x4F7F;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>Request&#x5904;&#x7406;&#x6D41;&#x7A0B;&#x4E09; -- &#x8D44;&#x6E90;&#x4F7F;&#x7528;</h3>
-<p>&#x5728;&#x524D;&#x6587;&#x7684;&#x8BB2;&#x89E3;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x9605;&#x8BFB;&#x5230;&#x5F53;&#x8D44;&#x6E90;&#x52A0;&#x8F7D;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x4F1A;&#x6267;&#x884C;&#x5230;&#xFF1A; <code>Request#onResourceReady(Resource&lt;?&gt;, DataSource)</code>&#xFF0C;&#x800C;&#x5176;&#x5B9E;&#x73B0;&#x5185;&#x5BB9;&#x5373;&#x4E3A;&#x8D44;&#x6E90;&#x4F7F;&#x7528;&#x3002;
-&#x5F53;&#x7136;&#x52A0;&#x8F7D;&#x5931;&#x8D25;&#xFF0C;&#x6216;&#x8005;&#x8D44;&#x6E90;&#x6821;&#x9A8C;&#x5931;&#x8D25;&#x4F1A;&#x6267;&#x884C; <code>onLoadFailed(GlideException e)</code>&#x3002;</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingleRequest</span> </span>{
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResourceReady</span><span class="hljs-params">(Resource&lt;?&gt; resource, DataSource dataSource)</span> </span>{
+<p>同样先给出图：<em>为了方便阅读，将流程切分成了5张图</em></p>
+<p><img src="./uml/FetchResourceSequence4_1-0.png" alt="" />
+<img src="./uml/FetchResourceSequence4_1-1.png" alt="" />
+<img src="./uml/FetchResourceSequence4_1-2.png" alt="" />
+<img src="./uml/FetchResourceSequence4_2-0.png" alt="" />
+<img src="./uml/FetchResourceSequence4_2-1.png" alt="" /></p>
+<hr />
+<p>接下来我们逐步分析</p>
+<p><img src="./uml/FetchResourceSequence4_1-0.png" alt="" /></p>
+<p><code>1、2</code>是生成key过程，<strong>注意：KEY的生成方式中，隐藏着危险</strong>。</p>
+<p>不难理解，对同一个媒体资源，采用不同的处理方式，得到的结果存在差别，缓存时，必须 <code>完整的</code> 考虑到这些处理差别，否则会出现 <code>资源错用</code>。<em>本文先不对此进行展开</em></p>
+<hr />
+<p><img src="./uml/FetchResourceSequence4_1-1.png" alt="" /></p>
+<p>接下来执行 <code>loadFromActiveResources</code>,即从 <code>已加载激活的缓存</code> 中获取</p>
+<p>如果不允许使用内存缓存，则直接返回null进入下一级缓存获取</p>
+<p>如果得到了缓存资源，则直接运用；否则进入下一级缓存获取</p>
+<hr />
+<p>此时，激活缓存未取到目标资源，将进入LRU内存缓存获取</p>
+<p><img src="./uml/FetchResourceSequence4_1-2.png" alt="" /></p>
+<p>同样的，如果不允许使用内存缓存，则直接返回null进入下一级缓存获取</p>
+<p>如果得到了缓存资源，<em>将从LRU内存缓存中被remove，做LRU标记维护，并被加载到 <code>激活缓存</code> 中激活</em>，则直接运用；否则进入下一级缓存获取。</p>
+<hr />
+<p>至此，内存缓存无法支持目标资源的获取，需要转向磁盘缓存</p>
+<p><em>不难理解：这里的内在细节会很复杂。将在缓存分析篇章中展开</em></p>
+<p>同样不难理解：当细节非常复杂时，有必要进行 <code>封装</code> ，<code>隐藏实现细节</code>，对调用者提供语义恰当的 <code>API</code> 即可。</p>
+<p>Glide中，将这些细节封装为 EngineJob 和 DecodeJob；</p>
+<p>不难理解：这种加载过程是 <code>相对耗时</code> 的，没有必要 <code>阻塞式</code> 等待结果以使用；因此，在加载的过程中，完全可能出现以下场景： <code>同一资源</code> 被 <code>多次要求</code> 加载。
+于是，对Job可以进行 <code>复用</code> ，获取到还在加载中的Job时，增加回调即可，如下图所示：</p>
+<p><img src="./uml/FetchResourceSequence4_2-0.png" alt="" /></p>
+<p>如果没有可复用的Job，则创建相应的Job，维护Job资源池，设置回调，如下图所示：
+<img src="./uml/FetchResourceSequence4_2-1.png" alt="" /></p>
+<h3 id="request处理流程三----资源使用"><a class="header" href="#request处理流程三----资源使用">Request处理流程三 -- 资源使用</a></h3>
+<p>在前文的讲解中，我们阅读到当资源加载成功后，会执行到： <code>Request#onResourceReady(Resource&lt;?&gt;, DataSource)</code>，而其实现内容即为资源使用。
+当然加载失败，或者资源校验失败会执行 <code>onLoadFailed(GlideException e)</code>。</p>
+<pre><code class="language-java">class SingleRequest {
+    @Override
+    public void onResourceReady(Resource&lt;?&gt; resource, DataSource dataSource) {
         stateVerifier.throwIfRecycled();
-        loadStatus = <span class="hljs-keyword">null</span>;
-        <span class="hljs-keyword">if</span> (resource == <span class="hljs-keyword">null</span>) {
-            GlideException exception = <span class="hljs-keyword">new</span> GlideException(<span class="hljs-string">&quot;...&quot;</span>);
+        loadStatus = null;
+        if (resource == null) {
+            GlideException exception = new GlideException("...");
             onLoadFailed(exception);
-            <span class="hljs-keyword">return</span>;
+            return;
         }
 
         Object received = resource.get();
-        <span class="hljs-keyword">if</span> (received == <span class="hljs-keyword">null</span> || !transcodeClass.isAssignableFrom(received.getClass())) {
+        if (received == null || !transcodeClass.isAssignableFrom(received.getClass())) {
             releaseResource(resource);
-            GlideException exception = <span class="hljs-keyword">new</span> GlideException(<span class="hljs-string">&quot;...&quot;</span>);
+            GlideException exception = new GlideException("...");
             onLoadFailed(exception);
-            <span class="hljs-keyword">return</span>;
+            return;
         }
 
-        <span class="hljs-keyword">if</span> (!canSetResource()) {
+        if (!canSetResource()) {
             releaseResource(resource);
-            <span class="hljs-comment">// We can&apos;t put the status to complete before asking canSetResource().</span>
+            // We can't put the status to complete before asking canSetResource().
             status = Status.COMPLETE;
-            <span class="hljs-keyword">return</span>;
+            return;
         }
 
         onResourceReady((Resource&lt;R&gt;) resource, (R) received, dataSource);
     }
-
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onResourceReady</span><span class="hljs-params">(Resource&lt;R&gt; resource, R result, DataSource dataSource)</span> </span>{
-        <span class="hljs-comment">// We must call isFirstReadyResource before setting status.</span>
-        <span class="hljs-keyword">boolean</span> isFirstResource = isFirstReadyResource();
+    
+    private void onResourceReady(Resource&lt;R&gt; resource, R result, DataSource dataSource) {
+        // We must call isFirstReadyResource before setting status.
+        boolean isFirstResource = isFirstReadyResource();
         status = Status.COMPLETE;
-        <span class="hljs-keyword">this</span>.resource = resource;
+        this.resource = resource;
 
-        <span class="hljs-comment">//log</span>
+        //log
 
-        isCallingCallbacks = <span class="hljs-keyword">true</span>;
-        <span class="hljs-keyword">try</span> {
-            <span class="hljs-keyword">if</span> ((requestListener == <span class="hljs-keyword">null</span>
+        isCallingCallbacks = true;
+        try {
+            if ((requestListener == null
                     || !requestListener.onResourceReady(result, model, target, dataSource, isFirstResource))
-                    &amp;&amp; (targetListener == <span class="hljs-keyword">null</span>
+                    &amp;&amp; (targetListener == null
                     || !targetListener.onResourceReady(result, model, target, dataSource, isFirstResource))) {
-                Transition&lt;? <span class="hljs-keyword">super</span> R&gt; animation =
+                Transition&lt;? super R&gt; animation =
                         animationFactory.build(dataSource, isFirstResource);
                 target.onResourceReady(result, animation);
             }
-        } <span class="hljs-keyword">finally</span> {
-            isCallingCallbacks = <span class="hljs-keyword">false</span>;
+        } finally {
+            isCallingCallbacks = false;
         }
 
         notifyLoadSuccess();
     }
 }
-</code></pre>
-<p><em>&#x6CE8;&#x610F;:RequestListener &#x4EE5;&#x53CA; TargetListener&#x7684;&#x5904;&#x7406;&#xFF0C;&#x5728;&#x4F7F;&#x7528;&#x76D1;&#x542C;&#x5668; <code>&#x9644;&#x52A0;</code> &#x4E00;&#x4E9B;&#x529F;&#x80FD;&#x65F6;&#xFF0C;&#x4F8B;&#x5982; <code>&#x91C7;&#x96C6;&#x57CB;&#x70B9;</code>&#x3001; <code>&#x4F9D;&#x8D56;&#x72B6;&#x6001;&#x89E6;&#x53D1;</code>&#xFF0C;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x6B64;&#x5904;&#x7EC6;&#x8282;&#x3002;</em></p>
-<p>&#x800C;Target&#x5B9E;&#x73B0;&#x7C7B;&#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#xFF0C;&#x672C;&#x6587;&#x7565;&#x53BB;&#xFF0C;&#x611F;&#x5174;&#x8DA3;&#x7684;&#x8BFB;&#x8005;&#x8FD8;&#x8BF7;&#x81EA;&#x884C;&#x9605;&#x8BFB;&#x6E90;&#x7801;&#x3002;</p>
-<h2 id="&#x5185;&#x5BB9;&#x603B;&#x7ED3;"><a name="&#x5185;&#x5BB9;&#x603B;&#x7ED3;" class="anchor-navigation-ex-anchor" href="#&#x5185;&#x5BB9;&#x603B;&#x7ED3;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5185;&#x5BB9;&#x603B;&#x7ED3;</h2>
-<p>&#x8FD9;&#x662F;&#x4E00;&#x5F20;Glide 3.x&#x65F6;&#x4EE3;&#x7684;&#x67B6;&#x6784;&#x56FE;&#xFF0C;&#x4EC5;&#x4F9B;&#x53C2;&#x8003;</p>
-<div style="background-color: white">
-<img src="http://sniffer-site.oss-cn-shenzhen.aliyuncs.com/GlideDiagram.png" alt="Glide 3.x&#x67B6;&#x6784;&#x56FE;&#x4F9B;&#x53C2;&#x8003;">
-</div>
 
-<p><em>&#x56FE;&#x7247;&#x6709;&#x533A;&#x57DF;&#x900F;&#x660E;&#xFF0C;&#x4F7F;&#x7528;&#x4E86;html&#x52A0;&#x4E86;&#x80CC;&#x666F;&#x8272;&#xFF0C;&#x5982;&#x679C;&#x88AB;&#x8F6C;&#x4E49;&#x4E86;&#xFF0C;<a href="http://sniffer-site.oss-cn-shenzhen.aliyuncs.com/GlideDiagram.png" target="_blank">&#x8BF7;&#x770B;&#x8FD9;&#x91CC;</a></em></p>
-<p>&#x56FE;&#x4E2D;&#xFF0C;<code>&#x84DD;&#x8272;</code> &#x548C; <code>&#x7D2B;&#x8272;</code> &#x533A;&#x57DF;&#x5BF9;&#x5E94;&#x4E86;&#x8D44;&#x6E90;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#xFF0C;<code>&#x9EC4;&#x8272;</code> &#x533A;&#x57DF;&#x5BF9;&#x5E94;&#x4E86;&#x539F;&#x59CB;&#x8D44;&#x6E90;&#x83B7;&#x53D6;&#xFF0C;<code>&#x54C1;&#x7EA2;&#x8272;</code> &#x533A;&#x57DF;&#x5BF9;&#x5E94;&#x4E86;&#x5185;&#x90E8;&#x7EBF;&#x7A0B;&#x6C60;&#x3002;</p>
-<p><em>&#x867D;&#x7136;&#x8FD9;&#x5F20;&#x56FE;&#x5DF2;&#x7ECF;&#x65E0;&#x6CD5;&#x548C; <code>Glide 4.x</code> &#x5B8C;&#x5168;&#x5BF9;&#x5E94;&#xFF0C;&#x4F46;&#x662F;&#x5904;&#x7406;&#x95EE;&#x9898;&#x7684;&#x4E3B;&#x8981;&#x6D41;&#x7A0B;&#x8FD8;&#x662F;&#x6CA1;&#x6709;&#x53D8;&#x5316;&#x7684;&#x3002;</em></p>
-<p>&#x672C;&#x6587;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x662F;&#x5728; <code>Glide 4.12.0&#x7248;&#x672C;&#x57FA;&#x7840;&#x4E0A;</code> &#x5BF9; <code>&#x84DD;&#x8272;&#x533A;&#x57DF;</code> &#x7684; <code>&#x6DF1;&#x5EA6;&#x6316;&#x6398;</code> &#x4EE5;&#x53CA;&#x5BF9; <code>&#x7D2B;&#x8272;&#x533A;&#x57DF;</code> &#x7684; <code>&#x7B80;&#x8981;&#x68B3;&#x7406;</code> <em>&#x62E9;&#x53BB;&#x4E86;&#x7F13;&#x5B58;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;</em>&#x3002;</p>
-<h2 id="&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;"><a name="&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;" class="anchor-navigation-ex-anchor" href="#&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;</h2>
-<p>&#x5728;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x5206;&#x6790;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x7F57;&#x5217;&#x4E86;&#x90E8;&#x5206;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#x4F7F;&#x7528;&#x7684;&#x5730;&#x65B9;&#x3002;&#x8FD9;&#x4E9B;&#x70B9;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x5E76;&#x5728;&#x4F7F;&#x7528;&#x4E2D;&#x907F;&#x5F00;&#x3002;</p>
-<p>&#x672C;&#x6587;&#x4E2D;&#x6CA1;&#x6709;&#x6D89;&#x53CA;&#x5230;&#x5177;&#x4F53;&#x6848;&#x4F8B;&#xFF0C;&#x6240;&#x4EE5;&#x6CA1;&#x6709; <code>&#x66F4;&#x4F18;&#x505A;&#x6CD5;</code> &#xFF0C; <code>&#x66F4;&#x5408;&#x9002;&#x7684;&#x505A;&#x6CD5;</code> &#x3002;</p>
-<p>&#x4F46;&#x9605;&#x8BFB;&#x4F18;&#x79C0;&#x7684;&#x6E90;&#x7801;&#xFF0C;&#x53EF;&#x4EE5;&#x5206;&#x6790;&#x5176;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#xFF0C;&#x601D;&#x8003;&#x8FD9;&#x6837;&#x8BBE;&#x8BA1;&#x7684;&#x4F18;&#x52A3;&#x3002;</p>
-<p>&#x5982;&#xFF1A;</p>
+</code></pre>
+<p><em>注意:RequestListener 以及 TargetListener的处理，在使用监听器 <code>附加</code> 一些功能时，例如 <code>采集埋点</code>、 <code>依赖状态触发</code>，需要注意此处细节。</em></p>
+<p>而Target实现类的具体实现，本文略去，感兴趣的读者还请自行阅读源码。</p>
+<h2 id="内容总结"><a class="header" href="#内容总结">内容总结</a></h2>
+<p>这是一张Glide 3.x时代的架构图，仅供参考</p>
+<div style="background-color: white">
+<img src="http://sniffer-site.oss-cn-shenzhen.aliyuncs.com/GlideDiagram.png" alt="Glide 3.x架构图供参考" />
+</div>
+<p><em>图片有区域透明，使用了html加了背景色，如果被转义了，<a href="http://sniffer-site.oss-cn-shenzhen.aliyuncs.com/GlideDiagram.png">请看这里</a></em></p>
+<p>图中，<code>蓝色</code> 和 <code>紫色</code> 区域对应了资源加载过程，<code>黄色</code> 区域对应了原始资源获取，<code>品红色</code> 区域对应了内部线程池。</p>
+<p><em>虽然这张图已经无法和 <code>Glide 4.x</code> 完全对应，但是处理问题的主要流程还是没有变化的。</em></p>
+<p>本文的内容，是在 <code>Glide 4.12.0版本基础上</code> 对 <code>蓝色区域</code> 的 <code>深度挖掘</code> 以及对 <code>紫色区域</code> 的 <code>简要梳理</code> <em>择去了缓存实现细节</em>。</p>
+<h2 id="思危思退思变"><a class="header" href="#思危思退思变">思危、思退、思变</a></h2>
+<p>在加载过程分析中，我们已经罗列了部分可能出现错误使用的地方。这些点需要注意并在使用中避开。</p>
+<p>本文中没有涉及到具体案例，所以没有 <code>更优做法</code> ， <code>更合适的做法</code> 。</p>
+<p>但阅读优秀的源码，可以分析其设计思路，思考这样设计的优劣。</p>
+<p>如：</p>
 <ul>
-<li>Request &#x6839;&#x636E;&#x5185;&#x5728;&#x72B6;&#x6001;&#x679A;&#x4E3E;&#x5904;&#x7406;&#x5207;&#x9762;&#xFF0C;&#x5728;&#x5F02;&#x6B65;&#x5904;&#x7406;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x9690;&#x85CF;&#x4E86;&#x5185;&#x5728;&#x5B9E;&#x73B0;&#xFF0C;&#x4EC5;&#x63D0;&#x4F9B;&#x6700;&#x7B80;&#x5355;&#x7684;&#x63A7;&#x5236;API&#xFF0C;&#x5982; <code>begin</code>&#xFF0C;<code>pause</code>&#xFF1B;&#x53C8;&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x4F7F;&#x7528; <code>&#x72B6;&#x6001;&#x6A21;&#x5F0F;</code>&#xFF1F;</li>
-<li>Engine &#x4F5C;&#x4E3A;&#x6574;&#x4E2A;&#x6D41;&#x7A0B;&#x7684;&#x63A7;&#x5236;&#x6838;&#x5FC3;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x79CD; <code>Facade&#x6A21;&#x5F0F;</code> &#x5B9E;&#x8DF5;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5B83;&#x7684;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x4F7F;&#x7528;&#x8005;&#x9700;&#x8981;&#x6E05;&#x6670;&#x7684;&#x4E86;&#x89E3;&#xFF1A;<ul>
-<li>&#x7F13;&#x5B58;&#x7684;&#x4F7F;&#x7528;&#x7EC6;&#x8282;</li>
-<li>EngineJob&#x7684;&#x8C03;&#x5EA6;&#x7B49; <p>
-&#x800C;&#x589E;&#x52A0;&#x4E86; Facade&#x5C42;&#x540E;&#xFF0C;&#x5BF9;&#x4F7F;&#x7528;&#x8005;&#x800C;&#x8A00;&#xFF0C;&#x4EC5;&#x9700;&#x8981;&#x77E5;&#x9053;&#x5176;&#x529F;&#x80FD;&#x548C;API&#x8BED;&#x4E49;&#x5373;&#x53EF;&#x3002;</p></li>
+<li>Request 根据内在状态枚举处理切面，在异步处理的过程中，隐藏了内在实现，仅提供最简单的控制API，如 <code>begin</code>，<code>pause</code>；又为什么不使用 <code>状态模式</code>？</li>
+<li>Engine 作为整个流程的控制核心，这是一种 <code>Facade模式</code> 实践，如果没有它的存在，则使用者需要清晰的了解：
+<ul>
+<li>缓存的使用细节</li>
+<li>EngineJob的调度等 <p>
+而增加了 Facade层后，对使用者而言，仅需要知道其功能和API语义即可。</li>
 </ul>
 </li>
 </ul>
-<p>&#x5F53;&#x7136;&#xFF0C;&#x8FD9;&#x4E9B;&#x5185;&#x5BB9;&#x4EE5;&#x53CA;&#x66F4;&#x7EC6;&#x81F4;&#x7684;&#x601D;&#x8003;&#xFF0C;&#x9700;&#x8981;&#x5EFA;&#x7ACB;&#x5728; <code>&#x6709;&#x76EE;&#x7684;</code> &#x5730;&#x6E90;&#x7801;&#x9605;&#x8BFB;&#x4E0A;&#xFF0C;&#x800C;&#x672C;&#x6587;&#x6240;&#x8D77;&#x5230;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E; <code>&#x5F15;&#x5B50;</code>&#xFF0C;<code>&#x53C2;&#x8003;</code>&#x3002;</p>
-<hr>
-<p>&#x5047;&#x671F;&#x5230;&#x4E86;&#xFF0C;&#x4E5F;&#x5E0C;&#x671B;&#x8BFB;&#x8005;&#x4EEC;&#x53BB;&#x8E0F;&#x8E0F;&#x9752;&#xFF0C;&#x953B;&#x70BC;&#x953B;&#x70BC;&#xFF0C;&#x62E5;&#x6709;&#x5065;&#x5EB7;&#x7684;&#x8EAB;&#x4F53;&#x72B6;&#x6001;&#xFF01;</p>
-<p>&#x6700;&#x8FD1;&#x4F1A;&#x964D;&#x4F4E;&#x5199;&#x539F;&#x521B;&#x7684;&#x9891;&#x6B21;&#xFF0C;<em>&#x5148;&#x524D;&#x4E00;&#x5468;&#x5199;&#x4E24;&#x5230;&#x4E09;&#x7BC7;&#x7740;&#x5B9E;&#x4E5F;&#x6709;&#x4E9B;&#x7D2F;</em>&#x3002; </p>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2022-04-07 22:13:30
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+<p>当然，这些内容以及更细致的思考，需要建立在 <code>有目的</code> 地源码阅读上，而本文所起到的作用，类似于 <code>引子</code>，<code>参考</code>。</p>
+<hr />
+<p>假期到了，也希望读者们去踏踏青，锻炼锻炼，拥有健康的身体状态！</p>
+<p>最近会降低写原创的频次，<em>先前一周写两到三篇着实也有些累</em>。</p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../Android/Glide/post_15.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../Android/KSP/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="post_15.html" class="navigation navigation-prev " aria-label="Previous page: 三思系列：Glide 4.X全方位认知 -- 模块职责概览">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="../KSP/" class="navigation navigation-next " aria-label="Next page: KSP">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../Android/Glide/post_15.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../Android/KSP/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"三思系列：Glide 4.X加载过程一文掌握 | Glide（二）","level":"1.2.5.2","depth":3,"next":{"title":"KSP","level":"1.2.6","depth":2,"path":"Android/KSP/README.md","ref":"./Android/KSP/README.md","articles":[{"title":"好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战","level":"1.2.6.1","depth":3,"path":"Android/KSP/post_24.md","ref":"./Android/KSP/post_24.md","articles":[]}]},"previous":{"title":"三思系列：Glide 4.X全方位认知 -- 模块职责概览","level":"1.2.5.1","depth":3,"path":"Android/Glide/post_15.md","ref":"./Android/Glide/post_15.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Android/Glide/post_16.md","mtime":"2022-04-07T14:13:30.128Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"../..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../../gitbook/gitbook.js"></script>
-    <script src="../../gitbook/theme.js"></script>
-    
-        
-        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-

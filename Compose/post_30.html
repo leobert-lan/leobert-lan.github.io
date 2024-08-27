@@ -1,1507 +1,232 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动 · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn &amp; 让Column可滑动 - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="../MultiThreading/" />
-    
-    
-    <link rel="prev" href="post_29.html" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../Android/">
-            
-                <a href="../Android/">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../Android/View/">
-            
-                <a href="../Android/View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../Android/View/post_1.html">
-            
-                <a href="../Android/View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../Android/View/post_6.html">
-            
-                <a href="../Android/View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../Android/View/post_7.html">
-            
-                <a href="../Android/View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="../Android/Idea/post_9.html">
-            
-                <a href="../Android/Idea/post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../Android/Drawable/">
-            
-                <a href="../Android/Drawable/">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="../Android/Drawable/post_2.html">
-            
-                <a href="../Android/Drawable/post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="../Android/Drawable/post_4.html">
-            
-                <a href="../Android/Drawable/post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="../Android/Drawable/post_47.html">
-            
-                <a href="../Android/Drawable/post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.4" data-path="../Android/Drawable/post_49.html">
-            
-                <a href="../Android/Drawable/post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../Android/Mechanism/Message/">
-            
-                <a href="../Android/Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../Android/Mechanism/Message/post_8.html">
-            
-                <a href="../Android/Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../Android/Idea/post_14/">
-            
-                <a href="../Android/Idea/post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.4.1" data-path="../Android/Idea/post_14.html">
-            
-                <a href="../Android/Idea/post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="../Android/Glide/">
-            
-                <a href="../Android/Glide/">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.5.1" data-path="../Android/Glide/post_15.html">
-            
-                <a href="../Android/Glide/post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5.2" data-path="../Android/Glide/post_16.html">
-            
-                <a href="../Android/Glide/post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../Android/KSP/">
-            
-                <a href="../Android/KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../Android/KSP/post_24.html">
-            
-                <a href="../Android/KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../Android/Base/">
-            
-                <a href="../Android/Base/">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.7.1" data-path="../Android/Base/post_35.html">
-            
-                <a href="../Android/Base/post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../Android/SysApp/">
-            
-                <a href="../Android/SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../Android/SysApp/post_52.html">
-            
-                <a href="../Android/SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../Android/DI/">
-            
-                <a href="../Android/DI/">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.9.1" data-path="../Android/DI/post_53.html">
-            
-                <a href="../Android/DI/post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="post_21.html">
-            
-                <a href="post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="post_26.html">
-            
-                <a href="post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="post_27.html">
-            
-                <a href="post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="post_28.html">
-            
-                <a href="post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="post_29.html">
-            
-                <a href="post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.3.6" data-path="post_30.html">
-            
-                <a href="post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../MultiThreading/">
-            
-                <a href="../MultiThreading/">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../MultiThreading/post_33.html">
-            
-                <a href="../MultiThreading/post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../MultiThreading/post_37.html">
-            
-                <a href="../MultiThreading/post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="../MultiThreading/post_38.html">
-            
-                <a href="../MultiThreading/post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="../MultiThreading/post_39.html">
-            
-                <a href="../MultiThreading/post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="../MultiThreading/post_42.html">
-            
-                <a href="../MultiThreading/post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.6" data-path="../MultiThreading/post_46.html">
-            
-                <a href="../MultiThreading/post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="../MultiThreading/post_50.html">
-            
-                <a href="../MultiThreading/post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="../MultiThreading/post_54.html">
-            
-                <a href="../MultiThreading/post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="../IO/">
-            
-                <a href="../IO/">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="../IO/post_55.html">
-            
-                <a href="../IO/post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="../IO/post_56.html">
-            
-                <a href="../IO/post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="../IO/post_57.html">
-            
-                <a href="../IO/post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="../IO/post_58.html">
-            
-                <a href="../IO/post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="../IO/post_59.html">
-            
-                <a href="../IO/post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../Gradle/">
-            
-                <a href="../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../Gradle/Modularization/post_18.html">
-            
-                <a href="../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../Gradle/Publish/post_17.html">
-            
-                <a href="../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../Gradle/post_22.html">
-            
-                <a href="../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../Groovy/">
-            
-                <a href="../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../Groovy/why_write_groovy.html">
-            
-                <a href="../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../Groovy/post_23.html">
-            
-                <a href="../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="../Review/">
-            
-                <a href="../Review/">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="../Review/post_10.html">
-            
-                <a href="../Review/post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="../Review/post_40.html">
-            
-                <a href="../Review/post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.3" data-path="../Review/post_44.html">
-            
-                <a href="../Review/post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="../Review/post_45.html">
-            
-                <a href="../Review/post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../repo/">
-            
-                <a href="../repo/">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../repo/DaVinCi.html">
-            
-                <a href="../repo/DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../Android/Idea/post_32.html">
-            
-                <a href="../Android/Idea/post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../Speculative/post_43.html">
-            
-                <a href="../Speculative/post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../repo/post_48.html">
-            
-                <a href="../repo/post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../Speculative/post_61.html">
-            
-                <a href="../Speculative/post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="../Review/DataStructure/">
-            
-                <a href="../Review/DataStructure/">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1.1" data-path="../Review/DataStructure/post_11.html">
-            
-                <a href="../Review/DataStructure/post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="../Review/DataStructure/post_12.html">
-            
-                <a href="../Review/DataStructure/post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="../Review/DataStructure/post_13.html">
-            
-                <a href="../Review/DataStructure/post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="../Review/README2.html">
-            
-                <a href="../Review/README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="../Review/post_36.html">
-            
-                <a href="../Review/post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="../Review/post_51.html">
-            
-                <a href="../Review/post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="../Review/post_60.html">
-            
-                <a href="../Review/post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="../Review/post_63.html">
-            
-                <a href="../Review/post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="../Review/post_64.html">
-            
-                <a href="../Review/post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../Note/">
-            
-                <a href="../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../Note/post_41.html">
-            
-                <a href="../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../Talk/">
-            
-                <a href="../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../Talk/talk_1.html">
-            
-                <a href="../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../Talk/talk_2_2023-03.html">
-            
-                <a href="../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../Thought/">
-            
-                <a href="../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../Thought/post_62.html">
-            
-                <a href="../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../info/">
-            
-                <a href="../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../info/about_view_series.html">
-            
-                <a href="../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../info/about_sansi_series.html">
-            
-                <a href="../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../info/about_haowan_series.html">
-            
-                <a href="../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../info/about_wengu_series.html">
-            
-                <a href="../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#jetpack-compose--&#x63A7;&#x4EF6;&#x7BC7;&#xFF08;&#x4E94;&#xFF09;---spacer&#x3001;lazyrow&#x3001;lazycolumn--&#x8BA9;column&#x53EF;&#x6ED1;&#x52A8;"><b></b>Jetpack Compose | &#x63A7;&#x4EF6;&#x7BC7;&#xFF08;&#x4E94;&#xFF09;-- Spacer&#x3001;LazyRow&#x3001;LazyColumn &amp; &#x8BA9;Column&#x53EF;&#x6ED1;&#x52A8;</a></li><ul><li><span class="title-icon "></span><a href="#&#x548C;android&#x8FDB;&#x884C;&#x7B80;&#x5355;&#x5BF9;&#x6BD4;"><b></b>&#x548C;Android&#x8FDB;&#x884C;&#x7B80;&#x5355;&#x5BF9;&#x6BD4;</a></li><li><span class="title-icon "></span><a href="#spacer"><b></b>Spacer</a></li><ul><li><span class="title-icon "></span><a href="#&#x5982;&#x4F55;&#x4F7F;&#x7528;"><b></b>&#x5982;&#x4F55;&#x4F7F;&#x7528;</a></li></ul><li><span class="title-icon "></span><a href="#lazycolumn"><b></b>LazyColumn</a></li><ul><li><span class="title-icon "></span><a href="#&#x5982;&#x4F55;&#x4F7F;&#x7528;_1"><b></b>&#x5982;&#x4F55;&#x4F7F;&#x7528;</a></li><li><span class="title-icon "></span><a href="#&#x57FA;&#x4E8E;lazylistscopeitem-&#x65B9;&#x6CD5;"><b></b>&#x57FA;&#x4E8E;LazyListScope.item &#x65B9;&#x6CD5;</a></li><li><span class="title-icon "></span><a href="#&#x57FA;&#x4E8E;lazylistscopeitems-&#x65B9;&#x6CD5;"><b></b>&#x57FA;&#x4E8E;LazyListScope.items &#x65B9;&#x6CD5;</a></li><li><span class="title-icon "></span><a href="#&#x66F4;&#x52A0;&#x4F18;&#x96C5;&#x5730;&#x5904;&#x7406;&#x95F4;&#x8DDD;&#x548C;&#x5BF9;&#x9F50;"><b></b>&#x66F4;&#x52A0;&#x4F18;&#x96C5;&#x5730;&#x5904;&#x7406;&#x95F4;&#x8DDD;&#x548C;&#x5BF9;&#x9F50;</a></li></ul><li><span class="title-icon "></span><a href="#&#x8BA9;column&#x53EF;&#x6ED1;&#x52A8;"><b></b>&#x8BA9;Column&#x53EF;&#x6ED1;&#x52A8;</a></li><ul><li><span class="title-icon "></span><a href="#demo"><b></b>Demo</a></li><li><span class="title-icon "></span><a href="#&#x6548;&#x679C;"><b></b>&#x6548;&#x679C;</a></li></ul><li><span class="title-icon "></span><a href="#&#x7ED3;&#x8BED;"><b></b>&#x7ED3;&#x8BED;</a></li></ul></ul></div><a href="#jetpack-compose--&#x63A7;&#x4EF6;&#x7BC7;&#xFF08;&#x4E94;&#xFF09;---spacer&#x3001;lazyrow&#x3001;lazycolumn--&#x8BA9;column&#x53EF;&#x6ED1;&#x52A8;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="jetpack-compose--&#x63A7;&#x4EF6;&#x7BC7;&#xFF08;&#x4E94;&#xFF09;---spacer&#x3001;lazyrow&#x3001;lazycolumn--&#x8BA9;column&#x53EF;&#x6ED1;&#x52A8;"><a name="jetpack-compose--&#x63A7;&#x4EF6;&#x7BC7;&#xFF08;&#x4E94;&#xFF09;---spacer&#x3001;lazyrow&#x3001;lazycolumn--&#x8BA9;column&#x53EF;&#x6ED1;&#x52A8;" class="anchor-navigation-ex-anchor" href="#jetpack-compose--&#x63A7;&#x4EF6;&#x7BC7;&#xFF08;&#x4E94;&#xFF09;---spacer&#x3001;lazyrow&#x3001;lazycolumn--&#x8BA9;column&#x53EF;&#x6ED1;&#x52A8;"><i class="fa fa-link" aria-hidden="true"></i></a>Jetpack Compose | &#x63A7;&#x4EF6;&#x7BC7;&#xFF08;&#x4E94;&#xFF09;-- Spacer&#x3001;LazyRow&#x3001;LazyColumn &amp; &#x8BA9;Column&#x53EF;&#x6ED1;&#x52A8;</h1>
-<p>&#x5728;&#x4E0A;&#x4E00;&#x7BC7;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5B8C;&#x6210;&#x4E86; <code>Box&#x3001;Row&#x3001;Column</code> &#x76F8;&#x5173;&#x5185;&#x5BB9;&#x7684;&#x5B66;&#x4E60;&#xFF0C;&#x5E76;&#x4E14;&#x7559;&#x4E0B;&#x4E86;&#x4E00;&#x4E2A;&#x7591;&#x95EE;&#xFF1A;<strong>&quot;&#x5982;&#x679C;&#x5BB9;&#x5668;&#x5927;&#x5C0F;&#x4E0D;&#x8DB3;&#x4EE5;&#x627F;&#x8F7D;&#x5185;&#x5BB9;&#xFF0C;&#x600E;&#x4E48;&#x5904;&#x7406;&#x5462;&#xFF1F;&quot;</strong>&#xFF0C;&#x8FD9;&#x4E00;&#x7BC7;&#x6211;&#x4EEC;&#x4E00;&#x8D77;&#x5B66;&#x4E60;&#x8FD9;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x3002;</p>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../Compose/post_30.html" class="active"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="jetpack-compose--控件篇五---spacerlazyrowlazycolumn--让column可滑动"><a class="header" href="#jetpack-compose--控件篇五---spacerlazyrowlazycolumn--让column可滑动">Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn &amp; 让Column可滑动</a></h1>
+<p>在上一篇中，我们完成了 <code>Box、Row、Column</code> 相关内容的学习，并且留下了一个疑问：<strong>"如果容器大小不足以承载内容，怎么处理呢？"</strong>，这一篇我们一起学习这部分内容。</p>
 <blockquote>
-<p><em>&#x6587;&#x4E2D;&#x4EE3;&#x7801;&#x5747;&#x57FA;&#x4E8E; 1.0.1&#x7248;&#x672C;</em></p>
-<p><em>&#x5982;&#x65E0;&#x7279;&#x6B8A;&#x8BF4;&#x660E;&#xFF0C;&#x6587;&#x4E2D;&#x7684; <code>Compose</code> &#x5747;&#x6307;&#x4EE3; <code>Jetpack compose</code></em></p>
-<p>&#x6587;&#x4E2D;&#x4EE3;&#x7801;&#x5747;&#x53EF;&#x5728; <a href="https://github.com/leobert-lan/ComposeWorkShop" target="_blank">WorkShop</a> &#x4E2D;&#x83B7;&#x53D6;&#xFF0C;&#x672C;&#x7BC7;&#x4EE3;&#x7801;&#x96C6;&#x4E2D;&#x4E8E; post29 &amp; post30 &#x5305;&#x4E0B;</p>
-<p>&#x5B8C;&#x6574;&#x7CFB;&#x5217;&#x76EE;&#x5F55;: <a href="https://leobert-lan.github.io/Compose/" target="_blank">Github Pages</a> | <a href="https://juejin.cn/column/6999815370697605156" target="_blank">&#x6398;&#x91D1;</a> | <a href="https://blog.csdn.net/a774057695/category_11298077.html" target="_blank">csdn</a></p>
+<p><em>文中代码均基于 1.0.1版本</em></p>
+<p><em>如无特殊说明，文中的 <code>Compose</code> 均指代 <code>Jetpack compose</code></em></p>
+<p>文中代码均可在 <a href="https://github.com/leobert-lan/ComposeWorkShop">WorkShop</a> 中获取，本篇代码集中于 post29 &amp; post30 包下</p>
+<p>完整系列目录: <a href="https://leobert-lan.github.io/Compose/">Github Pages</a> | <a href="https://juejin.cn/column/6999815370697605156">掘金</a> | <a href="https://blog.csdn.net/a774057695/category_11298077.html">csdn</a></p>
 </blockquote>
-<h2 id="&#x548C;android&#x8FDB;&#x884C;&#x7B80;&#x5355;&#x5BF9;&#x6BD4;"><a name="&#x548C;android&#x8FDB;&#x884C;&#x7B80;&#x5355;&#x5BF9;&#x6BD4;" class="anchor-navigation-ex-anchor" href="#&#x548C;android&#x8FDB;&#x884C;&#x7B80;&#x5355;&#x5BF9;&#x6BD4;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x548C;Android&#x8FDB;&#x884C;&#x7B80;&#x5355;&#x5BF9;&#x6BD4;</h2>
-<p>&#x5728;Android&#x4E2D;&#xFF0C;SDK&#x63D0;&#x4F9B;&#x4E86;&#x8BF8;&#x5982;&#xFF1A; <code>ScrollView</code> <code>NestedScrollView</code> <code>ListView</code> <code>GridView</code> <code>RecyclerView</code>&#xFF0C;&#x7B49;&#x9488;&#x5BF9;&#x5404;&#x7C7B;&#x573A;&#x666F;&#x4E0B;&#x9002;&#x7528;&#x7684;&#x63A7;&#x4EF6;&#xFF0C;
-&#x57FA;&#x4E8E;&#x6ED1;&#x52A8;&#x624B;&#x52BF;&#x8C03;&#x6574;&#x5185;&#x5BB9;&#x5C55;&#x793A;&#x533A;&#x57DF;&#xFF0C;&#x4EE5;&#x8FBE;&#x5230;&#x663E;&#x793A;&#x66F4;&#x591A;&#x5185;&#x5BB9;&#x7684;&#x76EE;&#x7684;&#x3002;</p>
-<p>&#x8FDB;&#x4E00;&#x6B65;&#x63A2;&#x7D22;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#xFF1A;View&#x672C;&#x8EAB;&#x5C31;&#x5305;&#x542B;&#x4E86;Scroll&#x673A;&#x5236;&#x7684; <code>&#x534A;&#x6210;&#x54C1;&#x5B9E;&#x73B0;</code>&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x672C;&#x6587;&#x6211;&#x4EEC;&#x4E0D;&#x53BB;&#x6DF1;&#x7A76;Android&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x501F;&#x52A9;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x638C;&#x63E1;&#x7684;Android&#x77E5;&#x8BC6;&#xFF0C;&#x5F15;&#x51FA;&#x4E00;&#x70B9;&#xFF1A;</p>
+<h2 id="和android进行简单对比"><a class="header" href="#和android进行简单对比">和Android进行简单对比</a></h2>
+<p>在Android中，SDK提供了诸如： <code>ScrollView</code> <code>NestedScrollView</code> <code>ListView</code> <code>GridView</code> <code>RecyclerView</code>，等针对各类场景下适用的控件，
+基于滑动手势调整内容展示区域，以达到显示更多内容的目的。</p>
+<p>进一步探索可以发现：View本身就包含了Scroll机制的 <code>半成品实现</code>，当然，本文我们不去深究Android的内容，借助我们已经掌握的Android知识，引出一点：</p>
 <blockquote>
-<p>&#x57FA;&#x4E8E;Scroll&#x673A;&#x5236;&#xFF0C;&#x7528;&#x5C0F;&#x5BB9;&#x5668;&#x5C55;&#x73B0;&#x5927;&#x5185;&#x5BB9;&#x7684;&#x672C;&#x8D28;&#xFF1A;&#x5728;&#x89C6;&#x56FE;&#x6D4B;&#x91CF;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x7ED3;&#x5408;&#x6ED1;&#x52A8;&#x624B;&#x52BF;&#x5904;&#x7406;&#xFF0C;&#x8C03;&#x6574;&#x5185;&#x5BB9;&#x5E03;&#x5C40;&#xFF0C;&#x7ED8;&#x5236;&#x540E;&#x5C55;&#x73B0;&#x3002;</p>
+<p>基于Scroll机制，用小容器展现大内容的本质：在视图测量的基础上，结合滑动手势处理，调整内容布局，绘制后展现。</p>
 </blockquote>
-<p>&#x5728;&#x65E9;&#x671F;&#x7684;&#x4E00;&#x4E9B;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6709;&#x535A;&#x4E3B;&#x63D0;&#x5230;&#xFF1A;Compose&#x4E2D;&#x5BF9;&#x5E94;&#x7684;&#x5185;&#x5BB9;&#x4E3A; <code>ScrollRow&#xFF0C;ScrollColumn</code> / <code>LazyRow&#x3001;LazyColumn</code>&#x3002;</p>
-<p><em>&#x5728;&#x65E9;&#x671F;&#x7684;&#x9884;&#x89C8;&#x7248;&#x4E2D;&#xFF0C;&#x77ED;&#x6682;&#x7684;&#x5B58;&#x5728;&#x8FC7; ScrollRow&#xFF0C;ScrollColumn&#x7B49;&#x5185;&#x5BB9;&#xFF0C;&#x4F3C;&#x4E4E;&#x5DF2;&#x7ECF;&#x88AB;&#x79FB;&#x9664;</em></p>
-<p><strong>Compose&#x4E2D;&#x4E5F;&#x662F;&#x6309;&#x7167;&#x8FD9;&#x6837;&#x7684;&#x601D;&#x8DEF;&#x8BBE;&#x8BA1;&#x7684;</strong>&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5728;&#x540E;&#x7EED;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#x518D;&#x7EC6;&#x81F4;&#x5730;&#x5C55;&#x5F00;&#x7814;&#x7A76;&#xFF0C;&#x672C;&#x7BC7;&#x4E2D;&#x4EC5;&#x5B66;&#x4E60;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5B83;&#x4EEC;&#x3002;</p>
-<p>&#x5728;&#x771F;&#x6B63;&#x5F00;&#x59CB;&#x8FD9;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x4E4B;&#x524D;&#xFF0C;&#x5148;&#x8865;&#x5145;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x63A7;&#x4EF6; Spacer&#xFF0C;&#x53EF;&#x4EE5;&#x7B80;&#x5355;&#x7684;&#x521B;&#x5EFA;&#x5360;&#x4F4D;&#x95F4;&#x8DDD;&#xFF0C;<em>&#x540E;&#x7EED;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x4ED6;&#x7684;&#x4F4D;&#x7F6E;&#x4E86;</em>&#x3002;</p>
-<h2 id="spacer"><a name="spacer" class="anchor-navigation-ex-anchor" href="#spacer"><i class="fa fa-link" aria-hidden="true"></i></a>Spacer</h2>
-<p>&#x5728;&#x4E4B;&#x524D;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5B66;&#x4E60;&#x8FC7;Modifier&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B;&#x4E00;&#x4E9B;&#x548C;&#x5E03;&#x5C40;&#x76F8;&#x5173;&#x7684;API&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;<code>padding</code>&#x3001;<code>offset</code>&#xFF0C;&#x4F46;&#x5E76;&#x65E0; <code>margin</code> &#x7B49;&#x5185;&#x5BB9;&#xFF0C;<em>&#x6309;&#x7167;&#x4E1A;&#x5185;&#x60EF;&#x4F8B;&#xFF0C;
-&#x5982;&#x679C;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x5E7F;&#x4E3A;&#x63A5;&#x53D7;&#x7684;&#x540D;&#x8BCD;&#xFF0C;&#x4E00;&#x822C;&#x4E0D;&#x4F1A;&#x4F7F;&#x7528;&#x65B0;&#x8BCD;&#xFF0C;&#x81F3;&#x5C11;&#x8BCD;&#x6839;&#x662F;&#x4E00;&#x81F4;&#x7684;</em>
-&#xFF0C;&#x5728;Compose&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;&#x4E86;Spacer&#xFF0C;&#x53D6;&#x7F14;&#x4E86;Margin&#x7684;&#x4E00;&#x4E9B;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x3002;</p>
-<p><em>&#x6CE8;&#xFF1A;&#x8BA1;&#x7B97;&#x603B;&#x662F;&#x6709;&#x635F;&#x8017;&#x7684;&#xFF0C;&#x4E0D;&#x8981;&#x6EE5;&#x7528;Spacer,&#x5E76;&#x4E14;&#x5F88;&#x591A;&#x573A;&#x666F;&#x4E0B;&#x6709;&#x7279;&#x5B9A;&#x7684;&#x65B9;&#x5F0F;&#x5904;&#x7406;&#x95F4;&#x8DDD;&#xFF0C;&#x540E;&#x7EED;&#x4F1A;&#x9010;&#x6E10;&#x5B66;&#x4E60;&#x5230;</em></p>
-<h3 id="&#x5982;&#x4F55;&#x4F7F;&#x7528;"><a name="&#x5982;&#x4F55;&#x4F7F;&#x7528;" class="anchor-navigation-ex-anchor" href="#&#x5982;&#x4F55;&#x4F7F;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5982;&#x4F55;&#x4F7F;&#x7528;</h3>
-<pre><code class="lang-kotlin">@Composable
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">Spacer</span><span class="hljs-params">(modifier: <span class="hljs-type">Modifier</span>)</span></span>
+<p>在早期的一些文章中，有博主提到：Compose中对应的内容为 <code>ScrollRow，ScrollColumn</code> / <code>LazyRow、LazyColumn</code>。</p>
+<p><em>在早期的预览版中，短暂的存在过 ScrollRow，ScrollColumn等内容，似乎已经被移除</em></p>
+<p><strong>Compose中也是按照这样的思路设计的</strong>，我们将在后续的文章中再细致地展开研究，本篇中仅学习如何使用它们。</p>
+<p>在真正开始这部分内容之前，先补充一个简单的控件 Spacer，可以简单的创建占位间距，<em>后续的文章中已经没有他的位置了</em>。</p>
+<h2 id="spacer"><a class="header" href="#spacer">Spacer</a></h2>
+<p>在之前的文章中，我们学习过Modifier，其中包含一些和布局相关的API，例如：<code>padding</code>、<code>offset</code>，但并无 <code>margin</code> 等内容，<em>按照业内惯例，
+如果已经存在一个广为接受的名词，一般不会使用新词，至少词根是一致的</em>
+，在Compose中，使用了Spacer，取缔了Margin的一些使用场景。</p>
+<p><em>注：计算总是有损耗的，不要滥用Spacer,并且很多场景下有特定的方式处理间距，后续会逐渐学习到</em></p>
+<h3 id="如何使用"><a class="header" href="#如何使用">如何使用</a></h3>
+<pre><code class="language-kotlin">@Composable
+fun Spacer(modifier: Modifier)
 </code></pre>
-<p>&#x4E00;&#x822C;&#x53EA;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x4ED6;&#x7684;&#x5BBD;&#x9AD8;&#x5C3A;&#x5BF8;&#x5373;&#x53EF;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
-<pre><code class="lang-kotlin">Spacer(modifier = Modifier.size(<span class="hljs-number">3.</span>dp))
+<p>一般只需要指定他的宽高尺寸即可，例如：</p>
+<pre><code class="language-kotlin">Spacer(modifier = Modifier.size(3.dp))
 </code></pre>
-<h2 id="lazycolumn"><a name="lazycolumn" class="anchor-navigation-ex-anchor" href="#lazycolumn"><i class="fa fa-link" aria-hidden="true"></i></a>LazyColumn</h2>
-<p><em>&#x5728;&#x4E0A;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5B66;&#x4E60;&#x8FC7; Row&#x548C;Column&#xFF0C;&#x5B83;&#x4EEC;&#x4EC5;&#x4EC5;&#x662F;&#x5728;&#x65B9;&#x5411;&#x4E0A;&#x4E0D;&#x4E00;&#x81F4;&#xFF0C;&#x5728;&#x5B9E;&#x73B0;&#x4E0A;&#x975E;&#x5E38;&#x7C7B;&#x4F3C;&#x3002;&#x540C;&#x6837;&#x7684;&#xFF0C;LazyRow&#x548C;LazyColumn&#x4E5F;&#x662F;&#x5982;&#x6B64;&#x3002;</em></p>
-<p>Doc&#x4E2D;&#x63D0;&#x5230;&#xFF1A;</p>
+<h2 id="lazycolumn"><a class="header" href="#lazycolumn">LazyColumn</a></h2>
+<p><em>在上一篇文章中，我们已经学习过 Row和Column，它们仅仅是在方向上不一致，在实现上非常类似。同样的，LazyRow和LazyColumn也是如此。</em></p>
+<p>Doc中提到：</p>
 <blockquote>
 <p>The vertically scrolling list that only composes and lays out the currently visible items.
 The content block defines a DSL which allows you to emit items of different types.
 For example you can use LazyListScope.item to add a single item and LazyListScope.items to add a list of items.</p>
 </blockquote>
-<p>&#x4EC5; &#x7EC4;&#x5408;&#x8BA1;&#x7B97; &#x4EE5;&#x53CA; &#x5E03;&#x5C40; &#x5F53;&#x524D;&#x53EF;&#x89C1;&#x5143;&#x7D20;&#x7684;&#x7EB5;&#x5411;&#x53EF;&#x6ED1;&#x52A8;&#x5217;&#x8868;&#x3002;&#x5185;&#x5BB9;&#x5757;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;DSL&#xFF0C;&#x5141;&#x8BB8;&#x521B;&#x5EFA;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x5143;&#x7D20;&#x3002;</p>
-<p>&#x4F8B;&#x5982;&#xFF1A;&#x4F7F;&#x7528; <code>LazyListScope.item</code> &#x6DFB;&#x52A0;&#x5355;&#x4E2A;&#x5143;&#x7D20;&#xFF0C; <code>LazyListScope.items</code> &#x6DFB;&#x52A0;&#x5143;&#x7D20;&#x5217;&#x8868;&#x3002;</p>
-<p><em>&#x6CE8;&#xFF1A;&quot;&#x5185;&#x5BB9;&#x5757;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;DSL&#xFF0C;&#x5141;&#x8BB8;&#x521B;&#x5EFA;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x5143;&#x7D20;&quot;&#xFF0C;&#x8FD9;&#x5E76;&#x4E0D;&#x540C;&#x4E8E;Android&#x4E2D;&#x6982;&#x5FF5;&#xFF1A; <code>RecyclerView#Adapter</code> &#x5177;&#x6709;&#x5C06;&#x6570;&#x636E;&#x6620;&#x5C04;&#x4E3A;&#x540C;&#x7C7B;&#x578B; <code>ViewHolder</code> &#x6216; &#x4E0D;&#x540C;&#x7C7B;&#x578B; <code>ViewHolder</code>
-&#x7684;&#x80FD;&#x529B;&#x3002;&#x800C;&#x662F;&#x6307; &quot;&#x6DFB;&#x52A0;&#x5143;&#x7D20;&#x65F6;&#x53EF;&#x4EE5;&#x662F; <code>&#x5355;&#x4E2A;&#x5143;&#x7D20;</code>&#xFF0C;&#x6216;&#x8005;&#x662F; <code>&#x5143;&#x7D20;&#x7684;&#x5217;&#x8868;</code>&#xFF0C;&#x8FD9;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x7C7B;&#x578B;&#x3002;
-<strong>&#x5B57;&#x9762;&#x7FFB;&#x8BD1;&#x5728;&#x4E2D;&#x6587;&#x8BED;&#x5883;&#x4E0B;&#x5BB9;&#x6613;&#x9020;&#x6210;&#x8BEF;&#x89E3;&#x3002;</strong></em></p>
-<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x5B83;&#x7C7B;&#x4F3C;&#x4E8E;Android&#x4E2D;&#x7684; <code>ListView</code>,<code>RecyclerView</code>, <strong>&#x7740;&#x91CD;&#x70B9;&#x5728;&#x4E8E; <code>Lazy</code></strong>&#xFF0C;<strong>&#x4E0D;&#x4F1A;&#x5C06;&#x5143;&#x7D20;&#x4E00;&#x80A1;&#x8111;&#x7684;&#x5168;&#x8BA1;&#x7B97;&#x3001;&#x5E03;&#x5C40;&#x51FA;&#x6765;</strong>&#x3002;</p>
-<p>&#x6240;&#x4EE5;&#xFF0C;&#x5B83;&#x5E76;&#x4E0D;&#x5BF9;&#x6807;ScrollView&#xFF0C;&#x5728;&#x5B83;&#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x4E0B;&#xFF0C;&#x53EF;&#x6ED1;&#x52A8;&#x9700;&#x6C42;&#x975E;&#x5E38;&#x666E;&#x904D;&#xFF0C;&#x4FBF;&#x9ED8;&#x8BA4;&#x5B9E;&#x73B0;&#x4E86;&#xFF01;</p>
+<p>仅 组合计算 以及 布局 当前可见元素的纵向可滑动列表。内容块定义了一个DSL，允许创建不同类型的元素。</p>
+<p>例如：使用 <code>LazyListScope.item</code> 添加单个元素， <code>LazyListScope.items</code> 添加元素列表。</p>
+<p><em>注："内容块定义了一个DSL，允许创建不同类型的元素"，这并不同于Android中概念： <code>RecyclerView#Adapter</code> 具有将数据映射为同类型 <code>ViewHolder</code> 或 不同类型 <code>ViewHolder</code>
+的能力。而是指 "添加元素时可以是 <code>单个元素</code>，或者是 <code>元素的列表</code>，这是不同的类型。
+<strong>字面翻译在中文语境下容易造成误解。</strong></em></p>
+<p>很显然，它类似于Android中的 <code>ListView</code>,<code>RecyclerView</code>, <strong>着重点在于 <code>Lazy</code></strong>，<strong>不会将元素一股脑的全计算、布局出来</strong>。</p>
+<p>所以，它并不对标ScrollView，在它的使用场景下，可滑动需求非常普遍，便默认实现了！</p>
 <blockquote>
-<p>&#x6211;&#x4EEC;&#x524D;&#x9762;&#x63D0;&#x5230;&#xFF1A;</p>
-<p>&#x5728;&#x65E9;&#x671F;&#x7684;&#x4E00;&#x4E9B;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6709;&#x535A;&#x4E3B;&#x63D0;&#x5230;&#xFF1A;Compose&#x4E2D;&#x5BF9;&#x5E94;&#x7684;&#x5185;&#x5BB9;&#x4E3A; ScrollRow&#xFF0C;ScrollColumn / LazyRow&#x3001;LazyColumn</p>
-<p>&#x8FD9;&#x672C;&#x6CA1;&#x6709;&#x5565;&#x9519;&#x8BEF;&#xFF0C;&#x4F46;&#x7EDD;&#x4E0D;&#x662F;&#x88AB;&#x66F2;&#x89E3;&#x7684;&#xFF1A; &quot;Row&#x548C;Column &#x65E0;&#x6CD5;&#x63D0;&#x4F9B;&#x6ED1;&#x52A8;&#x80FD;&#x529B;&#xFF0C;&#x800C;&#x662F;&#x9700;&#x8981;&#x4F7F;&#x7528; LazyRow&#x3001;LazyColumn&quot;</p>
+<p>我们前面提到：</p>
+<p>在早期的一些文章中，有博主提到：Compose中对应的内容为 ScrollRow，ScrollColumn / LazyRow、LazyColumn</p>
+<p>这本没有啥错误，但绝不是被曲解的： "Row和Column 无法提供滑动能力，而是需要使用 LazyRow、LazyColumn"</p>
 </blockquote>
-<p><strong>&#x4F46;&#x6C14;&#x6C1B;&#x5DF2;&#x7ECF;&#x70D8;&#x6258;&#x5230;&#x8FD9;&#x91CC;&#x4E86;</strong>&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x5148;&#x5C06;&#x5176;&#x5B66;&#x5B8C;&#xFF0C;&#x518D;&#x5B66;&#x4E60; Row&#x548C;Column &#x5982;&#x4F55;&#x63D0;&#x4F9B;&#x6ED1;&#x52A8;&#x80FD;&#x529B;&#x3002;</p>
-<h3 id="&#x5982;&#x4F55;&#x4F7F;&#x7528;_1"><a name="&#x5982;&#x4F55;&#x4F7F;&#x7528;_1" class="anchor-navigation-ex-anchor" href="#&#x5982;&#x4F55;&#x4F7F;&#x7528;_1"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5982;&#x4F55;&#x4F7F;&#x7528;</h3>
-<pre><code class="lang-kotlin">@Composable
+<p><strong>但气氛已经烘托到这里了</strong>，那我们先将其学完，再学习 Row和Column 如何提供滑动能力。</p>
+<h3 id="如何使用-1"><a class="header" href="#如何使用-1">如何使用</a></h3>
+<pre><code class="language-kotlin">@Composable
 fun LazyColumn(
     modifier: Modifier = Modifier,
     state: LazyListState = rememberLazyListState(),
@@ -1514,96 +239,96 @@ fun LazyColumn(
     content: LazyListScope.() -&gt; Unit
 )
 </code></pre>
-<p>&#x5404;&#x4E2A;&#x53C2;&#x6570;&#x542B;&#x4E49;&#xFF1A;</p>
+<p>各个参数含义：</p>
 <ul>
-<li>modifier&#xFF1A;&#x4FEE;&#x9970;&#x5668;</li>
-<li>state&#xFF1A;&#x7528;&#x4E8E;&#x63A7;&#x5236;&#x6216;&#x8005;&#x89C2;&#x6D4B;&#x5217;&#x8868;&#x72B6;&#x6001;</li>
-<li>contentPadding&#xFF1A;&#x6574;&#x4F53;&#x5185;&#x5BB9;&#x5468;&#x56F4;&#x7684;&#x4E00;&#x4E2A;Padding&#xFF0C;<em>&#x6CE8;&#xFF1A;&#x5185;&#x5BB9;&#x56DB;&#x5468;&#x7684;&#x7559;&#x767D;&#xFF0C;&#x4EE5;&#x7EB5;&#x5411;&#x5217;&#x8868;&#x4E3A;&#x4F8B;&#xFF0C;&#x5C3E;&#x90E8;&#x6CA1;&#x6709;&#x5C55;&#x793A;&#x65F6;&#x770B;&#x4E0D;&#x5230;&#x5C3E;&#x90E8;&#x7684;&#x7559;&#x767D;</em> &#x8FD9;&#x901A;&#x8FC7;Modifier&#x65E0;&#x6CD5;&#x5B9E;&#x73B0;&#xFF0C;
-<em>&#x6CE8;&#xFF1A;Modifier&#x53EA;&#x80FD;&#x5B9E;&#x73B0;&#x5217;&#x8868;&#x5BB9;&#x5668;&#x56FA;&#x5B9A;&#x7684;&#x7559;&#x767D;&#x95F4;&#x8DDD;</em> &#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B83;&#x5728;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x524D;&#x548C;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x540E;&#x7559;&#x767D;&#x3002; &#x5982;&#x679C;&#x9700;&#x8981;&#x5728;&#x5143;&#x7D20;&#x95F4;&#x7559;&#x51FA;&#x95F4;&#x8DDD;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; verticalArrangement</li>
-<li>reverseLayout&#xFF1A;&#x662F;&#x5426;&#x53CD;&#x8F6C;&#x5217;&#x8868;</li>
-<li>verticalArrangement&#xFF1A;&#x5B50;&#x63A7;&#x4EF6;&#x7EB5;&#x5411;&#x7684;&#x8303;&#x56F4;&#x3002;<em>&#x53EF;&#x7528;&#x4E8E;&#x6DFB;&#x52A0;&#x5B50;&#x63A7;&#x4EF6;&#x4E4B;&#x95F4;&#x7684;&#x95F4;&#x8DDD;&#xFF0C;&#x4EE5;&#x53CA;&#x5185;&#x5BB9;&#x4E0D;&#x8DB3;&#x4EE5;&#x586B;&#x6EE1;&#x5217;&#x8868;&#x6700;&#x5C0F;&#x5C3A;&#x5BF8;&#x65F6;&#xFF0C;&#x5982;&#x4F55;&#x6392;&#x5E03;</em></li>
-<li>horizontalAlignment&#xFF1A;&#x5B50;&#x63A7;&#x4EF6;&#x6A2A;&#x5411;&#x5BF9;&#x9F50;&#x65B9;&#x5F0F;</li>
-<li>flingBehavior&#xFF1A;fling&#x884C;&#x4E3A;&#x7684;&#x5904;&#x7406;&#x903B;&#x8F91;</li>
-<li>content&#xFF1A;&#x58F0;&#x660E;&#x4E86;&#x5982;&#x4F55;&#x63D0;&#x4F9B;&#x5B50;&#x63A7;&#x4EF6;&#x7684;DSL&#xFF0C;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;</li>
+<li>modifier：修饰器</li>
+<li>state：用于控制或者观测列表状态</li>
+<li>contentPadding：整体内容周围的一个Padding，<em>注：内容四周的留白，以纵向列表为例，尾部没有展示时看不到尾部的留白</em> 这通过Modifier无法实现，
+<em>注：Modifier只能实现列表容器固定的留白间距</em> 。可以使用它在第一个元素前和最后一个元素后留白。 如果需要在元素间留出间距，可以使用 verticalArrangement</li>
+<li>reverseLayout：是否反转列表</li>
+<li>verticalArrangement：子控件纵向的范围。<em>可用于添加子控件之间的间距，以及内容不足以填满列表最小尺寸时，如何排布</em></li>
+<li>horizontalAlignment：子控件横向对齐方式</li>
+<li>flingBehavior：fling行为的处理逻辑</li>
+<li>content：声明了如何提供子控件的DSL，有两种方式</li>
 </ul>
-<pre><code class="lang-kotlin">@LazyScopeMarker
+<pre><code class="language-kotlin">@LazyScopeMarker
 interface LazyListScope {
 
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">item</span><span class="hljs-params">(key: <span class="hljs-type">Any?</span> = null, content: <span class="hljs-type">@Composable LazyItemScope.(</span>)</span> -&gt; <span class="hljs-keyword">Unit</span>)</span>
+    fun item(key: Any? = null, content: @Composable LazyItemScope.() -&gt; Unit)
 
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">items</span><span class="hljs-params">(
-        count: <span class="hljs-type">Int,
-        key: ((index: Int</span>)</span> -&gt; Any)? = null,</span>
-        itemContent: @Composable LazyItemScope.(index: <span class="hljs-keyword">Int</span>) -&gt; <span class="hljs-keyword">Unit</span>
+    fun items(
+        count: Int,
+        key: ((index: Int) -&gt; Any)? = null,
+        itemContent: @Composable LazyItemScope.(index: Int) -&gt; Unit
     )
 
     @ExperimentalFoundationApi
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">stickyHeader</span><span class="hljs-params">(key: <span class="hljs-type">Any?</span> = null, content: <span class="hljs-type">@Composable LazyItemScope.(</span>)</span> -&gt; <span class="hljs-keyword">Unit</span>)</span>
+    fun stickyHeader(key: Any? = null, content: @Composable LazyItemScope.() -&gt; Unit)
 }
 </code></pre>
-<p><em>&#x987A;&#x5E26;&#x4E00;&#x63D0;&#xFF1A;&#x7B14;&#x8005;&#x53C2;&#x4E0E;&#x7684;&#x4E0A;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x4E2D;&#xFF0C;&#x9AD8;&#x9891;&#x4F7F;&#x7528;RecycleView&#x7528;&#x4F5C;&#x5185;&#x5BB9;&#x5448;&#x73B0;&#xFF0C;&#x4E3A;&#x4E86;&#x4FBF;&#x6377;&#x7684;&#x5904;&#x7406; &quot;item&#x4E4B;&#x95F4;&#x7684;&#x95F4;&#x8DDD;&quot;&#x3001;&quot;&#x9996;&#x5C3E;&#x7559;&#x767D;&quot;&#x3001;&quot;&#x7279;&#x5B9A;item&#x95F4;&#x4E0D;&#x5E94;&#x7528;&#x95F4;&#x8DDD;&quot;&#xFF0C; &#x5728;&#x9879;&#x76EE;&#x4E2D;&#x5199;&#x4E86;&#x4E00;&#x5957;&#x90E8;&#x4EF6;&#xFF0C;&#x540E;&#x7EED;&#x53EF;&#x4EE5;&#x62C6;&#x51FA;&#x6765;&#x540C;&#x5927;&#x5BB6;&#x5206;&#x4EAB;&#x4E0B;&#x3002;</em></p>
-<h3 id="&#x57FA;&#x4E8E;lazylistscopeitem-&#x65B9;&#x6CD5;"><a name="&#x57FA;&#x4E8E;lazylistscopeitem-&#x65B9;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#&#x57FA;&#x4E8E;lazylistscopeitem-&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x57FA;&#x4E8E;LazyListScope.item &#x65B9;&#x6CD5;</h3>
-<p>&#x5728;&#x4E0A;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x5BF9;&#x5E94;&#x7684;WorkShop&#x5185;&#x5BB9;&#x4E2D;&#xFF0C;&#x5DF2;&#x7ECF;&#x51FA;&#x73B0;&#x4E86;&#x8FD9;&#x4E00;&#x7528;&#x6CD5; <em>post29&#x5305;&#x4E0B;</em>&#x3002;</p>
-<p>&#x4F8B;&#x5982;&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> LazyListScope.<span class="hljs-title">rowDemo</span><span class="hljs-params">()</span> {</span>
+<p><em>顺带一提：笔者参与的上一个项目中，高频使用RecycleView用作内容呈现，为了便捷的处理 "item之间的间距"、"首尾留白"、"特定item间不应用间距"， 在项目中写了一套部件，后续可以拆出来同大家分享下。</em></p>
+<h3 id="基于lazylistscopeitem-方法"><a class="header" href="#基于lazylistscopeitem-方法">基于LazyListScope.item 方法</a></h3>
+<p>在上一篇文章对应的WorkShop内容中，已经出现了这一用法 <em>post29包下</em>。</p>
+<p>例如：</p>
+<pre><code class="language-kotlin">private fun LazyListScope.rowDemo() {
     item {
-        CodeSample(code = <span class="hljs-string">&quot;row sample 1:&quot;</span>)
+        CodeSample(code = "row sample 1:")
         Row {
-            <span class="hljs-comment">// ignore</span>
+            // ignore
         }
     }
 
     item {
-        CodeSample(code = <span class="hljs-string">&quot;row sample 2:&#x7EB5;&#x5411;&#x5C45;&#x4E2D;&#x5BF9;&#x9F50;&quot;</span>)
-        <span class="hljs-comment">// ignore</span>
+        CodeSample(code = "row sample 2:纵向居中对齐")
+        // ignore
     }
 
-    <span class="hljs-comment">// ignore</span>
+    // ignore
 }
 </code></pre>
-<h3 id="&#x57FA;&#x4E8E;lazylistscopeitems-&#x65B9;&#x6CD5;"><a name="&#x57FA;&#x4E8E;lazylistscopeitems-&#x65B9;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#&#x57FA;&#x4E8E;lazylistscopeitems-&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x57FA;&#x4E8E;LazyListScope.items &#x65B9;&#x6CD5;</h3>
-<p>&#x9664;&#x4E86;&#x76F4;&#x63A5;&#x4F7F;&#x7528;API&#xFF0C;SDK&#x4E2D;&#x540C;&#x6837;&#x63D0;&#x4F9B;&#x4E86;&#x90E8;&#x5206;&#x5185;&#x8054;&#x51FD;&#x6570;&#xFF0C;&#x6D88;&#x9664;&#x5904;&#x7406;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x4EE3;&#x7801;&#x5197;&#x4F59;&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-keyword">inline</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T&gt;</span> LazyListScope.<span class="hljs-title">items</span><span class="hljs-params">(
-    items: <span class="hljs-type">List&lt;T&gt;,
-    noinline key: ((item: T</span>)</span> -&gt; Any)? = null,</span>
-    crossinline itemContent: @Composable LazyItemScope.(item: T) -&gt; <span class="hljs-keyword">Unit</span>
+<h3 id="基于lazylistscopeitems-方法"><a class="header" href="#基于lazylistscopeitems-方法">基于LazyListScope.items 方法</a></h3>
+<p>除了直接使用API，SDK中同样提供了部分内联函数，消除处理数据结构的代码冗余：</p>
+<pre><code class="language-kotlin">inline fun &lt;T&gt; LazyListScope.items(
+    items: List&lt;T&gt;,
+    noinline key: ((item: T) -&gt; Any)? = null,
+    crossinline itemContent: @Composable LazyItemScope.(item: T) -&gt; Unit
 )
 
-<span class="hljs-keyword">inline</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T&gt;</span> LazyListScope.<span class="hljs-title">itemsIndexed</span><span class="hljs-params">(
-    items: <span class="hljs-type">List&lt;T&gt;,
-    noinline key: ((index: Int, item: T</span>)</span> -&gt; Any)? = null,</span>
-    crossinline itemContent: @Composable LazyItemScope.(index: <span class="hljs-keyword">Int</span>, item: T) -&gt; <span class="hljs-keyword">Unit</span>
+inline fun &lt;T&gt; LazyListScope.itemsIndexed(
+    items: List&lt;T&gt;,
+    noinline key: ((index: Int, item: T) -&gt; Any)? = null,
+    crossinline itemContent: @Composable LazyItemScope.(index: Int, item: T) -&gt; Unit
 )
 
-<span class="hljs-keyword">inline</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T&gt;</span> LazyListScope.<span class="hljs-title">items</span><span class="hljs-params">(
-    items: <span class="hljs-type">Array&lt;T&gt;,
-    noinline key: ((item: T</span>)</span> -&gt; Any)? = null,</span>
-    crossinline itemContent: @Composable LazyItemScope.(item: T) -&gt; <span class="hljs-keyword">Unit</span>
+inline fun &lt;T&gt; LazyListScope.items(
+    items: Array&lt;T&gt;,
+    noinline key: ((item: T) -&gt; Any)? = null,
+    crossinline itemContent: @Composable LazyItemScope.(item: T) -&gt; Unit
 )
 
-<span class="hljs-keyword">inline</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T&gt;</span> LazyListScope.<span class="hljs-title">itemsIndexed</span><span class="hljs-params">(
-    items: <span class="hljs-type">Array&lt;T&gt;,
-    noinline key: ((index: Int, item: T</span>)</span> -&gt; Any)? = null,</span>
-    crossinline itemContent: @Composable LazyItemScope.(index: <span class="hljs-keyword">Int</span>, item: T) -&gt; <span class="hljs-keyword">Unit</span>
+inline fun &lt;T&gt; LazyListScope.itemsIndexed(
+    items: Array&lt;T&gt;,
+    noinline key: ((index: Int, item: T) -&gt; Any)? = null,
+    crossinline itemContent: @Composable LazyItemScope.(index: Int, item: T) -&gt; Unit
 )
 </code></pre>
-<p>&#x6309;&#x7167;&#x4EE5;&#x5F80;Android&#x4E2D;&#x7684;&#x5F00;&#x53D1;&#x7ECF;&#x9A8C;&#xFF0C;&#x6211;&#x4EEC;&#x5F88;&#x5BB9;&#x6613;&#x5199;&#x51FA;&#x5982;&#x4E0B;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-comment">// WorkShop &#x4E2D;&#x7684;&#x5165;&#x53E3;&#x9875;&#x9762;&#xFF0C;&#x679A;&#x4E3E;&#x4E86;&#x5404;&#x4E2A;&#x4F8B;&#x5B50;&#x5BF9;&#x5E94;&#x7684;Activity</span>
+<p>按照以往Android中的开发经验，我们很容易写出如下的代码：</p>
+<pre><code class="language-kotlin">// WorkShop 中的入口页面，枚举了各个例子对应的Activity
 @Composable
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">TestList</span><span class="hljs-params">(activity: <span class="hljs-type">Activity, cases: List&lt;Pair&lt;String, Class&lt;out Activity&gt;&gt;&gt;</span>)</span> {</span>
-    LazyColumn(contentPadding = PaddingValues(horizontal = <span class="hljs-number">16.</span>dp, vertical = <span class="hljs-number">8.</span>dp)) {
+fun TestList(activity: Activity, cases: List&lt;Pair&lt;String, Class&lt;out Activity&gt;&gt;&gt;) {
+    LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
         itemsIndexed(items = cases) { _, item -&gt;
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Spacer(modifier = Modifier.size(<span class="hljs-number">3.</span>dp))
+                Spacer(modifier = Modifier.size(3.dp))
                 Box(
                     modifier = Modifier
-                        .height(<span class="hljs-number">48.</span>dp)
+                        .height(48.dp)
                         .fillMaxWidth()
                         .background(
                             color = Color.LightGray,
-                            shape = RoundedCornerShape(CornerSize(<span class="hljs-number">6.</span>dp))
+                            shape = RoundedCornerShape(CornerSize(6.dp))
                         )
                         .clickable {
                             activity.startActivity(Intent(activity, item.second))
@@ -1612,7 +337,7 @@ interface LazyListScope {
                 ) {
                     Text(text = item.first, color = MainTxt, textAlign = TextAlign.Center)
                 }
-                Spacer(modifier = Modifier.size(<span class="hljs-number">3.</span>dp))
+                Spacer(modifier = Modifier.size(3.dp))
             }
         }
     }
@@ -1620,30 +345,30 @@ interface LazyListScope {
 
 TestList(
     activity = this@MainActivity, cases = arrayListOf(
-        <span class="hljs-string">&quot;Layout samples&quot;</span> to P21LayoutSample::<span class="hljs-class"><span class="hljs-keyword">class</span>.<span class="hljs-title">java</span>,
-        <span class="hljs-type">&quot;Draw samples&quot; to P21DrawSample::class.java</span>,
-        <span class="hljs-type">&quot;Text samples&quot; to P26TextSample::class.java</span>,
-        <span class="hljs-type">&quot;TextField samples&quot; to P26TextFieldSample::class.java</span>,
-        <span class="hljs-type">&quot;Button samples&quot; to P26ButtonSample::class.java</span>,
-        <span class="hljs-type">&quot;Icon samples&quot; to P27IconSample::class.java</span>,
-        <span class="hljs-type">&quot;Image samples&quot; to P27ImageSample::class.java</span>,
-        <span class="hljs-type">&quot;Switch</span>,<span class="hljs-type">Checkbox</span>,<span class="hljs-type">RadioButton samples&quot; to P28SwitchRbCbSample::class.java</span>,
-        <span class="hljs-type">&quot;Box</span>,<span class="hljs-type">Row</span>,<span class="hljs-type">Column samples&quot; to P29BoxRowColumnSample::class.java</span>,
-    <span class="hljs-type">)</span></span>
+        "Layout samples" to P21LayoutSample::class.java,
+        "Draw samples" to P21DrawSample::class.java,
+        "Text samples" to P26TextSample::class.java,
+        "TextField samples" to P26TextFieldSample::class.java,
+        "Button samples" to P26ButtonSample::class.java,
+        "Icon samples" to P27IconSample::class.java,
+        "Image samples" to P27ImageSample::class.java,
+        "Switch,Checkbox,RadioButton samples" to P28SwitchRbCbSample::class.java,
+        "Box,Row,Column samples" to P29BoxRowColumnSample::class.java,
+    )
 )
 </code></pre>
-<p>&#x5982;&#x679C;&#x4ECE;Android&#x7684;&#x89C6;&#x89D2;&#x51FA;&#x53D1;&#xFF0C;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x76F8;&#x5F53;&#x4E8E;&#x521B;&#x5EFA; ViewHolder&#x7684;ItemView &#x4EE5;&#x53CA; onBindViewHolder &#x7684;&#x5B9E;&#x73B0;</p>
-<pre><code class="lang-kotlin">Column(
+<p>如果从Android的视角出发，这段代码相当于创建 ViewHolder的ItemView 以及 onBindViewHolder 的实现</p>
+<pre><code class="language-kotlin">Column(
     horizontalAlignment = Alignment.CenterHorizontally,
 ) {
-    Spacer(modifier = Modifier.size(<span class="hljs-number">3.</span>dp))
+    Spacer(modifier = Modifier.size(3.dp))
     Box(
         modifier = Modifier
-            .height(<span class="hljs-number">48.</span>dp)
+            .height(48.dp)
             .fillMaxWidth()
             .background(
                 color = Color.LightGray,
-                shape = RoundedCornerShape(CornerSize(<span class="hljs-number">6.</span>dp))
+                shape = RoundedCornerShape(CornerSize(6.dp))
             )
             .clickable {
                 activity.startActivity(Intent(activity, item.second))
@@ -1652,33 +377,33 @@ TestList(
     ) {
         Text(text = item.first, color = MainTxt, textAlign = TextAlign.Center)
     }
-    Spacer(modifier = Modifier.size(<span class="hljs-number">3.</span>dp))
+    Spacer(modifier = Modifier.size(3.dp))
 }
 </code></pre>
-<p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x6211;&#x4EEC;&#x5229;&#x7528;&#x4E86;ItemView&#x56FA;&#x6709;&#x7684; &quot;&#x7559;&#x767D;&quot; &#x5904;&#x7406;&#x4E86;Item&#x4E4B;&#x95F4;&#x7684;&#x95F4;&#x8DDD;&#xFF0C;&#x663E;&#x7136;&#x8FD9;&#x4E0D;&#x662F;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;&#x65B9;&#x6848;&#xFF01;</p>
-<h3 id="&#x66F4;&#x52A0;&#x4F18;&#x96C5;&#x5730;&#x5904;&#x7406;&#x95F4;&#x8DDD;&#x548C;&#x5BF9;&#x9F50;"><a name="&#x66F4;&#x52A0;&#x4F18;&#x96C5;&#x5730;&#x5904;&#x7406;&#x95F4;&#x8DDD;&#x548C;&#x5BF9;&#x9F50;" class="anchor-navigation-ex-anchor" href="#&#x66F4;&#x52A0;&#x4F18;&#x96C5;&#x5730;&#x5904;&#x7406;&#x95F4;&#x8DDD;&#x548C;&#x5BF9;&#x9F50;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x66F4;&#x52A0;&#x4F18;&#x96C5;&#x5730;&#x5904;&#x7406;&#x95F4;&#x8DDD;&#x548C;&#x5BF9;&#x9F50;</h3>
-<p>&#x4E0A;&#x6587;&#x4E2D;&#x5DF2;&#x7ECF;&#x63D0;&#x53CA;&#xFF1A;</p>
+<p>也就是说，我们利用了ItemView固有的 "留白" 处理了Item之间的间距，显然这不是最佳实践方案！</p>
+<h3 id="更加优雅地处理间距和对齐"><a class="header" href="#更加优雅地处理间距和对齐">更加优雅地处理间距和对齐</a></h3>
+<p>上文中已经提及：</p>
 <ul>
 <li>contentPadding</li>
 <li>verticalArrangement</li>
 <li>horizontalAlignment</li>
 </ul>
-<p>&#x57FA;&#x4E8E;&#x6B64;&#x6211;&#x4EEC;&#x5BF9;&#x4EE3;&#x7801;&#x8FDB;&#x884C;&#x6539;&#x9020;&#xFF0C;&#x4EE5;&#x51CF;&#x5C11;&#x6CA1;&#x7528;&#x7684;&#x5D4C;&#x5957;</p>
-<pre><code class="lang-kotlin">@Composable
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">TestList</span><span class="hljs-params">(activity: <span class="hljs-type">Activity, cases: List&lt;Pair&lt;String, Class&lt;out Activity&gt;&gt;&gt;</span>)</span> {</span>
+<p>基于此我们对代码进行改造，以减少没用的嵌套</p>
+<pre><code class="language-kotlin">@Composable
+fun TestList(activity: Activity, cases: List&lt;Pair&lt;String, Class&lt;out Activity&gt;&gt;&gt;) {
     LazyColumn(
-        contentPadding = PaddingValues(horizontal = <span class="hljs-number">16.</span>dp, vertical = <span class="hljs-number">8.</span>dp),
-        verticalArrangement = spacedBy(<span class="hljs-number">6.</span>dp, Alignment.Top),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+        verticalArrangement = spacedBy(6.dp, Alignment.Top),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         itemsIndexed(items = cases) { _, item -&gt;
             Box(
                 modifier = Modifier
-                    .height(<span class="hljs-number">48.</span>dp)
+                    .height(48.dp)
                     .fillMaxWidth()
                     .background(
                         color = Color.LightGray,
-                        shape = RoundedCornerShape(CornerSize(<span class="hljs-number">6.</span>dp))
+                        shape = RoundedCornerShape(CornerSize(6.dp))
                     )
                     .clickable {
                         activity.startActivity(Intent(activity, item.second))
@@ -1695,52 +420,52 @@ TestList(
     }
 }
 </code></pre>
-<p>&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x4E00;&#x81F4;&#x7684;&#x6548;&#x679C;&#xFF1A;</p>
-<p><img src="post_30/p30_demo1.webp" alt=""></p>
-<h2 id="&#x8BA9;column&#x53EF;&#x6ED1;&#x52A8;"><a name="&#x8BA9;column&#x53EF;&#x6ED1;&#x52A8;" class="anchor-navigation-ex-anchor" href="#&#x8BA9;column&#x53EF;&#x6ED1;&#x52A8;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8BA9;Column&#x53EF;&#x6ED1;&#x52A8;</h2>
-<p><em>&#x53C2;&#x8003;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;Row&#x7684;&#x53EF;&#x6ED1;&#x52A8;</em></p>
-<p>&#x6700;&#x5F00;&#x59CB;&#x5728;&#x548C;Modifier&#x6DF7;&#x8138;&#x719F;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x63D0;&#x53CA;&#x4E86; <code>androidx.compose.foundation</code> &#x5305;&#xFF0C;&#x5E76;&#x4E14;&#x542B;&#x6709;&#x5B50;&#x5305;&#xFF1A;
-<code>androidx.compose.foundation.gestures</code>&#xFF0C;&#x987E;&#x540D;&#x601D;&#x4E49;&#xFF0C;&#x540E;&#x8005;&#x548C;&#x624B;&#x52BF;&#x5904;&#x7406;&#x6709;&#x5173;&#x3002;</p>
+<p>可以得到一致的效果：</p>
+<p><img src="./post_30/p30_demo1.webp" alt="" /></p>
+<h2 id="让column可滑动"><a class="header" href="#让column可滑动">让Column可滑动</a></h2>
+<p><em>参考可以实现Row的可滑动</em></p>
+<p>最开始在和Modifier混脸熟的过程中，我们提及了 <code>androidx.compose.foundation</code> 包，并且含有子包：
+<code>androidx.compose.foundation.gestures</code>，顾名思义，后者和手势处理有关。</p>
 <ul>
 <li>androidx.compose.foundation.gestures.ScrollableKt#scrollable</li>
 <li>androidx.compose.foundation.ScrollKt#verticalScroll</li>
 <li>androidx.compose.foundation.ScrollKt#horizontalScroll</li>
 </ul>
-<p>&#x7ECF;&#x8FC7;&#x8FD9;&#x4E00;&#x9636;&#x6BB5;&#x7684;&#x5B66;&#x4E60;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x505A;&#x51FA;&#x4E00;&#x4E2A;&#x7ED3;&#x8BBA;&#xFF1A;</p>
+<p>经过这一阶段的学习，我们可以做出一个结论：</p>
 <blockquote>
-<p>Compose &#x4E2D;&#x5305;&#x542B;&#x4E00;&#x90E8;&#x5206;&#x57FA;&#x672C;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x4EE5;&#x53CA;&#x7ED3;&#x5408;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x573A;&#x666F;&#xFF0C;&#x5728;&#x57FA;&#x672C;&#x51FD;&#x6570;&#x4E0A; &quot;&#x88C5;&#x9970;&quot; &#x51FA;&#x9AD8;&#x7EA7;&#x51FD;&#x6570;</p>
+<p>Compose 中包含一部分基本的函数，以及结合实际使用场景，在基本函数上 "装饰" 出高级函数</p>
 </blockquote>
-<p>&#x4ECE;&#x547D;&#x540D;&#x4E0A;&#xFF0C;&#x6211;&#x4EEC;&#x5F88;&#x5BB9;&#x6613;&#x5F97;&#x77E5; <code>scrollable</code> &#x662F;&#x6BD4;&#x8F83;&#x57FA;&#x672C;&#x7684;&#x51FD;&#x6570;&#xFF0C;<code>verticalScroll</code>&#xFF0C;<code>horizontalScroll</code> &#x662F;&#x57FA;&#x4E8E; <code>scrollable</code> &#x88C5;&#x9970;&#x51FA;&#x7684;&#x9AD8;&#x7EA7;&#x51FD;&#x6570;&#x3002;</p>
-<p>&#x9605;&#x8BFB;&#x6E90;&#x7801;&#x540E;&#x4E5F;&#x786E;&#x5B9E;&#x9A8C;&#x8BC1;&#x4E86;&#x6211;&#x4EEC;&#x7684;&#x63A8;&#x6D4B;&#x3002;</p>
-<p><em>&#x4EE5; verticalScroll &#x4E3A;&#x4F8B;&#xFF0C;horizontalScroll&#x6682;&#x4E0D;&#x5C55;&#x5F00;</em></p>
-<p>Doc&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>从命名上，我们很容易得知 <code>scrollable</code> 是比较基本的函数，<code>verticalScroll</code>，<code>horizontalScroll</code> 是基于 <code>scrollable</code> 装饰出的高级函数。</p>
+<p>阅读源码后也确实验证了我们的推测。</p>
+<p><em>以 verticalScroll 为例，horizontalScroll暂不展开</em></p>
+<p>Doc内容如下：</p>
 <blockquote>
 <p>Modify element to allow to scroll vertically when height of the content is bigger than max
 constraints allow. In order to use this modifier, you need to create and own [ScrollState]
 @see [rememberScrollState]</p>
 </blockquote>
-<p>&#x4FEE;&#x9970;&#x5E03;&#x5C40;&#x5143;&#x7D20;&#xFF0C;&#x5F53;&#x5176;&#x5185;&#x5BB9;&#x9AD8;&#x5EA6;&#x8D85;&#x8FC7;&#x6700;&#x5927;&#x5141;&#x8BB8;&#x7684;&#x9650;&#x5236;&#x65F6;&#xFF0C;&#x5141;&#x8BB8;&#x5728;&#x7EB5;&#x5411;&#x8FDB;&#x884C;&#x6EDA;&#x52A8;&#x3002;</p>
-<p><em>&#x6CE8;&#xFF1A;&#x5185;&#x5BB9;&#x6700;&#x5927;&#x9AD8;&#x5EA6;&#x5730;&#x9650;&#x5236;&#x9700;&#x8981;&#x8003;&#x8651;&#x5BB9;&#x5668;&#x7684;&#x9AD8;&#x5EA6;&#x3001;padding&#x3001;offset&#x7B49;&#x5185;&#x5BB9;</em></p>
-<p>&#x4E3A;&#x4E86;&#x4F7F;&#x7528;&#x5B83;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x521B;&#x5EFA;&#x5E76;&#x6301;&#x6709; <code>ScrollState</code> &#x5B9E;&#x4F8B;&#xFF0C;&#x53C2;&#x89C1; <code>rememberScrollState</code></p>
-<p><strong>&#x65B9;&#x6CD5;&#x539F;&#x578B;</strong>&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> Modifier.<span class="hljs-title">verticalScroll</span><span class="hljs-params">(
-    state: <span class="hljs-type">ScrollState,
-    enabled: Boolean</span> = true,
-    flingBehavior: <span class="hljs-type">FlingBehavior?</span> = null,
-    reverseScrolling: <span class="hljs-type">Boolean</span> = false
-)</span></span>
+<p>修饰布局元素，当其内容高度超过最大允许的限制时，允许在纵向进行滚动。</p>
+<p><em>注：内容最大高度地限制需要考虑容器的高度、padding、offset等内容</em></p>
+<p>为了使用它，你需要创建并持有 <code>ScrollState</code> 实例，参见 <code>rememberScrollState</code></p>
+<p><strong>方法原型</strong>：</p>
+<pre><code class="language-kotlin">fun Modifier.verticalScroll(
+    state: ScrollState,
+    enabled: Boolean = true,
+    flingBehavior: FlingBehavior? = null,
+    reverseScrolling: Boolean = false
+)
 </code></pre>
 <ul>
-<li>state&#xFF1A;&#x6EDA;&#x52A8;&#x72B6;&#x6001;&#xFF0C;ScrollState&#x5B9E;&#x4F8B;</li>
-<li>enabled&#xFF1A;&#x5F53;&#x89E6;&#x6478;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#x65F6;&#xFF0C;&#x662F;&#x5426;&#x5141;&#x8BB8;&#x6ED1;&#x52A8;</li>
-<li>flingBehavior&#xFF1A;fling&#x5904;&#x7406;&#x903B;&#x8F91;</li>
-<li>reverseScrolling&#xFF1A;&#x662F;&#x5426;&#x53CD;&#x5411;&#x6ED1;&#x52A8;</li>
+<li>state：滚动状态，ScrollState实例</li>
+<li>enabled：当触摸事件发生时，是否允许滑动</li>
+<li>flingBehavior：fling处理逻辑</li>
+<li>reverseScrolling：是否反向滑动</li>
 </ul>
-<h3 id="demo"><a name="demo" class="anchor-navigation-ex-anchor" href="#demo"><i class="fa fa-link" aria-hidden="true"></i></a>Demo</h3>
-<pre><code class="lang-kotlin">Column(
+<h3 id="demo"><a class="header" href="#demo">Demo</a></h3>
+<pre><code class="language-kotlin">Column(
     modifier = Modifier
         .fillMaxWidth()
-        .height(<span class="hljs-number">600.</span>dp)
+        .height(600.dp)
         .verticalScroll(
             state = rememberScrollState()
         )
@@ -1749,117 +474,78 @@ constraints allow. In order to use this modifier, you need to create and own [Sc
     Box(
         Modifier
             .fillMaxWidth()
-            .height(<span class="hljs-number">400.</span>dp)
+            .height(400.dp)
             .background(Color.Green)
     )
 
-    Spacer(modifier = Modifier.height(<span class="hljs-number">50.</span>dp))
+    Spacer(modifier = Modifier.height(50.dp))
 
     Box(
         Modifier
             .fillMaxWidth()
-            .height(<span class="hljs-number">400.</span>dp)
+            .height(400.dp)
             .background(Color.Blue)
     )
 
 }
 </code></pre>
-<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x5185;&#x5BB9;&#x9AD8;&#x5EA6;&#x5DF2;&#x7ECF;&#x8D85;&#x8FC7;&#x4E86;&#x6700;&#x5927;&#x9650;&#x5236;&#xFF01;</p>
-<h3 id="&#x6548;&#x679C;"><a name="&#x6548;&#x679C;" class="anchor-navigation-ex-anchor" href="#&#x6548;&#x679C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6548;&#x679C;</h3>
-<p><img src="post_30/p30_demo2.gif" alt=""></p>
-<h2 id="&#x7ED3;&#x8BED;"><a name="&#x7ED3;&#x8BED;" class="anchor-navigation-ex-anchor" href="#&#x7ED3;&#x8BED;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7ED3;&#x8BED;</h2>
-<p>&#x81F3;&#x6B64;&#xFF0C;Compose&#x4E2D;&#x7684;&#x5217;&#x8868;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5B66;&#x4E60;&#x5B8C;&#x6210;&#xFF0C;&#x7ECF;&#x8FC7;&#x7B80;&#x5355;&#x63A2;&#x7D22;Modifier&#x4E2D;&#x6ED1;&#x52A8;&#x7684;&#x76F8;&#x5173;&#x5185;&#x5BB9;&#xFF0C;&#x638C;&#x63E1;&#x4E86;&#x8BA9;Column&#x5728;&#x5185;&#x5BB9;&#x8D85;&#x51FA;&#x5C55;&#x793A;&#x9650;&#x5236;&#x65F6;&#x53EF;&#x4EE5;&#x54CD;&#x5E94;&#x6ED1;&#x52A8;&#x7684;&#x65B9;&#x6848;&#x3002;
-&#x8F83;&#x4E3A;&#x9057;&#x61BE;&#x7684;&#x662F;&#xFF0C;&#x76EE;&#x524D;&#x6211;&#x4EEC;&#x6240;&#x638C;&#x63E1;&#x7684;&#x77E5;&#x8BC6;&#x8FD8;&#x4E0D;&#x8DB3;&#x4EE5;&#x652F;&#x6491;&#x6211;&#x4EEC;&#x7EE7;&#x7EED;&#x63A2;&#x7D22;&#x4E0B;&#x53BB;&#x3002;</p>
-<p>&#x5F53;&#x7136;&#xFF0C;&#x5728;&#x540E;&#x7EED;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x7EE7;&#x7EED;&#x5B66;&#x4E60;&#x76F8;&#x5173;&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#xFF0C;&#x6700;&#x7EC8;&#x4E00;&#x8D77;&#x63A2;&#x7D22;Compose&#x4E2D;&#x6DF1;&#x5C42;&#x6B21;&#x7684;&#x5185;&#x5BB9;</p>
-<p><em>&#x53E6;&#xFF1A;&#x6700;&#x8FD1;&#x7956;&#x4F20;&#x4EE3;&#x7801;&#x6539;&#x7684;&#x6709;&#x70B9;&#x7CBE;&#x795E;&#x5206;&#x88C2;&#xFF0C;&#x6587;&#x7AE0;&#x66F4;&#x65B0;&#x6548;&#x7387;&#x8FD8;&#x662F;&#x6CA1;&#x4E0A;&#x7684;&#x6765;&#x3002;&#x8BFB;&#x8005;&#x670B;&#x53CB;&#x4EEC;&#xFF0C;&#x5982;&#x679C;&#x89C9;&#x5F97;&#x6211;&#x7684;&#x5206;&#x4EAB;&#x5BF9;&#x4F60;&#x6709;&#x4E00;&#x4E9B;&#x5E2E;&#x52A9;&#xFF0C;&#x8FD8;&#x8BF7;&#x70B9;&#x4E2A;&#x8D5E;&#x8BA9;&#x6211;&#x77E5;&#x9053;&#xFF0C;&#x7ED9;&#x4E88;&#x6211;&#x652F;&#x6301;&#x4E0B;&#x53BB;&#x7684;&#x52A8;&#x529B;&#xFF1B;&#x5982;&#x679C;&#x5185;&#x5BB9;&#x5199;&#x7684;&#x4E0D;&#x597D;&#xFF0C;&#x4E5F;&#x70E6;&#x8BF7;&#x7559;&#x4E2A;&#x8A00;&#x628A;&#x60F3;&#x770B;&#x7684;&#x5185;&#x5BB9;&#x544A;&#x77E5;&#x6211;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x540E;&#x7EED;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#x4E00;&#x8D77;&#x4EA4;&#x6D41;&#xFF01;</em> </p>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2021-09-07 21:36:30
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+<p>很显然，内容高度已经超过了最大限制！</p>
+<h3 id="效果"><a class="header" href="#效果">效果</a></h3>
+<p><img src="./post_30/p30_demo2.gif" alt="" /></p>
+<h2 id="结语"><a class="header" href="#结语">结语</a></h2>
+<p>至此，Compose中的列表我们已经学习完成，经过简单探索Modifier中滑动的相关内容，掌握了让Column在内容超出展示限制时可以响应滑动的方案。
+较为遗憾的是，目前我们所掌握的知识还不足以支撑我们继续探索下去。</p>
+<p>当然，在后续的文章中，我们会继续学习相关的基础知识，最终一起探索Compose中深层次的内容</p>
+<p><em>另：最近祖传代码改的有点精神分裂，文章更新效率还是没上的来。读者朋友们，如果觉得我的分享对你有一些帮助，还请点个赞让我知道，给予我支持下去的动力；如果内容写的不好，也烦请留个言把想看的内容告知我，可以在后续的文章中一起交流！</em></p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Compose/post_29.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../MultiThreading/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="post_29.html" class="navigation navigation-prev " aria-label="Previous page: Jetpack Compose | 控件篇（四）-- Box、Row、Column">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="../MultiThreading/" class="navigation navigation-next " aria-label="Next page: Java多线程">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Compose/post_29.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../MultiThreading/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动","level":"1.3.6","depth":2,"next":{"title":"Java多线程","level":"1.4","depth":1,"path":"MultiThreading/README.md","ref":"./MultiThreading/README.md","articles":[{"title":"总纲","level":"1.4.1","depth":2,"path":"MultiThreading/post_33.md","ref":"./MultiThreading/post_33.md","articles":[]},{"title":"Java基础--图解JVM内存模型和JVM线程模型","level":"1.4.2","depth":2,"path":"MultiThreading/post_37.md","ref":"./MultiThreading/post_37.md","articles":[]},{"title":"Java多线程系列--掌控面试，一文吃透Synchronized锁","level":"1.4.3","depth":2,"path":"MultiThreading/post_38.md","ref":"./MultiThreading/post_38.md","articles":[]},{"title":"Java多线程基础--线程生命周期与线程协作详解","level":"1.4.4","depth":2,"path":"MultiThreading/post_39.md","ref":"./MultiThreading/post_39.md","articles":[]},{"title":"Java多线程基础--线程的创建与线程池管理","level":"1.4.5","depth":2,"path":"MultiThreading/post_42.md","ref":"./MultiThreading/post_42.md","articles":[]},{"title":"Java多线程系列--掌握Future，轻松获取异步任务结果","level":"1.4.6","depth":2,"path":"MultiThreading/post_46.md","ref":"./MultiThreading/post_46.md","articles":[]},{"title":"Java多线程系列--Fork&Join框架，分治的艺术","level":"1.4.7","depth":2,"path":"MultiThreading/post_50.md","ref":"./MultiThreading/post_50.md","articles":[]},{"title":"Java多线程系列--掌握CompletableFuture，驾驭异步编程","level":"1.4.8","depth":2,"path":"MultiThreading/post_54.md","ref":"./MultiThreading/post_54.md","articles":[]}]},"previous":{"title":"Jetpack Compose | 控件篇（四）-- Box、Row、Column","level":"1.3.5","depth":2,"path":"Compose/post_29.md","ref":"./Compose/post_29.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Compose/post_30.md","mtime":"2021-09-07T13:36:30.781Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../gitbook/gitbook.js"></script>
-    <script src="../gitbook/theme.js"></script>
-    
-        
-        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-

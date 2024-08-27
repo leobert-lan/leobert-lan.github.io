@@ -1,1730 +1,455 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Java多线程系列--掌握Future，轻松获取异步任务结果 · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Java多线程系列--掌握Future，轻松获取异步任务结果 - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="post_50.html" />
-    
-    
-    <link rel="prev" href="post_42.html" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../Android/">
-            
-                <a href="../Android/">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../Android/View/">
-            
-                <a href="../Android/View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../Android/View/post_1.html">
-            
-                <a href="../Android/View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../Android/View/post_6.html">
-            
-                <a href="../Android/View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../Android/View/post_7.html">
-            
-                <a href="../Android/View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="../Android/Idea/post_9.html">
-            
-                <a href="../Android/Idea/post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../Android/Drawable/">
-            
-                <a href="../Android/Drawable/">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="../Android/Drawable/post_2.html">
-            
-                <a href="../Android/Drawable/post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="../Android/Drawable/post_4.html">
-            
-                <a href="../Android/Drawable/post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="../Android/Drawable/post_47.html">
-            
-                <a href="../Android/Drawable/post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.4" data-path="../Android/Drawable/post_49.html">
-            
-                <a href="../Android/Drawable/post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../Android/Mechanism/Message/">
-            
-                <a href="../Android/Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../Android/Mechanism/Message/post_8.html">
-            
-                <a href="../Android/Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../Android/Idea/post_14/">
-            
-                <a href="../Android/Idea/post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.4.1" data-path="../Android/Idea/post_14.html">
-            
-                <a href="../Android/Idea/post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="../Android/Glide/">
-            
-                <a href="../Android/Glide/">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.5.1" data-path="../Android/Glide/post_15.html">
-            
-                <a href="../Android/Glide/post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5.2" data-path="../Android/Glide/post_16.html">
-            
-                <a href="../Android/Glide/post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../Android/KSP/">
-            
-                <a href="../Android/KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../Android/KSP/post_24.html">
-            
-                <a href="../Android/KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../Android/Base/">
-            
-                <a href="../Android/Base/">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.7.1" data-path="../Android/Base/post_35.html">
-            
-                <a href="../Android/Base/post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../Android/SysApp/">
-            
-                <a href="../Android/SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../Android/SysApp/post_52.html">
-            
-                <a href="../Android/SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../Android/DI/">
-            
-                <a href="../Android/DI/">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.9.1" data-path="../Android/DI/post_53.html">
-            
-                <a href="../Android/DI/post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../Compose/">
-            
-                <a href="../Compose/">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="../Compose/post_21.html">
-            
-                <a href="../Compose/post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../Compose/post_26.html">
-            
-                <a href="../Compose/post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="../Compose/post_27.html">
-            
-                <a href="../Compose/post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="../Compose/post_28.html">
-            
-                <a href="../Compose/post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="../Compose/post_29.html">
-            
-                <a href="../Compose/post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="../Compose/post_30.html">
-            
-                <a href="../Compose/post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="post_33.html">
-            
-                <a href="post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="post_37.html">
-            
-                <a href="post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="post_38.html">
-            
-                <a href="post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="post_39.html">
-            
-                <a href="post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="post_42.html">
-            
-                <a href="post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.4.6" data-path="post_46.html">
-            
-                <a href="post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="post_50.html">
-            
-                <a href="post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="post_54.html">
-            
-                <a href="post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="../IO/">
-            
-                <a href="../IO/">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="../IO/post_55.html">
-            
-                <a href="../IO/post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="../IO/post_56.html">
-            
-                <a href="../IO/post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="../IO/post_57.html">
-            
-                <a href="../IO/post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="../IO/post_58.html">
-            
-                <a href="../IO/post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="../IO/post_59.html">
-            
-                <a href="../IO/post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../Gradle/">
-            
-                <a href="../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../Gradle/Modularization/post_18.html">
-            
-                <a href="../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../Gradle/Publish/post_17.html">
-            
-                <a href="../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../Gradle/post_22.html">
-            
-                <a href="../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../Groovy/">
-            
-                <a href="../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../Groovy/why_write_groovy.html">
-            
-                <a href="../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../Groovy/post_23.html">
-            
-                <a href="../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="../Review/">
-            
-                <a href="../Review/">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="../Review/post_10.html">
-            
-                <a href="../Review/post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="../Review/post_40.html">
-            
-                <a href="../Review/post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.3" data-path="../Review/post_44.html">
-            
-                <a href="../Review/post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="../Review/post_45.html">
-            
-                <a href="../Review/post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../repo/">
-            
-                <a href="../repo/">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../repo/DaVinCi.html">
-            
-                <a href="../repo/DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../Android/Idea/post_32.html">
-            
-                <a href="../Android/Idea/post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../Speculative/post_43.html">
-            
-                <a href="../Speculative/post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../repo/post_48.html">
-            
-                <a href="../repo/post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../Speculative/post_61.html">
-            
-                <a href="../Speculative/post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="../Review/DataStructure/">
-            
-                <a href="../Review/DataStructure/">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1.1" data-path="../Review/DataStructure/post_11.html">
-            
-                <a href="../Review/DataStructure/post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="../Review/DataStructure/post_12.html">
-            
-                <a href="../Review/DataStructure/post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="../Review/DataStructure/post_13.html">
-            
-                <a href="../Review/DataStructure/post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="../Review/README2.html">
-            
-                <a href="../Review/README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="../Review/post_36.html">
-            
-                <a href="../Review/post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="../Review/post_51.html">
-            
-                <a href="../Review/post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="../Review/post_60.html">
-            
-                <a href="../Review/post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="../Review/post_63.html">
-            
-                <a href="../Review/post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="../Review/post_64.html">
-            
-                <a href="../Review/post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../Note/">
-            
-                <a href="../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../Note/post_41.html">
-            
-                <a href="../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../Talk/">
-            
-                <a href="../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../Talk/talk_1.html">
-            
-                <a href="../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../Talk/talk_2_2023-03.html">
-            
-                <a href="../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../Thought/">
-            
-                <a href="../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../Thought/post_62.html">
-            
-                <a href="../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../info/">
-            
-                <a href="../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../info/about_view_series.html">
-            
-                <a href="../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../info/about_sansi_series.html">
-            
-                <a href="../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../info/about_haowan_series.html">
-            
-                <a href="../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../info/about_wengu_series.html">
-            
-                <a href="../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Java多线程系列--掌握Future，轻松获取异步任务结果</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63E1;future&#xFF0C;&#x8F7B;&#x677E;&#x83B7;&#x53D6;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7ED3;&#x679C;"><b></b>Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63E1;Future&#xFF0C;&#x8F7B;&#x677E;&#x83B7;&#x53D6;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7ED3;&#x679C;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#runnable&#x7684;&#x5C40;&#x9650;&#x6027;"><b></b>Runnable&#x7684;&#x5C40;&#x9650;&#x6027;</a></li><ul><li><span class="title-icon "></span><a href="#&#x7EC3;&#x624B;&#x5C0F;demo----&#x56DE;&#x987E;&#x65E2;&#x5F80;&#x6587;&#x7AE0;&#x77E5;&#x8BC6;"><b></b>&#x7EC3;&#x624B;&#x5C0F;Demo -- &#x56DE;&#x987E;&#x65E2;&#x5F80;&#x6587;&#x7AE0;&#x77E5;&#x8BC6;</a></li></ul><li><span class="title-icon "></span><a href="#&#x4E3A;&#x5F02;&#x6B65;&#x800C;&#x751F;&#x7684;future"><b></b>&#x4E3A;&#x5F02;&#x6B65;&#x800C;&#x751F;&#x7684;Future</a></li><ul><li><span class="title-icon "></span><a href="#&#x7C7B;&#x56FE;"><b></b>&#x7C7B;&#x56FE;</a></li></ul><li><span class="title-icon "></span><a href="#futuretask&#x8BE6;&#x89E3;"><b></b>FutureTask&#x8BE6;&#x89E3;</a></li><ul><li><span class="title-icon "></span><a href="#&#x6784;&#x9020;&#x51FD;&#x6570;"><b></b>&#x6784;&#x9020;&#x51FD;&#x6570;</a></li><li><span class="title-icon "></span><a href="#&#x751F;&#x547D;&#x5468;&#x671F;"><b></b>&#x751F;&#x547D;&#x5468;&#x671F;</a></li><li><span class="title-icon "></span><a href="#&#x6838;&#x5FC3;&#x65B9;&#x6CD5;"><b></b>&#x6838;&#x5FC3;&#x65B9;&#x6CD5;</a></li></ul><li><span class="title-icon "></span><a href="#&#x5982;&#x4F55;&#x4F7F;&#x7528;"><b></b>&#x5982;&#x4F55;&#x4F7F;&#x7528;</a></li><li><span class="title-icon "></span><a href="#&#x5F15;&#x7533;&#xFF0C;&#x591A;&#x7EBF;&#x7A0B;&#x4E1A;&#x52A1;&#x6A21;&#x5F0F;"><b></b>&#x5F15;&#x7533;&#xFF0C;&#x591A;&#x7EBF;&#x7A0B;&#x4E1A;&#x52A1;&#x6A21;&#x5F0F;</a></li><ul><li><span class="title-icon "></span><a href="#future&#x6A21;&#x5F0F;"><b></b>Future&#x6A21;&#x5F0F;</a></li><li><span class="title-icon "></span><a href="#master-worker&#x6A21;&#x5F0F;"><b></b>Master-Worker&#x6A21;&#x5F0F;</a></li><li><span class="title-icon "></span><a href="#guarded-suspension&#x6A21;&#x5F0F;"><b></b>Guarded Suspension&#x6A21;&#x5F0F;</a></li><li><span class="title-icon "></span><a href="#&#x4E0D;&#x53D8;&#x6A21;&#x5F0F;"><b></b>&#x4E0D;&#x53D8;&#x6A21;&#x5F0F;</a></li><li><span class="title-icon "></span><a href="#&#x751F;&#x4EA7;&#x8005;-&#x6D88;&#x8D39;"><b></b>&#x751F;&#x4EA7;&#x8005;-&#x6D88;&#x8D39;</a></li></ul><li><span class="title-icon "></span><a href="#&#x540E;&#x8BB0;"><b></b>&#x540E;&#x8BB0;</a></li></ul></ul></div><a href="#java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63E1;future&#xFF0C;&#x8F7B;&#x677E;&#x83B7;&#x53D6;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7ED3;&#x679C;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63E1;future&#xFF0C;&#x8F7B;&#x677E;&#x83B7;&#x53D6;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7ED3;&#x679C;"><a name="java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63E1;future&#xFF0C;&#x8F7B;&#x677E;&#x83B7;&#x53D6;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7ED3;&#x679C;" class="anchor-navigation-ex-anchor" href="#java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63E1;future&#xFF0C;&#x8F7B;&#x677E;&#x83B7;&#x53D6;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7ED3;&#x679C;"><i class="fa fa-link" aria-hidden="true"></i></a>Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;--&#x638C;&#x63E1;Future&#xFF0C;&#x8F7B;&#x677E;&#x83B7;&#x53D6;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7ED3;&#x679C;</h1>
-<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
-<p>&#x6700;&#x8FD1;&#x56E0;&#x4E3A;&#x4E00;&#x4E9B;&#x4E2A;&#x4EBA;&#x539F;&#x56E0;&#xFF0C;&#x672A;&#x80FD;&#x62BD;&#x51FA;&#x592A;&#x591A;&#x7CBE;&#x529B;&#x66F4;&#x65B0;Java&#x591A;&#x7EBF;&#x7A0B;&#x7CFB;&#x5217;&#xFF0C;&#x4E00;&#x6401;&#x7F6E;&#x5C31;&#x662F;&#x597D;&#x51E0;&#x4E2A;&#x6708;&#xFF0C;&#x5148;&#x5411;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x81F4;&#x6B49;&#x3002;</p>
-<p>&#x5728;&#x672C;&#x7CFB;&#x5217;&#x7684;&#x5176;&#x4ED6;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x5DF2;&#x7ECF;&#x63D0;&#x5230;&#x8FC7;&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x7684;&#x76F8;&#x4E92;&#x534F;&#x4F5C;&#xFF0C; &#x901A;&#x8FC7;&#x5206;&#x5DE5;&#xFF0C;&#x5C06;&#x7A0B;&#x5E8F;&#x7CFB;&#x7EDF;&#x7684;&#x4E0D;&#x540C;&#x4EFB;&#x52A1;&#x8FDB;&#x884C;&#x7EBF;&#x7A0B;&#x5206;&#x79BB;&#xFF0C;&#x5145;&#x5206;&#x5229;&#x7528;&#x673A;&#x5668;&#x6027;&#x80FD;&#x3001;&#x63D0;&#x5347;&#x7279;&#x5B9A;&#x7EBF;&#x7A0B;&#x7684;&#x5229;&#x7528;&#x7387;&#x548C;&#x7A0B;&#x5E8F;&#x7684;&#x4F53;&#x9A8C;&#x611F;&#x3002;</p>
-<p><em>&#x8BE6;&#x89C1;&#x62D9;&#x4F5C;&#xFF1A;<a href="https://juejin.cn/post/7080088772754292744" target="_blank">Java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E0E;&#x7EBF;&#x7A0B;&#x534F;&#x4F5C;&#x8BE6;&#x89E3;</a></em>.</p>
-<p>&#x5E76;&#x5728;&#x7EBF;&#x7A0B;&#x6C60;&#x76F8;&#x5173;&#x6587;&#x7AE0;&#x4E2D;&#x63D0;&#x5230;&#xFF1A;&#x4F5C;&#x4E3A;&#x7A0B;&#x5E8F;&#x6784;&#x5EFA;&#x8005;&#xFF0C;&#x6211;&#x4EEC;&#x66F4;&#x5173;&#x5FC3;&#x7EBF;&#x7A0B;&#xFF08;&#x7EC4;&#xFF09;&#x7684;&#x7279;&#x6027;&#x548C;&#x5B83;&#x4EEC;&#x6240;&#x6267;&#x884C;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x5E76;&#x4E0D;&#x613F;&#x610F;&#x5206;&#x5FC3;&#x53BB;&#x505A;&#x7EBF;&#x7A0B;&#x64CD;&#x4F5C;&#x3002;</p>
-<p>&#x8BE6;&#x89C1;&#x62D9;&#x4F5C;&#xFF1A;<a href="https://juejin.cn/post/7098235227490746375" target="_blank">Java&#x591A;&#x7EBF;&#x7A0B;&#x57FA;&#x7840;--&#x7EBF;&#x7A0B;&#x7684;&#x521B;&#x5EFA;&#x4E0E;&#x7EBF;&#x7A0B;&#x6C60;&#x7BA1;&#x7406;</a></p>
-<p>&#x7136;&#x800C;&#x5B9E;&#x9645;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x540C;&#x6837;&#x5173;&#x5FC3;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x5BF9;&#x7A0B;&#x5E8F;&#x7CFB;&#x7EDF;&#x4EA7;&#x751F;&#x7684;&#x5F71;&#x54CD;&#xFF0C;<em>&#x4E60;&#x60EF;&#x4E0A;&#x79F0;&#x4E4B;&#x4E3A;&#x4EFB;&#x52A1;&#x7684;&#x7684;&#x6267;&#x884C;&#x7ED3;&#x679C;</em>&#x3002;</p>
-<h2 id="runnable&#x7684;&#x5C40;&#x9650;&#x6027;"><a name="runnable&#x7684;&#x5C40;&#x9650;&#x6027;" class="anchor-navigation-ex-anchor" href="#runnable&#x7684;&#x5C40;&#x9650;&#x6027;"><i class="fa fa-link" aria-hidden="true"></i></a>Runnable&#x7684;&#x5C40;&#x9650;&#x6027;</h2>
-<p>&#x5728;&#x524D;&#x6587;&#x4E2D;&#x6211;&#x4EEC;&#x8C08;&#x5230;&#xFF0C;&#x901A;&#x8FC7;&#x7F16;&#x7801;&#x5B9E;&#x73B0;Runnable&#x63A5;&#x53E3;&#xFF0C;&#x5C06;&#x83B7;&#x5F97;&#x5177;&#x6709;&#x8FB9;&#x754C;&#x6027;&#x7684; &quot;&#x4EFB;&#x52A1;&quot;&#xFF0C;&#x5728;&#x6307;&#x5B9A;&#x7684;&#x7EBF;&#x7A0B;&#xFF08;&#x6216;&#x8005;&#x7EBF;&#x7A0B;&#x6C60;&#xFF09;&#x4E2D;&#x8FD0;&#x884C;&#x3002;</p>
-<p>&#x91CD;&#x65B0;&#x89C2;&#x5BDF;&#x8BE5;&#x63A5;&#x53E3;&#xFF0C;&#x4E0D;&#x96BE;&#x53D1;&#x73B0;&#x5B83;&#x5E76;&#x6CA1;&#x6709;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x503C;&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Runnable</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>;
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_46.html" class="active"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="java多线程系列--掌握future轻松获取异步任务结果"><a class="header" href="#java多线程系列--掌握future轻松获取异步任务结果">Java多线程系列--掌握Future，轻松获取异步任务结果</a></h1>
+<h2 id="前言"><a class="header" href="#前言">前言</a></h2>
+<p>最近因为一些个人原因，未能抽出太多精力更新Java多线程系列，一搁置就是好几个月，先向读者诸君致歉。</p>
+<p>在本系列的其他文章中，已经提到过线程之间的相互协作， 通过分工，将程序系统的不同任务进行线程分离，充分利用机器性能、提升特定线程的利用率和程序的体验感。</p>
+<p><em>详见拙作：<a href="https://juejin.cn/post/7080088772754292744">Java多线程基础--线程生命周期与线程协作详解</a></em>.</p>
+<p>并在线程池相关文章中提到：作为程序构建者，我们更关心线程（组）的特性和它们所执行的任务，并不愿意分心去做线程操作。</p>
+<p>详见拙作：<a href="https://juejin.cn/post/7098235227490746375">Java多线程基础--线程的创建与线程池管理</a></p>
+<p>然而实际开发中，我们同样关心一个任务对程序系统产生的影响，<em>习惯上称之为任务的的执行结果</em>。</p>
+<h2 id="runnable的局限性"><a class="header" href="#runnable的局限性">Runnable的局限性</a></h2>
+<p>在前文中我们谈到，通过编码实现Runnable接口，将获得具有边界性的 "任务"，在指定的线程（或者线程池）中运行。</p>
+<p>重新观察该接口，不难发现它并没有方法返回值：</p>
+<pre><code class="language-java">public interface Runnable {
+    void run();
 }
 </code></pre>
-<p>&#x5728;JDK1.5&#x4E4B;&#x524D;&#xFF0C;&#x60F3;&#x5229;&#x7528;&#x4EFB;&#x52A1;&#x7684;&#x6267;&#x884C;&#x7ED3;&#x679C;&#xFF0C;&#x9700;&#x8981;&#x5C0F;&#x5FC3;&#x7684;&#x64CD;&#x4F5C;&#x7EBF;&#x7A0B;&#x8BBF;&#x95EE;&#x4E34;&#x754C;&#x533A;&#x8D44;&#x6E90;&#x3002;&#x4F7F;&#x7528; <code>&#x56DE;&#x8C03;</code> &#x8FDB;&#x884C;&#x89E3;&#x8026;&#x662F;&#x975E;&#x5E38;&#x4E0D;&#x9519;&#x7684;&#x9009;&#x62E9;&#x3002;</p>
-<h3 id="&#x7EC3;&#x624B;&#x5C0F;demo----&#x56DE;&#x987E;&#x65E2;&#x5F80;&#x6587;&#x7AE0;&#x77E5;&#x8BC6;"><a name="&#x7EC3;&#x624B;&#x5C0F;demo----&#x56DE;&#x987E;&#x65E2;&#x5F80;&#x6587;&#x7AE0;&#x77E5;&#x8BC6;" class="anchor-navigation-ex-anchor" href="#&#x7EC3;&#x624B;&#x5C0F;demo----&#x56DE;&#x987E;&#x65E2;&#x5F80;&#x6587;&#x7AE0;&#x77E5;&#x8BC6;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7EC3;&#x624B;&#x5C0F;Demo -- &#x56DE;&#x987E;&#x65E2;&#x5F80;&#x6587;&#x7AE0;&#x77E5;&#x8BC6;</h3>
-<p><em>&#x6CE8;&#x610F;&#xFF0C;&#x4E3A;&#x4E86;&#x51CF;&#x5C11;&#x7BC7;&#x5E45;&#x4F7F;&#x7528;&#x4E86;lambda&#xFF0C;&#x4F46;jdk1.5&#x4E4B;&#x524D;&#x5E76;&#x4E0D;&#x652F;&#x6301;lambda</em></p>
+<p>在JDK1.5之前，想利用任务的执行结果，需要小心的操作线程访问临界区资源。使用 <code>回调</code> 进行解耦是非常不错的选择。</p>
+<h3 id="练手小demo----回顾既往文章知识"><a class="header" href="#练手小demo----回顾既往文章知识">练手小Demo -- 回顾既往文章知识</a></h3>
+<p><em>注意，为了减少篇幅使用了lambda，但jdk1.5之前并不支持lambda</em></p>
 <blockquote>
-<p>&#x5C06;&#x8BA1;&#x7B97;&#x4EFB;&#x52A1;&#x5206;&#x79BB;&#x5230;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#xFF0C;&#x518D;&#x56DE;&#x5230;&#x4E3B;&#x7EBF;&#x7A0B;&#x6D88;&#x8D39;&#x7ED3;&#x679C;</p>
+<p>将计算任务分离到其他线程执行，再回到主线程消费结果</p>
 </blockquote>
-<p>&#x6211;&#x4EEC;&#x5C06;&#x8BA1;&#x7B97;&#x3001;IO&#x7B49;&#x8017;&#x65F6;&#x4EFB;&#x52A1;&#x4E22;&#x5230;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#xFF0C;&#x8BA9;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E13;&#x6CE8;&#x4E8E;&#x81EA;&#x8EAB;&#x4E1A;&#x52A1;&#xFF0C;<em>&#x5047;&#x60F3;&#x5B83;&#x5728;&#x63A5;&#x53D7;&#x7528;&#x6237;&#x8F93;&#x5165;&#x4EE5;&#x53CA;&#x5904;&#x7406;&#x53CD;&#x9988;,&#x4F46;&#x6211;&#x4EEC;&#x7565;&#x53BB;&#x8FD9;&#x4E00;&#x90E8;&#x5206;</em></p>
-<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8BBE;&#x8BA1;&#x51FA;&#x7C7B;&#x4F3C;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
-<p><em>&#x867D;&#x7136;&#x5B83;&#x8FD8;&#x6709;&#x5F88;&#x591A;&#x4E0D;&#x5408;&#x7406;&#x4E4B;&#x5904;&#x503C;&#x5F97;&#x4F18;&#x5316;&#xFF0C;&#x4F46;&#x4E5F;&#x8DB3;&#x4EE5;&#x7528;&#x4E8E;&#x6F14;&#x793A;</em></p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> </span>{
-    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Object queueLock = <span class="hljs-keyword">new</span> Object();
-    <span class="hljs-keyword">static</span> List&lt;Runnable&gt; mainQueue = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
-    <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> running = <span class="hljs-keyword">true</span>;
+<p>我们将计算、IO等耗时任务丢到其他线程，让主线程专注于自身业务，<em>假想它在接受用户输入以及处理反馈,但我们略去这一部分</em></p>
+<p>我们可以设计出类似下面的代码：</p>
+<p><em>虽然它还有很多不合理之处值得优化，但也足以用于演示</em></p>
+<pre><code class="language-java">class Demo {
+    static final Object queueLock = new Object();
+    static List&lt;Runnable&gt; mainQueue = new ArrayList&lt;&gt;();
+    static boolean running = true;
 
-    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Runnable FINISH = () -&gt; running = <span class="hljs-keyword">false</span>;
+    static final Runnable FINISH = () -&gt; running = false;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
-        <span class="hljs-keyword">synchronized</span> (queueLock) {
+    public static void main(String[] args) {
+        synchronized (queueLock) {
             mainQueue.add(Demo::onStart);
         }
-        <span class="hljs-keyword">while</span> (running) {
-            Runnable runnable = <span class="hljs-keyword">null</span>;
-            <span class="hljs-keyword">synchronized</span> (queueLock) {
-                <span class="hljs-keyword">if</span> (!mainQueue.isEmpty())
-                    runnable = mainQueue.remove(<span class="hljs-number">0</span>);
+        while (running) {
+            Runnable runnable = null;
+            synchronized (queueLock) {
+                if (!mainQueue.isEmpty())
+                    runnable = mainQueue.remove(0);
             }
-            <span class="hljs-keyword">if</span> (runnable != <span class="hljs-keyword">null</span>) {
+            if (runnable != null) {
                 runnable.run();
             }
             Thread.yield();
         }
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStart</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-comment">//...</span>
+    public static void onStart() {
+        //...
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">finish</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">synchronized</span> (queueLock) {
+    public static void finish() {
+        synchronized (queueLock) {
             mainQueue.clear();
             mainQueue.add(FINISH);
         }
     }
 }
 </code></pre>
-<p>&#x518D;&#x6A21;&#x62DF;&#x4E00;&#x4E2A;&#x8BA1;&#x7B97;&#x7684;&#x7EBF;&#x7A0B;&#x548C;&#x4EFB;&#x52A1;&#x56DE;&#x8C03;&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Callback</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">onResultCalculated</span><span class="hljs-params">(<span class="hljs-keyword">int</span> result)</span></span>;
+<p>再模拟一个计算的线程和任务回调：</p>
+<pre><code class="language-java">interface Callback {
+    void onResultCalculated(int result);
 }
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CalcThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>{
+class CalcThread extends Thread {
 
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Callback callback;
+    private final Callback callback;
 
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> a;
+    private final int a;
 
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> b;
+    private final int b;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CalcThread</span><span class="hljs-params">(Callback callback, <span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{
-        <span class="hljs-keyword">this</span>.callback = callback;
-        <span class="hljs-keyword">this</span>.a = a;
-        <span class="hljs-keyword">this</span>.b = b;
+    public CalcThread(Callback callback, int a, int b) {
+        this.callback = callback;
+        this.a = a;
+        this.b = b;
     }
 
-    <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">super</span>.run();
-        <span class="hljs-keyword">try</span> {
-            Thread.sleep(<span class="hljs-number">10</span>);
-        } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+    @Override
+    public void run() {
+        super.run();
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> result = a + b;
-        System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;,calc result:&quot;</span> + result + <span class="hljs-string">&quot;;&quot;</span> + System.currentTimeMillis());
+        final int result = a + b;
+        System.out.println("threadId" + Thread.currentThread().getId() + ",calc result:" + result + ";" + System.currentTimeMillis());
 
-        <span class="hljs-keyword">synchronized</span> (queueLock) {
+        synchronized (queueLock) {
             mainQueue.add(() -&gt; callback.onResultCalculated(result));
         }
     }
 }
 </code></pre>
-<p>&#x586B;&#x5145;&#x4E00;&#x4E0B;onStart&#x4E1A;&#x52A1;&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStart</span><span class="hljs-params">()</span> </span>{
-        System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;,onStart,&quot;</span> + System.currentTimeMillis());
+<p>填充一下onStart业务：</p>
+<pre><code class="language-java">class Demo {
+    public static void onStart() {
+        System.out.println("threadId" + Thread.currentThread().getId() + ",onStart," + System.currentTimeMillis());
 
-        <span class="hljs-keyword">new</span> CalcThread(result -&gt; {
-            System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;,onResultCalculated:&quot;</span> + result + <span class="hljs-string">&quot;;&quot;</span> + System.currentTimeMillis());
+        new CalcThread(result -&gt; {
+            System.out.println("threadId" + Thread.currentThread().getId() + ",onResultCalculated:" + result + ";" + System.currentTimeMillis());
             finish();
-        }, <span class="hljs-number">200</span>, <span class="hljs-number">300</span>).start();
+        }, 200, 300).start();
 
     }
 }
 </code></pre>
-<h4 id="&#x590D;&#x4E60;&#xFF1A;&#x4F18;&#x5316;&#x4E3A;&#x4F7F;&#x7528;runnable"><a name="&#x590D;&#x4E60;&#xFF1A;&#x4F18;&#x5316;&#x4E3A;&#x4F7F;&#x7528;runnable" class="anchor-navigation-ex-anchor" href="#&#x590D;&#x4E60;&#xFF1A;&#x4F18;&#x5316;&#x4E3A;&#x4F7F;&#x7528;runnable"><i class="fa fa-link" aria-hidden="true"></i></a>&#x590D;&#x4E60;&#xFF1A;&#x4F18;&#x5316;&#x4E3A;&#x4F7F;&#x7528;Runnable</h4>
-<p>&#x5728;&#x524D;&#x6587;&#x6211;&#x4EEC;&#x63D0;&#x5230;&#xFF0C;&#x5982;&#x679C;&#x4E1A;&#x52A1;&#x4EC5;&#x5173;&#x6CE8;&#x4EFB;&#x52A1;&#x7684;&#x6267;&#x884C;&#xFF0C;&#x5E76;&#x4E0D;&#x8FC7;&#x4E8E;&#x5173;&#x5FC3;&#x7EBF;&#x7A0B;&#x672C;&#x8EAB;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x5229;&#x7528;Runnable&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> </span>{
-    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CalcRunnable</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>{
+<h4 id="复习优化为使用runnable"><a class="header" href="#复习优化为使用runnable">复习：优化为使用Runnable</a></h4>
+<p>在前文我们提到，如果业务仅关注任务的执行，并不过于关心线程本身，则可以利用Runnable：</p>
+<pre><code class="language-java">class Demo {
+    static class CalcRunnable implements Runnable {
 
-        <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Callback callback;
+        private final Callback callback;
 
-        <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> a;
+        private final int a;
 
-        <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> b;
+        private final int b;
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CalcRunnable</span><span class="hljs-params">(Callback callback, <span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>{
-            <span class="hljs-keyword">this</span>.callback = callback;
-            <span class="hljs-keyword">this</span>.a = a;
-            <span class="hljs-keyword">this</span>.b = b;
+        public CalcRunnable(Callback callback, int a, int b) {
+            this.callback = callback;
+            this.a = a;
+            this.b = b;
         }
 
-        <span class="hljs-meta">@Override</span>
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
-            <span class="hljs-keyword">try</span> {
-                Thread.sleep(<span class="hljs-number">10</span>);
-            } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> result = a + b;
-            System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;,calc result:&quot;</span> + result + <span class="hljs-string">&quot;;&quot;</span> + System.currentTimeMillis());
+            final int result = a + b;
+            System.out.println("threadId" + Thread.currentThread().getId() + ",calc result:" + result + ";" + System.currentTimeMillis());
 
-            <span class="hljs-keyword">synchronized</span> (queueLock) {
+            synchronized (queueLock) {
                 mainQueue.add(() -&gt; callback.onResultCalculated(result));
             }
         }
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStart</span><span class="hljs-params">()</span> </span>{
-        System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;,onStart,&quot;</span> + System.currentTimeMillis());
+    public static void onStart() {
+        System.out.println("threadId" + Thread.currentThread().getId() + ",onStart," + System.currentTimeMillis());
 
-        <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> CalcRunnable(result -&gt; {
-            System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;,onResultCalculated:&quot;</span> + result + <span class="hljs-string">&quot;;&quot;</span> + System.currentTimeMillis());
+        new Thread(new CalcRunnable(result -&gt; {
+            System.out.println("threadId" + Thread.currentThread().getId() + ",onResultCalculated:" + result + ";" + System.currentTimeMillis());
             finish();
-        }, <span class="hljs-number">200</span>, <span class="hljs-number">300</span>)).start();
+        }, 200, 300)).start();
 
     }
 }
 </code></pre>
 <blockquote>
-<p>&#x4E0D;&#x96BE;&#x60F3;&#x8C61;&#x51FA;&#xFF1A;&#x6211;&#x4EEC;&#x975E;&#x5E38;&#x9700;&#x8981;</p>
+<p>不难想象出：我们非常需要</p>
 <ul>
-<li>&#x8BA9;&#x7279;&#x5B9A;&#x7EBF;&#x7A0B;&#x3001;&#x7279;&#x5B9A;&#x7C7B;&#x578B;&#x7684;&#x7EBF;&#x7A0B;&#x65B9;&#x4FBF;&#x5730;&#x63A5;&#x6536;&#x4EFB;&#x52A1;&#xFF0C;<em>&#x56DE;&#x987E;&#x672C;&#x7CFB;&#x5217;&#x6587;&#x7AE0;&#x4E2D;&#x7684; <a href="https://juejin.cn/post/7098235227490746375" target="_blank">&#x7EBF;&#x7A0B;&#x6C60;&#x7BC7;</a> &#xFF0C;&#x7EBF;&#x7A0B;&#x6C60;&#x662F;&#x5E94;&#x8FD0;&#x800C;&#x751F;</em></li>
-<li>&#x62E5;&#x6709;&#x6BD4;Synchronize&#x66F4;&#x8F7B;&#x91CF;&#x7684;&#x673A;&#x5236;</li>
-<li>&#x62E5;&#x6709;&#x66F4;&#x65B9;&#x4FBF;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;</li>
+<li>让特定线程、特定类型的线程方便地接收任务，<em>回顾本系列文章中的 <a href="https://juejin.cn/post/7098235227490746375">线程池篇</a> ，线程池是应运而生</em></li>
+<li>拥有比Synchronize更轻量的机制</li>
+<li>拥有更方便的数据结构</li>
 </ul>
 </blockquote>
-<p>&#x81F3;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F53;&#x4F1A;&#x5230;&#xFF1A;JDK1.5&#x4E4B;&#x524D;&#xFF0C;&#x56E0;&#x4E3A;JDK&#x7684;&#x529F;&#x80FD;&#x4E0D;&#x8DB3;&#xFF0C;Java&#x7A0B;&#x5E8F;&#x5BF9;&#x4E8E;&#x7EBF;&#x7A0B;&#x7684;&#x4F7F;&#x7528; <strong>&#x8F83;&#x4E3A;&#x7C97;&#x7CD9;</strong>&#x3002;</p>
-<h2 id="&#x4E3A;&#x5F02;&#x6B65;&#x800C;&#x751F;&#x7684;future"><a name="&#x4E3A;&#x5F02;&#x6B65;&#x800C;&#x751F;&#x7684;future" class="anchor-navigation-ex-anchor" href="#&#x4E3A;&#x5F02;&#x6B65;&#x800C;&#x751F;&#x7684;future"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E3A;&#x5F02;&#x6B65;&#x800C;&#x751F;&#x7684;Future</h2>
-<p>&#x7EC8;&#x4E8E;&#x5728;JDK1.5&#x4E2D;&#xFF0C;&#x8FCE;&#x6765;&#x4E86;&#x65B0;&#x7279;&#x6027;&#xFF1A; <code>Future</code> &#x4EE5;&#x53CA;&#x5148;&#x524D;&#x6587;&#x7AE0;&#x4E2D;&#x63D0;&#x5230;&#x7684;&#x7EBF;&#x7A0B;&#x6C60;, <em>&#x65F6;&#x5149;&#x834F;&#x82D2;&#xFF0C;&#x4E00;&#x6643;&#x5C06;&#x8FD1;20&#x5E74;&#x4E86;</em>&#x3002;</p>
-<pre><code class="lang-java"><span class="hljs-comment">/**
- * &#x7565;
- * <span class="hljs-doctag">@since</span> 1.5
- * <span class="hljs-doctag">@author</span> Doug Lea
- * <span class="hljs-doctag">@param</span> &lt;V&gt; The result type returned by this Future&apos;s {<span class="hljs-doctag">@code</span> get} method
- */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Future</span>&lt;<span class="hljs-title">V</span>&gt; </span>{
+<p>至此，我们可以体会到：JDK1.5之前，因为JDK的功能不足，Java程序对于线程的使用 <strong>较为粗糙</strong>。</p>
+<h2 id="为异步而生的future"><a class="header" href="#为异步而生的future">为异步而生的Future</a></h2>
+<p>终于在JDK1.5中，迎来了新特性： <code>Future</code> 以及先前文章中提到的线程池, <em>时光荏苒，一晃将近20年了</em>。</p>
+<pre><code class="language-java">/**
+ * 略
+ * @since 1.5
+ * @author Doug Lea
+ * @param &lt;V&gt; The result type returned by this Future's {@code get} method
+ */
+public interface Future&lt;V&gt; {
 
-    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">cancel</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> mayInterruptIfRunning)</span></span>;
+    boolean cancel(boolean mayInterruptIfRunning);
 
-    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isCancelled</span><span class="hljs-params">()</span></span>;
+    boolean isCancelled();
 
-    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isDone</span><span class="hljs-params">()</span></span>;
+    boolean isDone();
 
-    <span class="hljs-function">V <span class="hljs-title">get</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException</span>;
+    V get() throws InterruptedException, ExecutionException;
 
-    <span class="hljs-function">V <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-keyword">long</span> timeout, TimeUnit unit)</span>
-            <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException, TimeoutException</span>;
+    V get(long timeout, TimeUnit unit)
+            throws InterruptedException, ExecutionException, TimeoutException;
 }
 </code></pre>
-<p>&#x5C3D;&#x7BA1;&#x5DF2;&#x7ECF;&#x79FB;&#x9664;&#x4E86;API&#x6CE8;&#x91CA;&#xFF0C;&#x4F46;&#x4ECD;&#x7136;&#x80FD;&#x591F;&#x7406;&#x89E3;&#x6BCF;&#x4E2A;API&#x7684;&#x542B;&#x4E49;&#xFF0C;&#x4E0D;&#x591A;&#x505A;&#x8D58;&#x8FF0;&#x3002;</p>
-<p>&#x663E;&#x800C;&#x6613;&#x89C1;&#xFF0C;&#x4E3A;&#x4E86;&#x589E;&#x52A0;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;<strong>&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x7528;&#x5982;&#x6B64;&#x590D;&#x6742;&#x7684;</strong> &#x63A5;&#x53E3;&#x6765;&#x66FF;&#x4EE3; <code>Runnable</code>&#x3002;&#x7B80;&#x5355;&#x601D;&#x8003;&#x540E;&#x53EF;&#x4EE5;&#x5BF9;&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x60C5;&#x51B5;&#x8FDB;&#x884C;&#x5F52;&#x7EB3;&#xFF1A;</p>
+<p>尽管已经移除了API注释，但仍然能够理解每个API的含义，不多做赘述。</p>
+<p>显而易见，为了增加返回值，<strong>没有必要用如此复杂的</strong> 接口来替代 <code>Runnable</code>。简单思考后可以对返回值的情况进行归纳：</p>
 <ul>
-<li>&#x8FD4;&#x56DE;Runnable&#x4E2D;&#x4E1A;&#x52A1;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x4F8B;&#x5982;&#x8BA1;&#x7B97;&#x3001;&#x8BFB;&#x53D6;&#x8D44;&#x6E90;&#x7B49;</li>
-<li>&#x5355;&#x7EAF;&#x7684;&#x5728;Runnable&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x540E;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7ED3;&#x679C;</li>
+<li>返回Runnable中业务的结果，例如计算、读取资源等</li>
+<li>单纯的在Runnable执行完毕后返回一个结果</li>
 </ul>
-<p>&#x4ECE;&#x4E1A;&#x52A1;&#x5C42;&#x4E0A;&#x770B;&#xFF0C;&#x4EC5;&#x9700;&#x8981;&#x5982;&#x4E0B;&#x63A5;&#x53E3;&#x5373;&#x53EF;&#xFF0C;&#x5B83;&#x589E;&#x52A0;&#x4E86;&#x8FD4;&#x56DE;&#x503C;&#x3001;&#x5E76;&#x53EF;&#x4EE5;&#x66F4;&#x53CB;&#x597D;&#x5730;&#x8BA9;&#x4F7F;&#x7528;&#x8005;&#x5904;&#x7406;&#x5F02;&#x5E38;&#xFF1A;</p>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x629B;&#x5F00;&#x5E95;&#x5C42;&#x5B9E;&#x73B0;&#xFF0C;&#x4EC5;&#x770B;&#x4E1A;&#x52A1;&#x65B9;&#x7F16;&#x7801;&#x9700;&#x8981;</em></p>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Callable</span>&lt;<span class="hljs-title">V</span>&gt; </span>{
-    <span class="hljs-comment">/**
+<p>从业务层上看，仅需要如下接口即可，它增加了返回值、并可以更友好地让使用者处理异常：</p>
+<p><em>作者按：抛开底层实现，仅看业务方编码需要</em></p>
+<pre><code class="language-java">public interface Callable&lt;V&gt; {
+    /**
      * Computes a result, or throws an exception if unable to do so.
      *
-     * <span class="hljs-doctag">@return</span> computed result
-     * <span class="hljs-doctag">@throws</span> Exception if unable to compute a result
-     * &#x9632;&#x76D7;&#x6233; leobert-lan https://juejin.cn/user/2066737589654327
-     */</span>
-    <span class="hljs-function">V <span class="hljs-title">call</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception</span>;
+     * @return computed result
+     * @throws Exception if unable to compute a result
+     * 防盗戳 leobert-lan https://juejin.cn/user/2066737589654327
+     */
+    V call() throws Exception;
 }
 </code></pre>
-<p>&#x663E;&#x7136;&#xFF0C;JDK&#x9700;&#x8981;&#x63D0;&#x4F9B;&#x540E;&#x5411;&#x517C;&#x5BB9;&#x80FD;&#x529B;&#xFF1A;</p>
+<p>显然，JDK需要提供后向兼容能力：</p>
 <ul>
-<li>Runnable &#x4E0D;&#x80FD;&#x591F;&#x4E22;&#x5F03;&#xFF0C;&#x4E5F;&#x4E0D;&#x5E94;&#x5F53;&#x4E22;&#x5F03;</li>
-<li>&#x4E0D;&#x80FD;&#x8981;&#x6C42;&#x4F7F;&#x7528;&#x8005;&#x5B8C;&#x5168;&#x7684;&#x91CD;&#x6784;&#x4EE3;&#x7801;</li>
+<li>Runnable 不能够丢弃，也不应当丢弃</li>
+<li>不能要求使用者完全的重构代码</li>
 </ul>
-<p>&#x6240;&#x4EE5;&#x4E00;&#x5E76;&#x63D0;&#x4F9B;&#x4E86;&#x9002;&#x914D;&#x5668;&#xFF0C;&#x8BA9;&#x4F7F;&#x7528;&#x8005;&#x8FDB;&#x884C;&#x7B80;&#x5355;&#x7684;&#x5C40;&#x90E8;&#x91CD;&#x6784;&#x5373;&#x53EF;&#x7528;&#x4E0A;&#x65B0;&#x7279;&#x6027;</p>
-<pre><code class="lang-java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RunnableAdapter</span>&lt;<span class="hljs-title">T</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Callable</span>&lt;<span class="hljs-title">T</span>&gt; </span>{
-    <span class="hljs-keyword">final</span> Runnable task;
-    <span class="hljs-keyword">final</span> T result;
+<p>所以一并提供了适配器，让使用者进行简单的局部重构即可用上新特性</p>
+<pre><code class="language-java">static final class RunnableAdapter&lt;T&gt; implements Callable&lt;T&gt; {
+    final Runnable task;
+    final T result;
 
     RunnableAdapter(Runnable task, T result) {
-        <span class="hljs-keyword">this</span>.task = task;
-        <span class="hljs-keyword">this</span>.result = result;
+        this.task = task;
+        this.result = result;
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">call</span><span class="hljs-params">()</span> </span>{
+    public T call() {
         task.run();
-        <span class="hljs-keyword">return</span> result;
+        return result;
     }
 }
 </code></pre>
-<p>&#x800C;Future&#x6070;&#x5982;&#x5176;&#x540D;&#xFF0C;&#x5B83;&#x4EE3;&#x8868;&#x4E86;&#x5728; &quot;&#x672A;&#x6765;&quot; &#x7684;&#x4E00;&#x4E2A;&#x7ED3;&#x679C;&#x548C;&#x72B6;&#x6001;&#xFF0C;&#x4E3A;&#x4E86;&#x66F4;&#x65B9;&#x4FBF;&#x5730;&#x5904;&#x7406;&#x5F02;&#x6B65;&#x800C;&#x751F;&#x3002;</p>
-<p>&#x5E76;&#x4E14;&#x5185;&#x7F6E;&#x4E86; <code>FutureTask</code>&#xFF0C;&#x5728; <a href="#anchor1">FutureTask&#x8BE6;&#x89E3;</a> &#x7AE0;&#x8282;&#x4E2D;&#x518D;&#x884C;&#x5C55;&#x5F00;&#x3002;</p>
-<h3 id="&#x7C7B;&#x56FE;"><a name="&#x7C7B;&#x56FE;" class="anchor-navigation-ex-anchor" href="#&#x7C7B;&#x56FE;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7C7B;&#x56FE;</h3>
-<p>&#x5728;JDK1.8&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x770B;&#x4E00;&#x4E0B;&#x7CBE;&#x7B80;&#x7684;&#x7C7B;&#x56FE;&#x7ED3;&#x6784;&#xFF1A;</p>
-<p><img src="post_46/FutureDiagram.png" alt=""></p>
-<h2 id="futuretask&#x8BE6;&#x89E3;"><a name="futuretask&#x8BE6;&#x89E3;" class="anchor-navigation-ex-anchor" href="#futuretask&#x8BE6;&#x89E3;"><i class="fa fa-link" aria-hidden="true"></i></a><a id="anchor1">FutureTask&#x8BE6;&#x89E3;</a></h2>
-<h3 id="&#x6784;&#x9020;&#x51FD;&#x6570;"><a name="&#x6784;&#x9020;&#x51FD;&#x6570;" class="anchor-navigation-ex-anchor" href="#&#x6784;&#x9020;&#x51FD;&#x6570;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6784;&#x9020;&#x51FD;&#x6570;</h3>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FutureTask</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FutureTask</span><span class="hljs-params">(Callable&lt;V&gt; callable)</span> </span>{
-        <span class="hljs-keyword">if</span> (callable == <span class="hljs-keyword">null</span>)
-            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
-        <span class="hljs-keyword">this</span>.callable = callable;
-        <span class="hljs-keyword">this</span>.state = NEW;       <span class="hljs-comment">// ensure visibility of callable</span>
+<p>而Future恰如其名，它代表了在 "未来" 的一个结果和状态，为了更方便地处理异步而生。</p>
+<p>并且内置了 <code>FutureTask</code>，在 <a href="#anchor1">FutureTask详解</a> 章节中再行展开。</p>
+<h3 id="类图"><a class="header" href="#类图">类图</a></h3>
+<p>在JDK1.8的基础上，看一下精简的类图结构：</p>
+<p><img src="./post_46/FutureDiagram.png" alt="" /></p>
+<h2 id="futuretask详解"><a class="header" href="#futuretask详解"><a id="anchor1">FutureTask详解</a></a></h2>
+<h3 id="构造函数"><a class="header" href="#构造函数">构造函数</a></h3>
+<pre><code class="language-java">public class FutureTask {
+    public FutureTask(Callable&lt;V&gt; callable) {
+        if (callable == null)
+            throw new NullPointerException();
+        this.callable = callable;
+        this.state = NEW;       // ensure visibility of callable
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FutureTask</span><span class="hljs-params">(Runnable runnable, V result)</span> </span>{
-        <span class="hljs-keyword">this</span>.callable = Executors.callable(runnable, result);
-        <span class="hljs-keyword">this</span>.state = NEW;       <span class="hljs-comment">// ensure visibility of callable</span>
+    public FutureTask(Runnable runnable, V result) {
+        this.callable = Executors.callable(runnable, result);
+        this.state = NEW;       // ensure visibility of callable
     }
 }
 </code></pre>
-<h3 id="&#x751F;&#x547D;&#x5468;&#x671F;"><a name="&#x751F;&#x547D;&#x5468;&#x671F;" class="anchor-navigation-ex-anchor" href="#&#x751F;&#x547D;&#x5468;&#x671F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x751F;&#x547D;&#x5468;&#x671F;</h3>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FutureTask</span> </span>{
-    <span class="hljs-comment">//&#x65B0;&#x5EFA;</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> NEW = <span class="hljs-number">0</span>;
+<h3 id="生命周期"><a class="header" href="#生命周期">生命周期</a></h3>
+<pre><code class="language-java">public class FutureTask {
+    //新建
+    private static final int NEW = 0;
 
-    <span class="hljs-comment">//&#x5904;&#x7406;&#x4E2D;</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> COMPLETING = <span class="hljs-number">1</span>;
+    //处理中
+    private static final int COMPLETING = 1;
 
-    <span class="hljs-comment">//&#x6B63;&#x5E38;</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> NORMAL = <span class="hljs-number">2</span>;
+    //正常
+    private static final int NORMAL = 2;
 
-    <span class="hljs-comment">//&#x5F02;&#x5E38;</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> EXCEPTIONAL = <span class="hljs-number">3</span>;
+    //异常
+    private static final int EXCEPTIONAL = 3;
 
-    <span class="hljs-comment">//&#x5DF2;&#x53D6;&#x6D88;</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> CANCELLED = <span class="hljs-number">4</span>;
+    //已取消
+    private static final int CANCELLED = 4;
 
-    <span class="hljs-comment">//&#x4E2D;&#x65AD;&#x4E2D;</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> INTERRUPTING = <span class="hljs-number">5</span>;
+    //中断中
+    private static final int INTERRUPTING = 5;
 
-    <span class="hljs-comment">//&#x5DF2;&#x4E2D;&#x65AD;</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> INTERRUPTED = <span class="hljs-number">6</span>;
+    //已中断
+    private static final int INTERRUPTED = 6;
 }
 </code></pre>
-<p>&#x53EF;&#x80FD;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x8F6C;&#x6362;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>可能的生命周期转换如下：</p>
 <ul>
 <li>NEW -&gt; COMPLETING -&gt; NORMAL</li>
 <li>NEW -&gt; COMPLETING -&gt; EXCEPTIONAL</li>
 <li>NEW -&gt; CANCELLED</li>
 <li>NEW -&gt; INTERRUPTING -&gt; INTERRUPTED</li>
 </ul>
-<p>JDK&#x4E2D;&#x539F;&#x6C41;&#x539F;&#x5473;&#x7684;&#x89E3;&#x91CA;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>JDK中原汁原味的解释如下：</p>
 <blockquote>
 <p>The run state of this task, initially NEW. The run state
 transitions to a terminal state only in methods set,
@@ -1735,149 +460,150 @@ cancel(true)). Transitions from these intermediate to final
 states use cheaper ordered/lazy writes because values are unique
 and cannot be further modified.</p>
 </blockquote>
-<h3 id="&#x6838;&#x5FC3;&#x65B9;&#x6CD5;"><a name="&#x6838;&#x5FC3;&#x65B9;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#&#x6838;&#x5FC3;&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6838;&#x5FC3;&#x65B9;&#x6CD5;</h3>
-<p>&#x672C;&#x8282;&#x4ECE;&#x4EE5;&#x4E0B;&#x4E09;&#x5757;&#x5165;&#x624B;&#x9605;&#x8BFB;&#x6E90;&#x7801;</p>
+<h3 id="核心方法"><a class="header" href="#核心方法">核心方法</a></h3>
+<p>本节从以下三块入手阅读源码</p>
 <ul>
-<li>&#x72B6;&#x6001;&#x5224;&#x65AD;</li>
-<li>&#x53D6;&#x6D88;</li>
-<li>&#x83B7;&#x53D6;&#x7ED3;&#x679C;</li>
+<li>状态判断</li>
+<li>取消</li>
+<li>获取结果</li>
 </ul>
-<p>&#x72B6;&#x6001;&#x5224;&#x65AD;API&#x7684;&#x5B9E;&#x73B0;&#x975E;&#x5E38;&#x7B80;&#x5355;</p>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FutureTask</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isCancelled</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> state &gt;= CANCELLED;
+<p>状态判断API的实现非常简单</p>
+<pre><code class="language-java">public class FutureTask {
+    public boolean isCancelled() {
+        return state &gt;= CANCELLED;
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isDone</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">return</span> state != NEW;
+    public boolean isDone() {
+        return state != NEW;
     }
 }
 </code></pre>
-<p>&#x53D6;&#x6D88;&#xFF1A;</p>
+<p>取消：</p>
 <ol>
-<li>&#x5F53;&#x524D;&#x72B6;&#x6001;&#x4E3A; <code>NEW</code> &#x4E14; CAS&#x4FEE;&#x6539; state &#x6210;&#x529F;&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;&#x53D6;&#x6D88;&#x5931;&#x8D25;</li>
-<li>&#x5982;&#x679C; <code>mayInterruptIfRunning</code> &#x5219;&#x4E2D;&#x65AD;&#x5728;&#x6267;&#x884C;&#x7684;&#x7EBF;&#x7A0B;&#x5E76;CAS&#x4FEE;&#x6539;state&#x4E3A;INTERRUPTED</li>
-<li>&#x8C03;&#x7528; finishCompletion<ol>
-<li>&#x5220;&#x9664;&#x5E76;&#x901A;&#x77E5;&#x6240;&#x6709;&#x7B49;&#x5F85;&#x7684;&#x7EBF;&#x7A0B;</li>
-<li>&#x8C03;&#x7528;done()</li>
-<li>&#x8BBE;&#x7F6E;callable&#x4E3A;null</li>
+<li>当前状态为 <code>NEW</code> 且 CAS修改 state 成功，否则返回取消失败</li>
+<li>如果 <code>mayInterruptIfRunning</code> 则中断在执行的线程并CAS修改state为INTERRUPTED</li>
+<li>调用 finishCompletion
+<ol>
+<li>删除并通知所有等待的线程</li>
+<li>调用done()</li>
+<li>设置callable为null</li>
 </ol>
 </li>
 </ol>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FutureTask</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">cancel</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> mayInterruptIfRunning)</span> </span>{
-        <span class="hljs-keyword">if</span> (!(state == NEW &amp;&amp;
-                UNSAFE.compareAndSwapInt(<span class="hljs-keyword">this</span>, stateOffset, NEW,
+<pre><code class="language-java">public class FutureTask {
+    public boolean cancel(boolean mayInterruptIfRunning) {
+        if (!(state == NEW &amp;&amp;
+                UNSAFE.compareAndSwapInt(this, stateOffset, NEW,
                         mayInterruptIfRunning ? INTERRUPTING : CANCELLED))) {
 
-            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+            return false;
         }
 
-        <span class="hljs-keyword">try</span> {    <span class="hljs-comment">// in case call to interrupt throws exception</span>
-            <span class="hljs-keyword">if</span> (mayInterruptIfRunning) {
-                <span class="hljs-keyword">try</span> {
+        try {    // in case call to interrupt throws exception
+            if (mayInterruptIfRunning) {
+                try {
                     Thread t = runner;
-                    <span class="hljs-keyword">if</span> (t != <span class="hljs-keyword">null</span>)
+                    if (t != null)
                         t.interrupt();
-                } <span class="hljs-keyword">finally</span> { <span class="hljs-comment">// final state</span>
-                    UNSAFE.putOrderedInt(<span class="hljs-keyword">this</span>, stateOffset, INTERRUPTED);
+                } finally { // final state
+                    UNSAFE.putOrderedInt(this, stateOffset, INTERRUPTED);
                 }
             }
-        } <span class="hljs-keyword">finally</span> {
+        } finally {
             finishCompletion();
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        return true;
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">finishCompletion</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-comment">// assert state &gt; COMPLETING;</span>
-        <span class="hljs-keyword">for</span> (WaitNode q; (q = waiters) != <span class="hljs-keyword">null</span>; ) {
-            <span class="hljs-keyword">if</span> (UNSAFE.compareAndSwapObject(<span class="hljs-keyword">this</span>, waitersOffset, q, <span class="hljs-keyword">null</span>)) {
-                <span class="hljs-keyword">for</span> (; ; ) {
+    private void finishCompletion() {
+        // assert state &gt; COMPLETING;
+        for (WaitNode q; (q = waiters) != null; ) {
+            if (UNSAFE.compareAndSwapObject(this, waitersOffset, q, null)) {
+                for (; ; ) {
                     Thread t = q.thread;
-                    <span class="hljs-keyword">if</span> (t != <span class="hljs-keyword">null</span>) {
-                        q.thread = <span class="hljs-keyword">null</span>;
+                    if (t != null) {
+                        q.thread = null;
                         LockSupport.unpark(t);
                     }
                     WaitNode next = q.next;
-                    <span class="hljs-keyword">if</span> (next == <span class="hljs-keyword">null</span>)
-                        <span class="hljs-keyword">break</span>;
-                    q.next = <span class="hljs-keyword">null</span>; <span class="hljs-comment">// unlink to help gc</span>
+                    if (next == null)
+                        break;
+                    q.next = null; // unlink to help gc
                     q = next;
                 }
-                <span class="hljs-keyword">break</span>;
+                break;
             }
         }
 
         done();
 
-        callable = <span class="hljs-keyword">null</span>;        <span class="hljs-comment">// to reduce footprint</span>
+        callable = null;        // to reduce footprint
     }
 }
 </code></pre>
-<p>&#x83B7;&#x53D6;&#x7ED3;&#x679C;&#xFF1A; &#x5148;&#x5224;&#x65AD;&#x72B6;&#x6001;&#xFF0C;&#x5982;&#x679C;&#x672A;&#x8FDB;&#x5165;&#x5230; <code>COMPLETING</code>&#xFF08;&#x5373;&#x4E3A;NEW&#x72B6;&#x6001;&#xFF09;&#xFF0C;&#x5219;&#x963B;&#x585E;&#x7B49;&#x5F85;&#x72B6;&#x6001;&#x6539;&#x53D8;&#xFF0C;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x6216;&#x629B;&#x51FA;&#x5F02;&#x5E38;</p>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FutureTask</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> V <span class="hljs-title">get</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException </span>{
-        <span class="hljs-keyword">int</span> s = state;
-        <span class="hljs-keyword">if</span> (s &lt;= COMPLETING)
-            s = awaitDone(<span class="hljs-keyword">false</span>, <span class="hljs-number">0L</span>);
-        <span class="hljs-keyword">return</span> report(s);
+<p>获取结果： 先判断状态，如果未进入到 <code>COMPLETING</code>（即为NEW状态），则阻塞等待状态改变，返回结果或抛出异常</p>
+<pre><code class="language-java">public class FutureTask {
+    public V get() throws InterruptedException, ExecutionException {
+        int s = state;
+        if (s &lt;= COMPLETING)
+            s = awaitDone(false, 0L);
+        return report(s);
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> V <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-keyword">long</span> timeout, TimeUnit unit)</span>
-            <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException, TimeoutException </span>{
-        <span class="hljs-keyword">if</span> (unit == <span class="hljs-keyword">null</span>)
-            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();
-        <span class="hljs-keyword">int</span> s = state;
-        <span class="hljs-keyword">if</span> (s &lt;= COMPLETING &amp;&amp;
-                (s = awaitDone(<span class="hljs-keyword">true</span>, unit.toNanos(timeout))) &lt;= COMPLETING)
-            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> TimeoutException();
-        <span class="hljs-keyword">return</span> report(s);
+    public V get(long timeout, TimeUnit unit)
+            throws InterruptedException, ExecutionException, TimeoutException {
+        if (unit == null)
+            throw new NullPointerException();
+        int s = state;
+        if (s &lt;= COMPLETING &amp;&amp;
+                (s = awaitDone(true, unit.toNanos(timeout))) &lt;= COMPLETING)
+            throw new TimeoutException();
+        return report(s);
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">private</span> V <span class="hljs-title">report</span><span class="hljs-params">(<span class="hljs-keyword">int</span> s)</span> <span class="hljs-keyword">throws</span> ExecutionException </span>{
+    private V report(int s) throws ExecutionException {
         Object x = outcome;
-        <span class="hljs-keyword">if</span> (s == NORMAL)
-            <span class="hljs-keyword">return</span> (V) x;
-        <span class="hljs-keyword">if</span> (s &gt;= CANCELLED)
-            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> CancellationException();
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ExecutionException((Throwable) x);
+        if (s == NORMAL)
+            return (V) x;
+        if (s &gt;= CANCELLED)
+            throw new CancellationException();
+        throw new ExecutionException((Throwable) x);
     }
 }
 </code></pre>
-<h2 id="&#x5982;&#x4F55;&#x4F7F;&#x7528;"><a name="&#x5982;&#x4F55;&#x4F7F;&#x7528;" class="anchor-navigation-ex-anchor" href="#&#x5982;&#x4F55;&#x4F7F;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5982;&#x4F55;&#x4F7F;&#x7528;</h2>
-<p>&#x800C;&#x4F7F;&#x7528;&#x5219;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x4E5F;&#x975E;&#x5E38;&#x7684;&#x6734;&#x7D20;&#x3002;</p>
-<p>&#x6211;&#x4EEC;&#x4EE5;&#x6587;&#x4E2D;&#x7684;&#x7684;&#x4F8B;&#x5B50;&#x8FDB;&#x884C;&#x6539;&#x9020;:</p>
+<h2 id="如何使用"><a class="header" href="#如何使用">如何使用</a></h2>
+<p>而使用则非常简单，也非常的朴素。</p>
+<p>我们以文中的的例子进行改造:</p>
 <ol>
-<li>&#x6CBF;&#x7528;&#x539F;Runnable&#x903B;&#x8F91;</li>
-<li>&#x79FB;&#x9664;&#x56DE;&#x8C03;&#xFF0C;&#x589E;&#x52A0; <code>CalcResult</code> </li>
-<li>&#x5C06; <code>CalcResult</code> &#x5BF9;&#x8C61;&#x4F5C;&#x4E3A;&#x65E2;&#x5B9A;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF0C;Runnable&#x4E2D;&#x8BBE;&#x7F6E;&#x5176;&#x5C5E;&#x6027;</li>
+<li>沿用原Runnable逻辑</li>
+<li>移除回调，增加 <code>CalcResult</code></li>
+<li>将 <code>CalcResult</code> 对象作为既定返回结果，Runnable中设置其属性</li>
 </ol>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> </span>{
-   <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CalcResult</span> </span>{
-      <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> result;
+<pre><code class="language-java">class Demo {
+   static class CalcResult {
+      public int result;
    }
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStart</span><span class="hljs-params">()</span> </span>{
-      System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;,onStart,&quot;</span> + System.currentTimeMillis());
+   public static void onStart() {
+      System.out.println("threadId" + Thread.currentThread().getId() + ",onStart," + System.currentTimeMillis());
 
-      <span class="hljs-keyword">final</span> CalcResult calcResult = <span class="hljs-keyword">new</span> CalcResult();
+      final CalcResult calcResult = new CalcResult();
       Future&lt;CalcResult&gt; resultFuture = Executors.newSingleThreadExecutor().submit(() -&gt; {
-         <span class="hljs-keyword">try</span> {
-            Thread.sleep(<span class="hljs-number">10</span>);
-         } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+         try {
+            Thread.sleep(10);
+         } catch (InterruptedException e) {
             e.printStackTrace();
          }
-         <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> result = <span class="hljs-number">200</span> + <span class="hljs-number">300</span>;
-         System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;,calc result:&quot;</span> + result + <span class="hljs-string">&quot;;&quot;</span> + System.currentTimeMillis());
+         final int result = 200 + 300;
+         System.out.println("threadId" + Thread.currentThread().getId() + ",calc result:" + result + ";" + System.currentTimeMillis());
          calcResult.result = result;
       }, calcResult);
 
-      System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;&#x53CD;&#x6B63;&#x5E72;&#x70B9;&#x4EC0;&#x4E48;,&quot;</span> + System.currentTimeMillis());
-      <span class="hljs-keyword">if</span> (resultFuture.isDone()) {
-         <span class="hljs-keyword">try</span> {
-            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> ret = resultFuture.get().result;
-            System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;,get result:&quot;</span> + ret + <span class="hljs-string">&quot;;&quot;</span> + System.currentTimeMillis());
-         } <span class="hljs-keyword">catch</span> (InterruptedException | ExecutionException e) {
+      System.out.println("threadId" + Thread.currentThread().getId() + "反正干点什么," + System.currentTimeMillis());
+      if (resultFuture.isDone()) {
+         try {
+            final int ret = resultFuture.get().result;
+            System.out.println("threadId" + Thread.currentThread().getId() + ",get result:" + ret + ";" + System.currentTimeMillis());
+         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
          }
       }
@@ -1885,32 +611,32 @@ and cannot be further modified.</p>
    }
 }
 </code></pre>
-<p>&#x5982;&#x679C;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x65B0;&#x7279;&#x6027;Callback&#xFF0C;&#x5219;&#x5982;&#x4E0B;&#xFF1A;</p>
-<p><em>&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF0C;&#x5F53;&#x7136;&#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;Integer&#xFF0C;&#x4E0D;&#x518D;&#x5305;&#x88F9;&#x4E00;&#x5C42;</em></p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> </span>{
-   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onStart</span><span class="hljs-params">()</span> </span>{
-      System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;,onStart,&quot;</span> + System.currentTimeMillis());
+<p>如果直接使用新特性Callback，则如下：</p>
+<p><em>直接返回结果，当然也可以直接返回Integer，不再包裹一层</em></p>
+<pre><code class="language-java">class Demo {
+   public static void onStart() {
+      System.out.println("threadId" + Thread.currentThread().getId() + ",onStart," + System.currentTimeMillis());
 
       ExecutorService executor = Executors.newSingleThreadExecutor();
       Future&lt;CalcResult&gt; resultFuture = executor.submit(() -&gt; {
-         <span class="hljs-keyword">try</span> {
-            Thread.sleep(<span class="hljs-number">10</span>);
-         } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+         try {
+            Thread.sleep(10);
+         } catch (InterruptedException e) {
             e.printStackTrace();
          }
-         <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> result = <span class="hljs-number">200</span> + <span class="hljs-number">300</span>;
-         System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;,calc result:&quot;</span> + result + <span class="hljs-string">&quot;;&quot;</span> + System.currentTimeMillis());
-         <span class="hljs-keyword">final</span> CalcResult calcResult = <span class="hljs-keyword">new</span> CalcResult();
+         final int result = 200 + 300;
+         System.out.println("threadId" + Thread.currentThread().getId() + ",calc result:" + result + ";" + System.currentTimeMillis());
+         final CalcResult calcResult = new CalcResult();
          calcResult.result = result;
-         <span class="hljs-keyword">return</span> calcResult;
+         return calcResult;
       });
 
-      System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;&#x53CD;&#x6B63;&#x5E72;&#x70B9;&#x4EC0;&#x4E48;,&quot;</span> + System.currentTimeMillis());
-      <span class="hljs-keyword">if</span> (resultFuture.isDone()) {
-         <span class="hljs-keyword">try</span> {
-            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> ret = resultFuture.get().result;
-            System.out.println(<span class="hljs-string">&quot;threadId&quot;</span> + Thread.currentThread().getId() + <span class="hljs-string">&quot;,get result:&quot;</span> + ret + <span class="hljs-string">&quot;;&quot;</span> + System.currentTimeMillis());
-         } <span class="hljs-keyword">catch</span> (InterruptedException | ExecutionException e) {
+      System.out.println("threadId" + Thread.currentThread().getId() + "反正干点什么," + System.currentTimeMillis());
+      if (resultFuture.isDone()) {
+         try {
+            final int ret = resultFuture.get().result;
+            System.out.println("threadId" + Thread.currentThread().getId() + ",get result:" + ret + ";" + System.currentTimeMillis());
+         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
          }
       }
@@ -1919,149 +645,110 @@ and cannot be further modified.</p>
    }
 }
 </code></pre>
-<p>&#x76F8;&#x4FE1;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x4F1A;&#x6709;&#x8FD9;&#x6837;&#x7684;&#x7591;&#x60D1;&#xFF1A;</p>
+<p>相信读者诸君会有这样的疑惑：</p>
 <blockquote>
-<p>&#x4E3A;&#x4F55;&#x4F7F;&#x7528;Future&#x6BD4;&#x539F;&#x5148;&#x7684;&#x56DE;&#x8C03;&#x770B;&#x8D77;&#x6765;&#x7C97;&#x7CD9;&#xFF1F;</p>
+<p>为何使用Future比原先的回调看起来粗糙？</p>
 </blockquote>
-<p>&#x9996;&#x5148;&#x8981;&#x660E;&#x786E;&#x4E00;&#x70B9;&#xFF1A;&#x6587;&#x4E2D;&#x524D;&#x6BB5;&#x7684;&#x56DE;&#x8C03;Demo&#xFF0C;&#x867D;&#x7136;&#x8FBE;&#x6210;&#x4E86;&#x65E2;&#x5B9A;&#x76EE;&#x6807;&#xFF0C;&#x4F46;&#x6548;&#x7387;&#x5E76;&#x4E0D;&#x9AD8;&#xFF01;&#xFF01;&#x5728;&#x5F53;&#x65F6;&#x8BA1;&#x7B97;&#x5F88;&#x6602;&#x8D35;&#x7684;&#x80CC;&#x666F;&#x4E0B;&#xFF0C;&#x5E76;&#x4E0D;&#x4F1A;&#x5982;&#x6B64;&#x83BD;&#x649E;&#x5730;&#x4F7F;&#x7528;&#xFF01;</p>
-<p>&#x800C;&#x5728;JDK1.5&#x5F00;&#x59CB;&#xFF0C;&#x63D0;&#x4F9B;&#x4E86;&#x5927;&#x91CF;&#x5185;&#x5BB9;&#x652F;&#x6301;&#x591A;&#x7EBF;&#x7A0B;&#x5F00;&#x53D1;&#x3002;&#x8003;&#x8651;&#x5230;&#x7BC7;&#x5E45;&#xFF0C;&#x4F1A;&#x5728;&#x7CFB;&#x5217;&#x6587;&#x7AE0;&#x4E2D;&#x9010;&#x6B65;&#x5C55;&#x5F00;&#x3002;</p>
-<p>&#x53E6;&#x5916;&#xFF0C;FutureTask&#x4E2D;&#x7684;CAS&#x4E0E;Happens-Before&#x672C;&#x7BC7;&#x4E2D;&#x4EA6;&#x4E0D;&#x505A;&#x5C55;&#x5F00;&#x3002;</p>
-<p>&#x63A5;&#x4E0B;&#x6765;&#xFF0C;&#x518D;&#x505A;&#x4E00;&#x4E9B;&#x5F15;&#x7533;&#xFF0C;&#x7B80;&#x5355;&#x770B;&#x4E00;&#x770B;&#x591A;&#x7EBF;&#x7A0B;&#x4E1A;&#x52A1;&#x6A21;&#x5F0F;&#x3002;</p>
-<h2 id="&#x5F15;&#x7533;&#xFF0C;&#x591A;&#x7EBF;&#x7A0B;&#x4E1A;&#x52A1;&#x6A21;&#x5F0F;"><a name="&#x5F15;&#x7533;&#xFF0C;&#x591A;&#x7EBF;&#x7A0B;&#x4E1A;&#x52A1;&#x6A21;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#&#x5F15;&#x7533;&#xFF0C;&#x591A;&#x7EBF;&#x7A0B;&#x4E1A;&#x52A1;&#x6A21;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5F15;&#x7533;&#xFF0C;&#x591A;&#x7EBF;&#x7A0B;&#x4E1A;&#x52A1;&#x6A21;&#x5F0F;</h2>
-<p>&#x5E38;&#x7528;&#x7684;&#x591A;&#x7EBF;&#x7A0B;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x5305;&#x62EC;&#xFF1A;</p>
+<p>首先要明确一点：文中前段的回调Demo，虽然达成了既定目标，但效率并不高！！在当时计算很昂贵的背景下，并不会如此莽撞地使用！</p>
+<p>而在JDK1.5开始，提供了大量内容支持多线程开发。考虑到篇幅，会在系列文章中逐步展开。</p>
+<p>另外，FutureTask中的CAS与Happens-Before本篇中亦不做展开。</p>
+<p>接下来，再做一些引申，简单看一看多线程业务模式。</p>
+<h2 id="引申多线程业务模式"><a class="header" href="#引申多线程业务模式">引申，多线程业务模式</a></h2>
+<p>常用的多线程设计模式包括：</p>
 <ul>
-<li>Future&#x6A21;&#x5F0F;</li>
-<li>Master-Worker&#x6A21;&#x5F0F;</li>
-<li>Guarded Suspension&#x6A21;&#x5F0F;</li>
-<li>&#x4E0D;&#x53D8;&#x6A21;&#x5F0F;</li>
-<li>&#x751F;&#x4EA7;&#x8005;-&#x6D88;&#x8D39;</li>
+<li>Future模式</li>
+<li>Master-Worker模式</li>
+<li>Guarded Suspension模式</li>
+<li>不变模式</li>
+<li>生产者-消费</li>
 </ul>
-<h3 id="future&#x6A21;&#x5F0F;"><a name="future&#x6A21;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#future&#x6A21;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>Future&#x6A21;&#x5F0F;</h3>
-<p>&#x6587;&#x4E2D;&#x5BF9;&#x4E8E;Future&#x7684;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;&#x9075;&#x5FAA;&#x4E86;Future&#x6A21;&#x5F0F;&#x3002;</p>
-<p>&#x4E1A;&#x52A1;&#x65B9;&#x5728;&#x4F7F;&#x7528;&#x65F6;&#xFF0C;&#x5DF2;&#x7ECF;&#x660E;&#x786E;&#x4E86;&#x4EFB;&#x52A1;&#x88AB;&#x5206;&#x79BB;&#x5230;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x65F6;&#x6709;&#x7B49;&#x5F85;&#x671F;&#xFF0C;&#x5728;&#x6B64;&#x671F;&#x95F4;&#xFF0C;&#x53EF;&#x4EE5;&#x5E72;&#x70B9;&#x522B;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x4E0D;&#x5FC5;&#x6D6A;&#x8D39;&#x7CFB;&#x7EDF;&#x8D44;&#x6E90;&#x3002;</p>
-<h3 id="master-worker&#x6A21;&#x5F0F;"><a name="master-worker&#x6A21;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#master-worker&#x6A21;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>Master-Worker&#x6A21;&#x5F0F;</h3>
+<h3 id="future模式"><a class="header" href="#future模式">Future模式</a></h3>
+<p>文中对于Future的使用方式遵循了Future模式。</p>
+<p>业务方在使用时，已经明确了任务被分离到其他线程执行时有等待期，在此期间，可以干点别的事情，不必浪费系统资源。</p>
+<h3 id="master-worker模式"><a class="header" href="#master-worker模式">Master-Worker模式</a></h3>
 <blockquote>
-<p>&#x5728;&#x7A0B;&#x5E8F;&#x7CFB;&#x7EDF;&#x4E2D;&#x8BBE;&#x8BA1;&#x4E24;&#x7C7B;&#x7EBF;&#x7A0B;&#xFF0C;&#x5E76;&#x76F8;&#x4E92;&#x534F;&#x4F5C;&#xFF1A;</p>
+<p>在程序系统中设计两类线程，并相互协作：</p>
 <ul>
-<li>Master&#x7EBF;&#x7A0B;&#xFF08;&#x5355;&#x4E2A;&#xFF09;</li>
-<li>Worker&#x7EBF;&#x7A0B;</li>
+<li>Master线程（单个）</li>
+<li>Worker线程</li>
 </ul>
-<p>Master&#x7EBF;&#x7A0B;&#x8D1F;&#x8D23;&#x63A5;&#x53D7;&#x4EFB;&#x52A1;&#x3001;&#x5206;&#x914D;&#x4EFB;&#x52A1;&#x3001;&#x63A5;&#x6536;&#xFF08;&#x5FC5;&#x8981;&#x65F6;&#x8FDB;&#x4E00;&#x6B65;&#x7EC4;&#x5408;&#xFF09;&#x7ED3;&#x679C;&#x5E76;&#x8FD4;&#x56DE;&#xFF1B;</p>
-<p>Worker&#x7EBF;&#x7A0B;&#x8D1F;&#x8D23;&#x5904;&#x7406;&#x5B50;&#x4EFB;&#x52A1;&#xFF0C;&#x5F53;&#x5B50;&#x4EFB;&#x52A1;&#x5904;&#x7406;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x5411;Master&#x7EBF;&#x7A0B;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF1B;</p>
+<p>Master线程负责接受任务、分配任务、接收（必要时进一步组合）结果并返回；</p>
+<p>Worker线程负责处理子任务，当子任务处理完成后，向Master线程返回结果；</p>
 </blockquote>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x6B64;&#x65F6;&#x53EF;&#x518D;&#x6B21;&#x56DE;&#x60F3;&#x4E00;&#x4E0B;&#x6587;&#x7AE0;&#x5F00;&#x5934;&#x7684;Demo</em></p>
-<h3 id="guarded-suspension&#x6A21;&#x5F0F;"><a name="guarded-suspension&#x6A21;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#guarded-suspension&#x6A21;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>Guarded Suspension&#x6A21;&#x5F0F;</h3>
+<p><em>作者按：此时可再次回想一下文章开头的Demo</em></p>
+<h3 id="guarded-suspension模式"><a class="header" href="#guarded-suspension模式">Guarded Suspension模式</a></h3>
 <ol>
-<li>&#x4F7F;&#x7528;&#x7F13;&#x5B58;&#x961F;&#x5217;&#xFF0C;&#x4F7F;&#x5F97; &#x670D;&#x52A1;&#x7EBF;&#x7A0B;/&#x670D;&#x52A1;&#x8FDB;&#x7A0B; &#x5728;&#x672A;&#x5C31;&#x7EEA;&#x3001;&#x5FD9;&#x788C;&#x65F6;&#x80FD;&#x591F;&#x5EF6;&#x8FDF;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#x3002;</li>
-<li>&#x4F7F;&#x7528;&#x7B49;&#x5F85;-&#x901A;&#x77E5;&#x673A;&#x5236;&#xFF0C;&#x5C06;&#x6D88;&#x8D39; <code>&#x670D;&#x52A1;&#x7684;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;</code> &#x7684;&#x65B9;&#x5F0F;&#x89C4;&#x8303;&#x5316;</li>
+<li>使用缓存队列，使得 服务线程/服务进程 在未就绪、忙碌时能够延迟处理请求。</li>
+<li>使用等待-通知机制，将消费 <code>服务的返回结果</code> 的方式规范化</li>
 </ol>
-<h3 id="&#x4E0D;&#x53D8;&#x6A21;&#x5F0F;"><a name="&#x4E0D;&#x53D8;&#x6A21;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#&#x4E0D;&#x53D8;&#x6A21;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E0D;&#x53D8;&#x6A21;&#x5F0F;</h3>
-<p>&#x5728;&#x5E76;&#x884C;&#x5F00;&#x53D1;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x4E3A;&#x786E;&#x4FDD;&#x6570;&#x636E;&#x7684;&#x4E00;&#x81F4;&#x6027;&#x548C;&#x6B63;&#x786E;&#x6027;&#xFF0C;&#x6709;&#x5FC5;&#x8981;&#x5BF9;&#x5BF9;&#x8C61;&#x8FDB;&#x884C;&#x540C;&#x6B65;&#xFF0C;&#x800C;&#x540C;&#x6B65;&#x64CD;&#x4F5C;&#x4F1A;&#x5BF9;&#x7A0B;&#x5E8F;&#x7CFB;&#x7EDF;&#x7684;&#x6027;&#x80FD;&#x4EA7;&#x751F;&#x76F8;&#x5F53;&#x7684;&#x635F;&#x8017;&#x3002;</p>
-<p>&#x56E0;&#x6B64;&#xFF0C;&#x4F7F;&#x7528;&#x72B6;&#x6001;&#x4E0D;&#x53EF;&#x6539;&#x53D8;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4F9D;&#x9760;&#x5176;&#x4E0D;&#x53D8;&#x6027;&#x6765;&#x786E;&#x4FDD; <strong>&#x5E76;&#x884C;&#x64CD;&#x4F5C;</strong> &#x5728; <strong>&#x6CA1;&#x6709;&#x540C;&#x6B65;&#x673A;&#x5236;</strong> &#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4FDD;&#x6301;&#x4E00;&#x81F4;&#x6027;&#x548C;&#x6B63;&#x786E;&#x6027;&#x3002;</p>
+<h3 id="不变模式"><a class="header" href="#不变模式">不变模式</a></h3>
+<p>在并行开发过程中，为确保数据的一致性和正确性，有必要对对象进行同步，而同步操作会对程序系统的性能产生相当的损耗。</p>
+<p>因此，使用状态不可改变的对象，依靠其不变性来确保 <strong>并行操作</strong> 在 <strong>没有同步机制</strong> 的情况下，保持一致性和正确性。</p>
 <ol>
-<li>&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x540E;&#xFF0C;&#x5176;&#x5185;&#x90E8;&#x72B6;&#x6001;&#x548C;&#x6570;&#x636E;&#x4E0D;&#x518D;&#x53D1;&#x751F;&#x6539;&#x53D8; </li>
-<li>&#x5BF9;&#x8C61;&#x88AB;&#x5171;&#x4EAB;&#x3001;&#x88AB;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x8BBF;&#x95EE;</li>
+<li>对象创建后，其内部状态和数据不再发生改变</li>
+<li>对象被共享、被多个线程访问</li>
 </ol>
-<h3 id="&#x751F;&#x4EA7;&#x8005;-&#x6D88;&#x8D39;"><a name="&#x751F;&#x4EA7;&#x8005;-&#x6D88;&#x8D39;" class="anchor-navigation-ex-anchor" href="#&#x751F;&#x4EA7;&#x8005;-&#x6D88;&#x8D39;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x751F;&#x4EA7;&#x8005;-&#x6D88;&#x8D39;</h3>
-<p>&#x8BBE;&#x8BA1;&#x4E24;&#x7C7B;&#x7EBF;&#x7A0B;&#xFF1A;&#x82E5;&#x5E72;&#x4E2A;&#x751F;&#x4EA7;&#x8005;&#x7EBF;&#x7A0B;&#x548C;&#x82E5;&#x5E72;&#x4E2A;&#x6D88;&#x8D39;&#x8005;&#x7EBF;&#x7A0B;&#x3002;</p>
-<p>&#x751F;&#x4EA7;&#x8005;&#x7EBF;&#x7A0B;&#x8D1F;&#x8D23;&#x63D0;&#x4EA4;&#x7528;&#x6237;&#x8BF7;&#x6C42;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x7EBF;&#x7A0B;&#x8D1F;&#x8D23;&#x5904;&#x7406;&#x7528;&#x6237;&#x8BF7;&#x6C42;&#x3002;&#x751F;&#x4EA7;&#x8005;&#x548C;&#x6D88;&#x8D39;&#x8005;&#x4E4B;&#x95F4;&#x901A;&#x8FC7;&#x5171;&#x4EAB;&#x5185;&#x5B58;&#x7F13;&#x51B2;&#x533A;&#x8FDB;&#x884C;&#x901A;&#x4FE1;&#x3002;</p>
-<p>&#x5185;&#x5B58;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x610F;&#x4E49;&#xFF1A;</p>
+<h3 id="生产者-消费"><a class="header" href="#生产者-消费">生产者-消费</a></h3>
+<p>设计两类线程：若干个生产者线程和若干个消费者线程。</p>
+<p>生产者线程负责提交用户请求，消费者线程负责处理用户请求。生产者和消费者之间通过共享内存缓冲区进行通信。</p>
+<p>内存缓冲区的意义：</p>
 <ul>
-<li>&#x89E3;&#x51B3;&#x662F;&#x6570;&#x636E;&#x5728;&#x591A;&#x7EBF;&#x7A0B;&#x95F4;&#x7684;&#x5171;&#x4EAB;&#x95EE;&#x9898;</li>
-<li>&#x7F13;&#x89E3;&#x751F;&#x4EA7;&#x8005;&#x548C;&#x6D88;&#x8D39;&#x8005;&#x4E4B;&#x95F4;&#x7684;&#x6027;&#x80FD;&#x5DEE;</li>
+<li>解决是数据在多线程间的共享问题</li>
+<li>缓解生产者和消费者之间的性能差</li>
 </ul>
-<p>&#x8FD9;&#x51E0;&#x79CD;&#x6A21;&#x5F0F;&#x4ECE;&#x4E0D;&#x540C;&#x89D2;&#x5EA6;&#x51FA;&#x53D1;&#x89E3;&#x51B3;&#x7279;&#x5B9A;&#x95EE;&#x9898;&#xFF0C;&#x4F46;&#x4EA6;&#x6709;&#x4E00;&#x5B9A;&#x7684;&#x76F8;&#x4F3C;&#x4E4B;&#x5904;&#xFF0C;&#x4E0D;&#x518D;&#x5C55;&#x5F00;&#x3002;</p>
-<h2 id="&#x540E;&#x8BB0;"><a name="&#x540E;&#x8BB0;" class="anchor-navigation-ex-anchor" href="#&#x540E;&#x8BB0;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x540E;&#x8BB0;</h2>
-<p>&#x81F3;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x8FDB;&#x5165;&#x5C3E;&#x58F0;&#xFF0C;JDK1.5&#x4E2D;&#xFF0C;&#x5BF9;&#x591A;&#x7EBF;&#x7A0B;&#x7684;&#x652F;&#x6301;&#x8FCE;&#x6765;&#x4E00;&#x6CE2;&#x4E95;&#x55B7;&#x3002;&#x672C;&#x6587;&#x4EE5;&#x53CA;&#x7CFB;&#x5217;&#x6587;&#x7AE0;&#x4E2D;&#x5173;&#x4E8E;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x5185;&#x5BB9;&#x4E5F;&#x4EC5;&#x4EC5;&#x662F;&#x57FA;&#x7840;&#x4E2D;&#x7684;&#x57FA;&#x7840;&#xFF0C;&#x4ECD;&#x65E7;&#x6709;&#x5927;&#x91CF;&#x7684;&#x5185;&#x5BB9;&#x503C;&#x5F97;&#x6DF1;&#x5165;&#xFF0C;&#x672C;&#x7BC7;&#x4E0D;&#x518D;&#x5F80;&#x4E0B;&#x6316;&#x6398;&#x3002;</p>
-<p>&#x5728;&#x540E;&#x7EED;&#x7684;&#x7CFB;&#x5217;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5C55;&#x5F00;AQS&#x3001;HAPPENS-BEFORE&#x7B49;&#x5185;&#x5BB9;&#xFF0C;&#x4EE5;&#x53CA;&#x548C;&#x672C;&#x6587;&#x9AD8;&#x5EA6;&#x5173;&#x8054;&#x7684;CompleteFutureTask&#xFF0C;JUC&#x5DE5;&#x5177;&#x7B49;&#x3002;</p>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2022-09-26 12:54:26
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+<p>这几种模式从不同角度出发解决特定问题，但亦有一定的相似之处，不再展开。</p>
+<h2 id="后记"><a class="header" href="#后记">后记</a></h2>
+<p>至此，我们已经进入尾声，JDK1.5中，对多线程的支持迎来一波井喷。本文以及系列文章中关于线程池的内容也仅仅是基础中的基础，仍旧有大量的内容值得深入，本篇不再往下挖掘。</p>
+<p>在后续的系列文章中，我们将展开AQS、HAPPENS-BEFORE等内容，以及和本文高度关联的CompleteFutureTask，JUC工具等。</p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../MultiThreading/post_42.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../MultiThreading/post_50.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="post_42.html" class="navigation navigation-prev " aria-label="Previous page: Java多线程基础--线程的创建与线程池管理">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="post_50.html" class="navigation navigation-next " aria-label="Next page: Java多线程系列--Fork&Join框架，分治的艺术">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../MultiThreading/post_42.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../MultiThreading/post_50.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Java多线程系列--掌握Future，轻松获取异步任务结果","level":"1.4.6","depth":2,"next":{"title":"Java多线程系列--Fork&Join框架，分治的艺术","level":"1.4.7","depth":2,"path":"MultiThreading/post_50.md","ref":"./MultiThreading/post_50.md","articles":[]},"previous":{"title":"Java多线程基础--线程的创建与线程池管理","level":"1.4.5","depth":2,"path":"MultiThreading/post_42.md","ref":"./MultiThreading/post_42.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"MultiThreading/post_46.md","mtime":"2022-09-26T04:54:26.652Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../gitbook/gitbook.js"></script>
-    <script src="../gitbook/theme.js"></script>
-    
-        
-        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-

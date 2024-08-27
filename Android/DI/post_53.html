@@ -1,1713 +1,438 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Hilt进阶--一文吃透Hilt自定义与跨壁垒 · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Hilt进阶--一文吃透Hilt自定义与跨壁垒 - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="../../Compose/" />
-    
-    
-    <link rel="prev" href="./" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../../">
-            
-                <a href="../../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../View/">
-            
-                <a href="../View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../View/post_1.html">
-            
-                <a href="../View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../View/post_6.html">
-            
-                <a href="../View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../View/post_7.html">
-            
-                <a href="../View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="../Idea/post_9.html">
-            
-                <a href="../Idea/post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../Drawable/">
-            
-                <a href="../Drawable/">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="../Drawable/post_2.html">
-            
-                <a href="../Drawable/post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="../Drawable/post_4.html">
-            
-                <a href="../Drawable/post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="../Drawable/post_47.html">
-            
-                <a href="../Drawable/post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.4" data-path="../Drawable/post_49.html">
-            
-                <a href="../Drawable/post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../Mechanism/Message/">
-            
-                <a href="../Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../Mechanism/Message/post_8.html">
-            
-                <a href="../Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../Idea/post_14/">
-            
-                <a href="../Idea/post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.4.1" data-path="../Idea/post_14.html">
-            
-                <a href="../Idea/post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="../Glide/">
-            
-                <a href="../Glide/">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.5.1" data-path="../Glide/post_15.html">
-            
-                <a href="../Glide/post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5.2" data-path="../Glide/post_16.html">
-            
-                <a href="../Glide/post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../KSP/">
-            
-                <a href="../KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../KSP/post_24.html">
-            
-                <a href="../KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../Base/">
-            
-                <a href="../Base/">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.7.1" data-path="../Base/post_35.html">
-            
-                <a href="../Base/post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../SysApp/">
-            
-                <a href="../SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../SysApp/post_52.html">
-            
-                <a href="../SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter active" data-level="1.2.9.1" data-path="post_53.html">
-            
-                <a href="post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../../Compose/">
-            
-                <a href="../../Compose/">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="../../Compose/post_21.html">
-            
-                <a href="../../Compose/post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../../Compose/post_26.html">
-            
-                <a href="../../Compose/post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="../../Compose/post_27.html">
-            
-                <a href="../../Compose/post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="../../Compose/post_28.html">
-            
-                <a href="../../Compose/post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="../../Compose/post_29.html">
-            
-                <a href="../../Compose/post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="../../Compose/post_30.html">
-            
-                <a href="../../Compose/post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../../MultiThreading/">
-            
-                <a href="../../MultiThreading/">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../../MultiThreading/post_33.html">
-            
-                <a href="../../MultiThreading/post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../../MultiThreading/post_37.html">
-            
-                <a href="../../MultiThreading/post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="../../MultiThreading/post_38.html">
-            
-                <a href="../../MultiThreading/post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="../../MultiThreading/post_39.html">
-            
-                <a href="../../MultiThreading/post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="../../MultiThreading/post_42.html">
-            
-                <a href="../../MultiThreading/post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.6" data-path="../../MultiThreading/post_46.html">
-            
-                <a href="../../MultiThreading/post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="../../MultiThreading/post_50.html">
-            
-                <a href="../../MultiThreading/post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="../../MultiThreading/post_54.html">
-            
-                <a href="../../MultiThreading/post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="../../IO/">
-            
-                <a href="../../IO/">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="../../IO/post_55.html">
-            
-                <a href="../../IO/post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="../../IO/post_56.html">
-            
-                <a href="../../IO/post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="../../IO/post_57.html">
-            
-                <a href="../../IO/post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="../../IO/post_58.html">
-            
-                <a href="../../IO/post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="../../IO/post_59.html">
-            
-                <a href="../../IO/post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../../Gradle/">
-            
-                <a href="../../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../../Gradle/Modularization/post_18.html">
-            
-                <a href="../../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../../Gradle/Publish/post_17.html">
-            
-                <a href="../../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../../Gradle/post_22.html">
-            
-                <a href="../../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../../Groovy/">
-            
-                <a href="../../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../../Groovy/why_write_groovy.html">
-            
-                <a href="../../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../../Groovy/post_23.html">
-            
-                <a href="../../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="../../Review/">
-            
-                <a href="../../Review/">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="../../Review/post_10.html">
-            
-                <a href="../../Review/post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="../../Review/post_40.html">
-            
-                <a href="../../Review/post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.3" data-path="../../Review/post_44.html">
-            
-                <a href="../../Review/post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="../../Review/post_45.html">
-            
-                <a href="../../Review/post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../../repo/">
-            
-                <a href="../../repo/">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../../repo/DaVinCi.html">
-            
-                <a href="../../repo/DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../Idea/post_32.html">
-            
-                <a href="../Idea/post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../../Speculative/post_43.html">
-            
-                <a href="../../Speculative/post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../../repo/post_48.html">
-            
-                <a href="../../repo/post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../../Speculative/post_61.html">
-            
-                <a href="../../Speculative/post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="../../Review/DataStructure/">
-            
-                <a href="../../Review/DataStructure/">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1.1" data-path="../../Review/DataStructure/post_11.html">
-            
-                <a href="../../Review/DataStructure/post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="../../Review/DataStructure/post_12.html">
-            
-                <a href="../../Review/DataStructure/post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="../../Review/DataStructure/post_13.html">
-            
-                <a href="../../Review/DataStructure/post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="../../Review/README2.html">
-            
-                <a href="../../Review/README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="../../Review/post_36.html">
-            
-                <a href="../../Review/post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="../../Review/post_51.html">
-            
-                <a href="../../Review/post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="../../Review/post_60.html">
-            
-                <a href="../../Review/post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="../../Review/post_63.html">
-            
-                <a href="../../Review/post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="../../Review/post_64.html">
-            
-                <a href="../../Review/post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../../Note/">
-            
-                <a href="../../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../../Note/post_41.html">
-            
-                <a href="../../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../../Talk/">
-            
-                <a href="../../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../../Talk/talk_1.html">
-            
-                <a href="../../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../../Talk/talk_2_2023-03.html">
-            
-                <a href="../../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../../Thought/">
-            
-                <a href="../../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../../Thought/post_62.html">
-            
-                <a href="../../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../../info/">
-            
-                <a href="../../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../../info/about_view_series.html">
-            
-                <a href="../../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../../info/about_sansi_series.html">
-            
-                <a href="../../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../../info/about_haowan_series.html">
-            
-                <a href="../../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../../info/about_wengu_series.html">
-            
-                <a href="../../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Hilt进阶--一文吃透Hilt自定义与跨壁垒</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#hilt&#x8FDB;&#x9636;--&#x4E00;&#x6587;&#x5403;&#x900F;hilt&#x81EA;&#x5B9A;&#x4E49;&#x4E0E;&#x8DE8;&#x58C1;&#x5792;"><b></b>Hilt&#x8FDB;&#x9636;--&#x4E00;&#x6587;&#x5403;&#x900F;Hilt&#x81EA;&#x5B9A;&#x4E49;&#x4E0E;&#x8DE8;&#x58C1;&#x5792;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#&#x8DE8;&#x8D8A;-ioc&#x5BB9;&#x5668;&#x7684;&#x58C1;&#x5792;"><b></b>&#x8DE8;&#x8D8A; IOC&#x5BB9;&#x5668;&#x7684;&#x58C1;&#x5792;</a></li><ul><li><span class="title-icon "></span><a href="#&#x4F7F;&#x7528;entrypoint&#x8DE8;&#x8D8A;ioc&#x5BB9;&#x5668;&#x58C1;&#x5792;"><b></b>&#x4F7F;&#x7528;EntryPoint&#x8DE8;&#x8D8A;IOC&#x5BB9;&#x5668;&#x58C1;&#x5792;</a></li></ul><li><span class="title-icon "></span><a href="#&#x81EA;&#x5B9A;&#x4E49;scope&#x3001;component"><b></b>&#x81EA;&#x5B9A;&#x4E49;Scope&#x3001;Component</a></li><ul><li><span class="title-icon "></span><a href="#scope&#x3001;component&#x3001;module&#x7684;&#x771F;&#x5B9E;&#x542B;&#x4E49;"><b></b>Scope&#x3001;Component&#x3001;Module&#x7684;&#x771F;&#x5B9E;&#x542B;&#x4E49;</a></li><li><span class="title-icon "></span><a href="#&#x81EA;&#x5B9A;&#x4E49;"><b></b>&#x81EA;&#x5B9A;&#x4E49;</a></li></ul><li><span class="title-icon "></span><a href="#&#x89E3;&#x51B3;&#x72EC;&#x7ACB;library&#x7684;&#x4F9D;&#x8D56;&#x521D;&#x59CB;&#x5316;&#x95EE;&#x9898;"><b></b>&#x89E3;&#x51B3;&#x72EC;&#x7ACB;library&#x7684;&#x4F9D;&#x8D56;&#x521D;&#x59CB;&#x5316;&#x95EE;&#x9898;</a></li><ul><li><span class="title-icon "></span><a href="#&#x4F7F;&#x7528;hilt&#x7684;&#x805A;&#x5408;&#x80FD;&#x529B;&#x89E3;&#x51B3;&#x95EE;&#x9898;"><b></b>&#x4F7F;&#x7528;hilt&#x7684;&#x805A;&#x5408;&#x80FD;&#x529B;&#x89E3;&#x51B3;&#x95EE;&#x9898;</a></li><li><span class="title-icon "></span><a href="#&#x805A;&#x5408;&#x80FD;&#x529B;entrypoint"><b></b>&#x805A;&#x5408;&#x80FD;&#x529B;+EntryPoint</a></li><li><span class="title-icon "></span><a href="#&#x95EE;&#x9898;&#x884D;&#x751F;"><b></b>&#x95EE;&#x9898;&#x884D;&#x751F;</a></li></ul><li><span class="title-icon "></span><a href="#&#x672B;"><b></b>&#x672B;</a></li></ul></ul></div><a href="#hilt&#x8FDB;&#x9636;--&#x4E00;&#x6587;&#x5403;&#x900F;hilt&#x81EA;&#x5B9A;&#x4E49;&#x4E0E;&#x8DE8;&#x58C1;&#x5792;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="hilt&#x8FDB;&#x9636;--&#x4E00;&#x6587;&#x5403;&#x900F;hilt&#x81EA;&#x5B9A;&#x4E49;&#x4E0E;&#x8DE8;&#x58C1;&#x5792;"><a name="hilt&#x8FDB;&#x9636;--&#x4E00;&#x6587;&#x5403;&#x900F;hilt&#x81EA;&#x5B9A;&#x4E49;&#x4E0E;&#x8DE8;&#x58C1;&#x5792;" class="anchor-navigation-ex-anchor" href="#hilt&#x8FDB;&#x9636;--&#x4E00;&#x6587;&#x5403;&#x900F;hilt&#x81EA;&#x5B9A;&#x4E49;&#x4E0E;&#x8DE8;&#x58C1;&#x5792;"><i class="fa fa-link" aria-hidden="true"></i></a>Hilt&#x8FDB;&#x9636;--&#x4E00;&#x6587;&#x5403;&#x900F;Hilt&#x81EA;&#x5B9A;&#x4E49;&#x4E0E;&#x8DE8;&#x58C1;&#x5792;</h1>
-<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
-<p>&#x672C;&#x6587;&#x96B6;&#x5C5E;&#x4E8E;&#x6211;&#x5F52;&#x7EB3;&#x6574;&#x7406;&#x7684;Android&#x77E5;&#x8BC6;&#x4F53;&#x7CFB;&#x7684;&#x7B2C;&#x56DB;&#x90E8;&#x5206;&#xFF0C;&#x5C5E;&#x4E8E;DI&#x4E2D;Hilt&#x7684;&#x8FDB;&#x9636;&#x5185;&#x5BB9;</p>
-<p><img width="360" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/488677faa02244ddbe171a873d4ae62b~tplv-k3u1fbpfcp-watermark.image?"></p>
-<p>&#x5982;&#x679C;&#x60A8;&#x9700;&#x8981;&#x5B66;&#x4E60;Hilt&#x7684;&#x57FA;&#x7840;&#x5185;&#x5BB9;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;Android&#x5F00;&#x53D1;&#x8005;&#x5B98;&#x65B9;&#x63D0;&#x4F9B;&#x7684;
-<a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDIwMTExNw==&amp;action=getalbum&amp;album_id=1797733109421948930&amp;token=1293285389&amp;lang=zh_CN#wechat_redirect" target="_blank">MAD Skills</a>
-12-15&#x7BC7; &#x548C; <a href="https://dagger.dev/hilt/" target="_blank">&#x5B98;&#x65B9;&#x4F7F;&#x7528;&#x6559;&#x7A0B;</a></p>
-<p>&#x6587;&#x7AE0;&#x6309;&#x7167;&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;&#x5C55;&#x5F00;&#xFF1A;</p>
-<p><img width="800" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b2331bffb3e04976bea27c41fc54e42b~tplv-k3u1fbpfcp-watermark.image?"></p>
-<p>&#x6587;&#x4E2D;&#x6D89;&#x53CA;&#x7684;&#x4EE3;&#x7801;&#x548C;&#x6848;&#x4F8B;&#xFF0C;&#x5747;&#x53EF;&#x4EE5;&#x4E8E; <a href="https://github.com/leobert-lan/HiltWorkshop" target="_blank">workshop</a> &#x4E2D;&#x83B7;&#x5F97;&#x3002;</p>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/DI/post_53.html" class="active"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="hilt进阶--一文吃透hilt自定义与跨壁垒"><a class="header" href="#hilt进阶--一文吃透hilt自定义与跨壁垒">Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></h1>
+<h2 id="前言"><a class="header" href="#前言">前言</a></h2>
+<p>本文隶属于我归纳整理的Android知识体系的第四部分，属于DI中Hilt的进阶内容</p>
+<img width="360" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/488677faa02244ddbe171a873d4ae62b~tplv-k3u1fbpfcp-watermark.image?"/>
+<p>如果您需要学习Hilt的基础内容，可以通过Android开发者官方提供的
+<a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDIwMTExNw==&amp;action=getalbum&amp;album_id=1797733109421948930&amp;token=1293285389&amp;lang=zh_CN#wechat_redirect">MAD Skills</a>
+12-15篇 和 <a href="https://dagger.dev/hilt/">官方使用教程</a></p>
+<p>文章按照以下内容展开：</p>
+<img width="800" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b2331bffb3e04976bea27c41fc54e42b~tplv-k3u1fbpfcp-watermark.image?"/>
+<p>文中涉及的代码和案例，均可以于 <a href="https://github.com/leobert-lan/HiltWorkshop">workshop</a> 中获得。</p>
 <blockquote>
-<p><strong>&#x975E;&#x5E38;&#x91CD;&#x8981;</strong>&#xFF1A;&#x7ECF;&#x8FC7;&#x53CD;&#x590D;&#x601D;&#x8003;&#xFF0C;&#x6211;&#x5220;&#x9664;&#x4E86;&#x539F;&#x5148;&#x7F16;&#x5199;&#x7684;&#x5173;&#x4E8E;Hilt&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#x548C;&#x751F;&#x6210;&#x4EE3;&#x7801;&#x7684;&#x90E8;&#x5206;&#x3002;&#x6216;&#x8BB8;&#x52A0;&#x4E0A;&#x8FD9;&#x90E8;&#x5206;&#xFF0C;&#x4F1A;&#x8BA9;&#x90E8;&#x5206;&#x8BFB;&#x8005;&#x83B7;&#x5F97;&#x66F4;&#x6DF1;&#x523B;&#x5730;&#x7406;&#x89E3;&#xFF0C;<strong>&#x4F46;&#x6211;&#x62C5;&#x5FC3;&#x4F1A;&#x8BA9;&#x66F4;&#x591A;&#x7684;&#x8BFB;&#x8005;&#x9677;&#x5165;&#x56F0;&#x5883;</strong> &#x800C;&#x4E0D;&#x6562;&#x4F7F;&#x7528;&#x3002;</p>
-<p>&#x6B63;&#x5982;&#x540C;Google&#x8981;&#x521B;&#x5EFA;Hilt&#x4E00;&#x6837;&#xFF0C;&#x4ED6;&#x4EEC;&#x5E0C;&#x671B;&#x5F00;&#x53D1;&#x8005;&#x4EE5;&#x66F4;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x5F0F;&#x63A5;&#x5165;Dagger2&#xFF0C;&#x672C;&#x7BC7;&#x6587;&#x7AE0;&#x4E5F;&#x5E0C;&#x671B;&#x8BFB;&#x8005;&#x670B;&#x53CB;&#x80FD;&#x591F;&#x5148;&#x638C;&#x63E1;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#xFF0C;&#x5E76;&#x7ED3;&#x5408;&#x573A;&#x666F;&#x9009;&#x7528;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;&#x65B9;&#x6848;&#x3002;&#x5728;&#x6B64;&#x57FA;&#x7840;&#x4E0A;&#x518D;&#x884C;&#x7406;&#x89E3;&#x80CC;&#x540E;&#x7684;&#x8BBE;&#x8BA1;&#x539F;&#x7406;&#x3002;</p>
+<p><strong>非常重要</strong>：经过反复思考，我删除了原先编写的关于Hilt工作原理和生成代码的部分。或许加上这部分，会让部分读者获得更深刻地理解，<strong>但我担心会让更多的读者陷入困境</strong> 而不敢使用。</p>
+<p>正如同Google要创建Hilt一样，他们希望开发者以更简单的方式接入Dagger2，本篇文章也希望读者朋友能够先掌握如何使用，并结合场景选用最佳实践方案。在此基础上再行理解背后的设计原理。</p>
 </blockquote>
-<h2 id="&#x8DE8;&#x8D8A;-ioc&#x5BB9;&#x5668;&#x7684;&#x58C1;&#x5792;"><a name="&#x8DE8;&#x8D8A;-ioc&#x5BB9;&#x5668;&#x7684;&#x58C1;&#x5792;" class="anchor-navigation-ex-anchor" href="#&#x8DE8;&#x8D8A;-ioc&#x5BB9;&#x5668;&#x7684;&#x58C1;&#x5792;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8DE8;&#x8D8A; IOC&#x5BB9;&#x5668;&#x7684;&#x58C1;&#x5792;</h2>
-<p>&#x4F7F;&#x7528;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#xFF08;DI&#xFF09;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5B83;&#x5BF9; <code>&#x5B9E;&#x4F8B;</code> &#x3001;<code>&#x4F9D;&#x8D56;&#x5173;&#x7CFB;</code> &#x3001; <code>&#x751F;&#x547D;&#x5468;&#x671F;</code> &#x8FDB;&#x884C;&#x7BA1;&#x7406;&#xFF0C;&#x56E0;&#x6B64;DI&#x6846;&#x67B6;&#x4F1A;&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#xFF0C;&#x7528;&#x4E8E;&#x5B9E;&#x73B0;&#x8FD9;&#x4E9B;&#x529F;&#x80FD;&#x3002;&#x8FD9;&#x4E2A;&#x5BB9;&#x5668;&#x6211;&#x4EEC;&#x60EF;&#x79F0;&#x4E3A;IOC&#x5BB9;&#x5668;&#x3002;</p>
-<p>&#x5728;&#x5BB9;&#x5668;&#x4E2D;&#xFF0C;&#x4F1A;&#x6309;&#x7167;&#x6211;&#x4EEC;&#x5236;&#x5B9A;&#x7684;&#x89C4;&#x5219;&#xFF1A;</p>
+<h2 id="跨越-ioc容器的壁垒"><a class="header" href="#跨越-ioc容器的壁垒">跨越 IOC容器的壁垒</a></h2>
+<p>使用依赖注入（DI）时，我们需要它对 <code>实例</code> 、<code>依赖关系</code> 、 <code>生命周期</code> 进行管理，因此DI框架会构建一个容器，用于实现这些功能。这个容器我们惯称为IOC容器。</p>
+<p>在容器中，会按照我们制定的规则：</p>
 <ul>
-<li>&#x521B;&#x5EFA;&#x5B9E;&#x4F8B;</li>
-<li>&#x8BBF;&#x95EE;&#x5B9E;&#x4F8B;</li>
-<li>&#x6CE8;&#x5165;&#x4F9D;&#x8D56;</li>
-<li>&#x7BA1;&#x7406;&#x751F;&#x547D;&#x5468;&#x671F;</li>
+<li>创建实例</li>
+<li>访问实例</li>
+<li>注入依赖</li>
+<li>管理生命周期</li>
 </ul>
-<p>&#x4F46;&#x5BB9;&#x5668;&#x5916;&#x4E5F;&#x6709;&#x8BBF;&#x95EE;&#x5BB9;&#x5668;&#x5185;&#x90E8;&#x7684;&#x9700;&#x6C42;&#xFF0C;&#x663E;&#x7136;&#x8FD9;&#x91CC;&#x5B58;&#x5728;&#x4E00;&#x9053;&#x865A;&#x62DF;&#x7684; <code>&#x8FB9;&#x754C;&#x3001;&#x58C1;&#x5792;</code>&#x3002;&#x8FD9;&#x79CD;&#x9700;&#x6C42;&#x5206;&#x4E3A;&#x4E24;&#x7C7B;&#xFF1A;</p>
+<p>但容器外也有访问容器内部的需求，显然这里存在一道虚拟的 <code>边界、壁垒</code>。这种需求分为两类：</p>
 <ul>
-<li>&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x5BA2;&#x89C2;&#x9700;&#x8981;&#x7684;&#x5165;&#x53E3;</li>
-<li>&#x7CFB;&#x7EDF;&#x4E2D;&#x5B58;&#x5728;&#x5408;&#x7406;&#x51FA;&#x73B0;&#x7684;&#x3001;&#x975E;DI&#x6846;&#x67B6;&#x7BA1;&#x7406;&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x4F46;&#x5B83;&#x4E0D;&#x5E0C;&#x671B;&#x7834;&#x574F;&#x5176;&#x4ED6;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x7684; <code>&#x751F;&#x547D;&#x5468;&#x671F;</code> &#x3001;<code>&#x4F5C;&#x7528;&#x57DF;&#x552F;&#x4E00;&#x6027;</code>&#xFF0C;&#x5373;&#x5B83;&#x7684;&#x4F9D;&#x8D56;&#x5E0C;&#x671B;&#x4EA4;&#x7531;DI&#x6846;&#x67B6;&#x7BA1;&#x7406;</li>
+<li>依赖注入客观需要的入口</li>
+<li>系统中存在合理出现的、非DI框架管理的实例，但它不希望破坏其他实例对象的 <code>生命周期</code> 、<code>作用域唯一性</code>，即它的依赖希望交由DI框架管理</li>
 </ul>
-<p><strong>&#x4F46;&#x8BF7;&#x6CE8;&#x610F;</strong>&#xFF0C;IOC&#x5BB9;&#x5668;&#x5185;&#x90E8;&#x4E5F;&#x5B58;&#x5728;&#x7740; <code>&#x8FB9;&#x754C;&#x3001;&#x58C1;&#x5792;</code>&#xFF0C;&#x8FD9;&#x548C;&#x5B83;&#x7BA1;&#x7406;&#x5B9E;&#x4F8B;&#x7684;&#x673A;&#x5236;&#x6709;&#x5173;&#xFF0C;&#x5728;Hilt&#xFF08;&#x5305;&#x62EC;Dagger&#xFF09;&#x4E2D;&#xFF0C;&#x6700;&#x5927;&#x9897;&#x7C92;&#x5EA6;&#x7684;&#x5185;&#x90E8;&#x58C1;&#x5792;&#x662F; <code>Component</code>&#x3002;</p>
-<p><strong>&#x5373;&#x4FBF;&#x4ECE;&#x5916;&#x90E8;&#x7A81;&#x7834;IOC&#x5BB9;&#x5668;&#x7684;&#x58C1;&#x5792;&#xFF0C;&#x4E5F;&#x53EA;&#x80FD;&#x8FDB;&#x5165;&#x67D0;&#x4E2A;&#x7279;&#x5B9A;&#x7684;Component</strong></p>
-<h3 id="&#x4F7F;&#x7528;entrypoint&#x8DE8;&#x8D8A;ioc&#x5BB9;&#x5668;&#x58C1;&#x5792;"><a name="&#x4F7F;&#x7528;entrypoint&#x8DE8;&#x8D8A;ioc&#x5BB9;&#x5668;&#x58C1;&#x5792;" class="anchor-navigation-ex-anchor" href="#&#x4F7F;&#x7528;entrypoint&#x8DE8;&#x8D8A;ioc&#x5BB9;&#x5668;&#x58C1;&#x5792;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F7F;&#x7528;EntryPoint&#x8DE8;&#x8D8A;IOC&#x5BB9;&#x5668;&#x58C1;&#x5792;</h3>
-<p>&#x5728;Hilt&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;&#x5730;</p>
+<p><strong>但请注意</strong>，IOC容器内部也存在着 <code>边界、壁垒</code>，这和它管理实例的机制有关，在Hilt（包括Dagger）中，最大颗粒度的内部壁垒是 <code>Component</code>。</p>
+<p><strong>即便从外部突破IOC容器的壁垒，也只能进入某个特定的Component</strong></p>
+<h3 id="使用entrypoint跨越ioc容器壁垒"><a class="header" href="#使用entrypoint跨越ioc容器壁垒">使用EntryPoint跨越IOC容器壁垒</a></h3>
+<p>在Hilt中，我们可以很方便地</p>
 <ul>
-<li>&#x4F7F;&#x7528;&#x63A5;&#x53E3;&#x5B9A;&#x4E49; &#x8FDB;&#x5165;&#x70B9;&#xFF08;EntryPoint&#xFF09;&#xFF0C;&#x5E76;&#x4F7F;&#x7528; <code>@EntryPoint</code> &#x6CE8;&#x89E3;&#x4F7F;&#x5176;&#x751F;&#x6548;&#xFF1B;</li>
-<li>&#x7528; <code>@InstallIn</code> &#x6CE8;&#x89E3;&#x6307;&#x660E;&#x8BBF;&#x95EE;&#x7684;Component&#xFF1B;</li>
-<li>&#x5E76;&#x5229;&#x7528; <code>EntryPoints</code> &#x5B8C;&#x6210;&#x8BBF;&#x95EE;&#xFF0C;&#x7A81;&#x7834;&#x5BB9;&#x5668;&#x58C1;&#x5792;</li>
+<li>使用接口定义 进入点（EntryPoint），并使用 <code>@EntryPoint</code> 注解使其生效；</li>
+<li>用 <code>@InstallIn</code> 注解指明访问的Component；</li>
+<li>并利用 <code>EntryPoints</code> 完成访问，突破容器壁垒</li>
 </ul>
-<p>&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x5C55;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x5B9A;&#x4E49;&#xFF1A;</p>
-<p><em>UserComponent&#x662F;&#x81EA;&#x5B9A;&#x4E49;&#x7684;Component&#xFF0C;&#x5728;&#x4E0B;&#x6587;&#x4E2D;&#x4F1A;&#x8BE6;&#x7EC6;&#x5C55;&#x5F00;</em></p>
-<pre><code class="lang-kotlin">@EntryPoint
-@InstallIn(UserComponent::<span class="hljs-class"><span class="hljs-keyword">class</span>)</span>
+<p>下面的代码展示了如何定义：</p>
+<p><em>UserComponent是自定义的Component，在下文中会详细展开</em></p>
+<pre><code class="language-kotlin">@EntryPoint
+@InstallIn(UserComponent::class)
 interface UserEntryPoint {
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">provideUserVO</span><span class="hljs-params">()</span>: UserVO</span>
+    fun provideUserVO(): UserVO
 }
 </code></pre>
-<p>&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x5C55;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x83B7;&#x53D6;&#x8FDB;&#x5165;&#x70B9;&#xFF0C;&#x6CE8;&#x610F;&#xFF0C;&#x60A8;&#x9700;&#x8981;&#x5148;&#x83B7;&#x5F97;&#x5BF9;&#x5E94;&#x7684;Component&#x5B9E;&#x4F8B;&#x3002;</p>
-<p><em>&#x5BF9;&#x4E8E;Hilt&#x5185;&#x5EFA;&#x7684;Component&#xFF0C;&#x5747;&#x6709;&#x5176;&#x83B7;&#x53D6;&#x65B9;&#x6CD5;&#xFF0C;&#x800C;&#x81EA;&#x5B9A;&#x4E49;&#x7684;Component&#xFF0C;&#x9700;&#x4ECE;&#x5916;&#x754C;&#x53D1;&#x8D77;&#x751F;&#x547D;&#x5468;&#x671F;&#x63A7;&#x5236;&#xFF0C;&#x540C;&#x6837;&#x4F1A;&#x9884;&#x7559;&#x5B9E;&#x4F8B;&#x8BBF;&#x95EE;&#x8DEF;&#x5F84;</em></p>
-<pre><code class="lang-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">manualGet</span><span class="hljs-params">()</span>: UserEntryPoint {</span>
-    <span class="hljs-keyword">return</span> EntryPoints.<span class="hljs-keyword">get</span>(
+<p>下面的代码展示了如何获取进入点，注意，您需要先获得对应的Component实例。</p>
+<p><em>对于Hilt内建的Component，均有其获取方法，而自定义的Component，需从外界发起生命周期控制，同样会预留实例访问路径</em></p>
+<pre><code class="language-kotlin">fun manualGet(): UserEntryPoint {
+    return EntryPoints.get(
         UserComponentManager.instance.generatedComponent(),
-        UserEntryPoint::<span class="hljs-class"><span class="hljs-keyword">class</span>.<span class="hljs-title">java</span></span>
+        UserEntryPoint::class.java
     )
 }
 </code></pre>
-<p>&#x5F53;&#x83B7;&#x53D6;&#x8FDB;&#x5165;&#x70B9;&#x540E;&#xFF0C;&#x5373;&#x53EF;&#x4F7F;&#x7528;&#x9884;&#x5B9A;&#x4E49;&#x7684;API&#xFF0C;&#x8BBF;&#x95EE;&#x5BB9;&#x5668;&#x5185;&#x7684;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#x3002;</p>
-<h2 id="&#x81EA;&#x5B9A;&#x4E49;scope&#x3001;component"><a name="&#x81EA;&#x5B9A;&#x4E49;scope&#x3001;component" class="anchor-navigation-ex-anchor" href="#&#x81EA;&#x5B9A;&#x4E49;scope&#x3001;component"><i class="fa fa-link" aria-hidden="true"></i></a>&#x81EA;&#x5B9A;&#x4E49;Scope&#x3001;Component</h2>
-<p>&#x90E8;&#x5206;&#x4E1A;&#x52A1;&#x573A;&#x666F;&#x4E2D;&#xFF0C;Hilt&#x5185;&#x5EFA;&#x7684;Scope&#x548C;Component&#x5E76;&#x4E0D;&#x80FD;&#x5B8C;&#x7F8E;&#x652F;&#x6301;&#xFF0C;&#x6B64;&#x65F6;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x81EA;&#x5B9A;&#x4E49;&#x3002;</p>
-<p><em>&#x4E3A;&#x4E86;&#x4E0B;&#x6587;&#x80FD;&#x591F;&#x66F4;&#x987A;&#x5229;&#x7684;&#x5C55;&#x5F00;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x82B1;&#x4E00;&#x5B9A;&#x7684;&#x7B14;&#x58A8;&#x5BF9; <code>Scope</code>&#x3001;<code>Component</code>&#x3001;<code>Module</code> &#x7684;&#x542B;&#x4E49;&#x8FDB;&#x884C;&#x6F84;&#x6E05;&#x3002;</em></p>
-<h3 id="scope&#x3001;component&#x3001;module&#x7684;&#x771F;&#x5B9E;&#x542B;&#x4E49;"><a name="scope&#x3001;component&#x3001;module&#x7684;&#x771F;&#x5B9E;&#x542B;&#x4E49;" class="anchor-navigation-ex-anchor" href="#scope&#x3001;component&#x3001;module&#x7684;&#x771F;&#x5B9E;&#x542B;&#x4E49;"><i class="fa fa-link" aria-hidden="true"></i></a>Scope&#x3001;Component&#x3001;Module&#x7684;&#x771F;&#x5B9E;&#x542B;&#x4E49;</h3>
-<p>&#x524D;&#x6587;&#x63D0;&#x5230;&#x4E24;&#x70B9;:</p>
+<p>当获取进入点后，即可使用预定义的API，访问容器内的对象实例。</p>
+<h2 id="自定义scopecomponent"><a class="header" href="#自定义scopecomponent">自定义Scope、Component</a></h2>
+<p>部分业务场景中，Hilt内建的Scope和Component并不能完美支持，此时我们需要进行自定义。</p>
+<p><em>为了下文能够更顺利的展开，我们再花一定的笔墨对 <code>Scope</code>、<code>Component</code>、<code>Module</code> 的含义进行澄清。</em></p>
+<h3 id="scopecomponentmodule的真实含义"><a class="header" href="#scopecomponentmodule的真实含义">Scope、Component、Module的真实含义</a></h3>
+<p>前文提到两点:</p>
 <ul>
-<li>DI&#x6846;&#x67B6;&#x9700;&#x8981; <code>&#x521B;&#x5EFA;&#x5B9E;&#x4F8B;</code>&#x3001;<code>&#x8BBF;&#x95EE;&#x5B9E;&#x4F8B;</code>&#x3001;<code>&#x6CE8;&#x5165;&#x4F9D;&#x8D56;</code>&#x3001;<code>&#x7BA1;&#x7406;&#x751F;&#x547D;&#x5468;&#x671F;</code></li>
-<li>IOC&#x5BB9;&#x5668;&#x5185;&#x90E8;&#x4E5F;&#x5B58;&#x5728;&#x7740; <code>&#x8FB9;&#x754C;&#x3001;&#x58C1;&#x5792;</code>&#xFF0C;&#x8FD9;&#x548C;&#x5B83;&#x7BA1;&#x7406;&#x5B9E;&#x4F8B;&#x7684;&#x673A;&#x5236;&#x6709;&#x5173;&#xFF0C;&#x5728;Hilt&#xFF08;&#x5305;&#x62EC;Dagger&#xFF09;&#x4E2D;&#xFF0C;&#x6700;&#x5927;&#x9897;&#x7C92;&#x5EA6;&#x7684;&#x5185;&#x90E8;&#x58C1;&#x5792;&#x662F; <code>Component</code>&#x3002;</li>
+<li>DI框架需要 <code>创建实例</code>、<code>访问实例</code>、<code>注入依赖</code>、<code>管理生命周期</code></li>
+<li>IOC容器内部也存在着 <code>边界、壁垒</code>，这和它管理实例的机制有关，在Hilt（包括Dagger）中，最大颗粒度的内部壁垒是 <code>Component</code>。</li>
 </ul>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;</p>
+<p>不难理解：</p>
 <ul>
-<li>&#x5B9E;&#x4F8B;&#x4E4B;&#x95F4;&#xFF0C;&#x4E5F;&#x4F1A;&#x5B58;&#x5728;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF1B;</li>
-<li>DI&#x6846;&#x67B6;&#x9700;&#x8981;&#x7BA1;&#x7406;&#x5185;&#x90E8;&#x5B9E;&#x4F8B;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF1B;</li>
-<li>&#x9700;&#x8981;&#x8FDB;&#x884C;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x7684;&#x5BA2;&#x6237;&#xFF0C;&#x672C;&#x8EAB;&#x4E5F;&#x5B58;&#x5728;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF0C;<strong>&#x5B83;&#x7684;&#x4F9D;&#x8D56;&#x5BF9;&#x8C61;&#xFF0C;&#x5E94;&#x8BE5;&#x7ED3;&#x5408;&#x5B9E;&#x9645;&#x9700;&#x6C42;&#x88AB;&#x5408;&#x7406;&#x63A7;&#x5236;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF0C;&#x907F;&#x514D;&#x751F;&#x547D;&#x5468;&#x671F;&#x6CC4;&#x6F0F;</strong>&#xFF1B;</li>
+<li>实例之间，也会存在依赖关系；</li>
+<li>DI框架需要管理内部实例的生命周期；</li>
+<li>需要进行依赖注入的客户，本身也存在生命周期，<strong>它的依赖对象，应该结合实际需求被合理控制生命周期，避免生命周期泄漏</strong>；</li>
 </ul>
-<p>&#x56E0;&#x6B64;&#xFF0C;&#x51FA;&#x73B0;&#x4E86; <code>&#x8303;&#x56F4;&#x3001;&#x4F5C;&#x7528;&#x57DF;</code> &#x5373; <code>Scope</code> &#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x5B83;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x7EF4;&#x5EA6;&#xFF1A;&#x5B9E;&#x4F8B;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x8303;&#x56F4;&#xFF1B;&#x5B9E;&#x4F8B;&#x4E4B;&#x95F4;&#x7684;&#x8BBF;&#x95EE;&#x754C;&#x9650;&#x3002;</p>
-<p>&#x5E76;&#x4E14;DI&#x6846;&#x67B6;&#x901A;&#x8FC7;Component&#x63A7;&#x5236;&#x5185;&#x90E8;&#x5BF9;&#x8C61;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x3002;</p>
-<p>&#x4E3E;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x63CF;&#x8FF0;&#xFF0C;&#x4EE5;Activity&#x4E3A;&#x4F8B;&#xFF0C;Activity&#x9700;&#x8981;&#x8FDB;&#x884C;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#xFF0C;&#x5E76;&#x4E14;&#x6211;&#x4EEC;&#x4E0D;&#x5E0C;&#x671B;Activity&#x81EA;&#x8EAB;&#x9700;&#x8981;&#x7684;&#x4F9D;&#x8D56;&#x51FA;&#x73B0;&#x751F;&#x547D;&#x5468;&#x671F;&#x6CC4;&#x6F0F;&#xFF0C;&#x4E8E;&#x662F;&#x6309;&#x7167;Activity&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x7279;&#x70B9;&#x5B9A;&#x4E49;&#x4E86;&#xFF1A;</p>
+<p>因此，出现了 <code>范围、作用域</code> 即 <code>Scope</code> 的概念，它包含两个维度：实例的生命周期范围；实例之间的访问界限。</p>
+<p>并且DI框架通过Component控制内部对象的生命周期。</p>
+<p>举一个例子描述，以Activity为例，Activity需要进行依赖注入，并且我们不希望Activity自身需要的依赖出现生命周期泄漏，于是按照Activity的生命周期特点定义了：</p>
 <ul>
-<li><code>ActivityRetainedScoped</code> <code>ActivityRetainedComponent</code>&#xFF0C;&#x4E0D;&#x53D7;reCreate &#x5F71;&#x54CD;</li>
-<li><code>ActivityScoped</code>&#x3001; <code>ActivityComponent</code>&#xFF0C;&#x6A2A;&#x7AD6;&#x5C4F;&#x5207;&#x6362;&#x7B49;&#x914D;&#x7F6E;&#x53D8;&#x5316;&#x5F15;&#x8D77;reCreate &#x5F00;&#x59CB;&#x65B0;&#x751F;&#x547D;&#x5468;&#x671F;</li>
+<li><code>ActivityRetainedScoped</code> <code>ActivityRetainedComponent</code>，不受reCreate 影响</li>
+<li><code>ActivityScoped</code>、 <code>ActivityComponent</code>，横竖屏切换等配置变化引起reCreate 开始新生命周期</li>
 </ul>
-<p>&#x5E76;&#x636E;&#x6B64;&#x5BF9; <code>&#x4F9D;&#x8D56;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;</code> &#x5B9E;&#x65BD; <code>&#x751F;&#x547D;&#x5468;&#x671F;</code> &#x548C; <code>&#x8BBF;&#x95EE;&#x8303;&#x56F4;</code> &#x63A7;&#x5236;</p>
-<p>&#x53EF;&#x4EE5;&#x8BB0;&#x4F4F;&#x4EE5;&#x4E0B;&#x4E09;&#x70B9;&#x7ED3;&#x8BBA;&#xFF1A;</p>
+<p>并据此对 <code>依赖对象实例</code> 实施 <code>生命周期</code> 和 <code>访问范围</code> 控制</p>
+<p>可以记住以下三点结论：</p>
 <ul>
-<li>Activity&#x5B9E;&#x4F8B;&#x6309;&#x7167; <code>&#x9884;&#x5B9A;Scope&#x5BF9;&#x5E94;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x8303;&#x56F4;</code> &#x521B;&#x5EFA;&#x3001;&#x7BA1;&#x7406;Component&#xFF0C;&#x8BBF;&#x95EE;Component&#x4E2D;&#x7684;&#x5B9E;&#x4F8B;&#xFF1B;</li>
-<li>Component&#x5185;&#x7684;&#x5B9E;&#x4F8B;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x8BBF;&#x95EE;&#xFF0C;&#x5B9E;&#x4F8B;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x548C;Component&#x4E00;&#x81F4;&#xFF1B;</li>
-<li>Activity&#x5B9E;&#x4F8B;&#xFF08;&#x9700;&#x8981;&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x7684;&#x5BA2;&#x6237;&#xFF09;&#x548C; Component&#x4E2D;&#x7684;&#x5B9E;&#x4F8B; &#x53EF;&#x4EE5;&#x8BBF;&#x95EE; <code>&#x7236;Component</code>&#x4E2D;&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;<em>&#x7236;Component&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x5B8C;&#x5168;&#x5305;&#x542B;&#x5B50;Component&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;</em></li>
+<li>Activity实例按照 <code>预定Scope对应的生命周期范围</code> 创建、管理Component，访问Component中的实例；</li>
+<li>Component内的实例可以互相访问，实例的生命周期和Component一致；</li>
+<li>Activity实例（需要依赖注入的客户）和 Component中的实例 可以访问 <code>父Component</code>中的实例，<em>父Component的生命周期完全包含子Component的生命周期</em></li>
 </ul>
-<p>&#x5185;&#x5EFA;&#x7684;Scope&#x3001;Component&#x5173;&#x7CFB;&#x53C2;&#x8003;&#xFF1A;</p>
-<p><img style="background-color:white" width="400" alt="desc" src="https://dagger.dev/hilt/component-hierarchy.svg"></p>
-<p><strong>&#x800C;Module&#x6307;&#x5BFC;DI&#x6846;&#x67B6; <code>&#x521B;&#x5EFA;&#x5B9E;&#x4F8B;</code>&#x3001;<code>&#x9009;&#x7528;&#x5B9E;&#x4F8B;&#x8FDB;&#x884C;&#x6CE8;&#x5165;</code></strong></p>
-<p>&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;Hilt&#xFF08;&#x4EE5;&#x53CA;Dagger&#xFF09;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <code>@Inject</code> &#x6CE8;&#x89E3;&#x7C7B;&#x6784;&#x9020;&#x51FD;&#x6570;&#x6307;&#x5BFC; <code>&#x521B;&#x5EFA;&#x5B9E;&#x4F8B;</code>&#xFF0C;&#x6B64;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;&#x7684;&#x5B9E;&#x4F8B;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x8DDF;&#x968F;&#x5BBF;&#x4E3B;&#xFF0C;&#x4E0E; <code>&#x901A;&#x8FC7;Module&#x65B9;&#x5F0F;</code> &#x8FDB;&#x884C;&#x5BF9;&#x6BD4;&#xFF0C;&#x5B58;&#x5728;&#x751F;&#x547D;&#x5468;&#x671F;&#x7BA1;&#x7406;&#x7C92;&#x5EA6;&#x4E0A;&#x7684;&#x5DEE;&#x5F02;&#x3002;</p>
-<h3 id="&#x81EA;&#x5B9A;&#x4E49;"><a name="&#x81EA;&#x5B9A;&#x4E49;" class="anchor-navigation-ex-anchor" href="#&#x81EA;&#x5B9A;&#x4E49;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x81EA;&#x5B9A;&#x4E49;</h3>
-<p>&#x81F3;&#x6B64;&#xFF0C;&#x5DF2;&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x56E0;&#x4E3A;&#x6709;&#x5B9E;&#x9645;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x8303;&#x56F4;&#x7BA1;&#x7406;&#x9700;&#x6C42;&#xFF0C;&#x624D;&#x4F1A;&#x81EA;&#x5B9A;&#x4E49;&#x3002;</p>
-<p>&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x884C;&#x6587;&#x4EE5;&#x53CA;&#x7F16;&#x5199;&#x6F14;&#x793A;&#x4EE3;&#x7801;&#xFF0C;&#x6211;&#x4EEC;&#x4E3E;&#x4E00;&#x4E2A;&#x5E38;&#x89C1;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;&#x7528;&#x6237;&#x767B;&#x5F55;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x3002;</p>
+<p>内建的Scope、Component关系参考：</p>
+<img style="background-color:white" width="400" alt="desc" src="https://dagger.dev/hilt/component-hierarchy.svg"/>
+<p><strong>而Module指导DI框架 <code>创建实例</code>、<code>选用实例进行注入</code></strong></p>
+<p>值得注意的是，Hilt（以及Dagger）可以通过 <code>@Inject</code> 注解类构造函数指导 <code>创建实例</code>，此方式创建的实例的生命周期跟随宿主，与 <code>通过Module方式</code> 进行对比，存在生命周期管理粒度上的差异。</p>
+<h3 id="自定义"><a class="header" href="#自定义">自定义</a></h3>
+<p>至此，已不难理解：因为有实际的生命周期范围管理需求，才会自定义。</p>
+<p>为了方便行文以及编写演示代码，我们举一个常见的例子：用户登录的生命周期。</p>
 <blockquote>
-<p>&#x4E00;&#x822C;&#x7684;APP&#x5728;&#x8BBE;&#x8BA1;&#x4E2D;&#xFF0C;&#x7528;&#x6237;&#x767B;&#x5F55;&#x540E;&#x4F1A;&#x6301;&#x4E45;&#x5316;TOKEN&#xFF0C;&#x4E0B;&#x6B21;APP&#x542F;&#x52A8;&#x540E;&#x9A8C;&#x8BC1;TOKEN&#x771F;&#x5B9E;&#x6027;&#x548C;&#x65F6;&#x6548;&#x6027;&#xFF0C;&#x901A;&#x8FC7;&#x9A8C;&#x8BC1;&#x540E;&#x7528;&#x6237;&#x4ECD;&#x4FDD;&#x6301;&#x767B;&#x5F55;&#x72B6;&#x6001;&#xFF0C;&#x76F4;&#x5230;TOKEN&#x8D85;&#x65F6;&#x3001;&#x767B;&#x51FA;&#x3002;&#x5F53;APP&#x9000;&#x51FA;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x7B49;&#x6548;&#x8BA4;&#x4E3A;&#x7528;&#x6237;&#x767B;&#x5F55;&#x751F;&#x547D;&#x5468;&#x671F;&#x7ED3;&#x675F;&#x3002;</p>
+<p>一般的APP在设计中，用户登录后会持久化TOKEN，下次APP启动后验证TOKEN真实性和时效性，通过验证后用户仍保持登录状态，直到TOKEN超时、登出。当APP退出时，可以等效认为用户登录生命周期结束。</p>
 </blockquote>
-<p>&#x663E;&#x7136;&#xFF0C;&#x7528;&#x6237;&#x767B;&#x5F55;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x5B8C;&#x5168;&#x6DB5;&#x76D6;&#x5728;APP&#x751F;&#x547D;&#x5468;&#x671F;&#xFF08;Singleton Scope&#xFF09;&#x4E2D;&#xFF0C;&#x4F46;&#x7565;&#x5C0F;&#x4E8E;APP&#x751F;&#x547D;&#x5468;&#x671F;&#xFF1B;&#x548C;Activity&#x751F;&#x547D;&#x5468;&#x671F;&#x65E0;&#x660E;&#x663E;&#x5173;&#x8054;&#x3002;</p>
-<h4 id="&#x5B9A;&#x4E49;scope"><a name="&#x5B9A;&#x4E49;scope" class="anchor-navigation-ex-anchor" href="#&#x5B9A;&#x4E49;scope"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5B9A;&#x4E49;Scope</h4>
-<pre><code class="lang-kotlin"><span class="hljs-keyword">import</span> javax.inject.Scope
+<p>显然，用户登录的生命周期完全涵盖在APP生命周期（Singleton Scope）中，但略小于APP生命周期；和Activity生命周期无明显关联。</p>
+<h4 id="定义scope"><a class="header" href="#定义scope">定义Scope</a></h4>
+<pre><code class="language-kotlin">import javax.inject.Scope
 
 @Scope
-annotation <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserScope</span></span>
+annotation class UserScope
 </code></pre>
-<p>&#x5C31;&#x662F;&#x8FD9;&#x4E48;&#x7B80;&#x5355;&#x3002;</p>
-<h4 id="&#x5B9A;&#x4E49;component"><a name="&#x5B9A;&#x4E49;component" class="anchor-navigation-ex-anchor" href="#&#x5B9A;&#x4E49;component"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5B9A;&#x4E49;Component</h4>
-<p>&#x5B9A;&#x4E49;Component&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x6307;&#x660E;&#x7236;Component&#x548C;&#x5BF9;&#x5E94;&#x7684;Scope&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-keyword">import</span> dagger.hilt.DefineComponent
+<p>就是这么简单。</p>
+<h4 id="定义component"><a class="header" href="#定义component">定义Component</a></h4>
+<p>定义Component时，需要指明父Component和对应的Scope：</p>
+<pre><code class="language-kotlin">import dagger.hilt.DefineComponent
 
-@DefineComponent(parent = SingletonComponent::<span class="hljs-class"><span class="hljs-keyword">class</span>)</span>
+@DefineComponent(parent = SingletonComponent::class)
 @UserScope
 interface UserComponent {
 }
 </code></pre>
-<p>Hilt&#x9700;&#x8981;&#x4EE5;Builder&#x6784;&#x5EFA;Component&#xFF0C;&#x4E0D;&#x4EC5;&#x5982;&#x6B64;&#xFF0C;&#x4E00;&#x822C;&#x6784;&#x5EFA;Component&#x65F6;&#x5B58;&#x5728;&#x521D;&#x59CB;&#x4FE1;&#x606F;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;ActivityComponent&#x9700;&#x8981;&#x63D0;&#x4F9B;Activity&#x5B9E;&#x4F8B;&#x3002;</p>
-<p>&#x901A;&#x5E38;&#x8BBE;&#x8BA1;&#x4E2D;&#xFF0C;&#x7528;&#x6237;Component&#x5B58;&#x5728; <code>&#x7528;&#x6237;&#x57FA;&#x672C;&#x4FE1;&#x606F;&#x3001;TOKEN</code> &#x7B49;&#x521D;&#x59CB;&#x4FE1;&#x606F;</p>
-<pre><code class="lang-kotlin">data <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span></span>(<span class="hljs-variable"><span class="hljs-keyword">val</span> name</span>: String, <span class="hljs-variable"><span class="hljs-keyword">val</span> token</span>: String) {
+<p>Hilt需要以Builder构建Component，不仅如此，一般构建Component时存在初始信息，例如：ActivityComponent需要提供Activity实例。</p>
+<p>通常设计中，用户Component存在 <code>用户基本信息、TOKEN</code> 等初始信息</p>
+<pre><code class="language-kotlin">data class User(val name: String, val token: String) {
 }
 </code></pre>
-<p>&#x6B64;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;Builder&#x4E2D;&#x5B8C;&#x6210;&#x521D;&#x59CB;&#x4FE1;&#x606F;&#x7684;&#x6CE8;&#x5165;&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-keyword">import</span> dagger.BindsInstance
-<span class="hljs-keyword">import</span> dagger.hilt.DefineComponent
+<p>此时，我们可以在Builder中完成初始信息的注入：</p>
+<pre><code class="language-kotlin">import dagger.BindsInstance
+import dagger.hilt.DefineComponent
 
 @DefineComponent.Builder
 interface Builder {
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">feedUser</span><span class="hljs-params">(@BindsInstance user: <span class="hljs-type">User?</span>)</span>: Builder</span>
+    fun feedUser(@BindsInstance user: User?): Builder
 
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">build</span><span class="hljs-params">()</span>: UserComponent</span>
+    fun build(): UserComponent
 }
 </code></pre>
-<p>&#x6211;&#x4EEC;&#x4EE5; <code>@BindsInstance</code> &#x6CE8;&#x89E3;&#x6807;&#x8BC6;&#x9700;&#x8981;&#x6CE8;&#x5165;&#x7684;&#x521D;&#x59CB;&#x4FE1;&#x606F;&#xFF0C;<em>&#x6CE8;&#x610F;&#x5408;&#x7406;&#x63A7;&#x5236;&#x5176;&#x53EF;&#x7A7A;&#x6027;&#xFF0C;&#x5728;&#x540E;&#x7EED;&#x7684;&#x4F7F;&#x7528;&#x4E2D;&#xFF0C;&#x53EF;&#x7A7A;&#x6027;&#x9700;&#x4FDD;&#x6301;&#x4E00;&#x81F4;</em></p>
-<p><em>&#x6CE8;&#x610F;&#xFF1A;&#x65B9;&#x6CD5;&#x540D;&#x5E76;&#x4E0D;&#x91CD;&#x8981;&#xFF0C;&#x91C7;&#x7528;&#x4E60;&#x60EF;&#x6027;&#x547D;&#x540D;&#x5373;&#x53EF;&#xFF0C;&#x6211;&#x4E60;&#x60EF;&#x4E8E;&#x5C06;&#x5411;&#x5BB9;&#x5668;&#x5582;&#x5165;&#x53C2;&#x6570;&#x7684;API&#x6DFB;&#x52A0;feed&#x524D;&#x7F00;</em></p>
-<p>&#x5F53;&#x6211;&#x4EEC;&#x901A;&#x8FC7;Hilt&#x83B7;&#x5F97;Builder&#x5B9E;&#x4F8B;&#x65F6;&#xFF0C;&#x5373;&#x53EF;&#x63A7;&#x5236;Component&#x7684;&#x521B;&#x5EFA;&#xFF08;&#x5373;&#x751F;&#x547D;&#x5468;&#x671F;&#x5F00;&#x59CB;&#xFF09;</p>
-<h4 id="&#x4F7F;&#x7528;manager&#x7BA1;&#x7406;component"><a name="&#x4F7F;&#x7528;manager&#x7BA1;&#x7406;component" class="anchor-navigation-ex-anchor" href="#&#x4F7F;&#x7528;manager&#x7BA1;&#x7406;component"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F7F;&#x7528;Manager&#x7BA1;&#x7406;Component</h4>
-<p>&#x4E0D;&#x96BE;&#x60F3;&#x8C61;&#xFF0C;Component&#x7684;&#x7BA1;&#x7406;&#x57FA;&#x672C;&#x4E3A;&#x6A21;&#x677F;&#x4EE3;&#x7801;&#xFF0C;Hilt&#x4E2D;&#x63D0;&#x4F9B;&#x4E86;&#x6A21;&#x677F;&#x548C;&#x63A5;&#x53E3;&#x7C7B;&#xFF1A;</p>
-<p><em>&#x5982;&#x679C;&#x60A8;&#x60F3;&#x907F;&#x514D;&#x6A21;&#x677F;&#x4EE3;&#x7801;&#x7F16;&#x5199;&#xFF0C;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x6269;&#x5C55;&#x6A21;&#x5757;&#xFF0C;&#x4F7F;&#x7528;APT&#x3001;KCP&#x3001;KSP&#x751F;&#x6210;</em></p>
-<p>&#x6B64;&#x5904;&#x5C55;&#x793A;&#x975E;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x7B80;&#x5355;&#x4F7F;&#x7528;Demo</p>
-<pre><code class="lang-kotlin">@Singleton
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserComponentManager</span> @<span class="hljs-title">Inject</span> <span class="hljs-title">constructor</span></span>(
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> builder</span>: UserComponent.Builder
-) : GeneratedComponentManager<span class="hljs-type">&lt;UserComponent&gt;</span> {
+<p>我们以 <code>@BindsInstance</code> 注解标识需要注入的初始信息，<em>注意合理控制其可空性，在后续的使用中，可空性需保持一致</em></p>
+<p><em>注意：方法名并不重要，采用习惯性命名即可，我习惯于将向容器喂入参数的API添加feed前缀</em></p>
+<p>当我们通过Hilt获得Builder实例时，即可控制Component的创建（即生命周期开始）</p>
+<h4 id="使用manager管理component"><a class="header" href="#使用manager管理component">使用Manager管理Component</a></h4>
+<p>不难想象，Component的管理基本为模板代码，Hilt中提供了模板和接口类：</p>
+<p><em>如果您想避免模板代码编写，可以定义扩展模块，使用APT、KCP、KSP生成</em></p>
+<p>此处展示非线程安全的简单使用Demo</p>
+<pre><code class="language-kotlin">@Singleton
+class UserComponentManager @Inject constructor(
+    private val builder: UserComponent.Builder
+) : GeneratedComponentManager&lt;UserComponent&gt; {
 
-    <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> {
-        lateinit <span class="hljs-variable"><span class="hljs-keyword">var</span> instance</span>: UserComponentManager
+    companion object {
+        lateinit var instance: UserComponentManager
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">var</span> userComponent</span> = builder
-        .feedUser(<span class="hljs-literal">null</span>)
+    private var userComponent = builder
+        .feedUser(null)
         .build()
 
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onLogin</span><span class="hljs-params">(user: <span class="hljs-type">User</span>)</span> {</span>
+    fun onLogin(user: User) {
         userComponent = builder.feedUser(user).build()
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onLogout</span><span class="hljs-params">()</span> {</span>
-        userComponent = builder.feedUser(<span class="hljs-literal">null</span>).build()
+    fun onLogout() {
+        userComponent = builder.feedUser(null).build()
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">generatedComponent</span><span class="hljs-params">()</span>: UserComponent {</span>
-        <span class="hljs-keyword">return</span> userComponent
+    override fun generatedComponent(): UserComponent {
+        return userComponent
     }
 
 }
 </code></pre>
-<p>&#x60A8;&#x4E5F;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;Manager&#xFF0C;&#x5E76;&#x4F7F;&#x7528; <code>ComponentSupplier</code> &#x63D0;&#x4F9B;&#x5B9E;&#x4F8B;</p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomComponentManager</span></span>(
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> componentCreator</span>: ComponentSupplier
-) : GeneratedComponentManager<span class="hljs-type">&lt;Any&gt;</span> {
+<p>您也可以定义如下的线程安全的Manager，并使用 <code>ComponentSupplier</code> 提供实例</p>
+<pre><code class="language-kotlin">class CustomComponentManager(
+    private val componentCreator: ComponentSupplier
+) : GeneratedComponentManager&lt;Any&gt; {
 
     @Volatile
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">var</span> component</span>: Any? = <span class="hljs-literal">null</span>
+    private var component: Any? = null
 
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> componentLock</span> = Any()
+    private val componentLock = Any()
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">generatedComponent</span><span class="hljs-params">()</span>: Any {</span>
-        <span class="hljs-keyword">if</span> (component == <span class="hljs-literal">null</span>) {
+    override fun generatedComponent(): Any {
+        if (component == null) {
             synchronized(componentLock) {
-                <span class="hljs-keyword">if</span> (component == <span class="hljs-literal">null</span>) {
-                    component = componentCreator.<span class="hljs-keyword">get</span>()
+                if (component == null) {
+                    component = componentCreator.get()
                 }
             }
         }
 
-        <span class="hljs-keyword">return</span> component!!
+        return component!!
     }
 }
 </code></pre>
-<p>&#x60A8;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x5B9E;&#x9645;&#x9700;&#x6C42;&#x9009;&#x62E9;&#x6700;&#x9002;&#x5B9C;&#x7684;&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x7BA1;&#x7406;&#xFF0C;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;&#x3002;</p>
-<h4 id="&#x5728;&#x751F;&#x547D;&#x5468;&#x671F;&#x8303;&#x56F4;&#x66F4;&#x5C0F;&#x7684;component&#x4E2D;&#x4F7F;&#x7528;"><a name="&#x5728;&#x751F;&#x547D;&#x5468;&#x671F;&#x8303;&#x56F4;&#x66F4;&#x5C0F;&#x7684;component&#x4E2D;&#x4F7F;&#x7528;" class="anchor-navigation-ex-anchor" href="#&#x5728;&#x751F;&#x547D;&#x5468;&#x671F;&#x8303;&#x56F4;&#x66F4;&#x5C0F;&#x7684;component&#x4E2D;&#x4F7F;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5728;&#x751F;&#x547D;&#x5468;&#x671F;&#x8303;&#x56F4;&#x66F4;&#x5C0F;&#x7684;Component&#x4E2D;&#x4F7F;&#x7528;</h4>
-<p>&#x81F3;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E86;&#x81EA;&#x5B9A;&#x4E49;Scope&#x3001;Component&#x7684;&#x4E3B;&#x8981;&#x5DE5;&#x4F5C;&#xFF0C;&#x901A;&#x8FC7;Manager&#x5373;&#x53EF;&#x63A7;&#x5236;&#x751F;&#x547D;&#x5468;&#x671F;&#x3002;</p>
-<p>&#x5982;&#x679C;&#x60F3;&#x5728;&#x751F;&#x547D;&#x5468;&#x671F;&#x8303;&#x56F4;&#x66F4;&#x5C0F;&#x7684;Component&#x4E2D;&#x8BBF;&#x95EE; UserComponent&#x4E2D;&#x7684;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#xFF0C;&#x60A8;&#x9700;&#x8981;&#x8C28;&#x8BB0;&#x524D;&#x6587;&#x63D0;&#x5230;&#x7684;&#x4E09;&#x6761;&#x7ED3;&#x8BBA;&#x3002;</p>
-<p><em>&#x8BE5;&#x9700;&#x6C42;&#x5F88;&#x5408;&#x7406;&#xFF0C;&#x4F46;&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x5E76;&#x4E0D;&#x8DB3;&#x591F;&#x5178;&#x578B;</em></p>
-<p>&#x6B64;&#x65F6;&#xFF0C;&#x60A8;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;&#x5408;&#x7406;&#x7684;Component&#x5B9E;&#x73B0;&#x8BBF;&#x95EE;&#xFF0C;&#x4F8B;&#x5982;&#x5728;Activity&#x4E2D;&#x9700;&#x8981;&#x6CE8;&#x5165;&#x76F8;&#x5173;&#x5B9E;&#x4F8B;&#x65F6;&#x3002;
-&#x56E0;&#x4E3A; <code>ActivityRetainedComponent</code> &#x548C; <code>UserComponent</code> &#x4E0D;&#x5B58;&#x5728;&#x7236;&#x5B50;&#x5173;&#x7CFB;&#xFF0C;Scope&#x6CA1;&#x6709;&#x4EA4;&#x96C6;&#xFF0C;&#x6240;&#x4EE5; <strong>&#x9700;&#x8981;&#x627E;&#x5230;&#x5171;&#x540C;&#x7684;&#x7236;Component&#x8FDB;&#x884C;&#x5E2E;&#x52A9;&#xFF0C;&#x5E76;&#x901A;&#x8FC7;EntryPoint&#x7A81;&#x7834;&#x58C1;&#x5792;</strong> &#xFF1A;</p>
-<p>&#x524D;&#x6587;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5C06; <code>UserComponentManager</code> &#x5212;&#x5165; <code>SingletonComponent</code>, &#x4ED6;&#x662F;&#x4E24;&#x79CD;&#x7684;&#x5171;&#x540C;&#x7236;Component&#xFF0C;&#x6B64;&#x65F6;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x5904;&#x7406;&#xFF1A;</p>
-<pre><code class="lang-kotlin">@Module
-@InstallIn(ActivityRetainedComponent::<span class="hljs-class"><span class="hljs-keyword">class</span>)</span>
-<span class="hljs-keyword">object</span> AppModule {
+<p>您可以根据实际需求选择最适宜的方法进行管理，不再赘述。</p>
+<h4 id="在生命周期范围更小的component中使用"><a class="header" href="#在生命周期范围更小的component中使用">在生命周期范围更小的Component中使用</a></h4>
+<p>至此，我们已经完成了自定义Scope、Component的主要工作，通过Manager即可控制生命周期。</p>
+<p>如果想在生命周期范围更小的Component中访问 UserComponent中的对象实例，您需要谨记前文提到的三条结论。</p>
+<p><em>该需求很合理，但下面的例子并不足够典型</em></p>
+<p>此时，您需要通过一个合理的Component实现访问，例如在Activity中需要注入相关实例时。
+因为 <code>ActivityRetainedComponent</code> 和 <code>UserComponent</code> 不存在父子关系，Scope没有交集，所以 <strong>需要找到共同的父Component进行帮助，并通过EntryPoint突破壁垒</strong> ：</p>
+<p>前文中，我们将 <code>UserComponentManager</code> 划入 <code>SingletonComponent</code>, 他是两种的共同父Component，此时可以这样处理：</p>
+<pre><code class="language-kotlin">@Module
+@InstallIn(ActivityRetainedComponent::class)
+object AppModule {
 
     @Provides
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">provideUserVO</span><span class="hljs-params">(manager: <span class="hljs-type">UserComponentManager</span>)</span>:UserVO {</span>
-        <span class="hljs-keyword">return</span> UserEntryPoint.manualGet(manager.generatedComponent()).provideUserVO()
+    fun provideUserVO(manager: UserComponentManager):UserVO {
+        return UserEntryPoint.manualGet(manager.generatedComponent()).provideUserVO()
     }
 }
 </code></pre>
-<h2 id="&#x89E3;&#x51B3;&#x72EC;&#x7ACB;library&#x7684;&#x4F9D;&#x8D56;&#x521D;&#x59CB;&#x5316;&#x95EE;&#x9898;"><a name="&#x89E3;&#x51B3;&#x72EC;&#x7ACB;library&#x7684;&#x4F9D;&#x8D56;&#x521D;&#x59CB;&#x5316;&#x95EE;&#x9898;" class="anchor-navigation-ex-anchor" href="#&#x89E3;&#x51B3;&#x72EC;&#x7ACB;library&#x7684;&#x4F9D;&#x8D56;&#x521D;&#x59CB;&#x5316;&#x95EE;&#x9898;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x89E3;&#x51B3;&#x72EC;&#x7ACB;library&#x7684;&#x4F9D;&#x8D56;&#x521D;&#x59CB;&#x5316;&#x95EE;&#x9898;</h2>
-<p>&#x6B64;&#x95EE;&#x9898;&#x5C5E;&#x4E8E;&#x5E38;&#x89C1;&#x6848;&#x4F8B;&#xFF0C;&#x901A;&#x8FC7;&#x7814;&#x7A76;&#x5B83;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x66F4;&#x6DF1;&#x523B;&#x5730;&#x7406;&#x89E3;&#x524D;&#x6587;&#x5185;&#x5BB9;&#xFF0C;&#x505A;&#x5230;&#x5403;&#x900F;&#x3002;</p>
-<p>&#x5F53;&#x5904;&#x7406;&#x4E3B;&#x5DE5;&#x7A0B;&#x65F6;&#xFF0C;&#x6CA1;&#x6709;&#x4EE3;&#x7801;&#x9694;&#x79BB;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5F88;&#x8F7B;&#x6613;&#x7684;&#x4FEE;&#x6539;Application&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x56E0;&#x6B64;&#x5F88;&#x591A;&#x95EE;&#x9898;&#x96BE;&#x4EE5;&#x66B4;&#x9732;&#x3002;</p>
+<h2 id="解决独立library的依赖初始化问题"><a class="header" href="#解决独立library的依赖初始化问题">解决独立library的依赖初始化问题</a></h2>
+<p>此问题属于常见案例，通过研究它的解决方案，我们可以更深刻地理解前文内容，做到吃透。</p>
+<p>当处理主工程时，没有代码隔离，我们可以很轻易的修改Application的代码，因此很多问题难以暴露。</p>
 <blockquote>
-<p>&#x4F8B;&#x5982;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;Application&#x4E2D;&#x901A;&#x8FC7;&#x6CE8;&#x89E3;&#x6807;&#x660E;&#x4F9D;&#x8D56; <em>&#xFF08;&#x6EE1;&#x8DB3;Singleton Scope&#x524D;&#x63D0;&#xFF09;</em> &#xFF0C;DI&#x6846;&#x67B6;&#x4F1A;&#x5E2E;&#x52A9;&#x6211;&#x4EEC;&#x8FDB;&#x884C;&#x6CE8;&#x5165;&#xFF0C;&#x5728;&#x6CE8;&#x5165;&#x540E;&#x53EF;&#x4EE5;&#x7F16;&#x5199;&#x903B;&#x8F91;&#x4EE3;&#x7801;&#xFF0C;&#x5C06;&#x5BF9;&#x8C61;&#x8D4B;&#x503C;&#x7ED9;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF0C;&#x4FBF;&#x53EF;&#x4EE5; &quot;&#x65B9;&#x4FBF;&quot; &#x7684;&#x4F7F;&#x7528;&#x3002;</p>
-<p><em>&#x4E3A;&#x65B9;&#x4FBF;&#x4E0B;&#x6587;&#x8868;&#x8FF0;&#xFF0C;&#x6211;&#x4EEC;&#x79F0;&#x4E4B; &quot;&#x65B9;&#x6848;1&quot;</em></p>
+<p>例如，我们可以在Application中通过注解标明依赖 <em>（满足Singleton Scope前提）</em> ，DI框架会帮助我们进行注入，在注入后可以编写逻辑代码，将对象赋值给全局变量，便可以 "方便" 的使用。</p>
+<p><em>为方便下文表述，我们称之 "方案1"</em></p>
 </blockquote>
-<p><strong>&#x663E;&#x7136;&#xFF0C;&#x8FD9;&#x662F;&#x6709;&#x5F02;&#x5473;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x867D;&#x7136;&#x5B83;&#x6709;&#x6548;&#x4E14;&#x65B9;&#x4FBF;&#x3002;</strong></p>
+<p><strong>显然，这是有异味的代码，虽然它有效且方便。</strong></p>
 <blockquote>
-<p>&#x56E0;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x9009;&#x53D6;&#x4E00;&#x4E9B;&#x573A;&#x666F;&#x6765;&#x8BF4;&#x660E;&#x8BE5;&#x505A;&#x6CD5;&#x7684;&#x5F0A;&#x7AEF;&#xFF1A;</p>
+<p>因此，我们选取一些场景来说明该做法的弊端：</p>
 <ul>
-<li>&#x573A;&#x666F;1&#xFF1A;&#x521B;&#x5EFA;&#x72EC;&#x7ACB;Library&#xFF0C;&#x5176;&#x4E2D;&#x4F7F;&#x7528;Hilt&#x4F5C;&#x4E3A;DI&#x6846;&#x67B6;&#xFF0C;Library&#x4E2D;&#x5B58;&#x5728;&#x81EA;&#x5B9A;&#x4E49;Component&#xFF0C;&#x9700;&#x8981;&#x521D;&#x59CB;&#x5316;&#x7BA1;&#x7406;&#x5165;&#x53E3;</li>
-<li>&#x573A;&#x666F;2&#xFF1A;&#x9879;&#x76EE;&#x91C7;&#x7528;&#x4E86;&#x7EC4;&#x4EF6;&#x5316;&#xFF0C;&#x8BE5;Library&#x6309;&#x7167;&#x6E20;&#x9053;&#x5305;&#x9700;&#x6C42;&#xFF0C;&#x6E20;&#x9053;&#x5305;A&#x96C6;&#x6210;&#x3001;&#x6E20;&#x9053;&#x5305;B&#x4E0D;&#x96C6;&#x6210;</li>
-<li>&#x573A;&#x666F;3&#xFF1A;&#x9879;&#x76EE;&#x91C7;&#x7528;&#x4E86;Uni-App&#x3001;React-Native&#x7B49;&#x6280;&#x672F;&#xFF0C;&#x8BE5;Library&#x4E2D;&#x5B58;&#x5728;&#x5B9E;&#x4F8B;&#x7531;&#x53CD;&#x5C04;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;&#x3001;&#x4E0D;&#x53D7;Hilt&#x7BA1;&#x7406;&#xFF0C;&#x65E0;&#x6CD5;&#x501F;&#x52A9;Hilt&#x81EA;&#x52A8;&#x6CE8;&#x5165;&#x4F9D;&#x8D56;</li>
+<li>场景1：创建独立Library，其中使用Hilt作为DI框架，Library中存在自定义Component，需要初始化管理入口</li>
+<li>场景2：项目采用了组件化，该Library按照渠道包需求，渠道包A集成、渠道包B不集成</li>
+<li>场景3：项目采用了Uni-App、React-Native等技术，该Library中存在实例由反射方式创建、不受Hilt管理，无法借助Hilt自动注入依赖</li>
 </ul>
-<p>&#x4EE5;&#x4E0A;&#x573A;&#x666F;&#x5E76;&#x4E0D;&#x76F8;&#x4E92;&#x5B64;&#x7ACB;</p>
+<p>以上场景并不相互孤立</p>
 </blockquote>
-<p>&#x5728;&#x573A;&#x666F;1&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4ECD;&#x7136;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <code>&#x65B9;&#x6848;1</code> &#x5B8C;&#x6210;&#x9700;&#x6C42;&#xFF0C;&#x4F46;&#x5728;&#x573A;&#x666F;2&#x4E2D;&#x4FBF;&#x4E0D;&#x518D;&#x53EF;&#x884C;&#x3002;</p>
-<p>&#x5E38;&#x89C4;&#x7684;&#x7EC4;&#x4EF6;&#x5316;&#x3001;&#x63D2;&#x4EF6;&#x5316;&#xFF0C;&#x90FD;&#x4F1A;&#x5B8C;&#x6210;&#x4EE3;&#x7801;&#x9694;&#x79BB;&amp;&#x4F7F;&#x7528;&#x62BD;&#x8C61;&#xFF0C;&#x56E0;&#x6B64;&#x65E0;&#x6CD5;&#x5728;&#x4E3B;&#x5DE5;&#x7A0B;&#x7684;Application&#x4E2D;&#x4F7F;&#x7528;&#x76EE;&#x6807;&#x7C7B;&#x3002;&#x901A;&#x8FC7;&#x5B9A;&#x5236;&#x5B57;&#x8282;&#x7801;&#x5DE5;&#x5177;&#x66F2;&#x7EBF;&#x6551;&#x56FD;&#xFF0C;&#x5219;&#x5C5E;&#x5B9E;&#x662F;&#x5927;&#x70AE;&#x6253;&#x868A;&#x5B50;&#x3001;&#x5C4E;&#x76C6;&#x5B50;&#x9576;&#x91D1;&#x8FB9;</p>
-<h3 id="&#x4F7F;&#x7528;hilt&#x7684;&#x805A;&#x5408;&#x80FD;&#x529B;&#x89E3;&#x51B3;&#x95EE;&#x9898;"><a name="&#x4F7F;&#x7528;hilt&#x7684;&#x805A;&#x5408;&#x80FD;&#x529B;&#x89E3;&#x51B3;&#x95EE;&#x9898;" class="anchor-navigation-ex-anchor" href="#&#x4F7F;&#x7528;hilt&#x7684;&#x805A;&#x5408;&#x80FD;&#x529B;&#x89E3;&#x51B3;&#x95EE;&#x9898;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F7F;&#x7528;hilt&#x7684;&#x805A;&#x5408;&#x80FD;&#x529B;&#x89E3;&#x51B3;&#x95EE;&#x9898;</h3>
-<p>&#x5728; MAD Skills &#x7CFB;&#x5217;&#x6587;&#x7AE0;&#x7684;&#x6700;&#x540E;&#x4E00;&#x7BC7;&#x4E2D;&#xFF0C;&#x7B80;&#x5355;&#x63D0;&#x53CA;&#x4E86;Hilt&#x7684;&#x805A;&#x5408;&#x80FD;&#x529B;&#xFF0C;&#x5B83;&#x81F3;&#x5C11;&#x5305;&#x542B;&#x4EE5;&#x4E0B;&#x4E24;&#x4E2A;&#x5C42;&#x9762;&#xFF1A;</p>
+<p>在场景1中，我们仍然可以通过 <code>方案1</code> 完成需求，但在场景2中便不再可行。</p>
+<p>常规的组件化、插件化，都会完成代码隔离&amp;使用抽象，因此无法在主工程的Application中使用目标类。通过定制字节码工具曲线救国，则属实是大炮打蚊子、屎盆子镶金边</p>
+<h3 id="使用hilt的聚合能力解决问题"><a class="header" href="#使用hilt的聚合能力解决问题">使用hilt的聚合能力解决问题</a></h3>
+<p>在 MAD Skills 系列文章的最后一篇中，简单提及了Hilt的聚合能力，它至少包含以下两个层面：</p>
 <ul>
-<li>&#x5373;&#x4FBF;&#x4E00;&#x4E2A;&#x5DF2;&#x7ECF;&#x7F16;&#x8BD1;&#x4E3A;aar&#x7684;&#x5E93;&#xFF0C;&#x5728;&#x88AB;&#x96C6;&#x6210;&#x540E;&#xFF0C;Hilt&#x4F9D;&#x65E7;&#x80FD;&#x591F;&#x626B;&#x63CF;&#x8BE5;&#x5E93;&#x4E2D;Hilt&#x76F8;&#x5173;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x8FDB;&#x884C;&#x4F9D;&#x8D56;&#x56FE;&#x805A;&#x5408;</li>
-<li>Hilt&#x751F;&#x6210;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x4F9D;&#x65E7;&#x5B58;&#x5728;&#x7740;&#x6CE8;&#x89E3;&#xFF0C;&#x8FD9;&#x4E9B;&#x6CE8;&#x89E3;&#x53EF;&#x4EE5;&#x88AB;&#x6CE8;&#x89E3;&#x5904;&#x7406;&#x5668;&#x3001;&#x5B57;&#x8282;&#x7801;&#x5DE5;&#x5177;&#x8BC6;&#x522B;&#x3001;&#x5E76;&#x8FDB;&#x4E00;&#x6B65;&#x5904;&#x7406;&#x3002;&#x53EF;&#x4EE5;&#x662F;Hilt&#x5185;&#x5EFA;&#x7684;&#x5904;&#x7406;&#x5668;&#x6216;&#x60A8;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x6269;&#x5C55;&#x5904;&#x7406;&#x5668;</li>
+<li>即便一个已经编译为aar的库，在被集成后，Hilt依旧能够扫描该库中Hilt相关的内容，进行依赖图聚合</li>
+<li>Hilt生成的代码，依旧存在着注解，这些注解可以被注解处理器、字节码工具识别、并进一步处理。可以是Hilt内建的处理器或您自定义的扩展处理器</li>
 </ul>
-<p>&#x4F9D;&#x636E;&#x7B2C;&#x4E00;&#x4E2A;&#x5C42;&#x9762;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5236;&#x5B9A;&#x4E00;&#x4E2A;&#x7EA6;&#x5B9A;&#xFF1A;</p>
+<p>依据第一个层面，我们可以制定一个约定：</p>
 <blockquote>
-<p>&#x5B50;Library&#x6309;&#x7167;&#x62BD;&#x8C61;&#x63A5;&#x53E3;&#x63D0;&#x4F9B;Library&#x521D;&#x59CB;&#x5316;&#x5B9E;&#x4F8B;&#xFF0C;&#x4E3B;&#x5DE5;&#x7A0B;&#x7684;Application&#x901A;&#x8FC7;DI&#x6846;&#x67B6;&#x83B7;&#x53D6;&#x540E;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;</p>
-<p><em>&#x6211;&#x4EEC;&#x5C06;&#x5176;&#x79F0;&#x4E3A;&#x65B9;&#x6848;2</em></p>
+<p>子Library按照抽象接口提供Library初始化实例，主工程的Application通过DI框架获取后进行初始化</p>
+<p><em>我们将其称为方案2</em></p>
 </blockquote>
-<p>&#x4F8B;&#x5982;&#xFF0C;&#x5728;Library&#x4E2D;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#x521D;&#x59CB;&#x5316;&#x7C7B;&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LibInitializer</span> @<span class="hljs-title">Inject</span> <span class="hljs-title">constructor</span></span>(
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> userComponentManager</span>: UserComponentManager
-) : Function1<span class="hljs-type">&lt;Application, Any&gt;</span> {
+<p>例如，在Library中定义如下初始化类：</p>
+<pre><code class="language-kotlin">class LibInitializer @Inject constructor(
+    private val userComponentManager: UserComponentManager
+) : Function1&lt;Application, Any&gt; {
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">invoke</span><span class="hljs-params">(app: <span class="hljs-type">Application</span>)</span>: Any {</span>
+    override fun invoke(app: Application): Any {
         UserComponentManager.instance = userComponentManager
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">Unit</span>
+        return Unit
     }
 }
 </code></pre>
-<p>&#x4E0D;&#x96BE;&#x53D1;&#x73B0;&#xFF0C;&#x4ED6;&#x662F;&#x65B9;&#x6848;1&#x7684;&#x53D8;&#x79CD;&#xFF0C;&#x5C06;&#x4F9D;&#x8D56;&#x83B7;&#x53D6;&#x4ECE;Application&#x4E2D;&#x632A;&#x5230;&#x4E86;LibInitializer&#x4E2D;</p>
-<p>&#x5E76;&#x7EA6;&#x5B9A;&#x7ED1;&#x5B9A;&#x5B9E;&#x4F8B;&amp;&#x96C6;&#x5408;&#x6CE8;&#x5165;&#xFF0C; <em>&#x4F9D;&#x65E7;&#x5728;Library&#x4E2D;&#x7F16;&#x7801;</em> &#xFF1A;</p>
-<pre><code class="lang-kotlin">@InstallIn(SingletonComponent::<span class="hljs-class"><span class="hljs-keyword">class</span>)</span>
+<p>不难发现，他是方案1的变种，将依赖获取从Application中挪到了LibInitializer中</p>
+<p>并约定绑定实例&amp;集合注入， <em>依旧在Library中编码</em> ：</p>
+<pre><code class="language-kotlin">@InstallIn(SingletonComponent::class)
 @Module
-abstract <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppModuleBinds</span> </span>{
+abstract class AppModuleBinds {
     @Binds
     @IntoSet
-    abstract <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">provideLibInitializer</span><span class="hljs-params">(bind: <span class="hljs-type">LibInitializer</span>)</span>: Function1<span class="hljs-type">&lt;Application, Any&gt;</span></span>
+    abstract fun provideLibInitializer(bind: LibInitializer): Function1&lt;Application, Any&gt;
 }
 </code></pre>
-<p>&#x5728;&#x4E3B;&#x5DE5;&#x7A0B;&#x7684;Application&#x4E2D;&#xFF1A;</p>
-<pre><code class="lang-kotlin">@HiltAndroidApp
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> : <span class="hljs-type">Application</span></span>() {
+<p>在主工程的Application中：</p>
+<pre><code class="language-kotlin">@HiltAndroidApp
+class App : Application() {
     @Inject
-    lateinit <span class="hljs-variable"><span class="hljs-keyword">var</span> initializers</span>: Set<span class="hljs-type">&lt;@JvmSuppressWildcards Function1&lt;Application, Any&gt;</span>&gt;
+    lateinit var initializers: Set&lt;@JvmSuppressWildcards Function1&lt;Application, Any&gt;&gt;
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">()</span> {</span>
+    override fun onCreate() {
         super.onCreate()
         initializers.forEach {
             it(this)
@@ -1715,133 +440,94 @@ abstract <span class="hljs-class"><span class="hljs-keyword">class</span> <span 
     }
 }
 </code></pre>
-<p>&#x5982;&#x6B64;&#x5373;&#x53EF;&#x6EE1;&#x8DB3;&#x573A;&#x666F;1&#x3001;&#x573A;&#x666F;2&#x7684;&#x9700;&#x6C42;&#x3002;</p>
-<p>&#x4F46;&#x4ED4;&#x7EC6;&#x601D;&#x8003;&#x4E00;&#x4E0B;&#xFF0C;&#x8FD9;&#x79CD;&#x505A;&#x6CD5;&#x592A; <strong>&quot;&#x5F3A;&#x786C;&quot;</strong> &#x4E86;&#xFF0C;&#x4E0D;&#x4EC5;&#x8981;&#x6C42;&#x4E3B;&#x5DE5;&#x7A0B;&#x7684;Application&#x8FDB;&#x884C;&#x914D;&#x5408;&#xFF0C;&#x800C;&#x4E14;&#x9700;&#x8981;&#x5C0F;&#x5FC3;&#x7684;&#x5904;&#x7406;&#x521D;&#x59CB;&#x5316;&#x4EE3;&#x7801;&#x7684;&#x5206;&#x914D;&#x3002;</p>
-<p>&#x5728;&#x573A;&#x666F;3&#x4E2D;&#xFF0C;&#x8FD9;&#x4E9B;&#x6280;&#x672F;&#x5747;&#x6709;&#x76F8;&#x9002;&#x5E94;&#x7684;&#x63D2;&#x4EF6;&#x521D;&#x59CB;&#x5316;&#x5165;&#x53E3;&#xFF1B;&#x7EC4;&#x4EF6;&#x5316;&#x63D2;&#x4EF6;&#x5316;&#x9879;&#x76EE;&#x4E2D;&#xFF0C;&#x4E5F;&#x5177;&#x6709;&#x7C7B;&#x4F3C;&#x7684;&#x8BBE;&#x8BA1;&#x3002;&#x968F;&#x96C6;&#x6210;&#x65B9;&#x5F0F;&#x7684;&#x4E0D;&#x540C;&#xFF0C;&#x5F88;&#x53EF;&#x80FD;&#x9020;&#x6210; <strong>&#x521D;&#x59CB;&#x5316;&#x903B;&#x8F91;&#x9057;&#x6F0F;&#x6216;&#x8005;&#x91CD;&#x590D;</strong> &#x3002;</p>
-<p>&#x6CE8;&#x610F;&#xFF1A;&#x91CD;&#x590D;&#x521D;&#x59CB;&#x5316;&#x53EF;&#x80FD;&#x9020;&#x6210;&#x6F5C;&#x5728;&#x7684;Scope&#x6CC4;&#x6F0F;&#xFF0C;&#x6ECB;&#x751F;bug&#x3002;</p>
-<h3 id="&#x805A;&#x5408;&#x80FD;&#x529B;entrypoint"><a name="&#x805A;&#x5408;&#x80FD;&#x529B;entrypoint" class="anchor-navigation-ex-anchor" href="#&#x805A;&#x5408;&#x80FD;&#x529B;entrypoint"><i class="fa fa-link" aria-hidden="true"></i></a>&#x805A;&#x5408;&#x80FD;&#x529B;+EntryPoint</h3>
-<p>&#x524D;&#x6587;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x8BA8;&#x8BBA;&#x4E86;&#x4F7F;&#x7528;EntryPoint&#x7A81;&#x7834;IOC&#x5BB9;&#x5668;&#x7684;&#x58C1;&#x5792;&#xFF0C;&#x4E5F;&#x4F53;&#x9A8C;&#x4E86;Hilt&#x7684;&#x805A;&#x5408;&#x80FD;&#x529B;&#x3002;&#x800C; <code>SingletonComponent</code> &#x4F5C;&#x4E3A;&#x5185;&#x5EFA;Component&#xFF0C;&#x540C;&#x6837;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;EntryPoint&#x7A81;&#x7834;&#x5BB9;&#x5668;&#x58C1;&#x5792;&#x3002;</p>
-<p>&#x5982;&#x679C;&#x60A8;&#x5BF9;Hilt&#x7684;&#x6E90;&#x7801;&#x6216;&#x5176;&#x8BBE;&#x8BA1;&#x6709;&#x4E00;&#x5B9A;&#x7A0B;&#x5EA6;&#x7684;&#x4E86;&#x89E3;&#xFF0C;&#x5E94;&#x5F53;&#x6E05;&#x695A;&#xFF1A;</p>
+<p>如此即可满足场景1、场景2的需求。</p>
+<p>但仔细思考一下，这种做法太 <strong>"强硬"</strong> 了，不仅要求主工程的Application进行配合，而且需要小心的处理初始化代码的分配。</p>
+<p>在场景3中，这些技术均有相适应的插件初始化入口；组件化插件化项目中，也具有类似的设计。随集成方式的不同，很可能造成 <strong>初始化逻辑遗漏或者重复</strong> 。</p>
+<p>注意：重复初始化可能造成潜在的Scope泄漏，滋生bug。</p>
+<h3 id="聚合能力entrypoint"><a class="header" href="#聚合能力entrypoint">聚合能力+EntryPoint</a></h3>
+<p>前文中，我们已经讨论了使用EntryPoint突破IOC容器的壁垒，也体验了Hilt的聚合能力。而 <code>SingletonComponent</code> 作为内建Component，同样可以使用EntryPoint突破容器壁垒。</p>
+<p>如果您对Hilt的源码或其设计有一定程度的了解，应当清楚：</p>
 <blockquote>
-<p>&#x5185;&#x5EFA;Component&#x5747;&#x6709;&#x5BF9;&#x5E94;&#x7684;ComponentHolder&#xFF0C;&#x800C;SingletonComponent&#x5BF9;&#x5E94;&#x7684;Holder&#x5373;&#x4E3A;Application&#x3002;</p>
+<p>内建Component均有对应的ComponentHolder，而SingletonComponent对应的Holder即为Application。</p>
 </blockquote>
-<p>&#x901A;&#x8FC7; Holder&#x5B9E;&#x4F8B;&#x548C; <code>EntryPointAccessors</code> &#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x5B9A;&#x4E49;&#x7684; <code>EntryPoint&#x63A5;&#x53E3;</code></p>
-<p>&#x4E3A; <code>SingletonComponent</code> &#x81EA;&#x5B9A;&#x4E49;EntryPoint&#x540E;&#xFF0C;&#x5373;&#x53EF;&#x6446;&#x8131;Hilt&#x81EA;&#x5B9A;&#x6CE8;&#x5165;&#x7684;&#x4F20;&#x9012;&#x94FE;&#x800C;&#x901A;&#x8FC7;&#x903B;&#x8F91;&#x7F16;&#x7801;&#x83B7;&#x53D6;&#x5B9E;&#x4F8B;&#x3002;</p>
-<pre><code class="lang-kotlin">@EntryPoint
-@InstallIn(SingletonComponent::<span class="hljs-class"><span class="hljs-keyword">class</span>)</span>
+<p>通过 Holder实例和 <code>EntryPointAccessors</code> 可以获得定义的 <code>EntryPoint接口</code></p>
+<p>为 <code>SingletonComponent</code> 自定义EntryPoint后，即可摆脱Hilt自定注入的传递链而通过逻辑编码获取实例。</p>
+<pre><code class="language-kotlin">@EntryPoint
+@InstallIn(SingletonComponent::class)
 interface UserComponentEntryPoint {
-    <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> {
-        <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">manualGet</span><span class="hljs-params">(context: <span class="hljs-type">Context</span>)</span>: UserComponentEntryPoint {</span>
-            <span class="hljs-keyword">return</span> EntryPointAccessors.fromApplication(
-                context, UserComponentEntryPoint::<span class="hljs-class"><span class="hljs-keyword">class</span>.<span class="hljs-title">java</span></span>
+    companion object {
+        fun manualGet(context: Context): UserComponentEntryPoint {
+            return EntryPointAccessors.fromApplication(
+                context, UserComponentEntryPoint::class.java
             )
         }
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">provideBuilder</span><span class="hljs-params">()</span>: UserComponent.Builder</span>
+    fun provideBuilder(): UserComponent.Builder
 
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">provideManager</span><span class="hljs-params">()</span>:UserComponentManager</span>
+    fun provideManager():UserComponentManager
 }
 </code></pre>
-<p>&#x901A;&#x8FC7;&#x8FD9;&#x4E00;&#x65B9;&#x5F0F;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x83B7;&#x5F97;Context&#x5373;&#x53EF;&#x7A81;&#x7834;&#x58C1;&#x5792;&#x8BBF;&#x95EE;&#x5BB9;&#x5668;&#x5185;&#x90E8;&#x5B9E;&#x4F8B;&#xFF0C;Hilt&#x4E0D;&#x518D;&#x7EA6;&#x675F;Library&#x7684;&#x521D;&#x59CB;&#x5316;&#x65B9;&#x5F0F;&#x3002;</p>
-<p>&#x81F3;&#x6B64;&#xFF0C;&#x60A8;&#x53EF;&#x4EE5;&#x5728;&#x539F;&#x5148;&#x7684;Library&#x521D;&#x59CB;&#x5316;&#x6A21;&#x5757;&#x4E2D;&#xFF0C;&#x6309;&#x9700;&#x81EA;&#x7531;&#x7684;&#x6DFB;&#x52A0;&#x903B;&#x8F91;&#xFF01;</p>
-<p><em>&#x6CE8;&#x610F;&#xFF1A;Builder&#x7531;Hilt&#x751F;&#x6210;&#x5B9E;&#x73B0;&#xFF0C;&#x65E0;&#x6CD5;&#x5E72;&#x9884;&#x5176;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF0C;&#x6545;&#x6BCF;&#x6B21;&#x8C03;&#x7528;&#x65F6;&#x751F;&#x6210;&#x65B0;&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x4ECE;&#x4E00;&#x822C;&#x7684;&#x7F16;&#x7801;&#x9700;&#x6C42;&#xFF0C;&#x83B7;&#x53D6;Manager&#x5B9E;&#x4F8B;&#x5373;&#x53EF;&#x3002;&#x60A8;&#x53EF;&#x4EE5;&#x5728;WorkShop&#x9879;&#x76EE;&#x4E2D;&#x83B7;&#x5F97;&#x9A8C;&#x8BC1;</em></p>
-<h3 id="&#x95EE;&#x9898;&#x884D;&#x751F;"><a name="&#x95EE;&#x9898;&#x884D;&#x751F;" class="anchor-navigation-ex-anchor" href="#&#x95EE;&#x9898;&#x884D;&#x751F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x95EE;&#x9898;&#x884D;&#x751F;</h3>
-<p>&#x5728;&#x573A;&#x666F;3&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x7EE7;&#x7EED;&#x8FDB;&#x884C;&#x884D;&#x751F;&#xFF1A;</p>
+<p>通过这一方式，我们只需要获得Context即可突破壁垒访问容器内部实例，Hilt不再约束Library的初始化方式。</p>
+<p>至此，您可以在原先的Library初始化模块中，按需自由的添加逻辑！</p>
+<p><em>注意：Builder由Hilt生成实现，无法干预其生命周期，故每次调用时生成新的实例，从一般的编码需求，获取Manager实例即可。您可以在WorkShop项目中获得验证</em></p>
+<h3 id="问题衍生"><a class="header" href="#问题衍生">问题衍生</a></h3>
+<p>在场景3中，我们继续进行衍生：</p>
 <blockquote>
-<p>Library&#x4F5C;&#x4E3A;&#x52A8;&#x6001;&#x63D2;&#x4EF6;&#xFF0C;&#x5E76;&#x4E0D;&#x76F4;&#x63A5;&#x96C6;&#x6210;&#xFF0C;&#x800C;&#x662F;&#x901A;&#x8FC7;&#x63D2;&#x4EF6;&#x5316;&#x6280;&#x672F;&#xFF0C;&#x52A8;&#x6001;&#x96C6;&#x6210;&#x542F;&#x7528;&#x529F;&#x80FD;&#x3002;&#x53C8;&#x8BE5;&#x5982;&#x4F55;&#x5904;&#x7406;&#x5462;&#xFF1F;</p>
+<p>Library作为动态插件，并不直接集成，而是通过插件化技术，动态集成启用功能。又该如何处理呢？</p>
 </blockquote>
-<p>&#x5728;MAD Skills&#x7CFB;&#x5217;&#x6587;&#x7AE0;&#x7684;&#x7B2C;&#x56DB;&#x7BC7;&#x4E2D;&#xFF0C;&#x7B80;&#x5355;&#x63D0;&#x53CA;&#x4E86;Hilt&#x7684;&#x6269;&#x5C55;&#x80FD;&#x529B;&#x3002;&#x8003;&#x8651;&#x5230;&#x7BC7;&#x5E45;&#x4EE5;&#x53CA;AAB&#xFF08;Dynamic Feature&#xFF09;&#x3001;&#x63D2;&#x4EF6;&#x5316;&#x7684;&#x80CC;&#x666F;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5728;&#x4E0B;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#x5BF9;&#x8BE5;&#x95EE;&#x9898;&#x5C55;&#x5F00;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x7684;&#x8BA8;&#x8BBA;&#x3002;</p>
-<h2 id="&#x672B;"><a name="&#x672B;" class="anchor-navigation-ex-anchor" href="#&#x672B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x672B;</h2>
-<p>&#x5148;&#x505A;&#x5230;&#x6B63;&#x786E;&#x4F7F;&#x7528;&#xFF0C;&#x518D;&#x9010;&#x6B65;&#x7406;&#x89E3;&#x539F;&#x7406;&#x3002;&#x6211;&#x4F1A;&#x5728;&#x540E;&#x7EED;&#x7CFB;&#x5217;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x540C;&#x8BFB;&#x8005;&#x9163;&#x7545;&#x6DCB;&#x6F13;&#x7684;&#x8BA8;&#x8BBA;Hilt&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#x548C;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x3002; </p>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2023-03-17 15:24:00
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+<p>在MAD Skills系列文章的第四篇中，简单提及了Hilt的扩展能力。考虑到篇幅以及AAB（Dynamic Feature）、插件化的背景，我们将在下一篇文章中对该问题展开解决方案的讨论。</p>
+<h2 id="末"><a class="header" href="#末">末</a></h2>
+<p>先做到正确使用，再逐步理解原理。我会在后续系列文章中，同读者酣畅淋漓的讨论Hilt的工作原理和实现原理。</p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../Android/DI/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../Compose/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Part4-依赖注入部分">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="../../Compose/" class="navigation navigation-next " aria-label="Next page: Jetpack Compose">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../Android/DI/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../Compose/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Hilt进阶--一文吃透Hilt自定义与跨壁垒","level":"1.2.9.1","depth":3,"next":{"title":"Jetpack Compose","level":"1.3","depth":1,"path":"Compose/README.md","ref":"./Compose/README.md","articles":[{"title":"Jetpack Compose | 一文理解神奇的Modifier","level":"1.3.1","depth":2,"path":"Compose/post_21.md","ref":"./Compose/post_21.md","articles":[]},{"title":"Jetpack Compose | 控件篇（一） -- Text、TextField、Button","level":"1.3.2","depth":2,"path":"Compose/post_26.md","ref":"./Compose/post_26.md","articles":[]},{"title":"Jetpack Compose | 控件篇（二） -- Icon，Image","level":"1.3.3","depth":2,"path":"Compose/post_27.md","ref":"./Compose/post_27.md","articles":[]},{"title":"Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton","level":"1.3.4","depth":2,"path":"Compose/post_28.md","ref":"./Compose/post_28.md","articles":[]},{"title":"Jetpack Compose | 控件篇（四）-- Box、Row、Column","level":"1.3.5","depth":2,"path":"Compose/post_29.md","ref":"./Compose/post_29.md","articles":[]},{"title":"Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动","level":"1.3.6","depth":2,"path":"Compose/post_30.md","ref":"./Compose/post_30.md","articles":[]}]},"previous":{"title":"Part4-依赖注入部分","level":"1.2.9","depth":2,"path":"Android/DI/README.md","ref":"./Android/DI/README.md","articles":[{"title":"Hilt进阶--一文吃透Hilt自定义与跨壁垒","level":"1.2.9.1","depth":3,"path":"Android/DI/post_53.md","ref":"./Android/DI/post_53.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Android/DI/post_53.md","mtime":"2023-03-17T07:24:00.290Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"../..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../../gitbook/gitbook.js"></script>
-    <script src="../../gitbook/theme.js"></script>
-    
-        
-        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-

@@ -1,1525 +1,250 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧 · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧 - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="../Review/DataStructure/" />
-    
-    
-    <link rel="prev" href="../repo/post_48.html" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../Android/">
-            
-                <a href="../Android/">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../Android/View/">
-            
-                <a href="../Android/View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../Android/View/post_1.html">
-            
-                <a href="../Android/View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../Android/View/post_6.html">
-            
-                <a href="../Android/View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../Android/View/post_7.html">
-            
-                <a href="../Android/View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="../Android/Idea/post_9.html">
-            
-                <a href="../Android/Idea/post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../Android/Drawable/">
-            
-                <a href="../Android/Drawable/">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="../Android/Drawable/post_2.html">
-            
-                <a href="../Android/Drawable/post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="../Android/Drawable/post_4.html">
-            
-                <a href="../Android/Drawable/post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="../Android/Drawable/post_47.html">
-            
-                <a href="../Android/Drawable/post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.4" data-path="../Android/Drawable/post_49.html">
-            
-                <a href="../Android/Drawable/post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../Android/Mechanism/Message/">
-            
-                <a href="../Android/Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../Android/Mechanism/Message/post_8.html">
-            
-                <a href="../Android/Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../Android/Idea/post_14/">
-            
-                <a href="../Android/Idea/post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.4.1" data-path="../Android/Idea/post_14.html">
-            
-                <a href="../Android/Idea/post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="../Android/Glide/">
-            
-                <a href="../Android/Glide/">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.5.1" data-path="../Android/Glide/post_15.html">
-            
-                <a href="../Android/Glide/post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5.2" data-path="../Android/Glide/post_16.html">
-            
-                <a href="../Android/Glide/post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../Android/KSP/">
-            
-                <a href="../Android/KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../Android/KSP/post_24.html">
-            
-                <a href="../Android/KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../Android/Base/">
-            
-                <a href="../Android/Base/">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.7.1" data-path="../Android/Base/post_35.html">
-            
-                <a href="../Android/Base/post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../Android/SysApp/">
-            
-                <a href="../Android/SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../Android/SysApp/post_52.html">
-            
-                <a href="../Android/SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../Android/DI/">
-            
-                <a href="../Android/DI/">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.9.1" data-path="../Android/DI/post_53.html">
-            
-                <a href="../Android/DI/post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../Compose/">
-            
-                <a href="../Compose/">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="../Compose/post_21.html">
-            
-                <a href="../Compose/post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../Compose/post_26.html">
-            
-                <a href="../Compose/post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="../Compose/post_27.html">
-            
-                <a href="../Compose/post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="../Compose/post_28.html">
-            
-                <a href="../Compose/post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="../Compose/post_29.html">
-            
-                <a href="../Compose/post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="../Compose/post_30.html">
-            
-                <a href="../Compose/post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../MultiThreading/">
-            
-                <a href="../MultiThreading/">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../MultiThreading/post_33.html">
-            
-                <a href="../MultiThreading/post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../MultiThreading/post_37.html">
-            
-                <a href="../MultiThreading/post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="../MultiThreading/post_38.html">
-            
-                <a href="../MultiThreading/post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="../MultiThreading/post_39.html">
-            
-                <a href="../MultiThreading/post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="../MultiThreading/post_42.html">
-            
-                <a href="../MultiThreading/post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.6" data-path="../MultiThreading/post_46.html">
-            
-                <a href="../MultiThreading/post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="../MultiThreading/post_50.html">
-            
-                <a href="../MultiThreading/post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="../MultiThreading/post_54.html">
-            
-                <a href="../MultiThreading/post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="../IO/">
-            
-                <a href="../IO/">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="../IO/post_55.html">
-            
-                <a href="../IO/post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="../IO/post_56.html">
-            
-                <a href="../IO/post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="../IO/post_57.html">
-            
-                <a href="../IO/post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="../IO/post_58.html">
-            
-                <a href="../IO/post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="../IO/post_59.html">
-            
-                <a href="../IO/post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../Gradle/">
-            
-                <a href="../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../Gradle/Modularization/post_18.html">
-            
-                <a href="../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../Gradle/Publish/post_17.html">
-            
-                <a href="../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../Gradle/post_22.html">
-            
-                <a href="../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../Groovy/">
-            
-                <a href="../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../Groovy/why_write_groovy.html">
-            
-                <a href="../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../Groovy/post_23.html">
-            
-                <a href="../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="../Review/">
-            
-                <a href="../Review/">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="../Review/post_10.html">
-            
-                <a href="../Review/post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="../Review/post_40.html">
-            
-                <a href="../Review/post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.3" data-path="../Review/post_44.html">
-            
-                <a href="../Review/post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="../Review/post_45.html">
-            
-                <a href="../Review/post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../repo/">
-            
-                <a href="../repo/">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../repo/DaVinCi.html">
-            
-                <a href="../repo/DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../Android/Idea/post_32.html">
-            
-                <a href="../Android/Idea/post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="post_43.html">
-            
-                <a href="post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../repo/post_48.html">
-            
-                <a href="../repo/post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.9.5" data-path="post_61.html">
-            
-                <a href="post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="../Review/DataStructure/">
-            
-                <a href="../Review/DataStructure/">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1.1" data-path="../Review/DataStructure/post_11.html">
-            
-                <a href="../Review/DataStructure/post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="../Review/DataStructure/post_12.html">
-            
-                <a href="../Review/DataStructure/post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="../Review/DataStructure/post_13.html">
-            
-                <a href="../Review/DataStructure/post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="../Review/README2.html">
-            
-                <a href="../Review/README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="../Review/post_36.html">
-            
-                <a href="../Review/post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="../Review/post_51.html">
-            
-                <a href="../Review/post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="../Review/post_60.html">
-            
-                <a href="../Review/post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="../Review/post_63.html">
-            
-                <a href="../Review/post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="../Review/post_64.html">
-            
-                <a href="../Review/post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../Note/">
-            
-                <a href="../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../Note/post_41.html">
-            
-                <a href="../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../Talk/">
-            
-                <a href="../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../Talk/talk_1.html">
-            
-                <a href="../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../Talk/talk_2_2023-03.html">
-            
-                <a href="../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../Thought/">
-            
-                <a href="../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../Thought/post_62.html">
-            
-                <a href="../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../info/">
-            
-                <a href="../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../info/about_view_series.html">
-            
-                <a href="../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../info/about_sansi_series.html">
-            
-                <a href="../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../info/about_haowan_series.html">
-            
-                <a href="../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../info/about_wengu_series.html">
-            
-                <a href="../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#&#x597D;&#x73A9;&#x7CFB;&#x5217;--&#x5982;&#x679C;&#x540E;&#x7AEF;&#x8BA9;&#x4F60;&#x7528;sse&#x63A5;&#x6536;&#x591A;&#x6B21;&#x8FD4;&#x56DE;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x6539;&#x9020;retrofit&#x5427;"><b></b>&#x597D;&#x73A9;&#x7CFB;&#x5217; | &#x5982;&#x679C;&#x540E;&#x7AEF;&#x8BA9;&#x4F60;&#x7528;SSE&#x63A5;&#x6536;&#x591A;&#x6B21;&#x8FD4;&#x56DE;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x6539;&#x9020;Retrofit&#x5427;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#4&#x79CD;&#x5E38;&#x89C1;&#x7684;&#x5B9E;&#x8DF5;&#x65B9;&#x5F0F;"><b></b>4&#x79CD;&#x5E38;&#x89C1;&#x7684;&#x5B9E;&#x8DF5;&#x65B9;&#x5F0F;</a></li><ul><li><span class="title-icon "></span><a href="#&#x5BA2;&#x6237;&#x7AEF;polling"><b></b>&#x5BA2;&#x6237;&#x7AEF;polling</a></li><li><span class="title-icon "></span><a href="#&#x670D;&#x52A1;&#x7AEF;push"><b></b>&#x670D;&#x52A1;&#x7AEF;push</a></li></ul><li><span class="title-icon "></span><a href="#sse&#x534F;&#x8BAE;&#x7EC6;&#x8282;"><b></b>SSE&#x534F;&#x8BAE;&#x7EC6;&#x8282;</a></li><ul><li><span class="title-icon "></span><a href="#header&#x4E3B;&#x8981;&#x90E8;&#x5206;"><b></b>Header&#x4E3B;&#x8981;&#x90E8;&#x5206;</a></li><li><span class="title-icon "></span><a href="#event-stream-&#x89E3;&#x6790;"><b></b>Event-Stream &#x89E3;&#x6790;</a></li><li><span class="title-icon "></span><a href="#last-event-id"><b></b>Last-Event-ID</a></li></ul><li><span class="title-icon "></span><a href="#&#x7EB8;&#x4E0A;&#x5F97;&#x6765;&#x7EC8;&#x89C9;&#x6D45;"><b></b>&#x7EB8;&#x4E0A;&#x5F97;&#x6765;&#x7EC8;&#x89C9;&#x6D45;</a></li><ul><li><span class="title-icon "></span><a href="#&#x7F16;&#x5199;&#x670D;&#x52A1;&#x7AEF;"><b></b>&#x7F16;&#x5199;&#x670D;&#x52A1;&#x7AEF;</a></li><li><span class="title-icon "></span><a href="#&#x7F16;&#x5199;&#x5BA2;&#x6237;&#x7AEF;"><b></b>&#x7F16;&#x5199;&#x5BA2;&#x6237;&#x7AEF;</a></li><li><span class="title-icon "></span><a href="#&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;retrofit"><b></b>&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;Retrofit</a></li></ul><li><span class="title-icon "></span><a href="#&#x52A8;&#x624B;&#x5199;retrofit&#x6269;&#x5C55;&#x5E93;"><b></b>&#x52A8;&#x624B;&#x5199;Retrofit&#x6269;&#x5C55;&#x5E93;</a></li><ul><li><span class="title-icon "></span><a href="#&#x5185;&#x5EFA;&#x7684;eventsourcelistener----&#x5BF9;&#x5E94;1"><b></b>&#x5185;&#x5EFA;&#x7684;EventSourceListener -- &#x5BF9;&#x5E94;1</a></li><li><span class="title-icon "></span><a href="#&#x5B9A;&#x4E49;eventsourceadapter----&#x5BF9;&#x5E94;2"><b></b>&#x5B9A;&#x4E49;EventSourceAdapter -- &#x5BF9;&#x5E94;2</a></li><li><span class="title-icon "></span><a href="#&#x5185;&#x5EFA;eventsourceadapter-&#x548C;-factory----&#x5BF9;&#x5E94;2"><b></b>&#x5185;&#x5EFA;EventSourceAdapter &#x548C; Factory -- &#x5BF9;&#x5E94;2</a></li><li><span class="title-icon "></span><a href="#servicemethod&#x6269;&#x5C55;&#x4EE5;&#x53CA;&#x8DEF;&#x5F84;"><b></b>ServiceMethod&#x6269;&#x5C55;&#x4EE5;&#x53CA;&#x8DEF;&#x5F84;</a></li><li><span class="title-icon "></span><a href="#&#x65B0;&#x5165;&#x53E3;"><b></b>&#x65B0;&#x5165;&#x53E3;</a></li></ul><li><span class="title-icon "></span><a href="#&#x7ED3;&#x8BED;"><b></b>&#x7ED3;&#x8BED;</a></li></ul></ul></div><a href="#&#x597D;&#x73A9;&#x7CFB;&#x5217;--&#x5982;&#x679C;&#x540E;&#x7AEF;&#x8BA9;&#x4F60;&#x7528;sse&#x63A5;&#x6536;&#x591A;&#x6B21;&#x8FD4;&#x56DE;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x6539;&#x9020;retrofit&#x5427;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x597D;&#x73A9;&#x7CFB;&#x5217;--&#x5982;&#x679C;&#x540E;&#x7AEF;&#x8BA9;&#x4F60;&#x7528;sse&#x63A5;&#x6536;&#x591A;&#x6B21;&#x8FD4;&#x56DE;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x6539;&#x9020;retrofit&#x5427;"><a name="&#x597D;&#x73A9;&#x7CFB;&#x5217;--&#x5982;&#x679C;&#x540E;&#x7AEF;&#x8BA9;&#x4F60;&#x7528;sse&#x63A5;&#x6536;&#x591A;&#x6B21;&#x8FD4;&#x56DE;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x6539;&#x9020;retrofit&#x5427;" class="anchor-navigation-ex-anchor" href="#&#x597D;&#x73A9;&#x7CFB;&#x5217;--&#x5982;&#x679C;&#x540E;&#x7AEF;&#x8BA9;&#x4F60;&#x7528;sse&#x63A5;&#x6536;&#x591A;&#x6B21;&#x8FD4;&#x56DE;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x6539;&#x9020;retrofit&#x5427;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x597D;&#x73A9;&#x7CFB;&#x5217; | &#x5982;&#x679C;&#x540E;&#x7AEF;&#x8BA9;&#x4F60;&#x7528;SSE&#x63A5;&#x6536;&#x591A;&#x6B21;&#x8FD4;&#x56DE;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x6539;&#x9020;Retrofit&#x5427;</h1>
-<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
-<p>&#x8BF4;&#x6765;&#x60ED;&#x6127;&#xFF0C;&#x6700;&#x8FD1;&#x90FD;&#x6CA1;&#x5199;&#x6280;&#x672F;&#x5E16;&#xFF0C;&#x6BCF;&#x6708;&#x5199;&#x4E00;&#x7BC7;&#x539F;&#x521B;&#x7684;Flag&#x4E5F;&#x5012;&#x4E86;&#xFF0C;&#x5012;&#x5E76;&#x975E;&#x65E0;&#x5185;&#x5BB9;&#x53EF;&#x5199;&#xFF0C;&#x5B9E;&#x5219;&#x662F;&#x56E0;&#x4E3A;&#x61D2;&#x60F0;&#xFF0C; &#x867D;&#x7136;&#x5DE5;&#x4F5C;&#x548C;&#x751F;&#x6D3B;&#x7275;&#x626F;&#x4E86;&#x5F88;&#x591A;&#x7CBE;&#x529B;&#xFF0C;&#x4F46;&#x4ECD;&#x662F;&#x6709;&#x788E;&#x7247;&#x5316;&#x65F6;&#x95F4;&#x7684;&#x3002;&#x4E00;&#x7BC7;&#x5173;&#x4E8E;DataBinding&#x975E;&#x5E38;&#x6709;&#x8DA3;&#x7684;&#x6587;&#x7AE0;&#x8FD8;&#x5728;&#x7F16;&#x5199;&#x4E2D;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5148;&#x770B;&#x4E00;&#x7BC7;&#x8F7B;&#x677E;&#x70B9;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
-<p>&#x968F;&#x7740;ChatGpt&#x7B49;&#x751F;&#x6210;&#x5F0F;AI&#x5927;&#x706B;&#xFF0C;SSE&#xFF08;Server Send Events&#xFF09;&#x53C8;&#x56DE;&#x5230;&#x4E86;&#x6280;&#x672F;&#x8BA8;&#x8BBA;&#x5F53;&#x4E2D;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x804A;&#x4E00;&#x804A;&#xFF0C;<strong>&#x5982;&#x679C;&#x5BA2;&#x6237;&#x7AEF;&#x9700;&#x8981;&#x83B7;&#x53D6;&#x670D;&#x52A1;&#x7AEF;&#x957F;&#x8017;&#x65F6;&#x4EFB;&#x52A1;&#x7ED3;&#x679C;&#xFF0C;&#x6709;&#x54EA;&#x4E9B;&#x5B9E;&#x8DF5;&#x65B9;&#x5F0F;</strong>&#x3002;</p>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../Speculative/post_61.html" class="active"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="好玩系列--如果后端让你用sse接收多次返回那我们改造retrofit吧"><a class="header" href="#好玩系列--如果后端让你用sse接收多次返回那我们改造retrofit吧">好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></h1>
+<h2 id="前言"><a class="header" href="#前言">前言</a></h2>
+<p>说来惭愧，最近都没写技术帖，每月写一篇原创的Flag也倒了，倒并非无内容可写，实则是因为懒惰， 虽然工作和生活牵扯了很多精力，但仍是有碎片化时间的。一篇关于DataBinding非常有趣的文章还在编写中，今天我们先看一篇轻松点的内容。</p>
+<p>随着ChatGpt等生成式AI大火，SSE（Server Send Events）又回到了技术讨论当中，今天我们聊一聊，<strong>如果客户端需要获取服务端长耗时任务结果，有哪些实践方式</strong>。</p>
 <blockquote>
-<p>&#x672C;&#x7BC7;&#x535A;&#x5BA2;&#x5C06;&#x805A;&#x7126;&#x4E8E;4&#x4E2A;&#x65B9;&#x9762;&#xFF1A;</p>
+<p>本篇博客将聚焦于4个方面：</p>
 <ul>
-<li>&#x5F52;&#x7EB3;&#x83B7;&#x53D6;&#x670D;&#x52A1;&#x7AEF;&#x957F;&#x8017;&#x65F6;&#x4EFB;&#x52A1;&#x7ED3;&#x679C;&#x7684;&#x5E38;&#x89C1;&#x5B9E;&#x8DF5;&#x65B9;&#x5F0F;</li>
-<li>&#x5BF9;SSE&#x8FDB;&#x884C;&#x8BE6;&#x7EC6;&#x7684;&#x8BA8;&#x8BBA;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x5176;&#x534F;&#x8BAE;&#x7EC6;&#x8282;</li>
-<li>&#x5B9E;&#x64CD;&#xFF1A;&#x642D;&#x5EFA;SSE&#x670D;&#x52A1;&#x7AEF;&#x3001;&#x4F7F;&#x7528;OKHttp&#x642D;&#x5EFA;&#x5BA2;&#x6237;&#x7AEF;</li>
-<li>&#x63A2;&#x7D22;&#xFF1A;&#x5BF9;Retrofit&#x8FDB;&#x884C;&#x4E86;&#x5206;&#x6790;&#xFF0C;&#x6269;&#x5C55;Retrofit&#x4F7F;&#x7528;SSE</li>
+<li>归纳获取服务端长耗时任务结果的常见实践方式</li>
+<li>对SSE进行详细的讨论，尤其是其协议细节</li>
+<li>实操：搭建SSE服务端、使用OKHttp搭建客户端</li>
+<li>探索：对Retrofit进行了分析，扩展Retrofit使用SSE</li>
 </ul>
 </blockquote>
-<h2 id="4&#x79CD;&#x5E38;&#x89C1;&#x7684;&#x5B9E;&#x8DF5;&#x65B9;&#x5F0F;"><a name="4&#x79CD;&#x5E38;&#x89C1;&#x7684;&#x5B9E;&#x8DF5;&#x65B9;&#x5F0F;" class="anchor-navigation-ex-anchor" href="#4&#x79CD;&#x5E38;&#x89C1;&#x7684;&#x5B9E;&#x8DF5;&#x65B9;&#x5F0F;"><i class="fa fa-link" aria-hidden="true"></i></a>4&#x79CD;&#x5E38;&#x89C1;&#x7684;&#x5B9E;&#x8DF5;&#x65B9;&#x5F0F;</h2>
-<p>&#x4E0D;&#x5916;&#x4E4E;&#x4E24;&#x79CD;&#x601D;&#x8DEF;&#xFF1A;</p>
+<h2 id="4种常见的实践方式"><a class="header" href="#4种常见的实践方式">4种常见的实践方式</a></h2>
+<p>不外乎两种思路：</p>
 <ul>
-<li>&#x5BA2;&#x6237;&#x7AEF; polling</li>
-<li>&#x670D;&#x52A1;&#x7AEF; push</li>
+<li>客户端 polling</li>
+<li>服务端 push</li>
 </ul>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ec3a01c5cc74032a71befa745dccea1~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1366&amp;h=740&amp;s=71846&amp;e=png&amp;b=fffdfd" alt="4&#x79CD;&#x65B9;&#x5F0F;.png"></p>
-<h3 id="&#x5BA2;&#x6237;&#x7AEF;polling"><a name="&#x5BA2;&#x6237;&#x7AEF;polling" class="anchor-navigation-ex-anchor" href="#&#x5BA2;&#x6237;&#x7AEF;polling"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5BA2;&#x6237;&#x7AEF;polling</h3>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x670D;&#x52A1;&#x7AEF;&#x5904;&#x7406;&#x4E00;&#x9879;&#x4EFB;&#x52A1;&#xFF0C;&#x53EA;&#x6709;&#x670D;&#x52A1;&#x7AEF;&#x624D;&#x6E05;&#x6670;&#x5730;&#x77E5;&#x9053;&#x4EFB;&#x52A1;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <strong>&#x5468;&#x671F;&#x6027;&#x4E3B;&#x52A8;&#x8F6E;&#x8BE2;</strong> &#x76F4;&#x81F3;&#x83B7;&#x53D6;&#x4EFB;&#x52A1;&#x7684;&#x6700;&#x7EC8;&#x7ED3;&#x679C;&#x3002;</p>
-<p>&#x6309;&#x7167;&#x6B64;&#x7C7B;&#x5B9E;&#x8DF5;&#x65B9;&#x5F0F;&#xFF0C;&#x53EF;&#x4F7F;&#x7528; <code>HTTP/HTTPs</code> &#x534F;&#x8BAE;&#x3002;</p>
-<h4 id="short-polling"><a name="short-polling" class="anchor-navigation-ex-anchor" href="#short-polling"><i class="fa fa-link" aria-hidden="true"></i></a>short polling</h4>
-<p>&#x5BA2;&#x6237;&#x7AEF;&#x5411;&#x670D;&#x52A1;&#x7AEF;&#x53D1;&#x8D77;&#x8BF7;&#x6C42;&#xFF0C;&#x5982;&#x679C;&#x670D;&#x52A1;&#x7AEF;&#x72B6;&#x6001;&#x5DF2;&#x7ECF;&#x66F4;&#x65B0;&#xFF0C;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x5E76;&#x5173;&#x95ED;&#x94FE;&#x63A5;&#xFF1B;<strong>&#x5982;&#x679C;&#x670D;&#x52A1;&#x7AEF;&#x72B6;&#x6001;&#x5C1A;&#x672A;&#x66F4;&#x65B0;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x7ED3;&#x679C;&#x544A;&#x77E5;&#x8FD8;&#x5728;&#x5904;&#x7406;&#x4E2D;&#xFF0C;&#x5E76;&#x5173;&#x95ED;&#x94FE;&#x63A5;</strong></p>
-<h4 id="long-polling"><a name="long-polling" class="anchor-navigation-ex-anchor" href="#long-polling"><i class="fa fa-link" aria-hidden="true"></i></a>long polling</h4>
-<p>&#x548C; <code>short polling</code> &#x7C7B;&#x4F3C;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x5411;&#x670D;&#x52A1;&#x7AEF;&#x53D1;&#x8D77;&#x8BF7;&#x6C42;&#xFF0C;&#x5982;&#x679C;&#x670D;&#x52A1;&#x7AEF;&#x72B6;&#x6001;&#x5DF2;&#x7ECF;&#x66F4;&#x65B0;&#xFF0C;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x5E76;&#x5173;&#x95ED;&#x94FE;&#x63A5;&#xFF1B;</p>
-<p>&#x4F46;&#x5982;&#x679C;&#x670D;&#x52A1;&#x7AEF;&#x72B6;&#x6001;&#x5C1A;&#x672A;&#x66F4;&#x65B0;&#xFF0C;</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ec3a01c5cc74032a71befa745dccea1~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1366&amp;h=740&amp;s=71846&amp;e=png&amp;b=fffdfd" alt="4种方式.png" /></p>
+<h3 id="客户端polling"><a class="header" href="#客户端polling">客户端polling</a></h3>
+<p>不难理解，服务端处理一项任务，只有服务端才清晰地知道任务的状态，客户端可以通过 <strong>周期性主动轮询</strong> 直至获取任务的最终结果。</p>
+<p>按照此类实践方式，可使用 <code>HTTP/HTTPs</code> 协议。</p>
+<h4 id="short-polling"><a class="header" href="#short-polling">short polling</a></h4>
+<p>客户端向服务端发起请求，如果服务端状态已经更新，返回结果并关闭链接；<strong>如果服务端状态尚未更新，返回一个特定的结果告知还在处理中，并关闭链接</strong></p>
+<h4 id="long-polling"><a class="header" href="#long-polling">long polling</a></h4>
+<p>和 <code>short polling</code> 类似，客户端向服务端发起请求，如果服务端状态已经更新，返回结果并关闭链接；</p>
+<p>但如果服务端状态尚未更新，</p>
 <ul>
-<li>&#x670D;&#x52A1;&#x7AEF;&#x4F1A;&#x5728;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x5185;&#x7EF4;&#x6301;&#x94FE;&#x63A5;&#xFF0C;&#x8FDB;&#x884C;&#x7B49;&#x5F85;&#xFF0C;&#x76F4;&#x81F3;&#x72B6;&#x6001;&#x66F4;&#x65B0;&#xFF0C;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x5E76;&#x5173;&#x95ED;&#x94FE;&#x63A5;&#xFF1B;</li>
-<li>&#x82E5;&#x7B49;&#x5F85;&#x81F3;&#x8D85;&#x65F6;&#x4E5F;&#x672A;&#x66F4;&#x65B0;&#x72B6;&#x6001;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x7ED3;&#x679C;&#x544A;&#x77E5;&#x8FD8;&#x5728;&#x5904;&#x7406;&#x4E2D;&#xFF0C;&#x5E76;&#x5173;&#x95ED;&#x94FE;&#x63A5;</li>
+<li>服务端会在超时时间内维持链接，进行等待，直至状态更新，返回结果并关闭链接；</li>
+<li>若等待至超时也未更新状态，返回一个特定的结果告知还在处理中，并关闭链接</li>
 </ul>
-<h3 id="&#x670D;&#x52A1;&#x7AEF;push"><a name="&#x670D;&#x52A1;&#x7AEF;push" class="anchor-navigation-ex-anchor" href="#&#x670D;&#x52A1;&#x7AEF;push"><i class="fa fa-link" aria-hidden="true"></i></a>&#x670D;&#x52A1;&#x7AEF;push</h3>
-<p>&#x8FD9;&#x7C7B;&#x5B9E;&#x8DF5;&#x65B9;&#x5F0F;&#x4E2D;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x5BA2;&#x6237;&#x7AEF;&#x91C7;&#x53D6;&quot;&#x95EE;&quot;&#xFF0C;&#x800C;&#x662F;&#x5F53;&#x670D;&#x52A1;&#x7AEF;&#x72B6;&#x6001;&#x66F4;&#x65B0;&#x65F6;&#xFF0C;&#x81EA;&#x884C;&#x901A;&#x77E5;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x5178;&#x578B;&#x7684;&#x5B9E;&#x8DF5;&#x65B9;&#x5F0F;&#x6709;&#xFF1A;</p>
+<h3 id="服务端push"><a class="header" href="#服务端push">服务端push</a></h3>
+<p>这类实践方式中，不需要客户端采取"问"，而是当服务端状态更新时，自行通知客户端，典型的实践方式有：</p>
 <ul>
 <li>Server Send Events (SSE)</li>
 <li>WebSocket</li>
 </ul>
-<h4 id="sse"><a name="sse" class="anchor-navigation-ex-anchor" href="#sse"><i class="fa fa-link" aria-hidden="true"></i></a>SSE</h4>
-<p>SSE&#x662F;&#x672C;&#x6587;&#x7684;&#x8BA8;&#x8BBA;&#x6838;&#x5FC3;&#xFF0C;&#x4ECE;&#x670D;&#x52A1;&#x7AEF;&#x53D1;&#x5F80;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x9650;&#x5236;&#xFF0C;&#x5373;&#x4EC5;&#x53EF;&#x4EE5;&#x53D1;&#x9001; <code>&#x7EAF;&#x6587;&#x672C;</code> &#x7C7B;&#x578B;&#x7684;&#x6D88;&#x606F;&#x3002;</p>
-<p>SSE&#x57FA;&#x4E8E;http&#x534F;&#x8BAE;&#x7684;&#x6301;&#x4E45;&#x8FDE;&#x63A5;&#xFF0C;<code>SSE</code> &#x5177;&#x6709; W3C &#x6807;&#x51C6;&#x5316;&#x7684;&#x7F51;&#x7EDC;&#x534F;&#x8BAE;&#x548C; EventSource &#x5BA2;&#x6237;&#x7AEF;&#x63A5;&#x53E3;&#xFF0C;&#x5C5E;&#x4E8E; <code>HTML5</code> &#x6807;&#x51C6;&#x5957;&#x4EF6;&#x3002;</p>
-<p>&#x6709;&#x5174;&#x8DA3;&#x7684;&#x8BFB;&#x8005;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE; <a href="https://html.spec.whatwg.org/multipage/server-sent-events.html" target="_blank">&#x6269;&#x5C55;&#x9605;&#x8BFB;</a> &#x4E86;&#x89E3;&#x534F;&#x8BAE;&#x7EC6;&#x8282;</p>
-<h4 id="websocket"><a name="websocket" class="anchor-navigation-ex-anchor" href="#websocket"><i class="fa fa-link" aria-hidden="true"></i></a>WebSocket</h4>
-<p>&#x5B9A;&#x5236;&#x6027;&#x3001;&#x6269;&#x5C55;&#x6027;&#x6700;&#x5F3A;&#x7684;&#x5B9E;&#x8DF5;&#x65B9;&#x6848;&#xFF0C;&#x6709;&#x8DA3;&#x7684;&#x8BDD;&#x9898;&#x5B9E;&#x5728;&#x592A;&#x591A;&#xFF0C;&#x4E0D;&#x505A;&#x4EFB;&#x4F55;&#x5C55;&#x5F00;&#x3002;</p>
-<h2 id="sse&#x534F;&#x8BAE;&#x7EC6;&#x8282;"><a name="sse&#x534F;&#x8BAE;&#x7EC6;&#x8282;" class="anchor-navigation-ex-anchor" href="#sse&#x534F;&#x8BAE;&#x7EC6;&#x8282;"><i class="fa fa-link" aria-hidden="true"></i></a>SSE&#x534F;&#x8BAE;&#x7EC6;&#x8282;</h2>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;SSE&#x5F62;&#x5982;&#x6D88;&#x606F;&#x8BA2;&#x9605;&#xFF0C;&#x7531;&#x5BA2;&#x6237;&#x7AEF;&#x4E3B;&#x52A8;&#x53D1;&#x8D77;&#x8BA2;&#x9605;&#xFF0C;&#x53CC;&#x65B9;&#x7EF4;&#x6301;&#x94FE;&#x63A5;&#xFF0C;&#x670D;&#x52A1;&#x7AEF;&#x5411;&#x5BA2;&#x6237;&#x7AEF;&#x63A8;&#x9001;message&#x3002;</p>
-<h3 id="header&#x4E3B;&#x8981;&#x90E8;&#x5206;"><a name="header&#x4E3B;&#x8981;&#x90E8;&#x5206;" class="anchor-navigation-ex-anchor" href="#header&#x4E3B;&#x8981;&#x90E8;&#x5206;"><i class="fa fa-link" aria-hidden="true"></i></a>Header&#x4E3B;&#x8981;&#x90E8;&#x5206;</h3>
-<p>&#x6309;&#x7167;&#x534F;&#x8BAE;&#x7EA6;&#x5B9A;&#xFF0C;<code>Method</code> &#x4E3A; <code>GET</code>&#xFF0C;&#x5E76;&#x4E14;&#x9700;&#x8981;&#x5728; <code>Header</code> &#x4E2D;&#x5305;&#x542B;&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;&#xFF1A;</p>
+<h4 id="sse"><a class="header" href="#sse">SSE</a></h4>
+<p>SSE是本文的讨论核心，从服务端发往客户端的消息，存在一个限制，即仅可以发送 <code>纯文本</code> 类型的消息。</p>
+<p>SSE基于http协议的持久连接，<code>SSE</code> 具有 W3C 标准化的网络协议和 EventSource 客户端接口，属于 <code>HTML5</code> 标准套件。</p>
+<p>有兴趣的读者可以访问 <a href="https://html.spec.whatwg.org/multipage/server-sent-events.html">扩展阅读</a> 了解协议细节</p>
+<h4 id="websocket"><a class="header" href="#websocket">WebSocket</a></h4>
+<p>定制性、扩展性最强的实践方案，有趣的话题实在太多，不做任何展开。</p>
+<h2 id="sse协议细节"><a class="header" href="#sse协议细节">SSE协议细节</a></h2>
+<p>不难理解，SSE形如消息订阅，由客户端主动发起订阅，双方维持链接，服务端向客户端推送message。</p>
+<h3 id="header主要部分"><a class="header" href="#header主要部分">Header主要部分</a></h3>
+<p>按照协议约定，<code>Method</code> 为 <code>GET</code>，并且需要在 <code>Header</code> 中包含以下内容：</p>
 <ul>
-<li>Accept: text/event-stream &#x6307;&#x5B9A;Media Type</li>
-<li>Cache-Control: no-cache &#x4E0D;&#x4F7F;&#x7528;cache</li>
-<li>Connection: keep-alive &#x4F7F;&#x7528;&#x6301;&#x4E45;&#x6027;&#x8FDE;&#x63A5;</li>
+<li>Accept: text/event-stream 指定Media Type</li>
+<li>Cache-Control: no-cache 不使用cache</li>
+<li>Connection: keep-alive 使用持久性连接</li>
 </ul>
-<p>&#x4EE5;&#x4E0B;&#x662F;Header&#x90E8;&#x5206;&#x7684;&#x793A;&#x4F8B;&#xFF1A;</p>
-<pre><code class="lang-text">GET /{path} HTTP/1.1
+<p>以下是Header部分的示例：</p>
+<pre><code class="language-text">GET /{path} HTTP/1.1
 Accept: text/event-stream
 Cache-Control: no-cache
 Connection: keep-alive
 </code></pre>
-<p>&#x670D;&#x52A1;&#x7AEF;&#x7684;&#x54CD;&#x5E94;Header&#x81F3;&#x5C11;&#x5305;&#x542B;&#xFF1A;</p>
+<p>服务端的响应Header至少包含：</p>
 <ul>
-<li>Content-Type: text/event-stream;charset=UTF-8 &#x6307;&#x5B9A;Media Type</li>
+<li>Content-Type: text/event-stream;charset=UTF-8 指定Media Type</li>
 <li>Transfer-Encoding: chunked</li>
 </ul>
-<p>&#x4EE5;&#x4E0B;&#x662F;&#x54CD;&#x5E94;Header&#x90E8;&#x5206;&#x7684;&#x793A;&#x4F8B;&#xFF1A;</p>
-<pre><code class="lang-text">HTTP/1.1 200
+<p>以下是响应Header部分的示例：</p>
+<pre><code class="language-text">HTTP/1.1 200
 Content-Type: text/event-stream;charset=UTF-8
 Transfer-Encoding: chunked
 </code></pre>
-<h3 id="event-stream-&#x89E3;&#x6790;"><a name="event-stream-&#x89E3;&#x6790;" class="anchor-navigation-ex-anchor" href="#event-stream-&#x89E3;&#x6790;"><i class="fa fa-link" aria-hidden="true"></i></a>Event-Stream &#x89E3;&#x6790;</h3>
-<p>event-stream&#x7684;&#x5185;&#x5BB9;(&#x7ED3;&#x6784;&#x548C;&#x5B57;&#x7B26;)&#x9700;&#x6EE1;&#x8DB3;&#x4EE5;&#x4E0B; <a href="https://www.rfc-editor.org/rfc/rfc5234" target="_blank">ABNF</a> &#x8BED;&#x6CD5;&#x8303;&#x5F0F;&#x7EA6;&#x5B9A;</p>
-<pre><code class="lang-ABNF">stream        = [ bom ] *event
+<h3 id="event-stream-解析"><a class="header" href="#event-stream-解析">Event-Stream 解析</a></h3>
+<p>event-stream的内容(结构和字符)需满足以下 <a href="https://www.rfc-editor.org/rfc/rfc5234">ABNF</a> 语法范式约定</p>
+<pre><code class="language-ABNF">stream        = [ bom ] *event
 event         = *( comment / field ) end-of-line
 comment       = colon *any-char end-of-line
 field         = 1*name-char [ colon [ space ] *any-char ] end-of-line
@@ -1536,170 +261,176 @@ name-char     = %x0000-0009 / %x000B-000C / %x000E-0039 / %x003B-10FFFF
 any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF
 ; a scalar value other than U+000A LINE FEED (LF) or U+000D CARRIAGE RETURN (CR)
 </code></pre>
-<p>&#x9700;&#x8981;&#x9010;&#x884C;&#x8BFB;&#x53D6;&#x5185;&#x5BB9;&#x5E76;&#x8FDB;&#x884C;&#x89E3;&#x6790;&#xFF0C;&#x6309;&#x7167;&#x8BED;&#x6CD5;&#x7EA6;&#x5B9A;&#xFF1A;<code>end-of-line = ( cr lf / cr / lf )</code>&#xFF0C;CRLF&#x3001;CR&#x3001;LF&#x90FD;&#x4EE3;&#x8868;&#x6362;&#x884C;</p>
+<p>需要逐行读取内容并进行解析，按照语法约定：<code>end-of-line = ( cr lf / cr / lf )</code>，CRLF、CR、LF都代表换行</p>
 <ul>
-<li>&#x5982;&#x679C;&#x662F;&#x7A7A;&#x884C;&#xFF0C;&#x540E;&#x7EED;&#x662F;&#x65B0;Event&#xFF0C;&#x53EF;&#x901A;&#x4FD7;&#x7406;&#x89E3;&#x4E3A;&#x4E8B;&#x4EF6;&#x4E4B;&#x95F4;&#x7528;&#x7A7A;&#x884C;&#x5206;&#x9694;</li>
-<li>&#x5982;&#x679C;&#x662F;&#x4EE5; <code>:</code> <em>&#x5192;&#x53F7;&#xFF0C;UniCode&#x7F16;&#x7801; U+003A</em> &#x5F00;&#x59CB;&#xFF0C;&#x5FFD;&#x7565;&#x6B64;&#x884C;</li>
-<li>&#x5982;&#x679C;&#x5305;&#x542B; <code>:</code> <em>&#x5192;&#x53F7;&#xFF0C;UniCode&#x7F16;&#x7801; U+003A</em>&#xFF0C;&#x4ECE;&#x7B2C;&#x4E00;&#x4E2A;&#x5192;&#x53F7;&#x5F00;&#x59CB;&#x5206;&#x5272;<ul>
-<li>&#x5192;&#x53F7;&#x524D;&#x7684;&#x5185;&#x5BB9;&#x4E3A; <code>field</code></li>
-<li>&#x5192;&#x53F7;&#x540E;&#x7684;&#x5185;&#x5BB9;&#x4E3A; <code>value</code>&#xFF0C;&#x5982;&#x679C;&#x5192;&#x53F7;&#x540E;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E3A; <code>&#x7A7A;&#x683C;</code> U+0020&#xFF0C;&#x4ECE; <code>value</code> &#x4E2D;&#x79FB;&#x9664;</li>
+<li>如果是空行，后续是新Event，可通俗理解为事件之间用空行分隔</li>
+<li>如果是以 <code>:</code> <em>冒号，UniCode编码 U+003A</em> 开始，忽略此行</li>
+<li>如果包含 <code>:</code> <em>冒号，UniCode编码 U+003A</em>，从第一个冒号开始分割
+<ul>
+<li>冒号前的内容为 <code>field</code></li>
+<li>冒号后的内容为 <code>value</code>，如果冒号后的第一个字符为 <code>空格</code> U+0020，从 <code>value</code> 中移除</li>
 </ul>
 </li>
-<li>&#x975E;&#x7A7A;&#x4F46;&#x4E0D;&#x5305;&#x542B; <code>:</code>, &#x5185;&#x5BB9;&#x5168;&#x90E8;&#x4F5C;&#x4E3A; <code>field</code>, <code>value</code> &#x4E3A;&#x7A7A;&#x5B57;&#x7B26;&#x4E32;</li>
+<li>非空但不包含 <code>:</code>, 内容全部作为 <code>field</code>, <code>value</code> 为空字符串</li>
 </ul>
-<p>field&#x7684;&#x7EA6;&#x5B9A;&#xFF1A;</p>
+<p>field的约定：</p>
 <ul>
-<li>&quot;event&quot;&#xFF1A;&#x5176;value&#x4E3A; event type</li>
-<li>&quot;data&quot;&#xFF1A;&#x5176;value&#x4E3A;&#x4E8B;&#x4EF6;&#x6570;&#x636E;&#xFF0C;&#x89E3;&#x6790;&#x540E;&#x5355;&#x72EC;&#x518D;&#x5C3E;&#x90E8;&#x62FC;&#x63A5; <code>LF</code></li>
-<li>&quot;id&quot;&#xFF1A;&#x82E5;&#x5176;value&#x4E0D;&#x5305;&#x542B; <code>U+0000 &#x5373;NULL</code>&#xFF0C;&#x503C;&#x4E3A;&#x4E8B;&#x4EF6;&#x7684;ID&#xFF0C;&#x5426;&#x5219;&#x5FFD;&#x7565;</li>
-<li>&quot;retry&quot;&#xFF1A;&#x5176;value&#x82E5;&#x53EA;&#x5305;&#x542B;ASCII&#x7801;&#x8868;&#x793A;&#x7684;&#x6570;&#x503C;&#xFF0C;&#x8BA4;&#x4E3A;&#x662F;&#x5341;&#x8FDB;&#x5236;&#x6570;&#x89E3;&#x6790;&#x4E3A;Int&#xFF0C;&#x4F5C;&#x4E3A;&#x6BEB;&#x79D2;&#x7EA7;&#x7684;&#x91CD;&#x8FDE;&#x65F6;&#x95F4;&#xFF0C;<em>&#x5F53;&#x94FE;&#x63A5;&#x65AD;&#x5F00;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x5E94;&#x5F53;&#x5728;&#x6B64;&#x65F6;&#x95F4;&#x540E;&#x81EA;&#x52A8;&#x53D1;&#x8D77;&#x91CD;&#x8FDE;</em>&#xFF0C;&#x5426;&#x5219;&#x5FFD;&#x7565;</li>
-<li>&#x5176;&#x4ED6;&#x60C5;&#x51B5;&#x5747;&#x5FFD;&#x7565;</li>
+<li>"event"：其value为 event type</li>
+<li>"data"：其value为事件数据，解析后单独再尾部拼接 <code>LF</code></li>
+<li>"id"：若其value不包含 <code>U+0000 即NULL</code>，值为事件的ID，否则忽略</li>
+<li>"retry"：其value若只包含ASCII码表示的数值，认为是十进制数解析为Int，作为毫秒级的重连时间，<em>当链接断开，客户端应当在此时间后自动发起重连</em>，否则忽略</li>
+<li>其他情况均忽略</li>
 </ul>
-<h3 id="last-event-id"><a name="last-event-id" class="anchor-navigation-ex-anchor" href="#last-event-id"><i class="fa fa-link" aria-hidden="true"></i></a>Last-Event-ID</h3>
-<p>&#x524D;&#x6587;&#x5DF2;&#x7ECF;&#x63D0;&#x5230;&#x4E86;&#x5982;&#x4E0B;&#x5185;&#x5BB9;&#xFF1A;</p>
+<h3 id="last-event-id"><a class="header" href="#last-event-id">Last-Event-ID</a></h3>
+<p>前文已经提到了如下内容：</p>
 <ul>
 <li>Header</li>
-<li>Event-Stream&#x4E2D;field&#x4E3A;&quot;id&quot;&#x3001;&quot;retry&quot;</li>
+<li>Event-Stream中field为"id"、"retry"</li>
 </ul>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x5F53;&#x51FA;&#x73B0;&#x610F;&#x5916;&#x60C5;&#x51B5;&#x65F6;&#xFF0C;&#x4F8B;&#x5982;&#x7F51;&#x7EDC;&#x539F;&#x56E0;&#x5BFC;&#x81F4;&#x7684;&#x94FE;&#x63A5;&#x65AD;&#x5F00;&#xFF0C;&#x6D89;&#x53CA;&#x5230;&#x91CD;&#x8FDE;&#xFF1B;&#x663E;&#x7136;&#xFF0C;&#x91CD;&#x8FDE;&#x65F6;&#x4E00;&#x822C;&#x4E0D;&#x5E0C;&#x671B;&#x518D;&#x83B7;&#x53D6;&#x5DF2;&#x7ECF;&#x6536;&#x5230;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
-<p>Header&#x4E2D;&#x5B58;&#x5728; <code>Last-Event-ID</code> field&#x7EA6;&#x5B9A;&#xFF0C;&#x6307;&#x5B9A;&#x4E0A;&#x6B21;&#x6536;&#x5230;&#x7684;Event&#x7684;id&#xFF0C;&#x56E0;Event&#x6709;&#x5E8F;&#xFF0C;&#x53EF;&#x907F;&#x514D;&#x5197;&#x4F59;&#x4FE1;&#x606F;&#x4F20;&#x8F93;&#x3002;</p>
-<h2 id="&#x7EB8;&#x4E0A;&#x5F97;&#x6765;&#x7EC8;&#x89C9;&#x6D45;"><a name="&#x7EB8;&#x4E0A;&#x5F97;&#x6765;&#x7EC8;&#x89C9;&#x6D45;" class="anchor-navigation-ex-anchor" href="#&#x7EB8;&#x4E0A;&#x5F97;&#x6765;&#x7EC8;&#x89C9;&#x6D45;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7EB8;&#x4E0A;&#x5F97;&#x6765;&#x7EC8;&#x89C9;&#x6D45;</h2>
-<p>&#x81F3;&#x6B64;&#xFF0C;&#x534F;&#x8BAE;&#x90E8;&#x5206;&#x7684;&#x4E3B;&#x8981;&#x5185;&#x5BB9;&#x5DF2;&#x7ECF;&#x8BA8;&#x8BBA;&#x5B8C;&#x6BD5;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x8FDB;&#x5165;&#x6109;&#x5FEB;&#x7684;Demo&#x73AF;&#x8282;&#x3002;</p>
-<h3 id="&#x7F16;&#x5199;&#x670D;&#x52A1;&#x7AEF;"><a name="&#x7F16;&#x5199;&#x670D;&#x52A1;&#x7AEF;" class="anchor-navigation-ex-anchor" href="#&#x7F16;&#x5199;&#x670D;&#x52A1;&#x7AEF;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7F16;&#x5199;&#x670D;&#x52A1;&#x7AEF;</h3>
-<p>&#x5BF9;&#x90E8;&#x5206;&#x8BFB;&#x8005;&#x800C;&#x8A00;&#xFF0C;&#x8FD9;&#x90E8;&#x5206;&#x53EF;&#x80FD;&#x6709;&#x70B9;&#x8D85;&#x7EB2;&#xFF0C;&#x4F46;&#x6CA1;&#x6709;&#x5173;&#x7CFB;&#xFF0C;&#x5DF2;&#x7ECF;&#x51C6;&#x5907;&#x597D;&#x4E86;Demo&#x4EE3;&#x7801;&#xFF0C;&#x5404;&#x4F4D;&#x53EA;&#x9700;&#x8981;&#x51C6;&#x5907;&#x597D;Java&#x73AF;&#x5883;&#x548C;&#x8DEF;&#x7531;&#x5668;&#x5373;&#x53EF;&#x3002;</p>
-<p><a href="https://github.com/leobert-lan/SSE-Server-demo" target="_blank">&#x4EE3;&#x7801;&#x4ED3;&#x5E93;</a></p>
-<p>&#x5728;Demo&#x4E2D;&#xFF0C;&#x51C6;&#x5907;&#x4E86;&#x4E24;&#x6761;&#x63A5;&#x53E3;&#xFF1A;</p>
+<p>不难理解，当出现意外情况时，例如网络原因导致的链接断开，涉及到重连；显然，重连时一般不希望再获取已经收到的信息。</p>
+<p>Header中存在 <code>Last-Event-ID</code> field约定，指定上次收到的Event的id，因Event有序，可避免冗余信息传输。</p>
+<h2 id="纸上得来终觉浅"><a class="header" href="#纸上得来终觉浅">纸上得来终觉浅</a></h2>
+<p>至此，协议部分的主要内容已经讨论完毕，让我们进入愉快的Demo环节。</p>
+<h3 id="编写服务端"><a class="header" href="#编写服务端">编写服务端</a></h3>
+<p>对部分读者而言，这部分可能有点超纲，但没有关系，已经准备好了Demo代码，各位只需要准备好Java环境和路由器即可。</p>
+<p><a href="https://github.com/leobert-lan/SSE-Server-demo">代码仓库</a></p>
+<p>在Demo中，准备了两条接口：</p>
 <ul>
-<li><a href="http://{ip}:8080/sse/mvc/words" target="_blank">http://{ip}:8080/sse/mvc/words</a> , &#x6A21;&#x62DF;&#x591A;&#x6B21;&#x751F;&#x6210;&#x6587;&#x672C;&#x6BB5;&#x843D;&#x5E76;&#x63A8;&#x9001;&#x81F3;&#x5BA2;&#x6237;&#x7AEF;</li>
-<li><a href="http://{ip}:8080/sse/mvc/folder-watch" target="_blank">http://{ip}:8080/sse/mvc/folder-watch</a> , &#x6A21;&#x62DF;&#x6587;&#x4EF6;&#x5939;&#x76D1;&#x542C;</li>
+<li>http://{ip}:8080/sse/mvc/words , 模拟多次生成文本段落并推送至客户端</li>
+<li>http://{ip}:8080/sse/mvc/folder-watch , 模拟文件夹监听</li>
 </ul>
-<p>&#x542F;&#x52A8;&#x670D;&#x52A1;&#x540E;&#xFF0C;&#x53EF;&#x4F7F;&#x7528;&#x63A7;&#x5236;&#x53F0;&#x548C;curl&#x8FDB;&#x884C;&#x6D4B;&#x8BD5;&#xFF1A;</p>
+<p>启动服务后，可使用控制台和curl进行测试：</p>
 <pre><code>curl -v http://localhost:8080/sse/mvc/words
-</code></pre><h3 id="&#x7F16;&#x5199;&#x5BA2;&#x6237;&#x7AEF;"><a name="&#x7F16;&#x5199;&#x5BA2;&#x6237;&#x7AEF;" class="anchor-navigation-ex-anchor" href="#&#x7F16;&#x5199;&#x5BA2;&#x6237;&#x7AEF;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7F16;&#x5199;&#x5BA2;&#x6237;&#x7AEF;</h3>
-<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x4E00;&#x4E2A;&#x975E;&#x65B0;&#x4E8B;&#x7269;&#x5F80;&#x5F80;&#x4E0D;&#x9700;&#x8981;&#x666E;&#x901A;&#x5F00;&#x53D1;&#x8005;&#x9020;&#x8F6E;&#x5B50;&#xFF0C;<a href="https://github.com/square/okhttp/tree/master/okhttp-sse" target="_blank">OkHttp</a> &#x5DF2;&#x7ECF;&#x652F;&#x6301;SSE</p>
-<p>&#x4E0D;&#x540C;&#x4E8E;&#x5927;&#x5BB6;&#x719F;&#x77E5;&#x7684; <code>Call</code>&#xFF0C; Okhttp-SSE&#x4E2D;&#x5C01;&#x88C5;&#x4E86; <code>EventSource</code>&#xFF0C;&#x5E76;&#x901A;&#x8FC7; <code>Factory</code> &#x521B;&#x5EFA;&#x5B9E;&#x4F8B;&#x3001;&#x53D1;&#x8D77;&#x8BF7;&#x6C42;&#xFF1A;</p>
-<p>&#x4E00;&#x4E2A;&#x6734;&#x7D20;&#x5730;&#x4F7F;&#x7528;&#x793A;&#x4F8B;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">demoCode</span><span class="hljs-params">()</span> </span>{
+</code></pre>
+<h3 id="编写客户端"><a class="header" href="#编写客户端">编写客户端</a></h3>
+<p>很显然，一个非新事物往往不需要普通开发者造轮子，<a href="https://github.com/square/okhttp/tree/master/okhttp-sse">OkHttp</a> 已经支持SSE</p>
+<p>不同于大家熟知的 <code>Call</code>， Okhttp-SSE中封装了 <code>EventSource</code>，并通过 <code>Factory</code> 创建实例、发起请求：</p>
+<p>一个朴素地使用示例如下：</p>
+<pre><code class="language-java">class Demo {
+    void demoCode() {
 
-        OkHttpClient okHttpClient = <span class="hljs-keyword">new</span> OkHttpClient();
+        OkHttpClient okHttpClient = new OkHttpClient();
         EventSource.Factory factory = EventSources.createFactory(okHttpClient);
 
-        Request.Builder builder = <span class="hljs-keyword">new</span> Request.Builder().get().url(url);
+        Request.Builder builder = new Request.Builder().get().url(url);
 
-        builder.addHeader(<span class="hljs-string">&quot;Content-Type&quot;</span>, <span class="hljs-string">&quot;text/event-stream&quot;</span>)
-                .addHeader(<span class="hljs-string">&quot;Accept-Encoding&quot;</span>, <span class="hljs-string">&quot;&quot;</span>)
-                .addHeader(<span class="hljs-string">&quot;Accept&quot;</span>, <span class="hljs-string">&quot;text/event-stream&quot;</span>)
-                .addHeader(<span class="hljs-string">&quot;Cache-Control&quot;</span>, <span class="hljs-string">&quot;no-cache&quot;</span>);
+        builder.addHeader("Content-Type", "text/event-stream")
+                .addHeader("Accept-Encoding", "")
+                .addHeader("Accept", "text/event-stream")
+                .addHeader("Cache-Control", "no-cache");
 
-        builder.addHeader(<span class="hljs-string">&quot;Last-Event-ID&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>);
+        builder.addHeader("Last-Event-ID", "2");
 
         Request request = builder.build();
 
-        factory.newEventSource(request, <span class="hljs-keyword">new</span> EventSourceListener() {
-            <span class="hljs-comment">//ignore</span>
+        factory.newEventSource(request, new EventSourceListener() {
+            //ignore
         });
     }
 }
 </code></pre>
-<p>&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x5982;&#x679C;&#x5C06;&#x5176;&#x4F5C;&#x4E3A; <code>Call</code>&#xFF0C;&#x5C06;&#x65E0;&#x6CD5;&#x83B7;&#x5F97;&#x591A;&#x6B21;&#x63A8;&#x9001;&#x7684;&#x6548;&#x679C;&#xFF0C;&#x5728;&#x4E0D;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#x6216;&#x8D85;&#x65F6;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5F62;&#x5982;&#x4E00;&#x6B21;&#x54CD;&#x5E94;&#x8F83;&#x6162;&#x7684;Get&#x8BF7;&#x6C42;&#x3002;</p>
-<p><a href="https://github.com/leobert-lan/SSE-android-Demo" target="_blank">demo&#x4EE3;&#x7801;&#x4ED3;&#x5E93;</a></p>
-<h3 id="&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;retrofit"><a name="&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;retrofit" class="anchor-navigation-ex-anchor" href="#&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;retrofit"><i class="fa fa-link" aria-hidden="true"></i></a>&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;Retrofit</h3>
-<p>&#x622A;&#x81F3;&#x76EE;&#x524D;&#x4E3A;&#x6B62;&#xFF0C;Retrofit&#x672A;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x9002;&#x914D;&#xFF0C;&#x5176;&#x5B9E;&#x5728;&#x591A;&#x5E74;&#x524D;&#x5373;&#x5C55;&#x5F00;&#x8FC7;&#x8BA8;&#x8BBA;&#xFF0C;&#x6211;&#x627E;&#x5230;&#x4E86;&#x6B64;&#x6761; <a href="https://github.com/square/retrofit/issues/1029" target="_blank">&#x8BA8;&#x8BBA;issue</a></p>
-<p>Retrofit&#x7684;&#x8BBE;&#x8BA1;&#x539F;&#x7406;&#x5E76;&#x4E0D;&#x590D;&#x6742;&#xFF1A;</p>
+<p>请注意，如果将其作为 <code>Call</code>，将无法获得多次推送的效果，在不出现错误或超时的情况下，形如一次响应较慢的Get请求。</p>
+<p><a href="https://github.com/leobert-lan/SSE-android-Demo">demo代码仓库</a></p>
+<h3 id="是否可以使用retrofit"><a class="header" href="#是否可以使用retrofit">是否可以使用Retrofit</a></h3>
+<p>截至目前为止，Retrofit未对其进行适配，其实在多年前即展开过讨论，我找到了此条 <a href="https://github.com/square/retrofit/issues/1029">讨论issue</a></p>
+<p>Retrofit的设计原理并不复杂：</p>
 <blockquote>
 <ul>
-<li>&#x901A;&#x8FC7;&#x8FD0;&#x884C;&#x65F6;&#x53CD;&#x5C04;&#xFF0C;&#x5EFA;&#x7ACB;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#xFF0C;&#x4F9D;&#x636E;&#x6CE8;&#x89E3;&#x6784;&#x5EFA;Okhttp&#x7684;Call</li>
-<li>&#x901A;&#x8FC7;CallAdapter&#xFF0C;&#x5C06;Call&#x7684;&#x7ED3;&#x679C;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#xFF0C;&#x8FDB;&#x884C;&#x4E0D;&#x540C;&#x7684;&#x9002;&#x914D;</li>
+<li>通过运行时反射，建立动态代理，依据注解构建Okhttp的Call</li>
+<li>通过CallAdapter，将Call的结果处理方式，进行不同的适配</li>
 </ul>
 </blockquote>
-<p>&#x4F46;&#x8BBE;&#x8BA1;&#x4E4B;&#x521D;&#xFF0C;&#x4EC5;&#x8BBE;&#x8BA1;&#x4E86; <code>Retrofit.Call</code> &#x5BF9; <code>Okhttp.Call</code> &#x8FDB;&#x884C;Wrap&#xFF0C;&#x800C; <code>EventSource</code> &#x5E76;&#x4E0D;&#x7EE7;&#x627F; <code>Okhttp.Call</code>&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x4F9D;&#x636E;&#x5176;&#x7279;&#x6027;&#x4E5F;&#x4E0D;&#x5E94;&#x5F53;&#x7EE7;&#x627F;&#x81EA;Call</p>
-<p>&#x9274;&#x4E8E;&#x6B64;&#xFF0C;&#x82E5;&#x5C06; <code>EventSource</code> &#x5F3A;&#x884C;&#x5305;&#x88C5;&#x4E3A; <code>Retrofit.Call</code> &#x5C06;&#x4F1A;&#x5F88;&#x5BB9;&#x6613;&#x5F15;&#x8D77;&#x9519;&#x8BEF;&#xFF0C;&#x4F8B;&#x5982;&#x8C03;&#x7528;</p>
+<p>但设计之初，仅设计了 <code>Retrofit.Call</code> 对 <code>Okhttp.Call</code> 进行Wrap，而 <code>EventSource</code> 并不继承 <code>Okhttp.Call</code>，当然，依据其特性也不应当继承自Call</p>
+<p>鉴于此，若将 <code>EventSource</code> 强行包装为 <code>Retrofit.Call</code> 将会很容易引起错误，例如调用</p>
 <ul>
 <li><code>Response&lt;T&gt; execute() throws IOException;</code></li>
 <li><code>void enqueue(Callback&lt;T&gt; callback);</code></li>
 </ul>
-<p>&#x82E5;&#x5728;Retrofit&#x4E2D;&#x5E73;&#x884C;&#x5C55;&#x5F00;&#x4E00;&#x6761; <code>EventSource</code> &#x7684;&#x5904;&#x7406;&#x903B;&#x8F91;&#xFF0C;&#x9700;&#x8981;&#x5BF9;&#x5E93;&#x8FDB;&#x884C;&#x5F88;&#x591A;&#x4FEE;&#x6539;&#xFF0C;&#x5E76;&#x4E14;&#x8003;&#x8651;&#x5BF9;&#x751F;&#x6001;&#x7684;&#x5F71;&#x54CD;&#xFF0C;&#x5E76;&#x4E0D;&#x5212;&#x7B97;&#x3002;</p>
-<p>&#x4F46;&#x662F;&#x4F7F;&#x7528;&#x8005;&#x81EA;&#x5DF1;&#x7684;&#x884C;&#x4E3A;&#x662F;&#x4E0D;&#x53D7;&#x9650;&#x7684;&#xFF0C;&#x81EA;&#x5DF1;&#x7ED3;&#x5408;&#x9879;&#x76EE;&#x60C5;&#x51B5;&#x5F00;&#x53D1;&#xFF0C;&#x81EA;&#x5DF1;&#x5BF9;&#x5176;&#x8D1F;&#x8D23;&#x3002;</p>
-<h2 id="&#x52A8;&#x624B;&#x5199;retrofit&#x6269;&#x5C55;&#x5E93;"><a name="&#x52A8;&#x624B;&#x5199;retrofit&#x6269;&#x5C55;&#x5E93;" class="anchor-navigation-ex-anchor" href="#&#x52A8;&#x624B;&#x5199;retrofit&#x6269;&#x5C55;&#x5E93;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x52A8;&#x624B;&#x5199;Retrofit&#x6269;&#x5C55;&#x5E93;</h2>
-<p>&#x6B63;&#x5982;&#x6211;&#x4E0A;&#x6587;&#x6240;&#x8A00;&#xFF0C;&#x76F4;&#x63A5;&#x5728;Retrofit&#x4E2D;&#x8FDB;&#x884C;&#x6269;&#x5C55;&#x9700;&#x8981;&#x8003;&#x8651;&#x5BF9;&#x751F;&#x6001;&#x7684;&#x5F71;&#x54CD;&#xFF0C;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x53EF;&#x4EE5;&#x8BE6;&#x7EC6;&#x9605;&#x8BFB;Jake Wharton &#x7684;post&#xFF0C;&#x5176;&#x8BBE;&#x8BA1;&#x6784;&#x601D;&#x5728;&#x8003;&#x8651; &quot;&#x4E00;&#x81F4;&#x6027;&quot; &#x95EE;&#x9898;&#x3002;</p>
-<p>&#x4F46;&#x5982;&#x679C;&#x5728;Retrofit&#x4E4B;&#x5916;&#x8FDB;&#x884C;&#x6269;&#x5C55;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x56DE;&#x907F;&#x751F;&#x6001;&#x95EE;&#x9898;&#xFF0C;&#x5373;&#x4FBF;&#x6709;&#x975E;&#x4E00;&#x81F4;&#x6027;&#x8BBE;&#x8BA1;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x76F4;&#x9762;&#x3002;</p>
-<p><a href="https://github.com/leobert-lan/SSE-android-Demo" target="_blank">&#x4EE3;&#x7801;&#x4ED3;&#x5E93;</a> &#x9700;&#x5207;&#x6362;&#x5230; <code>retrofit-sse</code> &#x5206;&#x652F;&#xFF01;</p>
-<p><strong><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x5728;&#x7F16;&#x5199;&#x6B64;&#x6587;&#x65F6;&#xFF0C;&#x6211;&#x5C1A;&#x672A;&#x6709;&#x5145;&#x8DB3;&#x7684;&#x65F6;&#x95F4;&#x6295;&#x5165;&#x6269;&#x5C55;&#x5E93;&#x7684;&#x8BBE;&#x8BA1;&#x4E0E;&#x7F16;&#x5199;&#xFF0C;&#x4EE3;&#x7801;&#x5E93;&#x4E2D;&#x7684;Sample&#x4EE3;&#x7801;&#xFF0C;&#x4EC5;&#x53EF;&#x4F5C;&#x4E3A;&#x6307;&#x5BFC;&#xFF0C;&#x4ECD;&#x5B58;&#x5728;&#x8BBE;&#x8BA1;&#x76F2;&#x70B9;&#xFF0C;&#x4E0D;&#x8981;&#x76F4;&#x63A5;&#x6295;&#x5165;&#x5546;&#x7528;&#x3002;</em></strong></p>
-<p>&#x5F88;&#x5BB9;&#x6613;&#x5F97;&#x51FA;&#x4EE5;&#x4E0B;&#x6838;&#x5FC3;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#xFF0C;<em>&#x53EF;&#x770B;&#x5BFC;&#x56FE;&#x6216;&#x4E0B;&#x6587;&#x7684;&#x6587;&#x5B57;&#x8BF4;&#x660E;&#xFF0C;&#x8F83;&#x4E3A;&#x5570;&#x55E6;</em>&#xFF1A;</p>
-<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/766af76c9b1a4ab1b386f0b2c930e65c~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2916&amp;h=2272&amp;s=564681&amp;e=png&amp;b=fffefe" alt="&#x6269;&#x5C55;&#x5E93;.png"></p>
+<p>若在Retrofit中平行展开一条 <code>EventSource</code> 的处理逻辑，需要对库进行很多修改，并且考虑对生态的影响，并不划算。</p>
+<p>但是使用者自己的行为是不受限的，自己结合项目情况开发，自己对其负责。</p>
+<h2 id="动手写retrofit扩展库"><a class="header" href="#动手写retrofit扩展库">动手写Retrofit扩展库</a></h2>
+<p>正如我上文所言，直接在Retrofit中进行扩展需要考虑对生态的影响，读者诸君可以详细阅读Jake Wharton 的post，其设计构思在考虑 "一致性" 问题。</p>
+<p>但如果在Retrofit之外进行扩展，则可以回避生态问题，即便有非一致性设计，也可以不用直面。</p>
+<p><a href="https://github.com/leobert-lan/SSE-android-Demo">代码仓库</a> 需切换到 <code>retrofit-sse</code> 分支！</p>
+<p><strong><em>作者按：读者诸君请注意，在编写此文时，我尚未有充足的时间投入扩展库的设计与编写，代码库中的Sample代码，仅可作为指导，仍存在设计盲点，不要直接投入商用。</em></strong></p>
+<p>很容易得出以下核心设计思路，<em>可看导图或下文的文字说明，较为啰嗦</em>：</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/766af76c9b1a4ab1b386f0b2c930e65c~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2916&amp;h=2272&amp;s=564681&amp;e=png&amp;b=fffefe" alt="扩展库.png" /></p>
 <ul>
-<li>&#x5C06;&#x8FDE;&#x7EED;&#x7684;Event&#x5185;&#x5BB9;&#x8F6C;&#x53D8;&#x4E3A;&#x53EF;&#x89C2;&#x6D4B;&#x7684;Source&#xFF0C;&#x4F8B;&#x5982;Rxjava&#x7684;&#x89C2;&#x6D4B;&#x6E90;&#x3001;LiveData&#x3001;kotlin&#x534F;&#x7A0B;&#x7684;Flow<ul>
-<li>&#x5185;&#x5EFA; <code>EventSourceListener</code> &#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x4ECE;&#x56DE;&#x8C03;&#x89E6;&#x53D1;&#x6E90;&#x7684;&#x66F4;&#x65B0;</li>
-<li>&#x5B9A;&#x4E49; <code>EventSourceAdapter</code>&#xFF0C;&#x7528;&#x4E8E;&#x5C06; <code>Okhttp-EventSource</code> &#x8F6C;&#x53D8;&#x4E3A; &#x53EF;&#x89C2;&#x6D4B;&#x7684;Source</li>
+<li>将连续的Event内容转变为可观测的Source，例如Rxjava的观测源、LiveData、kotlin协程的Flow
+<ul>
+<li>内建 <code>EventSourceListener</code> 实现类，从回调触发源的更新</li>
+<li>定义 <code>EventSourceAdapter</code>，用于将 <code>Okhttp-EventSource</code> 转变为 可观测的Source</li>
 </ul>
 </li>
-<li>&#x9700;&#x8981;&#x5B58;&#x5728;&#x4E00;&#x79CD;&#x673A;&#x5236;&#xFF0C;&#x4F9D;&#x636E;Interface&#x4E2D;Method&#x5B9A;&#x4E49;&#x7684;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#xFF0C;&#x83B7;&#x53D6; <code>EventSourceAdapter</code> &#x5B9E;&#x4F8B;<ul>
-<li>&#x5E94;&#x5F53;&#x6709;Factory&#x3001;Factory&#x6CE8;&#x518C;&#x6C60;&#xFF0C;&#x4EA6;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x5B9E;&#x4F8B;&#x3001;&#x5B9E;&#x4F8B;&#x6CE8;&#x518C;&#x6C60;</li>
-<li>&#x9700;&#x8981;&#x5229;&#x7528;&#x53CD;&#x5C04;</li>
-<li>Factory&#x6CE8;&#x518C;&#x6C60;&#x6216;Adapter&#x5B9E;&#x4F8B;&#x6CE8;&#x518C;&#x6C60;&#x9700;&#x80FD;&#x533A;&#x5206;&#x76EE;&#x6807;&#x7C7B;&#x578B;</li>
+<li>需要存在一种机制，依据Interface中Method定义的返回类型，获取 <code>EventSourceAdapter</code> 实例
+<ul>
+<li>应当有Factory、Factory注册池，亦可以考虑直接使用实例、实例注册池</li>
+<li>需要利用反射</li>
+<li>Factory注册池或Adapter实例注册池需能区分目标类型</li>
 </ul>
 </li>
-<li>&#x9700;&#x8981;&#x80FD;&#x591F;&#x521B;&#x5EFA;&#xFF08;<strong>&#x5B8C;&#x6574;&#x529F;&#x80FD;&#x5E94;&#x5F53;&#x4E3A;&#x7BA1;&#x7406;</strong>&#xFF09;<code>EventSource</code><ul>
-<li>&#x9700;&#x53EF;&#x6CE8;&#x518C; <code>EventSource.Factory</code> &#x5B9E;&#x4F8B;</li>
+<li>需要能够创建（<strong>完整功能应当为管理</strong>）<code>EventSource</code>
+<ul>
+<li>需可注册 <code>EventSource.Factory</code> 实例</li>
 </ul>
 </li>
-<li>&#x5B58;&#x5728;&#x4E00;&#x6761;&#x6269;&#x5C55;&#x8DEF;&#x5F84;&#xFF0C;&#x7B26;&#x5408;SSE&#x65F6;&#xFF0C;&#x8D70;&#x65B0;&#x8BBE;&#x8BA1;&#xFF1B;&#x5426;&#x5219;&#x8D70;&#x539F;Retrofit&#x8BBE;&#x8BA1;<ul>
-<li>&#x589E;&#x52A0;&#x5165;&#x53E3;&#xFF0C;&#x4F8B;&#x5982; <code>RetrofitSSE</code>&#xFF0C;&#x627F;&#x8F7D;&#x4EE5;&#x4E0A;&#x8BBE;&#x8BA1;&#xFF0C;&#x5E76;&#x5305;&#x542B; <code>Retrofit</code></li>
-<li>&#x6269;&#x5C55; <code>ServiceMethod&lt;?&gt; loadServiceMethod(Method method)</code>&#xFF0C;&#x65B0;&#x589E;SSE&#x60C5;&#x51B5;&#x7684;&#x6267;&#x884C;&#x8DEF;&#x5F84;</li>
-<li>&#x6269;&#x5C55; <code>ServiceMethod</code>&#xFF0C;&#x5185;&#x5EFA;SSE&#x60C5;&#x51B5;&#x7684;&#x5904;&#x7406;&#x903B;&#x8F91;&#xFF0C;&#x5373;&#x627F;&#x8F7D;&#x8BBE;&#x8BA1;1&#x3001;2</li>
+<li>存在一条扩展路径，符合SSE时，走新设计；否则走原Retrofit设计
+<ul>
+<li>增加入口，例如 <code>RetrofitSSE</code>，承载以上设计，并包含 <code>Retrofit</code></li>
+<li>扩展 <code>ServiceMethod&lt;?&gt; loadServiceMethod(Method method)</code>，新增SSE情况的执行路径</li>
+<li>扩展 <code>ServiceMethod</code>，内建SSE情况的处理逻辑，即承载设计1、2</li>
 </ul>
 </li>
 </ul>
-<p>&#x7B80;&#x8981;&#x7684;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
-<h3 id="&#x5185;&#x5EFA;&#x7684;eventsourcelistener----&#x5BF9;&#x5E94;1"><a name="&#x5185;&#x5EFA;&#x7684;eventsourcelistener----&#x5BF9;&#x5E94;1" class="anchor-navigation-ex-anchor" href="#&#x5185;&#x5EFA;&#x7684;eventsourcelistener----&#x5BF9;&#x5E94;1"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5185;&#x5EFA;&#x7684;EventSourceListener -- &#x5BF9;&#x5E94;1</h3>
+<p>简要的代码如下：</p>
+<h3 id="内建的eventsourcelistener----对应1"><a class="header" href="#内建的eventsourcelistener----对应1">内建的EventSourceListener -- 对应1</a></h3>
 <blockquote>
-<p>&#x5185;&#x5EFA;&#x9009;&#x62E9;&#x4E86;Flow&#xFF0C;&#x53EF;&#x81EA;&#x884C;&#x6269;&#x5C55;&#x5176;&#x4ED6;&#xFF0C;&#x901A;&#x8FC7;&#x56DE;&#x8C03;&#x5B9E;&#x73B0;&#x6E90;&#x7684;&#x66F4;&#x65B0;</p>
+<p>内建选择了Flow，可自行扩展其他，通过回调实现源的更新</p>
 </blockquote>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlowAdapterEventListener</span></span>(
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> channel</span>: Channel<span class="hljs-type">&lt;Event&gt;</span>,
+<pre><code class="language-kotlin">class FlowAdapterEventListener(
+    val channel: Channel&lt;Event&gt;,
 ) : EventSourceListener() {
 
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> scope</span>: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onEvent</span><span class="hljs-params">(eventSource: <span class="hljs-type">EventSource, id: String?, type: String?, data: String</span>)</span> {</span>
+    override fun onEvent(eventSource: EventSource, id: String?, type: String?, data: String) {
         super.onEvent(eventSource, id, type, data)
         scope.launch {
             channel.send(Event(id, type, data))
         }
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onFailure</span><span class="hljs-params">(eventSource: <span class="hljs-type">EventSource, t: Throwable?, response: Response?</span>)</span> {</span>
+    override fun onFailure(eventSource: EventSource, t: Throwable?, response: Response?) {
         super.onFailure(eventSource, t, response)
         scope.launch {
             channel.send(
-                Event(<span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">&quot;&quot;</span>, t)
+                Event(null, null, "", t)
             )
             channel.close(t)
         }
     }
 }
 </code></pre>
-<h3 id="&#x5B9A;&#x4E49;eventsourceadapter----&#x5BF9;&#x5E94;2"><a name="&#x5B9A;&#x4E49;eventsourceadapter----&#x5BF9;&#x5E94;2" class="anchor-navigation-ex-anchor" href="#&#x5B9A;&#x4E49;eventsourceadapter----&#x5BF9;&#x5E94;2"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5B9A;&#x4E49;EventSourceAdapter -- &#x5BF9;&#x5E94;2</h3>
-<pre><code class="lang-kotlin">interface EventSourceAdapter<span class="hljs-type">&lt;T&gt;</span> {
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">adapt</span><span class="hljs-params">(request: <span class="hljs-type">Request, factory: EventSource.Factory</span>)</span>: T</span>
+<h3 id="定义eventsourceadapter----对应2"><a class="header" href="#定义eventsourceadapter----对应2">定义EventSourceAdapter -- 对应2</a></h3>
+<pre><code class="language-kotlin">interface EventSourceAdapter&lt;T&gt; {
+    fun adapt(request: Request, factory: EventSource.Factory): T
 
-    abstract <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Factory</span> </span>{
-        abstract operator <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">get</span><span class="hljs-params">(
-            returnType: <span class="hljs-type">Type, annotations: Array&lt;Annotation&gt;, retrofitSSE: RetrofitSSE</span>
-        )</span>: EventSourceAdapter<span class="hljs-type">&lt;*&gt;</span>?</span>
+    abstract class Factory {
+        abstract operator fun get(
+            returnType: Type, annotations: Array&lt;Annotation&gt;, retrofitSSE: RetrofitSSE
+        ): EventSourceAdapter&lt;*&gt;?
     }
 }
 </code></pre>
-<h3 id="&#x5185;&#x5EFA;eventsourceadapter-&#x548C;-factory----&#x5BF9;&#x5E94;2"><a name="&#x5185;&#x5EFA;eventsourceadapter-&#x548C;-factory----&#x5BF9;&#x5E94;2" class="anchor-navigation-ex-anchor" href="#&#x5185;&#x5EFA;eventsourceadapter-&#x548C;-factory----&#x5BF9;&#x5E94;2"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5185;&#x5EFA;EventSourceAdapter &#x548C; Factory -- &#x5BF9;&#x5E94;2</h3>
-<p>&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x793A;&#x4F8B;&#xFF0C;&#x4EE5;&#x5185;&#x5EFA;&#x9009;&#x62E9;&#x7684;Flow&#x60C5;&#x51B5;&#x4E3A;&#x4F8B;&#xFF0C;&#x5C55;&#x793A;Factory&#x80FD;&#x533A;&#x5206;&#x76EE;&#x6807;&#x7C7B;&#x578B;&#xFF0C;
-Factory&#x6CE8;&#x518C;&#x6C60;&#x904D;&#x5386;&#x6267;&#x884C;&#x81F3;&#x975E;NULL&#x8FD4;&#x56DE;&#x65F6;&#xFF0C;&#x8BA4;&#x4E3A;&#x5F97;&#x5230;&#x76EE;&#x6807;&#x7C7B;&#x578B;&#x7684;Factory</p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlowAdapter</span> : <span class="hljs-type">EventSourceAdapter</span>&lt;<span class="hljs-type">Flow&lt;Event</span>&gt;&gt; </span>{
+<h3 id="内建eventsourceadapter-和-factory----对应2"><a class="header" href="#内建eventsourceadapter-和-factory----对应2">内建EventSourceAdapter 和 Factory -- 对应2</a></h3>
+<p>这是一个示例，以内建选择的Flow情况为例，展示Factory能区分目标类型，
+Factory注册池遍历执行至非NULL返回时，认为得到目标类型的Factory</p>
+<pre><code class="language-kotlin">class FlowAdapter : EventSourceAdapter&lt;Flow&lt;Event&gt;&gt; {
 
-        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">adapt</span><span class="hljs-params">(request: <span class="hljs-type">Request, factory: EventSource.Factory</span>)</span>: Flow<span class="hljs-type">&lt;Event&gt;</span> {</span>
+        override fun adapt(request: Request, factory: EventSource.Factory): Flow&lt;Event&gt; {
 
-            <span class="hljs-variable"><span class="hljs-keyword">val</span> channel</span> = Channel<span class="hljs-type">&lt;Event&gt;</span>()
-            <span class="hljs-keyword">return</span> channel.receiveAsFlow()
+            val channel = Channel&lt;Event&gt;()
+            return channel.receiveAsFlow()
                 .shareIn(CoroutineScope(Dispatchers.IO), SharingStarted.Eagerly)
                 .onSubscription {
                     factory.newEventSource(
@@ -1708,225 +439,187 @@ Factory&#x6CE8;&#x518C;&#x6C60;&#x904D;&#x5386;&#x6267;&#x884C;&#x81F3;&#x975E;N
                 }
         }
 
-        <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> {
+        companion object {
 
-            <span class="hljs-variable"><span class="hljs-keyword">val</span> Factory</span> = <span class="hljs-keyword">object</span> : Factory() {
-                <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">get</span><span class="hljs-params">(
-                    returnType: <span class="hljs-type">Type,
+            val Factory = object : Factory() {
+                override fun get(
+                    returnType: Type,
                     annotations: Array&lt;Annotation&gt;,
-                    retrofitSSE: RetrofitSSE</span>
-                )</span>: EventSourceAdapter<span class="hljs-type">&lt;*&gt;</span>? {</span>
-                    <span class="hljs-keyword">if</span> (Flow::<span class="hljs-class"><span class="hljs-keyword">class</span>.<span class="hljs-title">java</span>.<span class="hljs-title">isAssignableFrom</span></span>(getRawType(returnType))) {
-                        <span class="hljs-keyword">return</span> FlowAdapter()
+                    retrofitSSE: RetrofitSSE
+                ): EventSourceAdapter&lt;*&gt;? {
+                    if (Flow::class.java.isAssignableFrom(getRawType(returnType))) {
+                        return FlowAdapter()
                     }
-                    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>
+                    return null
                 }
 
             }
         }
     }
 </code></pre>
-<h3 id="servicemethod&#x6269;&#x5C55;&#x4EE5;&#x53CA;&#x8DEF;&#x5F84;"><a name="servicemethod&#x6269;&#x5C55;&#x4EE5;&#x53CA;&#x8DEF;&#x5F84;" class="anchor-navigation-ex-anchor" href="#servicemethod&#x6269;&#x5C55;&#x4EE5;&#x53CA;&#x8DEF;&#x5F84;"><i class="fa fa-link" aria-hidden="true"></i></a>ServiceMethod&#x6269;&#x5C55;&#x4EE5;&#x53CA;&#x8DEF;&#x5F84;</h3>
-<p>&#x65B0;&#x8DEF;&#x5F84;&#xFF1A;</p>
-<pre><code class="lang-Java"><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ServiceMethodV2</span>&lt;<span class="hljs-title">T</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">ServiceMethod</span>&lt;<span class="hljs-title">T</span>&gt; </span>{
+<h3 id="servicemethod扩展以及路径"><a class="header" href="#servicemethod扩展以及路径">ServiceMethod扩展以及路径</a></h3>
+<p>新路径：</p>
+<pre><code class="language-Java">abstract class ServiceMethodV2&lt;T&gt; extends ServiceMethod&lt;T&gt; {
 
-    <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">ServiceMethod&lt;T&gt; <span class="hljs-title">parseAnnotationsV2</span><span class="hljs-params">(RetrofitSSE retrofit, Method method)</span> </span>{
+    static &lt;T&gt; ServiceMethod&lt;T&gt; parseAnnotationsV2(RetrofitSSE retrofit, Method method) {
         RequestFactory requestFactory = RequestFactory.parseAnnotations(retrofit.retrofit, method);
 
         Type returnType = method.getGenericReturnType();
-        <span class="hljs-keyword">if</span> (Utils.hasUnresolvableType(returnType)) {
-            <span class="hljs-keyword">throw</span> methodError(<span class="hljs-comment">/*ignore*/</span>);
+        if (Utils.hasUnresolvableType(returnType)) {
+            throw methodError(/*ignore*/);
         }
-        <span class="hljs-keyword">if</span> (returnType == <span class="hljs-keyword">void</span>.class) {
-            <span class="hljs-keyword">throw</span> methodError(method, <span class="hljs-string">&quot;Service methods cannot return void.&quot;</span>);
+        if (returnType == void.class) {
+            throw methodError(method, "Service methods cannot return void.");
         }
 
-        <span class="hljs-keyword">return</span> HttpServiceMethodV2.parseAnnotations(retrofit, method, requestFactory);
+        return HttpServiceMethodV2.parseAnnotations(retrofit, method, requestFactory);
     }
 }
 </code></pre>
 <blockquote>
-<p>&#x6269;&#x5C55; <code>ServiceMethod</code>&#xFF0C;&#x5185;&#x5EFA;SSE&#x60C5;&#x51B5;&#x7684;&#x5904;&#x7406;&#x903B;&#x8F91;&#xFF0C;&#x5373;&#x627F;&#x8F7D;&#x8BBE;&#x8BA1;1&#x3001;2</p>
+<p>扩展 <code>ServiceMethod</code>，内建SSE情况的处理逻辑，即承载设计1、2</p>
 </blockquote>
-<p>&#x8BE6;&#x89C1;&#xFF1A;<code>HttpServiceMethodV2</code>&#xFF0C;&#x4EE3;&#x7801;&#x8F83;&#x591A;&#xFF0C;&#x4E0D;&#x505A;&#x5C55;&#x5F00;,&#x5F53;&#x6EE1;&#x8DB3;SSE&#x60C5;&#x51B5;&#x65F6;&#xFF0C;&#x8D70;&#x65B0;&#x903B;&#x8F91;&#xFF0C;&#x5426;&#x5219;&#x56DE;&#x5F52;&#x81F3; <code>HttpServiceMethod#parseAnnotations</code></p>
-<h3 id="&#x65B0;&#x5165;&#x53E3;"><a name="&#x65B0;&#x5165;&#x53E3;" class="anchor-navigation-ex-anchor" href="#&#x65B0;&#x5165;&#x53E3;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x65B0;&#x5165;&#x53E3;</h3>
+<p>详见：<code>HttpServiceMethodV2</code>，代码较多，不做展开,当满足SSE情况时，走新逻辑，否则回归至 <code>HttpServiceMethod#parseAnnotations</code></p>
+<h3 id="新入口"><a class="header" href="#新入口">新入口</a></h3>
 <blockquote>
 <ul>
-<li>&#x5177;&#x5907;EventSource.Factory&#x6CE8;&#x518C;</li>
-<li>&#x5177;&#x5907;EventSourceAdapter.Factory&#x6C60;&#xFF0C;&#x4EE5;&#x53CA;&#x8BC6;&#x522B;&#x76EE;&#x6807;&#x7684;&#x80FD;&#x529B;</li>
-<li>&#x8D70;&#x65B0;&#x903B;&#x8F91;&#xFF1A;<code>ServiceMethodV2.parseAnnotationsV2(this, method)</code></li>
+<li>具备EventSource.Factory注册</li>
+<li>具备EventSourceAdapter.Factory池，以及识别目标的能力</li>
+<li>走新逻辑：<code>ServiceMethodV2.parseAnnotationsV2(this, method)</code></li>
 </ul>
 </blockquote>
-<pre><code class="lang-Java">
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RetrofitSSE</span> </span>{
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Map&lt;Method, ServiceMethod&lt;?&gt;&gt; serviceMethodCache = <span class="hljs-keyword">new</span> ConcurrentHashMap&lt;&gt;();
+<pre><code class="language-Java">
+public final class RetrofitSSE {
+    private final Map&lt;Method, ServiceMethod&lt;?&gt;&gt; serviceMethodCache = new ConcurrentHashMap&lt;&gt;();
 
-    <span class="hljs-keyword">final</span> Retrofit retrofit;
+    final Retrofit retrofit;
 
-    <span class="hljs-meta">@NotNull</span>
-    <span class="hljs-keyword">final</span> EventSource.Factory eventSourceFactory;
+    @NotNull
+    final EventSource.Factory eventSourceFactory;
 
-    <span class="hljs-keyword">final</span> List&lt;EventSourceAdapter.Factory&gt; eventSourceAdapterFactories = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    final List&lt;EventSourceAdapter.Factory&gt; eventSourceAdapterFactories = new ArrayList&lt;&gt;();
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RetrofitSSE</span><span class="hljs-params">(Retrofit retrofit, @NotNull EventSource.Factory eventSourceFactory)</span> </span>{
-        <span class="hljs-keyword">this</span>.retrofit = retrofit;
-        <span class="hljs-keyword">this</span>.eventSourceFactory = eventSourceFactory;
+    public RetrofitSSE(Retrofit retrofit, @NotNull EventSource.Factory eventSourceFactory) {
+        this.retrofit = retrofit;
+        this.eventSourceFactory = eventSourceFactory;
     }
 
 
-    <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">&quot;unchecked&quot;</span>) <span class="hljs-comment">// Single-interface proxy creation guarded by parameter safety.</span>
-    <span class="hljs-keyword">public</span> &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">create</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Class&lt;T&gt; service)</span> </span>{
-        <span class="hljs-comment">//ignore</span>
+    @SuppressWarnings("unchecked") // Single-interface proxy creation guarded by parameter safety.
+    public &lt;T&gt; T create(final Class&lt;T&gt; service) {
+        //ignore
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> RetrofitSSE <span class="hljs-title">addEventSourceAdapterFactory</span><span class="hljs-params">(EventSourceAdapter.Factory factory)</span> </span>{
-        eventSourceAdapterFactories.add(Objects.requireNonNull(factory, <span class="hljs-string">&quot;factory == null&quot;</span>));
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    public RetrofitSSE addEventSourceAdapterFactory(EventSourceAdapter.Factory factory) {
+        eventSourceAdapterFactories.add(Objects.requireNonNull(factory, "factory == null"));
+        return this;
     }
 
     ServiceMethod&lt;?&gt; loadServiceMethod(Method method) {
         ServiceMethod&lt;?&gt; result = serviceMethodCache.get(method);
-        <span class="hljs-keyword">if</span> (result != <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> result;
+        if (result != null) return result;
 
-        <span class="hljs-keyword">synchronized</span> (serviceMethodCache) {
+        synchronized (serviceMethodCache) {
             result = serviceMethodCache.get(method);
-            <span class="hljs-keyword">if</span> (result == <span class="hljs-keyword">null</span>) {
-                result = ServiceMethodV2.parseAnnotationsV2(<span class="hljs-keyword">this</span>, method);
+            if (result == null) {
+                result = ServiceMethodV2.parseAnnotationsV2(this, method);
                 serviceMethodCache.put(method, result);
             }
         }
-        <span class="hljs-keyword">return</span> result;
+        return result;
     }
 
 
-    <span class="hljs-keyword">public</span> EventSourceAdapter&lt;?&gt; eventSourceAdapter(Type returnType, Annotation[] annotations) {
-        <span class="hljs-keyword">return</span> nextEventSourceAdapter(<span class="hljs-keyword">null</span>, returnType, annotations);
+    public EventSourceAdapter&lt;?&gt; eventSourceAdapter(Type returnType, Annotation[] annotations) {
+        return nextEventSourceAdapter(null, returnType, annotations);
     }
 
 
-    <span class="hljs-keyword">public</span> EventSourceAdapter&lt;?&gt; nextEventSourceAdapter(
-            <span class="hljs-meta">@Nullable</span> EventSourceAdapter.Factory skipPast, Type returnType, Annotation[] annotations) {
-        Objects.requireNonNull(returnType, <span class="hljs-string">&quot;returnType == null&quot;</span>);
-        Objects.requireNonNull(annotations, <span class="hljs-string">&quot;annotations == null&quot;</span>);
+    public EventSourceAdapter&lt;?&gt; nextEventSourceAdapter(
+            @Nullable EventSourceAdapter.Factory skipPast, Type returnType, Annotation[] annotations) {
+        Objects.requireNonNull(returnType, "returnType == null");
+        Objects.requireNonNull(annotations, "annotations == null");
 
-        <span class="hljs-keyword">int</span> start = eventSourceAdapterFactories.indexOf(skipPast) + <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = start, count = eventSourceAdapterFactories.size(); i &lt; count; i++) {
-            EventSourceAdapter&lt;?&gt; adapter = eventSourceAdapterFactories.get(i).get(returnType, annotations, <span class="hljs-keyword">this</span>);
-            <span class="hljs-keyword">if</span> (adapter != <span class="hljs-keyword">null</span>) {
-                <span class="hljs-keyword">return</span> adapter;
+        int start = eventSourceAdapterFactories.indexOf(skipPast) + 1;
+        for (int i = start, count = eventSourceAdapterFactories.size(); i &lt; count; i++) {
+            EventSourceAdapter&lt;?&gt; adapter = eventSourceAdapterFactories.get(i).get(returnType, annotations, this);
+            if (adapter != null) {
+                return adapter;
             }
         }
 
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-comment">/*ignore*/</span>);
+        throw new IllegalArgumentException(/*ignore*/);
     }
 }
+
 </code></pre>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x66F4;&#x591A;&#x7684;&#x4EE3;&#x7801;&#x7EC6;&#x8282;&#xFF0C;&#x8FD8;&#x8BF7;&#x79FB;&#x6B65; <a href="https://github.com/leobert-lan/SSE-android-Demo" target="_blank">&#x4EE3;&#x7801;&#x4ED3;&#x5E93;</a> &#x9700;&#x5207;&#x6362;&#x5230; <code>retrofit-sse</code> &#x5206;&#x652F;&#xFF01;</em></p>
-<h2 id="&#x7ED3;&#x8BED;"><a name="&#x7ED3;&#x8BED;" class="anchor-navigation-ex-anchor" href="#&#x7ED3;&#x8BED;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7ED3;&#x8BED;</h2>
-<p>&#x53C8;&#x5230;&#x4E86;&#x8BF4;&#x518D;&#x89C1;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4E00;&#x540C;&#x5B8C;&#x6210;&#x4E86;&#xFF1A;</p>
+<p><em>作者按：更多的代码细节，还请移步 <a href="https://github.com/leobert-lan/SSE-android-Demo">代码仓库</a> 需切换到 <code>retrofit-sse</code> 分支！</em></p>
+<h2 id="结语"><a class="header" href="#结语">结语</a></h2>
+<p>又到了说再见的时候，这篇文章中，我们一同完成了：</p>
 <ul>
-<li>&#x83B7;&#x53D6;&#x670D;&#x52A1;&#x7AEF;&#x957F;&#x8017;&#x65F6;&#x4EFB;&#x52A1;&#x7ED3;&#x679C;&#x7684;&#x5E38;&#x89C1;&#x5B9E;&#x8DF5;&#x65B9;&#x5F0F;&#x7684;&#x5F52;&#x7EB3;</li>
-<li>&#x5BF9;SSE&#x8FDB;&#x884C;&#x4E86;&#x8BE6;&#x7EC6;&#x7684;&#x8BA8;&#x8BBA;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x5176;&#x534F;&#x8BAE;&#x7EC6;&#x8282;</li>
-<li>&#x642D;&#x5EFA;SSE&#x670D;&#x52A1;&#x7AEF;&#x3001;&#x4F7F;&#x7528;OKHttp&#x642D;&#x5EFA;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x8FDB;&#x884C;&#x5B9E;&#x64CD;</li>
-<li>&#x5BF9;Retrofit&#x8FDB;&#x884C;&#x4E86;&#x5206;&#x6790;&#xFF0C;&#x63A2;&#x8BA8;&#x5E76;&#x53D1;&#x73B0;&#x4E86;&#x4E00;&#x6761;&#x6269;&#x5C55;&#x8DEF;&#x5F84;&#xFF0C;&#x53EF;&#x901A;&#x8FC7;Retrofit&#x4F7F;&#x7528;SSE</li>
+<li>获取服务端长耗时任务结果的常见实践方式的归纳</li>
+<li>对SSE进行了详细的讨论，尤其是其协议细节</li>
+<li>搭建SSE服务端、使用OKHttp搭建客户端，进行实操</li>
+<li>对Retrofit进行了分析，探讨并发现了一条扩展路径，可通过Retrofit使用SSE</li>
 </ul>
-<p><strong>&#x5E94;&#x5F53;&#x662F;&#x4E00;&#x6B21;&#x6709;&#x8DA3;&#x3001;&#x597D;&#x73A9;&#x7684;&#x5386;&#x7A0B;&#xFF01;</strong></p>
-<p>&#x5728;&#x7ED3;&#x5C3E;&#xFF0C;&#x8FD8;&#x662F;&#x518D;&#x6B21;&#x63D0;&#x9192;&#xFF0C;<a href="https://github.com/leobert-lan/SSE-android-Demo" target="_blank">&#x4EE3;&#x7801;&#x4ED3;&#x5E93;</a> &#x4E2D;Retrofit-SSE&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x5E76;&#x672A;&#x7ECF;&#x8FC7;&#x4E25;&#x8C28;&#x7684;&#x8BBE;&#x8BA1;&#x8BBA;&#x8BC1;&#x5E76;&#x8FDB;&#x884C;&#x5145;&#x5206;&#x7684;&#x6D4B;&#x8BD5;&#xFF0C;
-&#x6211;&#x4EC5;&#x82B1;&#x8D39;&#x4E86;&#x6570;&#x5C0F;&#x65F6;&#x65F6;&#x95F4;&#x5B9E;&#x73B0;&#x535A;&#x5BA2;&#x5185;&#x5BB9;&#x6240;&#x9700;&#x7684;&#x6700;&#x5C11;&#x8BBE;&#x8BA1;&#xFF0C;&#x52BF;&#x5FC5;&#x4F1A;&#x5B58;&#x5728;BUG&#x548C;&#x8BBE;&#x8BA1;&#x4E0D;&#x5065;&#x5168;&#x7684;&#x5185;&#x5BB9;&#xFF0C;<strong>&#x4E0D;&#x8981;&#x76F4;&#x63A5;&#x5546;&#x7528;&#xFF0C;&#x4EE5;&#x514D;&#x5F71;&#x54CD;&#x7EE9;&#x6548;</strong>&#x3002;</p>
-<p>&#x6C47;&#x603B;&#x94FE;&#x63A5;&#x5982;&#x4E0B;&#xFF1A;</p>
-<p><a href="https://html.spec.whatwg.org/multipage/server-sent-events.html" target="_blank">SSE&#x534F;&#x8BAE;&#x5185;&#x5BB9;&#x6269;&#x5C55;&#x9605;&#x8BFB;</a></p>
-<p><a href="https://www.rfc-editor.org/rfc/rfc5234" target="_blank">ABNF&#x8BED;&#x6CD5;RFC</a></p>
-<p><a href="https://github.com/leobert-lan/SSE-android-Demo" target="_blank">&#x670D;&#x52A1;&#x7AEF; SSE demo&#x4EE3;&#x7801;&#x4ED3;&#x5E93;</a></p>
-<p><a href="https://github.com/square/retrofit/issues/1029" target="_blank">Retrofit&#x5173;&#x4E8E;SSE&#x7684;&#x8BA8;&#x8BBA;issue</a></p>
-<p><a href="https://github.com/leobert-lan/SSE-android-Demo" target="_blank">Android&#x4EE3;&#x7801;&#x4ED3;&#x5E93;</a> &#x6CE8;&#x610F;&#x5206;&#x652F;</p>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2023-10-16 22:17:22
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+<p><strong>应当是一次有趣、好玩的历程！</strong></p>
+<p>在结尾，还是再次提醒，<a href="https://github.com/leobert-lan/SSE-android-Demo">代码仓库</a> 中Retrofit-SSE的代码，并未经过严谨的设计论证并进行充分的测试，
+我仅花费了数小时时间实现博客内容所需的最少设计，势必会存在BUG和设计不健全的内容，<strong>不要直接商用，以免影响绩效</strong>。</p>
+<p>汇总链接如下：</p>
+<p><a href="https://html.spec.whatwg.org/multipage/server-sent-events.html">SSE协议内容扩展阅读</a></p>
+<p><a href="https://www.rfc-editor.org/rfc/rfc5234">ABNF语法RFC</a></p>
+<p><a href="https://github.com/leobert-lan/SSE-android-Demo">服务端 SSE demo代码仓库</a></p>
+<p><a href="https://github.com/square/retrofit/issues/1029">Retrofit关于SSE的讨论issue</a></p>
+<p><a href="https://github.com/leobert-lan/SSE-android-Demo">Android代码仓库</a> 注意分支</p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../repo/post_48.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../Review/DataStructure/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="../repo/post_48.html" class="navigation navigation-prev " aria-label="Previous page: 研究良久，终于发现了他代码写的快且bug少的原因">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="../Review/DataStructure/" class="navigation navigation-next " aria-label="Next page: 数据结构">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../repo/post_48.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../Review/DataStructure/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧","level":"1.9.5","depth":2,"next":{"title":"数据结构","level":"2.1","depth":1,"path":"Review/DataStructure/README.md","ref":"./Review/DataStructure/README.md","articles":[{"title":"温故：线性表","level":"2.1.1","depth":2,"path":"Review/DataStructure/post_11.md","ref":"./Review/DataStructure/post_11.md","articles":[]},{"title":"温故：栈","level":"2.1.2","depth":2,"path":"Review/DataStructure/post_12.md","ref":"./Review/DataStructure/post_12.md","articles":[]},{"title":"温故：队列","level":"2.1.3","depth":2,"path":"Review/DataStructure/post_13.md","ref":"./Review/DataStructure/post_13.md","articles":[]}]},"previous":{"title":"研究良久，终于发现了他代码写的快且bug少的原因","level":"1.9.4","depth":2,"path":"repo/post_48.md","ref":"./repo/post_48.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Speculative/post_61.md","mtime":"2023-10-16T14:17:22.073Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../gitbook/gitbook.js"></script>
-    <script src="../gitbook/theme.js"></script>
-    
-        
-        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-

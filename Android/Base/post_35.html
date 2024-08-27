@@ -1,1523 +1,248 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>孔乙己：你可知道页面和弹窗“通信“的方式有四种？ · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>孔乙己：你可知道页面和弹窗“通信“的方式有四种？ - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="../SysApp/" />
-    
-    
-    <link rel="prev" href="./" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../../">
-            
-                <a href="../../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../View/">
-            
-                <a href="../View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../View/post_1.html">
-            
-                <a href="../View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../View/post_6.html">
-            
-                <a href="../View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../View/post_7.html">
-            
-                <a href="../View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="../Idea/post_9.html">
-            
-                <a href="../Idea/post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../Drawable/">
-            
-                <a href="../Drawable/">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="../Drawable/post_2.html">
-            
-                <a href="../Drawable/post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="../Drawable/post_4.html">
-            
-                <a href="../Drawable/post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="../Drawable/post_47.html">
-            
-                <a href="../Drawable/post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.4" data-path="../Drawable/post_49.html">
-            
-                <a href="../Drawable/post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../Mechanism/Message/">
-            
-                <a href="../Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../Mechanism/Message/post_8.html">
-            
-                <a href="../Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../Idea/post_14/">
-            
-                <a href="../Idea/post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.4.1" data-path="../Idea/post_14.html">
-            
-                <a href="../Idea/post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="../Glide/">
-            
-                <a href="../Glide/">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.5.1" data-path="../Glide/post_15.html">
-            
-                <a href="../Glide/post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5.2" data-path="../Glide/post_16.html">
-            
-                <a href="../Glide/post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../KSP/">
-            
-                <a href="../KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../KSP/post_24.html">
-            
-                <a href="../KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter active" data-level="1.2.7.1" data-path="post_35.html">
-            
-                <a href="post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../SysApp/">
-            
-                <a href="../SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../SysApp/post_52.html">
-            
-                <a href="../SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../DI/">
-            
-                <a href="../DI/">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.9.1" data-path="../DI/post_53.html">
-            
-                <a href="../DI/post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../../Compose/">
-            
-                <a href="../../Compose/">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="../../Compose/post_21.html">
-            
-                <a href="../../Compose/post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../../Compose/post_26.html">
-            
-                <a href="../../Compose/post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="../../Compose/post_27.html">
-            
-                <a href="../../Compose/post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="../../Compose/post_28.html">
-            
-                <a href="../../Compose/post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="../../Compose/post_29.html">
-            
-                <a href="../../Compose/post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="../../Compose/post_30.html">
-            
-                <a href="../../Compose/post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../../MultiThreading/">
-            
-                <a href="../../MultiThreading/">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../../MultiThreading/post_33.html">
-            
-                <a href="../../MultiThreading/post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../../MultiThreading/post_37.html">
-            
-                <a href="../../MultiThreading/post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="../../MultiThreading/post_38.html">
-            
-                <a href="../../MultiThreading/post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="../../MultiThreading/post_39.html">
-            
-                <a href="../../MultiThreading/post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="../../MultiThreading/post_42.html">
-            
-                <a href="../../MultiThreading/post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.6" data-path="../../MultiThreading/post_46.html">
-            
-                <a href="../../MultiThreading/post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="../../MultiThreading/post_50.html">
-            
-                <a href="../../MultiThreading/post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="../../MultiThreading/post_54.html">
-            
-                <a href="../../MultiThreading/post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="../../IO/">
-            
-                <a href="../../IO/">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="../../IO/post_55.html">
-            
-                <a href="../../IO/post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="../../IO/post_56.html">
-            
-                <a href="../../IO/post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="../../IO/post_57.html">
-            
-                <a href="../../IO/post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="../../IO/post_58.html">
-            
-                <a href="../../IO/post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="../../IO/post_59.html">
-            
-                <a href="../../IO/post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../../Gradle/">
-            
-                <a href="../../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../../Gradle/Modularization/post_18.html">
-            
-                <a href="../../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../../Gradle/Publish/post_17.html">
-            
-                <a href="../../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../../Gradle/post_22.html">
-            
-                <a href="../../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../../Groovy/">
-            
-                <a href="../../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../../Groovy/why_write_groovy.html">
-            
-                <a href="../../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../../Groovy/post_23.html">
-            
-                <a href="../../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="../../Review/">
-            
-                <a href="../../Review/">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="../../Review/post_10.html">
-            
-                <a href="../../Review/post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="../../Review/post_40.html">
-            
-                <a href="../../Review/post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.3" data-path="../../Review/post_44.html">
-            
-                <a href="../../Review/post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="../../Review/post_45.html">
-            
-                <a href="../../Review/post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../../repo/">
-            
-                <a href="../../repo/">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../../repo/DaVinCi.html">
-            
-                <a href="../../repo/DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../Idea/post_32.html">
-            
-                <a href="../Idea/post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../../Speculative/post_43.html">
-            
-                <a href="../../Speculative/post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../../repo/post_48.html">
-            
-                <a href="../../repo/post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../../Speculative/post_61.html">
-            
-                <a href="../../Speculative/post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="../../Review/DataStructure/">
-            
-                <a href="../../Review/DataStructure/">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1.1" data-path="../../Review/DataStructure/post_11.html">
-            
-                <a href="../../Review/DataStructure/post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="../../Review/DataStructure/post_12.html">
-            
-                <a href="../../Review/DataStructure/post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="../../Review/DataStructure/post_13.html">
-            
-                <a href="../../Review/DataStructure/post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="../../Review/README2.html">
-            
-                <a href="../../Review/README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="../../Review/post_36.html">
-            
-                <a href="../../Review/post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="../../Review/post_51.html">
-            
-                <a href="../../Review/post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="../../Review/post_60.html">
-            
-                <a href="../../Review/post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="../../Review/post_63.html">
-            
-                <a href="../../Review/post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="../../Review/post_64.html">
-            
-                <a href="../../Review/post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../../Note/">
-            
-                <a href="../../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../../Note/post_41.html">
-            
-                <a href="../../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../../Talk/">
-            
-                <a href="../../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../../Talk/talk_1.html">
-            
-                <a href="../../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../../Talk/talk_2_2023-03.html">
-            
-                <a href="../../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../../Thought/">
-            
-                <a href="../../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../../Thought/post_62.html">
-            
-                <a href="../../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../../info/">
-            
-                <a href="../../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../../info/about_view_series.html">
-            
-                <a href="../../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../../info/about_sansi_series.html">
-            
-                <a href="../../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../../info/about_haowan_series.html">
-            
-                <a href="../../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../../info/about_wengu_series.html">
-            
-                <a href="../../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#&#x5B54;&#x4E59;&#x5DF1;&#xFF1A;&#x4F60;&#x53EF;&#x77E5;&#x9053;&#x9875;&#x9762;&#x548C;&#x5F39;&#x7A97;&#x901A;&#x4FE1;&#x7684;&#x65B9;&#x5F0F;&#x6709;&#x56DB;&#x79CD;&#xFF1F;"><b></b>&#x5B54;&#x4E59;&#x5DF1;&#xFF1A;&#x4F60;&#x53EF;&#x77E5;&#x9053;&#x9875;&#x9762;&#x548C;&#x5F39;&#x7A97;&#x201C;&#x901A;&#x4FE1;&#x201C;&#x7684;&#x65B9;&#x5F0F;&#x6709;&#x56DB;&#x79CD;&#xFF1F;</a></li><ul><li><span class="title-icon "></span><a href="#&#x6700;&#x4E45;&#x8FDC;&#x7684;&#x505A;&#x6CD5;-dialog"><b></b>&#x6700;&#x4E45;&#x8FDC;&#x7684;&#x505A;&#x6CD5;: Dialog</a></li><ul><li><span class="title-icon "></span><a href="#&#x505A;&#x6CD5;"><b></b>&#x505A;&#x6CD5;</a></li><li><span class="title-icon "></span><a href="#&#x4F18;&#x70B9;"><b></b>&#x4F18;&#x70B9;</a></li><li><span class="title-icon "></span><a href="#&#x7F3A;&#x70B9;"><b></b>&#x7F3A;&#x70B9;</a></li></ul><li><span class="title-icon "></span><a href="#&#x4E0D;&#x64CD;&#x5FC3;&#x751F;&#x547D;&#x5468;&#x671F;&#x53D8;&#x5316;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;dialogfragment--settargetfragment"><b></b>&#x4E0D;&#x64CD;&#x5FC3;&#x751F;&#x547D;&#x5468;&#x671F;&#x53D8;&#x5316;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;DialogFragment + setTargetFragment</a></li><ul><li><span class="title-icon "></span><a href="#&#x505A;&#x6CD5;_1"><b></b>&#x505A;&#x6CD5;</a></li><li><span class="title-icon "></span><a href="#&#x4F18;&#x70B9;_1"><b></b>&#x4F18;&#x70B9;</a></li><li><span class="title-icon "></span><a href="#&#x7F3A;&#x70B9;_1"><b></b>&#x7F3A;&#x70B9;</a></li></ul><li><span class="title-icon "></span><a href="#&#x4E0D;&#x9760;&#x8C31;&#x7684;-dialogfragment--callback"><b></b>&#x4E0D;&#x9760;&#x8C31;&#x7684; DialogFragment + Callback</a></li><ul><li><span class="title-icon "></span><a href="#&#x505A;&#x6CD5;_2"><b></b>&#x505A;&#x6CD5;</a></li><li><span class="title-icon "></span><a href="#&#x4F18;&#x70B9;_2"><b></b>&#x4F18;&#x70B9;</a></li><li><span class="title-icon "></span><a href="#&#x7F3A;&#x70B9;_2"><b></b>&#x7F3A;&#x70B9;</a></li></ul><li><span class="title-icon "></span><a href="#&#x62E5;&#x62B1;&#x65B0;&#x53D8;&#x5316;&#xFF1A;fragmentresultlistener"><b></b>&#x62E5;&#x62B1;&#x65B0;&#x53D8;&#x5316;&#xFF1A;FragmentResultListener</a></li><ul><li><span class="title-icon "></span><a href="#&#x505A;&#x6CD5;_3"><b></b>&#x505A;&#x6CD5;</a></li></ul><li><span class="title-icon "></span><a href="#&#x9644;"><b></b>&#x9644;</a></li></ul></ul></div><a href="#&#x5B54;&#x4E59;&#x5DF1;&#xFF1A;&#x4F60;&#x53EF;&#x77E5;&#x9053;&#x9875;&#x9762;&#x548C;&#x5F39;&#x7A97;&#x901A;&#x4FE1;&#x7684;&#x65B9;&#x5F0F;&#x6709;&#x56DB;&#x79CD;&#xFF1F;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x5B54;&#x4E59;&#x5DF1;&#xFF1A;&#x4F60;&#x53EF;&#x77E5;&#x9053;&#x9875;&#x9762;&#x548C;&#x5F39;&#x7A97;&#x901A;&#x4FE1;&#x7684;&#x65B9;&#x5F0F;&#x6709;&#x56DB;&#x79CD;&#xFF1F;"><a name="&#x5B54;&#x4E59;&#x5DF1;&#xFF1A;&#x4F60;&#x53EF;&#x77E5;&#x9053;&#x9875;&#x9762;&#x548C;&#x5F39;&#x7A97;&#x901A;&#x4FE1;&#x7684;&#x65B9;&#x5F0F;&#x6709;&#x56DB;&#x79CD;&#xFF1F;" class="anchor-navigation-ex-anchor" href="#&#x5B54;&#x4E59;&#x5DF1;&#xFF1A;&#x4F60;&#x53EF;&#x77E5;&#x9053;&#x9875;&#x9762;&#x548C;&#x5F39;&#x7A97;&#x901A;&#x4FE1;&#x7684;&#x65B9;&#x5F0F;&#x6709;&#x56DB;&#x79CD;&#xFF1F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5B54;&#x4E59;&#x5DF1;&#xFF1A;&#x4F60;&#x53EF;&#x77E5;&#x9053;&#x9875;&#x9762;&#x548C;&#x5F39;&#x7A97;&#x201C;&#x901A;&#x4FE1;&#x201C;&#x7684;&#x65B9;&#x5F0F;&#x6709;&#x56DB;&#x79CD;&#xFF1F;</h1>
-<p><em>&#x6F14;&#x793A;&#x7528;&#x6E90;&#x7801;&#x548C;&#x5185;&#x5BB9;&#x601D;&#x7EF4;&#x5BFC;&#x56FE;&#x4E8E;&#x6587;&#x672B;</em></p>
-<p>&#x8FD9;&#x65E5;&#x5B54;&#x4E59;&#x5DF1;&#x7167;&#x5E38;&#x8D70;&#x8FDB;&#x661F;&#x5DF4;&#x514B;&#xFF0C;&#x70B9;&#x4E86;&#x4EFD;&#x5927;&#x676F;&#x62FF;&#x94C1;&#xFF0C;&#x8FD8;&#x8981;&#x8131;&#x8102;&#x5976;&#x7684;&#xFF0C; &#x867D;&#x7136;&#x8FC7;&#x4E0A;&#x4E86;&#x5C0F;&#x5EB7;&#x751F;&#x6D3B;&#xFF0C;&#x4F46;&#x6BDB;&#x75C5;&#x8FD8;&#x662F;&#x6CA1;&#x6709;&#x6539;&#xFF0C;&#x7167;&#x4F8B;&#x638F;&#x51FA;&#x4E00;&#x5927;&#x628A;&#x786C;&#x5E01;&#xFF0C;&#x6392;&#x51FA;&#x4E09;&#x5341;&#x4E8C;&#x679A;&#x3002;</p>
-<p>&#x5C31;&#x5728;&#x7B49;&#x5F85;&#x65F6;&#xFF0C;&#x542C;&#x5230;&#x65C1;&#x8FB9;&#x4E00;&#x684C;&#x4EBA;&#x8BF4;&#x9053;&#xFF1A;&quot;&#x597D;&#x5144;&#x5F1F;&#xFF0C;&#x522B;&#x6478;&#x9C7C;&#x4E86;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x8BF7;&#x4F60;&#x559D;&#x5496;&#x5561;&#xFF0C;&#x8FD9;&#x4E2A;&#x5F39;&#x7A97;&#x529F;&#x80FD;&#x53EF;&#x52A1;&#x5FC5;&#x8981;&#x52A0;&#x597D;&#xFF0C;&#x4E0D;&#x80FD;&#x51FA;bug&#x554A;&quot;&#x3002;&quot;&#x5475;&#x5475;&#xFF0C;&#x4E00;&#x4E2A;&#x5F39;&#x7A97;&#x3001;&#x8FD8;&#x80FD;&#x96BE;&#x9053;&#x6211;&#x4F1F;&#x5927;&#x7684;Android&#x5DE5;&#x7A0B;&#x5E08;&#xFF1F;&quot;
-&#x624B;&#x6307;&#x5B54;&#x4E59;&#x5DF1;&#x8BF4;&#x9053;&#xFF1A;&quot;&#x5728;&#x4ED6;&#x62FF;&#x5230;&#x5496;&#x5561;&#x524D;&#xFF0C;&#x6211;&#x5C31;&#x80FD;&#x5199;&#x597D;&#xFF0C;bug&#x4E0D;&#x5B58;&#x5728;&#x7684;&#xFF01;&quot;</p>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x770B;&#x70ED;&#x95F9;&#x4E0D;&#x5ACC;&#x4E8B;&#x5927;&#xFF0C;&#x51D1;&#x4E0A;&#x524D;&#x53BB;&#xFF0C;&quot;&#x54DF;&#x56AF;&#xFF0C;&#x5C0F;&#x5144;&#x5F1F;&#x5E74;&#x7EAA;&#x4E0D;&#x5927;&#x53E3;&#x6C14;&#x4E0D;&#x5C0F;&#xFF0C;&#x4F60;&#x53EF;&#x77E5;&#x9053;Android&#x4E2D;&#x754C;&#x9762;&#x4F7F;&#x7528;&#x5F39;&#x7A97;&#xFF0C;&#x6709;&#x56DB;&#x79CD;&#x5199;&#x6CD5;&#xFF1F;&#x4ECA;&#x5929;&#x5C31;&#x8BA9;&#x6211;&#x5B54;&#x4E59;&#x5DF1;&#x6765;&#x548C;&#x4F60;&#x8BF4;&#x9053;&#x8BF4;&#x9053;&quot;</p>
-<p>&#x4F17;&#x4EBA;&#x54C2;&#x7B11;&#xFF1A;&quot;&#x8FD9;&#x5B54;&#x4E59;&#x5DF1;&#x8FD8;&#x771F;&#x662F;&#x5B54;&#x4E59;&#x5DF1;&#xFF0C;&#x8334;&#x9999;&#x8C46;&#x7684;&#x8334;&#x5B57;&#x4F60;&#x662F;&#x4E0D;&#x662F;&#x4E5F;&#x8981;&#x8BF4;&#x9053;&#x8BF4;&#x9053;&#xFF1F;&quot;</p>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x5927;&#x6012;&#x9053;&#xFF1A;&quot;&#x8FD9;&#x53EF;&#x4E0D;&#x662F;&#x8334;&#x9999;&#x8C46;&#x7684;&#x8334;&#x5B57;&#xFF01;&#x8FD9;&#x53EF;&#x662F;&#x5FC5;&#x5907;&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#x554A;&#xFF0C;&#x6709;&#x4E9B;&#x4F60;&#x4ECA;&#x5929;&#x7528;&#x4E0D;&#x7740;&#x4E86;&#xFF0C;&#x4F46;&#x9047;&#x4E0A;&#x7956;&#x4F20;&#x4EE3;&#x7801;&#x5462;&#xFF1F;&quot;</p>
-<p>&#x4E3A;&#x4E86;&#x8BF4;&#x7684;&#x6E05;&#x6670;&#x4E9B;&#xFF0C;&#x6211;&#x4EEC;&#x7EA6;&#x5B9A;&#xFF1A;&quot;&#x5728;&#x754C;&#x9762;&#x70B9;&#x51FB;&#x6309;&#x94AE;&#x89E6;&#x53D1;&#x5F39;&#x7A97;&#x3001;&#x5F39;&#x7A97;&#x4E2D;&#x53EF;&#x8F93;&#x5165;&#x6587;&#x5B57;&#xFF0C;&#x786E;&#x5B9A;&#x540E;&#x5C06;&#x8F93;&#x5165;&#x7684;&#x5185;&#x5BB9;&#x663E;&#x793A;&#x5728;&#x6309;&#x94AE;&#x4E0A;&#x65B9;&#x7684;&#x6587;&#x672C;&#x6846;&#x4E2D;&#x3002;&#x8BA9;&#x573A;&#x666F;&#x66F4;&#x52A0;&#x771F;&#x5B9E;&#x4E9B;&#xFF0C;&#x754C;&#x9762;&#x5305;&#x542B;Activity&#x754C;&#x9762;&#x548C;Fragment&#x754C;&#x9762;&#x4E24;&#x79CD;&#x4E3B;&#x6D41;&#x60C5;&#x51B5;&quot;&#x3002;</p>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x51C6;&#x5907;&#x5148;&#x505A;&#x70B9;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;&#xFF1A;&#x5C01;&#x88C5;&#x4E24;&#x79CD;&#x60C5;&#x51B5;&#x83B7;&#x53D6;Context&#x3001;&#x7ED1;&#x5B9A;View&#x3001;&#x7ED1;&#x5B9A;&#x4E8B;&#x4EF6;</p>
-<p><em>&#x8BF8;&#x4F4D;&#x53EF;&#x4EE5;&#x5FFD;&#x7565;&#x4E0B;&#x9762;&#x8FD9;&#x6BB5;&#x6A21;&#x677F;&#x4EE3;&#x7801;&#xFF0C;&#x4EC5;&#x4EC5;&#x662F;&#x62C5;&#x5FC3;&#x540E;&#x7EED;&#x5185;&#x5BB9;&#x4E2D;&#x7684;&#x4EE3;&#x7801;&#x5F15;&#x8D77;&#x7591;&#x60D1;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8DF3;&#x8DC3;&#x5230; <a href="#demo1">&#x6700;&#x4E45;&#x8FDC;&#x7684;&#x505A;&#x6CD5;: Dialog</a></em></p>
-<pre><code class="lang-kotlin">sealed <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Host</span> </span>{
-    abstract <span class="hljs-variable"><span class="hljs-keyword">val</span> context</span>: Context
-
-    abstract <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T : View&gt;</span> <span class="hljs-title">view</span><span class="hljs-params">(@IdRes id: <span class="hljs-type">Int</span>)</span>: T</span>
-    abstract <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">launchFragment</span><span class="hljs-params">(fragment: <span class="hljs-type">DialogFragment</span>)</span></span>
-    abstract <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">launchFragment2</span><span class="hljs-params">(fragment: <span class="hljs-type">DialogFragment, listener: FragmentResultListener</span>)</span></span>
-
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ActivityHost</span></span>(<span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> activity</span>: AppCompatActivity) : Host() {
-        <span class="hljs-keyword">override</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> context</span>: Context
-            <span class="hljs-keyword">get</span>() = activity
-
-        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T : View&gt;</span> <span class="hljs-title">view</span><span class="hljs-params">(id: <span class="hljs-type">Int</span>)</span>: T {</span>
-            <span class="hljs-keyword">return</span> activity.findViewById(id)
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Base/post_35.html" class="active"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="孔乙己你可知道页面和弹窗通信的方式有四种"><a class="header" href="#孔乙己你可知道页面和弹窗通信的方式有四种">孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></h1>
+<p><em>演示用源码和内容思维导图于文末</em></p>
+<p>这日孔乙己照常走进星巴克，点了份大杯拿铁，还要脱脂奶的， 虽然过上了小康生活，但毛病还是没有改，照例掏出一大把硬币，排出三十二枚。</p>
+<p>就在等待时，听到旁边一桌人说道："好兄弟，别摸鱼了，今天我请你喝咖啡，这个弹窗功能可务必要加好，不能出bug啊"。"呵呵，一个弹窗、还能难道我伟大的Android工程师？"
+手指孔乙己说道："在他拿到咖啡前，我就能写好，bug不存在的！"</p>
+<p>孔乙己看热闹不嫌事大，凑上前去，"哟嚯，小兄弟年纪不大口气不小，你可知道Android中界面使用弹窗，有四种写法？今天就让我孔乙己来和你说道说道"</p>
+<p>众人哂笑："这孔乙己还真是孔乙己，茴香豆的茴字你是不是也要说道说道？"</p>
+<p>孔乙己大怒道："这可不是茴香豆的茴字！这可是必备的基础知识啊，有些你今天用不着了，但遇上祖传代码呢？"</p>
+<p>为了说的清晰些，我们约定："在界面点击按钮触发弹窗、弹窗中可输入文字，确定后将输入的内容显示在按钮上方的文本框中。让场景更加真实些，界面包含Activity界面和Fragment界面两种主流情况"。</p>
+<p>孔乙己准备先做点准备工作：封装两种情况获取Context、绑定View、绑定事件</p>
+<p><em>诸位可以忽略下面这段模板代码，仅仅是担心后续内容中的代码引起疑惑，可以直接跳跃到 <a href="#demo1">最久远的做法: Dialog</a></em></p>
+<pre><code class="language-kotlin">sealed class Host {
+    abstract val context: Context
+
+    abstract fun &lt;T : View&gt; view(@IdRes id: Int): T
+    abstract fun launchFragment(fragment: DialogFragment)
+    abstract fun launchFragment2(fragment: DialogFragment, listener: FragmentResultListener)
+
+    class ActivityHost(private val activity: AppCompatActivity) : Host() {
+        override val context: Context
+            get() = activity
+
+        override fun &lt;T : View&gt; view(id: Int): T {
+            return activity.findViewById(id)
         }
 
-        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">launchFragment</span><span class="hljs-params">(fragment: <span class="hljs-type">DialogFragment</span>)</span> {</span>
-            <span class="hljs-comment">//&#x4E0B;&#x6587;&#x5C55;&#x5F00;</span>
+        override fun launchFragment(fragment: DialogFragment) {
+            //下文展开
         }
 
-        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">launchFragment2</span><span class="hljs-params">(fragment: <span class="hljs-type">DialogFragment, listener: FragmentResultListener</span>)</span> {</span>
-            <span class="hljs-comment">//&#x4E0B;&#x6587;&#x5C55;&#x5F00;</span>
+        override fun launchFragment2(fragment: DialogFragment, listener: FragmentResultListener) {
+            //下文展开
         }
     }
 
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FragmentHost</span></span>(<span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> fragment</span>: Fragment) : Host() {
-        <span class="hljs-keyword">override</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> context</span>: Context
-            <span class="hljs-keyword">get</span>() = fragment.requireContext()
+    class FragmentHost(private val fragment: Fragment) : Host() {
+        override val context: Context
+            get() = fragment.requireContext()
 
-        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-type">&lt;T : View&gt;</span> <span class="hljs-title">view</span><span class="hljs-params">(id: <span class="hljs-type">Int</span>)</span>: T {</span>
-            <span class="hljs-keyword">return</span> fragment.requireView().findViewById(id)
+        override fun &lt;T : View&gt; view(id: Int): T {
+            return fragment.requireView().findViewById(id)
         }
 
-        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">launchFragment</span><span class="hljs-params">(fragment: <span class="hljs-type">DialogFragment</span>)</span> {</span>
-            <span class="hljs-comment">//&#x4E0B;&#x6587;&#x5C55;&#x5F00;</span>
+        override fun launchFragment(fragment: DialogFragment) {
+            //下文展开
         }
 
-        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">launchFragment2</span><span class="hljs-params">(fragment: <span class="hljs-type">DialogFragment, listener: FragmentResultListener</span>)</span> {</span>
-            <span class="hljs-comment">//&#x4E0B;&#x6587;&#x5C55;&#x5F00;</span>
+        override fun launchFragment2(fragment: DialogFragment, listener: FragmentResultListener) {
+            //下文展开
         }
     }
 }
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span></span>(<span class="hljs-variable"><span class="hljs-keyword">val</span> host</span>: Host) {
+class Demo(val host: Host) {
 
     interface OnResultListener {
-        <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onResult</span><span class="hljs-params">(text: <span class="hljs-type">String?</span>)</span></span>
+        fun onResult(text: String?)
     }
 
-    <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> {
-        const <span class="hljs-variable"><span class="hljs-keyword">val</span> BUNDLE_STR_INPUT</span> = <span class="hljs-string">&quot;BUNDLE_STR_INPUT&quot;</span>
-        const <span class="hljs-variable"><span class="hljs-keyword">val</span> BUNDLE_BOOL_FROM_FG</span> = <span class="hljs-string">&quot;BUNDLE_BOOL_FROM_FG&quot;</span>
-        const <span class="hljs-variable"><span class="hljs-keyword">val</span> KEY_INPUT</span> = <span class="hljs-string">&quot;KEY_INPUT&quot;</span>
+    companion object {
+        const val BUNDLE_STR_INPUT = "BUNDLE_STR_INPUT"
+        const val BUNDLE_BOOL_FROM_FG = "BUNDLE_BOOL_FROM_FG"
+        const val KEY_INPUT = "KEY_INPUT"
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onStart</span><span class="hljs-params">()</span> {</span>
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> btnDemo1</span>: Button = host.view(R.id.btn1)
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> btnDemo2</span>: Button = host.view(R.id.btn2)
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> btnDemo3</span>: Button = host.view(R.id.btn3)
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> btnDemo4</span>: Button = host.view(R.id.btn4)
+    fun onStart() {
+        val btnDemo1: Button = host.view(R.id.btn1)
+        val btnDemo2: Button = host.view(R.id.btn2)
+        val btnDemo3: Button = host.view(R.id.btn3)
+        val btnDemo4: Button = host.view(R.id.btn4)
 
         btnDemo1.setOnClickListener { demo1() }
         btnDemo2.setOnClickListener { demo2() }
@@ -1525,289 +250,250 @@
         btnDemo4.setOnClickListener { demo4() }
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">setText</span><span class="hljs-params">(text: <span class="hljs-type">String?</span>)</span> {</span>
-        host.view<span class="hljs-type">&lt;TextView&gt;</span>(R.id.tv_result).text = text
+    fun setText(text: String?) {
+        host.view&lt;TextView&gt;(R.id.tv_result).text = text
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">demo1</span><span class="hljs-params">()</span> {</span>
+    private fun demo1() {
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">demo2</span><span class="hljs-params">()</span> {</span>
+    private fun demo2() {
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">demo3</span><span class="hljs-params">()</span> {</span>
+    private fun demo3() {
     }
 
-    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">demo4</span><span class="hljs-params">()</span> {</span>
+    private fun demo4() {
     }
 }
 </code></pre>
-<p>&#x5F88;&#x8F7B;&#x6613;&#x7684;&#xFF0C;&#x5B54;&#x4E59;&#x5DF1;&#x5B8C;&#x6210;&#x4E86;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;</p>
-<h2 id="&#x6700;&#x4E45;&#x8FDC;&#x7684;&#x505A;&#x6CD5;-dialog"><a name="&#x6700;&#x4E45;&#x8FDC;&#x7684;&#x505A;&#x6CD5;-dialog" class="anchor-navigation-ex-anchor" href="#&#x6700;&#x4E45;&#x8FDC;&#x7684;&#x505A;&#x6CD5;-dialog"><i class="fa fa-link" aria-hidden="true"></i></a><a id="demo1">&#x6700;&#x4E45;&#x8FDC;&#x7684;&#x505A;&#x6CD5;: Dialog</a></h2>
-<p>&#x8FD8;&#x80FD;&#x770B;&#x5230;&#x8FD9;&#x79CD;&#x505A;&#x6CD5;&#x7684;&#xFF0C;&#x90A3;&#x9879;&#x76EE;&#x4E00;&#x5B9A;&#x662F;&#x5386;&#x53F2;&#x60A0;&#x4E45;&#x4E86;&#x3002;</p>
-<h3 id="&#x505A;&#x6CD5;"><a name="&#x505A;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#&#x505A;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x505A;&#x6CD5;</h3>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x7EE7;&#x7EED;&#x8BF4;&#x9053;&#xFF1A;&quot;&#x8FD9;&#x79CD;&#x505A;&#x6CD5;&#x53EA;&#x9700;&#x8981;&#x62FF;&#x5230; Context &#x548C; &#x4E1A;&#x52A1;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x5373;&#x53EF;&quot;</p>
-<pre><code class="lang-kotlin"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">demo1</span><span class="hljs-params">()</span> {</span>
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> view</span> = LayoutInflater.from(host.context).inflate(R.layout.view_input, <span class="hljs-literal">null</span>)
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> dialog</span> = AlertDialog.Builder(host.context)
+<p>很轻易的，孔乙己完成了准备工作</p>
+<h2 id="最久远的做法-dialog"><a class="header" href="#最久远的做法-dialog"><a id="demo1">最久远的做法: Dialog</a></a></h2>
+<p>还能看到这种做法的，那项目一定是历史悠久了。</p>
+<h3 id="做法"><a class="header" href="#做法">做法</a></h3>
+<p>孔乙己继续说道："这种做法只需要拿到 Context 和 业务回调函数即可"</p>
+<pre><code class="language-kotlin">private fun demo1() {
+    val view = LayoutInflater.from(host.context).inflate(R.layout.view_input, null)
+    val dialog = AlertDialog.Builder(host.context)
         .setView(view)
-        .setPositiveButton(<span class="hljs-string">&quot;OK&quot;</span>) { dialog, _ -&gt;
+        .setPositiveButton("OK") { dialog, _ -&gt;
             dialog?.dismiss()
-            setText(view.findViewById<span class="hljs-type">&lt;EditText&gt;</span>(R.id.et_input)?.text?.toString())
+            setText(view.findViewById&lt;EditText&gt;(R.id.et_input)?.text?.toString())
         }
-        .setNegativeButton(<span class="hljs-string">&quot;cancel&quot;</span>) { dialog, _ -&gt; dialog?.dismiss() }
+        .setNegativeButton("cancel") { dialog, _ -&gt; dialog?.dismiss() }
         .create()
     dialog.show()
 }
 </code></pre>
-<h3 id="&#x4F18;&#x70B9;"><a name="&#x4F18;&#x70B9;" class="anchor-navigation-ex-anchor" href="#&#x4F18;&#x70B9;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F18;&#x70B9;</h3>
-<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x5B83;&#x7684;&#x4F18;&#x70B9;&#x5F88;&#x660E;&#x663E;&#xFF1A;<strong>&#x7B80;&#x5355;&#x3001;&#x6613;&#x4E8E;&#x5C01;&#x88C5;</strong>&#xFF0C;&#x8BF8;&#x4F4D;&#x53EF;&#x4EE5;&#x5F88;&#x5BB9;&#x6613;&#x7684;&#x6309;&#x7167;&#x4EA7;&#x54C1;&#x548C;UI&#x7684;&#x9700;&#x6C42;&#x3001;&#x5265;&#x79BB;&#x5F39;&#x7A97;UI&#x90E8;&#x5206;&#xFF0C;&#x4ECE;&#x800C;&#x4FDD;&#x6301;&#x4E1A;&#x52A1;&#x90E8;&#x5206; &quot;&#x7EAF;&#x7CB9;&quot;&#xFF0C; &#x65E2;&#x80FD;&#x591F; <code>&#x9AD8;&#x6548;&#x590D;&#x7528;</code> &#xFF0C;&#x4E5F; <code>&#x907F;&#x514D;</code> UI&#x53D8;&#x66F4;&#x65F6;&#x6539;&#x52A8;&#x4E1A;&#x52A1;&#x7C7B;&#x3002;</p>
-<h3 id="&#x7F3A;&#x70B9;"><a name="&#x7F3A;&#x70B9;" class="anchor-navigation-ex-anchor" href="#&#x7F3A;&#x70B9;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7F3A;&#x70B9;</h3>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x8F6C;&#x5934;&#x95EE;&#x5C0F;&#x5144;&#x5F1F;&#xFF1A;&quot;&#x4F60;&#x53EF;&#x77E5;&#x9053;&#x5B83;&#x7684;&#x7F3A;&#x70B9;&#x5417;&#xFF1F;&quot;&#xFF0C;&#x5C0F;&#x5144;&#x5F1F;&#x9ED8;&#x9ED8;&#x4E0D;&#x8A00;&#xFF0C; &#x5B54;&#x4E59;&#x5DF1;&#x4E5F;&#x4E0D;&#x53BB;&#x7BA1;&#x4ED6;&#xFF0C;&#x7B11;&#x9053;&#xFF1A;&quot;&#x4F60;&#x628A;&#x5F39;&#x7A97;&#x5F39;&#x51FA;&#x6765;&#x3001;&#x518D;&#x8F6C;&#x4E00;&#x4E0B;&#x5C4F;&#x5E55;&#x770B;&#x3002;&#x6216;&#x8005;&#x628A;&#x4E0D;&#x4FDD;&#x7559;&#x6D3B;&#x52A8;&#x6253;&#x5F00;&#xFF0C;&#x9000;&#x540E;&#x53F0;&#x518D;&#x8FDB;&#x3002;&#x54C8;&#x54C8;&#xFF0C;&#x662F;&#x4E0D;&#x662F;&#x5F39;&#x7A97;&#x6CA1;&#x4E86;&#xFF1F;&quot;</p>
-<p>&#x518D;&#x4ED4;&#x7EC6;&#x770B;&#x770B;&#xFF0C;&#x662F;&#x4E0D;&#x662F;&#x8FD8;&#x53D1;&#x751F;&#x4E86; <code>WindowLeak</code>&#xFF1F;</p>
-<p>&#x8FD9;&#x4E2A;&#x8BBE;&#x8BA1;&#x9700;&#x8981;&#x5F00;&#x53D1;&#x8005;&#x989D;&#x5916;&#x7EF4;&#x62A4;&#x751F;&#x547D;&#x5468;&#x671F;&#x53D8;&#x5316;&#x6240;&#x5BFC;&#x81F4;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
-<h2 id="&#x4E0D;&#x64CD;&#x5FC3;&#x751F;&#x547D;&#x5468;&#x671F;&#x53D8;&#x5316;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;dialogfragment--settargetfragment"><a name="&#x4E0D;&#x64CD;&#x5FC3;&#x751F;&#x547D;&#x5468;&#x671F;&#x53D8;&#x5316;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;dialogfragment--settargetfragment" class="anchor-navigation-ex-anchor" href="#&#x4E0D;&#x64CD;&#x5FC3;&#x751F;&#x547D;&#x5468;&#x671F;&#x53D8;&#x5316;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;dialogfragment--settargetfragment"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E0D;&#x64CD;&#x5FC3;&#x751F;&#x547D;&#x5468;&#x671F;&#x53D8;&#x5316;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;DialogFragment + setTargetFragment</h2>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x7EE7;&#x7EED;&#x8BF4;&#x9053;&#xFF1A;&quot;Google&#x77E5;&#x9053;&#x8FD9;&#x4E2A;&#x8BBE;&#x8BA1;&#x4E0D;&#x597D;&#xFF0C;&#x4E8E;&#x662F;&#x518D;Fragment&#x7CFB;&#x7EDF;&#x4E2D;&#x589E;&#x52A0;&#x5F39;&#x7A97;&#x4EA4;&#x4E92;&#x7CFB;&#x7EDF;&#xFF0C;&#x60F3;&#x8981;&#x5229;&#x7528;Fragment&#x5728;&#x5BBF;&#x4E3B;&#x751F;&#x547D;&#x5468;&#x671F;&#x53D8;&#x5316;&#x540E;&#x7684;&#x6062;&#x590D;&#x7279;&#x6027;&#x6765;&#x89E3;&#x51B3;&#x8FD9;&#x4E00;&#x95EE;&#x9898;&quot;</p>
-<h3 id="&#x505A;&#x6CD5;_1"><a name="&#x505A;&#x6CD5;_1" class="anchor-navigation-ex-anchor" href="#&#x505A;&#x6CD5;_1"><i class="fa fa-link" aria-hidden="true"></i></a>&#x505A;&#x6CD5;</h3>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x53C8;&#x505A;&#x4E86;&#x70B9;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;&#xFF0C;&#x548C;&#x524D;&#x6587;&#x7684;Dialog&#x4FDD;&#x6301;&#x4E86;&#x529F;&#x80FD;&#x4E00;&#x81F4;&#xFF1A;</p>
-<pre><code class="lang-kotlin">sealed <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoDialogFragment</span> : <span class="hljs-type">DialogFragment</span></span>() {
+<h3 id="优点"><a class="header" href="#优点">优点</a></h3>
+<p>很显然，它的优点很明显：<strong>简单、易于封装</strong>，诸位可以很容易的按照产品和UI的需求、剥离弹窗UI部分，从而保持业务部分 "纯粹"， 既能够 <code>高效复用</code> ，也 <code>避免</code> UI变更时改动业务类。</p>
+<h3 id="缺点"><a class="header" href="#缺点">缺点</a></h3>
+<p>孔乙己转头问小兄弟："你可知道它的缺点吗？"，小兄弟默默不言， 孔乙己也不去管他，笑道："你把弹窗弹出来、再转一下屏幕看。或者把不保留活动打开，退后台再进。哈哈，是不是弹窗没了？"</p>
+<p>再仔细看看，是不是还发生了 <code>WindowLeak</code>？</p>
+<p>这个设计需要开发者额外维护生命周期变化所导致的问题。</p>
+<h2 id="不操心生命周期变化的方式dialogfragment--settargetfragment"><a class="header" href="#不操心生命周期变化的方式dialogfragment--settargetfragment">不操心生命周期变化的方式：DialogFragment + setTargetFragment</a></h2>
+<p>孔乙己继续说道："Google知道这个设计不好，于是再Fragment系统中增加弹窗交互系统，想要利用Fragment在宿主生命周期变化后的恢复特性来解决这一问题"</p>
+<h3 id="做法-1"><a class="header" href="#做法-1">做法</a></h3>
+<p>孔乙己又做了点准备工作，和前文的Dialog保持了功能一致：</p>
+<pre><code class="language-kotlin">sealed class DemoDialogFragment : DialogFragment() {
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreateDialog</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle?</span>)</span>: Dialog {</span>
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> view</span> = LayoutInflater.from(requireContext()).inflate(R.layout.view_input, <span class="hljs-literal">null</span>)
-        <span class="hljs-keyword">return</span> AlertDialog.Builder(requireContext())
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.view_input, null)
+        return AlertDialog.Builder(requireContext())
             .setView(view)
-            .setPositiveButton(<span class="hljs-string">&quot;OK&quot;</span>) { _, _ -&gt;
+            .setPositiveButton("OK") { _, _ -&gt;
                 dismissAllowingStateLoss()
-                onPositive(view.findViewById<span class="hljs-type">&lt;EditText&gt;</span>(R.id.et_input)?.text?.toString())
+                onPositive(view.findViewById&lt;EditText&gt;(R.id.et_input)?.text?.toString())
             }
-            .setNegativeButton(<span class="hljs-string">&quot;Cancel&quot;</span>) { _, _ -&gt; dismissAllowingStateLoss() }
+            .setNegativeButton("Cancel") { _, _ -&gt; dismissAllowingStateLoss() }
             .create()
     }
 
-    <span class="hljs-keyword">protected</span> abstract <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onPositive</span><span class="hljs-params">(text: <span class="hljs-type">String?</span>)</span></span>
+    protected abstract fun onPositive(text: String?)
 }
 </code></pre>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x53C8;&#x6309;&#x7167;&#x4E24;&#x79CD;&#x754C;&#x9762;&#x5F62;&#x5F0F;&#x533A;&#x5206;&#x4E86;&#x7ED3;&#x679C;&#x5904;&#x7406;&#xFF1A;</p>
+<p>孔乙己又按照两种界面形式区分了结果处理：</p>
 <ul>
-<li>Fragment&#x6765;&#x6E90;&#x5219;&#x91CD;&#x65B0;&#x83B7;&#x5F97; targetFragment&#xFF0C;&#x7EA6;&#x5B9A;&#x8C03;&#x7528;onActivityResult&#x8FDB;&#x884C;&#x56DE;&#x8C03;</li>
-<li>Activity&#x6765;&#x6E90;&#x5219;&#x7EA6;&#x5B9A;Activity&#x5FC5;&#x987B;&#x5B9E;&#x73B0;&#x56DE;&#x8C03;&#x63A5;&#x53E3;&#xFF0C;&#x83B7;&#x53D6;&#x5BBF;&#x4E3B;Activity&#x540E;&#x8FDB;&#x884C;&#x8F6C;&#x578B;&#x7EE7;&#x800C;&#x8FDB;&#x884C;&#x56DE;&#x8C03;</li>
+<li>Fragment来源则重新获得 targetFragment，约定调用onActivityResult进行回调</li>
+<li>Activity来源则约定Activity必须实现回调接口，获取宿主Activity后进行转型继而进行回调</li>
 </ul>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo2</span> : <span class="hljs-type">DemoDialogFragment</span></span>() {
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">var</span> fromFg</span> = <span class="hljs-literal">false</span>
+<pre><code class="language-kotlin">class Demo2 : DemoDialogFragment() {
+    private var fromFg = false
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle?</span>)</span> {</span>
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fromFg = arguments?.getBoolean(BUNDLE_BOOL_FROM_FG) ?: <span class="hljs-literal">false</span>
+        fromFg = arguments?.getBoolean(BUNDLE_BOOL_FROM_FG) ?: false
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onPositive</span><span class="hljs-params">(text: <span class="hljs-type">String?</span>)</span> {</span>
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> intent</span> = Intent()
+    override fun onPositive(text: String?) {
+        val intent = Intent()
         intent.putExtras(Bundle().apply {
             putString(BUNDLE_STR_INPUT, text)
         })
 
-        <span class="hljs-keyword">if</span> (fromFg) {
+        if (fromFg) {
             targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
-        } <span class="hljs-keyword">else</span> {
-            (requireActivity() <span class="hljs-keyword">as</span> OnResultListener).onResult(text)
+        } else {
+            (requireActivity() as OnResultListener).onResult(text)
         }
     }
 }
 </code></pre>
-<p>&#x7F16;&#x5199;&#x597D; &quot;&#x542F;&#x52A8;&quot; &#x65B9;&#x5F0F;</p>
-<pre><code class="lang-kotlin"> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ActivityHost</span></span>(<span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> activity</span>: AppCompatActivity) : Host() {
+<p>编写好 "启动" 方式</p>
+<pre><code class="language-kotlin"> class ActivityHost(private val activity: AppCompatActivity) : Host() {
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">launchFragment</span><span class="hljs-params">(fragment: <span class="hljs-type">DialogFragment</span>)</span> {</span>
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> arg</span> = fragment.arguments ?: Bundle()
-        arg.putBoolean(BUNDLE_BOOL_FROM_FG, <span class="hljs-literal">false</span>)
+    override fun launchFragment(fragment: DialogFragment) {
+        val arg = fragment.arguments ?: Bundle()
+        arg.putBoolean(BUNDLE_BOOL_FROM_FG, false)
         fragment.arguments = arg
         fragment.show(activity.supportFragmentManager, fragment.javaClass.name)
     }
 }
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FragmentHost</span></span>(<span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> fragment</span>: Fragment) : Host() {
+class FragmentHost(private val fragment: Fragment) : Host() {
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">launchFragment</span><span class="hljs-params">(fragment: <span class="hljs-type">DialogFragment</span>)</span> {</span>
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> arg</span> = fragment.arguments ?: Bundle()
-        arg.putBoolean(BUNDLE_BOOL_FROM_FG, <span class="hljs-literal">true</span>)
+    override fun launchFragment(fragment: DialogFragment) {
+        val arg = fragment.arguments ?: Bundle()
+        arg.putBoolean(BUNDLE_BOOL_FROM_FG, true)
         fragment.arguments = arg
-        fragment.setTargetFragment(this.fragment, <span class="hljs-number">2</span>)
-        <span class="hljs-comment">//&#x4F7F;&#x7528; fragment.requireActivity().supportFragmentManager &#x4EA6;&#x53EF;</span>
+        fragment.setTargetFragment(this.fragment, 2)
+        //使用 fragment.requireActivity().supportFragmentManager 亦可
         fragment.show(this.fragment.requireFragmentManager(), fragment.javaClass.name)
     }
 }
 </code></pre>
-<p>&#x7565;&#x53BB;&#x56DE;&#x8C03;&#x5904;&#x7406;&#x903B;&#x8F91;&#xFF0C;<em>&#x7B80;&#x5355;&#x7684;&#x53D6;&#x6570;&#x636E;&#x548C;&#x65B9;&#x6CD5;&#x8C03;&#x7528;</em></p>
-<pre><code class="lang-kotlin"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">demo2</span><span class="hljs-params">()</span> {</span>
+<p>略去回调处理逻辑，<em>简单的取数据和方法调用</em></p>
+<pre><code class="language-kotlin">private fun demo2() {
     host.launchFragment(DemoDialogFragment.Demo2())
 }
 </code></pre>
-<h3 id="&#x4F18;&#x70B9;_1"><a name="&#x4F18;&#x70B9;_1" class="anchor-navigation-ex-anchor" href="#&#x4F18;&#x70B9;_1"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F18;&#x70B9;</h3>
-<p>&#x5C0F;&#x5144;&#x5F1F;&#x62FF;&#x8D77;demo&#x8FDB;&#x884C;&#x4E86;&#x628A;&#x73A9;&#xFF0C;&#x4E0D;&#x9519;&#x4E0D;&#x9519;&#xFF0C;&#x8FD9;&#x4E2A;&#x6CA1;bug&#x4E86;&#x3002;</p>
-<h3 id="&#x7F3A;&#x70B9;_1"><a name="&#x7F3A;&#x70B9;_1" class="anchor-navigation-ex-anchor" href="#&#x7F3A;&#x70B9;_1"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7F3A;&#x70B9;</h3>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x53C8;&#x662F;&#x90AA;&#x9B45;&#x4E00;&#x7B11;&#xFF0C;&#x4F60;&#x4E0D;&#x89C9;&#x5F97;&#x8FD9; <strong>&#x4EE3;&#x7801;&#x592A;TM&#x591A;</strong> &#x4E86;&#x5417;&#xFF1F;&#x4F7F;&#x7528;&#x5F88;&#x4E0D;&#x65B9;&#x4FBF;&#x554A;&#xFF0C;Activity&#x548C;Fragment&#x8FD8;&#x6709;&#x4F7F;&#x7528;&#x5DEE;&#x5F02;&#x3002;</p>
-<p>&#x5C0F;&#x5144;&#x5F1F;&#x8BD5;&#x63A2;&#x7684;&#x7B54;&#x9053;&#xFF1A;&quot;&#x6539;&#x9020;&#x4E0B;&#xFF0C;&#x5168;&#x90E8;&#x5E72;&#x6210;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF1F;&#x90A3;&#x4E0D;&#x5C31;&#x57FA;&#x672C;&#x7EDF;&#x4E00;&#x4E86;&#x5417;&#xFF1F;&quot;</p>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x53C8;&#x662F;&#x90AA;&#x9B45;&#x4E00;&#x7B11;&#xFF0C;&#x4E0D;&#x9519;&#x3001;&#x8FD9;&#x5C31;&#x662F;&#x7B2C;&#x4E09;&#x79CD;&#x505A;&#x6CD5;&#x4E86;&#xFF0C;&#x4F60;&#x6765;&#x8BD5;&#x4E00;&#x8BD5;&#x3002;</p>
-<h2 id="&#x4E0D;&#x9760;&#x8C31;&#x7684;-dialogfragment--callback"><a name="&#x4E0D;&#x9760;&#x8C31;&#x7684;-dialogfragment--callback" class="anchor-navigation-ex-anchor" href="#&#x4E0D;&#x9760;&#x8C31;&#x7684;-dialogfragment--callback"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E0D;&#x9760;&#x8C31;&#x7684; DialogFragment + Callback</h2>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x5728;&#x4E00;&#x65C1;&#x770B;&#x7740;&#x5C0F;&#x5144;&#x5F1F;&#x98DE;&#x5FEB;&#x7684;&#x7F16;&#x7801;&#xFF0C;&#x5DE6;&#x624B;&#x4E00;&#x4E2A;Callback&#xFF0C;&#x53F3;&#x624B;&#x4E00;&#x4E2A;invoke Callback&#xFF0C;&#x4E09;&#x4E0B;&#x4E94;&#x9664;&#x4E8C;&#x5C31;&#x6539;&#x5B8C;&#x4E86;</p>
-<h3 id="&#x505A;&#x6CD5;_2"><a name="&#x505A;&#x6CD5;_2" class="anchor-navigation-ex-anchor" href="#&#x505A;&#x6CD5;_2"><i class="fa fa-link" aria-hidden="true"></i></a>&#x505A;&#x6CD5;</h3>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo3</span> : <span class="hljs-type">DemoDialogFragment</span></span>() {
-    <span class="hljs-variable"><span class="hljs-keyword">var</span> listener</span>: OnResultListener? = <span class="hljs-literal">null</span>
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onPositive</span><span class="hljs-params">(text: <span class="hljs-type">String?</span>)</span> {</span>
-        listener?.onResult(text) ?: Log.e(<span class="hljs-string">&quot;DEMO3&quot;</span>, <span class="hljs-string">&quot;listener is null!&quot;</span>)
+<h3 id="优点-1"><a class="header" href="#优点-1">优点</a></h3>
+<p>小兄弟拿起demo进行了把玩，不错不错，这个没bug了。</p>
+<h3 id="缺点-1"><a class="header" href="#缺点-1">缺点</a></h3>
+<p>孔乙己又是邪魅一笑，你不觉得这 <strong>代码太TM多</strong> 了吗？使用很不方便啊，Activity和Fragment还有使用差异。</p>
+<p>小兄弟试探的答道："改造下，全部干成回调函数？那不就基本统一了吗？"</p>
+<p>孔乙己又是邪魅一笑，不错、这就是第三种做法了，你来试一试。</p>
+<h2 id="不靠谱的-dialogfragment--callback"><a class="header" href="#不靠谱的-dialogfragment--callback">不靠谱的 DialogFragment + Callback</a></h2>
+<p>孔乙己在一旁看着小兄弟飞快的编码，左手一个Callback，右手一个invoke Callback，三下五除二就改完了</p>
+<h3 id="做法-2"><a class="header" href="#做法-2">做法</a></h3>
+<pre><code class="language-kotlin">class Demo3 : DemoDialogFragment() {
+    var listener: OnResultListener? = null
+    override fun onPositive(text: String?) {
+        listener?.onResult(text) ?: Log.e("DEMO3", "listener is null!")
     }
 }
 
-<span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">demo3</span><span class="hljs-params">()</span> {</span>
+private fun demo3() {
     host.launchFragment(DemoDialogFragment.Demo3().apply {
-        this.listener = <span class="hljs-keyword">object</span> : OnResultListener {
-            <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onResult</span><span class="hljs-params">(text: <span class="hljs-type">String?</span>)</span> {</span>
+        this.listener = object : OnResultListener {
+            override fun onResult(text: String?) {
                 setText(text)
             }
         }
     })
 }
 </code></pre>
-<h3 id="&#x4F18;&#x70B9;_2"><a name="&#x4F18;&#x70B9;_2" class="anchor-navigation-ex-anchor" href="#&#x4F18;&#x70B9;_2"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F18;&#x70B9;</h3>
-<p>&#x5C0F;&#x5144;&#x5F1F;&#x5BF9;&#x5B54;&#x4E59;&#x5DF1;&#x8BF4;&#xFF1A;&quot;&#x5B54;&#x5144;&#xFF0C;&#x4F60;&#x770B;&#xFF0C;&#x5B83;&#x53C8;&#x53D8;&#x5F97; <strong>&#x5F88;&#x7B80;&#x5355;&#x3001;&#x5F88;&#x5BB9;&#x6613;&#x5C01;&#x88C5;</strong> &#x4E86;&#xFF0C;&#x4ED6;&#x4EEC;&#x518D;&#x6539;UI&#x6211;&#x4E5F;&#x4E0D;&#x62C5;&#x5FC3;&#x6539;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x4E86;&#xFF0C;&#x4F60;&#x770B;&#x751F;&#x547D;&#x5468;&#x671F;&#x53D8;&#x5316;&#x7684;&#x65F6;&#x5019;&#x5B83;&#x4E5F;&#x4E0D;&#x6D88;&#x5931;&#x4E86;&#xFF01;&quot;</p>
-<h3 id="&#x7F3A;&#x70B9;_2"><a name="&#x7F3A;&#x70B9;_2" class="anchor-navigation-ex-anchor" href="#&#x7F3A;&#x70B9;_2"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7F3A;&#x70B9;</h3>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x90AA;&#x9B45;&#x4E00;&#x7B11;&#xFF0C;&quot;&#x5C0F;&#x5144;&#x5F1F;&#x522B;&#x9AD8;&#x5174;&#x7684;&#x592A;&#x65E9;&#xFF0C;&#x8F6C;&#x5B8C;&#x4E86;&#x5C4F;&#x5E55;&#x6D4B;&#x4E00;&#x4E0B;&#x529F;&#x80FD;&#x8FD8;&#x6B63;&#x5E38;&#x4E0D;&#xFF1F;&quot;</p>
-<p>&#x5C0F;&#x5144;&#x5F1F;&#x95FB;&#x8A00;&#x4E00;&#x8BD5;&#xFF0C;&#x5927;&#x547C;&#xFF1A;&quot;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x600E;&#x4E48;&#x6CA1;&#x4E86;&#xFF01;&#x53EF;&#x6709;&#x89E3;&#x6551;&#x4E4B;&#x6CD5;&#xFF1F;&quot;</p>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x8BF4;&#x9053;&#xFF1A;&quot;&#x81EA;&#x7136;&#x662F;&#x6709;&#x7684;&#xFF0C;&#x5148;&#x60F3;&#x60F3;&#x4E3A;&#x4EC0;&#x4E48;&#x4F1A;&#x8FD9;&#x6837;&#xFF1F;&#x91CD;&#x65B0;&#x51FA;&#x73B0;&#x7684;&#x5F39;&#x7A97;&#x662F;&#x7CFB;&#x7EDF;&#x5728;&#x5904;&#x7406;&#x5BBF;&#x4E3B;&#x751F;&#x547D;&#x5468;&#x671F;&#x53D8;&#x5316;&#x65F6;&#x4E3A;&#x4F60;&#x6062;&#x590D;&#x7684;&#xFF0C;&#x4F46;&#x5E76;&#x4E0D;&#x4FDD;&#x8BC1;&#x6240;&#x6709;&#x7684;&#x5F15;&#x7528;&#x90FD;&#x6062;&#x590D;&quot;</p>
-<p>&#x7834;&#x89E3;&#x81EA;&#x7136;&#x662F;&#x6709;&#x529E;&#x6CD5;&#x7684;&#xFF0C;&#x8BA9;Callback&#x88AB;&#x6062;&#x590D;&#xFF0C;&#x6216;&#x8005;&#x8BA9;Callback&#x4E0D;&#x9700;&#x8981;&#x88AB;&#x6062;&#x590D;&#x4E5F;&#x80FD;&#x5F97;&#x5230;&#x6B63;&#x786E;&#x7684;&#x5BF9;&#x8C61;&#x5373;&#x53EF;&#xFF0C;&#x4F46;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x4E0D;&#x80FD;&#x5E26;&#x6765;&#x5BBF;&#x4E3B;&#x7684;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x95EE;&#x9898;&#x3002;</p>
-<p>&#x6539;&#x9020;&#x81EA;&#x7136;&#x662F;&#x9700;&#x8981;&#x82B1;&#x8D39;&#x5F88;&#x591A;&#x7CBE;&#x529B;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x73B0;&#x5728;&#x6709;&#x798F;&#x4E86;&#x3002;</p>
-<h2 id="&#x62E5;&#x62B1;&#x65B0;&#x53D8;&#x5316;&#xFF1A;fragmentresultlistener"><a name="&#x62E5;&#x62B1;&#x65B0;&#x53D8;&#x5316;&#xFF1A;fragmentresultlistener" class="anchor-navigation-ex-anchor" href="#&#x62E5;&#x62B1;&#x65B0;&#x53D8;&#x5316;&#xFF1A;fragmentresultlistener"><i class="fa fa-link" aria-hidden="true"></i></a>&#x62E5;&#x62B1;&#x65B0;&#x53D8;&#x5316;&#xFF1A;FragmentResultListener</h2>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x8BF4;&#x9053;&#xFF1A;&quot;Google&#x81EA;&#x7136;&#x662F;&#x77E5;&#x9053;&#x65B9;&#x6CD5;&#x4E8C;&#x4E2D;&#x7684;&#x8BF8;&#x591A;&#x95EE;&#x9898;&#xFF0C;&#x7EC8;&#x4E8E;&#x662F;&#x63D0;&#x4F9B;&#x4E86;&#x5927;&#x4E00;&#x7EDF;&#x89E3;&#x51B3;&#x65B9;&#x6848;&quot;</p>
-<p>&#x5148;&#x628A;AndroidX-Appcompat&#x5347;&#x7EA7;&#x5230; 1.3.0</p>
-<pre><code class="lang-kotlin">implementation &apos;androidx.appcompat:appcompat:<span class="hljs-number">1.3</span><span class="hljs-number">.0</span>&apos;
+<h3 id="优点-2"><a class="header" href="#优点-2">优点</a></h3>
+<p>小兄弟对孔乙己说："孔兄，你看，它又变得 <strong>很简单、很容易封装</strong> 了，他们再改UI我也不担心改业务代码了，你看生命周期变化的时候它也不消失了！"</p>
+<h3 id="缺点-2"><a class="header" href="#缺点-2">缺点</a></h3>
+<p>孔乙己邪魅一笑，"小兄弟别高兴的太早，转完了屏幕测一下功能还正常不？"</p>
+<p>小兄弟闻言一试，大呼："回调函数怎么没了！可有解救之法？"</p>
+<p>孔乙己说道："自然是有的，先想想为什么会这样？重新出现的弹窗是系统在处理宿主生命周期变化时为你恢复的，但并不保证所有的引用都恢复"</p>
+<p>破解自然是有办法的，让Callback被恢复，或者让Callback不需要被恢复也能得到正确的对象即可，但需要注意不能带来宿主的内存泄漏问题。</p>
+<p>改造自然是需要花费很多精力的，但是现在有福了。</p>
+<h2 id="拥抱新变化fragmentresultlistener"><a class="header" href="#拥抱新变化fragmentresultlistener">拥抱新变化：FragmentResultListener</a></h2>
+<p>孔乙己说道："Google自然是知道方法二中的诸多问题，终于是提供了大一统解决方案"</p>
+<p>先把AndroidX-Appcompat升级到 1.3.0</p>
+<pre><code class="language-kotlin">implementation 'androidx.appcompat:appcompat:1.3.0'
 </code></pre>
-<p>&#x6211;&#x4EEC;&#x5C06;&#x4F1A;&#x62E5;&#x6709;&#x65B0;API&#xFF1A;</p>
-<pre><code class="lang-kotlin">FragmentManager#setFragmentResultListener(key:String, lifecycleOwner:LifecycleOwner, listener:FragmentResultListener)
+<p>我们将会拥有新API：</p>
+<pre><code class="language-kotlin">FragmentManager#setFragmentResultListener(key:String, lifecycleOwner:LifecycleOwner, listener:FragmentResultListener)
 
 FragmentManager#setFragmentResult(key:String, bundle:Bundle)
 </code></pre>
-<h3 id="&#x505A;&#x6CD5;_3"><a name="&#x505A;&#x6CD5;_3" class="anchor-navigation-ex-anchor" href="#&#x505A;&#x6CD5;_3"><i class="fa fa-link" aria-hidden="true"></i></a>&#x505A;&#x6CD5;</h3>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x4F7F;&#x7528;&#x65B0;API&#x8FDB;&#x884C;&#x4E86;&#x4FEE;&#x6539;</p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ActivityHost</span></span>(<span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> activity</span>: AppCompatActivity) : Host() {
-    <span class="hljs-comment">//...</span>
+<h3 id="做法-3"><a class="header" href="#做法-3">做法</a></h3>
+<p>孔乙己使用新API进行了修改</p>
+<pre><code class="language-kotlin">class ActivityHost(private val activity: AppCompatActivity) : Host() {
+    //...
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">launchFragment2</span><span class="hljs-params">(fragment: <span class="hljs-type">DialogFragment, listener: FragmentResultListener</span>)</span> {</span>
+    override fun launchFragment2(fragment: DialogFragment, listener: FragmentResultListener) {
         activity.supportFragmentManager.setFragmentResultListener(Demo.KEY_INPUT, activity, listener)
         fragment.show(activity.supportFragmentManager, fragment.javaClass.name)
     }
 }
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FragmentHost</span></span>(<span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> fragment</span>: Fragment) : Host() {
-    <span class="hljs-comment">//...</span>
+class FragmentHost(private val fragment: Fragment) : Host() {
+    //...
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">launchFragment2</span><span class="hljs-params">(fragment: <span class="hljs-type">DialogFragment, listener: FragmentResultListener</span>)</span> {</span>
+    override fun launchFragment2(fragment: DialogFragment, listener: FragmentResultListener) {
         this.fragment.parentFragmentManager.setFragmentResultListener(Demo.KEY_INPUT, this.fragment, listener)
         fragment.show(this.fragment.parentFragmentManager, fragment.javaClass.name)
     }
 }
 </code></pre>
-<p>&#x91CD;&#x65B0;&#x547C;&#x51FA;&#x5F39;&#x7A97;&#x540E;</p>
-<pre><code class="lang-kotlin"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">demo4</span><span class="hljs-params">()</span> {</span>
+<p>重新呼出弹窗后</p>
+<pre><code class="language-kotlin">private fun demo4() {
     host.launchFragment2(fragment = DemoDialogFragment.Demo4()) { requestKey, result -&gt;
-        <span class="hljs-keyword">if</span> (requestKey != KEY_INPUT) <span class="hljs-keyword">return</span>@launchFragment2
+        if (requestKey != KEY_INPUT) return@launchFragment2
         setText(result.getString(BUNDLE_STR_INPUT))
     }
 }
 </code></pre>
-<p>&#x975E;&#x5E38;&#x5B8C;&#x7F8E;&#x3002;&#x6B64;&#x65F6;&#x5E97;&#x5458;&#x7684;&#x58F0;&#x97F3;&#x98D8;&#x6765;&#xFF1A;&quot;&#x5B54;&#x4E59;&#x5DF1;&#x5148;&#x751F;&#xFF0C;&#x60A8;&#x7684;&#x5927;&#x676F;&#x8131;&#x8102;&#x5976;&#x62FF;&#x94C1;&#x597D;&#x4E86;&quot;&#x3002;</p>
-<p>&#x5B54;&#x4E59;&#x5DF1;&#x5BF9;&#x4F17;&#x4EBA;&#x8BF4;&#x9053;&#xFF1A;&quot;&#x6211;&#x7684;&#x5496;&#x5561;&#x597D;&#x4E86;&#xFF0C;&#x8981;&#x8D70;&#x4E86;&#xFF0C;&#x6709;&#x8FD9;&#x79CD;&#x5B98;&#x65B9;&#x65B9;&#x6848;&#xFF0C;&#x7B2C;&#x4E09;&#x79CD;&#x65B9;&#x6CD5;&#x4FBF;&#x4E0D;&#x518D;&#x4F18;&#x5316;&#x4E86;&#xFF0C;&#x81F3;&#x4E8E;&#x6B64;&#x65B9;&#x6848;&#x662F;&#x5426;&#x6709;&#x7F3A;&#x70B9;&#xFF0C;&#x8BF8;&#x4F4D;&#x8FD8;&#x8BF7;&#x9605;&#x8BFB;&#x6E90;&#x7801;&#xFF0C;&#x6C5F;&#x6E56;&#x518D;&#x89C1;&quot;&#x3002;</p>
-<h2 id="&#x9644;"><a name="&#x9644;" class="anchor-navigation-ex-anchor" href="#&#x9644;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9644;</h2>
-<p><a href="https://github.com/leobert-lan/BlogWorkShop" target="_blank">&#x6F14;&#x793A;&#x4EE3;&#x7801;</a></p>
-<p>&#x5185;&#x5BB9;&#x5BFC;&#x56FE;</p>
-<p><img src="post_35/post_35.png" alt=""></p>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2021-12-21 22:22:04
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+<p>非常完美。此时店员的声音飘来："孔乙己先生，您的大杯脱脂奶拿铁好了"。</p>
+<p>孔乙己对众人说道："我的咖啡好了，要走了，有这种官方方案，第三种方法便不再优化了，至于此方案是否有缺点，诸位还请阅读源码，江湖再见"。</p>
+<h2 id="附"><a class="header" href="#附">附</a></h2>
+<p><a href="https://github.com/leobert-lan/BlogWorkShop">演示代码</a></p>
+<p>内容导图</p>
+<p><img src="./post_35/post_35.png" alt="" /></p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../Android/Base/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../Android/SysApp/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 基础">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="../SysApp/" class="navigation navigation-next " aria-label="Next page: 系统APP">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../Android/Base/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../Android/SysApp/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"孔乙己：你可知道页面和弹窗“通信“的方式有四种？","level":"1.2.7.1","depth":3,"next":{"title":"系统APP","level":"1.2.8","depth":2,"path":"Android/SysApp/README.md","ref":"./Android/SysApp/README.md","articles":[{"title":"使用日历丰富产品的用户体验","level":"1.2.8.1","depth":3,"path":"Android/SysApp/post_52.md","ref":"./Android/SysApp/post_52.md","articles":[]}]},"previous":{"title":"基础","level":"1.2.7","depth":2,"path":"Android/Base/README.md","ref":"./Android/Base/README.md","articles":[{"title":"孔乙己：你可知道页面和弹窗“通信“的方式有四种？","level":"1.2.7.1","depth":3,"path":"Android/Base/post_35.md","ref":"./Android/Base/post_35.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Android/Base/post_35.md","mtime":"2021-12-21T14:22:04.968Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"../..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../../gitbook/gitbook.js"></script>
-    <script src="../../gitbook/theme.js"></script>
-    
-        
-        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-

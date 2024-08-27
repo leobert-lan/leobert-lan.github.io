@@ -1,1485 +1,210 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>DaVinCi,取代XML编写Shape或ColorStateList的方案 · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>DaVinCi,取代XML编写Shape或ColorStateList的方案 - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="../Android/Idea/post_32.html" />
-    
-    
-    <link rel="prev" href="./" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../Android/">
-            
-                <a href="../Android/">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../Android/View/">
-            
-                <a href="../Android/View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../Android/View/post_1.html">
-            
-                <a href="../Android/View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../Android/View/post_6.html">
-            
-                <a href="../Android/View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../Android/View/post_7.html">
-            
-                <a href="../Android/View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="../Android/Idea/post_9.html">
-            
-                <a href="../Android/Idea/post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../Android/Drawable/">
-            
-                <a href="../Android/Drawable/">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="../Android/Drawable/post_2.html">
-            
-                <a href="../Android/Drawable/post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="../Android/Drawable/post_4.html">
-            
-                <a href="../Android/Drawable/post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="../Android/Drawable/post_47.html">
-            
-                <a href="../Android/Drawable/post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.4" data-path="../Android/Drawable/post_49.html">
-            
-                <a href="../Android/Drawable/post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../Android/Mechanism/Message/">
-            
-                <a href="../Android/Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../Android/Mechanism/Message/post_8.html">
-            
-                <a href="../Android/Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../Android/Idea/post_14/">
-            
-                <a href="../Android/Idea/post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.4.1" data-path="../Android/Idea/post_14.html">
-            
-                <a href="../Android/Idea/post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="../Android/Glide/">
-            
-                <a href="../Android/Glide/">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.5.1" data-path="../Android/Glide/post_15.html">
-            
-                <a href="../Android/Glide/post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5.2" data-path="../Android/Glide/post_16.html">
-            
-                <a href="../Android/Glide/post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../Android/KSP/">
-            
-                <a href="../Android/KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../Android/KSP/post_24.html">
-            
-                <a href="../Android/KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../Android/Base/">
-            
-                <a href="../Android/Base/">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.7.1" data-path="../Android/Base/post_35.html">
-            
-                <a href="../Android/Base/post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../Android/SysApp/">
-            
-                <a href="../Android/SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../Android/SysApp/post_52.html">
-            
-                <a href="../Android/SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../Android/DI/">
-            
-                <a href="../Android/DI/">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.9.1" data-path="../Android/DI/post_53.html">
-            
-                <a href="../Android/DI/post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../Compose/">
-            
-                <a href="../Compose/">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="../Compose/post_21.html">
-            
-                <a href="../Compose/post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../Compose/post_26.html">
-            
-                <a href="../Compose/post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="../Compose/post_27.html">
-            
-                <a href="../Compose/post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="../Compose/post_28.html">
-            
-                <a href="../Compose/post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="../Compose/post_29.html">
-            
-                <a href="../Compose/post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="../Compose/post_30.html">
-            
-                <a href="../Compose/post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../MultiThreading/">
-            
-                <a href="../MultiThreading/">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../MultiThreading/post_33.html">
-            
-                <a href="../MultiThreading/post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../MultiThreading/post_37.html">
-            
-                <a href="../MultiThreading/post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="../MultiThreading/post_38.html">
-            
-                <a href="../MultiThreading/post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="../MultiThreading/post_39.html">
-            
-                <a href="../MultiThreading/post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="../MultiThreading/post_42.html">
-            
-                <a href="../MultiThreading/post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.6" data-path="../MultiThreading/post_46.html">
-            
-                <a href="../MultiThreading/post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="../MultiThreading/post_50.html">
-            
-                <a href="../MultiThreading/post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="../MultiThreading/post_54.html">
-            
-                <a href="../MultiThreading/post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="../IO/">
-            
-                <a href="../IO/">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="../IO/post_55.html">
-            
-                <a href="../IO/post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="../IO/post_56.html">
-            
-                <a href="../IO/post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="../IO/post_57.html">
-            
-                <a href="../IO/post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="../IO/post_58.html">
-            
-                <a href="../IO/post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="../IO/post_59.html">
-            
-                <a href="../IO/post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../Gradle/">
-            
-                <a href="../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../Gradle/Modularization/post_18.html">
-            
-                <a href="../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../Gradle/Publish/post_17.html">
-            
-                <a href="../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../Gradle/post_22.html">
-            
-                <a href="../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../Groovy/">
-            
-                <a href="../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../Groovy/why_write_groovy.html">
-            
-                <a href="../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../Groovy/post_23.html">
-            
-                <a href="../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="../Review/">
-            
-                <a href="../Review/">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="../Review/post_10.html">
-            
-                <a href="../Review/post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="../Review/post_40.html">
-            
-                <a href="../Review/post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.3" data-path="../Review/post_44.html">
-            
-                <a href="../Review/post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="../Review/post_45.html">
-            
-                <a href="../Review/post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter active" data-level="1.9.1" data-path="DaVinCi.html">
-            
-                <a href="DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../Android/Idea/post_32.html">
-            
-                <a href="../Android/Idea/post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../Speculative/post_43.html">
-            
-                <a href="../Speculative/post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="post_48.html">
-            
-                <a href="post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../Speculative/post_61.html">
-            
-                <a href="../Speculative/post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="../Review/DataStructure/">
-            
-                <a href="../Review/DataStructure/">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1.1" data-path="../Review/DataStructure/post_11.html">
-            
-                <a href="../Review/DataStructure/post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="../Review/DataStructure/post_12.html">
-            
-                <a href="../Review/DataStructure/post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="../Review/DataStructure/post_13.html">
-            
-                <a href="../Review/DataStructure/post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="../Review/README2.html">
-            
-                <a href="../Review/README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="../Review/post_36.html">
-            
-                <a href="../Review/post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="../Review/post_51.html">
-            
-                <a href="../Review/post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="../Review/post_60.html">
-            
-                <a href="../Review/post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="../Review/post_63.html">
-            
-                <a href="../Review/post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="../Review/post_64.html">
-            
-                <a href="../Review/post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../Note/">
-            
-                <a href="../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../Note/post_41.html">
-            
-                <a href="../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../Talk/">
-            
-                <a href="../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../Talk/talk_1.html">
-            
-                <a href="../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../Talk/talk_2_2023-03.html">
-            
-                <a href="../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../Thought/">
-            
-                <a href="../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../Thought/post_62.html">
-            
-                <a href="../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../info/">
-            
-                <a href="../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../info/about_view_series.html">
-            
-                <a href="../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../info/about_sansi_series.html">
-            
-                <a href="../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../info/about_haowan_series.html">
-            
-                <a href="../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../info/about_wengu_series.html">
-            
-                <a href="../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >DaVinCi,取代XML编写Shape或ColorStateList的方案</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#davinci-&#xFF08;&#x8FBE;&#xB7;&#x82AC;&#x5947;&#xFF09;"><b></b>DaVinCi &#xFF08;&#x8FBE;&#xB7;&#x82AC;&#x5947;&#xFF09;</a></li><ul><li><span class="title-icon "></span><a href="#&#x662F;&#x4EC0;&#x4E48;"><b></b>&#x662F;&#x4EC0;&#x4E48;</a></li><li><span class="title-icon "></span><a href="#&#x4E3A;&#x4F55;&#x4F1A;&#x4EA7;&#x751F;&#x8FD9;&#x4E00;&#x60F3;&#x6CD5;"><b></b>&#x4E3A;&#x4F55;&#x4F1A;&#x4EA7;&#x751F;&#x8FD9;&#x4E00;&#x60F3;&#x6CD5;</a></li><li><span class="title-icon "></span><a href="#&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x89E3;&#x6790;"><b></b>&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x89E3;&#x6790;</a></li><li><span class="title-icon "></span><a href="#&#x5982;&#x4F55;&#x4F7F;&#x7528;"><b></b>&#x5982;&#x4F55;&#x4F7F;&#x7528;</a></li><ul><li><span class="title-icon "></span><a href="#&#x6DFB;&#x52A0;mavencentral&#x4ED3;&#x5E93;&#x58F0;&#x660E;"><b></b>&#x6DFB;&#x52A0;MavenCentral&#x4ED3;&#x5E93;&#x58F0;&#x660E;</a></li><li><span class="title-icon "></span><a href="#&#x58F0;&#x660E;&#x4F9D;&#x8D56;"><b></b>&#x58F0;&#x660E;&#x4F9D;&#x8D56;</a></li><li><span class="title-icon "></span><a href="#&#x6784;&#x5EFA;&#x4E00;&#x4E2A;shape"><b></b>&#x6784;&#x5EFA;&#x4E00;&#x4E2A;Shape</a></li><li><span class="title-icon "></span><a href="#&#x6784;&#x5EFA;&#x4E00;&#x4E2A;colorstatelist"><b></b>&#x6784;&#x5EFA;&#x4E00;&#x4E2A;ColorStateList</a></li><li><span class="title-icon "></span><a href="#&#x5728;xml&#x4E2D;&#x4F7F;&#x7528;"><b></b>&#x5728;XML&#x4E2D;&#x4F7F;&#x7528;</a></li><li><span class="title-icon "></span><a href="#&#x5B9A;&#x4E49;style"><b></b>&#x5B9A;&#x4E49;Style</a></li><li><span class="title-icon "></span><a href="#&#x9884;&#x89C8;style"><b></b>&#x9884;&#x89C8;Style</a></li></ul><li><span class="title-icon "></span><a href="#&#x4EE5;&#x540E;&#x7684;&#x5DE5;&#x4F5C;"><b></b>&#x4EE5;&#x540E;&#x7684;&#x5DE5;&#x4F5C;</a></li></ul></ul></div><a href="#davinci-&#xFF08;&#x8FBE;&#xB7;&#x82AC;&#x5947;&#xFF09;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="davinci-&#xFF08;&#x8FBE;&#xB7;&#x82AC;&#x5947;&#xFF09;"><a name="davinci-&#xFF08;&#x8FBE;&#xB7;&#x82AC;&#x5947;&#xFF09;" class="anchor-navigation-ex-anchor" href="#davinci-&#xFF08;&#x8FBE;&#xB7;&#x82AC;&#x5947;&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>DaVinCi &#xFF08;&#x8FBE;&#xB7;&#x82AC;&#x5947;&#xFF09;</h1>
-<h2 id="&#x662F;&#x4EC0;&#x4E48;"><a name="&#x662F;&#x4EC0;&#x4E48;" class="anchor-navigation-ex-anchor" href="#&#x662F;&#x4EC0;&#x4E48;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x662F;&#x4EC0;&#x4E48;</h2>
-<p>&#x5728;Android&#x4E0A;&#x53D6;&#x4EE3;xml&#x65B9;&#x5F0F;&#x5B9A;&#x4E49; Shape/GradientDrawable &#x4EE5;&#x53CA; ColorStateList&#x7684;&#x65B9;&#x6848;&#x3002;</p>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../repo/DaVinCi.html" class="active"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="davinci-达芬奇"><a class="header" href="#davinci-达芬奇">DaVinCi （达·芬奇）</a></h1>
+<h2 id="是什么"><a class="header" href="#是什么">是什么</a></h2>
+<p>在Android上取代xml方式定义 Shape/GradientDrawable 以及 ColorStateList的方案。</p>
 <ul>
-<li>&#x652F;&#x6301;&#x5728; <code>Java/Kotlin &#x4E1A;&#x52A1;&#x4EE3;&#x7801;</code> &#x4E2D;&#x4F7F;&#x7528;</li>
-<li>&#x914D;&#x5408; <code>DataBinding</code> &#x53EF;&#x4EE5;&#x5728; <code>XML&#x5E03;&#x5C40;&#x6587;&#x4EF6;</code> &#x4E2D;&#x4F7F;&#x7528;</li>
+<li>支持在 <code>Java/Kotlin 业务代码</code> 中使用</li>
+<li>配合 <code>DataBinding</code> 可以在 <code>XML布局文件</code> 中使用</li>
 </ul>
-<p><a href="https://github.com/leobert-lan/DaVinCi" target="_blank">&#x9879;&#x76EE;&#x5730;&#x5740;</a></p>
-<p>&#x51E0;&#x7BC7;&#x76F8;&#x5173;&#x62D9;&#x4F5C;&#xFF1A;</p>
+<p><a href="https://github.com/leobert-lan/DaVinCi">项目地址</a></p>
+<p>几篇相关拙作：</p>
 <ul>
-<li>&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x89E3;&#x6790;&#xFF0C;&#x8BE6;&#x89C1;&#x62D9;&#x4F5C;&#xFF1A;<a href="../Android/Drawable/post_4.html">&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x62E5;&#x6709;&#x5B83;&#xFF0C;XML&#x6587;&#x4EF6;&#x5C11;&#x4E00;&#x534A;--&#x66F4;&#x65B9;&#x4FBF;&#x7684;&#x5904;&#x7406;View&#x80CC;&#x666F;</a></li>
-<li>&#x5173;&#x4E8E;&#x6CE8;&#x89E3;&#x5904;&#x7406;&#x5668;&#xFF08;ksp&#x5B9E;&#x73B0;&#xFF09;&#x4EE5;&#x53CA;&#x5B9E;&#x73B0;&#x7684;&#x6838;&#x5FC3;&#x76EE;&#x6807;&#xFF0C;&#x8BE6;&#x89C1;&#x62D9;&#x4F5C;&#xFF1A; <a href="../Android/KSP/post_24.html">&#x597D;&#x73A9;&#x7CFB;&#x5217; | &#x62E5;&#x62B1;Kotlin Symbol Processing(KSP),&#x9879;&#x76EE;&#x5B9E;&#x6218;</a></li>
+<li>实现原理解析，详见拙作：<a href="../Android/Drawable/post_4.html">好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li>
+<li>关于注解处理器（ksp实现）以及实现的核心目标，详见拙作： <a href="../Android/KSP/post_24.html">好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li>
 </ul>
-<h2 id="&#x4E3A;&#x4F55;&#x4F1A;&#x4EA7;&#x751F;&#x8FD9;&#x4E00;&#x60F3;&#x6CD5;"><a name="&#x4E3A;&#x4F55;&#x4F1A;&#x4EA7;&#x751F;&#x8FD9;&#x4E00;&#x60F3;&#x6CD5;" class="anchor-navigation-ex-anchor" href="#&#x4E3A;&#x4F55;&#x4F1A;&#x4EA7;&#x751F;&#x8FD9;&#x4E00;&#x60F3;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E3A;&#x4F55;&#x4F1A;&#x4EA7;&#x751F;&#x8FD9;&#x4E00;&#x60F3;&#x6CD5;</h2>
-<p>&#x51FA;&#x4E8E;&#x591A;&#x65B9;&#x9762;&#x539F;&#x56E0;&#xFF0C;&#x4F7F;&#x7528;XML&#x5B9A;&#x4E49; <code>shape&#x8D44;&#x6E90;</code>&#xFF0C; <code>gradient drawable &#x8D44;&#x6E90;</code> &#xFF0C; <code>color state list &#x8D44;&#x6E90;</code> &#x592A;&#x9EBB;&#x70E6;&#x4E86;&#x3002;&#x8BF8;&#x5982;&#xFF1A;</p>
+<h2 id="为何会产生这一想法"><a class="header" href="#为何会产生这一想法">为何会产生这一想法</a></h2>
+<p>出于多方面原因，使用XML定义 <code>shape资源</code>， <code>gradient drawable 资源</code> ， <code>color state list 资源</code> 太麻烦了。诸如：</p>
 <ul>
-<li>xml&#x672C;&#x8EAB;&#x5F88;&#x5570;&#x55E6;</li>
-<li>&#x547D;&#x540D;&#x662F;&#x4E00;&#x4EF6;&#x5F88;&#x9EBB;&#x70E6;&#x7684;&#x4E8B;&#x60C5;&#xFF08;&#x6570;&#x91CF;&#x8FBE;&#x5230;&#x4E00;&#x5B9A;&#x89C4;&#x6A21;&#x540E;&#x7BA1;&#x7406;&#x4E5F;&#x5F88;&#x9EBB;&#x70E6;&#xFF09;</li>
-<li>&#x5F88;&#x591A;&#x6837;&#x5F0F; <code>&#x590D;&#x7528;&#x5EA6;&#x5E76;&#x4E0D;&#x9AD8;</code></li>
-<li>UI&#x5728;&#x9AD8;&#x5F3A;&#x5EA6;&#x6A21;&#x5F0F;&#x4E0B;&#x4E5F;&#x96BE;&#x4EE5;&#x505A;&#x5230; <code>&#x5BF9;&#x6BCF;&#x4E2A;&#x6837;&#x5F0F;&#x90FD;&#x89C4;&#x8303;&#x5316;&#x7BA1;&#x7406;</code></li>
-<li>&#x5207;&#x6362;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x6253;&#x65AD;&#x601D;&#x8DEF;&#x7684;&#x6210;&#x672C;&#x592A;&#x9AD8; &#x7B49;&#x7B49;</li>
+<li>xml本身很啰嗦</li>
+<li>命名是一件很麻烦的事情（数量达到一定规模后管理也很麻烦）</li>
+<li>很多样式 <code>复用度并不高</code></li>
+<li>UI在高强度模式下也难以做到 <code>对每个样式都规范化管理</code></li>
+<li>切换一个文件打断思路的成本太高 等等</li>
 </ul>
-<p>&#x6240;&#x4EE5;&#x6211;&#x4EA7;&#x751F;&#x4E86;&#x8FD9;&#x4E00;&#x60F3;&#x6CD5;&#xFF1A;</p>
+<p>所以我产生了这一想法：</p>
 <ul>
-<li>&#x5EFA;&#x7ACB;Builder&#x673A;&#x5236;&#x6784;&#x5EFA;&#x8FD9;&#x4E9B;&#x8D44;&#x6E90; &#xFF08;<em>&#x6784;&#x5EFA;&#x53D8;&#x5F97;&#x7B80;&#x5355;&#x4E14;&#x7075;&#x6D3B;</em>&#xFF09;</li>
-<li>&#x57FA;&#x4E8E;&#x7EAF;&#x6587;&#x672C;&#x5316;&#x7684;DSL&#xFF0C;&#x63CF;&#x8FF0;&#x8FD9;&#x4E9B;&#x8D44;&#x6E90;&#xFF0C;&#x5E76;&#x5229;&#x7528;Builder&#x8FDB;&#x884C;&#x6784;&#x5EFA;&#xFF08;<em>&#x65B9;&#x4FBF;&#x5411;&#x76AE;&#x80A4;&#x5305;&#x8FC7;&#x6E21;&#xFF0C;&#x6216;&#x8005;&#x4EFB;&#x4F55;&#x57FA;&#x4E8E;&#x914D;&#x7F6E;&#x7684;&#x5F62;&#x5F0F;&#x8FD0;&#x884C;</em>&#xFF09;</li>
-<li>&#x5EFA;&#x7ACB;OO&#x5C01;&#x88C5;&#xFF0C;&#x8BA9;&#x6784;&#x5EFA;&#x66F4;&#x52A0;&#x7B80;&#x5355;</li>
+<li>建立Builder机制构建这些资源 （<em>构建变得简单且灵活</em>）</li>
+<li>基于纯文本化的DSL，描述这些资源，并利用Builder进行构建（<em>方便向皮肤包过渡，或者任何基于配置的形式运行</em>）</li>
+<li>建立OO封装，让构建更加简单</li>
 </ul>
-<h2 id="&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x89E3;&#x6790;"><a name="&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x89E3;&#x6790;" class="anchor-navigation-ex-anchor" href="#&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x89E3;&#x6790;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x89E3;&#x6790;</h2>
-<p>&#x8BE6;&#x89C1;&#x62D9;&#x4F5C;&#xFF1A;<a href="../Android/Drawable/post_4.html">&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x62E5;&#x6709;&#x5B83;&#xFF0C;XML&#x6587;&#x4EF6;&#x5C11;&#x4E00;&#x534A;--&#x66F4;&#x65B9;&#x4FBF;&#x7684;&#x5904;&#x7406;View&#x80CC;&#x666F;</a></p>
-<h2 id="&#x5982;&#x4F55;&#x4F7F;&#x7528;"><a name="&#x5982;&#x4F55;&#x4F7F;&#x7528;" class="anchor-navigation-ex-anchor" href="#&#x5982;&#x4F55;&#x4F7F;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5982;&#x4F55;&#x4F7F;&#x7528;</h2>
-<h3 id="&#x6DFB;&#x52A0;mavencentral&#x4ED3;&#x5E93;&#x58F0;&#x660E;"><a name="&#x6DFB;&#x52A0;mavencentral&#x4ED3;&#x5E93;&#x58F0;&#x660E;" class="anchor-navigation-ex-anchor" href="#&#x6DFB;&#x52A0;mavencentral&#x4ED3;&#x5E93;&#x58F0;&#x660E;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6DFB;&#x52A0;MavenCentral&#x4ED3;&#x5E93;&#x58F0;&#x660E;</h3>
+<h2 id="实现原理解析"><a class="header" href="#实现原理解析">实现原理解析</a></h2>
+<p>详见拙作：<a href="../Android/Drawable/post_4.html">好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></p>
+<h2 id="如何使用"><a class="header" href="#如何使用">如何使用</a></h2>
+<h3 id="添加mavencentral仓库声明"><a class="header" href="#添加mavencentral仓库声明">添加MavenCentral仓库声明</a></h3>
 <pre><code>//{project root}/build.gradle
 subprojects {
     repositories {
@@ -1487,359 +212,323 @@ subprojects {
         //...
     }
 }
-</code></pre><h3 id="&#x58F0;&#x660E;&#x4F9D;&#x8D56;"><a name="&#x58F0;&#x660E;&#x4F9D;&#x8D56;" class="anchor-navigation-ex-anchor" href="#&#x58F0;&#x660E;&#x4F9D;&#x8D56;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x58F0;&#x660E;&#x4F9D;&#x8D56;</h3>
-<p>&#x4EE5;&#x4E0B;&#x662F;&#x5305;&#x4F9D;&#x8D56;&#x4FE1;&#x606F;</p>
-<pre><code class="lang-kotlin"><span class="hljs-comment">/*
-* &#x6CE8;&#x89E3;&#xFF0C;&#x7528;&#x4E8E;Style&#x7C7B;&#x6CE8;&#x89E3;&#x6216;&#x8005;StyleFactory&#x7C7B;&#x6CE8;&#x89E3;&#xFF0C;&#x4EE5;&#x53CA;&#x9884;&#x89C8;&#x65F6;&#x7684;&#x53EF;&#x9009;&#x914D;&#x7F6E;&#x6CE8;&#x89E3;
-* */</span>
-const <span class="hljs-variable"><span class="hljs-keyword">val</span> annotation</span> = <span class="hljs-string">&quot;io.github.leobert-lan:davinci-anno:0.0.2&quot;</span>
-
-<span class="hljs-comment">/*
-* &#x6CE8;&#x89E3;&#x5904;&#x7406;&#x5668;&#xFF0C;&#x652F;&#x6301;ksp&#x6216;&#x8005;kapt&#x6216;&#x8005;annotationProcessor
-* */</span>
-const <span class="hljs-variable"><span class="hljs-keyword">val</span> ksp</span> = <span class="hljs-string">&quot;io.github.leobert-lan:davinci-anno-ksp:0.0.2&quot;</span>
-
-<span class="hljs-comment">/*
-* &#x6838;&#x5FC3;&#x5305;
-* */</span>
-const <span class="hljs-variable"><span class="hljs-keyword">val</span> api</span> = <span class="hljs-string">&quot;io.github.leobert-lan:davinci:0.0.5&quot;</span>
-
-<span class="hljs-comment">/*
-* &#x5982;&#x679C;&#x8981;&#x9884;&#x89C8;style&#x5B9A;&#x4E49;&#xFF0C;&#x5229;&#x7528;debugImplementation &#x58F0;&#x660E;
-* */</span>
-const <span class="hljs-variable"><span class="hljs-keyword">val</span> viewer</span> = <span class="hljs-string">&quot;io.github.leobert-lan:davinci-style-viewer:0.0.1&quot;</span>
 </code></pre>
-<p>&#x5173;&#x4E8E;&#x6CE8;&#x89E3;&#x5904;&#x7406;&#x5668;&#xFF08;ksp&#x5B9E;&#x73B0;&#xFF09;&#x4EE5;&#x53CA;&#x5B9E;&#x73B0;&#x7684;&#x6838;&#x5FC3;&#x76EE;&#x6807;&#xFF0C;&#x8BE6;&#x89C1;&#x62D9;&#x4F5C;&#xFF1A; <a href="../Android/KSP/post_24.html">&#x597D;&#x73A9;&#x7CFB;&#x5217; | &#x62E5;&#x62B1;Kotlin Symbol Processing(KSP),&#x9879;&#x76EE;&#x5B9E;&#x6218;</a></p>
-<p>&#x4F7F;&#x7528;&#x6CE8;&#x89E3;&#x5904;&#x7406;&#x5668;&#x7B80;&#x5316;Style&#x6CE8;&#x518C;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x914D;&#x7F6E;&#x53C2;&#x6570;&#xFF1A;</p>
-<pre><code class="lang-groovy">kapt {
+<h3 id="声明依赖"><a class="header" href="#声明依赖">声明依赖</a></h3>
+<p>以下是包依赖信息</p>
+<pre><code class="language-kotlin">/*
+* 注解，用于Style类注解或者StyleFactory类注解，以及预览时的可选配置注解
+* */
+const val annotation = "io.github.leobert-lan:davinci-anno:0.0.2"
+
+/*
+* 注解处理器，支持ksp或者kapt或者annotationProcessor
+* */
+const val ksp = "io.github.leobert-lan:davinci-anno-ksp:0.0.2"
+
+/*
+* 核心包
+* */
+const val api = "io.github.leobert-lan:davinci:0.0.5"
+
+/*
+* 如果要预览style定义，利用debugImplementation 声明
+* */
+const val viewer = "io.github.leobert-lan:davinci-style-viewer:0.0.1"
+</code></pre>
+<p>关于注解处理器（ksp实现）以及实现的核心目标，详见拙作： <a href="../Android/KSP/post_24.html">好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></p>
+<p>使用注解处理器简化Style注册时，需要配置参数：</p>
+<pre><code class="language-groovy">kapt {
     arguments {
-        arg(<span class="hljs-string">&quot;daVinCi.verbose&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>) <span class="hljs-comment">//&#x65E5;&#x5FD7;</span>
-        arg(<span class="hljs-string">&quot;daVinCi.pkg&quot;</span>, <span class="hljs-string">&quot;com.example.simpletest&quot;</span>) <span class="hljs-comment">//&#x751F;&#x6210;&#x7C7B;&#x5305;&#x540D;</span>
-        arg(<span class="hljs-string">&quot;daVinCi.module&quot;</span>, <span class="hljs-string">&quot;App&quot;</span>) <span class="hljs-comment">//&#x751F;&#x6210;&#x7C7B;&#x7684;&#x524D;&#x7F00;</span>
-        arg(<span class="hljs-string">&quot;daVinCi.preview&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>) <span class="hljs-comment">//&#x751F;&#x6210;&#x9884;&#x89C8;&#x914D;&#x7F6E;&#x7684;&#x6CE8;&#x5165;&#x4EE3;&#x7801;</span>
+        arg("daVinCi.verbose", "true") //日志
+        arg("daVinCi.pkg", "com.example.simpletest") //生成类包名
+        arg("daVinCi.module", "App") //生成类的前缀
+        arg("daVinCi.preview", "true") //生成预览配置的注入代码
     }
 }
 </code></pre>
-<p>&#x4E0B;&#x9762;&#x4F1A;&#x5C55;&#x5F00;&#x8FD9;&#x51E0;&#x4E2A;&#x90E8;&#x5206;&#xFF1A;</p>
+<p>下面会展开这几个部分：</p>
 <ul>
-<li>&#x6784;&#x5EFA;&#x4E00;&#x4E2A;Shape &#x548C;&#x8BF8;&#x591A;API</li>
-<li>&#x6784;&#x5EFA;&#x4E00;&#x4E2A;ColorStateList &#x548C;&#x8BF8;&#x591A;API</li>
-<li>&#x5728;XML&#x4E2D;&#x4F7F;&#x7528;DaVinCi</li>
-<li>&#x5B9A;&#x4E49;Style&#xFF0C;&#x53CA;&#x5176;&#x521D;&#x59CB;&#x5316;&#x65B9;&#x5F0F;&#x4EE5;&#x53CA;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;</li>
-<li>&#x9884;&#x89C8;Style</li>
+<li>构建一个Shape 和诸多API</li>
+<li>构建一个ColorStateList 和诸多API</li>
+<li>在XML中使用DaVinCi</li>
+<li>定义Style，及其初始化方式以及使用方式</li>
+<li>预览Style</li>
 </ul>
-<h3 id="&#x6784;&#x5EFA;&#x4E00;&#x4E2A;shape"><a name="&#x6784;&#x5EFA;&#x4E00;&#x4E2A;shape" class="anchor-navigation-ex-anchor" href="#&#x6784;&#x5EFA;&#x4E00;&#x4E2A;shape"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6784;&#x5EFA;&#x4E00;&#x4E2A;Shape</h3>
-<pre><code class="lang-kotlin">DaVinCiExpression.shape(): Shape
+<h3 id="构建一个shape"><a class="header" href="#构建一个shape">构建一个Shape</a></h3>
+<pre><code class="language-kotlin">DaVinCiExpression.shape(): Shape
 </code></pre>
-<h4 id="&#x6307;&#x5B9A;shape&#x7684;&#x7C7B;&#x578B;&#xFF0C;"><a name="&#x6307;&#x5B9A;shape&#x7684;&#x7C7B;&#x578B;&#xFF0C;" class="anchor-navigation-ex-anchor" href="#&#x6307;&#x5B9A;shape&#x7684;&#x7C7B;&#x578B;&#xFF0C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6307;&#x5B9A;Shape&#x7684;&#x7C7B;&#x578B;&#xFF0C;</h4>
-<p>&#x4E00;&#x822C;&#x5E38;&#x7528;&#x7684;&#x662F;rectAngle &#x548C; oval</p>
-<pre><code class="lang-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">rectAngle</span><span class="hljs-params">()</span>: Shape</span>
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">oval</span><span class="hljs-params">()</span>: Shape</span>
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">ring</span><span class="hljs-params">()</span>: Shape</span>
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">line</span><span class="hljs-params">()</span>: Shape</span>
+<h4 id="指定shape的类型"><a class="header" href="#指定shape的类型">指定Shape的类型，</a></h4>
+<p>一般常用的是rectAngle 和 oval</p>
+<pre><code class="language-kotlin">fun rectAngle(): Shape
+fun oval(): Shape
+fun ring(): Shape
+fun line(): Shape
 </code></pre>
-<h4 id="rectangle&#x65F6;&#x7684;&#x5706;&#x89D2;&#xFF1A;"><a name="rectangle&#x65F6;&#x7684;&#x5706;&#x89D2;&#xFF1A;" class="anchor-navigation-ex-anchor" href="#rectangle&#x65F6;&#x7684;&#x5706;&#x89D2;&#xFF1A;"><i class="fa fa-link" aria-hidden="true"></i></a>rectAngle&#x65F6;&#x7684;&#x5706;&#x89D2;&#xFF1A;</h4>
-<pre><code class="lang-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">corner</span><span class="hljs-params">(@Px r: <span class="hljs-type">Int</span>)</span>: Shape</span>
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">corner</span><span class="hljs-params">(str: <span class="hljs-type">String</span>)</span>: Shape</span>
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">corners</span><span class="hljs-params">(@Px lt: <span class="hljs-type">Int, @Px rt: Int, @Px rb: Int, @Px lb: Int</span>)</span>: Shape</span>
+<h4 id="rectangle时的圆角"><a class="header" href="#rectangle时的圆角">rectAngle时的圆角：</a></h4>
+<pre><code class="language-kotlin">fun corner(@Px r: Int): Shape
+fun corner(str: String): Shape
+fun corners(@Px lt: Int, @Px rt: Int, @Px rb: Int, @Px lb: Int): Shape
 </code></pre>
-<p>&#x5C3A;&#x5BF8;&#x5747;&#x53EF;&#x4EE5; &quot;xdp&quot; &#x8868;&#x8FBE;dp&#x503C;&#xFF0C;&#x5982;&quot;3dp&quot;&#x5373;&#x4E3A; 3&#x4E2A;dp&#xFF0C;&quot;3&quot;&#x5219;&#x4E3A;3&#x4E2A;px&#x3002;</p>
-<h4 id="&#x586B;&#x5145;&#x8272;&#xFF1A;"><a name="&#x586B;&#x5145;&#x8272;&#xFF1A;" class="anchor-navigation-ex-anchor" href="#&#x586B;&#x5145;&#x8272;&#xFF1A;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x586B;&#x5145;&#x8272;&#xFF1A;</h4>
-<pre><code class="lang-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">solid</span><span class="hljs-params">(str: <span class="hljs-type">String</span>)</span>: Shape <span class="hljs-comment">//&#x8272;&#x503C; &quot;#ffffffff&quot; &#x6216;&#x8005; &quot;rc/&#x989C;&#x8272;&#x8D44;&#x6E90;&#x540D;&quot;</span></span>
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">solid</span><span class="hljs-params">(@ColorInt color: <span class="hljs-type">Int</span>)</span>: Shape</span>
+<p>尺寸均可以 "xdp" 表达dp值，如"3dp"即为 3个dp，"3"则为3个px。</p>
+<h4 id="填充色"><a class="header" href="#填充色">填充色：</a></h4>
+<pre><code class="language-kotlin">fun solid(str: String): Shape //色值 "#ffffffff" 或者 "rc/颜色资源名"
+fun solid(@ColorInt color: Int): Shape
 </code></pre>
-<h4 id="&#x63CF;&#x8FB9;&#xFF1A;"><a name="&#x63CF;&#x8FB9;&#xFF1A;" class="anchor-navigation-ex-anchor" href="#&#x63CF;&#x8FB9;&#xFF1A;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x63CF;&#x8FB9;&#xFF1A;</h4>
-<pre><code class="lang-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">stroke</span><span class="hljs-params">(width: <span class="hljs-type">String, color: String</span>)</span>: Shape</span>
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">stroke</span><span class="hljs-params">(width: <span class="hljs-type">String, color: String, dashGap: String, dashWidth: String</span>)</span>: Shape</span>
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">stroke</span><span class="hljs-params">(@Px width: <span class="hljs-type">Int, @ColorInt colorInt: Int</span>)</span>: Shape</span>
+<h4 id="描边"><a class="header" href="#描边">描边：</a></h4>
+<pre><code class="language-kotlin">fun stroke(width: String, color: String): Shape
+fun stroke(width: String, color: String, dashGap: String, dashWidth: String): Shape
+fun stroke(@Px width: Int, @ColorInt colorInt: Int): Shape 
 </code></pre>
-<h4 id="&#x6E10;&#x53D8;&#xFF1A;"><a name="&#x6E10;&#x53D8;&#xFF1A;" class="anchor-navigation-ex-anchor" href="#&#x6E10;&#x53D8;&#xFF1A;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6E10;&#x53D8;&#xFF1A;</h4>
-<pre><code class="lang-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">gradient</span><span class="hljs-params">(
-    type: <span class="hljs-type">String</span> = Gradient.TYPE_LINEAR,
-    @ColorInt startColor: <span class="hljs-type">Int,
+<h4 id="渐变"><a class="header" href="#渐变">渐变：</a></h4>
+<pre><code class="language-kotlin">fun gradient(
+    type: String = Gradient.TYPE_LINEAR,
+    @ColorInt startColor: Int,
     @ColorInt endColor: Int,
-    angle: Int</span> = 0
-)</span>: Shape</span>
+    angle: Int = 0
+): Shape
 
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">gradient</span><span class="hljs-params">(
-    type: <span class="hljs-type">String</span> = Gradient.TYPE_LINEAR, @ColorInt startColor: <span class="hljs-type">Int,
+fun gradient(
+    type: String = Gradient.TYPE_LINEAR, @ColorInt startColor: Int,
     @ColorInt centerColor: Int?, @ColorInt endColor: Int,
     centerX: Float,
     centerY: Float,
-    angle: Int</span> = 0
-)</span>: Shape</span>
+    angle: Int = 0
+): Shape
 
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">gradient</span><span class="hljs-params">(startColor: <span class="hljs-type">String, endColor: String, angle: Int</span>)</span>: Shape</span>
+fun gradient(startColor: String, endColor: String, angle: Int): Shape
 
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">gradient</span><span class="hljs-params">(type: <span class="hljs-type">String</span> = Gradient.TYPE_LINEAR, startColor: <span class="hljs-type">String, endColor: String, angle: Int</span> = 0)</span>: Shape</span>
+fun gradient(type: String = Gradient.TYPE_LINEAR, startColor: String, endColor: String, angle: Int = 0): Shape
 
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">gradient</span><span class="hljs-params">(
-    type: <span class="hljs-type">String</span> = Gradient.TYPE_LINEAR,
-    startColor: <span class="hljs-type">String,
+fun gradient(
+    type: String = Gradient.TYPE_LINEAR,
+    startColor: String,
     centerColor: String?,
     endColor: String,
     centerX: Float,
     centerY: Float,
-    angle: Int</span>
-)</span>: Shape</span>
+    angle: Int
+): Shape
+
 </code></pre>
-<h4 id="&#x8BBE;&#x7F6E;view&#x7684;&#x80CC;&#x666F;"><a name="&#x8BBE;&#x7F6E;view&#x7684;&#x80CC;&#x666F;" class="anchor-navigation-ex-anchor" href="#&#x8BBE;&#x7F6E;view&#x7684;&#x80CC;&#x666F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8BBE;&#x7F6E;View&#x7684;&#x80CC;&#x666F;</h4>
-<pre><code class="lang-kotlin">@BindingAdapter(
-    <span class="hljs-string">&quot;daVinCi_bg&quot;</span>, <span class="hljs-string">&quot;daVinCi_bg_pressed&quot;</span>, <span class="hljs-string">&quot;daVinCi_bg_unpressed&quot;</span>,
-    <span class="hljs-string">&quot;daVinCi_bg_checkable&quot;</span>, <span class="hljs-string">&quot;daVinCi_bg_uncheckable&quot;</span>, <span class="hljs-string">&quot;daVinCi_bg_checked&quot;</span>, <span class="hljs-string">&quot;daVinCi_bg_unchecked&quot;</span>,
-    requireAll = <span class="hljs-literal">false</span>
+<h4 id="设置view的背景"><a class="header" href="#设置view的背景">设置View的背景</a></h4>
+<pre><code class="language-kotlin">@BindingAdapter(
+    "daVinCi_bg", "daVinCi_bg_pressed", "daVinCi_bg_unpressed",
+    "daVinCi_bg_checkable", "daVinCi_bg_uncheckable", "daVinCi_bg_checked", "daVinCi_bg_unchecked",
+    requireAll = false
 )
-<span class="hljs-function"><span class="hljs-keyword">fun</span> View.<span class="hljs-title">daVinCi</span><span class="hljs-params">(
-    normal: <span class="hljs-type">DaVinCiExpression?</span> = null,
-    pressed: <span class="hljs-type">DaVinCiExpression?</span> = null, unpressed: <span class="hljs-type">DaVinCiExpression?</span> = null,
-    checkable: <span class="hljs-type">DaVinCiExpression?</span> = null, uncheckable: <span class="hljs-type">DaVinCiExpression?</span> = null,
-    checked: <span class="hljs-type">DaVinCiExpression?</span> = null, unchecked: <span class="hljs-type">DaVinCiExpression?</span> = null
-)</span></span>
+fun View.daVinCi(
+    normal: DaVinCiExpression? = null,
+    pressed: DaVinCiExpression? = null, unpressed: DaVinCiExpression? = null,
+    checkable: DaVinCiExpression? = null, uncheckable: DaVinCiExpression? = null,
+    checked: DaVinCiExpression? = null, unchecked: DaVinCiExpression? = null
+)
 </code></pre>
-<h3 id="&#x6784;&#x5EFA;&#x4E00;&#x4E2A;colorstatelist"><a name="&#x6784;&#x5EFA;&#x4E00;&#x4E2A;colorstatelist" class="anchor-navigation-ex-anchor" href="#&#x6784;&#x5EFA;&#x4E00;&#x4E2A;colorstatelist"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6784;&#x5EFA;&#x4E00;&#x4E2A;ColorStateList</h3>
-<pre><code class="lang-kotlin">DaVinCiExpression.stateColor(): ColorStateList
+<h3 id="构建一个colorstatelist"><a class="header" href="#构建一个colorstatelist">构建一个ColorStateList</a></h3>
+<pre><code class="language-kotlin">DaVinCiExpression.stateColor(): ColorStateList
 </code></pre>
-<h4 id="&#x8BBE;&#x7F6E;&#x72B6;&#x6001;&#x8272;"><a name="&#x8BBE;&#x7F6E;&#x72B6;&#x6001;&#x8272;" class="anchor-navigation-ex-anchor" href="#&#x8BBE;&#x7F6E;&#x72B6;&#x6001;&#x8272;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8BBE;&#x7F6E;&#x72B6;&#x6001;&#x8272;</h4>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ColorStateList</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">apply</span><span class="hljs-params">(state: <span class="hljs-type">State, color: String</span>)</span>: ColorStateList</span>
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">apply</span><span class="hljs-params">(state: <span class="hljs-type">String, color: String</span>)</span>: ColorStateList</span>
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">apply</span><span class="hljs-params">(state: <span class="hljs-type">State, @ColorInt color: Int</span>)</span>: ColorStateList</span>
+<h4 id="设置状态色"><a class="header" href="#设置状态色">设置状态色</a></h4>
+<pre><code class="language-kotlin">class ColorStateList {
+    fun apply(state: State, color: String): ColorStateList
+    fun apply(state: String, color: String): ColorStateList
+    fun apply(state: State, @ColorInt color: Int): ColorStateList
 }
 </code></pre>
-<p>&#x793A;&#x4F8B;&#xFF1A;</p>
-<pre><code class="lang-kotlin">DaVinCiExpression.stateColor().apply(
-    state = State.STATE_PRESSED_TRUE, color = Color.parseColor(<span class="hljs-string">&quot;#00aa00&quot;</span>)
+<p>示例：</p>
+<pre><code class="language-kotlin">DaVinCiExpression.stateColor().apply(
+    state = State.STATE_PRESSED_TRUE, color = Color.parseColor("#00aa00")
 ).apply(
-    state = State.STATE_PRESSED_FALSE, color = Color.parseColor(<span class="hljs-string">&quot;#667700&quot;</span>)
+    state = State.STATE_PRESSED_FALSE, color = Color.parseColor("#667700")
 ).apply(
-    state = State.STATE_CHECKED_TRUE.name, color = <span class="hljs-string">&quot;#ff0000&quot;</span>
+    state = State.STATE_CHECKED_TRUE.name, color = "#ff0000"
 ).apply(
-    state = State.STATE_CHECKED_FALSE, color = <span class="hljs-string">&quot;#000000&quot;</span>
+    state = State.STATE_CHECKED_FALSE, color = "#000000"
 )
     .let {
         binding.cb1.daVinCiColor(it)
     }
 </code></pre>
-<h4 id="&#x5E94;&#x7528;&#x989C;&#x8272;&#xFF1A;"><a name="&#x5E94;&#x7528;&#x989C;&#x8272;&#xFF1A;" class="anchor-navigation-ex-anchor" href="#&#x5E94;&#x7528;&#x989C;&#x8272;&#xFF1A;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5E94;&#x7528;&#x989C;&#x8272;&#xFF1A;</h4>
-<pre><code class="lang-kotlin">@BindingAdapter(<span class="hljs-string">&quot;daVinCiTextColor&quot;</span>)
-<span class="hljs-function"><span class="hljs-keyword">fun</span> TextView.<span class="hljs-title">daVinCiColor</span><span class="hljs-params">(expressions: <span class="hljs-type">DaVinCiExpression.ColorStateList</span>)</span></span>
+<h4 id="应用颜色"><a class="header" href="#应用颜色">应用颜色：</a></h4>
+<pre><code class="language-kotlin">@BindingAdapter("daVinCiTextColor")
+fun TextView.daVinCiColor(expressions: DaVinCiExpression.ColorStateList)
 </code></pre>
-<h3 id="&#x5728;xml&#x4E2D;&#x4F7F;&#x7528;"><a name="&#x5728;xml&#x4E2D;&#x4F7F;&#x7528;" class="anchor-navigation-ex-anchor" href="#&#x5728;xml&#x4E2D;&#x4F7F;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5728;XML&#x4E2D;&#x4F7F;&#x7528;</h3>
-<pre><code class="lang-xml">
-<span class="hljs-tag">&lt;<span class="hljs-name">layout</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">import</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;osp.leobert.android.davinci.DaVinCiExpression&quot;</span>/&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span>
+<h3 id="在xml中使用"><a class="header" href="#在xml中使用">在XML中使用</a></h3>
+<pre><code class="language-xml">
+&lt;layout&gt;
+    &lt;data&gt;
+        &lt;import type="osp.leobert.android.davinci.DaVinCiExpression"/&gt;
+    &lt;/data&gt;
 
-    <span class="hljs-tag">&lt;<span class="hljs-name">LinearLayout</span>
-        <span class="hljs-attr">daVinCi_bg</span>=<span class="hljs-string">&quot;@{DaVinCiExpression.shape().solid(`#eaeaea`)}&quot;</span>
-    /&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">layout</span>&gt;</span>
+    &lt;LinearLayout
+        daVinCi_bg="@{DaVinCiExpression.shape().solid(`#eaeaea`)}"
+    /&gt;
+&lt;/layout&gt;
 </code></pre>
-<p>&#x66F4;&#x591A; <a href="https://github.com/leobert-lan/DaVinCi" target="_blank">&#x53C2;&#x8003;Demo</a></p>
-<h3 id="&#x5B9A;&#x4E49;style"><a name="&#x5B9A;&#x4E49;style" class="anchor-navigation-ex-anchor" href="#&#x5B9A;&#x4E49;style"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5B9A;&#x4E49;Style</h3>
-<p>&#x5F53;&#x90E8;&#x5206;&#x6837;&#x5F0F;&#x590D;&#x7528;&#x5EA6;&#x8F83;&#x9AD8;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;Style&#xFF0C;&#x4EE5;&#x51CF;&#x5C11;&#x521B;&#x5EFA;&#x8FC7;&#x7A0B;</p>
-<pre><code class="lang-kotlin">@DaVinCiStyle(styleName = <span class="hljs-string">&quot;btn_style.main&quot;</span>)
+<p>更多 <a href="https://github.com/leobert-lan/DaVinCi">参考Demo</a></p>
+<h3 id="定义style"><a class="header" href="#定义style">定义Style</a></h3>
+<p>当部分样式复用度较高时，我们可以定义Style，以减少创建过程</p>
+<pre><code class="language-kotlin">@DaVinCiStyle(styleName = "btn_style.main")
 @StyleViewer(
-    height = <span class="hljs-number">40</span>, width = ViewGroup.LayoutParams.MATCH_PARENT,
-    type = StyleViewer.FLAG_CSL or StyleViewer.FLAG_BG, background = <span class="hljs-string">&quot;#ffffff&quot;</span>
+    height = 40, width = ViewGroup.LayoutParams.MATCH_PARENT,
+    type = StyleViewer.FLAG_CSL or StyleViewer.FLAG_BG, background = "#ffffff"
 )
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoStyle</span> : <span class="hljs-type">StyleRegistry.Style</span></span>(<span class="hljs-string">&quot;btn_style.main&quot;</span>) {
+class DemoStyle : StyleRegistry.Style("btn_style.main") {
     init {
         this.register(
             state = State.STATE_ENABLE_FALSE,
-            expression = DaVinCiExpression.shape().rectAngle().solid(<span class="hljs-string">&quot;#80ff3c08&quot;</span>).corner(<span class="hljs-string">&quot;10dp&quot;</span>)
+            expression = DaVinCiExpression.shape().rectAngle().solid("#80ff3c08").corner("10dp")
         ).register(
             state = State.STATE_ENABLE_TRUE,
-            expression = DaVinCiExpression.shape().rectAngle().corner(<span class="hljs-string">&quot;10dp&quot;</span>)
-                .gradient(<span class="hljs-string">&quot;#ff3c08&quot;</span>, <span class="hljs-string">&quot;#ff653c&quot;</span>, <span class="hljs-number">0</span>)
+            expression = DaVinCiExpression.shape().rectAngle().corner("10dp")
+                .gradient("#ff3c08", "#ff653c", 0)
         ).registerCsl(
             exp = DaVinCiExpression.stateColor().apply(
                 state = State.STATE_ENABLE_FALSE,
-                color = <span class="hljs-string">&quot;#ffffff&quot;</span>
+                color = "#ffffff"
             ).apply(
                 state = State.STATE_ENABLE_TRUE,
-                color = <span class="hljs-string">&quot;#333333&quot;</span>
+                color = "#333333"
             )
         )
     }
 }
 </code></pre>
-<p>&#x6216;&#x8005;&#x5229;&#x7528;Factory&#x5EF6;&#x8FDF;&#x521B;&#x5EFA;&#x8FC7;&#x7A0B;</p>
-<pre><code class="lang-kotlin">@DaVinCiStyleFactory(styleName = <span class="hljs-string">&quot;btn_style.main&quot;</span>)
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoStyleFactory</span> : <span class="hljs-type">StyleRegistry.Style.Factory</span></span>() {
-    <span class="hljs-keyword">override</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> styleName</span>: String = <span class="hljs-string">&quot;btn_style.main&quot;</span>
+<p>或者利用Factory延迟创建过程</p>
+<pre><code class="language-kotlin">@DaVinCiStyleFactory(styleName = "btn_style.main")
+class DemoStyleFactory : StyleRegistry.Style.Factory() {
+    override val styleName: String = "btn_style.main"
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">apply</span><span class="hljs-params">(style: <span class="hljs-type">StyleRegistry.Style</span>)</span> {</span>
+    override fun apply(style: StyleRegistry.Style) {
         style.register(
             state = State.STATE_ENABLE_FALSE,
-            expression = DaVinCiExpression.shape().rectAngle().solid(<span class="hljs-string">&quot;#80ff3c08&quot;</span>).corner(<span class="hljs-string">&quot;10dp&quot;</span>)
+            expression = DaVinCiExpression.shape().rectAngle().solid("#80ff3c08").corner("10dp")
         ).register(
             state = State.STATE_ENABLE_TRUE,
-            expression = DaVinCiExpression.shape().rectAngle().corner(<span class="hljs-string">&quot;10dp&quot;</span>)
-                .gradient(<span class="hljs-string">&quot;#ff3c08&quot;</span>, <span class="hljs-string">&quot;#ff653c&quot;</span>, <span class="hljs-number">0</span>)
+            expression = DaVinCiExpression.shape().rectAngle().corner("10dp")
+                .gradient("#ff3c08", "#ff653c", 0)
         )
     }
 }
 </code></pre>
-<h4 id="&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;"><a name="&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;" class="anchor-navigation-ex-anchor" href="#&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;</h4>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainApplication</span> : <span class="hljs-type">Application</span></span>() {
+<h4 id="进行初始化"><a class="header" href="#进行初始化">进行初始化</a></h4>
+<pre><code class="language-kotlin">class MainApplication : Application() {
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">()</span> {</span>
+    override fun onCreate() {
         super.onCreate()
         AppDaVinCiStyles.register()
 
-        <span class="hljs-comment">//&#x4E0D;&#x5BF9;&#x9884;&#x89C8;&#x8FDB;&#x884C;&#x989D;&#x5916;&#x914D;&#x7F6E;&#x53EF;&#x5FFD;&#x7565;</span>
+        //不对预览进行额外配置可忽略
         AppDaVinCiStylePreviewInjector.register()
 
-        <span class="hljs-comment">//&#x5982;&#x679C;&#x4E0D;&#x4F7F;&#x7528;&#x6CE8;&#x89E3;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x624B;&#x52A8;&#x7F57;&#x5217;&#x6CE8;&#x5165;&#xFF0C;&#x6570;&#x91CF;&#x591A;&#x4E86;&#x540E;&#xFF0C;&#x975E;&#x5E38;&#x5570;&#x55E6; &#xFF1A;</span>
-        <span class="hljs-comment">//StyleRegistry.registerFactory(DemoStyleFactory())</span>
+        //如果不使用注解，则需要手动罗列注入，数量多了后，非常啰嗦 ：
+        //StyleRegistry.registerFactory(DemoStyleFactory())
     }
 }
 </code></pre>
-<h4 id="&#x4F7F;&#x7528;style"><a name="&#x4F7F;&#x7528;style" class="anchor-navigation-ex-anchor" href="#&#x4F7F;&#x7528;style"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F7F;&#x7528;Style</h4>
-<pre><code class="lang-kotlin">@BindingAdapter(<span class="hljs-string">&quot;daVinCiBgStyle&quot;</span>)
-<span class="hljs-function"><span class="hljs-keyword">fun</span> View.<span class="hljs-title">daVinCiBgStyle</span><span class="hljs-params">(styleName: <span class="hljs-type">String</span>)</span> {</span>
+<h4 id="使用style"><a class="header" href="#使用style">使用Style</a></h4>
+<pre><code class="language-kotlin">@BindingAdapter("daVinCiBgStyle")
+fun View.daVinCiBgStyle(styleName: String) {
     with(StyleRegistry.find(styleName)) {
 
         this?.applyTo(
-            DaVinCi(<span class="hljs-literal">null</span>, this@daVinCiBgStyle)
+            DaVinCi(null, this@daVinCiBgStyle)
         )
-            ?: Log.d(DaVinCiExpression.sLogTag, <span class="hljs-string">&quot;could not found style with name $styleName&quot;</span>)
+            ?: Log.d(DaVinCiExpression.sLogTag, "could not found style with name $styleName")
     }
 }
 </code></pre>
-<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextView</span>
-    <span class="hljs-attr">daVinCiBgStyle</span>=<span class="hljs-string">&quot;@{`btn_style.main`}&quot;</span>/&gt;</span>
+<pre><code class="language-xml">&lt;TextView
+    daVinCiBgStyle="@{`btn_style.main`}"/&gt;
 </code></pre>
-<p>&#x5982;&#x679C;&#x5C06;style&#x5B9A;&#x4E49;&#x4E0B;&#x6C89;&#x5230;Module&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x751F;&#x6210;&#x7684;&#x540D;&#x79F0;&#x5E38;&#x91CF;</p>
-<p><em>&#x76EE;&#x524D;0.0.5&#x7248;&#x672C;&#x6269;&#x5C55;&#x4E86;&#x8F83;&#x591A;&#x529F;&#x80FD;&#x7F16;&#x7801;&#x4ED3;&#x4FC3;&#xFF0C;&#x90E8;&#x5206;API&#x540D;&#x79F0;&#x4E0D;&#x6070;&#x5F53;&#xFF0C;&#x4F1A;&#x9010;&#x6B65;&#x65B0;&#x589E;&#xFF0C;&#x4F7F;&#x5F97;API&#x540D;&#x79F0;&#x548C;&#x529F;&#x80FD;&#x66F4;&#x52A0;&#x8D34;&#x5207;</em></p>
-<h3 id="&#x9884;&#x89C8;style"><a name="&#x9884;&#x89C8;style" class="anchor-navigation-ex-anchor" href="#&#x9884;&#x89C8;style"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9884;&#x89C8;Style</h3>
-<p>&#x5982;&#x679C;&#x5728;AS&#x4E2D;&#x6269;&#x5C55;&#x9884;&#x89C8;&#x529F;&#x80FD;&#xFF0C;&#x90A3;&#x4E48;&#x9700;&#x8981;&#x4ED8;&#x51FA;&#x592A;&#x591A;&#x7684;&#x5DE5;&#x4F5C;&#x91CF;&#x3002;&#x4E8E;&#x662F;&#x91C7;&#x7528;&#x4E86;&#x53D6;&#x5DE7;&#x7684;&#x65B9;&#x5F0F;</p>
-<p>&#x4E00;&#x65E6;&#x6DFB;&#x52A0;&#x4E86; <code>&quot;io.github.leobert-lan:davinci-style-viewer:0.0.1&quot;</code> &#x5E93;&#xFF0C;&#x5219;&#x4F1A;&#x5305;&#x542B;&#x4E00;&#x4E2A;Activity&#xFF0C;&#x5C55;&#x793A;&#x6240;&#x6709;&#x5DF2;&#x6CE8;&#x518C;&#x7684;&#x6837;&#x5F0F;&#x3002;</p>
-<p>&#x4F8B;&#x5982;&#xFF1A;</p>
-<p><img src="DaVinCi/img.png" alt="Demo"></p>
-<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;&#x6761;&#x76EE;&#x7B2C;&#x4E00;&#x884C;&#x662F;&#x6837;&#x5F0F;&#x540D;&#xFF0C;&#x7B2C;&#x4E8C;&#x884C;&#x662F;&#x9884;&#x89C8;&#x533A;&#xFF0C;&#x7B2C;&#x4E09;&#x884C;&#x662F;Check&#x548C;Enable&#x7684;&#x8BBE;&#x7F6E;&#xFF0C;&#x66F4;&#x591A;&#x8BBE;&#x7F6E;&#x5C06;&#x4F1A;&#x9010;&#x6B65;&#x5F00;&#x653E;&#x3002;</p>
-<p>&#x5229;&#x7528;&#x6CE8;&#x89E3;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x4E00;&#x5B9A;&#x7684;&#x914D;&#x7F6E;&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-keyword">public</span> annotation <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StyleViewer</span></span>(
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> height</span>: <span class="hljs-keyword">Int</span> = <span class="hljs-number">48</span>,
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> width</span>: <span class="hljs-keyword">Int</span> = <span class="hljs-number">-1</span> <span class="hljs-comment">/*android.view.ViewGroup.LayoutParams.MATCH_PARENT = -1*/</span>,
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> background</span>: String = <span class="hljs-string">&quot;#ffffff&quot;</span>,
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> type</span>: <span class="hljs-keyword">Int</span> = FLAG_BG or FLAG_CSL,
+<p>如果将style定义下沉到Module，则可以使用生成的名称常量</p>
+<p><em>目前0.0.5版本扩展了较多功能编码仓促，部分API名称不恰当，会逐步新增，使得API名称和功能更加贴切</em></p>
+<h3 id="预览style"><a class="header" href="#预览style">预览Style</a></h3>
+<p>如果在AS中扩展预览功能，那么需要付出太多的工作量。于是采用了取巧的方式</p>
+<p>一旦添加了 <code>"io.github.leobert-lan:davinci-style-viewer:0.0.1"</code> 库，则会包含一个Activity，展示所有已注册的样式。</p>
+<p>例如：</p>
+<p><img src="./DaVinCi/img.png" alt="Demo" /></p>
+<p>很显然，条目第一行是样式名，第二行是预览区，第三行是Check和Enable的设置，更多设置将会逐步开放。</p>
+<p>利用注解可以进行一定的配置：</p>
+<pre><code class="language-kotlin">public annotation class StyleViewer(
+    val height: Int = 48,
+    val width: Int = -1 /*android.view.ViewGroup.LayoutParams.MATCH_PARENT = -1*/,
+    val background: String = "#ffffff",
+    val type: Int = FLAG_BG or FLAG_CSL,
 ) {
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> {
-        <span class="hljs-keyword">public</span> const <span class="hljs-variable"><span class="hljs-keyword">val</span> FLAG_BG</span>: <span class="hljs-keyword">Int</span> = <span class="hljs-number">1</span> shl <span class="hljs-number">0</span>
-        <span class="hljs-keyword">public</span> const <span class="hljs-variable"><span class="hljs-keyword">val</span> FLAG_CSL</span>: <span class="hljs-keyword">Int</span> = <span class="hljs-number">1</span> shl <span class="hljs-number">1</span>
+    public companion object {
+        public const val FLAG_BG: Int = 1 shl 0
+        public const val FLAG_CSL: Int = 1 shl 1
     }
 }
 </code></pre>
 <ul>
-<li>&#x8BBE;&#x7F6E;&#x5BBD;&#x9AD8;&#xFF0C;&#x5355;&#x4F4D;dp&#xFF0C;</li>
-<li>&#x9884;&#x89C8;&#x533A;&#x80CC;&#x666F;&#x4E3A;&#x767D;&#x8272;&#xFF0C;&#x5982;&#x679C;&#x548C;&#x6837;&#x5F0F;&#x6BD4;&#x8F83;&#x8D34;&#x8FD1;&#xFF0C;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x80CC;&#x666F;&#x533A;&#x989C;&#x8272;</li>
-<li>&#x5982;&#x679C;&#x662F;&#x660E;&#x786E;&#x7684;&#x80CC;&#x666F;&#x6837;&#x5F0F;&#xFF0C;&#x4E14;&#x5C3A;&#x5BF8;&#x8F83;&#x5C0F;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;type&#x4E3A; FLAG_BG&#xFF0C;&#x79FB;&#x9664;&#x6587;&#x5B57;&#x663E;&#x793A;</li>
+<li>设置宽高，单位dp，</li>
+<li>预览区背景为白色，如果和样式比较贴近，可以设置背景区颜色</li>
+<li>如果是明确的背景样式，且尺寸较小时，可以设置type为 FLAG_BG，移除文字显示</li>
 </ul>
-<h2 id="&#x4EE5;&#x540E;&#x7684;&#x5DE5;&#x4F5C;"><a name="&#x4EE5;&#x540E;&#x7684;&#x5DE5;&#x4F5C;" class="anchor-navigation-ex-anchor" href="#&#x4EE5;&#x540E;&#x7684;&#x5DE5;&#x4F5C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4EE5;&#x540E;&#x7684;&#x5DE5;&#x4F5C;</h2>
+<h2 id="以后的工作"><a class="header" href="#以后的工作">以后的工作</a></h2>
 <ul>
-<li>&#x7EE7;&#x7EED;&#x6DFB;&#x52A0;&#x66F4;&#x52A0;&#x65B9;&#x4FBF;&#x7684;API</li>
-<li>&#x6269;&#x5C55;DSL</li>
-<li>&#x4F18;&#x5316;&#x5728;Java/Kotlin &#x4EE3;&#x7801;&#x4E2D;&#x4F7F;&#x7528;DaVinCi&#x7684;&#x7B80;&#x4FBF;&#x6027;</li>
-<li>&#x5185;&#x90E8;&#x529F;&#x80FD;&#x8FDB;&#x4E00;&#x6B65;&#x89E3;&#x8026; <em>&#x5982;&#x679C;&#x6709;&#x5FC5;&#x8981;</em> &#xFF0C; <em>&#x53EF;&#x8FC1;&#x79FB;&#x5230;&#x5176;&#x4ED6;</em> </li>
-<li>&#x4F18;&#x5316;&#x9884;&#x89C8;<ul>
-<li>&#x66F4;&#x591A;&#x6A21;&#x6001;&#x72B6;&#x6001;&#x8BBE;&#x7F6E;</li>
-<li>&#x641C;&#x7D22; <em>&#x5982;&#x679C;&#x6709;&#x5FC5;&#x8981;</em></li>
-<li>&#x5206;&#x7EC4; <em>&#x5982;&#x679C;&#x6709;&#x5FC5;&#x8981;</em></li>
+<li>继续添加更加方便的API</li>
+<li>扩展DSL</li>
+<li>优化在Java/Kotlin 代码中使用DaVinCi的简便性</li>
+<li>内部功能进一步解耦 <em>如果有必要</em> ， <em>可迁移到其他</em></li>
+<li>优化预览
+<ul>
+<li>更多模态状态设置</li>
+<li>搜索 <em>如果有必要</em></li>
+<li>分组 <em>如果有必要</em></li>
 </ul>
 </li>
 </ul>
-<p>&#x5982;&#x679C;&#x4F60;&#x89C9;&#x5F97;DaVinCi&#x5F88;&#x6709;&#x8DA3;&#xFF0C;&#x4E0D;&#x59A8;&#x70B9;&#x4E2A;Star&#xFF0C;&#x6B22;&#x8FCE;&#x4E00;&#x8D77;&#x4EA4;&#x6D41;&#x60F3;&#x6CD5;&#x3002; </p>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2021-07-15 00:17:10
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+<p>如果你觉得DaVinCi很有趣，不妨点个Star，欢迎一起交流想法。</p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../repo/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../Android/Idea/post_32.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 个人项目">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="../Android/Idea/post_32.html" class="navigation navigation-next " aria-label="Next page: 好玩系列：白嫖一个优雅的类图生成工具">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../repo/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../Android/Idea/post_32.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"DaVinCi,取代XML编写Shape或ColorStateList的方案","level":"1.9.1","depth":2,"next":{"title":"好玩系列：白嫖一个优雅的类图生成工具","level":"1.9.2","depth":2,"path":"Android/Idea/post_32.md","ref":"./Android/Idea/post_32.md","articles":[]},"previous":{"title":"个人项目","level":"1.9","depth":1,"path":"repo/README.md","ref":"./repo/README.md","articles":[{"title":"DaVinCi,取代XML编写Shape或ColorStateList的方案","level":"1.9.1","depth":2,"path":"repo/DaVinCi.md","ref":"./repo/DaVinCi.md","articles":[]},{"title":"好玩系列：白嫖一个优雅的类图生成工具","level":"1.9.2","depth":2,"path":"Android/Idea/post_32.md","ref":"./Android/Idea/post_32.md","articles":[]},{"title":"初体验：动手搭建\"小清新式\"局域网文档系统","level":"1.9.3","depth":2,"path":"Speculative/post_43.md","ref":"./Speculative/post_43.md","articles":[]},{"title":"研究良久，终于发现了他代码写的快且bug少的原因","level":"1.9.4","depth":2,"path":"repo/post_48.md","ref":"./repo/post_48.md","articles":[]},{"title":"好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧","level":"1.9.5","depth":2,"path":"Speculative/post_61.md","ref":"./Speculative/post_61.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"repo/DaVinCi.md","mtime":"2021-07-14T16:17:10.501Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../gitbook/gitbook.js"></script>
-    <script src="../gitbook/theme.js"></script>
-    
-        
-        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-

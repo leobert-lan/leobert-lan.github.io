@@ -1,1545 +1,269 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>三思系列：Glide 4.X全方位认知 -- 模块职责概览 · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>三思系列：Glide 4.X全方位认知 -- 模块职责概览 - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="post_16.html" />
-    
-    
-    <link rel="prev" href="./" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../../">
-            
-                <a href="../../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../View/">
-            
-                <a href="../View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../View/post_1.html">
-            
-                <a href="../View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../View/post_6.html">
-            
-                <a href="../View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../View/post_7.html">
-            
-                <a href="../View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="../Idea/post_9.html">
-            
-                <a href="../Idea/post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../Drawable/">
-            
-                <a href="../Drawable/">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="../Drawable/post_2.html">
-            
-                <a href="../Drawable/post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="../Drawable/post_4.html">
-            
-                <a href="../Drawable/post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="../Drawable/post_47.html">
-            
-                <a href="../Drawable/post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.4" data-path="../Drawable/post_49.html">
-            
-                <a href="../Drawable/post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../Mechanism/Message/">
-            
-                <a href="../Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../Mechanism/Message/post_8.html">
-            
-                <a href="../Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../Idea/post_14/">
-            
-                <a href="../Idea/post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.4.1" data-path="../Idea/post_14.html">
-            
-                <a href="../Idea/post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter active" data-level="1.2.5.1" data-path="post_15.html">
-            
-                <a href="post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5.2" data-path="post_16.html">
-            
-                <a href="post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../KSP/">
-            
-                <a href="../KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../KSP/post_24.html">
-            
-                <a href="../KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../Base/">
-            
-                <a href="../Base/">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.7.1" data-path="../Base/post_35.html">
-            
-                <a href="../Base/post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../SysApp/">
-            
-                <a href="../SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../SysApp/post_52.html">
-            
-                <a href="../SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../DI/">
-            
-                <a href="../DI/">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.9.1" data-path="../DI/post_53.html">
-            
-                <a href="../DI/post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../../Compose/">
-            
-                <a href="../../Compose/">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="../../Compose/post_21.html">
-            
-                <a href="../../Compose/post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../../Compose/post_26.html">
-            
-                <a href="../../Compose/post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="../../Compose/post_27.html">
-            
-                <a href="../../Compose/post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="../../Compose/post_28.html">
-            
-                <a href="../../Compose/post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="../../Compose/post_29.html">
-            
-                <a href="../../Compose/post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="../../Compose/post_30.html">
-            
-                <a href="../../Compose/post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../../MultiThreading/">
-            
-                <a href="../../MultiThreading/">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../../MultiThreading/post_33.html">
-            
-                <a href="../../MultiThreading/post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../../MultiThreading/post_37.html">
-            
-                <a href="../../MultiThreading/post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="../../MultiThreading/post_38.html">
-            
-                <a href="../../MultiThreading/post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="../../MultiThreading/post_39.html">
-            
-                <a href="../../MultiThreading/post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="../../MultiThreading/post_42.html">
-            
-                <a href="../../MultiThreading/post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.6" data-path="../../MultiThreading/post_46.html">
-            
-                <a href="../../MultiThreading/post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="../../MultiThreading/post_50.html">
-            
-                <a href="../../MultiThreading/post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="../../MultiThreading/post_54.html">
-            
-                <a href="../../MultiThreading/post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="../../IO/">
-            
-                <a href="../../IO/">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="../../IO/post_55.html">
-            
-                <a href="../../IO/post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="../../IO/post_56.html">
-            
-                <a href="../../IO/post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="../../IO/post_57.html">
-            
-                <a href="../../IO/post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="../../IO/post_58.html">
-            
-                <a href="../../IO/post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="../../IO/post_59.html">
-            
-                <a href="../../IO/post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../../Gradle/">
-            
-                <a href="../../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../../Gradle/Modularization/post_18.html">
-            
-                <a href="../../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../../Gradle/Publish/post_17.html">
-            
-                <a href="../../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../../Gradle/post_22.html">
-            
-                <a href="../../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../../Groovy/">
-            
-                <a href="../../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../../Groovy/why_write_groovy.html">
-            
-                <a href="../../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../../Groovy/post_23.html">
-            
-                <a href="../../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="../../Review/">
-            
-                <a href="../../Review/">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="../../Review/post_10.html">
-            
-                <a href="../../Review/post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="../../Review/post_40.html">
-            
-                <a href="../../Review/post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.3" data-path="../../Review/post_44.html">
-            
-                <a href="../../Review/post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="../../Review/post_45.html">
-            
-                <a href="../../Review/post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../../repo/">
-            
-                <a href="../../repo/">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../../repo/DaVinCi.html">
-            
-                <a href="../../repo/DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../Idea/post_32.html">
-            
-                <a href="../Idea/post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../../Speculative/post_43.html">
-            
-                <a href="../../Speculative/post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../../repo/post_48.html">
-            
-                <a href="../../repo/post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../../Speculative/post_61.html">
-            
-                <a href="../../Speculative/post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="../../Review/DataStructure/">
-            
-                <a href="../../Review/DataStructure/">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1.1" data-path="../../Review/DataStructure/post_11.html">
-            
-                <a href="../../Review/DataStructure/post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="../../Review/DataStructure/post_12.html">
-            
-                <a href="../../Review/DataStructure/post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="../../Review/DataStructure/post_13.html">
-            
-                <a href="../../Review/DataStructure/post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="../../Review/README2.html">
-            
-                <a href="../../Review/README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="../../Review/post_36.html">
-            
-                <a href="../../Review/post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="../../Review/post_51.html">
-            
-                <a href="../../Review/post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="../../Review/post_60.html">
-            
-                <a href="../../Review/post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="../../Review/post_63.html">
-            
-                <a href="../../Review/post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="../../Review/post_64.html">
-            
-                <a href="../../Review/post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../../Note/">
-            
-                <a href="../../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../../Note/post_41.html">
-            
-                <a href="../../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../../Talk/">
-            
-                <a href="../../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../../Talk/talk_1.html">
-            
-                <a href="../../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../../Talk/talk_2_2023-03.html">
-            
-                <a href="../../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../../Thought/">
-            
-                <a href="../../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../../Thought/post_62.html">
-            
-                <a href="../../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../../info/">
-            
-                <a href="../../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../../info/about_view_series.html">
-            
-                <a href="../../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../../info/about_sansi_series.html">
-            
-                <a href="../../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../../info/about_haowan_series.html">
-            
-                <a href="../../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../../info/about_wengu_series.html">
-            
-                <a href="../../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >三思系列：Glide 4.X全方位认知 -- 模块职责概览</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;glide-4x&#x5168;&#x65B9;&#x4F4D;&#x8BA4;&#x77E5;----&#x6A21;&#x5757;&#x804C;&#x8D23;&#x6982;&#x89C8;--glide&#xFF08;&#x4E00;&#xFF09;"><b></b>&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;Glide 4.X&#x5168;&#x65B9;&#x4F4D;&#x8BA4;&#x77E5; -- &#x6A21;&#x5757;&#x804C;&#x8D23;&#x6982;&#x89C8; | Glide&#xFF08;&#x4E00;&#xFF09;</a></li><ul><li><span class="title-icon "></span><a href="#&#x672C;&#x6587;&#x4E3B;&#x65E8;"><b></b>&#x672C;&#x6587;&#x4E3B;&#x65E8;</a></li><li><span class="title-icon "></span><a href="#&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4ECE;glide&#x7684;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x7AA5;&#x4E00;&#x6591;"><b></b>&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4ECE;Glide&#x7684;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x7AA5;&#x4E00;&#x6591;</a></li><li><span class="title-icon "></span><a href="#&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4E8E;register&#x6316;&#x7EC6;&#x8282;"><b></b>&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4E8E;Register&#x6316;&#x7EC6;&#x8282;</a></li><ul><li><span class="title-icon "></span><a href="#&#x8D44;&#x6E90;model&#x52A0;&#x8F7D;&#x5668;"><b></b>&#x8D44;&#x6E90;Model&#x52A0;&#x8F7D;&#x5668;</a></li><li><span class="title-icon "></span><a href="#&#x7F16;&#x7801;&#x5668;"><b></b>&#x7F16;&#x7801;&#x5668;</a></li><li><span class="title-icon "></span><a href="#&#x89E3;&#x7801;&#x5668;"><b></b>&#x89E3;&#x7801;&#x5668;</a></li><li><span class="title-icon "></span><a href="#&#x8F6C;&#x6362;&#x5668;"><b></b>&#x8F6C;&#x6362;&#x5668;</a></li><li><span class="title-icon "></span><a href="#&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;"><b></b>&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;</a></li></ul><li><span class="title-icon "></span><a href="#&#x6A21;&#x5757;&#x804C;&#x8D23;&#x603B;&#x7ED3;"><b></b>&#x6A21;&#x5757;&#x804C;&#x8D23;&#x603B;&#x7ED3;</a></li><ul><li><span class="title-icon "></span><a href="#&#x7F13;&#x5B58;&#x4E0E;&#x6C60;"><b></b>&#x7F13;&#x5B58;&#x4E0E;&#x6C60;</a></li><li><span class="title-icon "></span><a href="#&#x8D44;&#x6E90;&#x83B7;&#x53D6;"><b></b>&#x8D44;&#x6E90;&#x83B7;&#x53D6;</a></li><li><span class="title-icon "></span><a href="#&#x6838;&#x5FC3;&#x6D41;&#x7A0B;"><b></b>&#x6838;&#x5FC3;&#x6D41;&#x7A0B;</a></li><li><span class="title-icon "></span><a href="#&#x7EBF;&#x7A0B;&#x6C60;"><b></b>&#x7EBF;&#x7A0B;&#x6C60;</a></li><li><span class="title-icon "></span><a href="#glide&#x7684;&#x521B;&#x5EFA;&#x4E0E;&#x914D;&#x7F6E;"><b></b>Glide&#x7684;&#x521B;&#x5EFA;&#x4E0E;&#x914D;&#x7F6E;</a></li></ul><li><span class="title-icon "></span><a href="#&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;"><b></b>&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;</a></li></ul></ul></div><a href="#&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;glide-4x&#x5168;&#x65B9;&#x4F4D;&#x8BA4;&#x77E5;----&#x6A21;&#x5757;&#x804C;&#x8D23;&#x6982;&#x89C8;--glide&#xFF08;&#x4E00;&#xFF09;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;glide-4x&#x5168;&#x65B9;&#x4F4D;&#x8BA4;&#x77E5;----&#x6A21;&#x5757;&#x804C;&#x8D23;&#x6982;&#x89C8;--glide&#xFF08;&#x4E00;&#xFF09;"><a name="&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;glide-4x&#x5168;&#x65B9;&#x4F4D;&#x8BA4;&#x77E5;----&#x6A21;&#x5757;&#x804C;&#x8D23;&#x6982;&#x89C8;--glide&#xFF08;&#x4E00;&#xFF09;" class="anchor-navigation-ex-anchor" href="#&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;glide-4x&#x5168;&#x65B9;&#x4F4D;&#x8BA4;&#x77E5;----&#x6A21;&#x5757;&#x804C;&#x8D23;&#x6982;&#x89C8;--glide&#xFF08;&#x4E00;&#xFF09;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;Glide 4.X&#x5168;&#x65B9;&#x4F4D;&#x8BA4;&#x77E5; -- &#x6A21;&#x5757;&#x804C;&#x8D23;&#x6982;&#x89C8; | Glide&#xFF08;&#x4E00;&#xFF09;</h1>
-<p>&#x6700;&#x8FD1;&#x5728;&#x89E3;&#x51B3;&#x4E00;&#x4E9B;&#x95EE;&#x9898;&#x65F6;&#xFF0C;&#x8FDB;&#x884C;&#x4E86;&#x4E00;&#x4E0B;&#x68C0;&#x7D22;&#xFF0C;&#x53D1;&#x73B0; <code>&#x7EDD;&#x5927;&#x591A;&#x6570;&#x6587;&#x7AE0;</code> &#x662F; <code>&#x57FA;&#x4E8E;3.X</code>&#x3002;Glide&#x4ECE;&#x8FDB;&#x5165;4.X&#x4E5F;&#x6709;&#x4E24;&#x4E09;&#x5E74;&#x4E86;&#xFF0C;&#x5728;3.X&#x7684;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x53D1;&#x751F;&#x4E86;&#x5F88;&#x591A;&#x53D8;&#x5316;&#x3002; &#x6240;&#x5E78;&#x6211;&#x5BF9; <code>4.X</code>
-&#x7684;&#x6E90;&#x7801;&#x8FD8;&#x6BD4;&#x8F83;&#x719F;&#xFF0C;&#x4E14;Glide&#x7684;&#x8BBE;&#x8BA1;&#x4E5F;&#x5F88;&#x7CBE;&#x5F69;&#xFF0C;&#x7D22;&#x6027;&#x5199;&#x4E00;&#x5199; <code>&#x5BF9;4.X&#x7684;&#x5256;&#x6790;</code>&#x3002;</p>
-<p>&#x5F53;&#x7136;&#xFF0C;&#x5BF9;&#x4E8E;&#x591A;&#x6570;&#x8BFB;&#x8005;&#x800C;&#x8A00;&#xFF0C;&#x56E0;&#x4E3A;&#x6709;&#x4E00;&#x5B9A;&#x7684;&#x57FA;&#x7840;&#x77E5;&#x8BC6;&#xFF0C;&#x8FD9;&#x4E9B;&#x5256;&#x6790;&#x6587;&#x7AE0;&#x5E76;&#x4E0D;&#x662F;&#x6EE1;&#x5730;&#x91D1;&#x7816;&#x4E86;&#xFF0C;&#x53EF;&#x4EE5;&#x6CDB;&#x8BFB;&#x67E5;&#x6F0F;&#x3002;</p>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Glide/post_15.html" class="active"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="三思系列glide-4x全方位认知----模块职责概览--glide一"><a class="header" href="#三思系列glide-4x全方位认知----模块职责概览--glide一">三思系列：Glide 4.X全方位认知 -- 模块职责概览 | Glide（一）</a></h1>
+<p>最近在解决一些问题时，进行了一下检索，发现 <code>绝大多数文章</code> 是 <code>基于3.X</code>。Glide从进入4.X也有两三年了，在3.X的基础上，发生了很多变化。 所幸我对 <code>4.X</code>
+的源码还比较熟，且Glide的设计也很精彩，索性写一写 <code>对4.X的剖析</code>。</p>
+<p>当然，对于多数读者而言，因为有一定的基础知识，这些剖析文章并不是满地金砖了，可以泛读查漏。</p>
 <blockquote>
-<p>&#x4E09;&#x601D;&#x7CFB;&#x5217;&#x662F;&#x6211;&#x6700;&#x65B0;&#x7684;&#x5B66;&#x4E60;&#x3001;&#x603B;&#x7ED3;&#x5F62;&#x5F0F;&#xFF0C;&#x7740;&#x91CD;&#x4E8E;:<strong>&#x95EE;&#x9898;&#x5206;&#x6790;</strong>&#x3001;<strong>&#x6280;&#x672F;&#x79EF;&#x7D2F;</strong>&#x3001;<strong>&#x89C6;&#x91CE;&#x62D3;&#x5C55;</strong>&#xFF0C;<a href="https://leobert-lan.github.io/info/about_sansi_series.html" target="_blank">&#x4E86;&#x89E3;&#x66F4;&#x591A;</a></p>
+<p>三思系列是我最新的学习、总结形式，着重于:<strong>问题分析</strong>、<strong>技术积累</strong>、<strong>视野拓展</strong>，<a href="https://leobert-lan.github.io/info/about_sansi_series.html">了解更多</a></p>
 </blockquote>
-<h2 id="&#x672C;&#x6587;&#x4E3B;&#x65E8;"><a name="&#x672C;&#x6587;&#x4E3B;&#x65E8;" class="anchor-navigation-ex-anchor" href="#&#x672C;&#x6587;&#x4E3B;&#x65E8;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x672C;&#x6587;&#x4E3B;&#x65E8;</h2>
-<p><strong>Glide&#x662F;&#x4E00;&#x4E2A; <code>&#x5E9E;&#x5927;</code> &#x7684;&#x9879;&#x76EE;&#xFF0C;&#x8FD9;&#x4E00;&#x7BC7;&#x65E8;&#x5728;&#x5BF9;Glide&#x9879;&#x76EE;4.X&#x7248;&#x672C;&#x8FDB;&#x884C; <code>&#x5168;&#x65B9;&#x4F4D;&#x7684;&#x8BA4;&#x77E5;</code></strong></p>
-<p>&#x5177;&#x4F53;&#x4E3A;&#xFF1A;<strong>&#x4E86;&#x89E3;Glide&#x5904;&#x7406;&#x54EA;&#x4E9B;&#x95EE;&#x9898;&#xFF0C;&#x54EA;&#x4E9B;&#x6A21;&#x5757;&#x4E0E;&#x4E4B;&#x76F8;&#x5BF9;&#x5E94;</strong></p>
-<p>&#x5BF9;&#x65E9;&#x5E74;&#x95F4; Square&#x516C;&#x53F8;&#x5F00;&#x6E90;&#x7684; <code>Picasso</code> &#x6BD4;&#x8F83;&#x719F;&#x6089;&#x7684;&#x8BFB;&#x8005;&#x800C;&#x8A00;&#xFF0C;&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;<code>Picasso</code> &#x662F;&#x4E00;&#x4E2A; <code>&#x5C0F;&#x800C;&#x96C5;</code> &#x7684;&#x6846;&#x67B6;&#xFF0C;&#x805A;&#x7126;&#x4E8E;&#x56FE;&#x7247;&#x52A0;&#x8F7D;&#x7684;&#x4EE5;&#x4E0B;4&#x70B9;&#x4E3B;&#x8981;&#x95EE;&#x9898;&#xFF1A;</p>
+<h2 id="本文主旨"><a class="header" href="#本文主旨">本文主旨</a></h2>
+<p><strong>Glide是一个 <code>庞大</code> 的项目，这一篇旨在对Glide项目4.X版本进行 <code>全方位的认知</code></strong></p>
+<p>具体为：<strong>了解Glide处理哪些问题，哪些模块与之相对应</strong></p>
+<p>对早年间 Square公司开源的 <code>Picasso</code> 比较熟悉的读者而言，不难理解：<code>Picasso</code> 是一个 <code>小而雅</code> 的框架，聚焦于图片加载的以下4点主要问题：</p>
 <ul>
-<li><code>&#x5F02;&#x6B65;&#x8FC7;&#x7A0B;&#x7BA1;&#x7406;&#x4E0E;&#x8C03;&#x5EA6;</code></li>
-<li><code>&#x8D44;&#x6E90;&#x4E0E;&#x663E;&#x793A;&#x5BB9;&#x5668;&#x591A;&#x5BF9;&#x591A;&#x5173;&#x7CFB;</code></li>
-<li><code>&#x591A;&#x7EA7;&#x7F13;&#x5B58;</code></li>
-<li><code>&#x56FE;&#x7247;&#x8F6C;&#x6362;&#x652F;&#x6301;ScaleType</code></li>
+<li><code>异步过程管理与调度</code></li>
+<li><code>资源与显示容器多对多关系</code></li>
+<li><code>多级缓存</code></li>
+<li><code>图片转换支持ScaleType</code></li>
 </ul>
-<p>&#x800C;&#x540E;&#x8D77;&#x4E4B;&#x79C0; <code>Glide</code> &#x5DF2;&#x7ECF;&#x662F;&#x4E00;&#x4E2A; <code>&#x535A;&#x5927;&#x4E14;&#x7EC6;&#x81F4;</code> &#x7684;&#x56FE;&#x7247;&#x5F02;&#x6B65;&#x52A0;&#x8F7D;&#x6846;&#x67B6;&#x3002;</p>
-<p>&#x5728;Glide 1.X &#x65F6;&#x671F;&#xFF0C;&#x4E24;&#x8005;&#x7684;&#x5173;&#x6CE8;&#x70B9;&#x57FA;&#x672C;&#x4E00;&#x81F4;&#xFF0C;&#x968F;&#x7740;&#x5B98;&#x65B9;&#x652F;&#x6301;Glide&#x7684;&#x53D1;&#x5C55;&#xFF0C;&#x5B83;&#x7684;&#x5173;&#x6CE8;&#x70B9;&#x4E5F;&#x8D8A;&#x6765;&#x8D8A;&#x591A;&#xFF0C;&#x5305;&#x62EC;&#x4F46;&#x4E0D;&#x9650;&#x4E8E;&#xFF1A;</p>
+<p>而后起之秀 <code>Glide</code> 已经是一个 <code>博大且细致</code> 的图片异步加载框架。</p>
+<p>在Glide 1.X 时期，两者的关注点基本一致，随着官方支持Glide的发展，它的关注点也越来越多，包括但不限于：</p>
 <ul>
-<li><code>&#x8D44;&#x6E90;&#x7684;&#x5C01;&#x88C5;</code></li>
-<li><code>&#x8D44;&#x6E90;&#x83B7;&#x53D6;&#x65B9;&#x5F0F;&#x4E0E;&#x8FC7;&#x7A0B;</code></li>
-<li><code>&#x7F13;&#x5B58;</code></li>
-<li><code>decode</code>&#x3001;<code>encode</code> &#x7684;&#x8FC7;&#x7A0B;</li>
-<li><code>Target&#x7684;&#x62BD;&#x8C61;</code>&#xFF0C;<em>&#x6CE8;&#xFF1A;&#x5A92;&#x4F53;&#x8D44;&#x6E90;&#x83B7;&#x53D6;&#x7684;&#x6700;&#x7EC8;&#x76EE;&#x6807;&#xFF0C;&#x4F8B;&#x5982;&#x5B58;&#x4E3A;&#x6587;&#x4EF6;&#x3001;&#x52A0;&#x8F7D;&#x5230;ImageView&#x4E2D;&#x7B49;</em></li>
-<li><code>&#x56FE;&#x7247;&#x8F6C;&#x6362;</code></li>
-<li><code>&#x8D44;&#x6E90;&#x4E0E;Target&#x591A;&#x5BF9;&#x591A;&#x5173;&#x7CFB;</code></li>
-<li><code>&#x751F;&#x547D;&#x5468;&#x671F;&#x611F;&#x77E5;&#x4E0E;&#x63A7;&#x5236;</code></li>
+<li><code>资源的封装</code></li>
+<li><code>资源获取方式与过程</code></li>
+<li><code>缓存</code></li>
+<li><code>decode</code>、<code>encode</code> 的过程</li>
+<li><code>Target的抽象</code>，<em>注：媒体资源获取的最终目标，例如存为文件、加载到ImageView中等</em></li>
+<li><code>图片转换</code></li>
+<li><code>资源与Target多对多关系</code></li>
+<li><code>生命周期感知与控制</code></li>
 </ul>
-<p>&#x4ED4;&#x7EC6;&#x601D;&#x8003;&#x8FD9;&#x4E9B;&#x70B9;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x96BE;&#x53D1;&#x73B0;&#xFF0C;Glide&#x5DF2;&#x7ECF;&#x7740;&#x773C;&#x4E8E;&#x89E3;&#x51B3;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF1A;</p>
+<p>仔细思考这些点之后，我们不难发现，Glide已经着眼于解决这样一个问题：</p>
 <blockquote>
-<p>&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x7CFB;&#x7EDF;&#xFF0C;&#x5BF9;&#x6307;&#x5B9A;&#x7684;&#x6807;&#x8BC6;&#x5A92;&#x4F53;&#x8D44;&#x6E90;&#x7684;&#x5B9E;&#x4F53;&#xFF0C;<em>&#x5176;&#x5C01;&#x88C5;&#x5F62;&#x5F0F;&#x53EF;&#x4EE5;&#x81EA;&#x884C;&#x6269;&#x5C55;</em>&#xFF0C;&#x6267;&#x884C;&#x8D44;&#x6E90;&#x7684;&#x83B7;&#x53D6;&#xFF0C;&#x5E76;&#x5E94;&#x7528;&#x5185;&#x5B58;&#x3001;&#x78C1;&#x76D8;&#x8FDB;&#x884C;&#x7F13;&#x5B58;&#xFF0C;&#x5C01;&#x88C5;&#x56FE;&#x7247;&#x7684;&#x89E3;&#x7801;&#x8FC7;&#x7A0B;&#xFF0C;&#x6309;&#x6307;&#x5B9A;&#x8981;&#x6C42;&#x8FDB;&#x884C;
-&#x88C1;&#x5207;&#x3001;&#x7F29;&#x653E;&#x7B49;&#x56FE;&#x7247;&#x8F6C;&#x6362;&#xFF0C;&#x6700;&#x7EC8;&#x5C06;&#x7ED3;&#x679C;&#x8FD0;&#x7528;&#x5230;&#x6307;&#x5B9A;&#x7684;&#x76EE;&#x6807;&#x3002;&#x5E76;&#x5BF9;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x6309;&#x7167;Android&#x5E73;&#x53F0;&#x7279;&#x6027;&#x8FDB;&#x884C;&#x751F;&#x547D;&#x5468;&#x671F;&#x7BA1;&#x7406;&#x3002;</p>
+<p>构建一个系统，对指定的标识媒体资源的实体，<em>其封装形式可以自行扩展</em>，执行资源的获取，并应用内存、磁盘进行缓存，封装图片的解码过程，按指定要求进行
+裁切、缩放等图片转换，最终将结果运用到指定的目标。并对整个过程按照Android平台特性进行生命周期管理。</p>
 </blockquote>
-<p>&#x800C;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x7EDD;&#x5927;&#x591A;&#x6570; <code>&#x8282;&#x70B9;</code> &#x6216;&#x8005;&#x79F0;&#x4E4B;&#x4E3A; <code>&#x5207;&#x9762;</code>&#xFF0C;&#x5747;&#x53EF;&#x8FDB;&#x884C; <code>&#x5916;&#x90E8;&#x6269;&#x5C55;</code></p>
-<p>&#x8FD9;&#x4E00;&#x70B9;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4ECE;&#x9879;&#x76EE;&#x4ECB;&#x7ECD;&#x4E2D;&#x5F97;&#x5230;&#x5370;&#x8BC1;&#xFF1A;<em>&#x770B;&#x91CD;&#x70B9;&#x5355;&#x8BCD;&#x5373;&#x53EF;</em></p>
+<p>而这个过程中的绝大多数 <code>节点</code> 或者称之为 <code>切面</code>，均可进行 <code>外部扩展</code></p>
+<p>这一点我们可以从项目介绍中得到印证：<em>看重点单词即可</em></p>
 <blockquote>
-<p>Glide is a fast and efficient open source <code>media management</code> and <code>image loading framework</code> for Android that wraps <code>media
-decoding</code>, <code>memory and disk caching</code>, and <code>resource pooling</code> into a simple and easy to use interface.</p>
+<p>Glide is a fast and efficient open source <code>media management</code> and <code>image loading framework</code> for Android that wraps <code>media decoding</code>, <code>memory and disk caching</code>, and <code>resource pooling</code> into a simple and easy to use interface.</p>
 <p>Glide supports <code>fetching</code>, <code>decoding</code>, and <code>displaying</code> video stills, images, and animated GIFs. Glide includes a flexible API
 that allows developers to plug in to almost any network stack. By default Glide uses a custom <code>HttpUrlConnection</code> based
-stack, but also includes utility libraries plug in to Google&apos;s Volley project or Square&apos;s OkHttp library instead.</p>
-<p>Glide&apos;s <code>primary focus</code> is on <code>making scrolling any kind of a list of images</code> as <code>smooth and fast</code> as possible, but Glide is
+stack, but also includes utility libraries plug in to Google's Volley project or Square's OkHttp library instead.</p>
+<p>Glide's <code>primary focus</code> is on <code>making scrolling any kind of a list of images</code> as <code>smooth and fast</code> as possible, but Glide is
 also effective for <code>almost any case</code> where you need to <code>fetch</code>, <code>resize</code>, and <code>display</code> a remote image.</p>
 </blockquote>
-<h2 id="&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4ECE;glide&#x7684;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x7AA5;&#x4E00;&#x6591;"><a name="&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4ECE;glide&#x7684;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x7AA5;&#x4E00;&#x6591;" class="anchor-navigation-ex-anchor" href="#&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4ECE;glide&#x7684;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x7AA5;&#x4E00;&#x6591;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4ECE;Glide&#x7684;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x7AA5;&#x4E00;&#x6591;</h2>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x4E00;&#x4E2A;&#x5E9E;&#x5927;&#x7684;&#x7CFB;&#x7EDF;&#x9700;&#x8981;&#x5728;&#x7B26;&#x5408; <code>SRP</code> &#x7684;&#x57FA;&#x7840;&#x4E0A;&#x8FDB;&#x884C;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x8FD9;&#x6837;&#x4E00;&#x6765;&#xFF0C;&#x7C7B;&#x5C31;&#x4F1A;&#x53D8;&#x5F97;&#x5F88;&#x591A;&#xFF0C;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x4F1A;&#x53D8;&#x5F97;&#x590D;&#x6742;&#xFF0C;&#x5229;&#x7528;Builder&#x6A21;&#x5F0F;&#x53EF;&#x4EE5;&#x5F88;&#x597D;&#x7684;&#x89E3;&#x51B3;&#x8FD9;&#x4E00;&#x95EE;&#x9898;&#x3002;</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GlideBuilder</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> Glide <span class="hljs-title">build</span><span class="hljs-params">(@NonNull Context context)</span> </span>{
-        <span class="hljs-keyword">if</span> (sourceExecutor == <span class="hljs-keyword">null</span>) {
+<h2 id="模块职责划分从glide的构建过程窥一斑"><a class="header" href="#模块职责划分从glide的构建过程窥一斑">模块职责划分，从Glide的构建过程窥一斑</a></h2>
+<p>不难理解：一个庞大的系统需要在符合 <code>SRP</code> 的基础上进行职责划分，这样一来，类就会变得很多，构建过程会变得复杂，利用Builder模式可以很好的解决这一问题。</p>
+<pre><code class="language-java">class GlideBuilder {
+    public Glide build(@NonNull Context context) {
+        if (sourceExecutor == null) {
             sourceExecutor = GlideExecutor.newSourceExecutor();
         }
 
-        <span class="hljs-keyword">if</span> (diskCacheExecutor == <span class="hljs-keyword">null</span>) {
+        if (diskCacheExecutor == null) {
             diskCacheExecutor = GlideExecutor.newDiskCacheExecutor();
         }
 
-        <span class="hljs-keyword">if</span> (animationExecutor == <span class="hljs-keyword">null</span>) {
+        if (animationExecutor == null) {
             animationExecutor = GlideExecutor.newAnimationExecutor();
         }
 
-        <span class="hljs-keyword">if</span> (memorySizeCalculator == <span class="hljs-keyword">null</span>) {
-            memorySizeCalculator = <span class="hljs-keyword">new</span> MemorySizeCalculator.Builder(context).build();
+        if (memorySizeCalculator == null) {
+            memorySizeCalculator = new MemorySizeCalculator.Builder(context).build();
         }
 
-        <span class="hljs-keyword">if</span> (connectivityMonitorFactory == <span class="hljs-keyword">null</span>) {
-            connectivityMonitorFactory = <span class="hljs-keyword">new</span> DefaultConnectivityMonitorFactory();
+        if (connectivityMonitorFactory == null) {
+            connectivityMonitorFactory = new DefaultConnectivityMonitorFactory();
         }
 
-        <span class="hljs-keyword">if</span> (bitmapPool == <span class="hljs-keyword">null</span>) {
-            <span class="hljs-keyword">int</span> size = memorySizeCalculator.getBitmapPoolSize();
-            <span class="hljs-keyword">if</span> (size &gt; <span class="hljs-number">0</span>) {
-                bitmapPool = <span class="hljs-keyword">new</span> LruBitmapPool(size);
-            } <span class="hljs-keyword">else</span> {
-                bitmapPool = <span class="hljs-keyword">new</span> BitmapPoolAdapter();
+        if (bitmapPool == null) {
+            int size = memorySizeCalculator.getBitmapPoolSize();
+            if (size &gt; 0) {
+                bitmapPool = new LruBitmapPool(size);
+            } else {
+                bitmapPool = new BitmapPoolAdapter();
             }
         }
 
-        <span class="hljs-keyword">if</span> (arrayPool == <span class="hljs-keyword">null</span>) {
-            arrayPool = <span class="hljs-keyword">new</span> LruArrayPool(memorySizeCalculator.getArrayPoolSizeInBytes());
+        if (arrayPool == null) {
+            arrayPool = new LruArrayPool(memorySizeCalculator.getArrayPoolSizeInBytes());
         }
 
-        <span class="hljs-keyword">if</span> (memoryCache == <span class="hljs-keyword">null</span>) {
-            memoryCache = <span class="hljs-keyword">new</span> LruResourceCache(memorySizeCalculator.getMemoryCacheSize());
+        if (memoryCache == null) {
+            memoryCache = new LruResourceCache(memorySizeCalculator.getMemoryCacheSize());
         }
 
-        <span class="hljs-keyword">if</span> (diskCacheFactory == <span class="hljs-keyword">null</span>) {
-            diskCacheFactory = <span class="hljs-keyword">new</span> InternalCacheDiskCacheFactory(context);
+        if (diskCacheFactory == null) {
+            diskCacheFactory = new InternalCacheDiskCacheFactory(context);
         }
 
-        <span class="hljs-keyword">if</span> (engine == <span class="hljs-keyword">null</span>) {
-            engine = <span class="hljs-keyword">new</span> Engine(
+        if (engine == null) {
+            engine = new Engine(
                     memoryCache,
                     diskCacheFactory,
                     diskCacheExecutor,
@@ -1550,9 +274,9 @@ also effective for <code>almost any case</code> where you need to <code>fetch</c
         }
 
         RequestManagerRetriever requestManagerRetriever =
-                <span class="hljs-keyword">new</span> RequestManagerRetriever(requestManagerFactory);
+                new RequestManagerRetriever(requestManagerFactory);
 
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Glide(
+        return new Glide(
                 context,
                 engine,
                 memoryCache,
@@ -1566,9 +290,10 @@ also effective for <code>almost any case</code> where you need to <code>fetch</c
     }
 }
 </code></pre>
-<p>&#x4ECE;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6536;&#x96C6;&#x5230;&#x4E00;&#x4E0B;&#x6709;&#x6548;&#x4FE1;&#x606F;</p>
+<p>从这里我们可以收集到一下有效信息</p>
 <ul>
-<li>&#x7F13;&#x5B58;&#x4E0E;&#x6C60;<ul>
+<li>缓存与池
+<ul>
 <li>MemorySizeCalculator</li>
 <li>LruBitmapPool</li>
 <li>BitmapPoolAdapter</li>
@@ -1577,82 +302,85 @@ also effective for <code>almost any case</code> where you need to <code>fetch</c
 <li>InternalCacheDiskCacheFactory</li>
 </ul>
 </li>
-<li>&#x8D44;&#x6E90;&#x83B7;&#x53D6;<ul>
+<li>资源获取
+<ul>
 <li>RequestManagerRetriever</li>
 <li>DefaultConnectivityMonitorFactory</li>
 </ul>
 </li>
-<li>&#x6838;&#x5FC3;&#x6D41;&#x7A0B;&#x7BA1;&#x7406;<ul>
+<li>核心流程管理
+<ul>
 <li>Engine</li>
 </ul>
 </li>
-<li>&#x7EBF;&#x7A0B;&#x6C60;<ul>
+<li>线程池
+<ul>
 <li>GlideExecutor</li>
 </ul>
 </li>
 </ul>
-<p>&#x518D;&#x770B;&#x5230;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF1A;<em>&#x4EE3;&#x7801;&#x633A;&#x957F;&#xFF0C;&#x7565;&#x53BB;&#x4E86;&#x90E8;&#x5206;&#x5185;&#x5BB9;</em></p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Glide</span> </span>{
+<p>再看到构造函数：<em>代码挺长，略去了部分内容</em></p>
+<pre><code class="language-java">class Glide {
     Glide(
-            <span class="hljs-meta">@NonNull</span> Context context,
-            <span class="hljs-meta">@NonNull</span> Engine engine,
-            <span class="hljs-meta">@NonNull</span> MemoryCache memoryCache,
-            <span class="hljs-meta">@NonNull</span> BitmapPool bitmapPool,
-            <span class="hljs-meta">@NonNull</span> ArrayPool arrayPool,
-            <span class="hljs-meta">@NonNull</span> RequestManagerRetriever requestManagerRetriever,
-            <span class="hljs-meta">@NonNull</span> ConnectivityMonitorFactory connectivityMonitorFactory,
-            <span class="hljs-keyword">int</span> logLevel,
-            <span class="hljs-meta">@NonNull</span> RequestOptions defaultRequestOptions,
-            <span class="hljs-meta">@NonNull</span> Map&lt;Class&lt;?&gt;, TransitionOptions&lt;?, ?&gt;&gt; defaultTransitionOptions) {
+            @NonNull Context context,
+            @NonNull Engine engine,
+            @NonNull MemoryCache memoryCache,
+            @NonNull BitmapPool bitmapPool,
+            @NonNull ArrayPool arrayPool,
+            @NonNull RequestManagerRetriever requestManagerRetriever,
+            @NonNull ConnectivityMonitorFactory connectivityMonitorFactory,
+            int logLevel,
+            @NonNull RequestOptions defaultRequestOptions,
+            @NonNull Map&lt;Class&lt;?&gt;, TransitionOptions&lt;?, ?&gt;&gt; defaultTransitionOptions) {
 
-        <span class="hljs-keyword">this</span>.engine = engine;
-        <span class="hljs-keyword">this</span>.bitmapPool = bitmapPool;
-        <span class="hljs-keyword">this</span>.arrayPool = arrayPool;
-        <span class="hljs-keyword">this</span>.memoryCache = memoryCache;
-        <span class="hljs-keyword">this</span>.requestManagerRetriever = requestManagerRetriever;
-        <span class="hljs-keyword">this</span>.connectivityMonitorFactory = connectivityMonitorFactory;
+        this.engine = engine;
+        this.bitmapPool = bitmapPool;
+        this.arrayPool = arrayPool;
+        this.memoryCache = memoryCache;
+        this.requestManagerRetriever = requestManagerRetriever;
+        this.connectivityMonitorFactory = connectivityMonitorFactory;
 
         DecodeFormat decodeFormat = defaultRequestOptions.getOptions().get(Downsampler.DECODE_FORMAT);
-        bitmapPreFiller = <span class="hljs-keyword">new</span> BitmapPreFiller(memoryCache, bitmapPool, decodeFormat);
+        bitmapPreFiller = new BitmapPreFiller(memoryCache, bitmapPool, decodeFormat);
 
-        <span class="hljs-keyword">final</span> Resources resources = context.getResources();
+        final Resources resources = context.getResources();
 
-        registry = <span class="hljs-keyword">new</span> Registry();
-        registry.register(<span class="hljs-keyword">new</span> DefaultImageHeaderParser());
+        registry = new Registry();
+        registry.register(new DefaultImageHeaderParser());
 
-        Downsampler downsampler = <span class="hljs-keyword">new</span> Downsampler(registry.getImageHeaderParsers(),
+        Downsampler downsampler = new Downsampler(registry.getImageHeaderParsers(),
                 resources.getDisplayMetrics(), bitmapPool, arrayPool);
         ByteBufferGifDecoder byteBufferGifDecoder =
-                <span class="hljs-keyword">new</span> ByteBufferGifDecoder(context, registry.getImageHeaderParsers(), bitmapPool, arrayPool);
+                new ByteBufferGifDecoder(context, registry.getImageHeaderParsers(), bitmapPool, arrayPool);
         ResourceDecoder&lt;ParcelFileDescriptor, Bitmap&gt; parcelFileDescriptorVideoDecoder =
                 VideoDecoder.parcel(bitmapPool);
-        ByteBufferBitmapDecoder byteBufferBitmapDecoder = <span class="hljs-keyword">new</span> ByteBufferBitmapDecoder(downsampler);
-        StreamBitmapDecoder streamBitmapDecoder = <span class="hljs-keyword">new</span> StreamBitmapDecoder(downsampler, arrayPool);
+        ByteBufferBitmapDecoder byteBufferBitmapDecoder = new ByteBufferBitmapDecoder(downsampler);
+        StreamBitmapDecoder streamBitmapDecoder = new StreamBitmapDecoder(downsampler, arrayPool);
         ResourceDrawableDecoder resourceDrawableDecoder =
-                <span class="hljs-keyword">new</span> ResourceDrawableDecoder(context);
+                new ResourceDrawableDecoder(context);
         ResourceLoader.StreamFactory resourceLoaderStreamFactory =
-                <span class="hljs-keyword">new</span> ResourceLoader.StreamFactory(resources);
+                new ResourceLoader.StreamFactory(resources);
         ResourceLoader.UriFactory resourceLoaderUriFactory =
-                <span class="hljs-keyword">new</span> ResourceLoader.UriFactory(resources);
+                new ResourceLoader.UriFactory(resources);
         ResourceLoader.FileDescriptorFactory resourceLoaderFileDescriptorFactory =
-                <span class="hljs-keyword">new</span> ResourceLoader.FileDescriptorFactory(resources);
+                new ResourceLoader.FileDescriptorFactory(resources);
         ResourceLoader.AssetFileDescriptorFactory resourceLoaderAssetFileDescriptorFactory =
-                <span class="hljs-keyword">new</span> ResourceLoader.AssetFileDescriptorFactory(resources);
-        BitmapEncoder bitmapEncoder = <span class="hljs-keyword">new</span> BitmapEncoder(arrayPool);
+                new ResourceLoader.AssetFileDescriptorFactory(resources);
+        BitmapEncoder bitmapEncoder = new BitmapEncoder(arrayPool);
 
-        BitmapBytesTranscoder bitmapBytesTranscoder = <span class="hljs-keyword">new</span> BitmapBytesTranscoder();
-        GifDrawableBytesTranscoder gifDrawableBytesTranscoder = <span class="hljs-keyword">new</span> GifDrawableBytesTranscoder();
+        BitmapBytesTranscoder bitmapBytesTranscoder = new BitmapBytesTranscoder();
+        GifDrawableBytesTranscoder gifDrawableBytesTranscoder = new GifDrawableBytesTranscoder();
 
         ContentResolver contentResolver = context.getContentResolver();
 
         registry
-                .append(ByteBuffer.class, <span class="hljs-keyword">new</span> ByteBufferEncoder())
-                <span class="hljs-comment">/*&#x7565;&#x53BB;&#x4E00;&#x6BB5;&#x5185;&#x5BB9;&#xFF0C;&#x592A;&#x957F;&#x4E86;*/</span>
-                .register(GifDrawable.class, <span class="hljs-keyword">byte</span>[].class, gifDrawableBytesTranscoder);
+                .append(ByteBuffer.class, new ByteBufferEncoder())
+                /*略去一段内容，太长了*/
+                .register(GifDrawable.class, byte[].class, gifDrawableBytesTranscoder);
 
-        ImageViewTargetFactory imageViewTargetFactory = <span class="hljs-keyword">new</span> ImageViewTargetFactory();
+        ImageViewTargetFactory imageViewTargetFactory = new ImageViewTargetFactory();
         glideContext =
-                <span class="hljs-keyword">new</span> GlideContext(
+                new GlideContext(
                         context,
                         arrayPool,
                         registry,
@@ -1664,110 +392,110 @@ also effective for <code>almost any case</code> where you need to <code>fetch</c
     }
 }
 </code></pre>
-<p>&#x8FD9;&#x4E00;&#x6BB5;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x5373;&#x53EF;&#x90E8;&#x5206;&#xFF1A;</p>
+<p>这一段可以分为即可部分：</p>
 <ul>
-<li>builder &#x7684; field &#x5BF9;&#x5E94;&#x53D6;&#x503C;&#x8D4B;&#x503C;</li>
-<li>&#x6784;&#x5EFA;&#x975E;&#x5F00;&#x653E;&#x7684; <code>BitmapPreFiller</code> &#x5B9E;&#x4F8B;</li>
-<li>&#x6784;&#x5EFA; <code>Registry</code> &#x5B9E;&#x4F8B; <code>registry</code></li>
-<li>&#x6784;&#x5EFA; <code>DefaultImageHeaderParser</code> &#x3001; <code>ResourceLoader</code> &#x3001;<code>Decoder</code> &#x3001; <code>ResourceTranscoder</code> &#x5E76;&#x5C06;&#x4E4B;&#x6CE8;&#x518C;&#x5230; <code>registry</code></li>
-<li>&#x6784;&#x5EFA; <code>GlideContext</code> &#x5B9E;&#x4F8B; <code>glideContext</code></li>
+<li>builder 的 field 对应取值赋值</li>
+<li>构建非开放的 <code>BitmapPreFiller</code> 实例</li>
+<li>构建 <code>Registry</code> 实例 <code>registry</code></li>
+<li>构建 <code>DefaultImageHeaderParser</code> 、 <code>ResourceLoader</code> 、<code>Decoder</code> 、 <code>ResourceTranscoder</code> 并将之注册到 <code>registry</code></li>
+<li>构建 <code>GlideContext</code> 实例 <code>glideContext</code></li>
 </ul>
-<p>&#x6309;&#x7167;&#x7ECF;&#x9A8C;&#x63A8;&#x65AD;&#xFF0C;Registry &#x662F;&#x4E00;&#x4E2A;&#x7B56;&#x7565;&#x6CE8;&#x518C;&#x8868;&#xFF0C;&#x670D;&#x52A1;&#x4E8E; <code>&#x7B56;&#x7565;&#x6A21;&#x5F0F;</code>&#x3002;</p>
-<p><em>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;Glide&#x7684;&#x5DE5;&#x4F5C;&#x73AF;&#x5883;&#x975E;&#x5E38;&#x590D;&#x6742;&#xFF0C;&#x4F8B;&#x5982;&#x83B7;&#x53D6;&#x8D44;&#x6E90;&#xFF0C;&#x5176;&#x8D44;&#x6E90;&#x5B58;&#x5728;&#x4F4D;&#x7F6E;&#x53EF;&#x80FD;&#x5728;&#x7F51;&#x7EDC;&#x4E2D;&#x7684;&#x67D0;&#x4E2A;&#x4F4D;&#x7F6E;&#x3001; &#x53EF;&#x80FD;&#x5728;&#x5E94;&#x7528;&#x7684;Assets&#x4E2D;&#xFF0C;&#x4E5F;&#x53EF;&#x80FD;&#x5728;&#x5176;&#x4ED6;&#x4F4D;&#x7F6E;&#xFF0C;&#x5BF9;&#x4E8E;&#x67D0;&#x4E00;&#x4E2A;&#x76EE;&#x6807;&#xFF0C;&#x6839;&#x636E;&#x573A;&#x666F;&#x4E0D;&#x540C;&#xFF0C;&#x5B58;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x5B9E;&#x73B0;&#x7B56;&#x7565;</em></p>
-<p>&#x7EE7;&#x7EED;&#x6309;&#x7167;&#x7ECF;&#x9A8C;&#x63A8;&#x65AD;&#xFF0C;&#x6CE8;&#x518C;&#x4F1A;&#x5206;&#x4E3A;&#x4E0D;&#x540C;&#x7684;&#x7B56;&#x7565;&#x7EC4;&#xFF0C;&#x5BF9;&#x5E94;&#x4E0D;&#x540C;&#x7684;&#x76EE;&#x6807;,&#x8FD9;&#x4E00;&#x70B9;&#x6211;&#x4EEC;&#x7A0D;&#x540E;&#x518D;&#x770B;&#x3002;</p>
-<p>&#x518D;&#x6309;&#x7167;&#x6211;&#x4EEC;&#x5E38;&#x89C1;&#x7684;&#x4F7F;&#x7528;&#x4E60;&#x60EF;&#xFF0C;&#x8FFD;&#x8E2A;&#x4E00;&#x4E0B;&#x521D;&#x59CB;&#x5316;&#x8FC7;&#x7A0B;&#xFF1A;<em>&#x6CDB;&#x8BFB;&#x5373;&#x53EF;</em></p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Glide</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Glide <span class="hljs-title">get</span><span class="hljs-params">(@NonNull Context context)</span> </span>{
-        <span class="hljs-keyword">if</span> (glide == <span class="hljs-keyword">null</span>) {
-            <span class="hljs-keyword">synchronized</span> (Glide.class) {
-                <span class="hljs-keyword">if</span> (glide == <span class="hljs-keyword">null</span>) {
+<p>按照经验推断，Registry 是一个策略注册表，服务于 <code>策略模式</code>。</p>
+<p><em>不难理解：Glide的工作环境非常复杂，例如获取资源，其资源存在位置可能在网络中的某个位置、 可能在应用的Assets中，也可能在其他位置，对于某一个目标，根据场景不同，存在不同的实现策略</em></p>
+<p>继续按照经验推断，注册会分为不同的策略组，对应不同的目标,这一点我们稍后再看。</p>
+<p>再按照我们常见的使用习惯，追踪一下初始化过程：<em>泛读即可</em></p>
+<pre><code class="language-java">class Glide {
+    public static Glide get(@NonNull Context context) {
+        if (glide == null) {
+            synchronized (Glide.class) {
+                if (glide == null) {
                     checkAndInitializeGlide(context);
                 }
             }
         }
 
-        <span class="hljs-keyword">return</span> glide;
+        return glide;
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">checkAndInitializeGlide</span><span class="hljs-params">(@NonNull Context context)</span> </span>{
-        <span class="hljs-comment">//...</span>
+    private static void checkAndInitializeGlide(@NonNull Context context) {
+        //...
         initializeGlide(context);
-        <span class="hljs-comment">//...</span>
+        //...
     }
 
-    <span class="hljs-comment">//&#x91CD;&#x8F7D;&#x7565;&#x53BB;</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> RequestManager <span class="hljs-title">with</span><span class="hljs-params">(@NonNull Activity activity)</span> </span>{
-        <span class="hljs-keyword">return</span> getRetriever(activity).get(activity);
+    //重载略去
+    public static RequestManager with(@NonNull Activity activity) {
+        return getRetriever(activity).get(activity);
     }
 
-    <span class="hljs-meta">@NonNull</span>
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> RequestManagerRetriever <span class="hljs-title">getRetriever</span><span class="hljs-params">(@Nullable Context context)</span> </span>{
-        <span class="hljs-comment">// Context could be null for other reasons (ie the user passes in null), but in practice it will</span>
-        <span class="hljs-comment">// only occur due to errors with the Fragment lifecycle.</span>
+    @NonNull
+    private static RequestManagerRetriever getRetriever(@Nullable Context context) {
+        // Context could be null for other reasons (ie the user passes in null), but in practice it will
+        // only occur due to errors with the Fragment lifecycle.
         Preconditions.checkNotNull(
                 context,
-                <span class="hljs-string">&quot;You cannot start a load on a not yet attached View or a Fragment where getActivity() &quot;</span>
-                        + <span class="hljs-string">&quot;returns null (which usually occurs when getActivity() is called before the Fragment &quot;</span>
-                        + <span class="hljs-string">&quot;is attached or after the Fragment is destroyed).&quot;</span>);
-        <span class="hljs-keyword">return</span> Glide.get(context).getRequestManagerRetriever();
+                "You cannot start a load on a not yet attached View or a Fragment where getActivity() "
+                        + "returns null (which usually occurs when getActivity() is called before the Fragment "
+                        + "is attached or after the Fragment is destroyed).");
+        return Glide.get(context).getRequestManagerRetriever();
     }
 }
 </code></pre>
-<p>&#x6309;&#x7167;&#x4F7F;&#x7528;&#x4E60;&#x60EF;&#xFF0C;&#x4E00;&#x822C;&#x4ECE; <code>Glide.with(...)</code> &#x5F00;&#x59CB;&#x5F97;&#x5230; <code>RequestManager</code>&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4EE5; <code>Glide.get(context).getRequestManagerRetriever()</code>
-&#x65B9;&#x5F0F;&#x83B7;&#x53D6;&#x3002;&#x5982;&#x679C;Glide&#x6CA1;&#x6709;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x5219;&#x4F1A;&#x8C03;&#x7528; <code>initializeGlide</code> &#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
-<p>&#x8DDF;&#x8FDB;&#x4E00;&#x4E0B;&#x4EE3;&#x7801;&#xFF0C;<em>&#x6CDB;&#x8BFB;&#x5373;&#x53EF;</em></p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Glide</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initializeGlide</span><span class="hljs-params">(@NonNull Context context)</span> </span>{
-        initializeGlide(context, <span class="hljs-keyword">new</span> GlideBuilder());
+<p>按照使用习惯，一般从 <code>Glide.with(...)</code> 开始得到 <code>RequestManager</code>，当然，也可以以 <code>Glide.get(context).getRequestManagerRetriever()</code>
+方式获取。如果Glide没有初始化，则会调用 <code>initializeGlide</code> 进行初始化。</p>
+<p>跟进一下代码，<em>泛读即可</em></p>
+<pre><code class="language-java">class Glide {
+    private static void initializeGlide(@NonNull Context context) {
+        initializeGlide(context, new GlideBuilder());
     }
 
-    <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">&quot;deprecation&quot;</span>)
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initializeGlide</span><span class="hljs-params">(@NonNull Context context, @NonNull GlideBuilder builder)</span> </span>{
+    @SuppressWarnings("deprecation")
+    private static void initializeGlide(@NonNull Context context, @NonNull GlideBuilder builder) {
         Context applicationContext = context.getApplicationContext();
         GeneratedAppGlideModule annotationGeneratedModule = getAnnotationGeneratedGlideModules();
         List&lt;com.bumptech.glide.module.GlideModule&gt; manifestModules = Collections.emptyList();
-        <span class="hljs-keyword">if</span> (annotationGeneratedModule == <span class="hljs-keyword">null</span> || annotationGeneratedModule.isManifestParsingEnabled()) {
-            manifestModules = <span class="hljs-keyword">new</span> ManifestParser(applicationContext).parse();
+        if (annotationGeneratedModule == null || annotationGeneratedModule.isManifestParsingEnabled()) {
+            manifestModules = new ManifestParser(applicationContext).parse();
         }
 
-        <span class="hljs-keyword">if</span> (annotationGeneratedModule != <span class="hljs-keyword">null</span>
+        if (annotationGeneratedModule != null
                 &amp;&amp; !annotationGeneratedModule.getExcludedModuleClasses().isEmpty()) {
             Set&lt;Class&lt;?&gt;&gt; excludedModuleClasses =
                     annotationGeneratedModule.getExcludedModuleClasses();
             Iterator&lt;com.bumptech.glide.module.GlideModule&gt; iterator = manifestModules.iterator();
-            <span class="hljs-keyword">while</span> (iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 com.bumptech.glide.module.GlideModule current = iterator.next();
-                <span class="hljs-keyword">if</span> (!excludedModuleClasses.contains(current.getClass())) {
-                    <span class="hljs-keyword">continue</span>;
+                if (!excludedModuleClasses.contains(current.getClass())) {
+                    continue;
                 }
-                <span class="hljs-keyword">if</span> (Log.isLoggable(TAG, Log.DEBUG)) {
-                    Log.d(TAG, <span class="hljs-string">&quot;AppGlideModule excludes manifest GlideModule: &quot;</span> + current);
+                if (Log.isLoggable(TAG, Log.DEBUG)) {
+                    Log.d(TAG, "AppGlideModule excludes manifest GlideModule: " + current);
                 }
                 iterator.remove();
             }
         }
 
-        <span class="hljs-keyword">if</span> (Log.isLoggable(TAG, Log.DEBUG)) {
-            <span class="hljs-keyword">for</span> (com.bumptech.glide.module.GlideModule glideModule : manifestModules) {
-                Log.d(TAG, <span class="hljs-string">&quot;Discovered GlideModule from manifest: &quot;</span> + glideModule.getClass());
+        if (Log.isLoggable(TAG, Log.DEBUG)) {
+            for (com.bumptech.glide.module.GlideModule glideModule : manifestModules) {
+                Log.d(TAG, "Discovered GlideModule from manifest: " + glideModule.getClass());
             }
         }
 
         RequestManagerRetriever.RequestManagerFactory factory =
-                annotationGeneratedModule != <span class="hljs-keyword">null</span>
-                        ? annotationGeneratedModule.getRequestManagerFactory() : <span class="hljs-keyword">null</span>;
+                annotationGeneratedModule != null
+                        ? annotationGeneratedModule.getRequestManagerFactory() : null;
         builder.setRequestManagerFactory(factory);
-        <span class="hljs-keyword">for</span> (com.bumptech.glide.module.GlideModule module : manifestModules) {
+        for (com.bumptech.glide.module.GlideModule module : manifestModules) {
             module.applyOptions(applicationContext, builder);
         }
-        <span class="hljs-keyword">if</span> (annotationGeneratedModule != <span class="hljs-keyword">null</span>) {
+        if (annotationGeneratedModule != null) {
             annotationGeneratedModule.applyOptions(applicationContext, builder);
         }
         Glide glide = builder.build(applicationContext);
-        <span class="hljs-keyword">for</span> (com.bumptech.glide.module.GlideModule module : manifestModules) {
+        for (com.bumptech.glide.module.GlideModule module : manifestModules) {
             module.registerComponents(applicationContext, glide, glide.registry);
         }
-        <span class="hljs-keyword">if</span> (annotationGeneratedModule != <span class="hljs-keyword">null</span>) {
+        if (annotationGeneratedModule != null) {
             annotationGeneratedModule.registerComponents(applicationContext, glide, glide.registry);
         }
         applicationContext.registerComponentCallbacks(glide);
@@ -1775,21 +503,21 @@ also effective for <code>almost any case</code> where you need to <code>fetch</c
     }
 }
 </code></pre>
-<p>&#x6CDB;&#x8BFB;&#x4E4B;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x53D1;&#x73B0;&#x4E3B;&#x8981;&#x6709; <code>&#x4E09;&#x6B65;</code>&#xFF1A;</p>
+<p>泛读之后，我们发现主要有 <code>三步</code>：</p>
 <ul>
-<li>&#x6784;&#x5EFA;GlideBuilder</li>
-<li>&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#xFF0C;&#x52A0;&#x8F7D; <code>&#x53EF;&#x80FD;&#x5B58;&#x5728;</code> &#x7684;&#x81EA;&#x5B9A;&#x4E49;&#x6A21;&#x5757;&#xFF0C;&#x8BBE;&#x7F6E;&#x5230;Builder&#x4E2D;</li>
-<li>&#x6784;&#x5EFA;Glide</li>
+<li>构建GlideBuilder</li>
+<li>通过反射，加载 <code>可能存在</code> 的自定义模块，设置到Builder中</li>
+<li>构建Glide</li>
 </ul>
 <blockquote>
-<p>&#x601D;&#x5371;&#xFF1A;&#x5982;&#x679C;&#x76F4;&#x63A5;&#x4F7F;&#x7528;GlideBuilder&#x8FDB;&#x884C;&#x6784;&#x5EFA;&#xFF0C;&#x5219;&#x65E0;&#x6CD5;&#x76F4;&#x63A5;&#x8FD0;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x6A21;&#x5757;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x9700;&#x8981;&#x81EA;&#x884C;&#x6CE8;&#x5165;&#x3002;</p>
+<p>思危：如果直接使用GlideBuilder进行构建，则无法直接运用自定义模块的内容，需要自行注入。</p>
 </blockquote>
-<h2 id="&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4E8E;register&#x6316;&#x7EC6;&#x8282;"><a name="&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4E8E;register&#x6316;&#x7EC6;&#x8282;" class="anchor-navigation-ex-anchor" href="#&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4E8E;register&#x6316;&#x7EC6;&#x8282;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6A21;&#x5757;&#x804C;&#x8D23;&#x5212;&#x5206;&#xFF0C;&#x4E8E;Register&#x6316;&#x7EC6;&#x8282;</h2>
-<p>&#x4E0A;&#x4E00;&#x8282;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x7565;&#x53BB;&#x4E86;Glide&#x5B9E;&#x4F8B;&#x5316;&#x8FC7;&#x7A0B;&#x7684;&#x4E00;&#x4E9B;&#x7EC6;&#x8282;&#xFF0C;&#x5176;&#x5B9E;&#x73B0;&#x5185;&#x5BB9;&#x4E3A;&#xFF1A;&#x5411;Register&#x6CE8;&#x518C;&#x4E86;&#x5404;&#x79CD;&#x6A21;&#x5757;&#xFF0C;&#x53EF;&#x4EE5;&#x6CDB;&#x8BFB;&#x4E00;&#x4E0B;&#x6E90;&#x7801;&#xFF1A;</p>
-<pre><code class="lang-java"> registry
-        .append(ByteBuffer.class,<span class="hljs-keyword">new</span> ByteBufferEncoder())
-        .append(InputStream.class,<span class="hljs-keyword">new</span> StreamEncoder(arrayPool))
-        <span class="hljs-comment">/* Bitmaps */</span>
+<h2 id="模块职责划分于register挖细节"><a class="header" href="#模块职责划分于register挖细节">模块职责划分，于Register挖细节</a></h2>
+<p>上一节中，我们略去了Glide实例化过程的一些细节，其实现内容为：向Register注册了各种模块，可以泛读一下源码：</p>
+<pre><code class="language-java"> registry
+        .append(ByteBuffer.class,new ByteBufferEncoder())
+        .append(InputStream.class,new StreamEncoder(arrayPool))
+        /* Bitmaps */
         .append(Registry.BUCKET_BITMAP,ByteBuffer.class,Bitmap.class,byteBufferBitmapDecoder)
         .append(Registry.BUCKET_BITMAP,InputStream.class,Bitmap.class,streamBitmapDecoder)
         .append(
@@ -1804,59 +532,59 @@ also effective for <code>almost any case</code> where you need to <code>fetch</c
         VideoDecoder.asset(bitmapPool))
         .append(Bitmap.class,Bitmap.class,UnitModelLoader.Factory.&lt;Bitmap&gt;getInstance())
         .append(
-        Registry.BUCKET_BITMAP,Bitmap.class,Bitmap.class,<span class="hljs-keyword">new</span> UnitBitmapDecoder())
+        Registry.BUCKET_BITMAP,Bitmap.class,Bitmap.class,new UnitBitmapDecoder())
         .append(Bitmap.class,bitmapEncoder)
-        <span class="hljs-comment">/* BitmapDrawables */</span>
+        /* BitmapDrawables */
         .append(
         Registry.BUCKET_BITMAP_DRAWABLE,
         ByteBuffer.class,
         BitmapDrawable.class,
-        <span class="hljs-keyword">new</span> BitmapDrawableDecoder&lt;&gt;(resources,byteBufferBitmapDecoder))
+        new BitmapDrawableDecoder&lt;&gt;(resources,byteBufferBitmapDecoder))
         .append(
         Registry.BUCKET_BITMAP_DRAWABLE,
         InputStream.class,
         BitmapDrawable.class,
-        <span class="hljs-keyword">new</span> BitmapDrawableDecoder&lt;&gt;(resources,streamBitmapDecoder))
+        new BitmapDrawableDecoder&lt;&gt;(resources,streamBitmapDecoder))
         .append(
         Registry.BUCKET_BITMAP_DRAWABLE,
         ParcelFileDescriptor.class,
         BitmapDrawable.class,
-        <span class="hljs-keyword">new</span> BitmapDrawableDecoder&lt;&gt;(resources,parcelFileDescriptorVideoDecoder))
-        .append(BitmapDrawable.class,<span class="hljs-keyword">new</span> BitmapDrawableEncoder(bitmapPool,bitmapEncoder))
-        <span class="hljs-comment">/* GIFs */</span>
+        new BitmapDrawableDecoder&lt;&gt;(resources,parcelFileDescriptorVideoDecoder))
+        .append(BitmapDrawable.class,new BitmapDrawableEncoder(bitmapPool,bitmapEncoder))
+        /* GIFs */
         .append(
         Registry.BUCKET_GIF,
         InputStream.class,
         GifDrawable.class,
-        <span class="hljs-keyword">new</span> StreamGifDecoder(registry.getImageHeaderParsers(),byteBufferGifDecoder,arrayPool))
+        new StreamGifDecoder(registry.getImageHeaderParsers(),byteBufferGifDecoder,arrayPool))
         .append(Registry.BUCKET_GIF,ByteBuffer.class,GifDrawable.class,byteBufferGifDecoder)
-        .append(GifDrawable.class,<span class="hljs-keyword">new</span> GifDrawableEncoder())
-        <span class="hljs-comment">/* GIF Frames */</span>
-        <span class="hljs-comment">// Compilation with Gradle requires the type to be specified for UnitModelLoader here.</span>
+        .append(GifDrawable.class,new GifDrawableEncoder())
+        /* GIF Frames */
+        // Compilation with Gradle requires the type to be specified for UnitModelLoader here.
         .append(
         GifDecoder.class,GifDecoder.class,UnitModelLoader.Factory.&lt;GifDecoder&gt;getInstance())
         .append(
         Registry.BUCKET_BITMAP,
         GifDecoder.class,
         Bitmap.class,
-        <span class="hljs-keyword">new</span> GifFrameResourceDecoder(bitmapPool))
-        <span class="hljs-comment">/* Drawables */</span>
+        new GifFrameResourceDecoder(bitmapPool))
+        /* Drawables */
         .append(Uri.class,Drawable.class,resourceDrawableDecoder)
         .append(
-        Uri.class,Bitmap.class,<span class="hljs-keyword">new</span> ResourceBitmapDecoder(resourceDrawableDecoder,bitmapPool))
-        <span class="hljs-comment">/* Files */</span>
-        .register(<span class="hljs-keyword">new</span> ByteBufferRewinder.Factory())
-        .append(File.class,ByteBuffer.class,<span class="hljs-keyword">new</span> ByteBufferFileLoader.Factory())
-        .append(File.class,InputStream.class,<span class="hljs-keyword">new</span> FileLoader.StreamFactory())
-        .append(File.class,File.class,<span class="hljs-keyword">new</span> FileDecoder())
-        .append(File.class,ParcelFileDescriptor.class,<span class="hljs-keyword">new</span> FileLoader.FileDescriptorFactory())
-        <span class="hljs-comment">// Compilation with Gradle requires the type to be specified for UnitModelLoader here.</span>
+        Uri.class,Bitmap.class,new ResourceBitmapDecoder(resourceDrawableDecoder,bitmapPool))
+        /* Files */
+        .register(new ByteBufferRewinder.Factory())
+        .append(File.class,ByteBuffer.class,new ByteBufferFileLoader.Factory())
+        .append(File.class,InputStream.class,new FileLoader.StreamFactory())
+        .append(File.class,File.class,new FileDecoder())
+        .append(File.class,ParcelFileDescriptor.class,new FileLoader.FileDescriptorFactory())
+        // Compilation with Gradle requires the type to be specified for UnitModelLoader here.
         .append(File.class,File.class,UnitModelLoader.Factory.&lt;File&gt;getInstance())
-        <span class="hljs-comment">/* Models */</span>
-        .register(<span class="hljs-keyword">new</span> InputStreamRewinder.Factory(arrayPool))
-        .append(<span class="hljs-keyword">int</span>.class,InputStream.class,resourceLoaderStreamFactory)
+        /* Models */
+        .register(new InputStreamRewinder.Factory(arrayPool))
+        .append(int.class,InputStream.class,resourceLoaderStreamFactory)
         .append(
-        <span class="hljs-keyword">int</span>.class,
+        int.class,
         ParcelFileDescriptor.class,
         resourceLoaderFileDescriptorFactory)
         .append(Integer.class,InputStream.class,resourceLoaderStreamFactory)
@@ -1866,169 +594,171 @@ also effective for <code>almost any case</code> where you need to <code>fetch</c
         resourceLoaderFileDescriptorFactory)
         .append(Integer.class,Uri.class,resourceLoaderUriFactory)
         .append(
-        <span class="hljs-keyword">int</span>.class,
+        int.class,
         AssetFileDescriptor.class,
         resourceLoaderAssetFileDescriptorFactory)
         .append(
         Integer.class,
         AssetFileDescriptor.class,
         resourceLoaderAssetFileDescriptorFactory)
-        .append(<span class="hljs-keyword">int</span>.class,Uri.class,resourceLoaderUriFactory)
-        .append(String.class,InputStream.class,<span class="hljs-keyword">new</span> DataUrlLoader.StreamFactory())
-        .append(String.class,InputStream.class,<span class="hljs-keyword">new</span> StringLoader.StreamFactory())
-        .append(String.class,ParcelFileDescriptor.class,<span class="hljs-keyword">new</span> StringLoader.FileDescriptorFactory())
+        .append(int.class,Uri.class,resourceLoaderUriFactory)
+        .append(String.class,InputStream.class,new DataUrlLoader.StreamFactory())
+        .append(String.class,InputStream.class,new StringLoader.StreamFactory())
+        .append(String.class,ParcelFileDescriptor.class,new StringLoader.FileDescriptorFactory())
         .append(
-        String.class,AssetFileDescriptor.class,<span class="hljs-keyword">new</span> StringLoader.AssetFileDescriptorFactory())
-        .append(Uri.class,InputStream.class,<span class="hljs-keyword">new</span> HttpUriLoader.Factory())
-        .append(Uri.class,InputStream.class,<span class="hljs-keyword">new</span> AssetUriLoader.StreamFactory(context.getAssets()))
+        String.class,AssetFileDescriptor.class,new StringLoader.AssetFileDescriptorFactory())
+        .append(Uri.class,InputStream.class,new HttpUriLoader.Factory())
+        .append(Uri.class,InputStream.class,new AssetUriLoader.StreamFactory(context.getAssets()))
         .append(
         Uri.class,
         ParcelFileDescriptor.class,
-        <span class="hljs-keyword">new</span> AssetUriLoader.FileDescriptorFactory(context.getAssets()))
-        .append(Uri.class,InputStream.class,<span class="hljs-keyword">new</span> MediaStoreImageThumbLoader.Factory(context))
-        .append(Uri.class,InputStream.class,<span class="hljs-keyword">new</span> MediaStoreVideoThumbLoader.Factory(context))
+        new AssetUriLoader.FileDescriptorFactory(context.getAssets()))
+        .append(Uri.class,InputStream.class,new MediaStoreImageThumbLoader.Factory(context))
+        .append(Uri.class,InputStream.class,new MediaStoreVideoThumbLoader.Factory(context))
         .append(
         Uri.class,
         InputStream.class,
-        <span class="hljs-keyword">new</span> UriLoader.StreamFactory(contentResolver))
+        new UriLoader.StreamFactory(contentResolver))
         .append(
         Uri.class,
         ParcelFileDescriptor.class,
-        <span class="hljs-keyword">new</span> UriLoader.FileDescriptorFactory(contentResolver))
+        new UriLoader.FileDescriptorFactory(contentResolver))
         .append(
         Uri.class,
         AssetFileDescriptor.class,
-        <span class="hljs-keyword">new</span> UriLoader.AssetFileDescriptorFactory(contentResolver))
-        .append(Uri.class,InputStream.class,<span class="hljs-keyword">new</span> UrlUriLoader.StreamFactory())
-        .append(URL.class,InputStream.class,<span class="hljs-keyword">new</span> UrlLoader.StreamFactory())
-        .append(Uri.class,File.class,<span class="hljs-keyword">new</span> MediaStoreFileLoader.Factory(context))
-        .append(GlideUrl.class,InputStream.class,<span class="hljs-keyword">new</span> HttpGlideUrlLoader.Factory())
-        .append(<span class="hljs-keyword">byte</span>[].class,ByteBuffer.class,<span class="hljs-keyword">new</span> ByteArrayLoader.ByteBufferFactory())
-        .append(<span class="hljs-keyword">byte</span>[].class,InputStream.class,<span class="hljs-keyword">new</span> ByteArrayLoader.StreamFactory())
+        new UriLoader.AssetFileDescriptorFactory(contentResolver))
+        .append(Uri.class,InputStream.class,new UrlUriLoader.StreamFactory())
+        .append(URL.class,InputStream.class,new UrlLoader.StreamFactory())
+        .append(Uri.class,File.class,new MediaStoreFileLoader.Factory(context))
+        .append(GlideUrl.class,InputStream.class,new HttpGlideUrlLoader.Factory())
+        .append(byte[].class,ByteBuffer.class,new ByteArrayLoader.ByteBufferFactory())
+        .append(byte[].class,InputStream.class,new ByteArrayLoader.StreamFactory())
         .append(Uri.class,Uri.class,UnitModelLoader.Factory.&lt;Uri&gt;getInstance())
         .append(Drawable.class,Drawable.class,UnitModelLoader.Factory.&lt;Drawable&gt;getInstance())
-        .append(Drawable.class,Drawable.class,<span class="hljs-keyword">new</span> UnitDrawableDecoder())
-        <span class="hljs-comment">/* Transcoders */</span>
+        .append(Drawable.class,Drawable.class,new UnitDrawableDecoder())
+        /* Transcoders */
         .register(
         Bitmap.class,
         BitmapDrawable.class,
-        <span class="hljs-keyword">new</span> BitmapDrawableTranscoder(resources))
-        .register(Bitmap.class,<span class="hljs-keyword">byte</span>[].class,bitmapBytesTranscoder)
+        new BitmapDrawableTranscoder(resources))
+        .register(Bitmap.class,byte[].class,bitmapBytesTranscoder)
         .register(
         Drawable.class,
-        <span class="hljs-keyword">byte</span>[].class,
-        <span class="hljs-keyword">new</span> DrawableBytesTranscoder(
+        byte[].class,
+        new DrawableBytesTranscoder(
         bitmapPool,bitmapBytesTranscoder,gifDrawableBytesTranscoder))
-        .register(GifDrawable.class,<span class="hljs-keyword">byte</span>[].class,gifDrawableBytesTranscoder);
+        .register(GifDrawable.class,byte[].class,gifDrawableBytesTranscoder);
 </code></pre>
-<p><code>&#x76F4;&#x63A5;&#x8BB2;&#x89E3;</code> &#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x662F; <code>&#x65E0;&#x610F;&#x4E49;</code> &#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x4ECE; <code>Register</code> &#x7C7B;&#x5165;&#x624B;&#xFF0C;&#x5206;&#x6790;&#x6CE8;&#x518C;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Registry</span> </span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String BUCKET_GIF = <span class="hljs-string">&quot;Gif&quot;</span>;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String BUCKET_BITMAP = <span class="hljs-string">&quot;Bitmap&quot;</span>;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String BUCKET_BITMAP_DRAWABLE = <span class="hljs-string">&quot;BitmapDrawable&quot;</span>;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String BUCKET_PREPEND_ALL = <span class="hljs-string">&quot;legacy_prepend_all&quot;</span>;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String BUCKET_APPEND_ALL = <span class="hljs-string">&quot;legacy_append&quot;</span>;
+<p><code>直接讲解</code> 这段代码是 <code>无意义</code> 的，我们从 <code>Register</code> 类入手，分析注册的内容。</p>
+<pre><code class="language-java">public class Registry {
+    public static final String BUCKET_GIF = "Gif";
+    public static final String BUCKET_BITMAP = "Bitmap";
+    public static final String BUCKET_BITMAP_DRAWABLE = "BitmapDrawable";
+    private static final String BUCKET_PREPEND_ALL = "legacy_prepend_all";
+    private static final String BUCKET_APPEND_ALL = "legacy_append";
 
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ModelLoaderRegistry modelLoaderRegistry;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> EncoderRegistry encoderRegistry;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ResourceDecoderRegistry decoderRegistry;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ResourceEncoderRegistry resourceEncoderRegistry;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> DataRewinderRegistry dataRewinderRegistry;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> TranscoderRegistry transcoderRegistry;
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ImageHeaderParserRegistry imageHeaderParserRegistry;
+    private final ModelLoaderRegistry modelLoaderRegistry;
+    private final EncoderRegistry encoderRegistry;
+    private final ResourceDecoderRegistry decoderRegistry;
+    private final ResourceEncoderRegistry resourceEncoderRegistry;
+    private final DataRewinderRegistry dataRewinderRegistry;
+    private final TranscoderRegistry transcoderRegistry;
+    private final ImageHeaderParserRegistry imageHeaderParserRegistry;
 
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ModelToResourceClassCache modelToResourceClassCache =
-            <span class="hljs-keyword">new</span> ModelToResourceClassCache();
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> LoadPathCache loadPathCache = <span class="hljs-keyword">new</span> LoadPathCache();
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Pool&lt;List&lt;Throwable&gt;&gt; throwableListPool = FactoryPools.threadSafeList();
+    private final ModelToResourceClassCache modelToResourceClassCache =
+            new ModelToResourceClassCache();
+    private final LoadPathCache loadPathCache = new LoadPathCache();
+    private final Pool&lt;List&lt;Throwable&gt;&gt; throwableListPool = FactoryPools.threadSafeList();
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Registry</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">this</span>.modelLoaderRegistry = <span class="hljs-keyword">new</span> ModelLoaderRegistry(throwableListPool);
-        <span class="hljs-keyword">this</span>.encoderRegistry = <span class="hljs-keyword">new</span> EncoderRegistry();
-        <span class="hljs-keyword">this</span>.decoderRegistry = <span class="hljs-keyword">new</span> ResourceDecoderRegistry();
-        <span class="hljs-keyword">this</span>.resourceEncoderRegistry = <span class="hljs-keyword">new</span> ResourceEncoderRegistry();
-        <span class="hljs-keyword">this</span>.dataRewinderRegistry = <span class="hljs-keyword">new</span> DataRewinderRegistry();
-        <span class="hljs-keyword">this</span>.transcoderRegistry = <span class="hljs-keyword">new</span> TranscoderRegistry();
-        <span class="hljs-keyword">this</span>.imageHeaderParserRegistry = <span class="hljs-keyword">new</span> ImageHeaderParserRegistry();
+    public Registry() {
+        this.modelLoaderRegistry = new ModelLoaderRegistry(throwableListPool);
+        this.encoderRegistry = new EncoderRegistry();
+        this.decoderRegistry = new ResourceDecoderRegistry();
+        this.resourceEncoderRegistry = new ResourceEncoderRegistry();
+        this.dataRewinderRegistry = new DataRewinderRegistry();
+        this.transcoderRegistry = new TranscoderRegistry();
+        this.imageHeaderParserRegistry = new ImageHeaderParserRegistry();
         setResourceDecoderBucketPriorityList(
                 Arrays.asList(BUCKET_GIF, BUCKET_BITMAP, BUCKET_BITMAP_DRAWABLE));
     }
-    <span class="hljs-comment">//API&#x7565;&#x53BB;</span>
+    //API略去
 }
 </code></pre>
-<h3 id="&#x8D44;&#x6E90;model&#x52A0;&#x8F7D;&#x5668;"><a name="&#x8D44;&#x6E90;model&#x52A0;&#x8F7D;&#x5668;" class="anchor-navigation-ex-anchor" href="#&#x8D44;&#x6E90;model&#x52A0;&#x8F7D;&#x5668;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8D44;&#x6E90;Model&#x52A0;&#x8F7D;&#x5668;</h3>
-<p><code>modelLoaderRegistry</code> &#x7528;&#x4E8E;&#x6CE8;&#x518C; <code>&#x8D44;&#x6E90;Model&#x52A0;&#x8F7D;&#x65B9;&#x5F0F;</code> &#x4FE1;&#x606F;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x8D44;&#x6E90;&#x7684;&#x5B9A;&#x4E49;Model&#x4E3A; <code>Uri</code> &#x7C7B;&#xFF0C;&#x6CE8;&#x518C;&#x4E00;&#x4E2A; <code>ModelLoaderFactory</code> &#xFF0C;&#x751F;&#x4EA7;&#x5BF9;&#x5E94;&#x7684;
-<code>ModelLoader</code>&#xFF0C;&#x5C06; <code>Uri</code> &#x5A92;&#x4F53;&#x5B9E;&#x4F53;&#xFF0C;&#x52A0;&#x8F7D;&#x4E3A; <code>InputStream</code> &#x6216;&#x8005;&#x5176;&#x4ED6;&#x5F62;&#x5F0F;&#x7684; <code>&#x5185;&#x5BB9;</code></p>
-<p>&#x76F8;&#x5173;&#x7C7B;&#xFF1A;</p>
+<h3 id="资源model加载器"><a class="header" href="#资源model加载器">资源Model加载器</a></h3>
+<p><code>modelLoaderRegistry</code> 用于注册 <code>资源Model加载方式</code> 信息。例如，资源的定义Model为 <code>Uri</code> 类，注册一个 <code>ModelLoaderFactory</code> ，生产对应的
+<code>ModelLoader</code>，将 <code>Uri</code> 媒体实体，加载为 <code>InputStream</code> 或者其他形式的 <code>内容</code></p>
+<p>相关类：</p>
 <ul>
 <li><code>ModelLoaderFactory</code></li>
-<li><code>ModelLoader</code> &#x7B49;</li>
+<li><code>ModelLoader</code> 等</li>
 </ul>
-<h3 id="&#x7F16;&#x7801;&#x5668;"><a name="&#x7F16;&#x7801;&#x5668;" class="anchor-navigation-ex-anchor" href="#&#x7F16;&#x7801;&#x5668;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7F16;&#x7801;&#x5668;</h3>
-<p><code>encoderRegistry</code> &#x7528;&#x4E8E;&#x6CE8;&#x518C; <code>&#x5185;&#x5BB9;encode&#x65B9;&#x5F0F;</code> &#x4FE1;&#x606F;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5A92;&#x4F53;&#x5B9E;&#x4F53;&#x5DF2;&#x88AB;&#x52A0;&#x8F7D;&#x4E3A; <code>InputStream</code>&#xFF0C;&#x6CE8;&#x518C;&#x4E00;&#x4E2A;&#x5BF9;&#x5E94;&#x5904;&#x7406;&#x7684; <code>Encoder&lt;InputStream&gt;</code>&#xFF0C;
-&#x7528;&#x4E8E;&#x5904;&#x7406;&#x5185;&#x5BB9;&#x7684;encode&#xFF0C;&#x5982;&#x5199;&#x5165;&#x78C1;&#x76D8;&#x8FC7;&#x7A0B;</p>
-<p>&#x76F8;&#x5173;&#x7C7B;&#xFF1A;<code>Encoder</code> &#x63A5;&#x53E3;&#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</p>
-<p>&#x76F8;&#x5E94;&#x7684;&#xFF0C;<code>resourceEncoderRegistry</code> &#x7528;&#x4E8E;&#x6CE8;&#x518C; <code>Resource &#x7684;encode&#x65B9;&#x5F0F;</code>&#xFF0C;&#x8FD9;&#x4E9B;encoder&#x9762;&#x5411; <code>Resource</code>&#xFF0C;&#x76F8;&#x6BD4;&#x4E8E; <code>InputStream</code> &#x7B49;&#x4F4E;&#x7EA7;&#x5F62;&#x5F0F;&#x7684;&#x7F16;&#x7801;&#x5185;&#x5BB9;&#x5C01;&#x88C5;&#xFF0C;
-<code>Resource</code> &#x5B9E;&#x73B0;&#x7C7B;&#x8FDB;&#x884C;&#x4E86;&#x66F4;&#x9AD8;&#x7EA7;&#x522B;&#x7684;&#x7F16;&#x7801;&#x5185;&#x5BB9;&#x5C01;&#x88C5;&#x3002;</p>
-<p>&#x76F8;&#x5173;&#x7C7B;&#xFF1A;</p>
+<h3 id="编码器"><a class="header" href="#编码器">编码器</a></h3>
+<p><code>encoderRegistry</code> 用于注册 <code>内容encode方式</code> 信息。例如，媒体实体已被加载为 <code>InputStream</code>，注册一个对应处理的 <code>Encoder&lt;InputStream&gt;</code>，
+用于处理内容的encode，如写入磁盘过程</p>
+<p>相关类：<code>Encoder</code> 接口及其实现类</p>
+<p>相应的，<code>resourceEncoderRegistry</code> 用于注册 <code>Resource 的encode方式</code>，这些encoder面向 <code>Resource</code>，相比于 <code>InputStream</code> 等低级形式的编码内容封装，
+<code>Resource</code> 实现类进行了更高级别的编码内容封装。</p>
+<p>相关类：</p>
 <ul>
-<li><code>ResourceEncoder</code> &#x63A5;&#x53E3;&#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
-<li><code>Resource</code> &#x63A5;&#x53E3;&#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>ResourceEncoder</code> 接口及其实现类</li>
+<li><code>Resource</code> 接口及其实现类</li>
 <li><code>EncodeStrategy</code></li>
 </ul>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF1A;&#x5A92;&#x4F53;&#x8D44;&#x6E90;&#x7684;&#x6570;&#x636E;&#x5C01;&#x88C5;&#x5B58;&#x5728;&#x4E0D;&#x540C; <code>&#x5C42;&#x7EA7;</code>&#xFF1A;</p>
+<p>不难理解：媒体资源的数据封装存在不同 <code>层级</code>：</p>
 <ul>
-<li>&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x7684;InputSteam</li>
-<li>Bitmap&#xFF0C;BitmapDrawable</li>
+<li>读取数据的InputSteam</li>
+<li>Bitmap，BitmapDrawable</li>
 </ul>
-<p>&#x6240;&#x4EE5; encode&#x8FC7;&#x7A0B; &#x5BF9;&#x4E0D;&#x540C;&#x5C42;&#x7EA7;&#x7684;&#x5C01;&#x88C5;&#x7C7B;&#xFF0C;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x5F53;&#x7136;&#xFF0C;encoder&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <code>wrapper</code>&#xFF0C;<code>adapter</code>,<code>transfer</code> &#x7B49;&#x5F62;&#x5F0F;&#xFF0C;&#x5229;&#x7528;&#x5176;&#x5B83;encoder&#x6269;&#x5C55;&#x529F;&#x80FD;</p>
-<h3 id="&#x89E3;&#x7801;&#x5668;"><a name="&#x89E3;&#x7801;&#x5668;" class="anchor-navigation-ex-anchor" href="#&#x89E3;&#x7801;&#x5668;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x89E3;&#x7801;&#x5668;</h3>
-<p><code>decoderRegistry</code> &#x7528;&#x4E8E;&#x6CE8;&#x518C; <code>&#x5A92;&#x4F53;&#x6570;&#x636E;&#x89E3;&#x7801;&#x4E3A;Resource&#x65B9;&#x5F0F;</code> &#x7684;&#x4FE1;&#x606F;&#x3002;</p>
-<p>&#x524D;&#x9762;&#x6211;&#x4EEC;&#x63D0;&#x5230; <code>modelLoaderRegistry</code> &#x6CE8;&#x518C;&#x7684;&#x4FE1;&#x606F;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x5F97;&#x5230; <code>ModelLoader</code>&#xFF0C; &#x5B83;&#x4EEC;&#x8D1F;&#x8D23;&#x5C06; <code>&#x8D44;&#x6E90;Model</code> &#x52A0;&#x8F7D;&#x4E3A; <code>&#x8D44;&#x6E90;&#x5185;&#x5BB9;</code>&#xFF0C;&#x8FD9;&#x79CD; <code>&#x8D44;&#x6E90;&#x5185;&#x5BB9;</code>&#x4EE5; <code>InputStream</code> &#x7B49;&#x4F4E;&#x7EA7;&#x5F62;&#x5F0F;&#x5B58;&#x5728;&#x5373;&#x53EF;&#x3002;</p>
-<p>&#x4E0D;&#x96BE;&#x7406;&#x89E3;&#xFF0C;&#x8FD9;&#x53EF;&#x4EE5;&#x6709;&#x6548;&#x7684;&#x89E3;&#x51B3; <code>&#x7C7B;&#x6570;&#x91CF;&#x7206;&#x70B8;</code> &#x95EE;&#x9898;&#x3002;</p>
+<p>所以 encode过程 对不同层级的封装类，有不同的处理，当然，encoder可以通过 <code>wrapper</code>，<code>adapter</code>,<code>transfer</code> 等形式，利用其它encoder扩展功能</p>
+<h3 id="解码器"><a class="header" href="#解码器">解码器</a></h3>
+<p><code>decoderRegistry</code> 用于注册 <code>媒体数据解码为Resource方式</code> 的信息。</p>
+<p>前面我们提到 <code>modelLoaderRegistry</code> 注册的信息中，可以得到 <code>ModelLoader</code>， 它们负责将 <code>资源Model</code> 加载为 <code>资源内容</code>，这种 <code>资源内容</code>以 <code>InputStream</code> 等低级形式存在即可。</p>
+<p>不难理解，这可以有效的解决 <code>类数量爆炸</code> 问题。</p>
 <blockquote>
-<p>&#x8111;&#x66B4;&#xFF1A;&#x5047;&#x5B9A; Model &#x7684;&#x7C7B;&#x6570;&#x91CF;&#x4E3A;m&#x4E2A;&#xFF0C;&#x89E3;&#x7801;&#x540E;&#x8F93;&#x51FA;&#x7684;&#x5F62;&#x5F0F;&#x6709;n&#x4E2A;</p>
+<p>脑暴：假定 Model 的类数量为m个，解码后输出的形式有n个</p>
 <ul>
-<li>&#x4E0D;&#x91C7;&#x7528;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5904;&#x7406;&#xFF0C;&#x4E00;&#x5171;&#x9700;&#x8981; m*n &#x4E2A; decoder &#x7C7B;</li>
-<li>&#x91C7;&#x7528;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5904;&#x7406;&#xFF0C;&#x4E00;&#x5171;&#x9700;&#x8981; m+n &#x4E2A; decoder &#x7C7B;</li>
+<li>不采用这种方式处理，一共需要 m*n 个 decoder 类</li>
+<li>采用这种方式处理，一共需要 m+n 个 decoder 类</li>
 </ul>
-<p>&#x5F53; <code>&#x5C42;&#x7EA7;</code> &#x589E;&#x52A0;&#x65F6;&#xFF0C;&#x5DEE;&#x8DDD;&#x4F1A;&#x66F4;&#x52A0;&#x660E;&#x663E;</p>
-<p>&#x6309;&#x7167;&#x7ECF;&#x9A8C;&#x63A8;&#x65AD;&#xFF0C;Glide&#x5728;&#x5904;&#x7406;decode&#x8FC7;&#x7A0B;&#x65F6;&#xFF0C;&#x91C7;&#x7528;&#x4E86; <code>Wrapper/delegate</code> &#x6A21;&#x5F0F; &#x6216;&#x8005; <code>bridge</code> &#x6A21;&#x5F0F;&#x3002;</p>
-<p>&#x601D;&#x53D8;&#xFF1A;&#x9879;&#x76EE;&#x4E2D;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7C7B;&#x4F3C;&#x65B9;&#x5F0F;&#xFF0C;&#x5904;&#x7406;&#x4E0D;&#x540C;&#x5C42;&#x7EA7;&#x4E4B;&#x95F4; <code>&#x6570;&#x636E;Bean</code> &#x7684; <code>&#x8F6C;&#x5316;</code> &#x6216;&#x8005; <code>&#x5305;&#x88C5;</code>&#xFF1F;</p>
+<p>当 <code>层级</code> 增加时，差距会更加明显</p>
+<p>按照经验推断，Glide在处理decode过程时，采用了 <code>Wrapper/delegate</code> 模式 或者 <code>bridge</code> 模式。</p>
 </blockquote>
-<p>&#x76F8;&#x5173;&#x7C7B;&#xFF1A;</p>
-<ul>
-<li><code>ResourceDecoder</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
-<li><code>Resource</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
-</ul>
-<h3 id="&#x8F6C;&#x6362;&#x5668;"><a name="&#x8F6C;&#x6362;&#x5668;" class="anchor-navigation-ex-anchor" href="#&#x8F6C;&#x6362;&#x5668;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F6C;&#x6362;&#x5668;</h3>
-<p><em>&#x867D;&#x7136;&#x76F4;&#x8BD1;&#x4E3A;&#x8F6C;&#x7801;&#x5668;&#xFF0C;&#x4F46;&#x662F;&#x5BB9;&#x6613;&#x6982;&#x5FF5;&#x6DF7;&#x6DC6;&#xFF0C;&#x6309;&#x7167;&#x5176;&#x529F;&#x80FD;&#x79F0;&#x4E3A;&#x8F6C;&#x6362;&#x5668;</em></p>
-<p><code>transcoderRegistry</code> &#x7528;&#x4E8E;&#x6CE8;&#x518C; <code>&#x8F6C;&#x5316;&#x5668;&#xFF0C;&#x53CA;&#x5176;&#x8D1F;&#x8D23;&#x7684;&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x548C;&#x8F6C;&#x6362;&#x7C7B;&#x578B;</code> &#x4FE1;&#x606F;&#xFF0C;&#x8F6C;&#x6362;&#x5668;&#x5C06;&#x8D44;&#x6E90;&#x4ECE;&#x4E00;&#x79CD;&#x5F62;&#x5F0F;&#x8F6C;&#x6362;&#x4E3A;&#x53E6;&#x4E00;&#x79CD;&#x5F62;&#x5F0F;&#x3002;&#x4F8B;&#x5982;: <code>Bitmap -&gt; byte[]</code></p>
-<p>&#x76F8;&#x5173;&#x7C7B;&#xFF1A;</p>
-<ul>
-<li><code>ResourceTranscoder</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
-<li><code>Resource</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
-</ul>
-<h3 id="&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;"><a name="&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;" class="anchor-navigation-ex-anchor" href="#&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;</h3>
-<p><code>imageHeaderParserRegistry</code> &#x7528;&#x4E8E;&#x6CE8;&#x518C; <code>&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;</code> &#x4FE1;&#x606F;</p>
-<p><em>&#x6CE8;&#xFF0C;&#x90E8;&#x5206;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E3A;&#x4E86;&#x66F4;&#x7B80;&#x4FBF;&#x7684;&#x51B3;&#x5B9A;&#x6587;&#x4EF6;&#x7684;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#xFF0C;&#x5229;&#x7528;&#x4E86;&#x6587;&#x4EF6;&#x6269;&#x5C55;&#x540D;&#x3002;&#x4F46;&#x6587;&#x4EF6;&#x5B9E;&#x8D28;&#x5185;&#x5BB9;&#x7684;&#x7F16;&#x7801;&#x65B9;&#x5F0F;&#x4FE1;&#x606F;&#xFF0C;&#x5B58;&#x50A8;&#x5728;&#x6587;&#x4EF6;&#x5934;&#x4FE1;&#x606F;&#x4E2D;&#xFF0C;&#x53C8;&#x79F0;&#xFF1A; <code>File Sigs</code>&#x3001;<code>&#x6587;&#x4EF6;&#x9B54;&#x6570;</code> &#x3002;</em></p>
 <blockquote>
-<p>&#x4F8B;&#x5982; FF D8 &#x4EE3;&#x8868; Generic JPEG image file&#xFF0C;&#x5373; JPE, JPEG, JPG</p>
+<p>思变：项目中是否可以使用类似方式，处理不同层级之间 <code>数据Bean</code> 的 <code>转化</code> 或者 <code>包装</code>？</p>
 </blockquote>
-<p><a href="https://www.garykessler.net/library/file_sigs.html" target="_blank">&#x4E86;&#x89E3;&#x66F4;&#x591A;&#x5173;&#x4E8E;File Sigs&#x5185;&#x5BB9;</a></p>
-<p>&#x76F8;&#x5173;&#x7C7B;&#xFF1A;</p>
+<p>相关类：</p>
 <ul>
-<li><code>ImageHeaderParser</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>ResourceDecoder</code> 及其实现类</li>
+<li><code>Resource</code> 及其实现类</li>
+</ul>
+<h3 id="转换器"><a class="header" href="#转换器">转换器</a></h3>
+<p><em>虽然直译为转码器，但是容易概念混淆，按照其功能称为转换器</em></p>
+<p><code>transcoderRegistry</code> 用于注册 <code>转化器，及其负责的原始类型和转换类型</code> 信息，转换器将资源从一种形式转换为另一种形式。例如: <code>Bitmap -&gt; byte[]</code></p>
+<p>相关类：</p>
+<ul>
+<li><code>ResourceTranscoder</code> 及其实现类</li>
+<li><code>Resource</code> 及其实现类</li>
+</ul>
+<h3 id="头信息解析器"><a class="header" href="#头信息解析器">头信息解析器</a></h3>
+<p><code>imageHeaderParserRegistry</code> 用于注册 <code>头信息解析器</code> 信息</p>
+<p><em>注，部分操作系统为了更简便的决定文件的处理方式，利用了文件扩展名。但文件实质内容的编码方式信息，存储在文件头信息中，又称： <code>File Sigs</code>、<code>文件魔数</code> 。</em></p>
+<blockquote>
+<p>例如 FF D8 代表 Generic JPEG image file，即 JPE, JPEG, JPG</p>
+</blockquote>
+<p><a href="https://www.garykessler.net/library/file_sigs.html">了解更多关于File Sigs内容</a></p>
+<p>相关类：</p>
+<ul>
+<li><code>ImageHeaderParser</code> 及其实现类</li>
 <li><code>ImageType</code></li>
 </ul>
-<h2 id="&#x6A21;&#x5757;&#x804C;&#x8D23;&#x603B;&#x7ED3;"><a name="&#x6A21;&#x5757;&#x804C;&#x8D23;&#x603B;&#x7ED3;" class="anchor-navigation-ex-anchor" href="#&#x6A21;&#x5757;&#x804C;&#x8D23;&#x603B;&#x7ED3;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6A21;&#x5757;&#x804C;&#x8D23;&#x603B;&#x7ED3;</h2>
-<p>&#x901A;&#x8FC7;&#x524D;&#x6587;&#x7684;&#x5206;&#x6790;&#xFF0C;&#x5E76;&#x67E5;&#x9605;Glide&#x6E90;&#x7801;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5BF9;&#x6A21;&#x5757;&#x804C;&#x8D23;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x521D;&#x6B65;&#x603B;&#x7ED3;&#x3002;</p>
-<p>&#x5728;&#x4E4B;&#x540E;&#x7684;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5BF9;&#x5177;&#x4F53;&#x6A21;&#x5757;&#x8FDB;&#x884C; <code>&#x66F4;&#x7EC6;&#x81F4;</code> &#x7684;&#x6316;&#x6398;&#xFF0C;&#x6B64;&#x5904;&#x603B;&#x7ED3;&#x7684;&#x7C7B;&#x4FE1;&#x606F;&#xFF0C;&#x5C31;&#x662F; <code>&#x7A81;&#x7834;&#x53E3;</code> &#x3002;</p>
-<p><em>&#x8003;&#x8651;&#x5230;&#x76EE;&#x524D;&#x6536;&#x96C6;&#x7684;&#x4FE1;&#x606F; <code>&#x5E76;&#x4E0D;&#x5168;&#x9762;</code> &#xFF0C;&#x6211;&#x4E0D;&#x6253;&#x7B97;&#x7ED8;&#x5236;&#x4E00;&#x4E2A;&#x56FE;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x4FE1;&#x606F;&#x4E5F; <code>&#x5E76;&#x975E;</code> &#x5341;&#x5206;&#x91CD;&#x8981;&#xFF0C;&#x6240;&#x4EE5;&#x5C06;&#x5176;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A; <code>&#x4E34;&#x65F6;&#x7684;&#x5907;&#x5FD8;&#x5F55;</code> &#x5373;&#x53EF;&#x3002;
-&#x5728;&#x540E;&#x7EED;&#x5185;&#x5BB9;&#x4E2D;&#xFF0C;&#x6211;&#x4F1A;&#x5BF9;&#x5404;&#x4E2A;&#x6A21;&#x5757;&#x5355;&#x72EC;&#x603B;&#x7ED3;&#x6210;&#x56FE;</em></p>
-<p>&#x4E0B;&#x4E00;&#x7BC7;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5BF9; <code>&#x8D44;&#x6E90;Model&#x52A0;&#x8F7D;&#x3001;&#x83B7;&#x53D6;&#x6D41;&#x7A0B;</code> &#x8FDB;&#x884C; <code>&#x6DF1;&#x5EA6;&#x6316;&#x6398;</code>&#x3002;</p>
-<hr>
-<h3 id="&#x7F13;&#x5B58;&#x4E0E;&#x6C60;"><a name="&#x7F13;&#x5B58;&#x4E0E;&#x6C60;" class="anchor-navigation-ex-anchor" href="#&#x7F13;&#x5B58;&#x4E0E;&#x6C60;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7F13;&#x5B58;&#x4E0E;&#x6C60;</h3>
+<h2 id="模块职责总结"><a class="header" href="#模块职责总结">模块职责总结</a></h2>
+<p>通过前文的分析，并查阅Glide源码，我们可以对模块职责进行一次初步总结。</p>
+<p>在之后的文章中，我们将对具体模块进行 <code>更细致</code> 的挖掘，此处总结的类信息，就是 <code>突破口</code> 。</p>
+<p><em>考虑到目前收集的信息 <code>并不全面</code> ，我不打算绘制一个图，下面的信息也 <code>并非</code> 十分重要，所以将其作为一个 <code>临时的备忘录</code> 即可。
+在后续内容中，我会对各个模块单独总结成图</em></p>
+<p>下一篇，我们将对 <code>资源Model加载、获取流程</code> 进行 <code>深度挖掘</code>。</p>
+<hr />
+<h3 id="缓存与池"><a class="header" href="#缓存与池">缓存与池</a></h3>
 <ul>
 <li>MemorySizeCalculator</li>
 <li>LruBitmapPool</li>
@@ -2037,153 +767,114 @@ also effective for <code>almost any case</code> where you need to <code>fetch</c
 <li>LruResourceCache</li>
 <li>InternalCacheDiskCacheFactory</li>
 </ul>
-<h3 id="&#x8D44;&#x6E90;&#x83B7;&#x53D6;"><a name="&#x8D44;&#x6E90;&#x83B7;&#x53D6;" class="anchor-navigation-ex-anchor" href="#&#x8D44;&#x6E90;&#x83B7;&#x53D6;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8D44;&#x6E90;&#x83B7;&#x53D6;</h3>
+<h3 id="资源获取"><a class="header" href="#资源获取">资源获取</a></h3>
 <ul>
 <li>RequestManagerRetriever</li>
 <li>RequestManager</li>
 <li>RequestBuilder</li>
-<li>Request  </li>
+<li>Request</li>
 <li>DefaultConnectivityMonitorFactory</li>
 </ul>
-<h3 id="&#x6838;&#x5FC3;&#x6D41;&#x7A0B;"><a name="&#x6838;&#x5FC3;&#x6D41;&#x7A0B;" class="anchor-navigation-ex-anchor" href="#&#x6838;&#x5FC3;&#x6D41;&#x7A0B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6838;&#x5FC3;&#x6D41;&#x7A0B;</h3>
+<h3 id="核心流程"><a class="header" href="#核心流程">核心流程</a></h3>
 <ul>
 <li>Engine</li>
 </ul>
-<p>&#x5176;&#x4ED6;&#x4FE1;&#x606F;&#x5C1A;&#x4E0D;&#x80FD;&#x786E;&#x5B9A;&#x3002;&#x4E3B;&#x8981;&#x6D41;&#x7A0B;&#x7684;&#x76F8;&#x5173;&#x4FE1;&#x606F;&#x5982;&#x4E0B;&#xFF1A;</p>
-<h4 id="&#x8D44;&#x6E90;model&#x52A0;&#x8F7D;&#x5668;_1"><a name="&#x8D44;&#x6E90;model&#x52A0;&#x8F7D;&#x5668;_1" class="anchor-navigation-ex-anchor" href="#&#x8D44;&#x6E90;model&#x52A0;&#x8F7D;&#x5668;_1"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8D44;&#x6E90;Model&#x52A0;&#x8F7D;&#x5668;</h4>
+<p>其他信息尚不能确定。主要流程的相关信息如下：</p>
+<h4 id="资源model加载器-1"><a class="header" href="#资源model加载器-1">资源Model加载器</a></h4>
 <ul>
 <li><code>ModelLoaderFactory</code></li>
-<li><code>ModelLoader</code> &#x7B49;</li>
+<li><code>ModelLoader</code> 等</li>
 </ul>
-<h4 id="&#x7F16;&#x7801;&#x5668;_1"><a name="&#x7F16;&#x7801;&#x5668;_1" class="anchor-navigation-ex-anchor" href="#&#x7F16;&#x7801;&#x5668;_1"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7F16;&#x7801;&#x5668;</h4>
+<h4 id="编码器-1"><a class="header" href="#编码器-1">编码器</a></h4>
 <ul>
-<li><code>Encoder</code> &#x63A5;&#x53E3;&#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
-<li><code>ResourceEncoder</code> &#x63A5;&#x53E3;&#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
-<li><code>Resource</code> &#x63A5;&#x53E3;&#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>Encoder</code> 接口及其实现类</li>
+<li><code>ResourceEncoder</code> 接口及其实现类</li>
+<li><code>Resource</code> 接口及其实现类</li>
 <li><code>EncodeStrategy</code></li>
 </ul>
-<h4 id="&#x89E3;&#x7801;&#x5668;_1"><a name="&#x89E3;&#x7801;&#x5668;_1" class="anchor-navigation-ex-anchor" href="#&#x89E3;&#x7801;&#x5668;_1"><i class="fa fa-link" aria-hidden="true"></i></a>&#x89E3;&#x7801;&#x5668;</h4>
+<h4 id="解码器-1"><a class="header" href="#解码器-1">解码器</a></h4>
 <ul>
-<li><code>ResourceDecoder</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
-<li><code>Resource</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>ResourceDecoder</code> 及其实现类</li>
+<li><code>Resource</code> 及其实现类</li>
 </ul>
-<h4 id="&#x8F6C;&#x6362;&#x5668;_1"><a name="&#x8F6C;&#x6362;&#x5668;_1" class="anchor-navigation-ex-anchor" href="#&#x8F6C;&#x6362;&#x5668;_1"><i class="fa fa-link" aria-hidden="true"></i></a>&#x8F6C;&#x6362;&#x5668;</h4>
+<h4 id="转换器-1"><a class="header" href="#转换器-1">转换器</a></h4>
 <ul>
-<li><code>ResourceTranscoder</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
-<li><code>Resource</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>ResourceTranscoder</code> 及其实现类</li>
+<li><code>Resource</code> 及其实现类</li>
 </ul>
-<h4 id="&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;_1"><a name="&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;_1" class="anchor-navigation-ex-anchor" href="#&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;_1"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5934;&#x4FE1;&#x606F;&#x89E3;&#x6790;&#x5668;</h4>
+<h4 id="头信息解析器-1"><a class="header" href="#头信息解析器-1">头信息解析器</a></h4>
 <ul>
-<li><code>ImageHeaderParser</code> &#x53CA;&#x5176;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li><code>ImageHeaderParser</code> 及其实现类</li>
 <li><code>ImageType</code></li>
 </ul>
-<h3 id="&#x7EBF;&#x7A0B;&#x6C60;"><a name="&#x7EBF;&#x7A0B;&#x6C60;" class="anchor-navigation-ex-anchor" href="#&#x7EBF;&#x7A0B;&#x6C60;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7EBF;&#x7A0B;&#x6C60;</h3>
+<h3 id="线程池"><a class="header" href="#线程池">线程池</a></h3>
 <ul>
 <li>GlideExecutor</li>
 </ul>
-<h3 id="glide&#x7684;&#x521B;&#x5EFA;&#x4E0E;&#x914D;&#x7F6E;"><a name="glide&#x7684;&#x521B;&#x5EFA;&#x4E0E;&#x914D;&#x7F6E;" class="anchor-navigation-ex-anchor" href="#glide&#x7684;&#x521B;&#x5EFA;&#x4E0E;&#x914D;&#x7F6E;"><i class="fa fa-link" aria-hidden="true"></i></a>Glide&#x7684;&#x521B;&#x5EFA;&#x4E0E;&#x914D;&#x7F6E;</h3>
-<p><code>GlideBuilder</code> &#x7528;&#x4E8E;&#x521B;&#x5EFA;&#xFF0C;<code>com.bumptech.glide.module</code> &#x5305;&#x4E0B;&#x7684;&#x5185;&#x5BB9;&#x7528;&#x4E8E;&#x81EA;&#x5B9A;&#x4E49;&#x6A21;&#x5757;&#xFF0C;&#x8BF8;&#x5982;&#xFF1A;</p>
+<h3 id="glide的创建与配置"><a class="header" href="#glide的创建与配置">Glide的创建与配置</a></h3>
+<p><code>GlideBuilder</code> 用于创建，<code>com.bumptech.glide.module</code> 包下的内容用于自定义模块，诸如：</p>
 <ul>
 <li><code>AppGlideModule</code></li>
 <li><code>LibraryGlideModule</code></li>
 </ul>
-<p>&#x4EE5;&#x53CA;&#x4E00;&#x4E9B;&#x5DF2;&#x5E9F;&#x5F03;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;</p>
-<h2 id="&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;"><a name="&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;" class="anchor-navigation-ex-anchor" href="#&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x601D;&#x5371;&#x3001;&#x601D;&#x9000;&#x3001;&#x601D;&#x53D8;</h2>
-<p><em>&#x53EF;&#x80FD;&#x6709;&#x8BFB;&#x8005;&#x4E60;&#x60EF;&#x6027;&#x5730;&#x62C9;&#x5230;&#x5C3E;&#x90E8;&#xFF0C;&#x524D;&#x9762;&#x63D0;&#x5230;&#xFF0C;&#x7ED3;&#x5C3E;&#x5904;&#x7684;&#x5927;&#x7BC7;&#x5E45;&#x5185;&#x5BB9;&#x90FD;&#x662F; <code>&#x5907;&#x5FD8;&#x5F55;</code> &#x6027;&#x8D28;,&#x800C;&#x4E14;&#x4E4B;&#x540E;&#x7684;&#x7CFB;&#x5217;&#x6587;&#x7AE0;&#x4F1A;&#x5728;&#x8FD9;&#x4E9B;&#x5185;&#x5BB9;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x5C55;&#x5F00;&#xFF0C;&#x53EF;&#x8BFB;&#x53EF;&#x4E0D;&#x8BFB;</em></p>
-<p>&#x4F46;&#x65E2;&#x7136;&#x62C9;&#x5230;&#x4E86;&#x8FD9;&#x91CC;&#xFF0C;&#x5C31;&#x601D;&#x8003;&#x4E00;&#x4E0B;&#x5427;&#xFF0C;&#x9605;&#x8BFB;&#x4F18;&#x79C0;&#x7684;&#x6846;&#x67B6;&#xFF0C;&#x4E0D;&#x4EC5;&#x4EC5;&#x53EF;&#x4EE5;&#x6DF1;&#x5165;&#x4E86;&#x89E3;&#x6846;&#x67B6;&#x5185;&#x5BB9;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x953B;&#x70BC;&#x8BBE;&#x8BA1;&#x80FD;&#x529B;&#xFF1A;</p>
+<p>以及一些已废弃的内容，不再赘述</p>
+<h2 id="思危思退思变"><a class="header" href="#思危思退思变">思危、思退、思变</a></h2>
+<p><em>可能有读者习惯性地拉到尾部，前面提到，结尾处的大篇幅内容都是 <code>备忘录</code> 性质,而且之后的系列文章会在这些内容的基础上展开，可读可不读</em></p>
+<p>但既然拉到了这里，就思考一下吧，阅读优秀的框架，不仅仅可以深入了解框架内容，也可以锻炼设计能力：</p>
 <ul>
-<li>&#x601D;&#x5371;&#xFF1A;&#x4F7F;&#x7528;GlideBuilder&#x6784;&#x5EFA;Glide&#x5B9E;&#x4F8B;&#x662F;&#x5426;&#x6709;&#x6CA1;&#x6709;&#x6CE8;&#x610F;&#x5230;&#x7684;&#x5371;&#x9669;&#xFF1F;</li>
-<li>&#x601D;&#x5371;&#xFF1A;&#x9879;&#x76EE;&#x4E2D;&#x518D;&#x6B21;&#x5BF9;Glide&#x5B9E;&#x73B0;&#x5355;&#x4F8B;&#x662F;&#x5426;&#x5B58;&#x5728;&#x5371;&#x9669;&#xFF1F;</li>
-<li>&#x601D;&#x53D8;&#xFF1A;&#x9879;&#x76EE;&#x4E2D;&#x662F;&#x5426;&#x5B58;&#x5728;&#x53EF;&#x4EE5;&#x501F;&#x9274;Glide&#x7684;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#x7684;&#x5730;&#x65B9;&#xFF1F; </li>
+<li>思危：使用GlideBuilder构建Glide实例是否有没有注意到的危险？</li>
+<li>思危：项目中再次对Glide实现单例是否存在危险？</li>
+<li>思变：项目中是否存在可以借鉴Glide的设计思路的地方？</li>
 </ul>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2022-04-07 22:13:30
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../Android/Glide/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../Android/Glide/post_16.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Glide">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="post_16.html" class="navigation navigation-next " aria-label="Next page: 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../Android/Glide/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../Android/Glide/post_16.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"三思系列：Glide 4.X全方位认知 -- 模块职责概览","level":"1.2.5.1","depth":3,"next":{"title":"三思系列：Glide 4.X加载过程一文掌握 | Glide（二）","level":"1.2.5.2","depth":3,"path":"Android/Glide/post_16.md","ref":"./Android/Glide/post_16.md","articles":[]},"previous":{"title":"Glide","level":"1.2.5","depth":2,"path":"Android/Glide/README.md","ref":"./Android/Glide/README.md","articles":[{"title":"三思系列：Glide 4.X全方位认知 -- 模块职责概览","level":"1.2.5.1","depth":3,"path":"Android/Glide/post_15.md","ref":"./Android/Glide/post_15.md","articles":[]},{"title":"三思系列：Glide 4.X加载过程一文掌握 | Glide（二）","level":"1.2.5.2","depth":3,"path":"Android/Glide/post_16.md","ref":"./Android/Glide/post_16.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Android/Glide/post_15.md","mtime":"2022-04-07T14:13:30.126Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"../..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../../gitbook/gitbook.js"></script>
-    <script src="../../gitbook/theme.js"></script>
-    
-        
-        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-

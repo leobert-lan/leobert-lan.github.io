@@ -1,1671 +1,396 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>好玩系列：让ImageSpan动起来 · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>好玩系列：让ImageSpan动起来 - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="../Mechanism/Message/" />
-    
-    
-    <link rel="prev" href="post_47.html" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../../">
-            
-                <a href="../../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../View/">
-            
-                <a href="../View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../View/post_1.html">
-            
-                <a href="../View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../View/post_6.html">
-            
-                <a href="../View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../View/post_7.html">
-            
-                <a href="../View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="../Idea/post_9.html">
-            
-                <a href="../Idea/post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="post_2.html">
-            
-                <a href="post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="post_4.html">
-            
-                <a href="post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="post_47.html">
-            
-                <a href="post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.2.2.4" data-path="post_49.html">
-            
-                <a href="post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../Mechanism/Message/">
-            
-                <a href="../Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../Mechanism/Message/post_8.html">
-            
-                <a href="../Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../Idea/post_14/">
-            
-                <a href="../Idea/post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.4.1" data-path="../Idea/post_14.html">
-            
-                <a href="../Idea/post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="../Glide/">
-            
-                <a href="../Glide/">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.5.1" data-path="../Glide/post_15.html">
-            
-                <a href="../Glide/post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5.2" data-path="../Glide/post_16.html">
-            
-                <a href="../Glide/post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../KSP/">
-            
-                <a href="../KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../KSP/post_24.html">
-            
-                <a href="../KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../Base/">
-            
-                <a href="../Base/">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.7.1" data-path="../Base/post_35.html">
-            
-                <a href="../Base/post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../SysApp/">
-            
-                <a href="../SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../SysApp/post_52.html">
-            
-                <a href="../SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../DI/">
-            
-                <a href="../DI/">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.9.1" data-path="../DI/post_53.html">
-            
-                <a href="../DI/post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../../Compose/">
-            
-                <a href="../../Compose/">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="../../Compose/post_21.html">
-            
-                <a href="../../Compose/post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../../Compose/post_26.html">
-            
-                <a href="../../Compose/post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="../../Compose/post_27.html">
-            
-                <a href="../../Compose/post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="../../Compose/post_28.html">
-            
-                <a href="../../Compose/post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="../../Compose/post_29.html">
-            
-                <a href="../../Compose/post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="../../Compose/post_30.html">
-            
-                <a href="../../Compose/post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../../MultiThreading/">
-            
-                <a href="../../MultiThreading/">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../../MultiThreading/post_33.html">
-            
-                <a href="../../MultiThreading/post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../../MultiThreading/post_37.html">
-            
-                <a href="../../MultiThreading/post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="../../MultiThreading/post_38.html">
-            
-                <a href="../../MultiThreading/post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="../../MultiThreading/post_39.html">
-            
-                <a href="../../MultiThreading/post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="../../MultiThreading/post_42.html">
-            
-                <a href="../../MultiThreading/post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.6" data-path="../../MultiThreading/post_46.html">
-            
-                <a href="../../MultiThreading/post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="../../MultiThreading/post_50.html">
-            
-                <a href="../../MultiThreading/post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="../../MultiThreading/post_54.html">
-            
-                <a href="../../MultiThreading/post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="../../IO/">
-            
-                <a href="../../IO/">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="../../IO/post_55.html">
-            
-                <a href="../../IO/post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="../../IO/post_56.html">
-            
-                <a href="../../IO/post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="../../IO/post_57.html">
-            
-                <a href="../../IO/post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="../../IO/post_58.html">
-            
-                <a href="../../IO/post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="../../IO/post_59.html">
-            
-                <a href="../../IO/post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../../Gradle/">
-            
-                <a href="../../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../../Gradle/Modularization/post_18.html">
-            
-                <a href="../../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../../Gradle/Publish/post_17.html">
-            
-                <a href="../../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../../Gradle/post_22.html">
-            
-                <a href="../../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../../Groovy/">
-            
-                <a href="../../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../../Groovy/why_write_groovy.html">
-            
-                <a href="../../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../../Groovy/post_23.html">
-            
-                <a href="../../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="../../Review/">
-            
-                <a href="../../Review/">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="../../Review/post_10.html">
-            
-                <a href="../../Review/post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="../../Review/post_40.html">
-            
-                <a href="../../Review/post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.3" data-path="../../Review/post_44.html">
-            
-                <a href="../../Review/post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="../../Review/post_45.html">
-            
-                <a href="../../Review/post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../../repo/">
-            
-                <a href="../../repo/">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../../repo/DaVinCi.html">
-            
-                <a href="../../repo/DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../Idea/post_32.html">
-            
-                <a href="../Idea/post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../../Speculative/post_43.html">
-            
-                <a href="../../Speculative/post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../../repo/post_48.html">
-            
-                <a href="../../repo/post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../../Speculative/post_61.html">
-            
-                <a href="../../Speculative/post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="../../Review/DataStructure/">
-            
-                <a href="../../Review/DataStructure/">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.1.1" data-path="../../Review/DataStructure/post_11.html">
-            
-                <a href="../../Review/DataStructure/post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="../../Review/DataStructure/post_12.html">
-            
-                <a href="../../Review/DataStructure/post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="../../Review/DataStructure/post_13.html">
-            
-                <a href="../../Review/DataStructure/post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="../../Review/README2.html">
-            
-                <a href="../../Review/README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="../../Review/post_36.html">
-            
-                <a href="../../Review/post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="../../Review/post_51.html">
-            
-                <a href="../../Review/post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="../../Review/post_60.html">
-            
-                <a href="../../Review/post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="../../Review/post_63.html">
-            
-                <a href="../../Review/post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="../../Review/post_64.html">
-            
-                <a href="../../Review/post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../../Note/">
-            
-                <a href="../../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../../Note/post_41.html">
-            
-                <a href="../../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../../Talk/">
-            
-                <a href="../../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../../Talk/talk_1.html">
-            
-                <a href="../../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../../Talk/talk_2_2023-03.html">
-            
-                <a href="../../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../../Thought/">
-            
-                <a href="../../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../../Thought/post_62.html">
-            
-                <a href="../../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../../info/">
-            
-                <a href="../../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../../info/about_view_series.html">
-            
-                <a href="../../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../../info/about_sansi_series.html">
-            
-                <a href="../../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../../info/about_haowan_series.html">
-            
-                <a href="../../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../../info/about_wengu_series.html">
-            
-                <a href="../../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >好玩系列：让ImageSpan动起来</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;imagespan&#x52A8;&#x8D77;&#x6765;"><b></b>&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;ImageSpan&#x52A8;&#x8D77;&#x6765;</a></li><ul><li><span class="title-icon "></span><a href="#&#x524D;&#x8A00;"><b></b>&#x524D;&#x8A00;</a></li><li><span class="title-icon "></span><a href="#&#x662F;&#x5426;&#x7528;&#x5F97;&#x4E0A;"><b></b>&#x662F;&#x5426;&#x7528;&#x5F97;&#x4E0A;</a></li><li><span class="title-icon "></span><a href="#&#x5236;&#x9020;&#x4E00;&#x4E2A;&#x7FFB;&#x8F66;&#x73B0;&#x573A;"><b></b>&#x5236;&#x9020;&#x4E00;&#x4E2A;&#x7FFB;&#x8F66;&#x73B0;&#x573A;</a></li><li><span class="title-icon "></span><a href="#&#x6E29;&#x6545;&#x800C;&#x77E5;&#x65B0;----&#x539F;&#x56E0;&#x5206;&#x6790;"><b></b>&#x6E29;&#x6545;&#x800C;&#x77E5;&#x65B0; -- &#x539F;&#x56E0;&#x5206;&#x6790;</a></li><li><span class="title-icon "></span><a href="#&#x76F4;&#x9762;&#x95EE;&#x9898;----&#x4EE5;&#x6700;&#x7B80;&#x5355;&#x7684;&#x4EE3;&#x7801;&#x8BA9;imagespan&#x52A8;&#x8D77;&#x6765;"><b></b>&#x76F4;&#x9762;&#x95EE;&#x9898; -- &#x4EE5;&#x6700;&#x7B80;&#x5355;&#x7684;&#x4EE3;&#x7801;&#x8BA9;ImageSpan&#x52A8;&#x8D77;&#x6765;</a></li><ul><li><span class="title-icon "></span><a href="#&#x7FFB;&#x8F66;&#x539F;&#x56E0;"><b></b>&#x7FFB;&#x8F66;&#x539F;&#x56E0;</a></li><li><span class="title-icon "></span><a href="#&#x6697;&#x5EA6;&#x9648;&#x4ED3;&#xFF0C;&#x7ED5;&#x8FC7;&#x6821;&#x9A8C;"><b></b>&#x6697;&#x5EA6;&#x9648;&#x4ED3;&#xFF0C;&#x7ED5;&#x8FC7;&#x6821;&#x9A8C;</a></li></ul><li><span class="title-icon "></span><a href="#&#x4F18;&#x96C5;&#xFF0C;&#x6C38;&#x6052;&#x7684;&#x8FFD;&#x6C42;"><b></b>&#x4F18;&#x96C5;&#xFF0C;&#x6C38;&#x6052;&#x7684;&#x8FFD;&#x6C42;</a></li><ul><li><span class="title-icon "></span><a href="#&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x4F1A;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;"><b></b>&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x4F1A;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;</a></li><li><span class="title-icon "></span><a href="#1&#x89E3;&#x51B3;callback&#x5BF9;&#x590D;&#x7528;&#x7684;&#x9650;&#x5236;"><b></b>1.&#x89E3;&#x51B3;Callback&#x5BF9;&#x590D;&#x7528;&#x7684;&#x9650;&#x5236;</a></li><li><span class="title-icon "></span><a href="#2&#x674E;&#x4EE3;&#x6843;&#x50F5;&#xFF0C;&#x5229;&#x7528;&#x4EE3;&#x7406;"><b></b>2.&#x674E;&#x4EE3;&#x6843;&#x50F5;&#xFF0C;&#x5229;&#x7528;&#x4EE3;&#x7406;</a></li><li><span class="title-icon "></span><a href="#&#x7EE7;&#x7EED;&#x4F7F;&#x7528;spanwatcher&#x89E3;&#x653E;&#x53CC;&#x624B;"><b></b>&#x7EE7;&#x7EED;&#x4F7F;&#x7528;SpanWatcher&#x89E3;&#x653E;&#x53CC;&#x624B;</a></li><li><span class="title-icon "></span><a href="#&#x4F7F;&#x7528;-spannablefactory-&#x68A6;&#x5E7B;&#x8054;&#x52A8;"><b></b>&#x4F7F;&#x7528; Spannable.Factory &#x68A6;&#x5E7B;&#x8054;&#x52A8;</a></li><li><span class="title-icon "></span><a href="#&#x6572;&#x54CD;&#x8B66;&#x949F;"><b></b>&#x6572;&#x54CD;&#x8B66;&#x949F;</a></li></ul><li><span class="title-icon "></span><a href="#&#x6301;&#x7EED;&#x601D;&#x8003;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x7ED3;&#x8BED;"><b></b>&#x6301;&#x7EED;&#x601D;&#x8003;&amp;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x7ED3;&#x8BED;</a></li></ul></ul></div><a href="#&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;imagespan&#x52A8;&#x8D77;&#x6765;" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;imagespan&#x52A8;&#x8D77;&#x6765;"><a name="&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;imagespan&#x52A8;&#x8D77;&#x6765;" class="anchor-navigation-ex-anchor" href="#&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;imagespan&#x52A8;&#x8D77;&#x6765;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x597D;&#x73A9;&#x7CFB;&#x5217;&#xFF1A;&#x8BA9;ImageSpan&#x52A8;&#x8D77;&#x6765;</h1>
-<h2 id="&#x524D;&#x8A00;"><a name="&#x524D;&#x8A00;" class="anchor-navigation-ex-anchor" href="#&#x524D;&#x8A00;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x524D;&#x8A00;</h2>
-<p>&#x524D;&#x4E0D;&#x4E45;&#xFF0C;&#x6211;&#x5199;&#x8FC7;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#xFF1A;<a href="https://juejin.cn/post/7155690991721119781" target="_blank">&#x8FDF;&#x6765;&#x7684;&#x7EED;&#x96C6;--Drawable+Animator&#xFF0C;&#x5C06;&#x4F18;&#x96C5;&#x8FDB;&#x884C;&#x5230;&#x5E95;</a> , &#x5E76;&#x5728;&#x5176;&#x4E2D;&#x7559;&#x4E0B;&#x4E00;&#x4E2A;&#x601D;&#x8003;&#x9898;&#xFF1A;&quot;
-&#x7528; &#x52A8;&#x753B;Drawable &#x662F;&#x5426;&#x53EF;&#x4EE5;&#x8BA9; ImageSpan &#x76F4;&#x63A5;&#x52A8;&#x8D77;&#x6765;&quot;</p>
-<p>&#x76F8;&#x4FE1;&#x5927;&#x5BB6;&#x4E5F;&#x8FDB;&#x884C;&#x4E86;&#x5C1D;&#x8BD5;&#xFF0C;&#x5E76;&#x4E14;&#x4E0D;&#x51FA;&#x610F;&#x5916;&#x5730;&#x51FA;&#x73B0;&#x4E86;&#x610F;&#x5916;&#xFF01;&#x5373;&#x4FBF;&#x4F7F;&#x7528;&#x53EF;&#x4EE5;&#x52A8;&#x8D77;&#x6765;&#x7684;Drawable&#x6784;&#x5EFA;ImageSpan&#xFF0C;&#x4E5F;&#x6CA1;&#x6709;&#x8BA9;&#x4ED6;&#x52A8;&#x8D77;&#x6765;&#xFF01;</p>
-<p><img width="220" alt="&#x95EE;&#x9898;&#x4E0D;&#x5927;" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8310c4177171446a92661e4e576df8ae~tplv-k3u1fbpfcp-watermark.image?"></p>
-<p>&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C06;&#x5728;&#x4E00;&#x4E2A;&#x6109;&#x5FEB;&#x7684;&#x6C1B;&#x56F4;&#x4E0B;&#xFF0C;&#x8BA9;ImageSpan&#x52A8;&#x8D77;&#x6765;&#xFF0C;&#x5E76;&#x8FDB;&#x884C;&#x4E00;&#x4E9B;&#x66F4;&#x6DF1;&#x5C42;&#x6B21;&#x7684;&#x63A2;&#x7D22;&#xFF0C;&#x4E0D;&#x51FA;&#x610F;&#x5916;&#xFF0C;&#x8FD9;&#x5C06;&#x662F;Drawable&#x76F8;&#x5173;&#x6587;&#x7AE0;&#x7684;&#x7EC8;&#x7ED3;&#x7BC7;&#x3002;</p>
-<p>&#x53E6;&#x5916;&#xFF0C;&#x6709;&#x51E0;&#x7BC7;&#x76F8;&#x5173;&#x6587;&#x7AE0;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x6269;&#x5C55;&#x9605;&#x8BFB;&#xFF1A;</p>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_49.html" class="active"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="好玩系列让imagespan动起来"><a class="header" href="#好玩系列让imagespan动起来">好玩系列：让ImageSpan动起来</a></h1>
+<h2 id="前言"><a class="header" href="#前言">前言</a></h2>
+<p>前不久，我写过一篇文章：<a href="https://juejin.cn/post/7155690991721119781">迟来的续集--Drawable+Animator，将优雅进行到底</a> , 并在其中留下一个思考题："
+用 动画Drawable 是否可以让 ImageSpan 直接动起来"</p>
+<p>相信大家也进行了尝试，并且不出意外地出现了意外！即便使用可以动起来的Drawable构建ImageSpan，也没有让他动起来！</p>
+<img width="220" alt="问题不大" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8310c4177171446a92661e4e576df8ae~tplv-k3u1fbpfcp-watermark.image?"/>
+<p>今天我们将在一个愉快的氛围下，让ImageSpan动起来，并进行一些更深层次的探索，不出意外，这将是Drawable相关文章的终结篇。</p>
+<p>另外，有几篇相关文章可以作为扩展阅读：</p>
 <ul>
-<li><a href="https://juejin.cn/post/6924240361317466125" target="_blank">&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;&#x91CD;&#x65B0;&#x8BA4;&#x8BC6;Drawable</a></li>
-<li><a href="https://juejin.cn/post/6934222774139518984" target="_blank">&#x4E09;&#x601D;&#x7CFB;&#x5217;&#xFF1A;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x81EA;&#x5B9A;&#x4E49;View </a></li>
+<li><a href="https://juejin.cn/post/6924240361317466125">三思系列：重新认识Drawable</a></li>
+<li><a href="https://juejin.cn/post/6934222774139518984">三思系列：为什么要自定义View </a></li>
 </ul>
-<h2 id="&#x662F;&#x5426;&#x7528;&#x5F97;&#x4E0A;"><a name="&#x662F;&#x5426;&#x7528;&#x5F97;&#x4E0A;" class="anchor-navigation-ex-anchor" href="#&#x662F;&#x5426;&#x7528;&#x5F97;&#x4E0A;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x662F;&#x5426;&#x7528;&#x5F97;&#x4E0A;</h2>
+<h2 id="是否用得上"><a class="header" href="#是否用得上">是否用得上</a></h2>
 <blockquote>
-<p>&quot;&#x5B66;&#x800C;&#x65F6;&#x4E60;&#x4E4B;&#xFF0C;&#x4E0D;&#x4EA6;&#x8BF4;&#x4E4E;&quot; -- &#x300A;&#x8BBA;&#x8BED;-&#x5B66;&#x800C;&#x300B;</p>
+<p>"学而时习之，不亦说乎" -- 《论语-学而》</p>
 </blockquote>
-<p>Span&#x662F;Android&#x4E2D;&#x5B9E;&#x73B0;&#x5BCC;&#x6587;&#x672C;&#x7684;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x8BF7;&#x6CE8;&#x610F;&#xFF0C;<strong>&#x662F;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x800C;&#x4E0D;&#x662F;&#x552F;&#x4E00;&#x65B9;&#x5F0F;&#xFF01;</strong> 
-&#x9664;&#x5374;Span&#x673A;&#x5236;&#xFF0C;&#x4F9D;&#x65E7;&#x6709;&#x5176;&#x4ED6;&#x5F62;&#x5F0F;&#x5C55;&#x73B0;&#x5BCC;&#x6587;&#x672C;&#x3002;</p>
-<p>&#x4F46;&#x4E0D;&#x53EF;&#x5426;&#x8BA4;&#xFF1A;Span&#x662F;&#x975E;&#x5E38;&#x8F7B;&#x91CF;&#x7684;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x867D;&#x7136;&#x8FD9;&#x79CD; <code>&#x8131;&#x79BB;&#x5C55;&#x793A;&#x5BB9;&#x5668;&#x7684;&#x8F7B;&#x91CF;</code> &#x4F7F;&#x5F97;&#x5B83;&#x7684;&#x8BBE;&#x8BA1;&#x5E76;&#x4E0D;&#x7B80;&#x5355;&#xFF0C;
-&#x5BFC;&#x81F4;&#x4E86;&#x7B80;&#x5355;&#x4F7F;&#x7528;&#x5B83;&#x65F6;&#x5F88;&#x65B9;&#x4FBF;&#xFF0C;&#x91CD;&#x5EA6;&#x4F7F;&#x7528;&#x5B83;&#x65F6; <strong>&#x96BE;&#x4EE5;&#x5982;&#x6307;&#x81C2;&#x4F7F;</strong> &#xFF0C;&#x5E76;&#x4F1A;&#x906D;&#x9047;&#x6027;&#x80FD;&#x74F6;&#x9888;&#x3002;</p>
+<p>Span是Android中实现富文本的一种方式，读者诸君请注意，<strong>是一种方式而不是唯一方式！</strong>
+除却Span机制，依旧有其他形式展现富文本。</p>
+<p>但不可否认：Span是非常轻量的一种方式，虽然这种 <code>脱离展示容器的轻量</code> 使得它的设计并不简单，
+导致了简单使用它时很方便，重度使用它时 <strong>难以如指臂使</strong> ，并会遭遇性能瓶颈。</p>
 <blockquote>
-<p>&#x4EE5;Juejin&#x4E3A;&#x4F8B;&#xFF0C;&#x53EA;&#x8981;&#x6211;&#x6301;&#x7EED;&#x521B;&#x4F5C;&#x8BFB;&#x8005;&#x611F;&#x5174;&#x8DA3;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x6211;&#x76F8;&#x4FE1;&#x7EC8;&#x6709;&#x4E00;&#x5929;&#x4F1A;&#x89E3;&#x9501;Lv10&#x7EA7;&#x4F5C;&#x8005;&#xFF0C;&#x90A3;&#x4E48;&#xFF1A;</p>
-<p>&quot;&#x5728;APP&#x4E0A;&#x7ED9;&#x6211;&#x9881;&#x53D1;&#x4E00;&#x4E2A;&#x4F1A;&#x95EA;&#x70C1;&#x7684;&#x5FBD;&#x7AE0;&#xFF0C;&#x5E76;&#x8FFD;&#x52A0;&#x5728;&#x6635;&#x79F0;&#x540E;&#xFF0C;&#x4EE5;&#x663E;&#x793A;&#x8EAB;&#x4EFD;&quot;&#xFF0C;&#x5305;&#x62EC;&#x4E0D;&#x9650;&#x4E8E;&#xFF1A;&#x6211;&#x7684;&#x4E3B;&#x9875;&#x3001;&#x6587;&#x7AE0;&#x4F5C;&#x8005;&#x680F;&#x3001;&#x8BC4;&#x8BBA;&#x533A;&#x3001;&#x6587;&#x7AE0;&#x4E2D; @&#x6211; &#x7684;&#x5730;&#x65B9;</p>
-<p>&#x8FD9;&#x4E2A;&#x529F;&#x80FD;&#x4F3C;&#x4E4E;&#x5F88;&#x5408;&#x60C5;&#x5408;&#x7406;&#x1F606;&#x3002;</p>
+<p>以Juejin为例，只要我持续创作读者感兴趣的内容，我相信终有一天会解锁Lv10级作者，那么：</p>
+<p>"在APP上给我颁发一个会闪烁的徽章，并追加在昵称后，以显示身份"，包括不限于：我的主页、文章作者栏、评论区、文章中 @我 的地方</p>
+<p>这个功能似乎很合情合理😆。</p>
 </blockquote>
-<p>&#x7528;ImageSpan&#x65B9;&#x6848;&#x5B9E;&#x73B0;&#x8FD9;&#x4E00;&#x9700;&#x6C42;&#x4E5F;&#x5F88;&#x5408;&#x7406;&#xFF0C;&#x5E76;&#x4E14;&#x8FD9;&#x4E00;&#x89E3;&#x6790;&#x3001;&#x5C55;&#x793A;&#x65B9;&#x6848;&#x53EF;&#x4EE5;&#x591A;&#x5904;&#x590D;&#x7528;&#xFF0C;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x56DB;&#x5904;&#x7CBE;&#x5FC3;&#x7EF4;&#x62A4;&#x5E03;&#x5C40;&#x3002;<em>&#x867D;&#x7136;juejin&#x5E76;&#x672A;&#x8FD9;&#x6837;&#x505A;&#x1F602;</em></p>
-<p><em>&#x7B80;&#x5355;&#x76D8;&#x7B97;&#x540E;&#xFF0C;&#x4ECA;&#x5929;&#x7684;&#x77E5;&#x8BC6;&#x4E00;&#x5B9A;&#x6709;&#x4F7F;&#x7528;&#x7684;&#x524D;&#x666F;&#xFF0C;&#x7A33;&#x8D5A;&#x4E0D;&#x4E8F;&#xFF01;</em></p>
-<h2 id="&#x5236;&#x9020;&#x4E00;&#x4E2A;&#x7FFB;&#x8F66;&#x73B0;&#x573A;"><a name="&#x5236;&#x9020;&#x4E00;&#x4E2A;&#x7FFB;&#x8F66;&#x73B0;&#x573A;" class="anchor-navigation-ex-anchor" href="#&#x5236;&#x9020;&#x4E00;&#x4E2A;&#x7FFB;&#x8F66;&#x73B0;&#x573A;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5236;&#x9020;&#x4E00;&#x4E2A;&#x7FFB;&#x8F66;&#x73B0;&#x573A;</h2>
-<p>&#x8FD8;&#x662F;&#x501F;&#x52A9;&#x5148;&#x524D;&#x7684;&#x9879;&#x76EE;&#xFF1A;<a href="https://github.com/leobert-lan/DrawableWorkShop" target="_blank">DrawableWorkShop</a> &#xFF0C;&#x5148;&#x5236;&#x4F5C;&#x4E00;&#x4E2A;&#x7FFB;&#x8F66;&#x73B0;&#x573A;&#x3002;</p>
-<p>&#x5728;&#x4E0A;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E86;&#x52A8;&#x753B;Drawable&#xFF0C;&#x6B63;&#x597D;&#x5229;&#x7528;&#x5B83;&#x751F;&#x6210;ImageSpan&#x3002;&#x6211;&#x4EEC;&#x518D;&#x589E;&#x52A0;DrawableStart &#x7528;&#x4F5C;&#x5BF9;&#x6BD4;&#x3002;</p>
-<p>&#x5173;&#x952E;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> tvSpan</span> = findViewById<span class="hljs-type">&lt;TextView&gt;</span>(R.id.tv_span)
+<p>用ImageSpan方案实现这一需求也很合理，并且这一解析、展示方案可以多处复用，并不需要四处精心维护布局。<em>虽然juejin并未这样做😂</em></p>
+<p><em>简单盘算后，今天的知识一定有使用的前景，稳赚不亏！</em></p>
+<h2 id="制造一个翻车现场"><a class="header" href="#制造一个翻车现场">制造一个翻车现场</a></h2>
+<p>还是借助先前的项目：<a href="https://github.com/leobert-lan/DrawableWorkShop">DrawableWorkShop</a> ，先制作一个翻车现场。</p>
+<p>在上一篇文章中，我们已经完成了动画Drawable，正好利用它生成ImageSpan。我们再增加DrawableStart 用作对比。</p>
+<p>关键代码如下：</p>
+<pre><code class="language-kotlin">val tvSpan = findViewById&lt;TextView&gt;(R.id.tv_span)
 
-<span class="hljs-variable"><span class="hljs-keyword">val</span> drawable</span> = createADrawable()
-<span class="hljs-variable"><span class="hljs-keyword">val</span> imgSpan</span> = ImageSpan(drawable)
+val drawable = createADrawable()
+val imgSpan = ImageSpan(drawable)
 
-<span class="hljs-variable"><span class="hljs-keyword">val</span> ss</span> = SpannableString(<span class="hljs-string">&quot;ImageSpan *&quot;</span>)
-ss.setSpan(imgSpan, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+val ss = SpannableString("ImageSpan *")
+ss.setSpan(imgSpan, 10, 11, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 tvSpan.text = ss
 
-<span class="hljs-variable"><span class="hljs-keyword">val</span> drawableStart</span> = createADrawable()
-tvSpan.setCompoundDrawables(drawableStart, <span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>)
+val drawableStart = createADrawable()
+tvSpan.setCompoundDrawables(drawableStart, null, null, null)
 
 tvSpan.setOnClickListener {
     drawable.start()
     drawableStart.start()
 }
 
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">createADrawable</span><span class="hljs-params">()</span>: AnimLetterDrawable2 {</span>
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> drawable</span> = AnimLetterDrawable2()
-    drawable.textSize = <span class="hljs-number">20</span>f
-    drawable.letters = <span class="hljs-string">&quot;span&quot;</span>
-    drawable.setBounds(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">100</span>, <span class="hljs-number">100</span>)
-    <span class="hljs-keyword">return</span> drawable
+fun createADrawable(): AnimLetterDrawable2 {
+    val drawable = AnimLetterDrawable2()
+    drawable.textSize = 20f
+    drawable.letters = "span"
+    drawable.setBounds(0, 0, 100, 100)
+    return drawable
 }
 </code></pre>
-<p>&#x70B9;&#x51FB;TextView&#x5F00;&#x542F;&#x52A8;&#x753B;&#xFF0C;&#x597D;&#xFF0C;&#x679C;&#x7136;&#x7FFB;&#x8F66;&#x4E86;&#xFF01;ImageSpan&#x5E76;&#x672A;&#x52A8;&#x8D77;&#x6765;&#xFF0C;&#x800C;DrawableStart&#x52A8;&#x8D77;&#x6765;&#x4E86;&#x3002;</p>
-<h2 id="&#x6E29;&#x6545;&#x800C;&#x77E5;&#x65B0;----&#x539F;&#x56E0;&#x5206;&#x6790;"><a name="&#x6E29;&#x6545;&#x800C;&#x77E5;&#x65B0;----&#x539F;&#x56E0;&#x5206;&#x6790;" class="anchor-navigation-ex-anchor" href="#&#x6E29;&#x6545;&#x800C;&#x77E5;&#x65B0;----&#x539F;&#x56E0;&#x5206;&#x6790;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6E29;&#x6545;&#x800C;&#x77E5;&#x65B0; -- &#x539F;&#x56E0;&#x5206;&#x6790;</h2>
-<p>&#x5728;&#x524D;&#x4E24;&#x7BC7;&#x76F8;&#x5173;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x7AA5;&#x63A2;&#x5230;&#x52A8;&#x753B;&#x7684;&#x539F;&#x7406;&#xFF1A;</p>
+<p>点击TextView开启动画，好，果然翻车了！ImageSpan并未动起来，而DrawableStart动起来了。</p>
+<h2 id="温故而知新----原因分析"><a class="header" href="#温故而知新----原因分析">温故而知新 -- 原因分析</a></h2>
+<p>在前两篇相关文章中，我们已经窥探到动画的原理：</p>
 <blockquote>
-<p>&#x6309;&#x7167;&#x7279;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x7ED8;&#x5236;&#x5BF9;&#x5E94;&#x5E27;&#xFF0C;&#x5229;&#x7528;&#x89C6;&#x89C9;&#x6682;&#x7559;&#x5F62;&#x6210;&#x52A8;&#x753B;&#x6548;&#x679C;</p>
+<p>按照特定的时间序列绘制对应帧，利用视觉暂留形成动画效果</p>
 </blockquote>
-<p>&#x65E0;&#x8BBA;&#x662F;&#x63A7;&#x4EF6;&#x7684;&#x5C5E;&#x6027;&#x52A8;&#x753B;&#x3001;&#x8FD8;&#x662F;Drawable&#x52A8;&#x753B;&#xFF0C;&#x5176;&#x672C;&#x8D28;&#x5747;&#x4E3A;&#x6B64;&#x3002;&#x5728;&#x524D;&#x4E24;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5206;&#x522B;&#x7528;&#x4E86;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x9A71;&#x52A8;Drawable&#x5F62;&#x6210;&#x52A8;&#x753B;&#x6548;&#x679C;&#xFF0C;&#x7A0D;&#x4F5C;&#x590D;&#x4E60;&#xFF1A;</p>
+<p>无论是控件的属性动画、还是Drawable动画，其本质均为此。在前两篇文章中，我们分别用了两种方式驱动Drawable形成动画效果，稍作复习：</p>
 <ul>
-<li>&#x57FA;&#x4E8E; <code>Drawable#scheduleSelf</code> API&#xFF0C;&#x5411;&#x5BBF;&#x4E3B;View <code>Post</code> &#x4E00;&#x4E2A;&#x5EF6;&#x8FDF;&#x6267;&#x884C;&#x7684; <code>Runnable</code> &#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x4E3A;&#x91CD;&#x65B0;&#x7ED8;&#x5236;&#x3002;&#x5728;Handler&#x6D88;&#x606F;&#x673A;&#x5236;&#x7684;&#x9A71;&#x52A8;&#x4E0B;, <code>Choreographer</code> &#x5B9E;&#x73B0;&#x4E86;&#x52A8;&#x753B;&#x57FA;&#x672C;&#x539F;&#x7406;</li>
-<li>&#x57FA;&#x4E8E; <code>ValueAnimator</code>&#xFF0C;&#x6309;&#x7167;&#x65F6;&#x5E8F;&#x6267;&#x884C;&#x56DE;&#x8C03;&#xFF0C;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x4E3A;&#x91CD;&#x65B0;&#x7ED8;&#x5236;&#x3002;&#x4F9D;&#x65E7;&#x662F;&#x501F;&#x52A9;Handler&#x6D88;&#x606F;&#x673A;&#x5236;&#x7684;&#x9A71;&#x52A8;, <code>Choreographer</code> &#x5B9E;&#x73B0;&#x52A8;&#x753B;&#x57FA;&#x672C;&#x539F;&#x7406;&#x3002;</li>
+<li>基于 <code>Drawable#scheduleSelf</code> API，向宿主View <code>Post</code> 一个延迟执行的 <code>Runnable</code> 业务逻辑为重新绘制。在Handler消息机制的驱动下, <code>Choreographer</code> 实现了动画基本原理</li>
+<li>基于 <code>ValueAnimator</code>，按照时序执行回调，业务逻辑为重新绘制。依旧是借助Handler消息机制的驱动, <code>Choreographer</code> 实现动画基本原理。</li>
 </ul>
-<p>&#x6B64;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x505A;&#x51FA;&#x5927;&#x80C6;&#x7684;&#x5047;&#x8BBE;&#xFF1A;<strong>&#x95EE;&#x9898;&#x672C;&#x8D28;&#x662F;&#x6CA1;&#x6709;&#x6B63;&#x786E;&#x91CD;&#x65B0;&#x7ED8;&#x5236;</strong>&#x3002;</p>
-<p>&#x5728;&#x524D;&#x6587;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;&#xFF0C;Drawable&#x91CD;&#x65B0;&#x7ED8;&#x5236;&#x7684;&#x6838;&#x5FC3;&#x662F; <code>invalidateSelf()</code>&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Drawable</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">invalidateSelf</span><span class="hljs-params">()</span> </span>{
-        <span class="hljs-keyword">final</span> Callback callback = getCallback();
-        <span class="hljs-keyword">if</span> (callback != <span class="hljs-keyword">null</span>) {
-            callback.invalidateDrawable(<span class="hljs-keyword">this</span>);
+<p>此时，可以做出大胆的假设：<strong>问题本质是没有正确重新绘制</strong>。</p>
+<p>在前文中，我们已经知道，Drawable重新绘制的核心是 <code>invalidateSelf()</code>：</p>
+<pre><code class="language-java">class Drawable {
+    public void invalidateSelf() {
+        final Callback callback = getCallback();
+        if (callback != null) {
+            callback.invalidateDrawable(this);
         }
     }
 }
 </code></pre>
-<p>&#x800C;&#x8BE5;API&#x501F;&#x52A9;&#x4E86; <code>Drawable.Callback</code> &#x59D4;&#x6258;&#x5B9E;&#x73B0;&#x3002;</p>
-<p>Debug&#x4E4B;&#x540E;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#xFF0C;<strong>&#x914D;&#x5408;ImageSpan&#x4F7F;&#x7528;&#x65F6;&#xFF0C;Drawable&#x5E76;&#x672A;&#x6301;&#x6709;Callback&#x5B9E;&#x4F8B;</strong> &#x3002;</p>
-<p>&#x5BF9;&#x6BD4;&#x53C2;&#x8003;TextView&#x8BBE;&#x7F6E;DrawableStart&#x7684;&#x76F8;&#x5173;&#x6838;&#x5FC3;&#x4EE3;&#x7801;&#xFF0C;&#x5FFD;&#x7565;&#x6389;&#x65E0;&#x5173;&#x7EC6;&#x8282;&#xFF0C;&#x5176;&#x4E2D;&#x8C03;&#x7528;&#x4E86; <code>Drawable#setCallback(this)</code> &#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TextView</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setRelativeDrawablesIfNeeded</span><span class="hljs-params">(Drawable start, Drawable end)</span> </span>{
-        <span class="hljs-keyword">boolean</span> hasRelativeDrawables = (start != <span class="hljs-keyword">null</span>) || (end != <span class="hljs-keyword">null</span>);
-        <span class="hljs-keyword">if</span> (hasRelativeDrawables) {
-            <span class="hljs-comment">//ignore </span>
-            <span class="hljs-keyword">if</span> (start != <span class="hljs-keyword">null</span>) {
-                <span class="hljs-comment">//ignore</span>
+<p>而该API借助了 <code>Drawable.Callback</code> 委托实现。</p>
+<p>Debug之后可以发现，<strong>配合ImageSpan使用时，Drawable并未持有Callback实例</strong> 。</p>
+<p>对比参考TextView设置DrawableStart的相关核心代码，忽略掉无关细节，其中调用了 <code>Drawable#setCallback(this)</code> ：</p>
+<pre><code class="language-java">class TextView {
+    private void setRelativeDrawablesIfNeeded(Drawable start, Drawable end) {
+        boolean hasRelativeDrawables = (start != null) || (end != null);
+        if (hasRelativeDrawables) {
+            //ignore 
+            if (start != null) {
+                //ignore
 
-                <span class="hljs-comment">//&#x91CD;&#x70B9;</span>
-                start.setCallback(<span class="hljs-keyword">this</span>);
+                //重点
+                start.setCallback(this);
 
-                <span class="hljs-comment">//ignore</span>
-            } <span class="hljs-keyword">else</span> {
-                dr.mDrawableSizeStart = dr.mDrawableHeightStart = <span class="hljs-number">0</span>;
+                //ignore
+            } else {
+                dr.mDrawableSizeStart = dr.mDrawableHeightStart = 0;
             }
-            <span class="hljs-keyword">if</span> (end != <span class="hljs-keyword">null</span>) {
-                <span class="hljs-comment">//ignore</span>
-                end.setCallback(<span class="hljs-keyword">this</span>);
+            if (end != null) {
+                //ignore
+                end.setCallback(this);
 
-                <span class="hljs-comment">//ignore</span>
-            } <span class="hljs-keyword">else</span> {
-                dr.mDrawableSizeEnd = dr.mDrawableHeightEnd = <span class="hljs-number">0</span>;
+                //ignore
+            } else {
+                dr.mDrawableSizeEnd = dr.mDrawableHeightEnd = 0;
             }
-            <span class="hljs-comment">//ignore</span>
+            //ignore
         }
     }
 }
 </code></pre>
-<p>&#x81F3;&#x6B64;&#xFF0C;&#x63A8;&#x6D4B;&#x5F97;&#x5230;&#x9A8C;&#x8BC1;&#x3002;</p>
-<h2 id="&#x76F4;&#x9762;&#x95EE;&#x9898;----&#x4EE5;&#x6700;&#x7B80;&#x5355;&#x7684;&#x4EE3;&#x7801;&#x8BA9;imagespan&#x52A8;&#x8D77;&#x6765;"><a name="&#x76F4;&#x9762;&#x95EE;&#x9898;----&#x4EE5;&#x6700;&#x7B80;&#x5355;&#x7684;&#x4EE3;&#x7801;&#x8BA9;imagespan&#x52A8;&#x8D77;&#x6765;" class="anchor-navigation-ex-anchor" href="#&#x76F4;&#x9762;&#x95EE;&#x9898;----&#x4EE5;&#x6700;&#x7B80;&#x5355;&#x7684;&#x4EE3;&#x7801;&#x8BA9;imagespan&#x52A8;&#x8D77;&#x6765;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x76F4;&#x9762;&#x95EE;&#x9898; -- &#x4EE5;&#x6700;&#x7B80;&#x5355;&#x7684;&#x4EE3;&#x7801;&#x8BA9;ImageSpan&#x52A8;&#x8D77;&#x6765;</h2>
-<p>&#x624D;&#x601D;&#x654F;&#x6377;&#x7684;&#x8BFB;&#x8005;&#x53EF;&#x80FD;&#x5DF2;&#x7ECF;&#x60F3;&#x5230;&#xFF0C;&#x7ED9;ImageSpan&#x5185;&#x90E8;&#x7684;Drawable&#x8BBE;&#x7F6E;Callback&#x4E0D;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x5417;&#xFF1F;&#x5C31;&#x50CF;&#x8FD9;&#x6837;&#xFF1A;</p>
-<pre><code class="lang-kotlin"> tvSpan.setOnClickListener {
-    <span class="hljs-comment">//&#x8BBE;&#x7F6E;Callback</span>
+<p>至此，推测得到验证。</p>
+<h2 id="直面问题----以最简单的代码让imagespan动起来"><a class="header" href="#直面问题----以最简单的代码让imagespan动起来">直面问题 -- 以最简单的代码让ImageSpan动起来</a></h2>
+<p>才思敏捷的读者可能已经想到，给ImageSpan内部的Drawable设置Callback不就可以了吗？就像这样：</p>
+<pre><code class="language-kotlin"> tvSpan.setOnClickListener {
+    //设置Callback
     drawable.callback = it
 
     drawable.start()
-    <span class="hljs-comment">//&#x5C4F;&#x853D;&#x6389;DrawableStart&#x7684;&#x5E72;&#x6270;</span>
-    <span class="hljs-comment">// drawableStart.start()</span>
+    //屏蔽掉DrawableStart的干扰
+    // drawableStart.start()
 }
 </code></pre>
-<p><img width="220" alt="&#x6CA1;&#x6709;&#x95EE;&#x9898;" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0ecbfafbe0104f23b8db06e31446195a~tplv-k3u1fbpfcp-watermark.image?"></p>
-<p>&#x5F53;&#x4F60;&#x81EA;&#x4FE1;&#x6EE1;&#x6EE1;&#x7684;&#x5C1D;&#x8BD5;&#x4E86;&#x4E00;&#x4E0B;&#xFF0C;&#x54CE;&#x5440;&#xFF0C;&#x53C8;TM&#x7FFB;&#x8F66;&#x4E86;&#xFF01;&#xFF01;&#xFF01;</p>
-<p><img width="220" alt="&#x5168;&#x662F;&#x95EE;&#x9898;" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f4959e7c21de4b7e8d41173c53210dbc~tplv-k3u1fbpfcp-watermark.image?"></p>
-<h3 id="&#x7FFB;&#x8F66;&#x539F;&#x56E0;"><a name="&#x7FFB;&#x8F66;&#x539F;&#x56E0;" class="anchor-navigation-ex-anchor" href="#&#x7FFB;&#x8F66;&#x539F;&#x56E0;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7FFB;&#x8F66;&#x539F;&#x56E0;</h3>
-<p>&#x8BA9;&#x6211;&#x4EEC;&#x518D;&#x590D;&#x4E60;&#x4E00;&#x4E0B;&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">View</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">invalidateDrawable</span><span class="hljs-params">(@NonNull Drawable drawable)</span> </span>{
-        <span class="hljs-comment">//&#x770B;&#x8FD9;&#x91CC;&#x7684;&#x6821;&#x9A8C;</span>
-        <span class="hljs-keyword">if</span> (verifyDrawable(drawable)) {
-            <span class="hljs-keyword">final</span> Rect dirty = drawable.getDirtyBounds();
-            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> scrollX = mScrollX;
-            <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> scrollY = mScrollY;
+<img width="220" alt="没有问题" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0ecbfafbe0104f23b8db06e31446195a~tplv-k3u1fbpfcp-watermark.image?"/>
+<p>当你自信满满的尝试了一下，哎呀，又TM翻车了！！！</p>
+<img width="220" alt="全是问题" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f4959e7c21de4b7e8d41173c53210dbc~tplv-k3u1fbpfcp-watermark.image?"/>
+<h3 id="翻车原因"><a class="header" href="#翻车原因">翻车原因</a></h3>
+<p>让我们再复习一下：</p>
+<pre><code class="language-java">public class View {
+    public void invalidateDrawable(@NonNull Drawable drawable) {
+        //看这里的校验
+        if (verifyDrawable(drawable)) {
+            final Rect dirty = drawable.getDirtyBounds();
+            final int scrollX = mScrollX;
+            final int scrollY = mScrollY;
 
-            <span class="hljs-comment">//&#x8FD9;&#x91CC;&#x662F;&#x5237;&#x65B0;</span>
+            //这里是刷新
             invalidate(dirty.left + scrollX, dirty.top + scrollY,
                     dirty.right + scrollX, dirty.bottom + scrollY);
             rebuildOutline();
         }
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">verifyDrawable</span><span class="hljs-params">(@NonNull Drawable who)</span> </span>{
-        <span class="hljs-comment">// Avoid verifying the scroll bar drawable so that we don&apos;t end up in</span>
-        <span class="hljs-comment">// an invalidation loop. This effectively prevents the scroll bar</span>
-        <span class="hljs-comment">// drawable from triggering invalidations and scheduling runnables.</span>
-        <span class="hljs-keyword">return</span> who == mBackground || (mForegroundInfo != <span class="hljs-keyword">null</span> &amp;&amp; mForegroundInfo.mDrawable == who)
+    protected boolean verifyDrawable(@NonNull Drawable who) {
+        // Avoid verifying the scroll bar drawable so that we don't end up in
+        // an invalidation loop. This effectively prevents the scroll bar
+        // drawable from triggering invalidations and scheduling runnables.
+        return who == mBackground || (mForegroundInfo != null &amp;&amp; mForegroundInfo.mDrawable == who)
                 || (mDefaultFocusHighlight == who);
     }
 }
 </code></pre>
-<p>&#x5F88;&#x663E;&#x7136;&#xFF0C;ImageSpan&#x5185;&#x5305;&#x542B;&#x7684;Drawable&#x548C;TextView&#x4E4B;&#x95F4;&#x5E76;&#x65E0;&#x76F4;&#x63A5;&#x5173;&#x8054;&#xFF01;</p>
-<p><em>&#x6CE8;&#x610F;,TextView&#x7684;&#x5224;&#x65AD;&#x903B;&#x8F91;&#x5B58;&#x5728;&#x91CD;&#x8F7D;&#xFF0C;&#x4EC5;&#x80CC;&#x666F;&#x3001;&#x805A;&#x7126;&#x6548;&#x679C;&#x3001;DrawableStart&#x3001;DrawableTop&#x3001;DrawableEnd&#x3001;DrawableBottom &#x662F;&#x6709;&#x5173;&#x8054;&#x7684;&#xFF1A;</em></p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TextView</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">verifyDrawable</span><span class="hljs-params">(@NonNull Drawable who)</span> </span>{
-        <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> verified = <span class="hljs-keyword">super</span>.verifyDrawable(who);
-        <span class="hljs-keyword">if</span> (!verified &amp;&amp; mDrawables != <span class="hljs-keyword">null</span>) {
-            <span class="hljs-keyword">for</span> (Drawable dr : mDrawables.mShowing) {
-                <span class="hljs-keyword">if</span> (who == dr) {
-                    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+<p>很显然，ImageSpan内包含的Drawable和TextView之间并无直接关联！</p>
+<p><em>注意,TextView的判断逻辑存在重载，仅背景、聚焦效果、DrawableStart、DrawableTop、DrawableEnd、DrawableBottom 是有关联的：</em></p>
+<pre><code class="language-java">class TextView {
+    protected boolean verifyDrawable(@NonNull Drawable who) {
+        final boolean verified = super.verifyDrawable(who);
+        if (!verified &amp;&amp; mDrawables != null) {
+            for (Drawable dr : mDrawables.mShowing) {
+                if (who == dr) {
+                    return true;
                 }
             }
         }
-        <span class="hljs-keyword">return</span> verified;
+        return verified;
     }
 }
 </code></pre>
-<h3 id="&#x6697;&#x5EA6;&#x9648;&#x4ED3;&#xFF0C;&#x7ED5;&#x8FC7;&#x6821;&#x9A8C;"><a name="&#x6697;&#x5EA6;&#x9648;&#x4ED3;&#xFF0C;&#x7ED5;&#x8FC7;&#x6821;&#x9A8C;" class="anchor-navigation-ex-anchor" href="#&#x6697;&#x5EA6;&#x9648;&#x4ED3;&#xFF0C;&#x7ED5;&#x8FC7;&#x6821;&#x9A8C;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6697;&#x5EA6;&#x9648;&#x4ED3;&#xFF0C;&#x7ED5;&#x8FC7;&#x6821;&#x9A8C;</h3>
-<p>&#x624D;&#x601D;&#x654F;&#x6377;&#x7684;&#x8BFB;&#x8005;&#x670B;&#x53CB;&#x4E00;&#x5B9A;&#x60F3;&#x5230;&#x4E86;&#xFF1A;&quot;&#x65E2;&#x7136;&#x662F;&#x6821;&#x9A8C;&#x51FA;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x90A3;&#x6211;&#x7ED5;&#x8FC7;&#x6821;&#x9A8C;&#x4E0D;&#x5C31;&#x597D;&#x4E86;&quot;&#xFF0C;&#x5F88;&#x5FEB;&#x638F;&#x51FA;&#x4E86;&#x4EE3;&#x7801;V2&#xFF1A;</p>
-<pre><code class="lang-kotlin">tvSpan.setOnClickListener {
-<span class="hljs-comment">//            drawable.callback = it //&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x65E0;&#x6548;&#xFF0C;Drawable&#x548C;TextView&#x4E4B;&#x95F4;&#x65E0;&#x5173;&#x8054;</span>
-    drawable.callback = <span class="hljs-keyword">object</span> : Drawable.Callback {
-        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">invalidateDrawable</span><span class="hljs-params">(who: <span class="hljs-type">Drawable</span>)</span> {</span>
-            <span class="hljs-comment">//&#x76F4;&#x63A5;&#x5237;&#xFF0C;&#x7ED5;&#x8FC7;&#x6821;&#x9A8C;</span>
+<h3 id="暗度陈仓绕过校验"><a class="header" href="#暗度陈仓绕过校验">暗度陈仓，绕过校验</a></h3>
+<p>才思敏捷的读者朋友一定想到了："既然是校验出的问题，那我绕过校验不就好了"，很快掏出了代码V2：</p>
+<pre><code class="language-kotlin">tvSpan.setOnClickListener {
+//            drawable.callback = it //这种方式无效，Drawable和TextView之间无关联
+    drawable.callback = object : Drawable.Callback {
+        override fun invalidateDrawable(who: Drawable) {
+            //直接刷，绕过校验
             it.invalidate()
         }
 
-        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">scheduleDrawable</span><span class="hljs-params">(who: <span class="hljs-type">Drawable, what: Runnable, `when`: Long</span>)</span> {</span>
-            it.scheduleDrawable(who, what, `<span class="hljs-keyword">when</span>`)
+        override fun scheduleDrawable(who: Drawable, what: Runnable, `when`: Long) {
+            it.scheduleDrawable(who, what, `when`)
         }
 
-        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">unscheduleDrawable</span><span class="hljs-params">(who: <span class="hljs-type">Drawable, what: Runnable</span>)</span> {</span>
+        override fun unscheduleDrawable(who: Drawable, what: Runnable) {
             it.unscheduleDrawable(who, what)
         }
 
     }
     drawable.start()
-<span class="hljs-comment">//            drawableStart.start()</span>
+//            drawableStart.start()
 }
 </code></pre>
-<p><img width="220" alt="&#x6CA1;&#x6709;&#x95EE;&#x9898;" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0ecbfafbe0104f23b8db06e31446195a~tplv-k3u1fbpfcp-watermark.image?"></p>
-<p>&#x679C;&#x7136;&#xFF0C;&#x5B83;&#x52A8;&#x8D77;&#x6765;&#x4E86;&#xFF01;</p>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x8BA9;ImageSpan&#x52A8;&#x8D77;&#x6765;&#x7684;&#x6838;&#x5FC3;&#x77E5;&#x8BC6;&#xFF0C;&#x5230;&#x6B64;&#x5DF2;&#x7ECF;&#x7ED3;&#x675F;&#xFF0C;&#x4F46;&#x77E5;&#x8BC6;&#x7684;&#x63A2;&#x7D22;&#x8FD8;&#x672A;&#x7ED3;&#x675F;&#xFF0C;&#x4E0B;&#x9762;&#x5C06;&#x6253;&#x5F00;Span&#x4E16;&#x754C;&#x7684;&#x5927;&#x95E8;</em></p>
-<h2 id="&#x4F18;&#x96C5;&#xFF0C;&#x6C38;&#x6052;&#x7684;&#x8FFD;&#x6C42;"><a name="&#x4F18;&#x96C5;&#xFF0C;&#x6C38;&#x6052;&#x7684;&#x8FFD;&#x6C42;" class="anchor-navigation-ex-anchor" href="#&#x4F18;&#x96C5;&#xFF0C;&#x6C38;&#x6052;&#x7684;&#x8FFD;&#x6C42;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F18;&#x96C5;&#xFF0C;&#x6C38;&#x6052;&#x7684;&#x8FFD;&#x6C42;</h2>
+<img width="220" alt="没有问题" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0ecbfafbe0104f23b8db06e31446195a~tplv-k3u1fbpfcp-watermark.image?"/>
+<p>果然，它动起来了！</p>
+<p><em>作者按：让ImageSpan动起来的核心知识，到此已经结束，但知识的探索还未结束，下面将打开Span世界的大门</em></p>
+<h2 id="优雅永恒的追求"><a class="header" href="#优雅永恒的追求">优雅，永恒的追求</a></h2>
 <blockquote>
-<p>&#x6211;&#x4E00;&#x76F4;&#x8FFD;&#x6C42;&#x7F16;&#x7A0B;&#x4E2D;&#x7684;&#x4E00;&#x79CD;&#x4F18;&#x96C5;&#xFF1A;</p>
+<p>我一直追求编程中的一种优雅：</p>
 <ul>
-<li>&#x590D;&#x6742;&#x5EA6;&#x6309;&#x5FC5;&#x8981;&#x7A0B;&#x5EA6;&#x5206;&#x5C42;&#x5C55;&#x5F00;&#xFF0C;&#x907F;&#x514D; &#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x7684;&#x8BE6;&#x7EC6;&#x5BFC;&#x81F4;&#x96BE;&#x4EE5;&#x7406;&#x89E3;&#x7684;&#x590D;&#x6742;</li>
-<li>&#x4E95;&#x7136;&#x6709;&#x5E8F;&#xFF0C;&#x5F53;&#x4EE3;&#x7801;&#x4E0D;&#x5F97;&#x4E0D;&#x505A;&#x51FA;&#x6539;&#x53D8;&#x65F6;&#xFF0C;&#x4E0D;&#x56E0;&#x4EE3;&#x7801;&#x95F4;&#x6CA1;&#x5FC5;&#x8981;&#x7684;&#x8026;&#x5408;&#xFF0C;&#x52A0;&#x5927;&#x53D8;&#x5316;&#x96BE;&#x5EA6;</li>
+<li>复杂度按必要程度分层展开，避免 没有必要的详细导致难以理解的复杂</li>
+<li>井然有序，当代码不得不做出改变时，不因代码间没必要的耦合，加大变化难度</li>
 </ul>
-<p>&#x800C;&#x6211;&#x4EEC;&#x76EE;&#x524D;&#x9762;&#x5BF9;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x6070;&#x6070;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x597D;&#x673A;&#x4F1A;&#xFF0C;&#x53EF;&#x4EE5;&#x987A;&#x52BF;&#x7814;&#x7A76;&#x6E90;&#x7801;&#xFF0C;&#x6C72;&#x53D6;&#x77E5;&#x8BC6;&#xFF0C;&#x5728;&#x6B64;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x5C01;&#x88C5;&#x4EE3;&#x7801;&#xFF0C;&#x66F4;&#x4F18;&#x96C5;&#x5730;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#xFF1B;&#x5E76;&#x4E14;&#x5728;&#x7814;&#x7A76;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x6478;&#x7D22;&#x5230;&#x5176;&#x5B83;&#x77E5;&#x8BC6;&#x6A21;&#x5757;&#x3002;</p>
-<p>&#x8FD9;&#x6070;&#x597D;&#x53EF;&#x4EE5;&#x901A;&#x5F80;&#x7B2C;&#x4E09;&#x5883; <em>&#x5BF9;&#x4E8E; <code>&#x4EBA;&#x751F;&#x8FFD;&#x6C42;&#x4E09;&#x5883;</code> &#xFF0C;&#x6211;&#x4F1A;&#x5728;&#x4E0B;&#x4E00;&#x4E2A;&#x6742;&#x7BC7;&#x548C;&#x8BFB;&#x8005;&#x4EEC;&#x4EA4;&#x6D41;&#x4E00;&#x4E0B;&#x5FC3;&#x5F97;</em></p>
+<p>而我们目前面对的问题，恰恰就是一个好机会，可以顺势研究源码，汲取知识，在此基础上，封装代码，更优雅地解决问题；并且在研究的过程中，可以摸索到其它知识模块。</p>
+<p>这恰好可以通往第三境 <em>对于 <code>人生追求三境</code> ，我会在下一个杂篇和读者们交流一下心得</em></p>
 </blockquote>
-<h3 id="&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x4F1A;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;"><a name="&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x4F1A;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;" class="anchor-navigation-ex-anchor" href="#&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x4F1A;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x4F1A;&#x5E26;&#x6765;&#x7684;&#x95EE;&#x9898;</h3>
-<h4 id="1&#x867D;&#x7136;&#x6709;&#x6548;&#xFF0C;&#x4F46;&#x8026;&#x5408;&#x8FC7;&#x91CD;&#xFF0C;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x4E2D;&#x4E0D;&#x5F97;&#x4E0D;&#x66B4;&#x9732;&#x8FC7;&#x591A;&#x65E0;&#x5173;&#x4EE3;&#x7801;"><a name="1&#x867D;&#x7136;&#x6709;&#x6548;&#xFF0C;&#x4F46;&#x8026;&#x5408;&#x8FC7;&#x91CD;&#xFF0C;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x4E2D;&#x4E0D;&#x5F97;&#x4E0D;&#x66B4;&#x9732;&#x8FC7;&#x591A;&#x65E0;&#x5173;&#x4EE3;&#x7801;" class="anchor-navigation-ex-anchor" href="#1&#x867D;&#x7136;&#x6709;&#x6548;&#xFF0C;&#x4F46;&#x8026;&#x5408;&#x8FC7;&#x91CD;&#xFF0C;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x4E2D;&#x4E0D;&#x5F97;&#x4E0D;&#x66B4;&#x9732;&#x8FC7;&#x591A;&#x65E0;&#x5173;&#x4EE3;&#x7801;"><i class="fa fa-link" aria-hidden="true"></i></a>1.&#x867D;&#x7136;&#x6709;&#x6548;&#xFF0C;&#x4F46;&#x8026;&#x5408;&#x8FC7;&#x91CD;&#xFF0C;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x4E2D;&#x4E0D;&#x5F97;&#x4E0D;&#x66B4;&#x9732;&#x8FC7;&#x591A;&#x65E0;&#x5173;&#x4EE3;&#x7801;</h4>
-<p>&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x4F7F;ImageSpan&#x52A8;&#x8D77;&#x6765;&#x4E86;&#xFF0C;&#x90A3;&#x6211;&#x591A;&#x641E;&#x51E0;&#x4E2A;&#x52A8;&#x6001;&#x5FBD;&#x7AE0;&#x6CA1;&#x6709;&#x95EE;&#x9898;&#x5427;&#x3002;</p>
-<p>&#x5C06;&#x6838;&#x5FC3;&#x4EE3;&#x7801;&#x590D;&#x523B;&#xFF0C;&#x5F88;&#x5FEB;&#x5C31;&#x5F97;&#x5230;&#x4E86;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;</p>
-<p><img width="220" alt="&#x6CA1;&#x6709;&#x95EE;&#x9898;" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0ecbfafbe0104f23b8db06e31446195a~tplv-k3u1fbpfcp-watermark.image?"></p>
-<pre><code class="lang-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> tvSpan2</span> = findViewById<span class="hljs-type">&lt;TextView&gt;</span>(R.id.tv_span2)
-<span class="hljs-variable"><span class="hljs-keyword">val</span> infoBuilder</span> = SpannableStringBuilder().append(<span class="hljs-string">&quot;Leobert&quot;</span>)
+<h3 id="直接使用会带来的问题"><a class="header" href="#直接使用会带来的问题">直接使用会带来的问题</a></h3>
+<h4 id="1虽然有效但耦合过重业务代码中不得不暴露过多无关代码"><a class="header" href="#1虽然有效但耦合过重业务代码中不得不暴露过多无关代码">1.虽然有效，但耦合过重，业务代码中不得不暴露过多无关代码</a></h4>
+<p>我们已经使ImageSpan动起来了，那我多搞几个动态徽章没有问题吧。</p>
+<p>将核心代码复刻，很快就得到了以下代码</p>
+<img width="220" alt="没有问题" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0ecbfafbe0104f23b8db06e31446195a~tplv-k3u1fbpfcp-watermark.image?"/>
+<pre><code class="language-kotlin">val tvSpan2 = findViewById&lt;TextView&gt;(R.id.tv_span2)
+val infoBuilder = SpannableStringBuilder().append("Leobert")
 
-<span class="hljs-variable"><span class="hljs-keyword">val</span> madels</span> = arrayListOf<span class="hljs-type">&lt;String&gt;</span>(<span class="hljs-string">&quot;Lv.10&quot;</span>, <span class="hljs-string">&quot;&#x6301;&#x7EED;&#x521B;&#x9020;&quot;</span>, <span class="hljs-string">&quot;&#x7B14;&#x8015;&#x4E0D;&#x8FFD;&quot;</span>, <span class="hljs-string">&quot;&#x591C;&#x4EE5;&#x7EE7;&#x65E5;&quot;</span>)
-<span class="hljs-variable"><span class="hljs-keyword">val</span> drawables</span>: List<span class="hljs-type">&lt;AnimLetterDrawable2&gt;</span> = madels.map { madel -&gt;
+val madels = arrayListOf&lt;String&gt;("Lv.10", "持续创造", "笔耕不追", "夜以继日")
+val drawables: List&lt;AnimLetterDrawable2&gt; = madels.map { madel -&gt;
     appendMadel(infoBuilder, madel).let { drawable -&gt;
-        drawable.callback = <span class="hljs-keyword">object</span> : Drawable.Callback {
-            <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">invalidateDrawable</span><span class="hljs-params">(who: <span class="hljs-type">Drawable</span>)</span> {</span>
+        drawable.callback = object : Drawable.Callback {
+            override fun invalidateDrawable(who: Drawable) {
                 tvSpan2.invalidate()
             }
-            <span class="hljs-comment">//ignore</span>
+            //ignore
         }
         drawable
     }
@@ -1678,33 +403,33 @@ tvSpan2.setOnClickListener {
     }
 }
 
-<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">appendMadel</span><span class="hljs-params">(builder: <span class="hljs-type">SpannableStringBuilder, madel: String</span>)</span>: AnimLetterDrawable2 {</span>
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> drawable</span> = AnimLetterDrawable2()
-    <span class="hljs-comment">//ignore</span>
+fun appendMadel(builder: SpannableStringBuilder, madel: String): AnimLetterDrawable2 {
+    val drawable = AnimLetterDrawable2()
+    //ignore
 
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> imgSpan</span> = ImageSpan(drawable)
-    <span class="hljs-variable"><span class="hljs-keyword">val</span> ss</span> = SpannableString(<span class="hljs-string">&quot; *&quot;</span>)
-    ss.setSpan(imgSpan, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    val imgSpan = ImageSpan(drawable)
+    val ss = SpannableString(" *")
+    ss.setSpan(imgSpan, 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     builder.append(ss)
 
-    <span class="hljs-comment">//ignore&#xFF0C;&#x8FFD;&#x52A0;&#x4E86;&#x4E00;&#x5904;ClickSpan&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x89C2;&#x89C2;&#x6D4B;&#x70B9;&#x51FB;&#x89E6;&#x53D1;</span>
+    //ignore，追加了一处ClickSpan，可以直观观测点击触发
 
-    <span class="hljs-keyword">return</span> drawable
+    return drawable
 }
 </code></pre>
-<p>&#x60A8;&#x5DF2;&#x7ECF;&#x53D1;&#x73B0;&#xFF0C;&#x4E3A;&#x4E86;&#x8BA9;&#x529F;&#x80FD;&#x6709;&#x6548;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x5F97;&#x4E0D;&#x5C0F;&#x5FC3;&#x7684;&#x8BBE;&#x7F6E;&#x56DE;&#x8C03;&#xFF0C;&#x4E00;&#x65E6;&#x6709;&#x6240;&#x758F;&#x6F0F;&#xFF0C;&#x5C31;&#x4F1A;&#x5E26;&#x6765;Bug&#x3002;</p>
+<p>您已经发现，为了让功能有效，我们不得不小心的设置回调，一旦有所疏漏，就会带来Bug。</p>
 <blockquote>
-<p>&#x52A1;&#x5FC5;&#x6CE8;&#x610F;&#xFF0C;&#x4EC5;&#x7528;&#x4E8E;&#x663E;&#x793A;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5C1A;&#x53EF;&#x4EE5;&#x8BF4;&#x670D;&#x81EA;&#x5DF1;&#x4E0D;&#x8D1F;&#x8D23;&#x4EFB;&#x5730;&#x5FFD;&#x7565; &quot;&#x4E0D;&#x79FB;&#x9664;&#x56DE;&#x8C03;&quot; &#x5E26;&#x6765;&#x7684;&#x8D1F;&#x9762;&#x5F71;&#x54CD;&#xFF0C;&#x8BF8;&#x5982;&#x65E0;&#x6548;&#x5237;&#x65B0;&#x3001;&#x5185;&#x5B58;&#x6CC4;&#x9732;&#x3002;</p>
-<p>&#x800C;&#x5728;&#x7F16;&#x8F91;&#x65F6;&#xFF08;&#x5982;EditText&#x4E2D;&#x4F7F;&#x7528;&#xFF0C;&#x5E76;&#x5220;&#x9664;&#x56FE;&#x7247;&#xFF09;&#x3001;&#x4EE5;&#x53CA;RecycleView&#x4E2D;TextView&#x590D;&#x7528;&#xFF08;&#x63A8;&#x5E7F;&#x5230;&#x53EF;&#x66FF;&#x6362;&#x5448;&#x73B0;&#x5185;&#x5BB9;&#x7684;&#x60C5;&#x51B5;&#xFF09;
-&#x5219;&#x4E0D;&#x5F97;&#x4E0D;&#x79FB;&#x9664;&#x56DE;&#x8C03;&#x3002;&#x5426;&#x5219;&#x8F7B;&#x5219;&#x9020;&#x6210;&#x6027;&#x80FD;&#x635F;&#x8017;&#x548C;&#x5185;&#x5B58;&#x6CC4;&#x9732;&#xFF0C;&#x91CD;&#x5219;&#x7ACB;&#x73B0; UI bug&#x3002;</p>
+<p>务必注意，仅用于显示时，我们尚可以说服自己不负责任地忽略 "不移除回调" 带来的负面影响，诸如无效刷新、内存泄露。</p>
+<p>而在编辑时（如EditText中使用，并删除图片）、以及RecycleView中TextView复用（推广到可替换呈现内容的情况）
+则不得不移除回调。否则轻则造成性能损耗和内存泄露，重则立现 UI bug。</p>
 </blockquote>
-<p><strong>&#x53EF;&#x4EE5;&#x60F3;&#x8C61;&#xFF0C;&#x8FD9;&#x6837;&#x7684;&#x4EE3;&#x7801;&#x592A;&#x8FC7;&#x4E8E;&#x4E11;&#x964B;&#xFF0C;&#x8FC7;&#x591A;&#x7684;&#x65E0;&#x5173;&#x4EE3;&#x7801;&#x66B4;&#x9732;&#x5728;&#x4E1A;&#x52A1;&#x5B9E;&#x73B0;&#x4E2D;</strong>&#x3002;</p>
-<h4 id="2&#x5F71;&#x54CD;&#x590D;&#x7528;"><a name="2&#x5F71;&#x54CD;&#x590D;&#x7528;" class="anchor-navigation-ex-anchor" href="#2&#x5F71;&#x54CD;&#x590D;&#x7528;"><i class="fa fa-link" aria-hidden="true"></i></a>2.&#x5F71;&#x54CD;&#x590D;&#x7528;</h4>
-<p>Callback&#x7684;&#x552F;&#x4E00;&#x6027;&#x5BFC;&#x81F4;ImageSpan&#x4E0D;&#x80FD;&#x88AB;&#x6709;&#x6548;&#x590D;&#x7528;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x4E00;&#x5B9A;&#x7684;&#x6539;&#x9020;&#x3002;</p>
-<p>&#x867D;&#x7136;&#x5728;&#x7406;&#x8BBA;&#x4E0A;&#x5DF2;&#x7ECF;&#x63A8;&#x65AD;&#x51FA;&#x8FD9;&#x79CD;&#x505A;&#x6CD5;&#x4F1A;&#x5F71;&#x54CD;Drawable&#x590D;&#x7528;&#xFF08;&#x4EE5;&#x53CA;Span&#x7684;&#x590D;&#x7528;&#x3001;&#x8FDB;&#x4E00;&#x6B65;&#x63A8;&#x5E7F;&#x5230;Spannable&#x7684;&#x590D;&#x7528;&#xFF09;&#xFF0C;&#x4ECD;&#x65E7;&#x4EE5;&#x4EE3;&#x7801;&#x9A8C;&#x8BC1;&#x4E00;&#x4E0B;&#x63A8;&#x8BBA;&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> tvSpan3</span> = findViewById<span class="hljs-type">&lt;TextView&gt;</span>(R.id.tv_span3)
-<span class="hljs-comment">// &#x6CBF;&#x7528;&#x4E0A;&#x6587;&#x4E2D;&#x6784;&#x5EFA;&#x7684;Spannable&#xFF0C;&#x5B83;&#x5DF2;&#x7ECF;&#x901A;&#x8FC7;Callback&#x548C;tvSpan2&#x9AD8;&#x5EA6;&#x8026;&#x5408;&#xFF0C;</span>
-<span class="hljs-comment">// &#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x8FD9;&#x6837;&#x7684;&#x4EE3;&#x7801;&#x5C31;&#x53EF;&#x4EE5;&#x5B8C;&#x6210;&#x76EE;&#x6807;&#xFF0C;&#x4F46;&#x663E;&#x7136;&#x76EE;&#x524D;&#x65E0;&#x6CD5;&#x5B8C;&#x6210;</span>
+<p><strong>可以想象，这样的代码太过于丑陋，过多的无关代码暴露在业务实现中</strong>。</p>
+<h4 id="2影响复用"><a class="header" href="#2影响复用">2.影响复用</a></h4>
+<p>Callback的唯一性导致ImageSpan不能被有效复用，还需要进行一定的改造。</p>
+<p>虽然在理论上已经推断出这种做法会影响Drawable复用（以及Span的复用、进一步推广到Spannable的复用），仍旧以代码验证一下推论：</p>
+<pre><code class="language-kotlin">val tvSpan3 = findViewById&lt;TextView&gt;(R.id.tv_span3)
+// 沿用上文中构建的Spannable，它已经通过Callback和tvSpan2高度耦合，
+// 我们希望这样的代码就可以完成目标，但显然目前无法完成
 tvSpan3.text = infoBuilder
 tvSpan3.setOnClickListener {
     drawables.forEach {
@@ -1713,304 +438,305 @@ tvSpan3.setOnClickListener {
 }
 tvSpan3.movementMethod = LinkMovementMethod.getInstance()
 </code></pre>
-<p>&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x53EF;&#x4F7F;&#x7528;WorkShop&#x81EA;&#x884C;&#x5C1D;&#x8BD5;&#xFF0C;&#x4E0D;&#x51FA;&#x610F;&#x5916;&#x7684;&#x7FFB;&#x8F66;&#x4E86;&#x5427;&#x3002;</p>
-<h3 id="1&#x89E3;&#x51B3;callback&#x5BF9;&#x590D;&#x7528;&#x7684;&#x9650;&#x5236;"><a name="1&#x89E3;&#x51B3;callback&#x5BF9;&#x590D;&#x7528;&#x7684;&#x9650;&#x5236;" class="anchor-navigation-ex-anchor" href="#1&#x89E3;&#x51B3;callback&#x5BF9;&#x590D;&#x7528;&#x7684;&#x9650;&#x5236;"><i class="fa fa-link" aria-hidden="true"></i></a>1.&#x89E3;&#x51B3;Callback&#x5BF9;&#x590D;&#x7528;&#x7684;&#x9650;&#x5236;</h3>
-<p>&#x663E;&#x7136;&#xFF0C;&#x6211;&#x4EEC;&#x65E0;&#x6CD5;&#x4FEE;&#x6539;SDK&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x4F46;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7EC4;&#x5408;&#x6A21;&#x5F0F;&#x3002;</p>
-<p>&#x5148;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x56DE;&#x8C03;&#x63A5;&#x53E3;&#xFF0C;&#x4F9D;&#x8D56;&#x62BD;&#x8C61;&#x4EE5;&#x89E3;&#x8026;&#x3002;</p>
-<pre><code class="lang-kotlin">interface OnRefreshListener {
-    <span class="hljs-comment">/**
+<p>读者诸君可使用WorkShop自行尝试，不出意外的翻车了吧。</p>
+<h3 id="1解决callback对复用的限制"><a class="header" href="#1解决callback对复用的限制">1.解决Callback对复用的限制</a></h3>
+<p>显然，我们无法修改SDK的内容，但可以使用组合模式。</p>
+<p>先定义一个回调接口，依赖抽象以解耦。</p>
+<pre><code class="language-kotlin">interface OnRefreshListener {
+    /**
      * will be called when a inner drawable of the span want to invalidate.
      *
-     * <span class="hljs-doctag">@return</span> true if the listener want to be called in future.
+     * @return true if the listener want to be called in future.
      * false otherwise
-     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onRefresh</span><span class="hljs-params">()</span>: <span class="hljs-keyword">Boolean</span></span>
+     */
+    fun onRefresh(): Boolean
 }
 </code></pre>
-<p>&#x5B9A;&#x4E49;&#x7EC4;&#x5408;&#xFF0C;&#x4ECD;&#x65E7;&#x4EE5;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#xFF0C;&#x4EE5;&#x63D0;&#x5347;&#x7075;&#x6D3B;&#x5EA6;&#xFF1A;</p>
-<pre><code class="lang-kotlin">interface OnRefreshListeners : OnRefreshListener {
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">addRefreshListener</span><span class="hljs-params">(callback: <span class="hljs-type">OnRefreshListener</span>)</span></span>
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">removeRefreshListener</span><span class="hljs-params">(callback: <span class="hljs-type">OnRefreshListener</span>)</span></span>
+<p>定义组合，仍旧以接口定义，以提升灵活度：</p>
+<pre><code class="language-kotlin">interface OnRefreshListeners : OnRefreshListener {
+    fun addRefreshListener(callback: OnRefreshListener)
+    fun removeRefreshListener(callback: OnRefreshListener)
 }
 </code></pre>
-<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x987A;&#x5176;&#x81EA;&#x7136;&#x7684;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x7EC4;&#x5408;Callback&#x5B9E;&#x73B0;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DrawableCallbackComposer</span> : <span class="hljs-type">OnRefreshListeners</span>, <span class="hljs-type">Drawable.Callback {</span></span>
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> mRefreshListeners</span>: MutableCollection<span class="hljs-type">&lt;OnRefreshListener&gt;</span> = mutableListOf()
+<p>我们可以顺其自然的定义一个组合Callback实现如下：</p>
+<pre><code class="language-kotlin">class DrawableCallbackComposer : OnRefreshListeners, Drawable.Callback {
+    private val mRefreshListeners: MutableCollection&lt;OnRefreshListener&gt; = mutableListOf()
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">addRefreshListener</span><span class="hljs-params">(callback: <span class="hljs-type">OnRefreshListener</span>)</span> {</span>
+    override fun addRefreshListener(callback: OnRefreshListener) {
         mRefreshListeners.add(callback)
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">removeRefreshListener</span><span class="hljs-params">(callback: <span class="hljs-type">OnRefreshListener</span>)</span> {</span>
+    override fun removeRefreshListener(callback: OnRefreshListener) {
         mRefreshListeners.remove(callback)
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onRefresh</span><span class="hljs-params">()</span>: <span class="hljs-keyword">Boolean</span> {</span>
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> stillActivatedAfterRefresh</span> = mRefreshListeners.filter {
+    override fun onRefresh(): Boolean {
+        val stillActivatedAfterRefresh = mRefreshListeners.filter {
             it.onRefresh()
         }
         mRefreshListeners.clear()
         mRefreshListeners.addAll(stillActivatedAfterRefresh)
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+        return true
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">unscheduleDrawable</span><span class="hljs-params">(who: <span class="hljs-type">Drawable, what: Runnable</span>)</span> {</span>
+    override fun unscheduleDrawable(who: Drawable, what: Runnable) {
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">invalidateDrawable</span><span class="hljs-params">(who: <span class="hljs-type">Drawable</span>)</span> {</span>
+    override fun invalidateDrawable(who: Drawable) {
         onRefresh()
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">scheduleDrawable</span><span class="hljs-params">(who: <span class="hljs-type">Drawable, what: Runnable, `when`: Long</span>)</span> {</span>
+    override fun scheduleDrawable(who: Drawable, what: Runnable, `when`: Long) {
     }
 }
 </code></pre>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>DrawableCallbackComposer</code> &#x6765;&#x6269;&#x5C55;&#x590D;&#x7528;&#x5EA6;&#xFF0C;&#x4F46;&#x663E;&#x7136;&#xFF0C;&#x6211;&#x4EEC;&#x5E76;&#x4E0D;&#x613F;&#x610F;&#x5230;&#x5904;&#x88F8;&#x9732; <code>DrawableCallbackComposer</code> &#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x7EE7;&#x7EED;&#x8003;&#x8651;&#x5C01;&#x88C5;&#x548C;&#x9690;&#x85CF;&#x3002;</p>
-<h3 id="2&#x674E;&#x4EE3;&#x6843;&#x50F5;&#xFF0C;&#x5229;&#x7528;&#x4EE3;&#x7406;"><a name="2&#x674E;&#x4EE3;&#x6843;&#x50F5;&#xFF0C;&#x5229;&#x7528;&#x4EE3;&#x7406;" class="anchor-navigation-ex-anchor" href="#2&#x674E;&#x4EE3;&#x6843;&#x50F5;&#xFF0C;&#x5229;&#x7528;&#x4EE3;&#x7406;"><i class="fa fa-link" aria-hidden="true"></i></a>2.&#x674E;&#x4EE3;&#x6843;&#x50F5;&#xFF0C;&#x5229;&#x7528;&#x4EE3;&#x7406;</h3>
-<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x4EE3;&#x7406;&#x5C42;&#xFF0C;&#x5B83;&#x5E2E;&#x52A9; Drawable &#x5904;&#x7406; <code>DrawableCallbackComposer</code> &#x7684; <code>&#x5B50;&#x8282;&#x70B9; OnRefreshListener</code> &#x6CE8;&#x518C;&#x4E0E;&#x89E3;&#x6CE8;&#x518C;&#xFF0C;&#x5E76;&#x4E14;&#x6700;&#x7EC8;&#x8868;&#x73B0;&#x4E3A;&#x4E00;&#x4E2A; Drawable&#xFF0C;&#x90A3;&#x4E48; <code>&#x88F8;&#x9732;&#x7684;&#x63A7;&#x5236;&#x4EE3;&#x7801;</code>
-&#x5C06;&#x66FF;&#x6362;&#x4E3A;&#x7B80;&#x5355;&#x7684; <code>&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x4E2D;&#x7684;&#x5B9E;&#x4F8B;&#x63D0;&#x4F9B;</code></p>
-<p>&#x57FA;&#x4E8E;&#x63A5;&#x53E3;&#x7684;&#x7075;&#x6D3B;&#x6027;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x987A;&#x5176;&#x81EA;&#x7136;&#x7684;&#x5B9A;&#x4E49;&#x5982;&#x4E0B; <code>DrawableProxy</code> &#x7C7B;&#x3002;</p>
-<p><em>&#x5B83;&#x80FD;&#x591F;&#x76F4;&#x63A5;&#x4EE3;&#x7406;&#x539F;Drawable&#x5173;&#x4E8E;&#x7ED8;&#x5236;&#x7684;&#x5168;&#x90E8;&#x5185;&#x5BB9;&#xFF0C;&#x53C8;&#x8FFD;&#x52A0;&#x4E86; &#x4F7F;&#x7528; DrawableCallbackComposer &#x548C; &#x56DE;&#x8C03;&#x6CE8;&#x518C;&#x89E3;&#x6CE8;&#x518C;&#x7684;&#x5FC5;&#x8981;&#x63A7;&#x5236;&#x903B;&#x8F91;</em></p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DrawableProxy</span></span>
+<p>接下来就可以使用 <code>DrawableCallbackComposer</code> 来扩展复用度，但显然，我们并不愿意到处裸露 <code>DrawableCallbackComposer</code> 的操作，继续考虑封装和隐藏。</p>
+<h3 id="2李代桃僵利用代理"><a class="header" href="#2李代桃僵利用代理">2.李代桃僵，利用代理</a></h3>
+<p>如果我们拥有一个代理层，它帮助 Drawable 处理 <code>DrawableCallbackComposer</code> 的 <code>子节点 OnRefreshListener</code> 注册与解注册，并且最终表现为一个 Drawable，那么 <code>裸露的控制代码</code>
+将替换为简单的 <code>依赖注入中的实例提供</code></p>
+<p>基于接口的灵活性，我们可以顺其自然的定义如下 <code>DrawableProxy</code> 类。</p>
+<p><em>它能够直接代理原Drawable关于绘制的全部内容，又追加了 使用 DrawableCallbackComposer 和 回调注册解注册的必要控制逻辑</em></p>
+<pre><code class="language-kotlin">class DrawableProxy
 @JvmOverloads constructor(
-    proxy: Drawable? = <span class="hljs-literal">null</span>,
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> drawableCallbackComposer</span>: DrawableCallbackComposer = DrawableCallbackComposer()
+    proxy: Drawable? = null,
+    private val drawableCallbackComposer: DrawableCallbackComposer = DrawableCallbackComposer()
 ) : Drawable(),
     ResizeDrawable,
     Drawable.Callback by drawableCallbackComposer,
     OnRefreshListeners by drawableCallbackComposer {
 
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">var</span> proxySafety</span>: Drawable = proxy?.also { it.callback = drawableCallbackComposer } ?: this
-        <span class="hljs-keyword">set</span>(drawable) {
-            field.callback = <span class="hljs-literal">null</span>
+    private var proxySafety: Drawable = proxy?.also { it.callback = drawableCallbackComposer } ?: this
+        set(drawable) {
+            field.callback = null
             drawable.callback = drawableCallbackComposer
             field = drawable
-            needResize = <span class="hljs-literal">true</span>
+            needResize = true
             invalidateDrawable(this)
         }
 
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">setProxy</span><span class="hljs-params">(drawable: <span class="hljs-type">Drawable</span>)</span> {</span>
+    fun setProxy(drawable: Drawable) {
         this.proxySafety = drawable
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">clearProxy</span><span class="hljs-params">()</span> {</span>
+    fun clearProxy() {
         this.proxySafety = this
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-variable"><span class="hljs-keyword">var</span> needResize</span>: <span class="hljs-keyword">Boolean</span> = <span class="hljs-literal">false</span>
+    override var needResize: Boolean = false
 
-    <span class="hljs-comment">/*&#x4EE5;&#x4E0B;&#x662F;&#x4EE3;&#x7406;&#x5B9E;&#x73B0;&#xFF0C;&#x65E0;&#x9700;&#x8FC7;&#x5EA6;&#x5173;&#x5FC3;*/</span>
+    /*以下是代理实现，无需过度关心*/
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getIntrinsicWidth</span><span class="hljs-params">()</span>: <span class="hljs-keyword">Int</span> {</span>
-        <span class="hljs-keyword">return</span> proxySafety.intrinsicWidth
+    override fun getIntrinsicWidth(): Int {
+        return proxySafety.intrinsicWidth
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getIntrinsicHeight</span><span class="hljs-params">()</span>: <span class="hljs-keyword">Int</span> {</span>
-        <span class="hljs-keyword">return</span> proxySafety.intrinsicHeight
+    override fun getIntrinsicHeight(): Int {
+        return proxySafety.intrinsicHeight
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">draw</span><span class="hljs-params">(canvas: <span class="hljs-type">Canvas</span>)</span> {</span>
+    override fun draw(canvas: Canvas) {
         proxySafety.draw(canvas)
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">setAlpha</span><span class="hljs-params">(alpha: <span class="hljs-type">Int</span>)</span> {</span>
+    override fun setAlpha(alpha: Int) {
         proxySafety.alpha = alpha
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">setColorFilter</span><span class="hljs-params">(cf: <span class="hljs-type">ColorFilter?</span>)</span> {</span>
+    override fun setColorFilter(cf: ColorFilter?) {
         proxySafety.colorFilter = cf
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getOpacity</span><span class="hljs-params">()</span>: <span class="hljs-keyword">Int</span> {</span>
-        <span class="hljs-keyword">return</span> proxySafety.opacity
+    override fun getOpacity(): Int {
+        return proxySafety.opacity
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onBoundsChange</span><span class="hljs-params">(bounds: <span class="hljs-type">Rect</span>)</span> {</span>
+    override fun onBoundsChange(bounds: Rect) {
         super.onBoundsChange(bounds)
-        needResize = <span class="hljs-literal">false</span>
+        needResize = false
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">setBounds</span><span class="hljs-params">(bounds: <span class="hljs-type">Rect</span>)</span> {</span>
+    override fun setBounds(bounds: Rect) {
         super.setBounds(bounds)
         proxySafety.bounds = bounds
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">setBounds</span><span class="hljs-params">(left: <span class="hljs-type">Int, top: Int, right: Int, bottom: Int</span>)</span> {</span>
+    override fun setBounds(left: Int, top: Int, right: Int, bottom: Int) {
         super.setBounds(left, top, right, bottom)
         proxySafety.setBounds(left, top, right, bottom)
     }
 
 }
 </code></pre>
-<p>&#x81F3;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x4F7F;&#x7528;<code>DrawableProxy</code> &#x66FF;&#x4EE3;&#x539F;&#x5148;&#x7684; AnimDrawable,&#x7528;&#x4EE5;&#x6784;&#x5EFA;Span&#x5B9E;&#x4F8B;&#x3002;</p>
-<p>&#x63A5;&#x4E0B;&#x6765;&#x53EF;&#x4EE5;&#x5C06;&#x6CE8;&#x610F;&#x529B;&#x8F6C;&#x79FB;&#x5230;&#xFF1A;&quot;&#x5B9E;&#x73B0;&#x3001;&#x6DFB;&#x52A0; OnRefreshListener&quot;&#xFF0C;&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x5BBF;&#x4E3B;TextView&#x7684;&#x5237;&#x65B0;&#xFF0C;&#x663E;&#x793A;&#x52A8;&#x753B;&#x5E27;&#x3002;</p>
-<h3 id="&#x7EE7;&#x7EED;&#x4F7F;&#x7528;spanwatcher&#x89E3;&#x653E;&#x53CC;&#x624B;"><a name="&#x7EE7;&#x7EED;&#x4F7F;&#x7528;spanwatcher&#x89E3;&#x653E;&#x53CC;&#x624B;" class="anchor-navigation-ex-anchor" href="#&#x7EE7;&#x7EED;&#x4F7F;&#x7528;spanwatcher&#x89E3;&#x653E;&#x53CC;&#x624B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7EE7;&#x7EED;&#x4F7F;&#x7528;SpanWatcher&#x89E3;&#x653E;&#x53CC;&#x624B;</h3>
-<p>&#x884C;&#x81F3;&#x6B64;&#x5904;&#xFF0C;&#x60A8;&#x4E00;&#x5B9A;&#x4E0D;&#x7518;&#x5FC3;&#x518D;&#x5728;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x4E2D;&#x88F8;&#x9732;&#x6B64;&#x7C7B;&#x63A7;&#x5236;&#x4EE3;&#x7801;&#xFF1A;</p>
-<pre><code class="lang-kotlin">drawable?.addRefreshListener(<span class="hljs-keyword">object</span> : OnRefreshListener {
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onRefresh</span><span class="hljs-params">()</span>: <span class="hljs-keyword">Boolean</span> {</span>
-        <span class="hljs-comment">//ignore &#x8BF8;&#x5982;&#x751F;&#x547D;&#x5468;&#x671F;&#x65AD;&#x5B9A; &#x3002;&#x3002;&#x3002;</span>
+<p>至此，我们将使用<code>DrawableProxy</code> 替代原先的 AnimDrawable,用以构建Span实例。</p>
+<p>接下来可以将注意力转移到："实现、添加 OnRefreshListener"，通过调用宿主TextView的刷新，显示动画帧。</p>
+<h3 id="继续使用spanwatcher解放双手"><a class="header" href="#继续使用spanwatcher解放双手">继续使用SpanWatcher解放双手</a></h3>
+<p>行至此处，您一定不甘心再在业务代码中裸露此类控制代码：</p>
+<pre><code class="language-kotlin">drawable?.addRefreshListener(object : OnRefreshListener {
+    override fun onRefresh(): Boolean {
+        //ignore 诸如生命周期断定 。。。
         view.invalidate()
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+        return true
     }
 })
 </code></pre>
-<p>&#x54EA;&#x6015;&#x60A8;&#x5C06;&#x5B83;&#x5C01;&#x88C5;&#x6210;&#x4E00;&#x4E2A;&#x9759;&#x6001;API&#x4EE5;&#x4F9B;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x4E2D;&#x8C03;&#x7528;&#xFF0C;&#x4E5F;&#x96BE;&#x4EE5;&#x8FBE;&#x5230;&#x60A8;&#x5BF9; &#x8FFD;&#x6C42;&quot;&#x4F18;&#x96C5;&quot; &#x7684;&#x8981;&#x6C42;&#x5E95;&#x7EBF;&#x4E86;&#x3002;</p>
-<p>&#x800C;SDK&#x4E2D;&#x5DF2;&#x7ECF;&#x786E;&#x5B9A;&#x4E86;&#x8FD9;&#x4F4D;&#x5929;&#x9009;&#x6253;&#x5DE5;&#x4EBA; <code>SpanWatcher</code>&#xFF0C;&#x770B;&#x4E00;&#x4E0B;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-comment">/**
+<p>哪怕您将它封装成一个静态API以供业务代码中调用，也难以达到您对 追求"优雅" 的要求底线了。</p>
+<p>而SDK中已经确定了这位天选打工人 <code>SpanWatcher</code>，看一下它的定义：</p>
+<pre><code class="language-java">/**
  * When an object of this type is attached to a Spannable,
  * its methods will be called to notify it that other 
  * markup objects have been added, changed, or removed.
- * */</span>
+ * */
 </code></pre>
-<p>&#x7FFB;&#x8BD1;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p>翻译如下：</p>
 <blockquote>
-<p>&#x5F53; <code>SpanWatcher</code> &#x7C7B;&#x578B;&#x7684;&#x5B9E;&#x4F8B;&#x88AB;&#x6DFB;&#x52A0;&#x5230; <code>Spannable</code> &#x4E4B;&#x540E;&#xFF0C;&#x4E00;&#x65E6;&#x53D1;&#x751F; &#xFF08;Span&#xFF09;&#x6807;&#x8BB0;&#x88AB; &#x6DFB;&#x52A0;&#x3001;&#x6539;&#x53D8;&#x3001;&#x79FB;&#x9664;&#x65F6;&#xFF0C;
-&#x5B9E;&#x4F8B;&#x76F8;&#x5E94;&#x7684; API&#x65B9;&#x6CD5; &#x4F1A;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x8D77;&#x5230;&#x901A;&#x77E5;&#x6548;&#x679C;&#x3002;</p>
+<p>当 <code>SpanWatcher</code> 类型的实例被添加到 <code>Spannable</code> 之后，一旦发生 （Span）标记被 添加、改变、移除时，
+实例相应的 API方法 会被调用，起到通知效果。</p>
 </blockquote>
-<p>&#x85C9;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x987A;&#x5176;&#x81EA;&#x7136;&#x5730;&#x7B80;&#x5316;&#x5904;&#x7406;&#x56DE;&#x8C03;&#x7684;&#x6CE8;&#x518C;&#x4E0E;&#x89E3;&#x6CE8;&#x518C;</p>
-<p><em>&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#xFF0C;&#x6B64;&#x65F6;&#x8FD8;&#x8BF7;&#x518D;&#x60F3;&#x4E00;&#x60F3;&#xFF0C;&#x5B83;&#x80FD;&#x5B8C;&#x7F8E;&#x7684;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#x5417;&#xFF1F;</em></p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AnimImageSpanWatcher</span></span>(view: View) : SpanWatcher, OnRefreshListener {
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">var</span> mLastRefreshStamp</span>: <span class="hljs-keyword">Long</span> = <span class="hljs-number">0</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> mViewWeakReference</span>: WeakReference<span class="hljs-type">&lt;View&gt;</span> = WeakReference(view)
+<p>藉此，我们可以顺其自然地简化处理回调的注册与解注册</p>
+<p><em>读者诸君，此时还请再想一想，它能完美的解决问题吗？</em></p>
+<pre><code class="language-kotlin">class AnimImageSpanWatcher(view: View) : SpanWatcher, OnRefreshListener {
+    private var mLastRefreshStamp: Long = 0
+    private val mViewWeakReference: WeakReference&lt;View&gt; = WeakReference(view)
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onSpanAdded</span><span class="hljs-params">(text: <span class="hljs-type">Spannable, what: Any, start: Int, end: Int</span>)</span> {</span>
-        <span class="hljs-keyword">if</span> (what <span class="hljs-keyword">is</span> RefreshSpan) {
-            <span class="hljs-variable"><span class="hljs-keyword">val</span> drawable</span> = what.getInvalidateDrawable()
+    override fun onSpanAdded(text: Spannable, what: Any, start: Int, end: Int) {
+        if (what is RefreshSpan) {
+            val drawable = what.getInvalidateDrawable()
             drawable?.addRefreshListener(this)
         }
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onSpanRemoved</span><span class="hljs-params">(text: <span class="hljs-type">Spannable, what: Any, start: Int, end: Int</span>)</span> {</span>
-        <span class="hljs-keyword">if</span> (what <span class="hljs-keyword">is</span> RefreshSpan) {
-            <span class="hljs-variable"><span class="hljs-keyword">val</span> drawable</span> = what.getInvalidateDrawable()
+    override fun onSpanRemoved(text: Spannable, what: Any, start: Int, end: Int) {
+        if (what is RefreshSpan) {
+            val drawable = what.getInvalidateDrawable()
             drawable?.removeRefreshListener(this)
         }
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onSpanChanged</span><span class="hljs-params">(text: <span class="hljs-type">Spannable, what: Any, ostart: Int, oend: Int, nstart: Int, nend: Int</span>)</span> {</span>
+    override fun onSpanChanged(text: Spannable, what: Any, ostart: Int, oend: Int, nstart: Int, nend: Int) {
 
     }
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onRefresh</span><span class="hljs-params">()</span>: <span class="hljs-keyword">Boolean</span> {</span>
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> view</span> = mViewWeakReference.<span class="hljs-keyword">get</span>() ?: <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+    override fun onRefresh(): Boolean {
+        val view = mViewWeakReference.get() ?: return false
 
-        <span class="hljs-comment">//ignore &#x751F;&#x547D;&#x5468;&#x671F;&#x6709;&#x6548;&#x6027;&#x5224;&#x65AD;</span>
+        //ignore 生命周期有效性判断
 
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> currentTime</span> = System.currentTimeMillis()
-        <span class="hljs-comment">//&#x52A0;&#x4E00;&#x5C42;&#x8FC7;&#x6EE4;&#xFF0C;&#x907F;&#x514D;&#x5237;&#x65B0;&#x8FC7;&#x4E8E;&#x9891;&#x7E41;</span>
-        <span class="hljs-keyword">if</span> (currentTime - mLastRefreshStamp &gt; REFRESH_INTERVAL) {
+        val currentTime = System.currentTimeMillis()
+        //加一层过滤，避免刷新过于频繁
+        if (currentTime - mLastRefreshStamp &gt; REFRESH_INTERVAL) {
             mLastRefreshStamp = currentTime
             view.invalidate()
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+        return true
     }
 
-    <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> {
-        <span class="hljs-keyword">private</span> const <span class="hljs-variable"><span class="hljs-keyword">val</span> REFRESH_INTERVAL</span> = <span class="hljs-number">60</span>
+    companion object {
+        private const val REFRESH_INTERVAL = 60
     }
 }
 </code></pre>
 <blockquote>
-<p>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x611F;&#x8C22; <a href="https://juejin.cn/user/835284568906152" target="_blank">&#x957F;&#x5B89;&#x7688;&#x6545;&#x91CC;</a> &#x7684;&#x63D0;&#x9192;&#xFF0C;&#x6211;&#x9057;&#x6F0F;&#x4E86;&#x90E8;&#x5206;&#x4EE3;&#x7801;&#x3002;</p>
+<p>作者按：感谢 <a href="https://juejin.cn/user/835284568906152">长安皈故里</a> 的提醒，我遗漏了部分代码。</p>
 </blockquote>
 <pre><code>interface RefreshSpan {
     fun getInvalidateDrawable(): OnRefreshListeners?
 }
-</code></pre><p>&#x884C;&#x81F3;&#x6B64;&#x5904;&#xFF0C;&#x8FD8;&#x5269;&#x4E0B;&#x5173;&#x952E;&#x7684;&#x4E00;&#x6B65;&#xFF1A;&#x501F;&#x52A9;TextView&#x81EA;&#x8EAB;&#x7684;&#x673A;&#x5236;&#xFF0C;&#x8BA9;&#x8FD9;&#x4E9B;&#x7C7B;&#x6B63;&#x5E38;&#x5DE5;&#x4F5C;&#xFF01;</p>
-<h3 id="&#x4F7F;&#x7528;-spannablefactory-&#x68A6;&#x5E7B;&#x8054;&#x52A8;"><a name="&#x4F7F;&#x7528;-spannablefactory-&#x68A6;&#x5E7B;&#x8054;&#x52A8;" class="anchor-navigation-ex-anchor" href="#&#x4F7F;&#x7528;-spannablefactory-&#x68A6;&#x5E7B;&#x8054;&#x52A8;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F7F;&#x7528; <code>Spannable.Factory</code> &#x68A6;&#x5E7B;&#x8054;&#x52A8;</h3>
-<p>&#x4E0D;&#x6E05;&#x695A;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x662F;&#x5426; <strong>&#x7CBE;&#x5FC3;&#x7814;&#x8BFB;</strong> &#x8FC7; <code>TextView</code> &#x7684;&#x6E90;&#x7801;&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x672C;&#x7BC7;&#x5E76;&#x4E0D;&#x6253;&#x7B97;&#x5C55;&#x5F00;&#x5206;&#x6790;&#xFF0C;TextView &#x4E2D;&#x6709;&#x4E00;&#x4E2A;API&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TextView</span> </span>{
-    <span class="hljs-comment">/**
+</code></pre>
+<p>行至此处，还剩下关键的一步：借助TextView自身的机制，让这些类正常工作！</p>
+<h3 id="使用-spannablefactory-梦幻联动"><a class="header" href="#使用-spannablefactory-梦幻联动">使用 <code>Spannable.Factory</code> 梦幻联动</a></h3>
+<p>不清楚读者诸君是否 <strong>精心研读</strong> 过 <code>TextView</code> 的源码，当然，本篇并不打算展开分析，TextView 中有一个API：</p>
+<pre><code class="language-java">class TextView {
+    /**
      * Sets the Factory used to create new Spannable
-     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setSpannableFactory</span><span class="hljs-params">(Spannable.Factory factory)</span> </span>{
+     */
+    public final void setSpannableFactory(Spannable.Factory factory) {
         mSpannableFactory = factory;
         setText(mText);
     }
 }
 </code></pre>
-<p>&#x901A;&#x8FC7;API&#x5B9E;&#x73B0;&#xFF0C;&#x60A8;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#xFF0C;&#x5B83;&#x4F1A;&#x91CD;&#x65B0;&#x8C03;&#x7528; setText API&#xFF0C;&#x5E76;&#x5229;&#x7528;&#x8BE5; Factory &#x521B;&#x5EFA;&#x7528;&#x4E8E;&#x663E;&#x793A;&#x7684; Spannable</p>
-<p><code>Spannable.Factory</code>&#xFF1A;</p>
-<pre><code class="lang-java"><span class="hljs-comment">/**
+<p>通过API实现，您可以发现，它会重新调用 setText API，并利用该 Factory 创建用于显示的 Spannable</p>
+<p><code>Spannable.Factory</code>：</p>
+<pre><code class="language-java">/**
  * Factory used by TextView to create new Spannables.
  * You can subclass it to provide something other than SpannableString.
- */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Factory</span> </span>{
-    <span class="hljs-comment">//ignore</span>
+ */
+public static class Factory {
+    //ignore
 
-    <span class="hljs-comment">/**
+    /**
      * Returns a new SpannableString from the specified CharSequence.
      * You can override this to provide a different kind of Spannable.
-     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> Spannable <span class="hljs-title">newSpannable</span><span class="hljs-params">(CharSequence source)</span> </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SpannableString(source);
+     */
+    public Spannable newSpannable(CharSequence source) {
+        return new SpannableString(source);
     }
 }
 </code></pre>
-<p>&#x503C;&#x5F97;&#x6CE8;&#x610F;&#xFF1A;</p>
+<p>值得注意：</p>
 <blockquote>
-<p>&#x8BBE;&#x8BA1;Spannable&#x7684;&#x62F7;&#x8D1D;&#x65F6;&#xFF0C;&#x7406;&#x6240;&#x5F53;&#x7136;&#x5B58;&#x5728;&#x4E00;&#x4E9B;Span&#x4E0D;&#x5E0C;&#x671B;&#x88AB;&#x62F7;&#x8D1D;&#xFF0C;&#x4E8E;&#x662F;&#x8BBE;&#x8BA1;&#x6709;&#x8BE5;&#x673A;&#x5236;&#xFF0C;&#x5B9E;&#x73B0; <code>NoCopySpan</code> &#x7684;&#x6807;&#x8BB0;&#xFF08;span&#xFF09;&#x4E0D;&#x4F1A;&#x88AB;&#x62F7;&#x8D1D;</p>
+<p>设计Spannable的拷贝时，理所当然存在一些Span不希望被拷贝，于是设计有该机制，实现 <code>NoCopySpan</code> 的标记（span）不会被拷贝</p>
 </blockquote>
-<p>&#x4E8E;&#x662F;&#xFF0C;&#x53EF;&#x5B9E;&#x73B0;&#x7C7B;&#x4F3C;&#x5982;&#x4E0B;&#x5DE5;&#x5382;&#x7C7B;&#xFF0C;&#x5B8C;&#x6210;&#x6700;&#x540E;&#x7684;&#x8054;&#x52A8;&#x3002;</p>
-<pre><code class="lang-kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomSpannableFactory</span></span>(<span class="hljs-keyword">private</span> <span class="hljs-variable"><span class="hljs-keyword">val</span> mNoCopySpans</span>: List<span class="hljs-type">&lt;NoCopySpan&gt;</span>) : Spannable.Factory() {
+<p>于是，可实现类似如下工厂类，完成最后的联动。</p>
+<pre><code class="language-kotlin">class CustomSpannableFactory(private val mNoCopySpans: List&lt;NoCopySpan&gt;) : Spannable.Factory() {
 
-    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">newSpannable</span><span class="hljs-params">(source: <span class="hljs-type">CharSequence</span>)</span>: Spannable {</span>
-        <span class="hljs-variable"><span class="hljs-keyword">val</span> spannableStringBuilder</span> = SpannableStringBuilder()
+    override fun newSpannable(source: CharSequence): Spannable {
+        val spannableStringBuilder = SpannableStringBuilder()
         mNoCopySpans.forEach {
             spannableStringBuilder.setSpan(
-                it, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>,
+                it, 0, 0,
                 Spanned.SPAN_INCLUSIVE_INCLUSIVE or Spanned.SPAN_PRIORITY
             )
         }
         spannableStringBuilder.append(source)
-        <span class="hljs-keyword">return</span> spannableStringBuilder
+        return spannableStringBuilder
     }
 }
 </code></pre>
-<p>&#x6700;&#x7EC8;&#xFF0C;&#x4EE5;&#x4F2A;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#x5C55;&#x73B0;&#x8C03;&#x7528;&#x7EC6;&#x8282;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre><code class="lang-kotlin"><span class="hljs-variable"><span class="hljs-keyword">val</span> tvSpan</span> = findViewById<span class="hljs-type">&lt;TextView&gt;</span>(R.id.tv_span)
+<p>最终，以伪代码实现展现调用细节如下：</p>
+<pre><code class="language-kotlin">val tvSpan = findViewById&lt;TextView&gt;(R.id.tv_span)
 
-<span class="hljs-comment">//&#x7B2C;&#x4E00;&#x90E8;&#x5206;</span>
-<span class="hljs-comment">//&#x5982;&#x4E0A;&#x6587;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x52A8;&#x753B;Drawable</span>
-<span class="hljs-variable"><span class="hljs-keyword">val</span> drawable</span> = createADrawable()
-<span class="hljs-comment">//&#x57FA;&#x4E8E;&#x4EE3;&#x7406;&#xFF0C;&#x5229;&#x7528;&#x5B83;&#x7B80;&#x5316;Drawable.Callback&#x7684;&#x5904;&#x7406;</span>
-<span class="hljs-variable"><span class="hljs-keyword">val</span> proxyDrawable</span> = DrawableProxy(drawable)
-<span class="hljs-comment">//&#x60A8;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x8FD9;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x4E86;RefreshSpan&#x7684;ImageSpan&#xFF0C;</span>
-<span class="hljs-comment">//&#x5185;&#x90E8;&#x505A;&#x4E86;&#x7B49;&#x9AD8;&#x5904;&#x7406;&#x7B49;&#xFF0C;&#x8FD9;&#x4E9B;&#x548C;&#x6587;&#x7AE0;&#x4E3B;&#x9898;&#x65E0;&#x5173;&#xFF0C;&#x7B80;&#x8981;&#x4EE3;&#x7801;&#x9644;&#x4E8E;&#x4E0B;&#x6587;</span>
-<span class="hljs-variable"><span class="hljs-keyword">val</span> imgSpan</span> = AnimIsohypseImageSpan(proxyDrawable)
+//第一部分
+//如上文，创建一个动画Drawable
+val drawable = createADrawable()
+//基于代理，利用它简化Drawable.Callback的处理
+val proxyDrawable = DrawableProxy(drawable)
+//您可以认为这就是一个实现了RefreshSpan的ImageSpan，
+//内部做了等高处理等，这些和文章主题无关，简要代码附于下文
+val imgSpan = AnimIsohypseImageSpan(proxyDrawable)
 
-<span class="hljs-comment">//&#x7B2C;&#x4E8C;&#x90E8;&#x5206;</span>
-<span class="hljs-comment">//&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x6F14;&#x793A;&#x7528;&#x7684;Spannable</span>
-<span class="hljs-variable"><span class="hljs-keyword">val</span> ss</span> = SpannableString(<span class="hljs-string">&quot;ImageSpan *&quot;</span>)
-ss.setSpan(imgSpan, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+//第二部分
+//构建一个演示用的Spannable
+val ss = SpannableString("ImageSpan *")
+ss.setSpan(imgSpan, 10, 11, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 tvSpan.text = ss
 
-<span class="hljs-comment">//&#x7B2C;&#x4E09;&#x90E8;&#x5206;</span>
-<span class="hljs-comment">//&#x4F7F;&#x7528;Watcher&#x7B80;&#x5316;&#x56DE;&#x8C03;&#x8BBE;&#x7F6E;</span>
-<span class="hljs-variable"><span class="hljs-keyword">val</span> watchers</span> = ArrayList<span class="hljs-type">&lt;NoCopySpan&gt;</span>()
+//第三部分
+//使用Watcher简化回调设置
+val watchers = ArrayList&lt;NoCopySpan&gt;()
 watchers.add(AnimImageSpanWatcher(tvSpan))
-<span class="hljs-comment">//&#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49;Factory&#x5B9E;&#x73B0;&#x8054;&#x52A8;</span>
+//使用自定义Factory实现联动
 tvSpan.setSpannableFactory(CustomSpannableFactory(watchers))
 
-<span class="hljs-comment">//&#x6F14;&#x793A;&#x624B;&#x52A8;&#x89E6;&#x53D1;&#x52A8;&#x753B;</span>
+//演示手动触发动画
 tvSpan.setOnClickListener {
     drawable.start()
 }
 </code></pre>
 <blockquote>
-<p>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x611F;&#x8C22; <a href="https://juejin.cn/user/835284568906152" target="_blank">&#x957F;&#x5B89;&#x7688;&#x6545;&#x91CC;</a> &#x7684;&#x63D0;&#x9192;&#xFF0C;&#x6211;&#x9057;&#x6F0F;&#x4E86;&#x90E8;&#x5206;&#x4EE3;&#x7801;&#x3002;</p>
+<p>作者按：感谢 <a href="https://juejin.cn/user/835284568906152">长安皈故里</a> 的提醒，我遗漏了部分代码。</p>
 </blockquote>
-<p>&#x53E6;&#x5916;&#x8FD8;&#x6709;&#x4E00;&#x90E8;&#x5206;&#x4EE3;&#x7801;&#xFF0C;&#x4EC5;&#x7528;&#x4E8E;&#x53C2;&#x8003;&#xFF0C;&#x8BFB;&#x8005;&#x8BF8;&#x541B;&#x9700;&#x8981;&#x7ED3;&#x5408;&#x81EA;&#x8EAB;&#x9879;&#x76EE;&#x5B9E;&#x9645;&#x60C5;&#x51B5;&#x8FDB;&#x884C;&#x7C7B;&#x7C07;&#x7684;&#x6269;&#x5C55;</p>
-<pre><code>//DrawableProxy&#x4E2D;&#x7528;&#x5230;
+<p>另外还有一部分代码，仅用于参考，读者诸君需要结合自身项目实际情况进行类簇的扩展</p>
+<pre><code>//DrawableProxy中用到
 interface ResizeDrawable {
     var needResize: Boolean
 }
 
 interface IntegratedSpan
 
-//&#x7B49;&#x9AD8;
+//等高
 open class IsohypseImageSpan : ImageSpan, IntegratedSpan {
-    //&#x6784;&#x9020;&#x5668;&#x548C;&#x7B49;&#x9AD8;&#x8BA1;&#x7B97;&#x3001;&#x7ED8;&#x5236;&#x7B49;&#x7565;
+    //构造器和等高计算、绘制等略
 
     open fun getResizedDrawable(): Drawable {
         val d = drawable
@@ -2029,9 +755,9 @@ open class IsohypseImageSpan : ImageSpan, IntegratedSpan {
     }
 }
 
-//&#x914D;&#x5408;&#x81EA;&#x5B9A;&#x4E49;&#x7684;SpanWatcher
+//配合自定义的SpanWatcher
 open class AnimIsohypseImageSpan : IsohypseImageSpan, RefreshSpan {
-    //&#x6784;&#x9020;&#x5668;&#x7565;
+    //构造器略
 
     override fun getInvalidateDrawable(): OnRefreshListeners? {
         val d = getResizedDrawable()
@@ -2043,9 +769,9 @@ open class AnimIsohypseImageSpan : IsohypseImageSpan, RefreshSpan {
     }
 }
 
-//&#x7528;&#x4E8E;&#x6709;&#x91CD;&#x8BA1;&#x7B97;&#x9AD8;&#x5EA6;&#x7684;&#x9700;&#x6C42;
+//用于有重计算高度的需求
 class ResizeIsoheightImageSpan : AnimIsohypseImageSpan, RefreshSpan {
-    //&#x6784;&#x9020;&#x5668;&#x7565;
+    //构造器略
 
     override fun getResizedDrawable(): Drawable {
         val d = drawable
@@ -2067,138 +793,100 @@ class ResizeIsoheightImageSpan : AnimIsohypseImageSpan, RefreshSpan {
                 drawableHeight)
     }
 }
-</code></pre><p>&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x5728;&#x5DE5;&#x7A0B;&#x4E2D;&#x5E94;&#x7528;&#x65F6;&#xFF1A;</p>
+</code></pre>
+<p>实际上，在工程中应用时：</p>
 <ul>
-<li>&#x7B2C;&#x4E00;&#x90E8;&#x5206;&#x6211;&#x4EEC;&#x4F1A;&#x4F7F;&#x7528;&#x5DE5;&#x5382;&#x7C7B;+&#x4F9D;&#x8D56;&#x6CE8;&#x5165;&#x5DE5;&#x5177;&#xFF0C;&#x5728;&#x4E1A;&#x52A1;&#x5C42;&#x5C4F;&#x853D;&#x6389;&#x7EC6;&#x8282;</li>
-<li>&#x7B2C;&#x4E8C;&#x90E8;&#x5206;&#x7565;&#xFF0C;&#x5982;&#x4F55;&#x6784;&#x5EFA;Spannable&#x5E76;&#x5728;&#x4E1A;&#x52A1;&#x5C42;&#x5C4F;&#x853D;&#x8BE5;&#x7EC6;&#x8282;&#x4E0E;&#x672C;&#x6587;&#x65E0;&#x5173;</li>
-<li>&#x7B2C;&#x4E09;&#x90E8;&#x5206;&#x4E5F;&#x53EF;&#x4EE5;&#x5C4F;&#x853D;&#x6389;&#x4E00;&#x4E9B;&#x7EC6;&#x8282;</li>
+<li>第一部分我们会使用工厂类+依赖注入工具，在业务层屏蔽掉细节</li>
+<li>第二部分略，如何构建Spannable并在业务层屏蔽该细节与本文无关</li>
+<li>第三部分也可以屏蔽掉一些细节</li>
 </ul>
-<p>&#x53EF;&#x4EE5;&#x60F3;&#x8C61;&#x7684;&#x5230;&#xFF0C;&#x4E1A;&#x52A1;&#x5C42;&#x53D8;&#x5F97;&#x7EAF;&#x7CB9;&#x4E86;&#xFF0C;&#x800C;&#x7EC4;&#x4EF6;&#x7684; Ability &#x5C42;&#xFF08;<em>&#x8FD9;&#x662F;&#x7B14;&#x8005;&#x81EA;&#x884C;&#x675C;&#x64B0;&#x7684;&#x547D;&#x540D;&#xFF0C;&#x7528;&#x4E8E;&#x63CF;&#x8FF0;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x63A7;&#x4EF6;&#x3001;&#x53CA;&#x5176;&#x62D3;&#x5C55;&#x529F;&#x80FD;&#x7684;&#x7C7B;</em>&#xFF09;&#x4E5F;&#x4F1A;&#x975E;&#x5E38;&#x5E72;&#x51C0;&#xFF0C;&#x5747;&#x53EF;&#x4EE5;&#x505A;&#x5230;&#x4F9D;&#x8D56;&#x62BD;&#x8C61;&#xFF0C;&#x6309;&#x9700;&#x4F7F;&#x7528;&#xFF0C;&#x7B80;&#x5316;&#x8026;&#x5408;&#x3002;</p>
-<h3 id="&#x6572;&#x54CD;&#x8B66;&#x949F;"><a name="&#x6572;&#x54CD;&#x8B66;&#x949F;" class="anchor-navigation-ex-anchor" href="#&#x6572;&#x54CD;&#x8B66;&#x949F;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6572;&#x54CD;&#x8B66;&#x949F;</h3>
-<p>&#x4E00;&#x822C;&#x6765;&#x8BF4;&#xFF0C;&#x6587;&#x7AE0;&#x5199;&#x5230;&#x8FD9;&#xFF0C;&#x57FA;&#x672C;&#x662F;&#x7ED3;&#x675F;&#x7684;&#x8282;&#x594F;&#xFF0C;&#x53EF;&#x80FD;&#x60A8;&#x4E5F;&#x618B;&#x4E86;&#x597D;&#x957F;&#x4E00;&#x53E3;&#x6C14;&#x624D;&#x770B;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x60F3;&#x7740;&#x53EF;&#x4EE5;&#x7F13;&#x4E00;&#x53E3;&#x6C14;&#x4E86;&#x3002;</p>
-<p>&#x7136;&#x800C;&#x6709;&#x4E2A;&#x574F;&#x6D88;&#x606F;&#x4E0D;&#x5F97;&#x4E0D;&#x544A;&#x8BC9;&#x60A8;&#xFF1A;<strong>&#x5176;&#x5B9E;&#x95EE;&#x9898;&#x5E76;&#x6CA1;&#x6709;&#x5B8C;&#x5168;&#x89E3;&#x51B3;</strong>&#xFF01;</p>
-<p><img width="220" alt="&#x5168;&#x662F;&#x95EE;&#x9898;" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f4959e7c21de4b7e8d41173c53210dbc~tplv-k3u1fbpfcp-watermark.image?"></p>
-<p>&#x56DE;&#x987E;&#x4E00;&#x4E0B;&#x524D;&#x6587;&#xFF0C;&#x6709;&#x8FD9;&#x6837;&#x4E00;&#x6BB5;&#xFF1A;</p>
+<p>可以想象的到，业务层变得纯粹了，而组件的 Ability 层（<em>这是笔者自行杜撰的命名，用于描述自定义的控件、及其拓展功能的类</em>）也会非常干净，均可以做到依赖抽象，按需使用，简化耦合。</p>
+<h3 id="敲响警钟"><a class="header" href="#敲响警钟">敲响警钟</a></h3>
+<p>一般来说，文章写到这，基本是结束的节奏，可能您也憋了好长一口气才看到这里，想着可以缓一口气了。</p>
+<p>然而有个坏消息不得不告诉您：<strong>其实问题并没有完全解决</strong>！</p>
+<img width="220" alt="全是问题" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f4959e7c21de4b7e8d41173c53210dbc~tplv-k3u1fbpfcp-watermark.image?"/>
+<p>回顾一下前文，有这样一段：</p>
 <blockquote>
-<p>&#x52A1;&#x5FC5;&#x6CE8;&#x610F;&#xFF0C;&#x4EC5;&#x7528;&#x4E8E;&#x663E;&#x793A;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5C1A;&#x53EF;&#x4EE5;&#x8BF4;&#x670D;&#x81EA;&#x5DF1;&#x4E0D;&#x8D1F;&#x8D23;&#x4EFB;&#x5730;&#x5FFD;&#x7565; &quot;&#x4E0D;&#x79FB;&#x9664;&#x56DE;&#x8C03;&quot; &#x5E26;&#x6765;&#x7684;&#x8D1F;&#x9762;&#x5F71;&#x54CD;&#xFF0C;&#x8BF8;&#x5982;&#x65E0;&#x6548;&#x5237;&#x65B0;&#x3001;&#x5185;&#x5B58;&#x6CC4;&#x9732;&#x3002;</p>
-<p>&#x800C;&#x5728;&#x7F16;&#x8F91;&#x65F6;&#xFF08;&#x5982;EditText&#x4E2D;&#x4F7F;&#x7528;&#xFF0C;&#x5E76;&#x5220;&#x9664;&#x56FE;&#x7247;&#xFF09;&#x3001;&#x4EE5;&#x53CA;RecycleView&#x4E2D;TextView&#x590D;&#x7528;&#xFF08;&#x63A8;&#x5E7F;&#x5230;&#x53EF;&#x66FF;&#x6362;&#x5448;&#x73B0;&#x5185;&#x5BB9;&#x7684;&#x60C5;&#x51B5;&#xFF09;
-&#x5219;&#x4E0D;&#x5F97;&#x4E0D;&#x79FB;&#x9664;&#x56DE;&#x8C03;&#x3002;&#x5426;&#x5219;&#x8F7B;&#x5219;&#x9020;&#x6210;&#x6027;&#x80FD;&#x635F;&#x8017;&#x548C;&#x5185;&#x5B58;&#x6CC4;&#x9732;&#xFF0C;&#x91CD;&#x5219;&#x7ACB;&#x73B0; UI bug&#x3002;</p>
+<p>务必注意，仅用于显示时，我们尚可以说服自己不负责任地忽略 "不移除回调" 带来的负面影响，诸如无效刷新、内存泄露。</p>
+<p>而在编辑时（如EditText中使用，并删除图片）、以及RecycleView中TextView复用（推广到可替换呈现内容的情况）
+则不得不移除回调。否则轻则造成性能损耗和内存泄露，重则立现 UI bug。</p>
 </blockquote>
-<p>&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x89E3;&#x51B3;&#x4E86;&#x4E00;&#x90E8;&#x5206;&#x95EE;&#x9898;&#xFF1A;</p>
+<p>我们已经解决了一部分问题：</p>
 <ul>
-<li>&#x7B80;&#x5316;&#x6CE8;&#x518C;&#x56DE;&#x8C03;&#xFF0C;&#x8BA9;Spannable&#x53EF;&#x4EE5;&#x88AB;&#x591A;&#x4E2A;View&#x6709;&#x6548;&#x590D;&#x7528;&#xFF0C;&#x5C55;&#x73B0;&#x51FA;&#x52A8;&#x753B;&#x3002;&#x5E76;&#x4E14;&#x5728;&#x5DE5;&#x7A0B;&#x6027;&#x95EE;&#x9898;&#x4E0A;&#x505A;&#x7684;&#x4E0D;&#x9519;&#x3002;</li>
-<li>&#x79FB;&#x9664;Span&#x65F6;&#xFF0C;&#x5BF9;&#x56DE;&#x8C03;&#x8FDB;&#x884C;&#x89E3;&#x6CE8;&#x518C;&#x3002;&#x53EF;&#x56DE;&#x770B; <code>AnimImageSpanWatcher</code> &#x4EE3;&#x7801;</li>
-<li>&#x4F7F;&#x7528;&#x8005;&#x8BA4;&#x4E3A;&#x81EA;&#x8EAB;&#x4E0D;&#x518D;&#x9700;&#x8981;&#x88AB;&#x56DE;&#x8C03;&#x66F4;&#x65B0;&#x65F6;&#xFF0C;&#x89E3;&#x9664;&#x56DE;&#x8C03;&#x3002;&#x53EF;&#x56DE;&#x770B; <code>OnRefreshListener</code> &#x4EE3;&#x7801;&#xFF0C;&#x6CE8;&#x610F;&#xFF0C;&#x8BE5;&#x60C5;&#x51B5;&#x5B8C;&#x5168;&#x4EA4;&#x7ED9;&#x4E1A;&#x52A1;&#x7BA1;&#x63A7;&#x3002;</li>
-<li>&#x5F31;&#x5F15;&#x7528;&#xFF0C;&#x4E0D;&#x59A8;&#x788D;&#x4F7F;&#x7528;&#x8005;&#x53CA;&#x5BBF;&#x4E3B;Activity&#x88AB;&#x56DE;&#x6536;</li>
-<li>&#x7B49;</li>
+<li>简化注册回调，让Spannable可以被多个View有效复用，展现出动画。并且在工程性问题上做的不错。</li>
+<li>移除Span时，对回调进行解注册。可回看 <code>AnimImageSpanWatcher</code> 代码</li>
+<li>使用者认为自身不再需要被回调更新时，解除回调。可回看 <code>OnRefreshListener</code> 代码，注意，该情况完全交给业务管控。</li>
+<li>弱引用，不妨碍使用者及宿主Activity被回收</li>
+<li>等</li>
 </ul>
-<p>&#x4F46;&#x6709;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x95EE;&#x9898;&#xFF1A;RecycleView&#x4E2D;TextView&#x590D;&#x7528;&#xFF08;&#x63A8;&#x5E7F;&#x5230;&#x53EF;&#x66FF;&#x6362;&#x5448;&#x73B0;&#x5185;&#x5BB9;&#x7684;&#x60C5;&#x51B5;&#xFF09;&#x6CA1;&#x6709;&#x8003;&#x8651;&#x3002;</p>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x6CE8;&#x610F;&#xFF0C;EditText&#x5728;&#x7F16;&#x8F91;&#x65F6;&#x7684;&#x7279;&#x6027;&#x3001;&#x9009;&#x4E2D;&#x7279;&#x6027;&#x3001;Span&#x673A;&#x5236;&#x672C;&#x8EAB;&#x7684;&#x7279;&#x6027;&#x95EE;&#x9898;&#xFF0C;&#x6CA1;&#x6709;&#x5728;&#x672C;&#x7BC7;&#x4E2D;&#x5C55;&#x5F00;&#x3002;&#x8FD9;&#x4E0D;&#x4EE3;&#x8868;&#x5B83;&#x4EEC;&#x4E0D;&#x5B58;&#x5728;&#xFF01;</em></p>
-<h2 id="&#x6301;&#x7EED;&#x601D;&#x8003;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x7ED3;&#x8BED;"><a name="&#x6301;&#x7EED;&#x601D;&#x8003;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x7ED3;&#x8BED;" class="anchor-navigation-ex-anchor" href="#&#x6301;&#x7EED;&#x601D;&#x8003;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x7ED3;&#x8BED;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6301;&#x7EED;&#x601D;&#x8003;&amp;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x7ED3;&#x8BED;</h2>
-<p><em>&#x4F5C;&#x8005;&#x6309;&#xFF1A;&#x672C;&#x7BC7;&#x7684;&#x7BC7;&#x5E45;&#x5DF2;&#x7ECF;&#x5F88;&#x957F;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x8FD8;&#x8BF7;&#x6CA1;&#x6709;&#x770B;&#x8FC7;&#x763E;&#x7684;&#x8BFB;&#x8005;&#x4EEC;&#x89C1;&#x8C05;&#xFF0C;&#x8003;&#x8651;&#x5230;&#x5927;&#x591A;&#x6570;&#x8BFB;&#x8005;&#x7684;&#x9605;&#x8BFB;&#x611F;&#x53D7;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5728;&#x6B64;&#x7ED3;&#x675F;&#x4E86;</em></p>
-<p>&#x4F46;&#x5C1A;&#x9057;&#x7559;3&#x4E2A;&#x95EE;&#x9898;&#x9700;&#x8981;&#x6301;&#x7EED;&#x601D;&#x8003;&#xFF1A;</p>
+<p>但有一个重要的问题：RecycleView中TextView复用（推广到可替换呈现内容的情况）没有考虑。</p>
+<p><em>作者按：注意，EditText在编辑时的特性、选中特性、Span机制本身的特性问题，没有在本篇中展开。这不代表它们不存在！</em></p>
+<h2 id="持续思考非常重要的结语"><a class="header" href="#持续思考非常重要的结语">持续思考&amp;非常重要的结语</a></h2>
+<p><em>作者按：本篇的篇幅已经很长了，所以还请没有看过瘾的读者们见谅，考虑到大多数读者的阅读感受，我们需要在此结束了</em></p>
+<p>但尚遗留3个问题需要持续思考：</p>
 <ol>
-<li>RecycleView&#x4E2D;&#xFF0C;&#x63A7;&#x4EF6;&#x590D;&#x7528;&#x4E86;&#xFF0C;&#x95EE;&#x9898;&#x8BE5;&#x5982;&#x4F55;&#x89E3;&#x51B3;&#xFF1F;</li>
+<li>RecycleView中，控件复用了，问题该如何解决？</li>
 </ol>
-<p>&#x5F53;&#x7136;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7B80;&#x5316;&#x95EE;&#x9898;&#x6A21;&#x578B;&#xFF0C;&#x7528; <code>RecycleView&#x4E2D;TextView&#x590D;&#x7528;</code> &#x6765;&#x8868;&#x73B0;&#x592A;&#x91CD;&#x4E86;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7B80;&#x5316;&#x4E3A;&#xFF1A;</p>
+<p>当然，我们可以简化问题模型，用 <code>RecycleView中TextView复用</code> 来表现太重了，我们可以简化为：</p>
 <blockquote>
-<p>&#x4E00;&#x4E2A;TextView&#x5C55;&#x73B0; Spannable-A&#xFF0C;&#x968F;&#x540E;&#x5C55;&#x73B0; Spannable-B&#xFF0C;</p>
+<p>一个TextView展现 Spannable-A，随后展现 Spannable-B，</p>
 </blockquote>
-<ol>
-<li>&#x4F7F;&#x7528;EditText&#x7F16;&#x8F91;&#x65F6;&#xFF0C;&#x662F;&#x5426;&#x4F1A;&#x6709;&#x65B0;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x5220;&#x9664;&#x65F6;&#x5148;&#x9009;&#x4E2D;&#x7684;&#x9700;&#x6C42;&#xFF0C;&#x5220;&#x9664;&#x5B8C;&#x4E4B;&#x540E;&#xFF0C;&#x53C8;&#x5E94;&#x5F53;&#x5982;&#x4F55;&#x89E3;&#x51B3;</li>
-<li>&#x4EE5;&#x4E0A;&#x505A;&#x6CD5;&#x5DF2;&#x7ECF;&#x662F;&#x6700;&#x4F18;&#x4E86;&#x5417;&#xFF1F;&#x8FD8;&#x80FD;&#x4E0D;&#x80FD;&#x7EE7;&#x7EED;&#x4F18;&#x5316;</li>
+<ol start="2">
+<li>使用EditText编辑时，是否会有新的问题，例如：删除时先选中的需求，删除完之后，又应当如何解决</li>
+<li>以上做法已经是最优了吗？还能不能继续优化</li>
 </ol>
-<p><em>&#x56E0;&#x4E3A;&#x6211;&#x8BA4;&#x4E3A;&#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x5C1A;&#x5B58;&#x5728;&#x4F18;&#x5316;&#x7A7A;&#x95F4;&#xFF0C;&#x5E76;&#x4E14;&#x63A8;&#x6D4B;&#x60A8;&#x7684;&#x9879;&#x76EE;&#x4E2D;&#x5DF2;&#x7ECF;&#x4F7F;&#x7528;&#x4E86;Span&#x673A;&#x5236;&#x7684;&#x6269;&#x5C55;&#x4EE5;&#x5B9E;&#x73B0;&#x67D0;&#x4E9B;&#x9700;&#x6C42;&#xFF1B;</em></p>
-<p><em>&#x800C;&#x6211;&#x5C1A;&#x4E0D;&#x6253;&#x7B97;&#x82B1;&#x8D39;&#x5927;&#x91CF;&#x7684;&#x65F6;&#x95F4;&#x7F16;&#x5199;&#x7528;&#x4E8E;&#x517C;&#x5BB9;&#x7528;&#x9014;&#x7684;&#x529F;&#x80FD;&#x7C7B;&#x3002;&#x6240;&#x4EE5;&#x6211;&#x5E76;&#x672A;&#x5C06;&#x8FD9;&#x90E8;&#x5206;&#x4EE3;&#x7801;&#x4F20;&#x5165;&#x4ED3;&#x5E93;&#xFF0C;&#x907F;&#x514D;&#x60A8;&#x76F4;&#x63A5;&#x5F53;&#x505A;&#x5E93;&#x9879;&#x76EE;&#x4F7F;&#x7528;&#xFF0C;&#x5BFC;&#x81F4;&#x539F;&#x529F;&#x80FD;&#x6A21;&#x5757;&#x4E0D;&#x53EF;&#x7528;&#x3002;</em></p>
-<p><em>&#x5982;&#x679C;&#x60A8;&#x5F88;&#x8FEB;&#x5207;&#x7684;&#x9700;&#x8981;&#x5C06;&#x5176;&#x79FB;&#x690D;&#x5230;&#x9879;&#x76EE;&#x4E2D;&#xFF0C;&#x6587;&#x4E2D;&#x7684;&#x4EE3;&#x7801;&#x5DF2;&#x7ECF;&#x6DB5;&#x76D6;&#x6240;&#x6709;&#x91CD;&#x70B9;&#xFF0C;&#x4F46;&#x8BF7;&#x52A1;&#x5FC5;&#x81EA;&#x884C;&#x6D4B;&#x8BD5;&#x76F8;&#x5173;&#x529F;&#x80FD;&#x6A21;&#x5757;&#xFF0C;&#x505A;&#x597D;&#x517C;&#x5BB9;&#x5DE5;&#x4F5C;&#x3002;</em></p>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2023-02-10 13:29:54
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+<p><em>因为我认为以上代码尚存在优化空间，并且推测您的项目中已经使用了Span机制的扩展以实现某些需求；</em></p>
+<p><em>而我尚不打算花费大量的时间编写用于兼容用途的功能类。所以我并未将这部分代码传入仓库，避免您直接当做库项目使用，导致原功能模块不可用。</em></p>
+<p><em>如果您很迫切的需要将其移植到项目中，文中的代码已经涵盖所有重点，但请务必自行测试相关功能模块，做好兼容工作。</em></p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../Android/Drawable/post_47.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../Android/Mechanism/Message/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="post_47.html" class="navigation navigation-prev " aria-label="Previous page: 迟来的续集--Drawable+Animator，将优雅进行到底">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="../Mechanism/Message/" class="navigation navigation-next " aria-label="Next page: 消息机制">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../Android/Drawable/post_47.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../Android/Mechanism/Message/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"好玩系列：让ImageSpan动起来","level":"1.2.2.4","depth":3,"next":{"title":"消息机制","level":"1.2.3","depth":2,"path":"Android/Mechanism/Message/README.md","ref":"./Android/Mechanism/Message/README.md","articles":[{"title":"三思系列：Android的消息机制，一文吃透","level":"1.2.3.1","depth":3,"path":"Android/Mechanism/Message/post_8.md","ref":"./Android/Mechanism/Message/post_8.md","articles":[]}]},"previous":{"title":"迟来的续集--Drawable+Animator，将优雅进行到底","level":"1.2.2.3","depth":3,"path":"Android/Drawable/post_47.md","ref":"Android/Drawable/post_47.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Android/Drawable/post_49.md","mtime":"2023-02-10T05:29:54.176Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"../..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../../gitbook/gitbook.js"></script>
-    <script src="../../gitbook/theme.js"></script>
-    
-        
-        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-

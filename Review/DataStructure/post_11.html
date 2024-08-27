@@ -1,1674 +1,367 @@
-
 <!DOCTYPE HTML>
-<html lang="" >
+<html lang="en" class="light" dir="ltr">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>温故：线性表 · GitBook</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>温故：线性表 - leobert&#x27;s blog</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta name="description" content="">
-        <meta name="generator" content="GitBook 3.2.3">
-        
-        
-        
-    
-    <link rel="stylesheet" href="../../gitbook/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
-                
-            
-                
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
-                
-            
-        
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
 
-    
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
 
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
 
-        
-    
-    
-    <meta name="HandheldFriendly" content="true"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
-    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
-
-    
-    <link rel="next" href="post_12.html" />
-    
-    
-    <link rel="prev" href="./" />
-    
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
-        
-<div class="book">
-    <div class="book-summary">
-        
-            
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
-            
-                <nav role="navigation">
-                
-
-
-<ul class="summary">
-    
-    
-
-    
-
-    
-        
-        
-    
-        <li class="chapter " data-level="1.1" data-path="../../">
-            
-                <a href="../../">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../../Android/">
-            
-                <a href="../../Android/">
-            
-                    
-                    Android
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1" data-path="../../Android/View/">
-            
-                <a href="../../Android/View/">
-            
-                    
-                    View
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.1.1" data-path="../../Android/View/post_1.html">
-            
-                <a href="../../Android/View/post_1.html">
-            
-                    
-                    好玩系列：优雅的处理ButterKnife和KAE被废弃
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.2" data-path="../../Android/View/post_6.html">
-            
-                <a href="../../Android/View/post_6.html">
-            
-                    
-                    三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.3" data-path="../../Android/View/post_7.html">
-            
-                <a href="../../Android/View/post_7.html">
-            
-                    
-                    三思系列：为什么自定义View
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.1.4" data-path="../../Android/Idea/post_9.html">
-            
-                <a href="../../Android/Idea/post_9.html">
-            
-                    
-                    三思系列："声明式UI"和"命令式UI"，你的理解可能是错的
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="../../Android/Drawable/">
-            
-                <a href="../../Android/Drawable/">
-            
-                    
-                    Drawable
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.2.1" data-path="../../Android/Drawable/post_2.html">
-            
-                <a href="../../Android/Drawable/post_2.html">
-            
-                    
-                    三思系列：重新认识Drawable
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.2" data-path="../../Android/Drawable/post_4.html">
-            
-                <a href="../../Android/Drawable/post_4.html">
-            
-                    
-                    好玩系列：拥有它，XML文件少一半--更方便的处理View背景
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.3" data-path="../../Android/Drawable/post_47.html">
-            
-                <a href="../../Android/Drawable/post_47.html">
-            
-                    
-                    迟来的续集--Drawable+Animator，将优雅进行到底
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2.4" data-path="../../Android/Drawable/post_49.html">
-            
-                <a href="../../Android/Drawable/post_49.html">
-            
-                    
-                    好玩系列：让ImageSpan动起来
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.3" data-path="../../Android/Mechanism/Message/">
-            
-                <a href="../../Android/Mechanism/Message/">
-            
-                    
-                    消息机制
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.3.1" data-path="../../Android/Mechanism/Message/post_8.html">
-            
-                <a href="../../Android/Mechanism/Message/post_8.html">
-            
-                    
-                    三思系列：Android的消息机制，一文吃透
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="../../Android/Idea/post_14/">
-            
-                <a href="../../Android/Idea/post_14/">
-            
-                    
-                    兼容
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.4.1" data-path="../../Android/Idea/post_14.html">
-            
-                <a href="../../Android/Idea/post_14.html">
-            
-                    
-                    好玩系列：让项目中的相册支持Heif格式图片
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="../../Android/Glide/">
-            
-                <a href="../../Android/Glide/">
-            
-                    
-                    Glide
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.5.1" data-path="../../Android/Glide/post_15.html">
-            
-                <a href="../../Android/Glide/post_15.html">
-            
-                    
-                    三思系列：Glide 4.X全方位认知 -- 模块职责概览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5.2" data-path="../../Android/Glide/post_16.html">
-            
-                <a href="../../Android/Glide/post_16.html">
-            
-                    
-                    三思系列：Glide 4.X加载过程一文掌握 | Glide（二）
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.6" data-path="../../Android/KSP/">
-            
-                <a href="../../Android/KSP/">
-            
-                    
-                    KSP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.6.1" data-path="../../Android/KSP/post_24.html">
-            
-                <a href="../../Android/KSP/post_24.html">
-            
-                    
-                    好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.7" data-path="../../Android/Base/">
-            
-                <a href="../../Android/Base/">
-            
-                    
-                    基础
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.7.1" data-path="../../Android/Base/post_35.html">
-            
-                <a href="../../Android/Base/post_35.html">
-            
-                    
-                    孔乙己：你可知道页面和弹窗“通信“的方式有四种？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.8" data-path="../../Android/SysApp/">
-            
-                <a href="../../Android/SysApp/">
-            
-                    
-                    系统APP
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.8.1" data-path="../../Android/SysApp/post_52.html">
-            
-                <a href="../../Android/SysApp/post_52.html">
-            
-                    
-                    使用日历丰富产品的用户体验
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.9" data-path="../../Android/DI/">
-            
-                <a href="../../Android/DI/">
-            
-                    
-                    Part4-依赖注入部分
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.2.9.1" data-path="../../Android/DI/post_53.html">
-            
-                <a href="../../Android/DI/post_53.html">
-            
-                    
-                    Hilt进阶--一文吃透Hilt自定义与跨壁垒
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3" data-path="../../Compose/">
-            
-                <a href="../../Compose/">
-            
-                    
-                    Jetpack Compose
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.3.1" data-path="../../Compose/post_21.html">
-            
-                <a href="../../Compose/post_21.html">
-            
-                    
-                    Jetpack Compose | 一文理解神奇的Modifier
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.2" data-path="../../Compose/post_26.html">
-            
-                <a href="../../Compose/post_26.html">
-            
-                    
-                    Jetpack Compose | 控件篇（一） -- Text、TextField、Button
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.3" data-path="../../Compose/post_27.html">
-            
-                <a href="../../Compose/post_27.html">
-            
-                    
-                    Jetpack Compose | 控件篇（二） -- Icon，Image
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.4" data-path="../../Compose/post_28.html">
-            
-                <a href="../../Compose/post_28.html">
-            
-                    
-                    Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.5" data-path="../../Compose/post_29.html">
-            
-                <a href="../../Compose/post_29.html">
-            
-                    
-                    Jetpack Compose | 控件篇（四）-- Box、Row、Column
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.3.6" data-path="../../Compose/post_30.html">
-            
-                <a href="../../Compose/post_30.html">
-            
-                    
-                    Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4" data-path="../../MultiThreading/">
-            
-                <a href="../../MultiThreading/">
-            
-                    
-                    Java多线程
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.4.1" data-path="../../MultiThreading/post_33.html">
-            
-                <a href="../../MultiThreading/post_33.html">
-            
-                    
-                    总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../../MultiThreading/post_37.html">
-            
-                <a href="../../MultiThreading/post_37.html">
-            
-                    
-                    Java基础--图解JVM内存模型和JVM线程模型
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.3" data-path="../../MultiThreading/post_38.html">
-            
-                <a href="../../MultiThreading/post_38.html">
-            
-                    
-                    Java多线程系列--掌控面试，一文吃透Synchronized锁
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.4" data-path="../../MultiThreading/post_39.html">
-            
-                <a href="../../MultiThreading/post_39.html">
-            
-                    
-                    Java多线程基础--线程生命周期与线程协作详解
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.5" data-path="../../MultiThreading/post_42.html">
-            
-                <a href="../../MultiThreading/post_42.html">
-            
-                    
-                    Java多线程基础--线程的创建与线程池管理
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.6" data-path="../../MultiThreading/post_46.html">
-            
-                <a href="../../MultiThreading/post_46.html">
-            
-                    
-                    Java多线程系列--掌握Future，轻松获取异步任务结果
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.7" data-path="../../MultiThreading/post_50.html">
-            
-                <a href="../../MultiThreading/post_50.html">
-            
-                    
-                    Java多线程系列--Fork&Join框架，分治的艺术
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.8" data-path="../../MultiThreading/post_54.html">
-            
-                <a href="../../MultiThreading/post_54.html">
-            
-                    
-                    Java多线程系列--掌握CompletableFuture，驾驭异步编程
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5" data-path="../../IO/">
-            
-                <a href="../../IO/">
-            
-                    
-                    Java IO系列
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.5.1" data-path="../../IO/post_55.html">
-            
-                <a href="../../IO/post_55.html">
-            
-                    
-                    Java IO 系列总纲
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.2" data-path="../../IO/post_56.html">
-            
-                <a href="../../IO/post_56.html">
-            
-                    
-                    Java IO系列 | 经典 IO
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.3" data-path="../../IO/post_57.html">
-            
-                <a href="../../IO/post_57.html">
-            
-                    
-                    Java IO 系列 | NIO-1.0一文速览
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.4" data-path="../../IO/post_58.html">
-            
-                <a href="../../IO/post_58.html">
-            
-                    
-                    Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.5.5" data-path="../../IO/post_59.html">
-            
-                <a href="../../IO/post_59.html">
-            
-                    
-                    IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6" data-path="../../Gradle/">
-            
-                <a href="../../Gradle/">
-            
-                    
-                    Gradle
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../../Gradle/Modularization/post_18.html">
-            
-                <a href="../../Gradle/Modularization/post_18.html">
-            
-                    
-                    三思系列：组件化场景下module依赖优雅实践方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../../Gradle/Publish/post_17.html">
-            
-                <a href="../../Gradle/Publish/post_17.html">
-            
-                    
-                    迁移到MavenCentral--再不行动起来，你的托管的library就没了
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../../Gradle/post_22.html">
-            
-                <a href="../../Gradle/post_22.html">
-            
-                    
-                    Gradle | 依赖管理最佳实践
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7" data-path="../../Groovy/">
-            
-                <a href="../../Groovy/">
-            
-                    
-                    Groovy
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.7.1" data-path="../../Groovy/why_write_groovy.html">
-            
-                <a href="../../Groovy/why_write_groovy.html">
-            
-                    
-                    为什么撰写这个系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.2" data-path="../../Groovy/post_23.html">
-            
-                <a href="../../Groovy/post_23.html">
-            
-                    
-                    Groovy：MOP一文打尽
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8" data-path="../">
-            
-                <a href="../">
-            
-                    
-                    Review
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.8.1" data-path="../post_10.html">
-            
-                <a href="../post_10.html">
-            
-                    
-                    造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.2" data-path="../post_40.html">
-            
-                <a href="../post_40.html">
-            
-                    
-                    三思系列：前人用GreenDao留下的坑，全线被扣了绩效
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.3" data-path="../post_44.html">
-            
-                <a href="../post_44.html">
-            
-                    
-                    谈一谈在两个商业项目中使用MVI架构后的感悟
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.8.4" data-path="../post_45.html">
-            
-                <a href="../post_45.html">
-            
-                    
-                    Review | 这三个坑你遇到了吗？
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../../repo/">
-            
-                <a href="../../repo/">
-            
-                    
-                    个人项目
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.9.1" data-path="../../repo/DaVinCi.html">
-            
-                <a href="../../repo/DaVinCi.html">
-            
-                    
-                    DaVinCi,取代XML编写Shape或ColorStateList的方案
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.2" data-path="../../Android/Idea/post_32.html">
-            
-                <a href="../../Android/Idea/post_32.html">
-            
-                    
-                    好玩系列：白嫖一个优雅的类图生成工具
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.3" data-path="../../Speculative/post_43.html">
-            
-                <a href="../../Speculative/post_43.html">
-            
-                    
-                    初体验：动手搭建"小清新式"局域网文档系统
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.4" data-path="../../repo/post_48.html">
-            
-                <a href="../../repo/post_48.html">
-            
-                    
-                    研究良久，终于发现了他代码写的快且bug少的原因
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9.5" data-path="../../Speculative/post_61.html">
-            
-                <a href="../../Speculative/post_61.html">
-            
-                    
-                    好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" data-path="./">
-            
-                <a href="./">
-            
-                    
-                    数据结构
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter active" data-level="2.1.1" data-path="post_11.html">
-            
-                <a href="post_11.html">
-            
-                    
-                    温故：线性表
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.2" data-path="post_12.html">
-            
-                <a href="post_12.html">
-            
-                    
-                    温故：栈
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.1.3" data-path="post_13.html">
-            
-                <a href="post_13.html">
-            
-                    
-                    温故：队列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2" data-path="../README2.html">
-            
-                <a href="../README2.html">
-            
-                    
-                    年终总结&计划
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.2.1" data-path="../post_36.html">
-            
-                <a href="../post_36.html">
-            
-                    
-                    2021年终总结
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.2" data-path="../post_51.html">
-            
-                <a href="../post_51.html">
-            
-                    
-                    关于画一个句号--基于2022年终总结的反思与分享
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.3" data-path="../post_60.html">
-            
-                <a href="../post_60.html">
-            
-                    
-                    突如其来的秋季反思
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.4" data-path="../post_63.html">
-            
-                <a href="../post_63.html">
-            
-                    
-                    2023年总结 寻找到源于内心深处的无穷力量
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.2.5" data-path="../post_64.html">
-            
-                <a href="../post_64.html">
-            
-                    
-                    2024年中思考，推倒樊笼重新出发
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.3" data-path="../../Note/">
-            
-                <a href="../../Note/">
-            
-                    
-                    读书笔记
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.3.1" data-path="../../Note/post_41.html">
-            
-                <a href="../../Note/post_41.html">
-            
-                    
-                    读书笔记：《简约至上--交互式设计四策略》
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4" data-path="../../Talk/">
-            
-                <a href="../../Talk/">
-            
-                    
-                    杂谈
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.4.1" data-path="../../Talk/talk_1.html">
-            
-                <a href="../../Talk/talk_1.html">
-            
-                    
-                    杂谈1-2022-11
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.4.2" data-path="../../Talk/talk_2_2023-03.html">
-            
-                <a href="../../Talk/talk_2_2023-03.html">
-            
-                    
-                    杂篇（二）-- 认识并战胜焦虑
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.5" data-path="../../Thought/">
-            
-                <a href="../../Thought/">
-            
-                    
-                    半成熟的思考
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.5.1" data-path="../../Thought/post_62.html">
-            
-                <a href="../../Thought/post_62.html">
-            
-                    
-                    好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6" data-path="../../info/">
-            
-                <a href="../../info/">
-            
-                    
-                    系列说明
-            
-                </a>
-            
-
-            
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="2.6.1" data-path="../../info/about_view_series.html">
-            
-                <a href="../../info/about_view_series.html">
-            
-                    
-                    关于View系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.2" data-path="../../info/about_sansi_series.html">
-            
-                <a href="../../info/about_sansi_series.html">
-            
-                    
-                    关于三思系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.3" data-path="../../info/about_haowan_series.html">
-            
-                <a href="../../info/about_haowan_series.html">
-            
-                    
-                    关于好玩系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="2.6.4" data-path="../../info/about_wengu_series.html">
-            
-                <a href="../../info/about_wengu_series.html">
-            
-                    
-                    关于温故系列
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
-        </li>
-    
-
-    
-
-    <li class="divider"></li>
-
-    <li>
-        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
-            Published with GitBook
-        </a>
-    </li>
-</ul>
-
-
-                </nav>
-            
-        
-    </div>
-
-    <div class="book-body">
-        
-            <div class="body-inner">
-                
-                    
-
-<div class="book-header" role="navigation">
-    
-
-    <!-- Title -->
-    <h1>
-        <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >温故：线性表</a>
-    </h1>
-</div>
-
-
-
-
-                    <div class="page-wrapper" tabindex="-1" role="main">
-                        <div class="page-inner">
-                            
-<div id="book-search-results">
-    <div class="search-noresults">
-    
-                                <section class="normal markdown-section">
-                                
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><ul><li><span class="title-icon "></span><a href="#&#x57FA;&#x672C;&#x6982;&#x5FF5;"><b></b>&#x57FA;&#x672C;&#x6982;&#x5FF5;</a></li><li><span class="title-icon "></span><a href="#&#x987A;&#x5E8F;&#x8868;"><b></b>&#x987A;&#x5E8F;&#x8868;</a></li><li><span class="title-icon "></span><a href="#&#x94FE;&#x8868;"><b></b>&#x94FE;&#x8868;</a></li><li><span class="title-icon "></span><a href="#&#x9759;&#x6001;&#x94FE;&#x8868;"><b></b>&#x9759;&#x6001;&#x94FE;&#x8868;</a></li><li><span class="title-icon "></span><a href="#&#x7B97;&#x6CD5;&#x9898;&#x5C0F;&#x7EC3;&#x624B;"><b></b>&#x7B97;&#x6CD5;&#x9898;&#x5C0F;&#x7EC3;&#x624B;</a></li><li><span class="title-icon "></span><a href="#&#x6E29;&#x6545;&#x603B;&#x7ED3;"><b></b>&#x6E29;&#x6545;&#x603B;&#x7ED3;</a></li></ul></ul></div><a href="#" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><p>&#x6E29;&#x6545;&#xFF1A;&#x7EBF;&#x6027;&#x8868;|&#x6570;&#x636E;&#x7ED3;&#x6784;</p>
-<p>&#x5BF9; &#x6570;&#x636E;&#x7ED3;&#x6784; - <code>&#x7EBF;&#x6027;&#x8868;</code> &#x8FDB;&#x884C;&#x6E29;&#x6545;&#xFF0C;&#x4EE5;&#x671F;&#x83B7;&#x65B0;&#x77E5;</p>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_14/index.html"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_11.html" class="active"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li></ol></li><li class="chapter-item expanded "><a href="../../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li></ol></li><li class="chapter-item expanded "><a href="../../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li></ol></li><li class="chapter-item expanded "><a href="../../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li></ol></li><li class="chapter-item expanded "><a href="../../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">leobert&#x27;s blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>温故：线性表|数据结构</p>
+<p>对 数据结构 - <code>线性表</code> 进行温故，以期获新知</p>
 <blockquote>
-<p>&#x6E29;&#x6545;&#x7CFB;&#x5217;&#x662F;&#x6211;&#x5C1D;&#x8BD5;&#x7684;&#x4E00;&#x79CD;&#x65B0;&#x5B66;&#x4E60;&#x603B;&#x7ED3;&#x65B9;&#x5F0F;&#xFF0C;&#x5728; <code>&#x9605;&#x5386;&#x589E;&#x957F;</code>&#x65F6;&#xFF0C;&#x603B;&#x7ED3;&#x65E7;&#x95FB;&#xFF0C;&#x4EE5; <code>&#x671F;&#x83B7;</code> &#x65B0;&#x77E5;&#xFF0C;&#x5E76;&#x4E0D;&#x65AD;&#x8FED;&#x4EE3;&#x3002;<a href="https://github.com/leobert-lan/Blog/blob/main/info/%E5%85%B3%E4%BA%8E%E6%B8%A9%E6%95%85%E7%B3%BB%E5%88%97.md" target="_blank">&#x4E86;&#x89E3;&#x66F4;&#x591A;</a></p>
-<p>&#x672C;&#x6B21;&#x6E29;&#x6545;&#x65F6;&#x95F4;&#xFF1A;2021&#x5E74;3&#x6708;</p>
-<p>&#x6CE8;&#xFF1A;<em>&#x90E8;&#x5206;&#x56FE;&#x7247;&#x6765;&#x81EA;&#x7F51;&#x7EDC;&#x68C0;&#x7D22;&#xFF0C;&#x672A;&#x627E;&#x5230;&#x51FA;&#x5904;&#xFF0C;&#x5185;&#x5BB9;&#x4EC5;&#x4F9B;&#x5B66;&#x4E60;&#xFF0C;&#x5982;&#x6709;&#x4FB5;&#x6743;&#xFF0C;&#x53EF;&#x7559;&#x8A00;&#x8054;&#x7CFB; <code>&#x8981;&#x6C42;&#x5220;&#x9664;</code> &#x6216;&#x8005; <code>&#x8981;&#x6C42;&#x6307;&#x660E;&#x51FA;&#x5904;</code></em></p>
+<p>温故系列是我尝试的一种新学习总结方式，在 <code>阅历增长</code>时，总结旧闻，以 <code>期获</code> 新知，并不断迭代。<a href="https://github.com/leobert-lan/Blog/blob/main/info/%E5%85%B3%E4%BA%8E%E6%B8%A9%E6%95%85%E7%B3%BB%E5%88%97.md">了解更多</a></p>
+<p>本次温故时间：2021年3月</p>
 </blockquote>
-<h2 id="&#x57FA;&#x672C;&#x6982;&#x5FF5;"><a name="&#x57FA;&#x672C;&#x6982;&#x5FF5;" class="anchor-navigation-ex-anchor" href="#&#x57FA;&#x672C;&#x6982;&#x5FF5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x57FA;&#x672C;&#x6982;&#x5FF5;</h2>
-<p><code>&#x7EBF;&#x6027;&#x8868;</code> &#xFF0C;&#x5168;&#x540D;&#x4E3A; <code>&#x7EBF;&#x6027;&#x5B58;&#x50A8;&#x7ED3;&#x6784;</code>&#xFF0C;&#x662F;&#x4E00;&#x79CD; <code>&#x6709;&#x5E8F;&#x6570;&#x636E;&#x9879;</code> &#x7684; <code>&#x96C6;&#x5408;</code>&#xFF0C;&#x5176;&#x4E2D;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x90FD;&#x6709; <code>&#x552F;&#x4E00;</code> &#x7684; <code>&#x524D;&#x9A71;</code> &#x548C; <code>&#x540E;&#x7EE7;</code>&#xFF0C;
-<em>&#x6CE8;&#x610F;&#xFF1A;&#x7B2C;&#x4E00;&#x4E2A;&#x6CA1;&#x6709;&#x524D;&#x9A71;&#xFF0C;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x6CA1;&#x6709;&#x540E;&#x7EE7;</em>&#x3002;</p>
-<p>&#x65B0;&#x6570;&#x636E;&#x9879;&#x52A0;&#x5165;&#x5230;&#x6570;&#x636E;&#x96C6;&#x4E2D;&#x65F6;&#xFF0C;&#x53EA;&#x4F1A;&#x52A0;&#x5165;&#x5230;&#x539F;&#x6709;&#x67D0;&#x4E2A;&#x6570;&#x636E;&#x9879; <code>&#x4E4B;&#x524D;</code> &#x6216;&#x8005; <code>&#x4E4B;&#x540E;</code> </p>
-<p><img src="&#x6E29;&#x6545;&#xFF1A;&#x7EBF;&#x6027;&#x8868;/table1.gif" alt="table1"></p>
-<p>&#x4ECE;&#x4E0A;&#x56FE;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#xFF0C;&#x7EBF;&#x6027;&#x8868;&#x662F;<code>&#x5C06;&#x6570;&#x636E;&#x9879;&#x4E32;&#x8D77;&#x6765;</code> &#x4E4B;&#x540E; <code>&#x5B58;&#x5165;&#x7269;&#x7406;&#x7A7A;&#x95F4;</code> &#x7684;&#x4E00;&#x79CD;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;</p>
-<p><img src="&#x6E29;&#x6545;&#xFF1A;&#x7EBF;&#x6027;&#x8868;/table2.gif" alt="table1"></p>
-<p>&#x4E0D;&#x540C;&#x7684;&#x5B58;&#x50A8;&#x65B9;&#x5F0F;&#xFF0C;&#x884D;&#x751F;&#x51FA;&#x4E24;&#x79CD;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#xFF1A;</p>
-<ul>
-<li>&#x5C06;&#x6570;&#x636E; <code>&#x4F9D;&#x6B21;&#x5B58;&#x50A8;</code> &#x5728; <code>&#x8FDE;&#x7EED;&#x7684;&#x6574;&#x5757;</code> &#x7269;&#x7406;&#x7A7A;&#x95F4;&#x4E2D;&#xFF0C;&#x662F; <code>&#x987A;&#x5E8F;&#x5B58;&#x50A8;&#x7ED3;&#x6784;</code> &#x53C8;&#x79F0; <code>&#x987A;&#x5E8F;&#x8868;</code>&#xFF1B;</li>
-<li>&#x5C06;&#x6570;&#x636E; <code>&#x5206;&#x6563;&#x5B58;&#x50A8;</code> &#x5728;&#x7269;&#x7406;&#x7A7A;&#x95F4;&#x4E2D;&#xFF0C;&#x5E76;&#x80FD;&#x591F;&#x5B58;&#x50A8;&#x6570;&#x636E;&#x9879;&#x4E4B;&#x95F4;&#x7684; <code>&#x524D;&#x3001;&#x540E;&#x9A71;</code> &#x5173;&#x7CFB;&#xFF0C;&#x662F; <code>&#x94FE;&#x5F0F;&#x5B58;&#x50A8;&#x7ED3;&#x6784;</code> &#xFF0C;&#x53C8;&#x79F0; <code>&#x94FE;&#x8868;</code>&#xFF1B;</li>
-</ul>
-<h2 id="&#x987A;&#x5E8F;&#x8868;"><a name="&#x987A;&#x5E8F;&#x8868;" class="anchor-navigation-ex-anchor" href="#&#x987A;&#x5E8F;&#x8868;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x987A;&#x5E8F;&#x8868;</h2>
-<p>&#x5176;&#x6027;&#x8D28;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5BF9;&#x5E94;&#x5230; <code>&#x6570;&#x7EC4;</code>&#xFF0C;&#x5177;&#x6709;&#x968F;&#x673A;&#x8BFB;&#x5199;&#x80FD;&#x529B;&#xFF0C;&#x4F7F;&#x7528;&#x9700;&#x8981;&#x5148;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x83B7;&#x53D6; <code>&#x6574;&#x5757;&#x7684;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;</code>&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x4E2D;&#x9700;&#x8981;&#x6269;&#x5BB9;&#xFF0C;
-&#x5219;&#x9700;&#x8981;&#x5148;&#x5206;&#x914D;&#x4E00;&#x5757;&#x65B0;&#x7684;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#xFF0C;&#x5E76;&#x8FDB;&#x884C;&#x5185;&#x5BB9;&#x590D;&#x5236;&#x3002;</p>
-<h2 id="&#x94FE;&#x8868;"><a name="&#x94FE;&#x8868;" class="anchor-navigation-ex-anchor" href="#&#x94FE;&#x8868;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x94FE;&#x8868;</h2>
-<p>&#x666E;&#x901A;&#x94FE;&#x8868;&#x53C8;&#x79F0;&#x5355;&#x94FE;&#x8868;&#xFF0C;&#x7528;&#x4E8E;&#x5B58;&#x50A8;&#x903B;&#x8F91;&#x5173;&#x7CFB;&#x4E3A; &quot;&#x4E00;&#x5BF9;&#x4E00;&quot; &#x7684;&#x6570;&#x636E;&#x3002;</p>
-<p>&#x4E0E;&#x987A;&#x5E8F;&#x8868;&#x4E0D;&#x540C;&#xFF0C;&#x94FE;&#x8868;&#x4E0D;&#x9650;&#x5236;&#x6570;&#x636E;&#x7684;&#x7269;&#x7406;&#x5B58;&#x50A8;&#x72B6;&#x6001;&#xFF0C;&#x5373;&#x6570;&#x636E;&#x9879;&#x7684;&#x7269;&#x7406;&#x5B58;&#x50A8;&#x4F4D;&#x7F6E;&#x662F;&#x968F;&#x673A;&#x7684;&#x3002;</p>
-<p>&#x6BCF;&#x4E2A; <code>&#x8282;&#x70B9;</code> &#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x9879;&#xFF0C;&#x5305;&#x542B;&#x4E86;&#x4E24;&#x90E8;&#x5206;&#x4FE1;&#x606F;&#xFF1A;</p>
-<ul>
-<li>&#x6570;&#x636E;&#x5143;&#x7D20;&#x672C;&#x8EAB;&#xFF0C;&#x5176;&#x6240;&#x5728;&#x7684;&#x533A;&#x57DF;&#x79F0;&#x4E3A; <code>&#x6570;&#x636E;&#x57DF;</code>&#xFF1B; </li>
-<li>&#x6307;&#x5411; <code>&#x76F4;&#x63A5;&#x540E;&#x7EE7;&#x5143;&#x7D20;</code> &#x7684;&#x6307;&#x9488;&#xFF0C;&#x6240;&#x5728;&#x7684;&#x533A;&#x57DF;&#x79F0;&#x4E3A; <code>&#x6307;&#x9488;&#x57DF;</code>&#xFF1B;</li>
-</ul>
-<p><code>&#x5934;&#x6307;&#x9488;</code> &#xFF1A;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x7684;&#x6307;&#x9488;&#xFF0C;&#x5B83;&#x7684;&#x7279;&#x70B9;&#x662F;&#x6C38;&#x8FDC;&#x6307;&#x5411;&#x94FE;&#x8868;&#x7B2C;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</p>
-<p><code>&#x5934;&#x8282;&#x70B9;</code> &#xFF1A;&#x4E00;&#x4E2A; <code>&#x4E0D;&#x5B58;&#x4EFB;&#x4F55;&#x6570;&#x636E;</code> &#x7684;&#x7A7A;&#x8282;&#x70B9;&#x3002;&#x4E0D;&#x662F;&#x5FC5;&#x987B;&#x7684;&#xFF0C;&#x4F46;&#x53EF;&#x4EE5;&#x89E3;&#x51B3;&#x4E00;&#x4E9B;&#x5B9E;&#x9645;&#x95EE;&#x9898;&#xFF1A;</p>
-<ul>
-<li>&#x94FE;&#x8868;&#x6570;&#x636E;&#x53D8;&#x52A8;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x7EF4;&#x62A4; <code>&#x94FE;&#x8868;&#x7684;&#x5F15;&#x7528;&#x5730;&#x5740;</code> &#x5373; <code>&#x5934;&#x6307;&#x9488;</code> &#x7684;&#x95EE;&#x9898;</li>
-<li>&#x904D;&#x5386;&#x65F6;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x5BF9;&#x7B2C;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x7279;&#x6B8A;&#x5904;&#x7406;</li>
-</ul>
-<p><code>&#x9996;&#x5143;&#x8282;&#x70B9;</code> &#xFF1A;&#x94FE;&#x8868;&#x4E2D;&#x7B2C;&#x4E00;&#x4E2A;&#x5B58;&#x6709;&#x6570;&#x636E;&#x7684;&#x8282;&#x70B9;&#x4E3A;&#x9996;&#x5143;&#x8282;&#x70B9;&#x3002;</p>
-<h2 id="&#x9759;&#x6001;&#x94FE;&#x8868;"><a name="&#x9759;&#x6001;&#x94FE;&#x8868;" class="anchor-navigation-ex-anchor" href="#&#x9759;&#x6001;&#x94FE;&#x8868;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x9759;&#x6001;&#x94FE;&#x8868;</h2>
-<p>&#x6BD4;&#x8F83;&#x65E9;&#x671F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5E76;&#x4E0D;&#x80FD;&#x50CF;C&#x8BED;&#x8A00;&#x90A3;&#x6837;&#x7075;&#x6D3B;&#x7684;&#x64CD;&#x4F5C;&#x6307;&#x9488;&#xFF0C;&#x4E8E;&#x662F;&#x7528; <code>&#x6570;&#x7EC4;&#x4EE3;&#x66FF;&#x6307;&#x9488;</code> &#x6765;&#x63CF;&#x8FF0;&#x5355;&#x94FE;&#x8868;&#x3002;
-&#x8FD9;&#x79CD;&#x7528;&#x6570;&#x7EC4;&#x63CF;&#x8FF0;&#x7684;&#x94FE;&#x8868;&#x53EB;&#x505A;&#x9759;&#x6001;&#x94FE;&#x8868;&#xFF0C;&#x8FD9;&#x79CD;&#x63CF;&#x8FF0;&#x65B9;&#x6CD5;&#x53EB;&#x505A; <code>&#x6E38;&#x6807;&#x5B9E;&#x73B0;&#x6CD5;</code>&#x3002;</p>
-<h2 id="&#x7B97;&#x6CD5;&#x9898;&#x5C0F;&#x7EC3;&#x624B;"><a name="&#x7B97;&#x6CD5;&#x9898;&#x5C0F;&#x7EC3;&#x624B;" class="anchor-navigation-ex-anchor" href="#&#x7B97;&#x6CD5;&#x9898;&#x5C0F;&#x7EC3;&#x624B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x7B97;&#x6CD5;&#x9898;&#x5C0F;&#x7EC3;&#x624B;</h2>
-<p>206.<a href="https://leetcode-cn.com/problems/reverse-linked-list/" target="_blank">&#x53CD;&#x8F6C;&#x94FE;&#x8868;</a></p>
 <blockquote>
-<p>&#x53CD;&#x8F6C;&#x4E00;&#x4E2A;&#x5355;&#x94FE;&#x8868;&#x3002;</p>
+<p>注：<em>部分图片来自网络检索，未找到出处，内容仅供学习，如有侵权，可留言联系 <code>要求删除</code> 或者 <code>要求指明出处</code></em></p>
 </blockquote>
-<p>&#x793A;&#x4F8B;:</p>
-<pre><code>&#x8F93;&#x5165;: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
-&#x8F93;&#x51FA;: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
-</code></pre><blockquote>
-<p>&#x8FDB;&#x9636;:
-&#x4F60;&#x53EF;&#x4EE5;&#x8FED;&#x4EE3;&#x6216;&#x9012;&#x5F52;&#x5730;&#x53CD;&#x8F6C;&#x94FE;&#x8868;&#x3002;&#x4F60;&#x80FD;&#x5426;&#x7528;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x89E3;&#x51B3;&#x8FD9;&#x9053;&#x9898;&#xFF1F;</p>
+<h2 id="基本概念"><a class="header" href="#基本概念">基本概念</a></h2>
+<p><code>线性表</code> ，全名为 <code>线性存储结构</code>，是一种 <code>有序数据项</code> 的 <code>集合</code>，其中每个数据项都有 <code>唯一</code> 的 <code>前驱</code> 和 <code>后继</code>，
+<em>注意：第一个没有前驱，最后一个没有后继</em>。</p>
+<p>新数据项加入到数据集中时，只会加入到原有某个数据项 <code>之前</code> 或者 <code>之后</code></p>
+<p><img src="./%E6%B8%A9%E6%95%85%EF%BC%9A%E7%BA%BF%E6%80%A7%E8%A1%A8/table1.gif" alt="table1" /></p>
+<p>从上图我们可以理解，线性表是<code>将数据项串起来</code> 之后 <code>存入物理空间</code> 的一种数据结构。</p>
+<p><img src="./%E6%B8%A9%E6%95%85%EF%BC%9A%E7%BA%BF%E6%80%A7%E8%A1%A8/table2.gif" alt="table1" /></p>
+<p>不同的存储方式，衍生出两种实现方式：</p>
+<ul>
+<li>将数据 <code>依次存储</code> 在 <code>连续的整块</code> 物理空间中，是 <code>顺序存储结构</code> 又称 <code>顺序表</code>；</li>
+<li>将数据 <code>分散存储</code> 在物理空间中，并能够存储数据项之间的 <code>前、后驱</code> 关系，是 <code>链式存储结构</code> ，又称 <code>链表</code>；</li>
+</ul>
+<h2 id="顺序表"><a class="header" href="#顺序表">顺序表</a></h2>
+<p>其性质可以直接对应到 <code>数组</code>，具有随机读写能力，使用需要先初始化，获取 <code>整块的存储空间</code>，如果使用中需要扩容，
+则需要先分配一块新的存储空间，并进行内容复制。</p>
+<h2 id="链表"><a class="header" href="#链表">链表</a></h2>
+<p>普通链表又称单链表，用于存储逻辑关系为 "一对一" 的数据。</p>
+<p>与顺序表不同，链表不限制数据的物理存储状态，即数据项的物理存储位置是随机的。</p>
+<p>每个 <code>节点</code> 对应一个数据项，包含了两部分信息：</p>
+<ul>
+<li>数据元素本身，其所在的区域称为 <code>数据域</code>；</li>
+<li>指向 <code>直接后继元素</code> 的指针，所在的区域称为 <code>指针域</code>；</li>
+</ul>
+<p><code>头指针</code> ：一个普通的指针，它的特点是永远指向链表第一个节点的位置。</p>
+<p><code>头节点</code> ：一个 <code>不存任何数据</code> 的空节点。不是必须的，但可以解决一些实际问题：</p>
+<ul>
+<li>链表数据变动时，需要维护 <code>链表的引用地址</code> 即 <code>头指针</code> 的问题</li>
+<li>遍历时，不需要对第一个节点进行特殊处理</li>
+</ul>
+<p><code>首元节点</code> ：链表中第一个存有数据的节点为首元节点。</p>
+<h2 id="静态链表"><a class="header" href="#静态链表">静态链表</a></h2>
+<p>比较早期的时候，并不能像C语言那样灵活的操作指针，于是用 <code>数组代替指针</code> 来描述单链表。
+这种用数组描述的链表叫做静态链表，这种描述方法叫做 <code>游标实现法</code>。</p>
+<h2 id="算法题小练手"><a class="header" href="#算法题小练手">算法题小练手</a></h2>
+<p>206.<a href="https://leetcode-cn.com/problems/reverse-linked-list/">反转链表</a></p>
+<blockquote>
+<p>反转一个单链表。</p>
 </blockquote>
-<p>&#x6765;&#x6E90;&#xFF1A;&#x529B;&#x6263;&#xFF08;LeetCode&#xFF09;</p>
-<p>&#x8FED;&#x4EE3;&#x601D;&#x8DEF;&#xFF1A;&#x904D;&#x5386;&#x6574;&#x4E2A;&#x94FE;&#x8868;&#xFF0C;&#x5C06;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x7684;next&#x6307;&#x5411;&#x524D;&#x9A71;&#xFF0C;&#x8FD4;&#x56DE;&#x94FE;&#x8868;&#x7684;&#x5C3E;&#x7AEF;&#x8282;&#x70B9;&#x5373;&#x53EF;&#x3002;</p>
-<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode head)</span> </span>{
-    ListNode prev = <span class="hljs-keyword">null</span>;
+<p>示例:</p>
+<pre><code>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
+</code></pre>
+<blockquote>
+<p>进阶:
+你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p>
+</blockquote>
+<p>来源：力扣（LeetCode）</p>
+<p>迭代思路：遍历整个链表，将每个节点的next指向前驱，返回链表的尾端节点即可。</p>
+<pre><code class="language-java">public ListNode reverseList(ListNode head) {
+    ListNode prev = null;
     ListNode curr = head;
-    ListNode tmp = <span class="hljs-keyword">null</span>;
-    <span class="hljs-keyword">while</span> (curr != <span class="hljs-keyword">null</span>) {
+    ListNode tmp = null;
+    while (curr != null) {
         tmp = curr.next;
         curr.next = prev;
         prev = curr;
         curr = tmp;
     }
-    <span class="hljs-keyword">return</span> prev;
+    return prev;
 }
 </code></pre>
-<p>&#x9012;&#x5F52;&#x601D;&#x8DEF;&#xFF1A;
-<code>&#x9012;</code>&#xFF1A; &#x5C06;&#x7ED3;&#x70B9;&#x7684; <code>&#x540E;&#x7EE7;</code> &#x4F5C;&#x4E3A; &#x65B0;&#x7684;&#x94FE;&#x8868;&#x5934;&#x8282;&#x70B9;&#xFF0C;&#x8C03;&#x7528;reverseList&#xFF0C;&#x76F4;&#x5230;&#x8FDB;&#x884C;&#x5230;&#x539F;&#x59CB;&#x94FE;&#x8868;&#x7684;&#x5C3E;&#x7AEF;&#x65F6;&#xFF0C;&#x5373; node.next &#x4E3A; null &#x65F6;&#x3002;&#x6B64;&#x65F6;&#x5F00;&#x59CB;&#x5F52;&#xFF0C;&#x8FD4;&#x56DE;&#x65B0;&#x94FE;&#x8868;&#x5934;&#x8282;&#x70B9;</p>
-<p><code>&#x5F52;</code>&#xFF1A;&#x5F52;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x53CD;&#x8F6C;&#x94FE;&#x8868;&#x7684;&#x65B9;&#x5411;&#xFF0C;&#x8BBE;&#x539F;&#x5148;&#x6709; <code>a.next = b</code>, &#x73B0;&#x5728;&#x9700;&#x8981;&#x8F6C;&#x53D8;&#x4E3A; <code>b.next = a</code>, &#x5373; <code>a.next.next = a</code>,</p>
-<p>&#x8FB9;&#x754C;&#x95EE;&#x9898;&#xFF1A;</p>
+<p>递归思路：
+<code>递</code>： 将结点的 <code>后继</code> 作为 新的链表头节点，调用reverseList，直到进行到原始链表的尾端时，即 node.next 为 null 时。此时开始归，返回新链表头节点</p>
+<p><code>归</code>：归的过程中，反转链表的方向，设原先有 <code>a.next = b</code>, 现在需要转变为 <code>b.next = a</code>, 即 <code>a.next.next = a</code>,</p>
+<p>边界问题：</p>
 <ul>
-<li>&#x56E0;&#x4E3A;&#x662F;&#x5728;&#x5F52;&#x4E2D;&#x5904;&#x7406;&#xFF0C;&#x6240;&#x4EE5;&#x76F8;&#x5F53;&#x4E8E;&#x662F;&#x4ECE; <code>&#x539F;&#x94FE;&#x8868;&#x5C3E;&#x7AEF;</code> &#x5F00;&#x59CB;&#x5904;&#x7406;&#x53CD;&#x8F6C;&#xFF0C;&#x5F00;&#x59CB;&#x4F4D;&#x7F6E;&#x4E0D;&#x7528;&#x62C5;&#x5FC3;</li>
-<li>&#x7ED3;&#x675F;&#x4F4D;&#x7F6E;&#x9700;&#x8981;&#x6CE8;&#x610F;&#xFF0C;&#x5FC5;&#x987B;&#x5C06;&#x5176;&#x7684; next &#x6539;&#x4E3A; null&#xFF0C;&#x5373; a.next = null</li>
+<li>因为是在归中处理，所以相当于是从 <code>原链表尾端</code> 开始处理反转，开始位置不用担心</li>
+<li>结束位置需要注意，必须将其的 next 改为 null，即 a.next = null</li>
 </ul>
-<p>&#x6211;&#x4EEC;&#x518D;&#x7528;&#x6570;&#x5B66;&#x5F52;&#x7EB3;&#x6CD5;&#x590D;&#x76D8;&#x4E00;&#x4E0B;&#xFF1A;&#x4EE4;&#x957F;&#x5EA6;&#x4E3A;l &#xFF08;L&#x7684;&#x5C0F;&#x5199;&#xFF0C;&#x90E8;&#x5206;&#x5B57;&#x4F53;&#x4E0B;&#x770B;&#x8D77;&#x6765;&#x50CF;&#x6570;&#x5B57;1&#xFF0C;&#x7279;&#x6B64;&#x8BF4;&#x660E;&#xFF09;&#xFF0C;&#x539F;&#x94FE;&#x8868;&#x5934;&#x7ED3;&#x70B9;&#x4E3A;head</p>
+<p>我们再用数学归纳法复盘一下：令长度为l （L的小写，部分字体下看起来像数字1，特此说明），原链表头结点为head</p>
 <ul>
-<li>&#x5F53;l=0&#x65F6;&#xFF0C;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;null&#xFF0C;head&#x4E5F;&#x662F;null</li>
-<li>&#x5F53;l=1&#x65F6;&#xFF0C;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;head</li>
-<li>&#x5F53;l=2&#x65F6;&#xFF1A;<ul>
-<li>&#x53D6;head&#x7684;next&#xFF0C;&#x4F5C;&#x4E3A;&#x65B0;&#x94FE;&#x8868;&#x5148;&#x8FDB;&#x5165;&#x5904;&#x7406;&#xFF0C;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x5373;newHead&#xFF0C;&#x65B0;&#x94FE;&#x8868;&#x957F;&#x5EA6;l=1&#xFF0C;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x4E86;,&#x786E;&#x5B9E;&#x662F;&#x671F;&#x671B;&#x7684;&#x53CD;&#x8F6C;&#x94FE;&#x8868;&#x7684;&#x5934;&#x8282;&#x70B9;</li>
-<li>&#x53CD;&#x8F6C;&#x4E24;&#x8005;(&#x5373; head &#x4E0E; head.next)&#x524D;&#x540E;&#x9A71;&#x5173;&#x7CFB;&#xFF0C;head.next.next = head&#xFF0C;&#x5904;&#x7406;head&#x7684;next &#x4E3A; null</li>
-<li>&#x8FD4;&#x56DE;newHead</li>
+<li>当l=0时，直接返回null，head也是null</li>
+<li>当l=1时，直接返回head</li>
+<li>当l=2时：
+<ul>
+<li>取head的next，作为新链表先进入处理，返回结果即newHead，新链表长度l=1，直接返回了,确实是期望的反转链表的头节点</li>
+<li>反转两者(即 head 与 head.next)前后驱关系，head.next.next = head，处理head的next 为 null</li>
+<li>返回newHead</li>
 </ul>
 </li>
-<li>&#x5F53;l=3&#x65F6;&#xFF1A;<ul>
-<li>&#x53D6;head&#x7684;next&#xFF0C;&#x4F5C;&#x4E3A;&#x65B0;&#x94FE;&#x8868;&#x5148;&#x8FDB;&#x5165;&#x5904;&#x7406;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;newHead &#x662F;&#x671F;&#x671B;&#x7684; <code>&#x53CD;&#x8F6C;&#x94FE;&#x8868;&#x7684;&#x5934;&#x7ED3;&#x70B9;</code> </li>
-<li>&#x5904;&#x7406;head &#x4E0E; head.next &#x7684;&#x524D;&#x540E;&#x9A71;&#x5173;&#x7CFB;&#xFF0C;head.next.next = head&#xFF0C;&#x5904;&#x7406;head&#x7684;next &#x4E3A; null</li>
-<li>&#x8FD4;&#x56DE;newHead</li>
+<li>当l=3时：
+<ul>
+<li>取head的next，作为新链表先进入处理，返回的newHead 是期望的 <code>反转链表的头结点</code></li>
+<li>处理head 与 head.next 的前后驱关系，head.next.next = head，处理head的next 为 null</li>
+<li>返回newHead</li>
 </ul>
 </li>
 </ul>
 <p>......</p>
 <ul>
-<li>&#x5F53;l=n&#xFF0C;n&gt;3&#x65F6;&#xFF1A;<ul>
-<li>&#x53D6;head&#x7684;next&#xFF0C;&#x4F5C;&#x4E3A;&#x65B0;&#x94FE;&#x8868;&#x5148;&#x8FDB;&#x5165;&#x5904;&#x7406;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;newHead &#x662F;&#x671F;&#x671B;&#x7684; <code>&#x53CD;&#x8F6C;&#x94FE;&#x8868;&#x7684;&#x5934;&#x7ED3;&#x70B9;</code></li>
-<li>&#x5904;&#x7406;head &#x4E0E; head.next &#x7684;&#x524D;&#x540E;&#x9A71;&#x5173;&#x7CFB;&#xFF0C;head.next.next = head&#xFF0C;&#x5904;&#x7406;head&#x7684;next &#x4E3A; null</li>
-<li>&#x8FD4;&#x56DE;newHead</li>
+<li>当l=n，n&gt;3时：
+<ul>
+<li>取head的next，作为新链表先进入处理，返回的newHead 是期望的 <code>反转链表的头结点</code></li>
+<li>处理head 与 head.next 的前后驱关系，head.next.next = head，处理head的next 为 null</li>
+<li>返回newHead</li>
 </ul>
 </li>
-<li>&#x5F53;l=n+1,n&gt;3&#x65F6;&#xFF1A;<ul>
-<li>&#x53D6;head&#x7684;next&#xFF0C;&#x4F5C;&#x4E3A;&#x65B0;&#x94FE;&#x8868;&#x5148;&#x8FDB;&#x5165;&#x5904;&#x7406;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;newHead &#x662F;&#x671F;&#x671B;&#x7684; <code>&#x53CD;&#x8F6C;&#x94FE;&#x8868;&#x7684;&#x5934;&#x7ED3;&#x70B9;</code></li>
-<li>&#x5904;&#x7406;head &#x4E0E; head.next &#x7684;&#x524D;&#x540E;&#x9A71;&#x5173;&#x7CFB;&#xFF0C;head.next.next = head&#xFF0C;&#x5904;&#x7406;head&#x7684;next &#x4E3A; null</li>
-<li>&#x8FD4;&#x56DE;newHead</li>
+<li>当l=n+1,n&gt;3时：
+<ul>
+<li>取head的next，作为新链表先进入处理，返回的newHead 是期望的 <code>反转链表的头结点</code></li>
+<li>处理head 与 head.next 的前后驱关系，head.next.next = head，处理head的next 为 null</li>
+<li>返回newHead</li>
 </ul>
 </li>
 </ul>
-<p>&#x6211;&#x4EEC;&#x4F9D;&#x636E;&#x6570;&#x5B66;&#x5F52;&#x7EB3;&#x6CD5;&#xFF0C;&#x5F97;&#x51FA;&#xFF1A;l=0&#x6216;l=1&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;head&#xFF0C;l &gt;= 2&#x65F6;&#xFF0C;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#x4E00;&#x81F4;&#xFF0C;<em>&#x4E0D;&#x518D;&#x8A8A;&#x5199;</em></p>
-<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">reverseList</span><span class="hljs-params">(ListNode head)</span> </span>{
-    <span class="hljs-comment">//l=0&#x65F6;&#xFF0C;head&#x4E3A;null&#xFF1B;l=1&#x65F6;&#xFF0C;head.next &#x4E3A;null&#x3002; &#x5747;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;head&#xFF0C;&#x5F52;&#x7684;&#x7279;&#x6B8A;&#x5904;&#x7406;</span>
-    <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span> || head.next == <span class="hljs-keyword">null</span>) {
-        <span class="hljs-keyword">return</span> head;
+<p>我们依据数学归纳法，得出：l=0或l=1时，返回head，l &gt;= 2时，处理方式一致，<em>不再誊写</em></p>
+<pre><code class="language-java">public ListNode reverseList(ListNode head) {
+    //l=0时，head为null；l=1时，head.next 为null。 均直接返回head，归的特殊处理
+    if (head == null || head.next == null) {
+        return head;
     }
-    <span class="hljs-comment">//&#x9012;</span>
+    //递
     ListNode newHead = reverseList(head.next);
-
-    <span class="hljs-comment">//&#x5F52;&#x7684;&#x5904;&#x7406;</span>
-    <span class="hljs-comment">//&#x53CD;&#x8F6C; head &#x4E0E; head.next &#x7684;&#x524D;&#x540E;&#x9A71;&#x5173;&#x7CFB;</span>
+    
+    //归的处理
+    //反转 head 与 head.next 的前后驱关系
     head.next.next = head;
-    head.next = <span class="hljs-keyword">null</span>;
-
-    <span class="hljs-comment">//&#x8FD4;&#x56DE;newHead</span>
-    <span class="hljs-keyword">return</span> newHead;
+    head.next = null;
+    
+    //返回newHead
+    return newHead;
 }
 </code></pre>
-<h2 id="&#x6E29;&#x6545;&#x603B;&#x7ED3;"><a name="&#x6E29;&#x6545;&#x603B;&#x7ED3;" class="anchor-navigation-ex-anchor" href="#&#x6E29;&#x6545;&#x603B;&#x7ED3;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6E29;&#x6545;&#x603B;&#x7ED3;</h2>
-<p>&#x4F5C;&#x4E3A;&#x6BD4;&#x8F83;&#x57FA;&#x7840;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x5728;&#x66F4;&#x590D;&#x6742;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x4E2D;&#xFF0C;&#x7EBF;&#x6027;&#x8868;&#x53EF;&#x80FD;&#x4F1A;&#x4F5C;&#x4E3A;&#x5E95;&#x5C42;&#x5B9E;&#x73B0;&#x3002;&#x5728;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x7528;&#x5230; <code>&#x5355;&#x94FE;&#x8868;</code> &#x7684;&#x5730;&#x65B9;&#x4E0D;&#x4F1A;&#x592A;&#x591A;&#x3002;</p>
-<p>&#x5728;&#x7B97;&#x6CD5;&#x7EC3;&#x624B;&#x73AF;&#x8282;&#x4E2D;&#xFF0C;&#x7A81;&#x7136;&#x53D1;&#x73B0;&#x4E00;&#x4E2A; <code>&#x5F88;&#x8D81;&#x624B;</code> &#x7684;&#x4E1C;&#x897F;&#xFF0C;&#x4EE5;&#x4E3A;&#x8003;&#x8651; <code>&#x9012;&#x5F52;&#x5B9E;&#x73B0;</code> &#x601D;&#x8DEF;&#x65F6;&#xFF0C;&#x6211;&#x603B;&#x662F;&#x8981;&#x975E;&#x5E38;&#x4ED4;&#x7EC6;&#x7684;&#x601D;&#x8003;&#x8FB9;&#x754C;&#x95EE;&#x9898;&#x3002;</p>
+<h2 id="温故总结"><a class="header" href="#温故总结">温故总结</a></h2>
+<p>作为比较基础的内容，在更复杂的数据结构中，线性表可能会作为底层实现。在实际应用中，我们用到 <code>单链表</code> 的地方不会太多。</p>
+<p>在算法练手环节中，突然发现一个 <code>很趁手</code> 的东西，以为考虑 <code>递归实现</code> 思路时，我总是要非常仔细的思考边界问题。</p>
 <blockquote>
-<p>&#x4F46;&#x8FD9;&#x6B21;&#x7A81;&#x7136;&#x53D1;&#x73B0;&#xFF0C;&#x82E5;&#x80FD;&#x591F; <code>&#x88AB;&#x9012;&#x5F52;&#x5B9E;&#x73B0;</code>&#xFF0C;&#x4E00;&#x5B9A;&#x53EF;&#x4EE5;&#x7528; <code>&#x6570;&#x5B66;&#x5F52;&#x7EB3;&#x6CD5;</code> &#x8BBA;&#x8BC1; <code>&#x505A;&#x6CD5;&#x7684;&#x6B63;&#x786E;&#x6027;</code>&#xFF0C;&#x63A8;&#x5BFC;&#x8FC7;&#x7A0B;&#x53EF;&#x4EE5; <code>&#x5B8C;&#x5584;&#x5730;</code> &#x8BA8;&#x8BBA;&#x8FB9;&#x754C;&#x95EE;&#x9898;&#x3002;
-&#x5E76;&#x4E14;&#x5176;&#x63A8;&#x5BFC;&#x8FC7;&#x7A0B;&#x975E;&#x5E38; <code>&#x4EBA;&#x6027;&#x5316;</code>&#x3002;</p>
+<p>但这次突然发现，若能够 <code>被递归实现</code>，一定可以用 <code>数学归纳法</code> 论证 <code>做法的正确性</code>，推导过程可以 <code>完善地</code> 讨论边界问题。
+并且其推导过程非常 <code>人性化</code>。</p>
 </blockquote>
-<p>&#x8FD9;&#x7BC7;&#x5185;&#x5BB9;&#x5F88;&#x77ED;&#xFF0C;&#x5C31;&#x5230;&#x6B64;&#x7ED3;&#x675F;&#x4E86;&#x3002;</p>
-<p><footer class="page-footer"><span class="copyright">Copyright &#xA9;leobert-lan all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified at&#xFF1A;
-2021-03-21 11:12:02
-</span></footer><hr><div id="vcomments"></div><script src="//unpkg.com/valine/dist/Valine.min.js"></script><script>new Valine({el: "#vcomments",appId: 'ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz',appKey: 'SImUlUOT3fUp5sFzwFlb2RbE',placeholder: '期待与您一起讨论',avatar: '',meta: undefined,pageSize: 10,lang: 'zh-CN',recordIP: true})</script></p>
+<p>这篇内容很短，就到此结束了。</p>
 
-                                
-                                </section>
-                            
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
+                    </main>
 
-                        </div>
-                    </div>
-                
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../Review/DataStructure/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../Review/DataStructure/post_12.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
             </div>
 
-            
-                
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 数据结构">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="post_12.html" class="navigation navigation-next " aria-label="Next page: 温故：栈">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-                
-            
-        
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../Review/DataStructure/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../Review/DataStructure/post_12.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
     </div>
-
-    <script>
-        var gitbook = gitbook || [];
-        gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"温故：线性表","level":"2.1.1","depth":2,"next":{"title":"温故：栈","level":"2.1.2","depth":2,"path":"Review/DataStructure/post_12.md","ref":"./Review/DataStructure/post_12.md","articles":[]},"previous":{"title":"数据结构","level":"2.1","depth":1,"path":"Review/DataStructure/README.md","ref":"./Review/DataStructure/README.md","articles":[{"title":"温故：线性表","level":"2.1.1","depth":2,"path":"Review/DataStructure/post_11.md","ref":"./Review/DataStructure/post_11.md","articles":[]},{"title":"温故：栈","level":"2.1.2","depth":2,"path":"Review/DataStructure/post_12.md","ref":"./Review/DataStructure/post_12.md","articles":[]},{"title":"温故：队列","level":"2.1.3","depth":2,"path":"Review/DataStructure/post_13.md","ref":"./Review/DataStructure/post_13.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["anchor-navigation-ex","github","code","-todo","-page-footer","tbfed-pagefooter","valine"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright ©leobert-lan","modify_label":"modified at：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/leobert-lan"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":false,"float":{"floatIcon":"fa fa-anchor","level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","multipleH1":false,"pageTop":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"printLog":true,"showGoTop":true,"showLevel":false},"page-footer":{"isShowIssues":false,"wisdom":"Coding fervidly for interest，working hard for life.","copyright":"Copyright &#169; leobert-lan","style":"normal","isShowQRCode":true,"timeColor":"#666","utcOffset":"8","format":"yyyy-MM-dd hh:mm:ss","signature":"leobert","copyrightColor":"#666","description":"modified at"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"valine":{"avatar":"","lang":"zh-CN","pageSize":10,"placeholder":"期待与您一起讨论","recordIP":true,"appId":"ok2DjfrjmclS2C03lD9YoHiB-gzGzoHsz","appKey":"SImUlUOT3fUp5sFzwFlb2RbE"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Review/DataStructure/post_11.md","mtime":"2021-03-21T03:12:02.419Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-06-09T05:22:57.468Z"},"basePath":"../..","book":{"language":""}});
-        });
-    </script>
-</div>
-
-        
-    <script src="../../gitbook/gitbook.js"></script>
-    <script src="../../gitbook/theme.js"></script>
-    
-        
-        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
-        
-    
-
     </body>
 </html>
-
