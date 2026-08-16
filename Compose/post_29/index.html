@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Jetpack Compose | 控件篇（四）-- Box、Row、Column | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Jetpack Compose | 控件篇（四）-- Box、Row、Column</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="jetpack-compose--控件篇四-boxrowcolumn">Jetpack Compose | 控件篇（四）— Box、Row、Column</h1>
+<p>在上一篇中，我们完成了 <code>Switch、CheckBox、RadioButton</code> 相关内容的学习，至此，最基本的简单控件我们已经学完，接下来我们将学习 <code>基本的布局</code>。</p>
+<blockquote>
+<p>以Android 为例，我们已经完成了：<code>TextView、Edittext、Button、ImageView、CheckBox、SwitchButton、RadioButton</code> 等内容的学习。</p>
+<p>接下来将开始学习布局规则，例如：<code>FrameLayout、LinearLayout、RelativeLayout、ConstraintLayout</code> 等</p>
+</blockquote>
+<blockquote>
+<p><em>文中代码均基于 1.0.1版本</em></p>
+<p><em>如无特殊说明，文中的 <code>Compose</code> 均指代 <code>Jetpack compose</code></em></p>
+<p>文中代码均可在 <a href="https://github.com/leobert-lan/ComposeWorkShop">WorkShop</a> 中获取，本篇代码集中于 post29 包下</p>
+<p>完整系列目录: <a href="https://leobert-lan.github.io/Compose/">Github Pages</a> | <a href="https://juejin.cn/column/6999815370697605156">掘金</a> | <a href="https://blog.csdn.net/a774057695/category_11298077.html">csdn</a></p>
+</blockquote>
+<h2 id="box">Box</h2>
+<p>类似Android中的 <code>FrameLayout</code>。</p>
+<p>在UI设计中，不可避免的会将一些UI元素组合在一起，从外观上进行整体改变，将他们从环境中 “独立” 开来。很自然地诞生了这一方式：以一个节点包裹这些UI元素，
+将整体外观设计运用于这一节点上。</p>
+<p><em>注意：这个节点可以根据排布元素的需求灵活的选择布局</em> — 在Compose中，这个节点可以是Box，但不一定必须是Box！</p>
+<h3 id="使用方式">使用方式</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@Composable</span></span>
+<span class="line"><span style="color:#F97583">inline</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> Box</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentAlignment: </span><span style="color:#B392F0">Alignment</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Alignment.TopStart,</span></span>
+<span class="line"><span style="color:#E1E4E8">    propagateMinConstraints: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    content: </span><span style="color:#B392F0">@Composable</span><span style="color:#E1E4E8"> BoxScope.() </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p><em>很显然，这是一个内联函数，意味着它类似Facade模式的运用，其底层实现较为复杂，这里针对需求场景做了封装，隐匿了大量细节</em></p>
+<p>在当前的学习阶段，我们克制住好奇心，先不探索细节。</p>
+<p>参数含义：</p>
+<ul>
+<li>modifier: 修饰器</li>
+<li>contentAlignment：内容对齐方式 <em>注意：这和FrameLayout有区别</em></li>
+<li>propagateMinConstraints：是否运用最小尺寸到内容，如果为TRUE，内容的最小尺寸将按照modifier中的信息进行设定，否则仅作用于Box</li>
+<li>content：内容 <em>Android中子View的概念</em></li>
+</ul>
+<p>在WorkShop中，我们沿用了 <a href="https://developer.android.google.cn/reference/kotlin/androidx/compose/foundation/layout/package-summary?hl=en#Box(androidx.compose.ui.Modifier)">Google的一个demo</a></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">Box</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    Box</span><span style="color:#E1E4E8">(Modifier.</span><span style="color:#B392F0">fillMaxSize</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Cyan))</span></span>
+<span class="line"><span style="color:#B392F0">    Box</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            Modifier.</span><span style="color:#B392F0">matchParentSize</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">padding</span><span style="color:#E1E4E8">(top </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 20</span><span style="color:#E1E4E8">.dp, bottom </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 20</span><span style="color:#E1E4E8">.dp).</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Yellow)</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"><span style="color:#B392F0">    Box</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            Modifier.</span><span style="color:#B392F0">matchParentSize</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">padding</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">40</span><span style="color:#E1E4E8">.dp).</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Magenta)</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"><span style="color:#B392F0">    Box</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            Modifier.</span><span style="color:#B392F0">align</span><span style="color:#E1E4E8">(Alignment.Center).</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">300</span><span style="color:#E1E4E8">.dp, </span><span style="color:#79B8FF">300</span><span style="color:#E1E4E8">.dp).</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Green)</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"><span style="color:#B392F0">    Box</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            Modifier.</span><span style="color:#B392F0">align</span><span style="color:#E1E4E8">(Alignment.TopStart).</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">150</span><span style="color:#E1E4E8">.dp, </span><span style="color:#79B8FF">150</span><span style="color:#E1E4E8">.dp).</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Red)</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"><span style="color:#B392F0">    Box</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            Modifier.</span><span style="color:#B392F0">align</span><span style="color:#E1E4E8">(Alignment.BottomEnd).</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">150</span><span style="color:#E1E4E8">.dp, </span><span style="color:#79B8FF">150</span><span style="color:#E1E4E8">.dp).</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Blue)</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>在这个Demo中，我们可以看到：</p>
+<ul>
+<li>对齐方式、padding 对 Box的 位置和大小所产生的影响</li>
+<li>内容按照声明的次序先后进行排布</li>
+</ul>
+<p><img  src="/_astro/p29_demo1.B0yAx5HM_2K7HV.webp" alt loading="lazy" decoding="async" width="456" height="362"></p>
+<h4 id="根据box的布局限制调整内容">根据Box的布局限制调整内容</h4>
+<p><em>这是不同屏幕尺寸下的一种适配手段</em></p>
+<p>这将使用到：<code>BoxWithConstraints</code></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@Composable</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> BoxWithConstraints</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentAlignment: </span><span style="color:#B392F0">Alignment</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Alignment.TopStart,</span></span>
+<span class="line"><span style="color:#E1E4E8">    propagateMinConstraints: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    content: </span><span style="color:#B392F0">@Composable</span><span style="color:#E1E4E8"> BoxWithConstraintsScope.() </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>和Box的区别在于 content，lambda中的上下文是 <code>BoxWithConstraintsScope</code> 实例，而不再是 <code>BoxScope</code> 实例，据此，我们可以在布局时获知Box的尺寸限制：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@Stable</span></span>
+<span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> BoxWithConstraintsScope</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">BoxScope</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * The constraints given by the parent layout in pixels.</span></span>
+<span class="line"><span style="color:#6A737D">     * Use [minWidth], [maxWidth], [minHeight] or [maxHeight] if you need value in [Dp].</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> constraints: </span><span style="color:#B392F0">Constraints</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * The minimum width in [Dp].</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> minWidth: </span><span style="color:#B392F0">Dp</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * The maximum width in [Dp].</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> maxWidth: </span><span style="color:#B392F0">Dp</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * The minimum height in [Dp].</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> minHeight: </span><span style="color:#B392F0">Dp</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * The maximum height in [Dp].</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> maxHeight: </span><span style="color:#B392F0">Dp</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>下面展示一个例子：</p>
+<p>当Box最大高度小于100dp时，放置一个50*50dp的Box，否则纵向放置两个；初始高度为80dp，通过点击按钮在100dp和80dp间来回切换：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> height </span><span style="color:#F97583">by</span><span style="color:#B392F0"> rememberSaveable</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">mutableStateOf</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">80</span><span style="color:#E1E4E8">) }</span></span>
+<span class="line"><span style="color:#B392F0">BoxWithConstraints</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier.</span><span style="color:#B392F0">height</span><span style="color:#E1E4E8">(height.dp)</span></span>
+<span class="line"><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> rectangleHeight </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 50</span><span style="color:#E1E4E8">.dp</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (maxHeight </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> rectangleHeight </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">        Box</span><span style="color:#E1E4E8">(Modifier</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">.dp, rectangleHeight)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Blue))</span></span>
+<span class="line"><span style="color:#E1E4E8">    } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        Column</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            Box</span><span style="color:#E1E4E8">(Modifier</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">.dp, rectangleHeight)</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Blue))</span></span>
+<span class="line"><span style="color:#B392F0">            Box</span><span style="color:#E1E4E8">(Modifier</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">.dp, rectangleHeight)</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Gray))</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">Button</span><span style="color:#E1E4E8">(onClick </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    height </span><span style="color:#F97583">=</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (height </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 100</span><span style="color:#E1E4E8">) </span><span style="color:#79B8FF">100</span><span style="color:#F97583"> else</span><span style="color:#79B8FF"> 80</span></span>
+<span class="line"><span style="color:#E1E4E8">}) {</span></span>
+<span class="line"><span style="color:#B392F0">    Text</span><span style="color:#E1E4E8">(text </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "点击切换高度"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="效果">效果</h3>
+<p>高度为80dp时，仅显示一个蓝色色块：</p>
+<p><img  src="/_astro/p29_demo3.CiPzcXHc_20puyi.webp" alt loading="lazy" decoding="async" width="858" height="354"></p>
+<p>高度为100dp时，显示两个色块：</p>
+<p><img  src="/_astro/p29_demo2.Dyw0zxuN_1iYnxK.webp" alt loading="lazy" decoding="async" width="1008" height="398"></p>
+<h2 id="row">Row</h2>
+<p>在Android中，也有Row的概念 <code>TableRow</code> ，它被用在TableLayout中，作为表格的行:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> TableRow</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> LinearLayout</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>和Android的 <code>TableRow</code> 类似，Compose中的Row效果等同于 <strong>横向的 LinearLayout</strong></p>
+<h3 id="使用方式-1">使用方式：</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@Composable</span></span>
+<span class="line"><span style="color:#F97583">inline</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> Row</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    horizontalArrangement: </span><span style="color:#B392F0">Arrangement</span><span style="color:#E1E4E8">.Horizontal </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Arrangement.Start,</span></span>
+<span class="line"><span style="color:#E1E4E8">    verticalAlignment: </span><span style="color:#B392F0">Alignment</span><span style="color:#E1E4E8">.Vertical </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Alignment.Top,</span></span>
+<span class="line"><span style="color:#E1E4E8">    content: </span><span style="color:#B392F0">@Composable</span><span style="color:#E1E4E8"> RowScope.() </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>参数含义：</p>
+<ul>
+<li>modifier: 修饰器</li>
+<li>horizontalArrangement: 纵向上的范围</li>
+<li>verticalAlignment: 横向的对齐方式</li>
+<li>content：内容声明</li>
+</ul>
+<p>借用 <a href="https://developer.android.google.cn/reference/kotlin/androidx/compose/foundation/layout/package-summary?hl=en#Row(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function1)">Google的Demo</a></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">Row</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // The child with no weight will have the specified size.</span></span>
+<span class="line"><span style="color:#B392F0">    Box</span><span style="color:#E1E4E8">(Modifier.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">40</span><span style="color:#E1E4E8">.dp, </span><span style="color:#79B8FF">80</span><span style="color:#E1E4E8">.dp).</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Magenta))</span></span>
+<span class="line"><span style="color:#6A737D">    // Has weight, the child will occupy half of the remaining width.</span></span>
+<span class="line"><span style="color:#B392F0">    Box</span><span style="color:#E1E4E8">(Modifier.</span><span style="color:#B392F0">height</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">40</span><span style="color:#E1E4E8">.dp).</span><span style="color:#B392F0">weight</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1f</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Yellow))</span></span>
+<span class="line"><span style="color:#6A737D">    // Has weight and does not fill, the child will occupy at most half of the remaining width.</span></span>
+<span class="line"><span style="color:#6A737D">    // Therefore it will occupy 80.dp (its preferred width) if the assigned width is larger.</span></span>
+<span class="line"><span style="color:#B392F0">    Box</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Modifier.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">80</span><span style="color:#E1E4E8">.dp, </span><span style="color:#79B8FF">40</span><span style="color:#E1E4E8">.dp)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">weight</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1f</span><span style="color:#E1E4E8">, fill </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Green)</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>在一行中，先用掉 40*80dp的空间，剩下来的空间 <em>（横向）</em> ，利用Weight进行均分，如果不使用fill策略，将使用给定的宽度。</p>
+<p>在WorkShop中，提供了更多的场景Demo，可以发现，使用Weight时，总是：<strong>先计算给定尺寸的元素，并对剩余空间使用Weight进行分配</strong>。</p>
+<p><em>这一点和Android的LinearLayout相比要更加灵活、好用</em></p>
+<h4 id="纵向对齐方式">纵向对齐方式</h4>
+<p>通过 verticalAlignment 可以指定纵向的对齐方式，例如纵向居中对齐：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">Row</span><span style="color:#E1E4E8">(verticalAlignment </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Alignment.CenterVertically) {</span></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>可以使用：</p>
+<ul>
+<li>Top 顶部对齐，默认</li>
+<li>CenterVertically 居中对齐</li>
+<li>Bottom 底部对齐</li>
+</ul>
+<h4 id="横向范围">横向范围</h4>
+<p>当Row的尺寸大于内容的尺寸时，可以调整内容的位置：</p>
+<p>例如横向的居中</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0"> Row</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier.</span><span style="color:#B392F0">fillMaxWidth</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">    horizontalArrangement </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Arrangement.Center) {</span></span>
+<span class="line"><span style="color:#6A737D">    // The child with no weight will have the specified size.</span></span>
+<span class="line"><span style="color:#B392F0">    Box</span><span style="color:#E1E4E8">(Modifier</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">40</span><span style="color:#E1E4E8">.dp, </span><span style="color:#79B8FF">80</span><span style="color:#E1E4E8">.dp)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Magenta))</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="效果-1">效果</h3>
+<p><img  src="/_astro/p29_demo4.BO9ssyjf_6Y2qz.webp" alt loading="lazy" decoding="async" width="826" height="1138"></p>
+<h2 id="column">Column</h2>
+<p>和 Row类似，但排布方向为纵向</p>
+<p><em>读者可以自行编码以尝试效果，不再赘述</em></p>
+<h3 id="使用方式-2">使用方式</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">inline</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> Column</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    verticalArrangement: </span><span style="color:#B392F0">Arrangement</span><span style="color:#E1E4E8">.Vertical </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Arrangement.Top,</span></span>
+<span class="line"><span style="color:#E1E4E8">    horizontalAlignment: </span><span style="color:#B392F0">Alignment</span><span style="color:#E1E4E8">.Horizontal </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Alignment.Start,</span></span>
+<span class="line"><span style="color:#E1E4E8">    content: </span><span style="color:#B392F0">@Composable</span><span style="color:#E1E4E8"> ColumnScope.() </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit</span></span>
+<span class="line"><span style="color:#E1E4E8">) </span></span></code></pre>
+<p><em>参考Row的使用方式</em></p>
+<h2 id="结语">结语</h2>
+<p>很快又到了说结束的时候，本篇中，我们一同学习了Compose中最基本的布局方式，当然，还有一些问题没有继续往下探索：如果内容超过容器的大小该如何处理呢？</p>
+<p>我们将在后续的篇章中继续探索。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

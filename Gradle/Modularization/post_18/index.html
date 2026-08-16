@@ -1,0 +1,440 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>组件化：三思系列：组件化场景下module依赖优雅实践方案 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">组件化：三思系列：组件化场景下module依赖优雅实践方案</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="三思系列组件化场景下module依赖优雅实践方案">三思系列：组件化场景下module依赖优雅实践方案</h1>
+<h2 id="前言">前言</h2>
+<p><a href="https://leobert-lan.github.io/info/about_sansi_series.html">关于三思系列</a></p>
+<blockquote>
+<p>背景：
+如果没有记错，15年那会Android项目逐步转向使用Gradle构建，时至今日，组件化已经不再是一个新颖的话题。</p>
+<p>虽然我将这篇文章放在了<code>Gradle分类</code>中，但是我们知道，使用gradle构建的后端项目，
+热点聚焦在：实现<code>微服务化</code>，项目是拆开的，决定了依赖库已经是静态jar包，和我们
+要讨论的场景是不一致的。所以我们还是在<code>Android</code>领域中讨论这个问题.</p>
+<p>在各种方案的组件化实施中，一定会将<code>部分功能模块拆分</code>，进行<code>library下沉</code>。
+于是，就有了<code>处理依赖</code>的场景。</p>
+<p>相信大家思考过这样一个问题：如果下沉的<code>library</code>也提前编译好<code>静态aar包</code>，我们的项目编译时间会缩短。
+毋庸置疑，这样做会直接从<code>源头解决</code> <code>编译时间长的问题</code>，就是<code>减少编译内容</code>。</p>
+<p><code>但是</code>，项目合并在一起，难免就想在开发下层library时，直接用上层业务集成进行冒烟。 <em>ps:这个做法并不好，应当为library配置好冒烟测试环境，虽然会耗费掉一定的时间</em></p>
+<p>理想归理想，最终还是会败给现实，这个问题就变成了<code>鱼和熊掌想要兼得</code>的问题</p>
+</blockquote>
+<p>为了让阅读的目标更加明确，我们先思考一个问题：</p>
+<p><img  src="/_astro/APP.HWjNFbEy_ZIgdqq.webp" alt="依赖关系" loading="lazy" decoding="async" width="344" height="378"></p>
+<p>这样一个项目依赖关系，如果做到<code>改动B</code> 的内容，却不需要重新编译A，运行APP，验证B的修改</p>
+<p>我们下面会进行一定地展开，来体悟这个问题。</p>
+<h2 id="为什么使用远程仓库中的依赖包比使用本地静态aar要方便">为什么使用远程仓库中的依赖包比使用本地静态aar要方便</h2>
+<p>我们知道，对于一个module，我们对其进行编译生成静态aar包，只会处理它自身的内容。那么他的依赖是如何传递的？</p>
+<p><code>通过pom文件</code></p>
+<p>举个例子：</p>
+<p>我们新建一个module，看一下依赖：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">dependencies {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    implementation </span><span style="color:#9ECBFF">"org.jetbrains.kotlin:kotlin-stdlib:</span><span style="color:#E1E4E8">$kotlin_version</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#E1E4E8">    implementation </span><span style="color:#9ECBFF">'androidx.core:core-ktx:1.3.2'</span></span>
+<span class="line"><span style="color:#E1E4E8">    implementation </span><span style="color:#9ECBFF">'androidx.appcompat:appcompat:1.2.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">    implementation </span><span style="color:#9ECBFF">'com.google.android.material:material:1.2.1'</span></span>
+<span class="line"><span style="color:#E1E4E8">    testImplementation </span><span style="color:#9ECBFF">'junit:junit:4.+'</span></span>
+<span class="line"><span style="color:#E1E4E8">    androidTestImplementation </span><span style="color:#9ECBFF">'androidx.test.ext:junit:1.1.2'</span></span>
+<span class="line"><span style="color:#E1E4E8">    androidTestImplementation </span><span style="color:#9ECBFF">'androidx.test.espresso:espresso-core:3.3.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>利用maven plugin 进行发布，会有任务生成pom文件，如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"><span style="color:#E1E4E8">&#x3C;?</span><span style="color:#85E89D">xml</span><span style="color:#B392F0"> version</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"1.0"</span><span style="color:#B392F0"> encoding</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"UTF-8"</span><span style="color:#E1E4E8">?></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">project</span><span style="color:#B392F0"> xsi:schemaLocation</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span style="color:#B392F0"> xmlns</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://maven.apache.org/POM/4.0.0"</span></span>
+<span class="line"><span style="color:#B392F0">    xmlns:xsi</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://www.w3.org/2001/XMLSchema-instance"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">modelVersion</span><span style="color:#E1E4E8">>4.0.0&#x3C;/</span><span style="color:#85E89D">modelVersion</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>leobert&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>B&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>1.0.0&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">packaging</span><span style="color:#E1E4E8">>aar&#x3C;/</span><span style="color:#85E89D">packaging</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>org.jetbrains.kotlin&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>kotlin-stdlib&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>1.4.21&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">>compile&#x3C;/</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>androidx.core&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>core-ktx&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>1.3.2&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">>compile&#x3C;/</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>androidx.appcompat&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>appcompat&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>1.2.0&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">>compile&#x3C;/</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>com.google.android.material&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>material&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>1.2.1&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">>compile&#x3C;/</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">project</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<p>我们发现，关于测试相关的依赖并<code>没有</code>被收录到pom文件中。这很合理，测试代码是针对该module的，并不需要提供给使用方，其依赖自然也不需要传递。</p>
+<p>我们知道，AGP中现在有4种声明依赖的方式（除去testXXX这种变种）</p>
+<ul>
+<li>api</li>
+<li>implementation</li>
+<li>compileOnly</li>
+<li>runtimeOnly</li>
+</ul>
+<p>runtimeOnly对应以前的apk方式声明依赖，我们直接忽略掉，测试一下生成的pom文件。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">dependencies {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    api </span><span style="color:#9ECBFF">"org.jetbrains.kotlin:kotlin-stdlib:</span><span style="color:#E1E4E8">$kotlin_version</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#E1E4E8">    implementation </span><span style="color:#9ECBFF">'androidx.core:core-ktx:1.3.2'</span></span>
+<span class="line"><span style="color:#E1E4E8">    compileOnly </span><span style="color:#9ECBFF">'androidx.appcompat:appcompat:1.2.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">    compileOnly </span><span style="color:#9ECBFF">'com.google.android.material:material:1.2.1'</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    testImplementation </span><span style="color:#9ECBFF">'junit:junit:4.+'</span></span>
+<span class="line"><span style="color:#E1E4E8">    androidTestImplementation </span><span style="color:#9ECBFF">'androidx.test.ext:junit:1.1.2'</span></span>
+<span class="line"><span style="color:#E1E4E8">    androidTestImplementation </span><span style="color:#9ECBFF">'androidx.test.espresso:espresso-core:3.3.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"><span style="color:#E1E4E8">&#x3C;?</span><span style="color:#85E89D">xml</span><span style="color:#B392F0"> version</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"1.0"</span><span style="color:#B392F0"> encoding</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"UTF-8"</span><span style="color:#E1E4E8">?></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">project</span><span style="color:#B392F0"> xsi:schemaLocation</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span style="color:#B392F0"> xmlns</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://maven.apache.org/POM/4.0.0"</span></span>
+<span class="line"><span style="color:#B392F0">    xmlns:xsi</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://www.w3.org/2001/XMLSchema-instance"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">modelVersion</span><span style="color:#E1E4E8">>4.0.0&#x3C;/</span><span style="color:#85E89D">modelVersion</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>leobert&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>B&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>1.0.0&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">packaging</span><span style="color:#E1E4E8">>aar&#x3C;/</span><span style="color:#85E89D">packaging</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>org.jetbrains.kotlin&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>kotlin-stdlib&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>1.4.21&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">>compile&#x3C;/</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>androidx.core&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>core-ktx&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>1.3.2&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">>compile&#x3C;/</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">project</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<p>使用compileOnly方式的并没有被收录到pom文件中，而api和implementation 方式，在pom文件中，都表现为
+采用compile的方案应用依赖。</p>
+<blockquote>
+<p><em>ps:api和implementation在编码期的不同，不是我们讨论的重点，略。</em></p>
+</blockquote>
+<p><strong>回到我们开始的问题</strong>，将library发布时，按照约定，会将library本身的依赖收录到pom文件中。相应的，使用方使用
+仓库中的依赖项时，gradle会拉取其对应的pom文件，并添加依赖。</p>
+<p>所以，如果我们直接使用一个编译好的静态包，而丢弃了他对应的pom文件时，可能会丢失依赖，出现打包失败或者运行异常。
+这意味着我们需要人为维护依赖传递</p>
+<p><strong>我们记住这些内容，并先放到一边</strong>。</p>
+<h2 id="下沉后library会有多个层级">下沉后，library会有多个层级</h2>
+<blockquote>
+<p>例如图中：APP => A => B， 即APP依赖A，A依赖B，而A和B都是library</p>
+</blockquote>
+<p>我们知道，对于B，并不会有什么说法，只会出现在A和APP</p>
+<p>如果不使用静态包，那么A会声明：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">api project(</span><span style="color:#9ECBFF">':B'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#6A737D">//或者</span></span>
+<span class="line"><span style="color:#E1E4E8">implementation project(</span><span style="color:#9ECBFF">':B'</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>我们先看一下，这样生成的library-A的pom文件</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"><span style="color:#E1E4E8">&#x3C;?</span><span style="color:#85E89D">xml</span><span style="color:#B392F0"> version</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"1.0"</span><span style="color:#B392F0"> encoding</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"UTF-8"</span><span style="color:#E1E4E8">?></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">project</span><span style="color:#B392F0"> xsi:schemaLocation</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span style="color:#B392F0"> xmlns</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://maven.apache.org/POM/4.0.0"</span></span>
+<span class="line"><span style="color:#B392F0">    xmlns:xsi</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://www.w3.org/2001/XMLSchema-instance"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">modelVersion</span><span style="color:#E1E4E8">>4.0.0&#x3C;/</span><span style="color:#85E89D">modelVersion</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>leobert&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>A&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>1.0.0&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">packaging</span><span style="color:#E1E4E8">>aar&#x3C;/</span><span style="color:#85E89D">packaging</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>Demo&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>B&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>unspecified&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">>compile&#x3C;/</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">project</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<p>会得到groupID是项目名，artifactId是module名，version是未知的一个依赖项。</p>
+<p>假如我将A编译为静态包并发布到仓库，并运用了pom中的依赖描述，一定会得到无法找到:<code>Demo-B-unspecified.pom</code> 的问题。
+当然，这个问题可以通过<code>在APP中重新声明 B的依赖</code> 来解决。</p>
+<blockquote>
+<p>这意味着，我们需要时刻保持警惕，维护各个module的依赖。否则，我们无法同时享受：<code>静态包减少编译</code> &#x26; <code>随心的修改局部并集成测试</code></p>
+</blockquote>
+<p>这显然是一件不人道主义的事情。</p>
+<p>反思一下，对于A而言，它需要B，但仅在两个时机需要：</p>
+<ul>
+<li>编译时受检，完成编译</li>
+<li>运行时</li>
+</ul>
+<p>作为一个library，它本身并不对应运行时，所以，<code>compileOnly</code> 是其声明对B的依赖的最佳方式。</p>
+<p>这意味着，最终对应<code>运行时</code> 的内容，即APP，需要在<code>编译时加入</code> 对B的依赖。在原先 A 使用 Api方式声明对B的依赖时，是通过gradle
+分析pom文件实现的依赖加入。而现在，需要<code>人为维护</code>，只需要实现 <code>人道主义</code>，就可以鱼和熊掌兼得。</p>
+<h2 id="反思依赖传递的本质">反思依赖传递的本质</h2>
+<p><img  src="/_astro/APP.HWjNFbEy_ZIgdqq.webp" alt="依赖关系" loading="lazy" decoding="async" width="344" height="378"></p>
+<p>一般我们会像下面的演示代码一样声明依赖：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#6A737D">//APP:</span></span>
+<span class="line"><span style="color:#E1E4E8">implementation project(</span><span style="color:#9ECBFF">'A'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">implementation project(</span><span style="color:#9ECBFF">'Foo'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//A:</span></span>
+<span class="line"><span style="color:#E1E4E8">implementation project(</span><span style="color:#9ECBFF">'B'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">implementation project(</span><span style="color:#9ECBFF">'Bar'</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>因为依赖传递性，APP其实依赖了A，Foo，B，Bar。</p>
+<p>其实就是一颗树中，除去根节点的节点集合。而对于一个非根节点，它被依赖的形式只有两种：</p>
+<ul>
+<li>静态包，不需要重新编译，节约编译时间</li>
+<li>module，需要再次编译，可以运用最新改动</li>
+</ul>
+<p>我们可以定义这样一个键值对信息：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">depRules </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span></span>
+<span class="line"><span style="color:#9ECBFF">        "B"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"p"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "A"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"a"</span></span>
+<span class="line"><span style="color:#E1E4E8">]</span></span></code></pre>
+<p><code>"p"</code>代表使用project，<code>"a"</code>代表使用静态包。</p>
+<p>并将这颗树的内容表达出来：<strong>我们先忽略掉Foo和Bar</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">deps </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span></span>
+<span class="line"><span style="color:#9ECBFF">        "A"</span><span style="color:#E1E4E8">  : [</span></span>
+<span class="line"><span style="color:#9ECBFF">                "B"</span><span style="color:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#9ECBFF">                        "p"</span><span style="color:#E1E4E8">: project(</span><span style="color:#9ECBFF">':B'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#9ECBFF">                        "a"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'leobert:B:1.0.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">                ]</span></span>
+<span class="line"><span style="color:#E1E4E8">        ],</span></span>
+<span class="line"><span style="color:#9ECBFF">        "APP"</span><span style="color:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#9ECBFF">                "A"</span><span style="color:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#9ECBFF">                        "p"</span><span style="color:#E1E4E8">: project(</span><span style="color:#9ECBFF">':A'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#9ECBFF">                        "a"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'leobert:A:1.0.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">                ]</span></span>
+<span class="line"><span style="color:#E1E4E8">        ]</span></span>
+<span class="line"><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">with(</span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    A</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">each { </span><span style="color:#FFAB70">e</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#79B8FF">        APP</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">put(e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">key, e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">value)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>以A为例，我们可以通过代码实现动态添加依赖：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">afterEvaluate { </span><span style="color:#FFAB70">p</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"handle deps for:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> p)</span></span>
+<span class="line"><span style="color:#E1E4E8">        deps</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">A</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">each { </span><span style="color:#FFAB70">e</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#F97583">            def</span><span style="color:#E1E4E8"> rule </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> depRules</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">key)</span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"find deps of A: rule is"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> rule </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " ,dep is:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">value</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(rule)</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">toString())</span></span>
+<span class="line"><span style="color:#E1E4E8">            project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">dependencies</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">add(</span><span style="color:#9ECBFF">"compileOnly"</span><span style="color:#E1E4E8">, e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">value</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(rule))</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>同理，对于APP：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">afterEvaluate { </span><span style="color:#FFAB70">p</span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"handle deps for:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> p)</span></span>
+<span class="line"><span style="color:#E1E4E8">        deps</span><span style="color:#F97583">.</span><span style="color:#79B8FF">APP</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">each { </span><span style="color:#FFAB70">e</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#F97583">            def</span><span style="color:#E1E4E8"> rule </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> depRules</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">key)</span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"find deps of App:rule is"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> rule </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " ,dep is:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">value</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(rule)</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">toString())</span></span>
+<span class="line"><span style="color:#E1E4E8">            project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">dependencies</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">add(</span><span style="color:#9ECBFF">"implementation"</span><span style="color:#E1E4E8">, e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">value</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(rule))</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>查看输出：</p>
+<blockquote>
+<p>Configure project :A</p>
+<p>handle deps for:project ‘:A’</p>
+<p>find deps of A: rule isp ,dep is:project ‘:B’</p>
+</blockquote>
+<blockquote>
+<p>Configure project :app</p>
+<p>handle deps for:project ‘:app’</p>
+<p>find deps of App:rule isa ,dep is:leobert:A:1.0.0</p>
+<p>find deps of App:rule isp ,dep is:project ‘:B’</p>
+</blockquote>
+<p>这样，我们就可以通过修改对应节点的依赖方式配置而实现鱼和熊掌兼得。不再受pom文件的约束。</p>
+<p>当时，我们回到上面说的<code>不人道主义</code>之处，我们通过了<code>with</code> 函数，将A自身的依赖信息，注入到APP中。
+但是当树的规模变大时，人为维护就很累了。这是<code>必须要解决的</code>，当然，这很容易解决。我们直接使用递归处理即可</p>
+<h2 id="贴近人的直观感受才优雅逐步实现人道主义">贴近人的直观感受才优雅，逐步实现人道主义</h2>
+<p>我们添加一个全局闭包：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">utils </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span></span>
+<span class="line"><span style="color:#79B8FF">        applyDependency</span><span style="color:#E1E4E8">: { </span><span style="color:#FFAB70">project</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">e</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#F97583">            def</span><span style="color:#E1E4E8"> rule </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> depRules</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">key)</span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"find deps of App:rule is "</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> rule </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " ,dep is:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">value</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(rule)</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">toString())</span></span>
+<span class="line"><span style="color:#E1E4E8">            project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">dependencies</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">add(</span><span style="color:#9ECBFF">"implementation"</span><span style="color:#E1E4E8">, e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">value</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(rule))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">                println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"try to add sub deps of:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">key)</span></span>
+<span class="line"><span style="color:#F97583">                def</span><span style="color:#E1E4E8"> sub </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> deps</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">key)</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (sub </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> sub</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(</span><span style="color:#9ECBFF">"isEnd"</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    sub</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">each { </span><span style="color:#FFAB70">se</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#E1E4E8">                        ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">utils</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">applyDependency(project, se)</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">Exception</span><span style="color:#E1E4E8"> ignore) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">]</span></span></code></pre>
+<p>注意，因为我们定义的依赖信息是：moduleName-> (moduleName -> (scopeName-> depInfo)) 的方式。</p>
+<p>这导致我们判断末端节点有一定的困难，即递归的尾部判断存在困难,我们需要人为标记一下末端节点</p>
+<p>这时，我们只需描述一下树即可：<strong>同样忽略Foo，Bar</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">deps </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span></span>
+<span class="line"><span style="color:#9ECBFF">        "A"</span><span style="color:#E1E4E8">  : [</span></span>
+<span class="line"><span style="color:#9ECBFF">                "B"</span><span style="color:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#9ECBFF">                        "isEnd"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">                        "p"</span><span style="color:#E1E4E8">    : project(</span><span style="color:#9ECBFF">':B'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#9ECBFF">                        "a"</span><span style="color:#E1E4E8">    : </span><span style="color:#9ECBFF">'leobert:B:1.0.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">                ]</span></span>
+<span class="line"><span style="color:#E1E4E8">        ],</span></span>
+<span class="line"><span style="color:#9ECBFF">        "APP"</span><span style="color:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#9ECBFF">                "A"</span><span style="color:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#9ECBFF">                        "p"</span><span style="color:#E1E4E8">: project(</span><span style="color:#9ECBFF">':A'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#9ECBFF">                        "a"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'leobert:A:1.0.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">                ]</span></span>
+<span class="line"><span style="color:#E1E4E8">        ]</span></span>
+<span class="line"><span style="color:#E1E4E8">]</span></span></code></pre>
+<p>问题基本得到解决了，但是并不优雅。</p>
+<h3 id="优雅优雅优雅">优雅，优雅，优雅</h3>
+<p>我们不妨再修改一下对依赖树的描述方式，将节点信息和树结构分开，重新改进：</p>
+<p>更人道主义的依赖描述</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">deps </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span></span>
+<span class="line"><span style="color:#9ECBFF">        "A"</span><span style="color:#E1E4E8">  : [</span><span style="color:#9ECBFF">"B"</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#9ECBFF">        "app"</span><span style="color:#E1E4E8">: [</span><span style="color:#9ECBFF">"A"</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">modules </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span></span>
+<span class="line"><span style="color:#9ECBFF">        "A"</span><span style="color:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#9ECBFF">                "p"</span><span style="color:#E1E4E8">: project(</span><span style="color:#9ECBFF">':A'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#9ECBFF">                "a"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'leobert:A:1.0.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">        ],</span></span>
+<span class="line"><span style="color:#9ECBFF">        "B"</span><span style="color:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#9ECBFF">                "p"</span><span style="color:#E1E4E8">    : project(</span><span style="color:#9ECBFF">':B'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#9ECBFF">                "a"</span><span style="color:#E1E4E8">    : </span><span style="color:#9ECBFF">'leobert:B:1.0.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">        ]</span></span>
+<span class="line"><span style="color:#E1E4E8">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">depRules </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span></span>
+<span class="line"><span style="color:#9ECBFF">        "B"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"p"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "A"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"a"</span></span>
+<span class="line"><span style="color:#E1E4E8">]</span></span></code></pre>
+<p>抽象添加依赖的过程，递归处理<code>每一个节点</code>的<code>依赖收集</code>，并<code>向宿主module添加</code>，当某个节点在ext.deps中没有任何依赖时，<code>归</code>：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">utils </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span></span>
+<span class="line"><span style="color:#79B8FF">            applyDependency</span><span style="color:#E1E4E8">: { </span><span style="color:#FFAB70">project</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">scope</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">e</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#F97583">                def</span><span style="color:#E1E4E8"> rule </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> depRules</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(e)</span></span>
+<span class="line"><span style="color:#F97583">                def</span><span style="color:#E1E4E8"> eInfo </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">modules</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(e)</span></span>
+<span class="line"><span style="color:#79B8FF">                println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"find deps of "</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> project </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ":rule is "</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> rule </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " ,dep is:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> eInfo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(rule)</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">toString())</span></span>
+<span class="line"><span style="color:#E1E4E8">                project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">dependencies</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">add(scope, eInfo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(rule))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">                def</span><span style="color:#E1E4E8"> sub </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> deps</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(e) </span><span style="color:#6A737D">//list deps of e</span></span>
+<span class="line"><span style="color:#79B8FF">                println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"try to add sub deps of:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> e </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " ---> "</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> sub)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (sub </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">sub</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">isEmpty()) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    sub</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">each { </span><span style="color:#FFAB70">dOfE</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#E1E4E8">                        ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">utils</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">applyDependency(project, scope, dOfE)</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">    ]</span></span></code></pre>
+<p>每个module只需要指定自己的scope：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#6A737D">//:app</span></span>
+<span class="line"><span style="color:#E1E4E8">project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">afterEvaluate { </span><span style="color:#FFAB70">p</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#79B8FF">    println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"handle deps for:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> p)</span></span>
+<span class="line"><span style="color:#E1E4E8">    deps</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(p</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">name)</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">each { </span><span style="color:#FFAB70">e</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#E1E4E8">        rootProject</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">utils</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">applyDependency(p,</span><span style="color:#9ECBFF">"implementation"</span><span style="color:#E1E4E8">,e)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//:A</span></span>
+<span class="line"><span style="color:#E1E4E8">project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">afterEvaluate { </span><span style="color:#FFAB70">p</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#79B8FF">    println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"handle deps for:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> p</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">name)</span></span>
+<span class="line"><span style="color:#E1E4E8">    deps</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">get(p</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">name)</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">each { </span><span style="color:#FFAB70">e</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#E1E4E8">        rootProject</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">utils</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">applyDependency(p,</span><span style="color:#9ECBFF">"compileOnly"</span><span style="color:#E1E4E8">,e)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>只要不是独立运行的module，就是<code>compileOnly</code>，否则就是 <code>implementation</code>。</p>
+<p>输出也容易拍错：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8"> Configure project :A</span></span>
+<span class="line"><span style="color:#B392F0">handle</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> for:A</span></span>
+<span class="line"><span style="color:#B392F0">find</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of</span><span style="color:#9ECBFF"> project</span><span style="color:#9ECBFF"> ':A':rule</span><span style="color:#9ECBFF"> is</span><span style="color:#9ECBFF"> p</span><span style="color:#9ECBFF"> ,dep</span><span style="color:#9ECBFF"> is:project</span><span style="color:#9ECBFF"> ':B'</span></span>
+<span class="line"><span style="color:#B392F0">try</span><span style="color:#9ECBFF"> to</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> sub</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of:B</span><span style="color:#79B8FF"> ---</span><span style="color:#F97583">></span><span style="color:#9ECBFF"> null</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8"> Configure project :app</span></span>
+<span class="line"><span style="color:#B392F0">handle</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> for:project</span><span style="color:#9ECBFF"> ':app'</span></span>
+<span class="line"><span style="color:#B392F0">find</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of</span><span style="color:#9ECBFF"> project</span><span style="color:#9ECBFF"> ':app':rule</span><span style="color:#9ECBFF"> is</span><span style="color:#9ECBFF"> a</span><span style="color:#9ECBFF"> ,dep</span><span style="color:#9ECBFF"> is:leobert:A:1.0.0</span></span>
+<span class="line"><span style="color:#B392F0">try</span><span style="color:#9ECBFF"> to</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> sub</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of:A</span><span style="color:#79B8FF"> ---</span><span style="color:#F97583">></span><span style="color:#E1E4E8"> [B]</span></span>
+<span class="line"><span style="color:#B392F0">find</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of</span><span style="color:#9ECBFF"> project</span><span style="color:#9ECBFF"> ':app':rule</span><span style="color:#9ECBFF"> is</span><span style="color:#9ECBFF"> p</span><span style="color:#9ECBFF"> ,dep</span><span style="color:#9ECBFF"> is:project</span><span style="color:#9ECBFF"> ':B'</span></span>
+<span class="line"><span style="color:#B392F0">try</span><span style="color:#9ECBFF"> to</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> sub</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of:B</span><span style="color:#79B8FF"> ---</span><span style="color:#F97583">></span><span style="color:#9ECBFF"> null</span></span></code></pre>
+<h2 id="测试一个复杂场景">测试一个复杂场景</h2>
+<p>我们再上图的基础上，让B和Foo依赖Base</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">deps </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span></span>
+<span class="line"><span style="color:#9ECBFF">        "app"</span><span style="color:#E1E4E8">: [</span><span style="color:#9ECBFF">"A"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Foo"</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#9ECBFF">        "A"</span><span style="color:#E1E4E8">  : [</span><span style="color:#9ECBFF">"B"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Bar"</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Foo"</span><span style="color:#E1E4E8">: [</span><span style="color:#9ECBFF">"Base"</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#9ECBFF">        "B"</span><span style="color:#E1E4E8">  : [</span><span style="color:#9ECBFF">"Base"</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#E1E4E8">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">modules </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span></span>
+<span class="line"><span style="color:#9ECBFF">        "A"</span><span style="color:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#9ECBFF">                "p"</span><span style="color:#E1E4E8">: project(</span><span style="color:#9ECBFF">':A'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#9ECBFF">                "a"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'leobert:A:1.0.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">        ],</span></span>
+<span class="line"><span style="color:#9ECBFF">        "B"</span><span style="color:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#9ECBFF">                "p"</span><span style="color:#E1E4E8">: project(</span><span style="color:#9ECBFF">':B'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#9ECBFF">                "a"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'leobert:B:1.0.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">        ],</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Foo"</span><span style="color:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#9ECBFF">                "p"</span><span style="color:#E1E4E8">: project(</span><span style="color:#9ECBFF">':Foo'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">        ],</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Bar"</span><span style="color:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#9ECBFF">                "p"</span><span style="color:#E1E4E8">: project(</span><span style="color:#9ECBFF">':Bar'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">        ],</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Base"</span><span style="color:#E1E4E8">: [</span></span>
+<span class="line"><span style="color:#9ECBFF">                "p"</span><span style="color:#E1E4E8">: project(</span><span style="color:#9ECBFF">':Base'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">        ]</span></span>
+<span class="line"><span style="color:#E1E4E8">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">ext</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">depRules </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span></span>
+<span class="line"><span style="color:#9ECBFF">        "B"</span><span style="color:#E1E4E8">   : </span><span style="color:#9ECBFF">"p"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "A"</span><span style="color:#E1E4E8">   : </span><span style="color:#9ECBFF">"a"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Foo"</span><span style="color:#E1E4E8"> : </span><span style="color:#9ECBFF">"p"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Bar"</span><span style="color:#E1E4E8"> : </span><span style="color:#9ECBFF">"p"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Base"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"p"</span></span>
+<span class="line"><span style="color:#E1E4E8">]</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8"> Configure project :A</span></span>
+<span class="line"><span style="color:#B392F0">handle</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> for:A</span></span>
+<span class="line"><span style="color:#B392F0">find</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of</span><span style="color:#9ECBFF"> project</span><span style="color:#9ECBFF"> ':A':rule</span><span style="color:#9ECBFF"> is</span><span style="color:#9ECBFF"> p</span><span style="color:#9ECBFF"> ,dep</span><span style="color:#9ECBFF"> is:project</span><span style="color:#9ECBFF"> ':B'</span></span>
+<span class="line"><span style="color:#B392F0">try</span><span style="color:#9ECBFF"> to</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> sub</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of:B</span><span style="color:#79B8FF"> ---</span><span style="color:#F97583">></span><span style="color:#E1E4E8"> [Base]</span></span>
+<span class="line"><span style="color:#B392F0">find</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of</span><span style="color:#9ECBFF"> project</span><span style="color:#9ECBFF"> ':A':rule</span><span style="color:#9ECBFF"> is</span><span style="color:#9ECBFF"> p</span><span style="color:#9ECBFF"> ,dep</span><span style="color:#9ECBFF"> is:project</span><span style="color:#9ECBFF"> ':Base'</span></span>
+<span class="line"><span style="color:#B392F0">try</span><span style="color:#9ECBFF"> to</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> sub</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of:Base</span><span style="color:#79B8FF"> ---</span><span style="color:#F97583">></span><span style="color:#9ECBFF"> null</span></span>
+<span class="line"><span style="color:#B392F0">find</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of</span><span style="color:#9ECBFF"> project</span><span style="color:#9ECBFF"> ':A':rule</span><span style="color:#9ECBFF"> is</span><span style="color:#9ECBFF"> p</span><span style="color:#9ECBFF"> ,dep</span><span style="color:#9ECBFF"> is:project</span><span style="color:#9ECBFF"> ':Bar'</span></span>
+<span class="line"><span style="color:#B392F0">try</span><span style="color:#9ECBFF"> to</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> sub</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of:Bar</span><span style="color:#79B8FF"> ---</span><span style="color:#F97583">></span><span style="color:#9ECBFF"> null</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8"> Configure project :app</span></span>
+<span class="line"><span style="color:#B392F0">handle</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> for:project</span><span style="color:#9ECBFF"> ':app'</span></span>
+<span class="line"><span style="color:#B392F0">find</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of</span><span style="color:#9ECBFF"> project</span><span style="color:#9ECBFF"> ':app':rule</span><span style="color:#9ECBFF"> is</span><span style="color:#9ECBFF"> a</span><span style="color:#9ECBFF"> ,dep</span><span style="color:#9ECBFF"> is:leobert:A:1.0.0</span></span>
+<span class="line"><span style="color:#B392F0">try</span><span style="color:#9ECBFF"> to</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> sub</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of:A</span><span style="color:#79B8FF"> ---</span><span style="color:#F97583">></span><span style="color:#E1E4E8"> [B, </span><span style="color:#9ECBFF">Bar]</span></span>
+<span class="line"><span style="color:#B392F0">find</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of</span><span style="color:#9ECBFF"> project</span><span style="color:#9ECBFF"> ':app':rule</span><span style="color:#9ECBFF"> is</span><span style="color:#9ECBFF"> p</span><span style="color:#9ECBFF"> ,dep</span><span style="color:#9ECBFF"> is:project</span><span style="color:#9ECBFF"> ':B'</span></span>
+<span class="line"><span style="color:#B392F0">try</span><span style="color:#9ECBFF"> to</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> sub</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of:B</span><span style="color:#79B8FF"> ---</span><span style="color:#F97583">></span><span style="color:#E1E4E8"> [Base]</span></span>
+<span class="line"><span style="color:#B392F0">find</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of</span><span style="color:#9ECBFF"> project</span><span style="color:#9ECBFF"> ':app':rule</span><span style="color:#9ECBFF"> is</span><span style="color:#9ECBFF"> p</span><span style="color:#9ECBFF"> ,dep</span><span style="color:#9ECBFF"> is:project</span><span style="color:#9ECBFF"> ':Base'</span></span>
+<span class="line"><span style="color:#B392F0">try</span><span style="color:#9ECBFF"> to</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> sub</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of:Base</span><span style="color:#79B8FF"> ---</span><span style="color:#F97583">></span><span style="color:#9ECBFF"> null</span></span>
+<span class="line"><span style="color:#B392F0">find</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of</span><span style="color:#9ECBFF"> project</span><span style="color:#9ECBFF"> ':app':rule</span><span style="color:#9ECBFF"> is</span><span style="color:#9ECBFF"> p</span><span style="color:#9ECBFF"> ,dep</span><span style="color:#9ECBFF"> is:project</span><span style="color:#9ECBFF"> ':Bar'</span></span>
+<span class="line"><span style="color:#B392F0">try</span><span style="color:#9ECBFF"> to</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> sub</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of:Bar</span><span style="color:#79B8FF"> ---</span><span style="color:#F97583">></span><span style="color:#9ECBFF"> null</span></span>
+<span class="line"><span style="color:#B392F0">find</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of</span><span style="color:#9ECBFF"> project</span><span style="color:#9ECBFF"> ':app':rule</span><span style="color:#9ECBFF"> is</span><span style="color:#9ECBFF"> p</span><span style="color:#9ECBFF"> ,dep</span><span style="color:#9ECBFF"> is:project</span><span style="color:#9ECBFF"> ':Foo'</span></span>
+<span class="line"><span style="color:#B392F0">try</span><span style="color:#9ECBFF"> to</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> sub</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of:Foo</span><span style="color:#79B8FF"> ---</span><span style="color:#F97583">></span><span style="color:#E1E4E8"> [Base]</span></span>
+<span class="line"><span style="color:#B392F0">find</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of</span><span style="color:#9ECBFF"> project</span><span style="color:#9ECBFF"> ':app':rule</span><span style="color:#9ECBFF"> is</span><span style="color:#9ECBFF"> p</span><span style="color:#9ECBFF"> ,dep</span><span style="color:#9ECBFF"> is:project</span><span style="color:#9ECBFF"> ':Base'</span></span>
+<span class="line"><span style="color:#B392F0">try</span><span style="color:#9ECBFF"> to</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> sub</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of:Base</span><span style="color:#79B8FF"> ---</span><span style="color:#F97583">></span><span style="color:#9ECBFF"> null</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8"> Configure project :Bar</span></span>
+<span class="line"><span style="color:#B392F0">handle</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> for:Bar</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8"> Configure project :Base</span></span>
+<span class="line"><span style="color:#B392F0">handle</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> for:Base</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8"> Configure project :Foo</span></span>
+<span class="line"><span style="color:#B392F0">handle</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> for:Foo</span></span>
+<span class="line"><span style="color:#B392F0">find</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of</span><span style="color:#9ECBFF"> project</span><span style="color:#9ECBFF"> ':Foo':rule</span><span style="color:#9ECBFF"> is</span><span style="color:#9ECBFF"> p</span><span style="color:#9ECBFF"> ,dep</span><span style="color:#9ECBFF"> is:project</span><span style="color:#9ECBFF"> ':Base'</span></span>
+<span class="line"><span style="color:#B392F0">try</span><span style="color:#9ECBFF"> to</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> sub</span><span style="color:#9ECBFF"> deps</span><span style="color:#9ECBFF"> of:Base</span><span style="color:#79B8FF"> ---</span><span style="color:#F97583">></span><span style="color:#9ECBFF"> null</span></span></code></pre>
+<blockquote>
+<p>随着，树规模的增大，阅读依赖关系还算明显，但是阅读日志，又不太优雅了。</p>
+</blockquote>
+<h2 id="总结和展望">总结和展望</h2>
+<p>我们通过探寻，发现了一种可以 <code>鱼和熊掌兼得</code> 地依赖处理方式，让我们在Android领域组件化场景下（单项目，多module），能够灵活地切换：</p>
+<ul>
+<li>静态包依赖，缩短编译时间</li>
+<li>项目依赖，快速部署变更进行集成测试</li>
+</ul>
+<p>对了，上面我们没有重点提到如何切换，其实非常地简单：
+只需要修改 <code>project.ext.depRules</code> 中对应的配置项即可。</p>
+<p>如果后面还有闲情逸致的话，可以再写一个studio的插件，获取 <code>dependency.gradle</code> 的信息，
+输出可视化的依赖树；rule配置，直接做成多个开关，<code>优雅，永不过时</code>。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

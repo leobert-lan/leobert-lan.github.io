@@ -1,0 +1,784 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>三思系列：重新认识Drawable | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">三思系列：重新认识Drawable</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="三思系列重新认识drawable">三思系列：重新认识Drawable</h1>
+<h2 id="前言">前言</h2>
+<p><a href="https://leobert-lan.github.io/info/about_sansi_series.html">关于三思系列</a></p>
+<p>前一段时间看到宏洋公众号推送了一篇关于splash页面动效的文章，具体为：将一个英文单词拆分为多个字母，散落在屏幕中，然后按照一定的路径回归，最终展示一段流光效果，完成splash页面。</p>
+<p>当时文章中提到的做法是自定义View的实现。当时脑海中灵光一闪，感觉还是用Drawable来干这个事情更加合适。</p>
+<p>记忆中，我曾经整理过一篇Drawable基础内容的文章，可惜丢失了，在开始干这件事情之前，我们把这一块内容再完整的梳理一遍。</p>
+<p>这篇文章会比较长，先给出导图</p>
+<p><img  src="/_astro/Drawable_guide.DeqPIL-k_Z20L7GV.webp" alt="guide.png" loading="lazy" decoding="async" width="660" height="233"></p>
+<h2 id="drawable的设计意图">Drawable的设计意图</h2>
+<blockquote>
+<p>A Drawable is a general abstraction for “something that can be drawn.”  Most often you will deal with Drawable as the type of resource retrieved for drawing things to the screen; the Drawable class provides a generic API for dealing with an underlying visual resource that may take a variety of forms. Unlike a View, a Drawable does not have any facility to receive events or otherwise interact with the user.</p>
+</blockquote>
+<p>这是SDK文档中的内容，大致含义呢：drawable是对于”<strong>可以被绘制的内容</strong>”的<strong>抽象</strong>。 多数情况下，我们将获取的资源作为Drawable绘制在屏幕上，
+Drawable类提供了一个通用API，用于处理可能采用多种类型的底层可视资源。 不像View，Drawable<strong>没有</strong>任何接收事件或以其他方式与用户交互的功能。</p>
+<p>为了简化绘制，Drawable中为使用者提供了一定的机制操作绘制：</p>
+<blockquote>
+<ul>
+<li>
+<p>The {@link #setBounds} method <var>must</var> be called to tell the
+> Drawable where it is drawn and how large it should be. All Drawables
+> should respect the requested size, often simply by scaling their
+> imagery. A client can find the preferred size for some Drawables with
+> the {@link #getIntrinsicHeight} and {@link #getIntrinsicWidth} methods.</p>
+</li>
+<li>
+<p>The {@link #getPadding} method can return from some Drawables
+> information about how to frame content that is placed inside of them.
+> For example, a Drawable that is intended to be the frame for a button
+> widget would need to return padding that correctly places the label
+> inside of itself.</p>
+</li>
+<li>
+<p>The {@link #setState} method allows the client to tell the Drawable
+> in which state it is to be drawn, such as “focused”, “selected”, etc.
+> Some drawables may modify their imagery based on the selected state.</p>
+</li>
+<li>
+<p>The {@link #setLevel} method allows the client to supply a single
+> continuous controller that can modify the Drawable is displayed, such as
+> a battery level or progress level. Some drawables may modify their
+> imagery based on the current level.</p>
+</li>
+<li>
+<p>A Drawable can perform animations by calling back to its client
+> through the {@link Callback} interface. All clients should support this
+> interface (via {@link #setCallback}) so that animations will work. A
+> simple way to do this is through the system facilities such as
+> {@link android.view.View#setBackground(Drawable)} and
+> {@link android.widget.ImageView}.</p>
+</li>
+</ul>
+</blockquote>
+<p>继续简要翻译一下重要内容</p>
+<ul>
+<li>setBounds 方法必须被调用，它告知了Drawable应该被绘制的位置和大小</li>
+<li>getPadding 方法可以获知一些Drawable绘制时的内边距信息</li>
+<li>setState 方法允许使用者告知Drawable应当在哪些状态时绘制，例如获取了焦点，被选中等</li>
+<li>setLevel 方法允许调用者提供一个连续的控制器，可以修改显示的可绘制内容， 例如电池电量或进度。一些Drawable可能会根据当前的level改变其图像</li>
+<li>Drawable可以展现动画，通过设置Callback接口回调给他的使用者，所有的使用者，需要通过 setCallback方法提供回调函数支持以让动画工作。一个简便方式是通过一些系统设施例如：View#setBackground 和
+ImageView</li>
+</ul>
+<blockquote>
+<p>注：Drawable展现动画部分，这里翻译的比较晦涩，具体细节见：Drawable Api概览</p>
+</blockquote>
+<p>小结：Android SDK中抽象了Drawable体系，不同于View体系，它仅负责描述可绘制的内容，不可进行用户交互，其子类将描述各类可绘制内容的特性。</p>
+<h2 id="sdk中的drawable子类概览">SDK中的Drawable子类概览</h2>
+<blockquote>
+<p>注：经过多次思考，我最终把这一段的草稿删除了，这部分体系实在是太大，浅写无异于copy官方文档，深挖就会影响文章关注的重点。
+如果对系统中提供的Drawable子类感兴趣的，建议深入源码看一下。</p>
+</blockquote>
+<h2 id="drawable-api概览">Drawable Api概览</h2>
+<p>在开头的设计意图探索中，我们已经阅读了几个关键API：<code>setBound</code>，<code>getPadding</code>，<code>setState</code>，<code>setLevel</code>，<code>setCallback</code>的信息</p>
+<p>还有<code>getBound</code>，<code>copyBound</code>等获取边界信息的API，RippleDrawable和一些自定义的Drawable还覆写了<code>getDirtyBounds</code>，用以获取它可能涉及到的范围边界</p>
+<p>横向的方向相关：<code>setLayoutDirection</code>，<code>getLayoutDirection</code>，<code>onLayoutDirectionChanged</code></p>
+<p>透明度相关：<code>setAlpha</code>，<code>getAlpha</code></p>
+<p>着色和颜色filter相关：<code>setColorFilter</code>，<code>getColorFilter</code>，<code>clearColorFilter</code>，
+<code>setTint</code>，<code>setTintList</code>，<code>setTintMode</code>，<code>setTintBlendMode</code></p>
+<p>尺寸测量：<code>getIntrinsicWidth</code>，<code>getIntrinsicHeight</code>，<code>getMinimumWidth</code>，<code>getMinimumHeight</code>
+当作为背景使用时，getMinimumXXX用于告知View建议使用的最小宽高。getIntrinsicXXX是获取一个Drawable的内在的、固有的宽高，这个值和设备屏幕密度是有关系的。</p>
+<p>自我独立：<code>mutate</code>，和缓存机制有关，调用得到一个新的Drawable，这样自己的状态就不会影响到其他使用处。</p>
+<p>重绘相关：<code>setCallback(@Nullable Callback cb)</code>，<code>getCallback()</code>，<code>invalidateSelf()</code>，
+<code>scheduleSelf(@NonNull Runnable what, long when)</code>，<code>unscheduleSelf(@NonNull Runnable what)</code></p>
+<p>上面我们提到这一组API会详细说一下。以AnimationDrawable为例，这是一个动画Drawable，</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> AnimationDrawable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> setFrame</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> frame</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">boolean</span><span style="color:#FFAB70"> unschedule</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">boolean</span><span style="color:#FFAB70"> animate</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (frame </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> mAnimationState.</span><span style="color:#B392F0">getChildCount</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        mAnimating </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> animate;</span></span>
+<span class="line"><span style="color:#E1E4E8">        mCurFrame </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> frame;</span></span>
+<span class="line"><span style="color:#B392F0">        selectDrawable</span><span style="color:#E1E4E8">(frame);</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (unschedule </span><span style="color:#F97583">||</span><span style="color:#E1E4E8"> animate) {</span></span>
+<span class="line"><span style="color:#B392F0">            unscheduleSelf</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (animate) {</span></span>
+<span class="line"><span style="color:#6A737D">            // Unscheduling may have clobbered these values; restore them</span></span>
+<span class="line"><span style="color:#E1E4E8">            mCurFrame </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> frame;</span></span>
+<span class="line"><span style="color:#E1E4E8">            mRunning </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#B392F0">            scheduleSelf</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, SystemClock.</span><span style="color:#B392F0">uptimeMillis</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> mAnimationState.mDurations[frame]);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>设置某一帧之后，如果是使用动画，则会调用scheduleSelf，时间戳是下一帧应该出现的时间戳。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Drawable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> scheduleSelf</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Runnable </span><span style="color:#FFAB70">what</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">long</span><span style="color:#FFAB70"> when</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#E1E4E8"> Callback callback </span><span style="color:#F97583">=</span><span style="color:#B392F0"> getCallback</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (callback </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            callback.</span><span style="color:#B392F0">scheduleDrawable</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, what, when);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>如果存在Callback，则调用Callback#scheduleDrawable。</p>
+<p>以View的代码为例</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> scheduleDrawable</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Drawable </span><span style="color:#FFAB70">who</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Runnable </span><span style="color:#FFAB70">what</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">long</span><span style="color:#FFAB70"> when</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">verifyDrawable</span><span style="color:#E1E4E8">(who) </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> what </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> delay </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> when </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> SystemClock.</span><span style="color:#B392F0">uptimeMillis</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (mAttachInfo </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                mAttachInfo.mViewRootImpl.mChoreographer.</span><span style="color:#B392F0">postCallbackDelayed</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                        Choreographer.CALLBACK_ANIMATION, what, who,</span></span>
+<span class="line"><span style="color:#E1E4E8">                        Choreographer.</span><span style="color:#B392F0">subtractFrameDelay</span><span style="color:#E1E4E8">(delay));</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">                // Postpone the runnable until we know</span></span>
+<span class="line"><span style="color:#6A737D">                // on which thread it needs to run.</span></span>
+<span class="line"><span style="color:#B392F0">                getRunQueue</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">postDelayed</span><span style="color:#E1E4E8">(what, delay);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>很简单，验证合法性之后定时执行Runnable，Runnable的内容：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> AnimationDrawable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> run</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#B392F0">        nextFrame</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> nextFrame</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">boolean</span><span style="color:#FFAB70"> unschedule</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> nextFrame </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mCurFrame </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> numFrames </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mAnimationState.</span><span style="color:#B392F0">getChildCount</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#F97583"> boolean</span><span style="color:#E1E4E8"> isLastFrame </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mAnimationState.mOneShot </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> nextFrame </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> (numFrames </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // Loop if necessary. One-shot animations should never hit this case.</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">mAnimationState.mOneShot </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> nextFrame </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> numFrames) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            nextFrame </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        setFrame</span><span style="color:#E1E4E8">(nextFrame, unschedule, </span><span style="color:#F97583">!</span><span style="color:#E1E4E8">isLastFrame);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>显示下一帧，逻辑非常清晰，不再进行解析。</p>
+<blockquote>
+<p>小结: 这一段我们对Drawable的API进行了简单的梳理，略去了大量关于创建的API以及和开发不太紧密的API，完成了一次概览。
+更完善的认知需要再仔细研读源码内容，限于篇幅不再展开。</p>
+</blockquote>
+<h2 id="drawableinflater">DrawableInflater</h2>
+<p>顾名思义，这是一个Drawable加载器，和LayoutInflater类似，从一种满足特定语法的语法式中解析出实例对象，显然，在Android中它用来处理xml语法的drawable资源文件。</p>
+<p>看一下文档：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * Instantiates a drawable XML file into its corresponding</span></span>
+<span class="line"><span style="color:#6A737D"> * {@link android.graphics.drawable.Drawable} objects.</span></span>
+<span class="line"><span style="color:#6A737D"> * &#x3C;p></span></span>
+<span class="line"><span style="color:#6A737D"> * For performance reasons, inflation relies heavily on pre-processing of</span></span>
+<span class="line"><span style="color:#6A737D"> * XML files that is done at build time. Therefore, it is not currently possible</span></span>
+<span class="line"><span style="color:#6A737D"> * to use this inflater with an XmlPullParser over a plain XML file at runtime;</span></span>
+<span class="line"><span style="color:#6A737D"> * it only works with an XmlPullParser returned from a compiled resource (R.</span></span>
+<span class="line"><span style="color:#6A737D"> * &#x3C;em>something&#x3C;/em> file.)</span></span>
+<span class="line"><span style="color:#6A737D"> *</span></span>
+<span class="line"><span style="color:#6A737D"> * @hide Pending API finalization.</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span></code></pre>
+<p>需要注意，从性能角度上，这种创建严重依赖于构建时的预处理，因此，目前不可能利用它和 <strong>XmlPullParser</strong> 一起 <strong>在运行时解析一个xml文件</strong> 并创建对象实例 只适用于那些已经在资源编译阶段返回的XmlPullParser</p>
+<p>我们知道，一个受检的xml document，会被解析为语法树，得到树中的标签节点和属性信息。</p>
+<p>我们阅读DrawableInflater的代码，有两段关于创建Drawable具体实例的内容，这是根据tag创建实例的代码</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> DrawableInflater</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> Drawable </span><span style="color:#B392F0">inflateFromTag</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> String </span><span style="color:#FFAB70">name</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        switch</span><span style="color:#E1E4E8"> (name) {</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "selector"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> StateListDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "animated-selector"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> AnimatedStateListDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "level-list"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> LevelListDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "layer-list"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> LayerDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "transition"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> TransitionDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "ripple"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> RippleDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "adaptive-icon"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> AdaptiveIconDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "color"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ColorDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "shape"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> GradientDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "vector"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> VectorDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "animated-vector"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> AnimatedVectorDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "scale"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ScaleDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "clip"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ClipDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "rotate"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> RotateDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "animated-rotate"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> AnimatedRotateDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "animation-list"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> AnimationDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "inset"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> InsetDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "bitmap"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> BitmapDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "nine-patch"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> NinePatchDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            case</span><span style="color:#9ECBFF"> "animated-image"</span><span style="color:#F97583">:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> AnimatedImageDrawable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            default:</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>如果您已经在第二小节自行对Drawable的子类进行了概览，应该对这些内容不陌生了。</p>
+<p>以Android项目模板为例，工程会创建一个启动图标：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">vector</span><span style="color:#B392F0"> xmlns:android</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://schemas.android.com/apk/res/android"</span></span>
+<span class="line"><span style="color:#B392F0">        xmlns:aapt</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://schemas.android.com/aapt"</span></span>
+<span class="line"><span style="color:#B392F0">        android:width</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"108dp"</span></span>
+<span class="line"><span style="color:#B392F0">        android:height</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"108dp"</span></span>
+<span class="line"><span style="color:#B392F0">        android:viewportWidth</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"108"</span></span>
+<span class="line"><span style="color:#B392F0">        android:viewportHeight</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"108"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">path</span></span>
+<span class="line"><span style="color:#B392F0">        android:pathData</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"M31,63.928c0,0 6.4,-11 12.1,-13.1c7.2,-2.6 26,-1.4 26,-1.4l38.1,38.1L107,108.928l-32,-1L31,63.928z"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">aapt:attr</span><span style="color:#B392F0"> name</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"android:fillColor"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;</span><span style="color:#85E89D">gradient</span></span>
+<span class="line"><span style="color:#B392F0">                android:endX</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"85.84757"</span></span>
+<span class="line"><span style="color:#B392F0">                android:endY</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"92.4963"</span></span>
+<span class="line"><span style="color:#B392F0">                android:startX</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"42.9492"</span></span>
+<span class="line"><span style="color:#B392F0">                android:startY</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"49.59793"</span></span>
+<span class="line"><span style="color:#B392F0">                android:type</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"linear"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">item</span></span>
+<span class="line"><span style="color:#B392F0">                    android:color</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"#44000000"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:offset</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"0.0"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">item</span></span>
+<span class="line"><span style="color:#B392F0">                    android:color</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"#00000000"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:offset</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"1.0"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;/</span><span style="color:#85E89D">gradient</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;/</span><span style="color:#85E89D">aapt:attr</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">path</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">path</span></span>
+<span class="line"><span style="color:#B392F0">        android:fillColor</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"#FFFFFF"</span></span>
+<span class="line"><span style="color:#B392F0">        android:fillType</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"nonZero"</span></span>
+<span class="line"><span style="color:#B392F0">        android:pathData</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"M65.3,45.828l3.8,-6.6c0.2,-0.4 0.1,-0.9 -0.3,-1.1c-0.4,-0.2 -0.9,-0.1 -1.1,0.3l-3.9,6.7c-6.3,-2.8 -13.4,-2.8 -19.7,0l-3.9,-6.7c-0.2,-0.4 -0.7,-0.5 -1.1,-0.3C38.8,38.328 38.7,38.828 38.9,39.228l3.8,6.6C36.2,49.428 31.7,56.028 31,63.928h46C76.3,56.028 71.8,49.428 65.3,45.828zM43.4,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2c-0.3,-0.7 -0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C45.3,56.528 44.5,57.328 43.4,57.328L43.4,57.328zM64.6,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2s-0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C66.5,56.528 65.6,57.328 64.6,57.328L64.6,57.328z"</span></span>
+<span class="line"><span style="color:#B392F0">        android:strokeWidth</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"1"</span></span>
+<span class="line"><span style="color:#B392F0">        android:strokeColor</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"#00000000"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">vector</span><span style="color:#E1E4E8">></span></span></code></pre>
+<p>其实就是机器人头的图标，它会被加载为<code>VectorDrawable</code></p>
+<p>我们反推一下，调用者为：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> DrawableInflater</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">NonNull</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> Drawable </span><span style="color:#B392F0">inflateFromXml</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> String </span><span style="color:#FFAB70">name</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> XmlPullParser </span><span style="color:#FFAB70">parser</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                                   @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> AttributeSet </span><span style="color:#FFAB70">attrs</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">Nullable</span><span style="color:#E1E4E8"> Theme </span><span style="color:#FFAB70">theme</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            throws</span><span style="color:#E1E4E8"> XmlPullParserException, IOException {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> inflateFromXmlForDensity</span><span style="color:#E1E4E8">(name, parser, attrs, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, theme);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">NonNull</span></span>
+<span class="line"><span style="color:#E1E4E8">    Drawable </span><span style="color:#B392F0">inflateFromXmlForDensity</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> String </span><span style="color:#FFAB70">name</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> XmlPullParser </span><span style="color:#FFAB70">parser</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                                      @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> AttributeSet </span><span style="color:#FFAB70">attrs</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> density</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">Nullable</span><span style="color:#E1E4E8"> Theme </span><span style="color:#FFAB70">theme</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            throws</span><span style="color:#E1E4E8"> XmlPullParserException, IOException {</span></span>
+<span class="line"><span style="color:#6A737D">        // Inner classes must be referenced as Outer$Inner, but XML tag names</span></span>
+<span class="line"><span style="color:#6A737D">        // can't contain $, so the &#x3C;drawable> tag allows developers to specify</span></span>
+<span class="line"><span style="color:#6A737D">        // the class in an attribute. We'll still run it through inflateFromTag</span></span>
+<span class="line"><span style="color:#6A737D">        // to stay consistent with how LayoutInflater works.</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (name.</span><span style="color:#B392F0">equals</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"drawable"</span><span style="color:#E1E4E8">)) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            name </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> attrs.</span><span style="color:#B392F0">getAttributeValue</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"class"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (name </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> InflateException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"&#x3C;drawable> tag must specify class attribute"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //注意这里 --1</span></span>
+<span class="line"><span style="color:#E1E4E8">        Drawable drawable </span><span style="color:#F97583">=</span><span style="color:#B392F0"> inflateFromTag</span><span style="color:#E1E4E8">(name);</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (drawable </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">            //注意这里 --2</span></span>
+<span class="line"><span style="color:#E1E4E8">            drawable </span><span style="color:#F97583">=</span><span style="color:#B392F0"> inflateFromClass</span><span style="color:#E1E4E8">(name);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        drawable.</span><span style="color:#B392F0">setSrcDensityOverride</span><span style="color:#E1E4E8">(density);</span></span>
+<span class="line"><span style="color:#6A737D">        //注意这里 --3</span></span>
+<span class="line"><span style="color:#E1E4E8">        drawable.</span><span style="color:#B392F0">inflate</span><span style="color:#E1E4E8">(mRes, parser, attrs, theme);</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> drawable;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>上面标记了3处注意点， 第一处即为内置的顶层drawable创建</p>
+<p>第二处我们稍后再看</p>
+<p>第三处将parser，属性和主题交给生成的Drawable继续解析。不同的Drawable子类按照自身特性实现自己的解析需求。</p>
+<p>以<code>LevelListDrawable</code>为例，我们知道它内部还可以添加Drawable作为不同的level，这是通过递归调用解析创建实现的， 最终追溯源码至Drawable</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> LevelListDrawable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> inflateChildElements</span><span style="color:#E1E4E8">(Resources </span><span style="color:#FFAB70">r</span><span style="color:#E1E4E8">, XmlPullParser </span><span style="color:#FFAB70">parser</span><span style="color:#E1E4E8">, AttributeSet </span><span style="color:#FFAB70">attrs</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                                      Theme </span><span style="color:#FFAB70">theme</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">throws</span><span style="color:#E1E4E8"> XmlPullParserException, IOException {</span></span>
+<span class="line"><span style="color:#6A737D">        //略</span></span>
+<span class="line"><span style="color:#F97583">        while</span><span style="color:#E1E4E8"> ((type </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> parser.</span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">()) </span><span style="color:#F97583">!=</span><span style="color:#E1E4E8"> XmlPullParser.END_DOCUMENT</span></span>
+<span class="line"><span style="color:#F97583">                &#x26;&#x26;</span><span style="color:#E1E4E8"> ((depth </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> parser.</span><span style="color:#B392F0">getDepth</span><span style="color:#E1E4E8">()) </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> innerDepth</span></span>
+<span class="line"><span style="color:#F97583">                ||</span><span style="color:#E1E4E8"> type </span><span style="color:#F97583">!=</span><span style="color:#E1E4E8"> XmlPullParser.END_TAG)) {</span></span>
+<span class="line"><span style="color:#6A737D">            //略</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            Drawable dr;</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (drawableRes </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                dr </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> r.</span><span style="color:#B392F0">getDrawable</span><span style="color:#E1E4E8">(drawableRes, theme);</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">                //略</span></span>
+<span class="line"><span style="color:#6A737D">                //注意此处</span></span>
+<span class="line"><span style="color:#E1E4E8">                dr </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Drawable.</span><span style="color:#B392F0">createFromXmlInner</span><span style="color:#E1E4E8">(r, parser, attrs, theme);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">            mLevelListState.</span><span style="color:#B392F0">addLevel</span><span style="color:#E1E4E8">(low, high, dr);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#B392F0">        onLevelChange</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">getLevel</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Drawable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#E1E4E8"> Drawable </span><span style="color:#B392F0">createFromXmlInner</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Resources </span><span style="color:#FFAB70">r</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> XmlPullParser </span><span style="color:#FFAB70">parser</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                                              @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> AttributeSet </span><span style="color:#FFAB70">attrs</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">Nullable</span><span style="color:#E1E4E8"> Theme </span><span style="color:#FFAB70">theme</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            throws</span><span style="color:#E1E4E8"> XmlPullParserException, IOException {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> createFromXmlInnerForDensity</span><span style="color:#E1E4E8">(r, parser, attrs, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, theme);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">NonNull</span></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#E1E4E8"> Drawable </span><span style="color:#B392F0">createFromXmlInnerForDensity</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Resources </span><span style="color:#FFAB70">r</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                                                 @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> XmlPullParser </span><span style="color:#FFAB70">parser</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> AttributeSet </span><span style="color:#FFAB70">attrs</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> density</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                                                 @</span><span style="color:#F97583">Nullable</span><span style="color:#E1E4E8"> Theme </span><span style="color:#FFAB70">theme</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">throws</span><span style="color:#E1E4E8"> XmlPullParserException, IOException {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> r.</span><span style="color:#B392F0">getDrawableInflater</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">inflateFromXmlForDensity</span><span style="color:#E1E4E8">(parser.</span><span style="color:#B392F0">getName</span><span style="color:#E1E4E8">(), parser, attrs,</span></span>
+<span class="line"><span style="color:#E1E4E8">                density, theme);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>我们再看第二处，当特定的tag未被匹配时，会使用反射方式尝试创建Drawable：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> DrawableInflater</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">NonNull</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> Drawable </span><span style="color:#B392F0">inflateFromClass</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> String </span><span style="color:#FFAB70">className</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            Constructor&#x3C;</span><span style="color:#F97583">?</span><span style="color:#F97583"> extends</span><span style="color:#F97583"> Drawable</span><span style="color:#E1E4E8">> constructor;</span></span>
+<span class="line"><span style="color:#F97583">            synchronized</span><span style="color:#E1E4E8"> (CONSTRUCTOR_MAP) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                constructor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> CONSTRUCTOR_MAP.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(className);</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (constructor </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                    final</span><span style="color:#E1E4E8"> Class&#x3C;</span><span style="color:#F97583">?</span><span style="color:#F97583"> extends</span><span style="color:#F97583"> Drawable</span><span style="color:#E1E4E8">> clazz </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">                            mClassLoader.</span><span style="color:#B392F0">loadClass</span><span style="color:#E1E4E8">(className).</span><span style="color:#B392F0">asSubclass</span><span style="color:#E1E4E8">(Drawable.class);</span></span>
+<span class="line"><span style="color:#E1E4E8">                    constructor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> clazz.</span><span style="color:#B392F0">getConstructor</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">                    CONSTRUCTOR_MAP.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(className, constructor);</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> constructor.</span><span style="color:#B392F0">newInstance</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#6A737D">        //略</span></span>
+<span class="line"><span style="color:#F97583">        catch</span><span style="color:#E1E4E8"> (XXX </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<blockquote>
+<p>Custom drawables</p>
+<p>All versions of Android allow the Drawable class to be extended and used at run time in place
+of framework-provided drawable classes. Starting in API 24, custom drawables classes may also be used in XML.
+Note: Custom drawable classes are only accessible from within
+your application package. Other applications will not be able to load them.</p>
+</blockquote>
+<p>文档中有这样一段话，自定义的Drawable一直是可行的，但仅Api>=24时才能够用XML定义这样的资源。虽然没有仔细追溯版本源码，但应该和此处有关。</p>
+<blockquote>
+<p>小结：我们简单阅读了DrawableInflater的源码，了解了Android如何从xml资源得到Drawable对象。需要注意的是，我们没有阅读Resource#getDrawable
+的相关源码，这一块内容也很有意思，建议读者有时间自行阅读下。</p>
+</blockquote>
+<h2 id="自定义一个drawable">自定义一个Drawable</h2>
+<p>终于来到这个环节了，为了更好的进行这个环节，我们新建一个WorkShop项目，我会按照文章中每一个小目标提出的一个小目标建立提交。
+<a href="https://github.com/leobert-lan/DrawableWorkShop">DrawableWorkShop</a></p>
+<h3 id="version-1-一个能绘制的自定义drawable">version 1 一个能绘制的自定义Drawable</h3>
+<p>这里我们尽可能的简单，目标就是绘制一个字母，先定义类：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> LetterDrawable</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">Drawable</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> tag </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "LetterDrawable"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#E1E4E8"> letter: </span><span style="color:#B392F0">Char</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> 'A'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> paint </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Paint</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">        textSize </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 60f</span></span>
+<span class="line"><span style="color:#E1E4E8">        color </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Color.CYAN</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> draw</span><span style="color:#E1E4E8">(canvas: </span><span style="color:#B392F0">Canvas</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(tag, </span><span style="color:#9ECBFF">"on draw"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        canvas.</span><span style="color:#B392F0">drawText</span><span style="color:#E1E4E8">(letter.</span><span style="color:#B392F0">toString</span><span style="color:#E1E4E8">(), </span><span style="color:#79B8FF">60f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">60f</span><span style="color:#E1E4E8">, paint)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> setAlpha</span><span style="color:#E1E4E8">(alpha: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        //ignore</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> setColorFilter</span><span style="color:#E1E4E8">(colorFilter: </span><span style="color:#B392F0">ColorFilter</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#6A737D">        //ignore</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> getOpacity</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> PixelFormat.TRANSLUCENT</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>字号字色，绘制字母的位置和内容都直接写死，</p>
+<p>定义资源：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"><span style="color:#E1E4E8">&#x3C;?</span><span style="color:#85E89D">xml</span><span style="color:#B392F0"> version</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"1.0"</span><span style="color:#B392F0"> encoding</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"utf-8"</span><span style="color:#E1E4E8">?></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">osp.leobert.android.drawableworkshop.drawable.LetterDrawable</span></span>
+<span class="line"><span style="color:#B392F0">    xmlns:android</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://schemas.android.com/apk/res/android"</span></span>
+<span class="line"><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">osp.leobert.android.drawableworkshop.drawable.LetterDrawable</span><span style="color:#E1E4E8">></span></span></code></pre>
+<p>直接使用：得到结果：</p>
+<p><img  src="/_astro/version_1.BTQxBdAW_Z1YUiTo.webp" alt="version_1" loading="lazy" decoding="async" width="1080" height="2160"></p>
+<h3 id="version-2-支持颜色和字号等可配">version 2 支持颜色和字号等可配</h3>
+<p>我们将单个字符改为String，添加color和textSize成员变量，并将改动设置到paint</p>
+<p>添加属性定义：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">resources</span><span style="color:#B392F0"> xmlns:tools</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://schemas.android.com/tools"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">declare-styleable</span><span style="color:#B392F0"> name</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"letter_drawable"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">attr</span><span style="color:#B392F0"> name</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"android:text"</span><span style="color:#B392F0"> format</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"string|reference"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">attr</span><span style="color:#B392F0"> name</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"color"</span><span style="color:#B392F0"> format</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"color|reference"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">attr</span><span style="color:#B392F0"> name</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"android:textSize"</span><span style="color:#B392F0"> format</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"dimension|reference"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">declare-styleable</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">resources</span><span style="color:#E1E4E8">></span></span></code></pre>
+<p>这样我们就可以进行资源配置和解析</p>
+<p>按照我们之前阅读的代码，我们需要覆写<code>inflate</code>以实现属性解析</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> LetterDrawable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> inflate</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        r: </span><span style="color:#B392F0">Resources</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        parser: </span><span style="color:#B392F0">XmlPullParser</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        attrs: </span><span style="color:#B392F0">AttributeSet</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        theme: </span><span style="color:#B392F0">Resources</span><span style="color:#E1E4E8">.Theme?</span></span>
+<span class="line"><span style="color:#E1E4E8">    ) {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">inflate</span><span style="color:#E1E4E8">(r, parser, attrs, theme)</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> a: </span><span style="color:#B392F0">TypedArray</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> obtainAttributes</span><span style="color:#E1E4E8">(r, theme, attrs, R.styleable.letter_drawable)</span></span>
+<span class="line"><span style="color:#E1E4E8">        letter </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> a.</span><span style="color:#B392F0">getString</span><span style="color:#E1E4E8">(R.styleable.letter_drawable_android_text) ?: </span><span style="color:#9ECBFF">"A"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        textSize </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> a.</span><span style="color:#B392F0">getDimension</span><span style="color:#E1E4E8">(R.styleable.letter_drawable_android_textSize, </span><span style="color:#79B8FF">60f</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        color </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> a.</span><span style="color:#B392F0">getColor</span><span style="color:#E1E4E8">(R.styleable.letter_drawable_color, Color.CYAN)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        a.</span><span style="color:#B392F0">recycle</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        paint.color </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> color</span></span>
+<span class="line"><span style="color:#E1E4E8">        paint.textSize </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> textSize</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Size</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> type: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">ReadWriteProperty</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">LetterDrawable</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Float</span><span style="color:#E1E4E8">?> {</span></span>
+<span class="line"><span style="color:#F97583">        private</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> prop: </span><span style="color:#B392F0">Float</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> getValue</span><span style="color:#E1E4E8">(thisRef: </span><span style="color:#B392F0">LetterDrawable</span><span style="color:#E1E4E8">, property: </span><span style="color:#B392F0">KProperty</span><span style="color:#E1E4E8">&#x3C;*>): </span><span style="color:#B392F0">Float</span><span style="color:#E1E4E8">? {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> prop ?: thisRef.</span><span style="color:#B392F0">run</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                val</span><span style="color:#E1E4E8"> rect </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Rect</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#79B8FF">                this</span><span style="color:#E1E4E8">.paint.</span><span style="color:#B392F0">getTextBounds</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.letter, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.letter.length, rect)</span></span>
+<span class="line"><span style="color:#F97583">                val</span><span style="color:#E1E4E8"> s </span><span style="color:#F97583">=</span><span style="color:#F97583"> when</span><span style="color:#E1E4E8"> (type) {</span></span>
+<span class="line"><span style="color:#79B8FF">                    0</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> rect.</span><span style="color:#B392F0">width</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">                    else</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> rect.</span><span style="color:#B392F0">height</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">                }.</span><span style="color:#B392F0">toFloat</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">                prop </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> s</span></span>
+<span class="line"><span style="color:#E1E4E8">                prop</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> setValue</span><span style="color:#E1E4E8">(thisRef: </span><span style="color:#B392F0">LetterDrawable</span><span style="color:#E1E4E8">, property: </span><span style="color:#B392F0">KProperty</span><span style="color:#E1E4E8">&#x3C;*>, </span><span style="color:#F97583">value</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">Float</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            prop </span><span style="color:#F97583">=</span><span style="color:#F97583"> value</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> width </span><span style="color:#F97583">by</span><span style="color:#B392F0"> Size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> height </span><span style="color:#F97583">by</span><span style="color:#B392F0"> Size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> draw</span><span style="color:#E1E4E8">(canvas: </span><span style="color:#B392F0">Canvas</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(tag, </span><span style="color:#9ECBFF">"on draw,</span><span style="color:#79B8FF">$letter</span><span style="color:#9ECBFF"> , </span><span style="color:#79B8FF">$height</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        canvas.</span><span style="color:#B392F0">drawText</span><span style="color:#E1E4E8">(letter, </span><span style="color:#79B8FF">0f</span><span style="color:#E1E4E8">, height ?: </span><span style="color:#79B8FF">60f</span><span style="color:#E1E4E8">, paint)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>并且我们利用属性代理来封装计算宽高的细节（<em>只是利用了小技巧，可以减少不必要的重复测量</em>）</p>
+<p>修改我们资源：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"><span style="color:#E1E4E8">&#x3C;?</span><span style="color:#85E89D">xml</span><span style="color:#B392F0"> version</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"1.0"</span><span style="color:#B392F0"> encoding</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"utf-8"</span><span style="color:#E1E4E8">?></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">osp.leobert.android.drawableworkshop.drawable.LetterDrawable</span></span>
+<span class="line"><span style="color:#B392F0">    xmlns:android</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://schemas.android.com/apk/res/android"</span></span>
+<span class="line"><span style="color:#B392F0">    xmlns:app</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://schemas.android.com/apk/res-auto"</span></span>
+<span class="line"><span style="color:#B392F0">    android:textSize</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"40sp"</span></span>
+<span class="line"><span style="color:#B392F0">    app:color</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"#ff3c06"</span></span>
+<span class="line"><span style="color:#B392F0">    android:text</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@string/letters"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">osp.leobert.android.drawableworkshop.drawable.LetterDrawable</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span></code></pre>
+<p>运行后我们得到这样的结果：
+<img  src="/_astro/version_2.DIZdhQ4O_Z2wWbA4.webp" alt="version_2" loading="lazy" decoding="async" width="1080" height="2160"></p>
+<h3 id="version-3-正确处理宽高">version 3: 正确处理宽高</h3>
+<p>我们发现Drawable的位置是有问题的，对于TextView，并没有在文字之上（drawableTop）， 对于ImageView，并没有居中（默认 ScaleType.FIT_CENTER）。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> LetterDrawable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#E1E4E8"> letter: </span><span style="color:#B392F0">String</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "A"</span></span>
+<span class="line"><span style="color:#F97583">        set</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">value</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            field</span><span style="color:#F97583"> =</span><span style="color:#F97583"> value</span></span>
+<span class="line"><span style="color:#E1E4E8">            width </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#E1E4E8">            height </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#B392F0">            invalidateSelf</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#E1E4E8"> color: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Color.CYAN</span></span>
+<span class="line"><span style="color:#F97583">        set</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">value</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            field</span><span style="color:#F97583"> =</span><span style="color:#F97583"> value</span></span>
+<span class="line"><span style="color:#E1E4E8">            paint.color </span><span style="color:#F97583">=</span><span style="color:#F97583"> value</span></span>
+<span class="line"><span style="color:#B392F0">            invalidateSelf</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#E1E4E8"> textSize: </span><span style="color:#B392F0">Float</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 60f</span></span>
+<span class="line"><span style="color:#F97583">        set</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">value</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            field</span><span style="color:#F97583"> =</span><span style="color:#F97583"> value</span></span>
+<span class="line"><span style="color:#E1E4E8">            width </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#E1E4E8">            height </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#E1E4E8">            paint.textSize </span><span style="color:#F97583">=</span><span style="color:#F97583"> value</span></span>
+<span class="line"><span style="color:#B392F0">            invalidateSelf</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> getIntrinsicHeight</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> height?.</span><span style="color:#B392F0">toInt</span><span style="color:#E1E4E8">() ?: </span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> getIntrinsicWidth</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> width?.</span><span style="color:#B392F0">toInt</span><span style="color:#E1E4E8">() ?: </span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>并且当颜色、文字、字号变更时触发重新计算和重绘</p>
+<p>看一下结果：
+<img  src="/_astro/version_3.q0jXYfJy_VExB9.webp" alt="version_3" loading="lazy" decoding="async" width="1080" height="2160"></p>
+<blockquote>
+<p>注：更多和Canvas和Paint的内容忽略，Padding和文字边距等细节忽略</p>
+</blockquote>
+<blockquote>
+<p>小结：这一小节到此基本可以结束了，我们用了三步实现了一个简单自定义Drawable，
+并且在比较常见的场景下进行了效果演示。读者可以在此基础上在对于padding等属性进行尝试，
+以及尝试绘制自己感兴趣的内容。</p>
+</blockquote>
+<h2 id="自定义一个动画drawable">自定义一个动画Drawable</h2>
+<p>这一次，我们尝试让字从分散，开始聚拢，最终排列成一行。因为它的draw规则更加特殊，我们新建一个Drawable进行演示。</p>
+<p>还是在原来的项目上，version 直接递增</p>
+<h3 id="version-4-先让一个字母动起来">version 4: 先让一个字母动起来</h3>
+<blockquote>
+<p>目标：让字母从一个随机的初始位置，匀速运动到终点位置。约定最终将文字绘制在中心</p>
+</blockquote>
+<p>我们建立一个新的类AnimLetterDrawable，迁移LetterDrawable中的主要逻辑，并实现<code>Runnable</code>接口，以实现<strong>schedule</strong> 时的主要逻辑； 实现<code>Animatable2</code>接口并完成动画相关逻辑</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> AnimLetterDrawable</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">Drawable</span><span style="color:#E1E4E8">(), Animatable2, </span><span style="color:#B392F0">Runnable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> frameIndex </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> totalFrames </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 30</span><span style="color:#F97583"> *</span><span style="color:#79B8FF"> 3</span><span style="color:#6A737D"> //3 second, 30frames per second</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> animationCallbacks: </span><span style="color:#B392F0">MutableSet</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Animatable2</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">AnimationCallback</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#B392F0"> linkedSetOf</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> mAnimating: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> setFrame</span><span style="color:#E1E4E8">(frame: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, unschedule: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">, animate: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (frame </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> totalFrames) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        mAnimating </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> animate</span></span>
+<span class="line"><span style="color:#E1E4E8">        frameIndex </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> frame</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (unschedule </span><span style="color:#F97583">||</span><span style="color:#E1E4E8"> animate) {</span></span>
+<span class="line"><span style="color:#B392F0">            unscheduleSelf</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (animate) {</span></span>
+<span class="line"><span style="color:#6A737D">            // Unscheduling may have clobbered these values; restore them</span></span>
+<span class="line"><span style="color:#E1E4E8">            frameIndex </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> frame</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">            scheduleSelf</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, SystemClock.</span><span style="color:#B392F0">uptimeMillis</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> durationPerFrame)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#B392F0">        invalidateSelf</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> nextFrame</span><span style="color:#E1E4E8">(unschedule: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> nextFrame: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> frameIndex </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> isLastFrame </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> nextFrame </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583"> ==</span><span style="color:#E1E4E8"> totalFrames</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (nextFrame </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583"> ></span><span style="color:#E1E4E8"> totalFrames) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            nextFrame </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> totalFrames </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        setFrame</span><span style="color:#E1E4E8">(nextFrame, unschedule, </span><span style="color:#F97583">!</span><span style="color:#E1E4E8">isLastFrame)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> durationPerFrame </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 3000</span><span style="color:#F97583"> /</span><span style="color:#E1E4E8"> totalFrames</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> start</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(tag, </span><span style="color:#9ECBFF">"start called"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        mAnimating </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">isRunning) {</span></span>
+<span class="line"><span style="color:#6A737D">            // Start from 0th frame.</span></span>
+<span class="line"><span style="color:#B392F0">            setFrame</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                frame </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">, unschedule </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">, animate </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            setFrame</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                frame </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">, unschedule </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">, animate </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> stop</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        mAnimating </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (isRunning) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            frameIndex </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#6A737D">            //un-schedule it at first</span></span>
+<span class="line"><span style="color:#B392F0">            unscheduleSelf</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">            setFrame</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, unschedule </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">, animate </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> isRunning</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> mAnimating</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> registerAnimationCallback</span><span style="color:#E1E4E8">(callback: </span><span style="color:#B392F0">Animatable2</span><span style="color:#E1E4E8">.AnimationCallback) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        animationCallbacks.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(callback)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> unregisterAnimationCallback</span><span style="color:#E1E4E8">(callback: </span><span style="color:#B392F0">Animatable2</span><span style="color:#E1E4E8">.AnimationCallback): </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> animationCallbacks.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(callback)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> clearAnimationCallbacks</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        animationCallbacks.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> run</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(tag, </span><span style="color:#9ECBFF">"callback by schedule"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (isRunning) {</span></span>
+<span class="line"><span style="color:#B392F0">            nextFrame</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">            //safe call</span></span>
+<span class="line"><span style="color:#B392F0">            setFrame</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, unschedule </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">, animate </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><strong>这一段代码虽然有点长，但是逻辑很简单，阅读文章过程中，可以忽略这部分代码的细节</strong>。</p>
+<p>显然，我们还需要实现：<strong>正确绘制每一帧</strong></p>
+<p>在约定的目标中，每个字母从一个 <strong>随机的初始位置</strong>，<strong>匀速运动</strong> 到 <strong>终点位置</strong>。那么，对于任意一个字母，只需要确定 <strong>四个参数</strong>，即可确定其 <strong>位置</strong></p>
+<ul>
+<li>总帧数</li>
+<li>当前帧数</li>
+<li>字母起始位置</li>
+<li>字母结束位置</li>
+</ul>
+<blockquote>
+<p>延伸：上面的例子中，我们约定了轨迹是直线，延伸开来，其实我们只需要一个 <code>location = f(time)</code> 的函数和<code>time</code>值即可确定其位置。</p>
+<p>一般情况下，我们需要关心轨迹方程，和加速度公式。有加速度公式，我们按照时间积分得到<code>速度-时间</code>函数，再按照时间积分，得到 <code>移动距离-时间</code>函数，
+在有轨迹方程和起始点的情况下，就可以找到任意时间的位置，得到 <code>location = f(time)</code> 函数</p>
+</blockquote>
+<p>当然，因为我们的场景足够简单，<code>起始点</code>和<code>终点</code>确定的<code>线段</code>即为路径，运动为<code>匀速</code>，<code>当前时间</code> 通过 <code>当前帧</code>,<code>每帧时间</code>确定，达到总动画时长（最后一帧）时
+达到终点</p>
+<ul>
+<li><code>x = startX + (endX - startX) * time / totalTime</code></li>
+<li><code>y = startY + (endY - startY) * time / totalTime</code></li>
+</ul>
+<p>附上计算相关的源码： 运动过程中我是适当处理了文字的透明度</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> AnimLetterDrawable</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">Drawable</span><span style="color:#E1E4E8">(), Animatable2, </span><span style="color:#B392F0">Runnable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> originalLetterLocations </span><span style="color:#F97583">=</span><span style="color:#B392F0"> SparseArray</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">PointF</span><span style="color:#E1E4E8">>()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> finalLetterLocations </span><span style="color:#F97583">=</span><span style="color:#B392F0"> SparseArray</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">PointF</span><span style="color:#E1E4E8">>()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> draw</span><span style="color:#E1E4E8">(canvas: </span><span style="color:#B392F0">Canvas</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(tag, </span><span style="color:#9ECBFF">"on draw,</span><span style="color:#79B8FF">$letters</span><span style="color:#9ECBFF"> , </span><span style="color:#79B8FF">$height</span><span style="color:#9ECBFF">,</span><span style="color:#79B8FF">$frameIndex</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> progress </span><span style="color:#F97583">=</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (totalFrames </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            frameIndex.</span><span style="color:#B392F0">toFloat</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">/</span><span style="color:#E1E4E8"> (totalFrames </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">toFloat</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">            1f</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        paint.alpha </span><span style="color:#F97583">=</span><span style="color:#B392F0"> min</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">255</span><span style="color:#E1E4E8">, (</span><span style="color:#79B8FF">255</span><span style="color:#F97583"> *</span><span style="color:#E1E4E8"> progress).</span><span style="color:#B392F0">toInt</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 100</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (i </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> letters.indices) {</span></span>
+<span class="line"><span style="color:#F97583">            val</span><span style="color:#E1E4E8"> endPoint: </span><span style="color:#B392F0">PointF</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> finalLetterLocations.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(i)</span></span>
+<span class="line"><span style="color:#F97583">            val</span><span style="color:#E1E4E8"> startPoint: </span><span style="color:#B392F0">PointF</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> originalLetterLocations.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(i)</span></span>
+<span class="line"><span style="color:#F97583">            val</span><span style="color:#E1E4E8"> x: </span><span style="color:#B392F0">Float</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> startPoint.x </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> (endPoint.x </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> startPoint.x) </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> progress</span></span>
+<span class="line"><span style="color:#F97583">            val</span><span style="color:#E1E4E8"> y: </span><span style="color:#B392F0">Float</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> startPoint.y </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> (endPoint.y </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> startPoint.y) </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> progress</span></span>
+<span class="line"><span style="color:#E1E4E8">            canvas.</span><span style="color:#B392F0">drawText</span><span style="color:#E1E4E8">(letters[i].</span><span style="color:#B392F0">toString</span><span style="color:#E1E4E8">(), x, y, paint)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onBoundsChange</span><span style="color:#E1E4E8">(bounds: </span><span style="color:#B392F0">Rect</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">onBoundsChange</span><span style="color:#E1E4E8">(bounds)</span></span>
+<span class="line"><span style="color:#E1E4E8">        Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(tag, </span><span style="color:#9ECBFF">"onBoundsChange, </span><span style="color:#79B8FF">$bounds</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        height </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> bounds.</span><span style="color:#B392F0">height</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">toFloat</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        width </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> bounds.</span><span style="color:#B392F0">width</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">toFloat</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        calcLetterStartEndLocations</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        invalidateSelf</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> calcLetterStartEndLocations</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        originalLetterLocations.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        finalLetterLocations.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> height </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.height ?: </span><span style="color:#F97583">throw</span><span style="color:#B392F0"> IllegalStateException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"height cannot be null"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> width </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.width ?: </span><span style="color:#F97583">throw</span><span style="color:#B392F0"> IllegalStateException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"width cannot be null"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> centerY: </span><span style="color:#B392F0">Float</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> height </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2f</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> paint.textSize </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> totalLength </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> paint.</span><span style="color:#B392F0">measureText</span><span style="color:#E1E4E8">(letters)</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> startX </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (width </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> totalLength) </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> currentStartX </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> startX</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (i </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> letters.indices) {</span></span>
+<span class="line"><span style="color:#F97583">            val</span><span style="color:#E1E4E8"> str: </span><span style="color:#B392F0">String</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> letters[i].</span><span style="color:#B392F0">toString</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">            val</span><span style="color:#E1E4E8"> currentLength: </span><span style="color:#B392F0">Float</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> paint.</span><span style="color:#B392F0">measureText</span><span style="color:#E1E4E8">(str)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            originalLetterLocations.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                i, </span><span style="color:#B392F0">PointF</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                    Math.</span><span style="color:#B392F0">random</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">toFloat</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> width, Math.</span><span style="color:#B392F0">random</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">                        .</span><span style="color:#B392F0">toFloat</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> height</span></span>
+<span class="line"><span style="color:#E1E4E8">                )</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            finalLetterLocations.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(i, </span><span style="color:#B392F0">PointF</span><span style="color:#E1E4E8">(currentStartX, centerY))</span></span>
+<span class="line"><span style="color:#6A737D">            // TODO: 2021/2/1 consider padding for letters inner</span></span>
+<span class="line"><span style="color:#E1E4E8">            currentStartX </span><span style="color:#F97583">+=</span><span style="color:#E1E4E8"> currentLength</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>最终我们看一下效果： 大约从第四秒开始点击了start，中间点击了stop，随后又点击了start</p>
+<p><img  src="/_astro/version_4.CRqnkQVx_Z1CqVhj.webp" alt="version_4" loading="lazy" decoding="async" width="1080" height="2160"></p>
+<blockquote>
+<p>注：gif丢失了一定的连贯性，可以看一下录制的视频
+<a href="https://github.com/leobert-lan/Blog/blob/main/Android/Drawable/post_2/version_4.webm">链接</a>
+因为起始位置是随机的，所以每次的效果都会有差别</p>
+</blockquote>
+<h3 id="version-5-让所有的字母都动起来">version 5 让所有的字母都动起来</h3>
+<p>其实细心的读者应该发现了，上面<code>Version 4</code>的代码已经可以让每个字母都动起来了。
+先来试一下效果，把Drawable资源的text改成Leobert，看一下效果:</p>
+<p><img  src="/_astro/version_5.BdaXEIMQ_Z1JCAqA.webp" alt="version_5" loading="lazy" decoding="async" width="1080" height="2160"></p>
+<p>录制视频：<a href="https://github.com/leobert-lan/Blog/blob/main/Android/Drawable/post_2/version_5.webm">链接</a></p>
+<p>可能有些读者这时候已经在思考，继续添加各种配置支持项，改变初始点的随机位置算法，计算过程中更加细致的考虑字号、文字留白等等等等细节了。</p>
+<p><strong>打住</strong>，我们的目标是重新梳理Drawable中的知识，而不是实现一个特定的Drawable。到这里，我们已经实现了一个自定义的动画Drawable。</p>
+<h2 id="最终总结和反思">最终总结和反思</h2>
+<p>这篇文章中，我们梳理了Drawable的设计意图，自行梳理了Drawable子类概览，梳理了Drawable的API概览，练习了自定义Drawable。</p>
+<p>我们再思考几个问题：</p>
+<blockquote>
+<p>自定义View和自定义Drawable的区别是什么</p>
+</blockquote>
+<p>前者是对于视图的自定义，后者是对于绘制的自定义。<code>两者有一定的关联性</code>，因为视图也是需要通过视觉呈现给用户的，有很大一部和<code>绘制相关</code>；</p>
+<p>但自定义View不仅仅可以<code>自定义绘制</code>，还可以<code>自定义交互</code>，这一点是自定义Drawable不具备的。如果我们仅仅是期望对绘制进行自定义，选择自定义Drawable<code>即可</code>；</p>
+<p>相比于自定义View，自定义Drawable在应用内的<code>适用性更广</code>，它<code>具体</code>描述了一种<code>绘制</code>，所以，只要存在<code>绘制</code>机制的地方，理论上就可以使用它。</p>
+<blockquote>
+<p>各种”花里胡哨”的效果都可以这样干吗</p>
+</blockquote>
+<p>可以但不是所有的都建议。一些简单的场景，例如<code>一种点击特效</code>、<code>一种Progress效果</code> 是建议这样处理的。</p>
+<p>一些复杂的场景，例如启动图、固定的酷炫的转场等，是不建议这样处理的。<code>不是说不建议用自定义Drawable处理</code>，而是<code>不建议</code>
+再用<code>代码</code>去<code>直接描述Draw的内容</code>。</p>
+<p>对于复杂内容，可以对其内容进行抽象和分类，一般来说，我们可以从：</p>
+<ul>
+<li>静态、动态</li>
+<li>矢量描述、非矢量描述</li>
+</ul>
+<p><code>两个维度</code>区分一个要绘制的内容；</p>
+<p>对于静态的，或者矢量描述的内容，已经有相关的类进行抽象描述。而对于动态的非矢量描述的绘制内容，
+它们往往<code>复杂</code>，而且很<code>具体</code>，用纯代码进行描述太糟糕了。应当建立抽象体系并结合中间物来描述它们。</p>
+<p>以大名鼎鼎的Lottie为例，设计使用AE创作动画文件，并导出成lottie的动画文件：</p>
+<ul>
+<li>不可矢量描述的、唯一命名的图</li>
+<li>json格式封装的所有帧信息</li>
+</ul>
+<p>那么只需要描述：</p>
+<ul>
+<li>解析文件</li>
+<li>加载帧信息</li>
+<li>展示帧，即绘制帧</li>
+<li>按照动画时间和帧信息schedule</li>
+</ul>
+<p>即可。内容设计这种事情，就交给UI和UX了</p>
+<p>从技术梳理和博客的角度看，这篇文章的内容已经结束了，从商业投产的角度看，这篇文章的内容远没有结束</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

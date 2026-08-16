@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>好玩系列：优雅的处理ButterKnife和KAE被废弃 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">好玩系列：优雅的处理ButterKnife和KAE被废弃</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="好玩系列优雅的处理butterknife和kae被废弃">好玩系列：优雅的处理ButterKnife和KAE被废弃</h1>
+<p><em>最近反思了一下近期的工作，忽然就出现了一个想法，将平时干的好玩的事情，整理成一个系列，和大家分享一下，想来想去也没想好这个系列叫啥，索性就叫好玩系列得了。</em></p>
+<p><strong>文中涉及的代码均在 <a href="https://github.com/leobert-lan/UIBinding">此处</a> 可以找到</strong></p>
+<h2 id="前言">前言</h2>
+<p>如果你的项目中使用了ButterKnife或者Kotlin-Android-Extention（KAE）插件，近半年你一定关注过如下信息：</p>
+<blockquote>
+<p>Attention: This tool is now deprecated. Please switch to view binding. Existing versions will continue to work, obviously, but only critical bug fixes for integration with AGP will be considered. Feature development and general bug fixes have stopped. — ButterKnife</p>
+</blockquote>
+<blockquote>
+<p>Resource IDs will be non-final in Android Gradle Plugin version 5.0, avoid using them in switch case statements
+Inspection info:Avoid the usage of resource IDs where constant expressions are required.  A future version of the Android Gradle Plugin will generate R classes with non-constant IDs in order to improve the performance of incremental compilation.</p>
+<p>Issue id: NonConstantResourceId — lint</p>
+</blockquote>
+<blockquote>
+<p>The ‘kotlin-android-extensions’ Gradle plugin is deprecated. Please use this migration guide (<a href="https://goo.gle/kotlin-android-extensions-deprecation">https://goo.gle/kotlin-android-extensions-deprecation</a>) to start working with View Binding (<a href="https://developer.android.com/topic/libraries/view-binding">https://developer.android.com/topic/libraries/view-binding</a>) and the ‘kotlin-parcelize’ plugin.</p>
+</blockquote>
+<p>是的，这两个在Android中使用面很广的内容被标记为废弃了。</p>
+<p>对于ButterKnife，被废弃的原因是：从AGP-5.0版本开始，R类生成的值不再是常量</p>
+<p>对于KAE，问题如下：</p>
+<ul>
+<li>类型安全：res下的任何id都可以被访问，有可能因访问了非当前Layout下的id而出错，难以利用lint等静态代码校验</li>
+<li>空安全：运行时可能出现NPE</li>
+<li>兼容性：只能在kotlin中使用，java不友好</li>
+<li>局限性：不能跨module使用</li>
+</ul>
+<p>按照官方或者社区的推荐，替代方案还是回归到findViewById or ViewBinding or DataBinding.</p>
+<p>未来可能替代XML描述布局文件的技术：Compose还没有真正到来，而且一时半会也不可能把原先的内容全部迁移到Compose实现，所以我们还是要老老实实回归到上面的三个方案。</p>
+<p>有些同学知识面广一点，立马想到了psi，通过分析代码文件的psi树，实现代码转换，直接搞一个插件来处理ButterKnife的迁移问题。</p>
+<p><strong>当然，这篇文章并不准备去讲psi，虽然这是一个挺好玩的东西。下次有时间会专门写一个好玩的psi</strong></p>
+<h2 id="思考1为什么要废弃butterknife">思考1：为什么要废弃ButterKnife</h2>
+<p>因为AGP生成的R类资源值不再是常量，无论是library还是application，那么要继续再思考一个问题：library的R类资源也不是常量，原先ButterKnife是怎么处理的？
+我们知道，Butterknife有运行时反射用法，也有编译期使用apt预生成代码的用法。bk提供了gradle插件，用于copy原始R类内容,生成R2类，R2复刻了R的内容，但均为常量。因为注解中的内容，是需要在编译期确定，它被要求为常量，并且在编译时被优化。但我们知道，通过字节码技术，可以修改很多东西，无论是一个常量的值，还是索性连类都给换了。
+一旦这个值被修改，注解中的信息便为谬误。但因为R2的存在，我们可以通过常量值反向获取到常量的名字，从而去使用R类。</p>
+<h2 id="思考2是不是butterknife所有的代码都没有意义了">思考2：是不是Butterknife所有的代码都没有意义了？</h2>
+<p>显然不是，因为findviewbyid还没用被革命性改变，bk中所有的核心代码还是有用的
+如果你使用的apt方式，那么就有意思了，对于一个特定的target，bk生成的绑定代码完全是没有“废弃”风险的，我们完全可以拷贝其中的逻技，或者直接对生成类实行“拿来主义”
+最终，我们只需要扔掉bk的gradle插件，注解和apt处理器，岁月静好。
+如果你使用的是运行时反射方案，我不排斥运行时反射，虽然他会多耗一些时间，如果你不介意耗费更多的时间，完全可以改造bk的注解和逻辑，虽然它很好玩，但这并不是一个值得推荐的做法。</p>
+<h2 id="思考3kae又是怎么帮助我们找到view的">思考3：kae又是怎么帮助我们找到view的</h2>
+<p>没错，还是通过findviewbyid，它被废弃并不是犯了什么大错，只是不在适应潮流，且有各种各样的小毛病。
+我们以Fragment为例子，看一下编译器为我们植入的代码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public android.view.View _$_findCachedViewById(int var1) {</span></span>
+<span class="line"><span>    if (this._$_findViewCache == null) {</span></span>
+<span class="line"><span>       this._$_findViewCache = new HashMap();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    android.view.View var2 = (android.view.View)this._$_findViewCache.get(var1);</span></span>
+<span class="line"><span>    if (var2 == null) {</span></span>
+<span class="line"><span>       android.view.View var10000 = this.getView();</span></span>
+<span class="line"><span>       if (var10000 == null) {</span></span>
+<span class="line"><span>          return null;</span></span>
+<span class="line"><span>       }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>       var2 = var10000.findViewById(var1);</span></span>
+<span class="line"><span>       this._$_findViewCache.put(var1, var2);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    return var2;</span></span>
+<span class="line"><span> }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span> public void _$_clearFindViewByIdCache() {</span></span>
+<span class="line"><span>    if (this._$_findViewCache != null) {</span></span>
+<span class="line"><span>       this._$_findViewCache.clear();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span> }</span></span></code></pre>
+<p>以及：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// $FF: synthetic method</span></span>
+<span class="line"><span>public void onDestroyView() {</span></span>
+<span class="line"><span>  super.onDestroyView();</span></span>
+<span class="line"><span>  this._$_clearFindViewByIdCache();</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>//源码</span></span>
+<span class="line"><span>vMallAccountTitleBar.setTitle("我的钱包")</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>//反编译结果</span></span>
+<span class="line"><span>((BarStyle4)this._$_findCachedViewById(id.vMallAccountTitleBar))</span></span>
+<span class="line"><span>	.setTitle((CharSequence)"我的钱包");</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>可以很轻易的发现，具有多种场景下潜在的npe风险。本质上还是在使用findViewByID机制</p>
+<h2 id="思考4是否可以最小程度重构实现从bk切换到databinding或者viewbinding">思考4：是否可以最小程度重构实现从bk切换到databinding或者viewbinding</h2>
+<p>首先还是要粗略提一下databinding和viewbinding。记忆中databinding技术先于viewbinding，是Google提供的声明式UI解决方案，这里必须要岔开一句：什么是声明式UI？</p>
+<p>这里我用SQL举个例子类比， select * from t where ‘t.id’ = 1， 这就是声明式，声明一个符合规则的定则，让对应的系统执行，得到目标结果。相应的，对立面就是命令式，命令式需要准确的指出每一步操作的具体指令，以完成一个特定的算法。</p>
+<p>肤浅的总结，声明式是底层实现了一类行为的抽象，其核心的算法或者控制段均被封装，只需要控制输入，即可得到输出。而命令式则完全需要自行实现。</p>
+<p>理解了这一点，我们就会意识到，databinding本身不应该对外暴露这些view，只是这么干的话，项目迁移成本就会变大，所以还是选择了开放，这也就有了后来的viewbinding。</p>
+<p>言归正传，原先用bk，我们需要一个根view作为起始点，以实现视图绑定，基本是找到Activity#setContentView(Int id)后activity的decorview，或者是viewholder#getRoot()，或者是开发者inflate得到的一个view等等。</p>
+<p>不难判断，<strong>如果彻底的修改代码，从基类出发应该是没什么方案。只能进行一件枯燥乏味的事情</strong></p>
+<h2 id="思考5如果是kotlin语言下利用属性代理是否可以简化代码修改">思考5：如果是kotlin语言下，利用属性代理是否可以简化代码修改</h2>
+<blockquote>
+<p>延伸：属性委托指的是一个类的某个属性值不是在类中直接进行定义，而是将其托付给一个代理类，从而实现对该类的属性统一管理。
+属性委托语法格式：</p>
+<p><code>val/var &#x3C;属性名>: &#x3C;类型> by &#x3C;表达式></code></p>
+</blockquote>
+<h2 id="实践1属性代理替代bk的注解">实践1：属性代理替代BK的注解</h2>
+<p>先定一个小目标,我们会将注解形式变成类似以下代码的形式：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>val tvHello1 by bindView&#x3C;TextView>(R.id.dialog)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>val tvHello by bindView&#x3C;TextView>(viewProvider, R.id.hello, lifecycle) {</span></span>
+<span class="line"><span>    bindClick { changeText() }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>val tvHellos by bindViews&#x3C;TextView>(</span></span>
+<span class="line"><span>    viewProvider,</span></span>
+<span class="line"><span>    arrayListOf(R.id.hello1, R.id.hello2),</span></span>
+<span class="line"><span>    lifecycle</span></span>
+<span class="line"><span>) {</span></span>
+<span class="line"><span>    this.forEach {</span></span>
+<span class="line"><span>        it.bindClick { tv -></span></span>
+<span class="line"><span>            Toast.makeText(tv.context, it.text.toString(), Toast.LENGTH_SHORT).show()</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>那么我们需要先定义一个属性代理类，并实现操作符，以bindView为例，</p>
+<p>我们先缓一缓，定义一个基类，接受属性持有者的生命周期，<strong>以实现其生命周期走到特定节点时释放依赖</strong>。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>abstract class LifeCycledBindingDelegate&#x3C;F,T>(lifecycle: Lifecycle): ReadOnlyProperty&#x3C;F,T> {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    protected var property: T? = null</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    init {</span></span>
+<span class="line"><span>        lifecycle.onDestroyOnce { destroy() }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    protected open fun destroy() {</span></span>
+<span class="line"><span>        property = null</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>internal class OnDestroyObserver(var lifecycle: Lifecycle?, val destroyed: () -> Unit) :</span></span>
+<span class="line"><span>    LifecycleEventObserver {</span></span>
+<span class="line"><span>    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {</span></span>
+<span class="line"><span>        val lifecycleState = source.lifecycle.currentState</span></span>
+<span class="line"><span>        if (lifecycleState == Lifecycle.State.DESTROYED) {</span></span>
+<span class="line"><span>            destroyed()</span></span>
+<span class="line"><span>            lifecycle?.apply {</span></span>
+<span class="line"><span>                removeObserver(this@OnDestroyObserver)</span></span>
+<span class="line"><span>                lifecycle = null</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>fun Lifecycle.onDestroyOnce(destroyed: () -> Unit) {</span></span>
+<span class="line"><span>    addObserver(OnDestroyObserver(this, destroyed))</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>这时候我们来处理findViewById的核心部分</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class BindView&#x3C;T:View>(</span></span>
+<span class="line"><span>    private val targetClazz: Class&#x3C;T>,</span></span>
+<span class="line"><span>    private val rootViewProvider: ViewProvider,</span></span>
+<span class="line"><span>    @IdRes val resId: Int,</span></span>
+<span class="line"><span>    lifecycle: Lifecycle,</span></span>
+<span class="line"><span>    private var onBind: (T.() -> Unit)?</span></span>
+<span class="line"><span>):LifeCycledBindingDelegate&#x3C;Any,T>(lifecycle) {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    override fun getValue(thisRef: Any, property: KProperty&#x3C;*>): T {</span></span>
+<span class="line"><span>        return this.property ?: let {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            val rootView = rootViewProvider.provide()</span></span>
+<span class="line"><span>            val v = rootView.findViewById&#x3C;T>(resId)</span></span>
+<span class="line"><span>                ?: throw IllegalStateException(</span></span>
+<span class="line"><span>                    "could not findViewById by id $resId," +</span></span>
+<span class="line"><span>                            " given name: ${rootView.context.resources.getResourceEntryName(resId)}"</span></span>
+<span class="line"><span>                )</span></span>
+<span class="line"><span>            return v.apply {</span></span>
+<span class="line"><span>                this@BindView.property = this</span></span>
+<span class="line"><span>                onBind?.invoke(this)</span></span>
+<span class="line"><span>                onBind = null</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>我们需要几样东西以支持：</p>
+<blockquote>
+<p><code>View#&#x3C;T extends View> T findViewById(@IdRes int id)</code></p>
+</blockquote>
+<p>对应了<strong>目标类</strong>，<strong>根View提供者</strong>，<strong>目标view的id</strong>，<strong>属性持有者的生命周期</strong>和<strong>初次属性初始化后的附加逻辑</strong></p>
+<p>至于BindViews，我们如法炮制即可。</p>
+<p>这时候会发现，这样使用太累了，对于Activity、Fragment、ViewHolder等常见的类而言，虽然他们提供根视图等内容的方式有所差别，但这种行为基本是可以抽象的。</p>
+<p>以ComponentActivity为例，我们只需要定义扩展函数：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>inline fun &#x3C;reified T : View> ComponentActivity.bindView(@LayoutRes resId: Int) =</span></span>
+<span class="line"><span>    BindView&#x3C;T>(</span></span>
+<span class="line"><span>        targetClazz = T::class.java,</span></span>
+<span class="line"><span>        rootViewProvider = object : ViewProvider {</span></span>
+<span class="line"><span>            override fun provide(): View {</span></span>
+<span class="line"><span>                return this@bindView.window.decorView</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        },</span></span>
+<span class="line"><span>        resId = resId,</span></span>
+<span class="line"><span>        lifecycle = this.lifecycle,</span></span>
+<span class="line"><span>        onBind = null</span></span>
+<span class="line"><span>    )</span></span></code></pre>
+<p>就可以<strong>比较方便的使用</strong>，剩下来的Fragment、ViewHolder之类的东西，讲起来太啰嗦了，都是<strong>如法炮制</strong>。</p>
+<p>再定义一个大而全的：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>inline fun &#x3C;reified T : View> Any.bindView(</span></span>
+<span class="line"><span>    rootViewProvider: ViewProvider,</span></span>
+<span class="line"><span>    @LayoutRes resId: Int,</span></span>
+<span class="line"><span>    lifecycle: Lifecycle,</span></span>
+<span class="line"><span>    noinline onBind: (T.() -> Unit)?</span></span>
+<span class="line"><span>) =</span></span>
+<span class="line"><span>    BindView&#x3C;T>(</span></span>
+<span class="line"><span>        targetClazz = T::class.java,</span></span>
+<span class="line"><span>        rootViewProvider = rootViewProvider,</span></span>
+<span class="line"><span>        resId = resId,</span></span>
+<span class="line"><span>        lifecycle = lifecycle,</span></span>
+<span class="line"><span>        onBind = onBind</span></span>
+<span class="line"><span>    )</span></span></code></pre>
+<p><strong>实际项目中想怎么用完全看实际就行了。</strong></p>
+<h2 id="思考6让databinding和viewbinding拥有同样的特性是否有价值">思考6：让DataBinding和ViewBinding拥有同样的特性是否有价值</h2>
+<p>当然是有价值的，一个大项目中，尤其是进行了模块化拆分，不同模块使用不同的技术是很正常的，DataBinding和ViewBinding并存的情况一定会发生，虽然我并没有真正遇到过同时使用的，<strong>并且并不清楚同时使用会不会有bug</strong></p>
+<h2 id="实践2支持databinding和viewbinding">实践2：支持DataBinding和ViewBinding</h2>
+<p>因为笔者项目中没有使用ViewBinding，我们就粗暴的只实现DataBinding了，其实都是获取Binding类实例而已，机制是一致的，<strong>ViewBinding可以如法炮制</strong></p>
+<p>得益于我们上面定义的基类，我们可以直接干一个处理DataBinding的子类了</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class BindDataBinding&#x3C;T : ViewDataBinding>(</span></span>
+<span class="line"><span>    private val targetClazz: Class&#x3C;T>,</span></span>
+<span class="line"><span>    private val inflaterProvider: LayoutInflaterProvider,</span></span>
+<span class="line"><span>    @LayoutRes val resId: Int,</span></span>
+<span class="line"><span>    lifecycle: Lifecycle,</span></span>
+<span class="line"><span>    private var onBind: (T.() -> Unit)?</span></span>
+<span class="line"><span>) : LifeCycledBindingDelegate&#x3C;Any, T>(lifecycle) {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    override fun getValue(thisRef: Any, property: KProperty&#x3C;*>): T {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        return this.property ?: let {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            val layoutInflater = inflaterProvider.provide()</span></span>
+<span class="line"><span>            val bind = DataBindingUtil.bind&#x3C;T>(layoutInflater.inflate(resId, null))</span></span>
+<span class="line"><span>                ?: throw IllegalStateException(</span></span>
+<span class="line"><span>                    "could not create binding ${targetClazz.name} by id $resId," +</span></span>
+<span class="line"><span>                            " given name: ${layoutInflater.context.resources.getResourceEntryName(resId)}"</span></span>
+<span class="line"><span>                )</span></span>
+<span class="line"><span>            return bind.apply {</span></span>
+<span class="line"><span>                this@BindDataBinding.property = this</span></span>
+<span class="line"><span>                onBind?.invoke(this)</span></span>
+<span class="line"><span>                onBind = null</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>依葫芦画瓢，我们直接搞定inflate方式获取Binding。</p>
+<p>仔细一想，<strong>这还不够</strong>，本来我们将布局改为DataBinding模板，有多种方案设置视图，使用属性代理，有一个目的是：让<strong>设置视图</strong>和<strong>得到Binding实例</strong>之间减少限制。</p>
+<p>再干一个：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class FindDataBinding&#x3C;T : ViewDataBinding>(</span></span>
+<span class="line"><span>    private val targetClazz: Class&#x3C;T>,</span></span>
+<span class="line"><span>    private val viewProvider: ViewProvider,</span></span>
+<span class="line"><span>    lifecycle: Lifecycle,</span></span>
+<span class="line"><span>    private var onBind: (T.() -> Unit)?</span></span>
+<span class="line"><span>) : LifeCycledBindingDelegate&#x3C;Any, T>(lifecycle) {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    override fun getValue(thisRef: Any, property: KProperty&#x3C;*>): T {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        return this.property ?: let {</span></span>
+<span class="line"><span>            val view = viewProvider.provide()</span></span>
+<span class="line"><span>            val bind = DataBindingUtil.bind&#x3C;T>(view)</span></span>
+<span class="line"><span>                ?: throw IllegalStateException(</span></span>
+<span class="line"><span>                    "could not find binding ${targetClazz.name}"</span></span>
+<span class="line"><span>                )</span></span>
+<span class="line"><span>            return bind.apply {</span></span>
+<span class="line"><span>                this@FindDataBinding.property = this</span></span>
+<span class="line"><span>                onBind?.invoke(this)</span></span>
+<span class="line"><span>                onBind = null</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>我们又可以通过bind的方式，从一个View发现其binding了。<strong>寻找binding</strong>和<strong>设置视图</strong>的先后，就可以灵活选择了。</p>
+<p>加上一些扩展方法后，我们就可以开心的使用了：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class MainActivity2 : AppCompatActivity() ,ViewProvider{</span></span>
+<span class="line"><span>    val binding by dataBinding&#x3C;ActivityMainBinding>(this)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    override fun onCreate(savedInstanceState: Bundle?) {</span></span>
+<span class="line"><span>        super.onCreate(savedInstanceState)</span></span>
+<span class="line"><span>        setContentView(R.layout.activity_main)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        binding.hello.text = "fragment"</span></span>
+<span class="line"><span>        binding.hello.bindClick {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    override fun provide(): View {</span></span>
+<span class="line"><span>        return window.decorView.findViewById(R.id.ll_root)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<h2 id="总结">总结</h2>
+<p>正如开篇提到的，好玩系列其出发点一定是好玩，它很可能是对一个问题展开的一次脑暴和尝试，不一定是一个真正成熟的特定问题通用解法。</p>
+<p>这一篇，我们从Butterknife的废弃和KAE的废弃开始思考，回顾了两者的实现原理和被废弃的原因，再到寻找迁移方案，并进行了实践。抛开还未涉及到的PSI，基本可以画上一个阶段性句号了。</p>
+<p>再次贴上代码链接：
+<strong><a href="https://github.com/leobert-lan/UIBinding">UIBinding</a>，如果本文中的内容对你有一丝丝的帮助，希望可以得到点赞支持。</strong></p>
+<p>补充：2021-1-25
+再补充一段内容重点。</p>
+<ul>
+<li>对于Java编写的业务，不牵涉kae，只涉及bk，个人建议拷贝其生成类核心逻辑，再删除相关注解点。</li>
+<li>对于kotlin编写的业务，bk内容可以和Java一样处理，kae相关内容考虑使用属性代理方式，增加全局变量。</li>
+<li>这一波重构，并不适合在基类做手脚。</li>
+<li>对于还没有迁移到databinding或者viewbinding的内容，配合属性代理迁移到databinding或者viewbinding也不麻烦。</li>
+</ul></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

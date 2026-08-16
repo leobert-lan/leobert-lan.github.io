@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>三思系列：&quot;声明式UI&quot;和&quot;命令式UI&quot;，你的理解可能是错的 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">三思系列：&quot;声明式UI&quot;和&quot;命令式UI&quot;，你的理解可能是错的</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="三思系列声明式ui和命令式ui你的理解可能是错的">三思系列：“声明式UI”和”命令式UI”，你的理解可能是错的</h1>
+<blockquote>
+<p>三思系列是我最新的学习、总结形式，着重于:<strong>问题分析</strong>、<strong>技术积累</strong>、<strong>视野拓展</strong>，<a href="https://leobert-lan.github.io/info/about_sansi_series.html">关于三思系列</a></p>
+</blockquote>
+<h2 id="前言">前言</h2>
+<p>最近，<code>Jetpack Compose</code> 发布了 <code>Beta</code> 版本，可以说是千呼万唤始出来。</p>
+<p>在一个 <code>现象级事物</code> 出现时，关于它的讨论会很热。我注意到，最近有一大批关于Compose的文章涌现了出来，并且有很多的讨论，这很棒。</p>
+<p>但是，值得一提的是，我发现很多人对于 <code>声明式UI</code> 、 <code>命令式UI</code> 的认知，可能出现了一点偏差。</p>
+<p>当然，我也 <code>不是</code> 像 <strong>马丁老爷子</strong> 或者 <strong>Jack Wharton</strong> 那样的 <code>专家</code>，对于这个问题，只能是同大家 <code>一道探索</code>。</p>
+<h2 id="声明式-和-命令式-含义探索">声明式 和 命令式 含义探索</h2>
+<p>按照经验，中文往往比英文具有 <code>更强的表达力</code> ，这也意味着：中文的 <code>凝练度更高</code>，也更容易产生理解误差，我们结合英文一起看</p>
+<ul>
+<li>声明式 declarative</li>
+</ul>
+<blockquote>
+<p><strong>a declarative <a href="https://www.ldoceonline.com/dictionary/sentence">sentence</a> has the form of a <a href="https://www.ldoceonline.com/dictionary/statement">statement</a></strong>.</p>
+<p>statement: 4条释义，看第一条</p>
+<ul>
+<li><strong>something you say or write, especially publicly or officially, to let people know your intentions or opinions, or to record facts</strong></li>
+<li>其他三条略</li>
+</ul>
+</blockquote>
+<ul>
+<li>命令式 <a href="https://www.ldoceonline.com/dictionary/imperative">imperative</a></li>
+</ul>
+<blockquote>
+<p><em>technical</em>, an imperative verb is one that expresses an order, such as ‘stand up’</p>
+</blockquote>
+<p>如果从 <code>语境</code> 上来看，<code>声明</code> 是面向一个环境、一个群体表达某些规则，而 <code>命令</code> 所面向的，是一个明确的对象群，在指使他们做一些事情。</p>
+<p>举个可能不太恰当的例子：</p>
+<blockquote>
+<ul>
+<li>
+<p>我军优待俘虏，缴枪投降不杀，这是对敌军的声明</p>
+</li>
+<li>
+<p>营长命令各战斗单位，打扫战场，一连收缴武器弹药，二连负责收押俘虏。这是命令式</p>
+</li>
+</ul>
+</blockquote>
+<p>我发现，讨论 <code>声明式</code> 和 <code>命令式</code> 时，需要先界定好 <code>讨论范围</code>。这一点非常重要，一旦超越了范围，讨论就会出现错误。</p>
+<p>放在计算机领域中讨论这两者时，需要先界定好 <code>层</code>。</p>
+<p>我们知道，程序设计中，以及在计算机设计中，都是 <code>分层</code> 的。<code>下层</code> 的内容交给 <code>上层</code> 使用时，需要使用到 <code>接口</code>，</p>
+<blockquote>
+<p><em>这个接口，不仅仅是我们编程中的API的概念</em></p>
+</blockquote>
+<p>甚至，接口的表现形式是一种 <code>语言</code>。</p>
+<p>接口被定义时，其表意即已固定，当其表意：</p>
+<ul>
+<li>越倾向于 <code>现实表达</code> 时，呈现为 <code>声明式</code></li>
+<li>越倾向于 <code>执行过程</code> 时，呈现为 <code>命令式</code></li>
+</ul>
+<h2 id="ui">UI</h2>
+<blockquote>
+<p>User Interface 的简称，直译为用户界面</p>
+</blockquote>
+<p>UI系统需要处理两个范畴的事情：</p>
+<ul>
+<li>内容呈现、反馈</li>
+<li>用户交互</li>
+</ul>
+<p>另外，还需要程序 <code>构建</code> 出UI。</p>
+<p>我们需要从这 <code>三个角度</code> 来看。</p>
+<h2 id="构建ui时的-命令式-和-声明式">构建UI时的 命令式 和 声明式</h2>
+<p>我们在Android原有的知识领域中看这个问题。</p>
+<p>我们知道，这部分内容设计时是遵守 OOP 的，存在一整套 <code>View 类簇</code>。而界面由具体的功能类组建出 <code>视图树</code>。</p>
+<p>我们需要讨论的，就是 <code>视图树</code> 的 <code>构建</code>。我们知道：</p>
+<blockquote>
+<p><code>ViewGroup</code> 存在一系列 <code>addView</code> 方法，通过它们，最终实现 <code>树结构</code></p>
+</blockquote>
+<p>这套 <code>接口</code> ，倾向于 <code>执行过程</code>，直接使用这套接口去构建，就是 <code>命令式</code> 的构建。</p>
+<p>而在此基础上，封装了 <code>LayoutInflater</code>，将 <code>xml语法</code> 表达的 <code>结构树</code> 转换为 <code>视图树</code>， 此时我们使用的 <code>接口</code> ，其表现形式是 <code>xml语言</code>。</p>
+<p>按照特定的规则，我们 <code>直接描述</code> 了 <code>期望的结果</code>，这更倾向于 <code>现实表达</code>，这样的构建方式，就是 <code>声明式</code></p>
+<blockquote>
+<p><code>View</code> 存在一系列的 <code>布局属性</code>，一些直接持有，一些被LayoutParams封装而间接持有。</p>
+</blockquote>
+<p>在 <code>视图树</code> 的节点构建过程中，还需要处理 <code>布局属性</code>。</p>
+<p>按照刚才的讨论，我们很容易得出：</p>
+<ul>
+<li>直接使用 <code>View的API</code> 或者 <code>LayoutParams的API</code>，或者直接对属性赋值，可以断言是 <code>命令式</code> 范畴。</li>
+<li>而在布局文件中，声明对应的属性值，可以断言是 <code>声明式</code> 范畴</li>
+</ul>
+<blockquote>
+<p>小结：本段内容，我们讨论了构建UI的两种做法。并讨论了其所属的范畴。</p>
+</blockquote>
+<h2 id="android体系最基础的内容中内容呈现交互">Android体系最基础的内容中，内容呈现&#x26;交互</h2>
+<p>在最基础的内容中，讨论 <code>内容呈现</code> 和 <code>交互</code> 部分使用的API，是 <code>命令式</code> 的，还是 <code>声明式</code> 的，这 <code>非常的无聊</code>。</p>
+<h3 id="内容呈现时的-命令式-与-声明式">内容呈现时的 命令式 与 声明式</h3>
+<p>在 <code>View</code> 提供的 <code>接口</code> 中，例如：</p>
+<ul>
+<li>TextView#setText(Charsequence cs)</li>
+<li>ImageView#setImageDrawable(Drawable d)</li>
+</ul>
+<p>等，更加偏向于 <code>执行过程</code> 。</p>
+<p>但是注意，<em>此时 <code>执行过程</code> 和 <code>现实表达</code> 的界限已经有点模糊了</em> 。我们不必 <code>牵强附会</code>。</p>
+<p>读一下这两句话：</p>
+<ul>
+<li>我们通过调用相应API设置了需要显示的内容</li>
+<li>我们在布局文件中指明了视图显示时需要呈现的内容</li>
+</ul>
+<h3 id="交互时的-命令式-与-声明式">交互时的 命令式 与 声明式</h3>
+<p>我们知道，Android View 体系中，封装了一系列 <code>Listener</code>，通过 <code>接口回调</code>，让程序可以 <code>监听</code> 到用户发出的 <code>交互指令</code>。</p>
+<p>除此之外，在 <code>最基础内容</code> 中，仅有简陋的 <code>click</code> 属性可以声明点击事件的 <code>消费函数</code></p>
+<hr>
+<p>此时，我们 <code>放大着眼点</code> 。我们处理视觉呈现和交互时，面向的两个重要对象</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>          信息展示</span></span>
+<span class="line"><span>   | ================ |</span></span>
+<span class="line"><span>   |     内容呈现     \|/</span></span>
+<span class="line"><span>|=====|           |=====|   </span></span>
+<span class="line"><span>| 实体 |           | UI  |</span></span>
+<span class="line"><span>|=====|           |=====|</span></span>
+<span class="line"><span>  /|\      交互       |</span></span>
+<span class="line"><span>   | ================ | </span></span>
+<span class="line"><span>          状态变更</span></span>
+<span class="line"><span>            </span></span></code></pre>
+<p>这两者之间存在两条线：</p>
+<ul>
+<li><code>代表信息</code> 的 <code>实体</code> -> <code>UI</code>, 这是 <code>内容呈现</code> ，实质是：在UI上做 <code>信息展示</code></li>
+<li><code>UI</code> -> <code>代表信息</code> 的 <code>实体</code> ，这是 <code>交互</code> ，实质是：在信息实体上做 <code>状态变更</code>，即变更信息</li>
+</ul>
+<p>我们在实现这两条线时：</p>
+<ul>
+<li>如果<code>直接利用</code> 了倾向于 <code>现实表达</code> 的高阶框架封装，那这个框架就是 <code>声明式</code>的框架；</li>
+<li>如果仅使用 <code>低阶</code>的 <code>view层api</code> ，自行实现了逻辑，那就是 <code>命令式</code> 的编程，毕竟也没用啥框架；</li>
+</ul>
+<blockquote>
+<p>评价一套 <code>UI工具体系</code> 是否是 <code>声明式</code> 的，要从这三个方面看，如果在三个方面均进行了封装，提供的 <code>接口</code> 都偏向于 <code>现实表达</code>，那是成熟完善的 <code>声明式UI</code> 框架。</p>
+</blockquote>
+<p>看几个例子：</p>
+<ul>
+<li>直接使用 <code>View体系的接口</code> 构建UI、处理显示和交互，这是 <code>命令式编程</code></li>
+<li>使用 <code>LayoutInflater</code> 工具和 <code>xml表达的布局文件</code>。绝大多数情况下，还需要通过<code>映射关系</code>，找到View对象；并进一步 <code>根据业务逻辑</code> ，操作 <code>View对象</code> 实现内容呈现和交互逻辑。
+这是 <code>声明式构建</code>，<code>命令式编程</code> 处理显示和交互。这套工具并不是完善的 <code>声明式UI开发工具</code></li>
+<li>使用 <code>LayoutInflater</code> 工具 + <code>DataBinding工具包</code> 和 <code>xml表达的布局文件</code>。<code>DataBingding</code> + <code>LayoutInflater</code>是一套完善的 <code>声明式UI框架</code></li>
+<li><code>Compose</code>，完善的 <code>声明式UI框架</code></li>
+</ul>
+<h2 id="思考为什么当初xml布局方式受到官方推荐">思考：为什么当初XML布局方式受到官方推荐</h2>
+<p>很大一方面是Java语言特性的原因，最开始，都是使用Java语言编写业务逻辑，而基于Java，很难直接定义DSL</p>
+<blockquote>
+<p>注：<code>Java语言很难直接定义DSL</code> 这一点我并没有做严格的调研考证，如果有谬误，请指出。</p>
+<p>而基于Groovy等语言开发符合 <code>DSL</code> 的 <code>声明式UI框架</code>，必然要引入Groovy，这在当时也和 <code>主流</code> 格格不入，虽然Google很喜欢创新。</p>
+</blockquote>
+<p>所以，官方提出了 <code>布局</code> 和 <code>业务</code> 分开，这样也有很多好处：</p>
+<ul>
+<li>业务逻辑的 <code>模块内聚性</code> 和 <code>复用度</code> 可提升</li>
+<li>开发者可以提升专注度</li>
+<li><code>xml树</code> 和 <code>view树</code> 之间 <code>关系明了</code>，借助成熟内容，快速开发出 <code>预览工具</code></li>
+</ul>
+<h2 id="思考为什么xml布局方式走在被淘汰的路上">思考：为什么XML布局方式走在被淘汰的路上</h2>
+<p>因为使用XML布局的方式存在 <code>先天弱点</code> ，它和 <code>业务逻辑</code> 天生生活在两个世界。</p>
+<p>这意味着，必然存在一个 <code>加载器</code> 或者 <code>转换器</code>，在 <code>运行时</code> 或者 <code>编译时</code>，将 <code>xml语法</code> 所描述的 <code>声明式布局</code> 转换到 <code>业务逻辑</code> 所在的世界。</p>
+<p>所以，并不是 <code>DataBinding</code> 这一 <code>声明式UI框架</code> 不够优秀，而是 xml 和 业务逻辑代码 之间天生的屏障不够 <code>人道主义</code>。</p>
+<p>而推行 <code>kotlin first</code> 也有一段时间了，基于kotlin，开发 <code>DSL</code> 工具包非常的方便。</p>
+<h2 id="延伸响应式ui框架">延伸：响应式UI框架</h2>
+<p>这也是 Modern Development 中非常热门的一个词，<code>响应式</code> 是对特点的一种描述，方法论是：<code>事件驱动，Event-Driven</code>，<code>发布订阅者模式</code>。</p>
+<p>这个概念，和前面提到的 <code>声明式UI框架</code> 和 <code>命令式UI编程</code> 没有必然的联系，它所表达的是： <code>代表信息的实体</code> 和 <code>UI</code> 之间的互操作是符合 <code>响应式</code> 特征的。</p>
+<p>但可以想象，要实现响应式，其接口变现特征，天然倾向于 <code>现实表达</code>；如果是倾向于 <code>操作过程</code>，可以断言其抽象程度非常低。</p>
+<h2 id="扣题勘误">扣题：勘误</h2>
+<p>再看到这些说法，我们可以判断出它们存在 <code>谬误</code>：</p>
+<ul>
+<li>基于xml无法实现声明式UI</li>
+<li>xml被淘汰是因为无法实现声明式UI</li>
+<li>基于xml布局方式都是命令式</li>
+<li>声明式一定会取代命令式，你看xml都要被淘汰了</li>
+<li>用代码写的就是命令式UI</li>
+</ul>
+<p>等。</p>
+<p>再多聊两句，一套曾经热门的技术，一定有其热门的原因和背景，它走向消亡，往往是其 <code>面向的问题</code> 和 <code>场景</code> ，在事物发展过程中，越来越少见。</p>
+<p><code>声明式</code> 和 <code>命令式</code> 各有优劣。按照规律，高阶封装更 <code>人道主义</code> ，解决高复杂度问题时，也容易实现 <code>降维打击</code>。
+但这也意味着机器付出的代价更高一点。</p>
+<p>总之，脱离了环境背景讨论谁胜谁负，往往是耍流氓。</p>
+<h2 id="总结">总结</h2>
+<p>这一篇，我们用比较 <code>随性</code> 的文字，对 <code>声明式UI</code> 进行了一次脑暴，进而讨论其概念的实质。我相信，经过这次脑暴，对这一套概念体系的理解会更加 <code>深刻</code> 、
+<code>准确</code> 。相应的，学习新内容时也会 <code>更加轻松</code>、<code>事半功倍</code></p>
+<blockquote>
+<p>进一步延伸, 在学习Compose，思考Compose的优劣时，势必会上升到 <code>OOP</code> 和 <code>FP</code> 两大编程范式的讨论。这一篇不再展开。</p>
+<p>点赞关注收藏，从此不迷路。</p>
+</blockquote></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn &amp; 让Column可滑动 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn &amp; 让Column可滑动</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="jetpack-compose--控件篇五-spacerlazyrowlazycolumn--让column可滑动">Jetpack Compose | 控件篇（五）— Spacer、LazyRow、LazyColumn &#x26; 让Column可滑动</h1>
+<p>在上一篇中，我们完成了 <code>Box、Row、Column</code> 相关内容的学习，并且留下了一个疑问：<strong>“如果容器大小不足以承载内容，怎么处理呢？“</strong>，这一篇我们一起学习这部分内容。</p>
+<blockquote>
+<p><em>文中代码均基于 1.0.1版本</em></p>
+<p><em>如无特殊说明，文中的 <code>Compose</code> 均指代 <code>Jetpack compose</code></em></p>
+<p>文中代码均可在 <a href="https://github.com/leobert-lan/ComposeWorkShop">WorkShop</a> 中获取，本篇代码集中于 post29 &#x26; post30 包下</p>
+<p>完整系列目录: <a href="https://leobert-lan.github.io/Compose/">Github Pages</a> | <a href="https://juejin.cn/column/6999815370697605156">掘金</a> | <a href="https://blog.csdn.net/a774057695/category_11298077.html">csdn</a></p>
+</blockquote>
+<h2 id="和android进行简单对比">和Android进行简单对比</h2>
+<p>在Android中，SDK提供了诸如： <code>ScrollView</code> <code>NestedScrollView</code> <code>ListView</code> <code>GridView</code> <code>RecyclerView</code>，等针对各类场景下适用的控件，
+基于滑动手势调整内容展示区域，以达到显示更多内容的目的。</p>
+<p>进一步探索可以发现：View本身就包含了Scroll机制的 <code>半成品实现</code>，当然，本文我们不去深究Android的内容，借助我们已经掌握的Android知识，引出一点：</p>
+<blockquote>
+<p>基于Scroll机制，用小容器展现大内容的本质：在视图测量的基础上，结合滑动手势处理，调整内容布局，绘制后展现。</p>
+</blockquote>
+<p>在早期的一些文章中，有博主提到：Compose中对应的内容为 <code>ScrollRow，ScrollColumn</code> / <code>LazyRow、LazyColumn</code>。</p>
+<p><em>在早期的预览版中，短暂的存在过 ScrollRow，ScrollColumn等内容，似乎已经被移除</em></p>
+<p><strong>Compose中也是按照这样的思路设计的</strong>，我们将在后续的文章中再细致地展开研究，本篇中仅学习如何使用它们。</p>
+<p>在真正开始这部分内容之前，先补充一个简单的控件 Spacer，可以简单的创建占位间距，<em>后续的文章中已经没有他的位置了</em>。</p>
+<h2 id="spacer">Spacer</h2>
+<p>在之前的文章中，我们学习过Modifier，其中包含一些和布局相关的API，例如：<code>padding</code>、<code>offset</code>，但并无 <code>margin</code> 等内容，<em>按照业内惯例，
+如果已经存在一个广为接受的名词，一般不会使用新词，至少词根是一致的</em>
+，在Compose中，使用了Spacer，取缔了Margin的一些使用场景。</p>
+<p><em>注：计算总是有损耗的，不要滥用Spacer,并且很多场景下有特定的方式处理间距，后续会逐渐学习到</em></p>
+<h3 id="如何使用">如何使用</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@Composable</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> Spacer</span><span style="color:#E1E4E8">(modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>一般只需要指定他的宽高尺寸即可，例如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">Spacer</span><span style="color:#E1E4E8">(modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">.dp))</span></span></code></pre>
+<h2 id="lazycolumn">LazyColumn</h2>
+<p><em>在上一篇文章中，我们已经学习过 Row和Column，它们仅仅是在方向上不一致，在实现上非常类似。同样的，LazyRow和LazyColumn也是如此。</em></p>
+<p>Doc中提到：</p>
+<blockquote>
+<p>The vertically scrolling list that only composes and lays out the currently visible items.
+The content block defines a DSL which allows you to emit items of different types.
+For example you can use LazyListScope.item to add a single item and LazyListScope.items to add a list of items.</p>
+</blockquote>
+<p>仅 组合计算 以及 布局 当前可见元素的纵向可滑动列表。内容块定义了一个DSL，允许创建不同类型的元素。</p>
+<p>例如：使用 <code>LazyListScope.item</code> 添加单个元素， <code>LazyListScope.items</code> 添加元素列表。</p>
+<p><em>注：“内容块定义了一个DSL，允许创建不同类型的元素”，这并不同于Android中概念： <code>RecyclerView#Adapter</code> 具有将数据映射为同类型 <code>ViewHolder</code> 或 不同类型 <code>ViewHolder</code>
+的能力。而是指 “添加元素时可以是 <code>单个元素</code>，或者是 <code>元素的列表</code>，这是不同的类型。
+<strong>字面翻译在中文语境下容易造成误解。</strong></em></p>
+<p>很显然，它类似于Android中的 <code>ListView</code>,<code>RecyclerView</code>, <strong>着重点在于 <code>Lazy</code></strong>，<strong>不会将元素一股脑的全计算、布局出来</strong>。</p>
+<p>所以，它并不对标ScrollView，在它的使用场景下，可滑动需求非常普遍，便默认实现了！</p>
+<blockquote>
+<p>我们前面提到：</p>
+<p>在早期的一些文章中，有博主提到：Compose中对应的内容为 ScrollRow，ScrollColumn / LazyRow、LazyColumn</p>
+<p>这本没有啥错误，但绝不是被曲解的： “Row和Column 无法提供滑动能力，而是需要使用 LazyRow、LazyColumn”</p>
+</blockquote>
+<p><strong>但气氛已经烘托到这里了</strong>，那我们先将其学完，再学习 Row和Column 如何提供滑动能力。</p>
+<h3 id="如何使用-1">如何使用</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@Composable</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> LazyColumn</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    state: </span><span style="color:#B392F0">LazyListState</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> rememberLazyListState</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentPadding: </span><span style="color:#B392F0">PaddingValues</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> PaddingValues</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">.dp),</span></span>
+<span class="line"><span style="color:#E1E4E8">    reverseLayout: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    verticalArrangement: </span><span style="color:#B392F0">Arrangement</span><span style="color:#E1E4E8">.Vertical </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">reverseLayout) Arrangement.Top </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> Arrangement.Bottom,</span></span>
+<span class="line"><span style="color:#E1E4E8">    horizontalAlignment: </span><span style="color:#B392F0">Alignment</span><span style="color:#E1E4E8">.Horizontal </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Alignment.Start,</span></span>
+<span class="line"><span style="color:#E1E4E8">    flingBehavior: </span><span style="color:#B392F0">FlingBehavior</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ScrollableDefaults.</span><span style="color:#B392F0">flingBehavior</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">    content: </span><span style="color:#B392F0">LazyListScope</span><span style="color:#E1E4E8">.() </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>各个参数含义：</p>
+<ul>
+<li>modifier：修饰器</li>
+<li>state：用于控制或者观测列表状态</li>
+<li>contentPadding：整体内容周围的一个Padding，<em>注：内容四周的留白，以纵向列表为例，尾部没有展示时看不到尾部的留白</em> 这通过Modifier无法实现，
+<em>注：Modifier只能实现列表容器固定的留白间距</em> 。可以使用它在第一个元素前和最后一个元素后留白。 如果需要在元素间留出间距，可以使用 verticalArrangement</li>
+<li>reverseLayout：是否反转列表</li>
+<li>verticalArrangement：子控件纵向的范围。<em>可用于添加子控件之间的间距，以及内容不足以填满列表最小尺寸时，如何排布</em></li>
+<li>horizontalAlignment：子控件横向对齐方式</li>
+<li>flingBehavior：fling行为的处理逻辑</li>
+<li>content：声明了如何提供子控件的DSL，有两种方式</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@LazyScopeMarker</span></span>
+<span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> LazyListScope</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> item</span><span style="color:#E1E4E8">(key: </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">, content: </span><span style="color:#B392F0">@Composable</span><span style="color:#E1E4E8"> LazyItemScope.() </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> items</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        count: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        key: ((</span><span style="color:#B392F0">index</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) -> </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8">)? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        itemContent: </span><span style="color:#B392F0">@Composable</span><span style="color:#E1E4E8"> LazyItemScope.(index: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @ExperimentalFoundationApi</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> stickyHeader</span><span style="color:#E1E4E8">(key: </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">, content: </span><span style="color:#B392F0">@Composable</span><span style="color:#E1E4E8"> LazyItemScope.() </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><em>顺带一提：笔者参与的上一个项目中，高频使用RecycleView用作内容呈现，为了便捷的处理 “item之间的间距”、“首尾留白”、“特定item间不应用间距”， 在项目中写了一套部件，后续可以拆出来同大家分享下。</em></p>
+<h3 id="基于lazylistscopeitem-方法">基于LazyListScope.item 方法</h3>
+<p>在上一篇文章对应的WorkShop内容中，已经出现了这一用法 <em>post29包下</em>。</p>
+<p>例如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> LazyListScope</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">rowDemo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#B392F0">    item</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        CodeSample</span><span style="color:#E1E4E8">(code </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "row sample 1:"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">        Row</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">            // ignore</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    item</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        CodeSample</span><span style="color:#E1E4E8">(code </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "row sample 2:纵向居中对齐"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#6A737D">        // ignore</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // ignore</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="基于lazylistscopeitems-方法">基于LazyListScope.items 方法</h3>
+<p>除了直接使用API，SDK中同样提供了部分内联函数，消除处理数据结构的代码冗余：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">inline</span><span style="color:#F97583"> fun</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">LazyListScope</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">items</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    items: </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">>,</span></span>
+<span class="line"><span style="color:#F97583">    noinline</span><span style="color:#E1E4E8"> key: ((</span><span style="color:#B392F0">item</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">) -> </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8">)? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">    crossinline</span><span style="color:#E1E4E8"> itemContent: </span><span style="color:#B392F0">@Composable</span><span style="color:#E1E4E8"> LazyItemScope.(item: </span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">inline</span><span style="color:#F97583"> fun</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">LazyListScope</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">itemsIndexed</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    items: </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">>,</span></span>
+<span class="line"><span style="color:#F97583">    noinline</span><span style="color:#E1E4E8"> key: ((</span><span style="color:#B392F0">index</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">item</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">) -> </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8">)? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">    crossinline</span><span style="color:#E1E4E8"> itemContent: </span><span style="color:#B392F0">@Composable</span><span style="color:#E1E4E8"> LazyItemScope.(index: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, item: </span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">inline</span><span style="color:#F97583"> fun</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">LazyListScope</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">items</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    items: </span><span style="color:#B392F0">Array</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">>,</span></span>
+<span class="line"><span style="color:#F97583">    noinline</span><span style="color:#E1E4E8"> key: ((</span><span style="color:#B392F0">item</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">) -> </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8">)? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">    crossinline</span><span style="color:#E1E4E8"> itemContent: </span><span style="color:#B392F0">@Composable</span><span style="color:#E1E4E8"> LazyItemScope.(item: </span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">inline</span><span style="color:#F97583"> fun</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">LazyListScope</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">itemsIndexed</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    items: </span><span style="color:#B392F0">Array</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">>,</span></span>
+<span class="line"><span style="color:#F97583">    noinline</span><span style="color:#E1E4E8"> key: ((</span><span style="color:#B392F0">index</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">item</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">) -> </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8">)? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">    crossinline</span><span style="color:#E1E4E8"> itemContent: </span><span style="color:#B392F0">@Composable</span><span style="color:#E1E4E8"> LazyItemScope.(index: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, item: </span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>按照以往Android中的开发经验，我们很容易写出如下的代码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#6A737D">// WorkShop 中的入口页面，枚举了各个例子对应的Activity</span></span>
+<span class="line"><span style="color:#B392F0">@Composable</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> TestList</span><span style="color:#E1E4E8">(activity: </span><span style="color:#B392F0">Activity</span><span style="color:#E1E4E8">, cases: </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Pair</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Class</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">out</span><span style="color:#B392F0"> Activity</span><span style="color:#E1E4E8">>>>) {</span></span>
+<span class="line"><span style="color:#B392F0">    LazyColumn</span><span style="color:#E1E4E8">(contentPadding </span><span style="color:#F97583">=</span><span style="color:#B392F0"> PaddingValues</span><span style="color:#E1E4E8">(horizontal </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 16</span><span style="color:#E1E4E8">.dp, vertical </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 8</span><span style="color:#E1E4E8">.dp)) {</span></span>
+<span class="line"><span style="color:#B392F0">        itemsIndexed</span><span style="color:#E1E4E8">(items </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> cases) { _, item </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#B392F0">            Column</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                horizontalAlignment </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Alignment.CenterHorizontally,</span></span>
+<span class="line"><span style="color:#E1E4E8">            ) {</span></span>
+<span class="line"><span style="color:#B392F0">                Spacer</span><span style="color:#E1E4E8">(modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">.dp))</span></span>
+<span class="line"><span style="color:#B392F0">                Box</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                    modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier</span></span>
+<span class="line"><span style="color:#E1E4E8">                        .</span><span style="color:#B392F0">height</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">48</span><span style="color:#E1E4E8">.dp)</span></span>
+<span class="line"><span style="color:#E1E4E8">                        .</span><span style="color:#B392F0">fillMaxWidth</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">                        .</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                            color </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Color.LightGray,</span></span>
+<span class="line"><span style="color:#E1E4E8">                            shape </span><span style="color:#F97583">=</span><span style="color:#B392F0"> RoundedCornerShape</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">CornerSize</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">.dp))</span></span>
+<span class="line"><span style="color:#E1E4E8">                        )</span></span>
+<span class="line"><span style="color:#E1E4E8">                        .</span><span style="color:#B392F0">clickable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                            activity.</span><span style="color:#B392F0">startActivity</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">Intent</span><span style="color:#E1E4E8">(activity, item.second))</span></span>
+<span class="line"><span style="color:#E1E4E8">                        },</span></span>
+<span class="line"><span style="color:#E1E4E8">                    contentAlignment </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Alignment.Center</span></span>
+<span class="line"><span style="color:#E1E4E8">                ) {</span></span>
+<span class="line"><span style="color:#B392F0">                    Text</span><span style="color:#E1E4E8">(text </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> item.first, color </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> MainTxt, textAlign </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> TextAlign.Center)</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#B392F0">                Spacer</span><span style="color:#E1E4E8">(modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">.dp))</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">TestList</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    activity </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this@MainActivity</span><span style="color:#E1E4E8">, cases </span><span style="color:#F97583">=</span><span style="color:#B392F0"> arrayListOf</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Layout samples"</span><span style="color:#E1E4E8"> to P21LayoutSample::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Draw samples"</span><span style="color:#E1E4E8"> to P21DrawSample::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Text samples"</span><span style="color:#E1E4E8"> to P26TextSample::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "TextField samples"</span><span style="color:#E1E4E8"> to P26TextFieldSample::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Button samples"</span><span style="color:#E1E4E8"> to P26ButtonSample::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Icon samples"</span><span style="color:#E1E4E8"> to P27IconSample::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Image samples"</span><span style="color:#E1E4E8"> to P27ImageSample::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Switch,Checkbox,RadioButton samples"</span><span style="color:#E1E4E8"> to P28SwitchRbCbSample::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java,</span></span>
+<span class="line"><span style="color:#9ECBFF">        "Box,Row,Column samples"</span><span style="color:#E1E4E8"> to P29BoxRowColumnSample::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java,</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>如果从Android的视角出发，这段代码相当于创建 ViewHolder的ItemView 以及 onBindViewHolder 的实现</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">Column</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    horizontalAlignment </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Alignment.CenterHorizontally,</span></span>
+<span class="line"><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">    Spacer</span><span style="color:#E1E4E8">(modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">.dp))</span></span>
+<span class="line"><span style="color:#B392F0">    Box</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">height</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">48</span><span style="color:#E1E4E8">.dp)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">fillMaxWidth</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                color </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Color.LightGray,</span></span>
+<span class="line"><span style="color:#E1E4E8">                shape </span><span style="color:#F97583">=</span><span style="color:#B392F0"> RoundedCornerShape</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">CornerSize</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">.dp))</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">clickable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                activity.</span><span style="color:#B392F0">startActivity</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">Intent</span><span style="color:#E1E4E8">(activity, item.second))</span></span>
+<span class="line"><span style="color:#E1E4E8">            },</span></span>
+<span class="line"><span style="color:#E1E4E8">        contentAlignment </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Alignment.Center</span></span>
+<span class="line"><span style="color:#E1E4E8">    ) {</span></span>
+<span class="line"><span style="color:#B392F0">        Text</span><span style="color:#E1E4E8">(text </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> item.first, color </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> MainTxt, textAlign </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> TextAlign.Center)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#B392F0">    Spacer</span><span style="color:#E1E4E8">(modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">.dp))</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>也就是说，我们利用了ItemView固有的 “留白” 处理了Item之间的间距，显然这不是最佳实践方案！</p>
+<h3 id="更加优雅地处理间距和对齐">更加优雅地处理间距和对齐</h3>
+<p>上文中已经提及：</p>
+<ul>
+<li>contentPadding</li>
+<li>verticalArrangement</li>
+<li>horizontalAlignment</li>
+</ul>
+<p>基于此我们对代码进行改造，以减少没用的嵌套</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@Composable</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> TestList</span><span style="color:#E1E4E8">(activity: </span><span style="color:#B392F0">Activity</span><span style="color:#E1E4E8">, cases: </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Pair</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Class</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">out</span><span style="color:#B392F0"> Activity</span><span style="color:#E1E4E8">>>>) {</span></span>
+<span class="line"><span style="color:#B392F0">    LazyColumn</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        contentPadding </span><span style="color:#F97583">=</span><span style="color:#B392F0"> PaddingValues</span><span style="color:#E1E4E8">(horizontal </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 16</span><span style="color:#E1E4E8">.dp, vertical </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 8</span><span style="color:#E1E4E8">.dp),</span></span>
+<span class="line"><span style="color:#E1E4E8">        verticalArrangement </span><span style="color:#F97583">=</span><span style="color:#B392F0"> spacedBy</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">.dp, Alignment.Top),</span></span>
+<span class="line"><span style="color:#E1E4E8">        horizontalAlignment </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Alignment.CenterHorizontally,</span></span>
+<span class="line"><span style="color:#E1E4E8">    ) {</span></span>
+<span class="line"><span style="color:#B392F0">        itemsIndexed</span><span style="color:#E1E4E8">(items </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> cases) { _, item </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#B392F0">            Box</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier</span></span>
+<span class="line"><span style="color:#E1E4E8">                    .</span><span style="color:#B392F0">height</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">48</span><span style="color:#E1E4E8">.dp)</span></span>
+<span class="line"><span style="color:#E1E4E8">                    .</span><span style="color:#B392F0">fillMaxWidth</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">                    .</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                        color </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Color.LightGray,</span></span>
+<span class="line"><span style="color:#E1E4E8">                        shape </span><span style="color:#F97583">=</span><span style="color:#B392F0"> RoundedCornerShape</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">CornerSize</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">.dp))</span></span>
+<span class="line"><span style="color:#E1E4E8">                    )</span></span>
+<span class="line"><span style="color:#E1E4E8">                    .</span><span style="color:#B392F0">clickable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                        activity.</span><span style="color:#B392F0">startActivity</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">Intent</span><span style="color:#E1E4E8">(activity, item.second))</span></span>
+<span class="line"><span style="color:#E1E4E8">                    },</span></span>
+<span class="line"><span style="color:#E1E4E8">                contentAlignment </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Alignment.Center</span></span>
+<span class="line"><span style="color:#E1E4E8">            ) {</span></span>
+<span class="line"><span style="color:#B392F0">                Text</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                    text </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> item.first,</span></span>
+<span class="line"><span style="color:#E1E4E8">                    color </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> MainTxt,</span></span>
+<span class="line"><span style="color:#E1E4E8">                    textAlign </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> TextAlign.Center</span></span>
+<span class="line"><span style="color:#E1E4E8">                )</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>可以得到一致的效果：</p>
+<p><img  src="/_astro/p30_demo1.DViIkvJI_Z1eYB3E.webp" alt loading="lazy" decoding="async" width="1080" height="2160"></p>
+<h2 id="让column可滑动">让Column可滑动</h2>
+<p><em>参考可以实现Row的可滑动</em></p>
+<p>最开始在和Modifier混脸熟的过程中，我们提及了 <code>androidx.compose.foundation</code> 包，并且含有子包：
+<code>androidx.compose.foundation.gestures</code>，顾名思义，后者和手势处理有关。</p>
+<ul>
+<li>androidx.compose.foundation.gestures.ScrollableKt#scrollable</li>
+<li>androidx.compose.foundation.ScrollKt#verticalScroll</li>
+<li>androidx.compose.foundation.ScrollKt#horizontalScroll</li>
+</ul>
+<p>经过这一阶段的学习，我们可以做出一个结论：</p>
+<blockquote>
+<p>Compose 中包含一部分基本的函数，以及结合实际使用场景，在基本函数上 “装饰” 出高级函数</p>
+</blockquote>
+<p>从命名上，我们很容易得知 <code>scrollable</code> 是比较基本的函数，<code>verticalScroll</code>，<code>horizontalScroll</code> 是基于 <code>scrollable</code> 装饰出的高级函数。</p>
+<p>阅读源码后也确实验证了我们的推测。</p>
+<p><em>以 verticalScroll 为例，horizontalScroll暂不展开</em></p>
+<p>Doc内容如下：</p>
+<blockquote>
+<p>Modify element to allow to scroll vertically when height of the content is bigger than max
+constraints allow. In order to use this modifier, you need to create and own [ScrollState]
+@see [rememberScrollState]</p>
+</blockquote>
+<p>修饰布局元素，当其内容高度超过最大允许的限制时，允许在纵向进行滚动。</p>
+<p><em>注：内容最大高度地限制需要考虑容器的高度、padding、offset等内容</em></p>
+<p>为了使用它，你需要创建并持有 <code>ScrollState</code> 实例，参见 <code>rememberScrollState</code></p>
+<p><strong>方法原型</strong>：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> Modifier</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">verticalScroll</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    state: </span><span style="color:#B392F0">ScrollState</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    enabled: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    flingBehavior: </span><span style="color:#B392F0">FlingBehavior</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    reverseScrolling: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<ul>
+<li>state：滚动状态，ScrollState实例</li>
+<li>enabled：当触摸事件发生时，是否允许滑动</li>
+<li>flingBehavior：fling处理逻辑</li>
+<li>reverseScrolling：是否反向滑动</li>
+</ul>
+<h3 id="demo">Demo</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">Column</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">fillMaxWidth</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">height</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">600</span><span style="color:#E1E4E8">.dp)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">verticalScroll</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            state </span><span style="color:#F97583">=</span><span style="color:#B392F0"> rememberScrollState</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">    Box</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Modifier</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">fillMaxWidth</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">height</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">400</span><span style="color:#E1E4E8">.dp)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Green)</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    Spacer</span><span style="color:#E1E4E8">(modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier.</span><span style="color:#B392F0">height</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">.dp))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    Box</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Modifier</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">fillMaxWidth</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">height</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">400</span><span style="color:#E1E4E8">.dp)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">background</span><span style="color:#E1E4E8">(Color.Blue)</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>很显然，内容高度已经超过了最大限制！</p>
+<h3 id="效果">效果</h3>
+<p><img  src="/_astro/p30_demo2.C1OL1Ihv_Z2a8ruu.webp" alt loading="lazy" decoding="async" width="1080" height="2160"></p>
+<h2 id="结语">结语</h2>
+<p>至此，Compose中的列表我们已经学习完成，经过简单探索Modifier中滑动的相关内容，掌握了让Column在内容超出展示限制时可以响应滑动的方案。
+较为遗憾的是，目前我们所掌握的知识还不足以支撑我们继续探索下去。</p>
+<p>当然，在后续的文章中，我们会继续学习相关的基础知识，最终一起探索Compose中深层次的内容</p>
+<p><em>另：最近祖传代码改的有点精神分裂，文章更新效率还是没上的来。读者朋友们，如果觉得我的分享对你有一些帮助，还请点个赞让我知道，给予我支持下去的动力；如果内容写的不好，也烦请留个言把想看的内容告知我，可以在后续的文章中一起交流！</em></p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

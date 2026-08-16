@@ -1,0 +1,649 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>三思系列：Glide 4.X全方位认知 -- 模块职责概览 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">三思系列：Glide 4.X全方位认知 -- 模块职责概览</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="三思系列glide-4x全方位认知--模块职责概览--glide一">三思系列：Glide 4.X全方位认知 — 模块职责概览 | Glide（一）</h1>
+<p>最近在解决一些问题时，进行了一下检索，发现 <code>绝大多数文章</code> 是 <code>基于3.X</code>。Glide从进入4.X也有两三年了，在3.X的基础上，发生了很多变化。 所幸我对 <code>4.X</code>
+的源码还比较熟，且Glide的设计也很精彩，索性写一写 <code>对4.X的剖析</code>。</p>
+<p>当然，对于多数读者而言，因为有一定的基础知识，这些剖析文章并不是满地金砖了，可以泛读查漏。</p>
+<blockquote>
+<p>三思系列是我最新的学习、总结形式，着重于:<strong>问题分析</strong>、<strong>技术积累</strong>、<strong>视野拓展</strong>，<a href="https://leobert-lan.github.io/info/about_sansi_series.html">了解更多</a></p>
+</blockquote>
+<h2 id="本文主旨">本文主旨</h2>
+<p><strong>Glide是一个 <code>庞大</code> 的项目，这一篇旨在对Glide项目4.X版本进行 <code>全方位的认知</code></strong></p>
+<p>具体为：<strong>了解Glide处理哪些问题，哪些模块与之相对应</strong></p>
+<p>对早年间 Square公司开源的 <code>Picasso</code> 比较熟悉的读者而言，不难理解：<code>Picasso</code> 是一个 <code>小而雅</code> 的框架，聚焦于图片加载的以下4点主要问题：</p>
+<ul>
+<li><code>异步过程管理与调度</code></li>
+<li><code>资源与显示容器多对多关系</code></li>
+<li><code>多级缓存</code></li>
+<li><code>图片转换支持ScaleType</code></li>
+</ul>
+<p>而后起之秀 <code>Glide</code> 已经是一个 <code>博大且细致</code> 的图片异步加载框架。</p>
+<p>在Glide 1.X 时期，两者的关注点基本一致，随着官方支持Glide的发展，它的关注点也越来越多，包括但不限于：</p>
+<ul>
+<li><code>资源的封装</code></li>
+<li><code>资源获取方式与过程</code></li>
+<li><code>缓存</code></li>
+<li><code>decode</code>、<code>encode</code> 的过程</li>
+<li><code>Target的抽象</code>，<em>注：媒体资源获取的最终目标，例如存为文件、加载到ImageView中等</em></li>
+<li><code>图片转换</code></li>
+<li><code>资源与Target多对多关系</code></li>
+<li><code>生命周期感知与控制</code></li>
+</ul>
+<p>仔细思考这些点之后，我们不难发现，Glide已经着眼于解决这样一个问题：</p>
+<blockquote>
+<p>构建一个系统，对指定的标识媒体资源的实体，<em>其封装形式可以自行扩展</em>，执行资源的获取，并应用内存、磁盘进行缓存，封装图片的解码过程，按指定要求进行
+裁切、缩放等图片转换，最终将结果运用到指定的目标。并对整个过程按照Android平台特性进行生命周期管理。</p>
+</blockquote>
+<p>而这个过程中的绝大多数 <code>节点</code> 或者称之为 <code>切面</code>，均可进行 <code>外部扩展</code></p>
+<p>这一点我们可以从项目介绍中得到印证：<em>看重点单词即可</em></p>
+<blockquote>
+<p>Glide is a fast and efficient open source <code>media management</code> and <code>image loading framework</code> for Android that wraps <code>media decoding</code>, <code>memory and disk caching</code>, and <code>resource pooling</code> into a simple and easy to use interface.</p>
+<p>Glide supports <code>fetching</code>, <code>decoding</code>, and <code>displaying</code> video stills, images, and animated GIFs. Glide includes a flexible API
+that allows developers to plug in to almost any network stack. By default Glide uses a custom <code>HttpUrlConnection</code> based
+stack, but also includes utility libraries plug in to Google’s Volley project or Square’s OkHttp library instead.</p>
+<p>Glide’s <code>primary focus</code> is on <code>making scrolling any kind of a list of images</code> as <code>smooth and fast</code> as possible, but Glide is
+also effective for <code>almost any case</code> where you need to <code>fetch</code>, <code>resize</code>, and <code>display</code> a remote image.</p>
+</blockquote>
+<h2 id="模块职责划分从glide的构建过程窥一斑">模块职责划分，从Glide的构建过程窥一斑</h2>
+<p>不难理解：一个庞大的系统需要在符合 <code>SRP</code> 的基础上进行职责划分，这样一来，类就会变得很多，构建过程会变得复杂，利用Builder模式可以很好的解决这一问题。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> GlideBuilder</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> Glide </span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Context </span><span style="color:#FFAB70">context</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (sourceExecutor </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            sourceExecutor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> GlideExecutor.</span><span style="color:#B392F0">newSourceExecutor</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (diskCacheExecutor </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            diskCacheExecutor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> GlideExecutor.</span><span style="color:#B392F0">newDiskCacheExecutor</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (animationExecutor </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            animationExecutor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> GlideExecutor.</span><span style="color:#B392F0">newAnimationExecutor</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (memorySizeCalculator </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            memorySizeCalculator </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> MemorySizeCalculator.</span><span style="color:#B392F0">Builder</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (connectivityMonitorFactory </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            connectivityMonitorFactory </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> DefaultConnectivityMonitorFactory</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (bitmapPool </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            int</span><span style="color:#E1E4E8"> size </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> memorySizeCalculator.</span><span style="color:#B392F0">getBitmapPoolSize</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (size </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                bitmapPool </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> LruBitmapPool</span><span style="color:#E1E4E8">(size);</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                bitmapPool </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> BitmapPoolAdapter</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (arrayPool </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            arrayPool </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> LruArrayPool</span><span style="color:#E1E4E8">(memorySizeCalculator.</span><span style="color:#B392F0">getArrayPoolSizeInBytes</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (memoryCache </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            memoryCache </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> LruResourceCache</span><span style="color:#E1E4E8">(memorySizeCalculator.</span><span style="color:#B392F0">getMemoryCacheSize</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (diskCacheFactory </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            diskCacheFactory </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> InternalCacheDiskCacheFactory</span><span style="color:#E1E4E8">(context);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (engine </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            engine </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Engine</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                    memoryCache,</span></span>
+<span class="line"><span style="color:#E1E4E8">                    diskCacheFactory,</span></span>
+<span class="line"><span style="color:#E1E4E8">                    diskCacheExecutor,</span></span>
+<span class="line"><span style="color:#E1E4E8">                    sourceExecutor,</span></span>
+<span class="line"><span style="color:#E1E4E8">                    GlideExecutor.</span><span style="color:#B392F0">newUnlimitedSourceExecutor</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">                    GlideExecutor.</span><span style="color:#B392F0">newAnimationExecutor</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">                    isActiveResourceRetentionAllowed);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        RequestManagerRetriever requestManagerRetriever </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#F97583">                new</span><span style="color:#B392F0"> RequestManagerRetriever</span><span style="color:#E1E4E8">(requestManagerFactory);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Glide</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                context,</span></span>
+<span class="line"><span style="color:#E1E4E8">                engine,</span></span>
+<span class="line"><span style="color:#E1E4E8">                memoryCache,</span></span>
+<span class="line"><span style="color:#E1E4E8">                bitmapPool,</span></span>
+<span class="line"><span style="color:#E1E4E8">                arrayPool,</span></span>
+<span class="line"><span style="color:#E1E4E8">                requestManagerRetriever,</span></span>
+<span class="line"><span style="color:#E1E4E8">                connectivityMonitorFactory,</span></span>
+<span class="line"><span style="color:#E1E4E8">                logLevel,</span></span>
+<span class="line"><span style="color:#E1E4E8">                defaultRequestOptions.</span><span style="color:#B392F0">lock</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">                defaultTransitionOptions);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>从这里我们可以收集到一下有效信息</p>
+<ul>
+<li>缓存与池
+<ul>
+<li>MemorySizeCalculator</li>
+<li>LruBitmapPool</li>
+<li>BitmapPoolAdapter</li>
+<li>LruArrayPool</li>
+<li>LruResourceCache</li>
+<li>InternalCacheDiskCacheFactory</li>
+</ul>
+</li>
+<li>资源获取
+<ul>
+<li>RequestManagerRetriever</li>
+<li>DefaultConnectivityMonitorFactory</li>
+</ul>
+</li>
+<li>核心流程管理
+<ul>
+<li>Engine</li>
+</ul>
+</li>
+<li>线程池
+<ul>
+<li>GlideExecutor</li>
+</ul>
+</li>
+</ul>
+<p>再看到构造函数：<em>代码挺长，略去了部分内容</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Glide</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    Glide</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Context </span><span style="color:#FFAB70">context</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Engine </span><span style="color:#FFAB70">engine</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> MemoryCache </span><span style="color:#FFAB70">memoryCache</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> BitmapPool </span><span style="color:#FFAB70">bitmapPool</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> ArrayPool </span><span style="color:#FFAB70">arrayPool</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> RequestManagerRetriever </span><span style="color:#FFAB70">requestManagerRetriever</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> ConnectivityMonitorFactory </span><span style="color:#FFAB70">connectivityMonitorFactory</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">            int</span><span style="color:#FFAB70"> logLevel</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> RequestOptions </span><span style="color:#FFAB70">defaultRequestOptions</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Map&#x3C;Class&#x3C;</span><span style="color:#F97583">?</span><span style="color:#E1E4E8">>, TransitionOptions&#x3C;</span><span style="color:#F97583">?</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">?</span><span style="color:#E1E4E8">>> </span><span style="color:#FFAB70">defaultTransitionOptions</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.engine </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> engine;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.bitmapPool </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> bitmapPool;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.arrayPool </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> arrayPool;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.memoryCache </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> memoryCache;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.requestManagerRetriever </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> requestManagerRetriever;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.connectivityMonitorFactory </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> connectivityMonitorFactory;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        DecodeFormat decodeFormat </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> defaultRequestOptions.</span><span style="color:#B392F0">getOptions</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(Downsampler.DECODE_FORMAT);</span></span>
+<span class="line"><span style="color:#E1E4E8">        bitmapPreFiller </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> BitmapPreFiller</span><span style="color:#E1E4E8">(memoryCache, bitmapPool, decodeFormat);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#E1E4E8"> Resources resources </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> context.</span><span style="color:#B392F0">getResources</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        registry </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Registry</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        registry.</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#B392F0"> DefaultImageHeaderParser</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        Downsampler downsampler </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Downsampler</span><span style="color:#E1E4E8">(registry.</span><span style="color:#B392F0">getImageHeaderParsers</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">                resources.</span><span style="color:#B392F0">getDisplayMetrics</span><span style="color:#E1E4E8">(), bitmapPool, arrayPool);</span></span>
+<span class="line"><span style="color:#E1E4E8">        ByteBufferGifDecoder byteBufferGifDecoder </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#F97583">                new</span><span style="color:#B392F0"> ByteBufferGifDecoder</span><span style="color:#E1E4E8">(context, registry.</span><span style="color:#B392F0">getImageHeaderParsers</span><span style="color:#E1E4E8">(), bitmapPool, arrayPool);</span></span>
+<span class="line"><span style="color:#E1E4E8">        ResourceDecoder&#x3C;</span><span style="color:#F97583">ParcelFileDescriptor</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Bitmap</span><span style="color:#E1E4E8">> parcelFileDescriptorVideoDecoder </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">                VideoDecoder.</span><span style="color:#B392F0">parcel</span><span style="color:#E1E4E8">(bitmapPool);</span></span>
+<span class="line"><span style="color:#E1E4E8">        ByteBufferBitmapDecoder byteBufferBitmapDecoder </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ByteBufferBitmapDecoder</span><span style="color:#E1E4E8">(downsampler);</span></span>
+<span class="line"><span style="color:#E1E4E8">        StreamBitmapDecoder streamBitmapDecoder </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> StreamBitmapDecoder</span><span style="color:#E1E4E8">(downsampler, arrayPool);</span></span>
+<span class="line"><span style="color:#E1E4E8">        ResourceDrawableDecoder resourceDrawableDecoder </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#F97583">                new</span><span style="color:#B392F0"> ResourceDrawableDecoder</span><span style="color:#E1E4E8">(context);</span></span>
+<span class="line"><span style="color:#E1E4E8">        ResourceLoader.StreamFactory resourceLoaderStreamFactory </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#F97583">                new</span><span style="color:#E1E4E8"> ResourceLoader.</span><span style="color:#B392F0">StreamFactory</span><span style="color:#E1E4E8">(resources);</span></span>
+<span class="line"><span style="color:#E1E4E8">        ResourceLoader.UriFactory resourceLoaderUriFactory </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#F97583">                new</span><span style="color:#E1E4E8"> ResourceLoader.</span><span style="color:#B392F0">UriFactory</span><span style="color:#E1E4E8">(resources);</span></span>
+<span class="line"><span style="color:#E1E4E8">        ResourceLoader.FileDescriptorFactory resourceLoaderFileDescriptorFactory </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#F97583">                new</span><span style="color:#E1E4E8"> ResourceLoader.</span><span style="color:#B392F0">FileDescriptorFactory</span><span style="color:#E1E4E8">(resources);</span></span>
+<span class="line"><span style="color:#E1E4E8">        ResourceLoader.AssetFileDescriptorFactory resourceLoaderAssetFileDescriptorFactory </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#F97583">                new</span><span style="color:#E1E4E8"> ResourceLoader.</span><span style="color:#B392F0">AssetFileDescriptorFactory</span><span style="color:#E1E4E8">(resources);</span></span>
+<span class="line"><span style="color:#E1E4E8">        BitmapEncoder bitmapEncoder </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> BitmapEncoder</span><span style="color:#E1E4E8">(arrayPool);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        BitmapBytesTranscoder bitmapBytesTranscoder </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> BitmapBytesTranscoder</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        GifDrawableBytesTranscoder gifDrawableBytesTranscoder </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> GifDrawableBytesTranscoder</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        ContentResolver contentResolver </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> context.</span><span style="color:#B392F0">getContentResolver</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        registry</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(ByteBuffer.class, </span><span style="color:#F97583">new</span><span style="color:#B392F0"> ByteBufferEncoder</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#6A737D">                /*略去一段内容，太长了*/</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(GifDrawable.class, </span><span style="color:#F97583">byte</span><span style="color:#E1E4E8">[].class, gifDrawableBytesTranscoder);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        ImageViewTargetFactory imageViewTargetFactory </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ImageViewTargetFactory</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        glideContext </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#F97583">                new</span><span style="color:#B392F0"> GlideContext</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                        context,</span></span>
+<span class="line"><span style="color:#E1E4E8">                        arrayPool,</span></span>
+<span class="line"><span style="color:#E1E4E8">                        registry,</span></span>
+<span class="line"><span style="color:#E1E4E8">                        imageViewTargetFactory,</span></span>
+<span class="line"><span style="color:#E1E4E8">                        defaultRequestOptions,</span></span>
+<span class="line"><span style="color:#E1E4E8">                        defaultTransitionOptions,</span></span>
+<span class="line"><span style="color:#E1E4E8">                        engine,</span></span>
+<span class="line"><span style="color:#E1E4E8">                        logLevel);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>这一段可以分为即可部分：</p>
+<ul>
+<li>builder 的 field 对应取值赋值</li>
+<li>构建非开放的 <code>BitmapPreFiller</code> 实例</li>
+<li>构建 <code>Registry</code> 实例 <code>registry</code></li>
+<li>构建 <code>DefaultImageHeaderParser</code> 、 <code>ResourceLoader</code> 、<code>Decoder</code> 、 <code>ResourceTranscoder</code> 并将之注册到 <code>registry</code></li>
+<li>构建 <code>GlideContext</code> 实例 <code>glideContext</code></li>
+</ul>
+<p>按照经验推断，Registry 是一个策略注册表，服务于 <code>策略模式</code>。</p>
+<p><em>不难理解：Glide的工作环境非常复杂，例如获取资源，其资源存在位置可能在网络中的某个位置、 可能在应用的Assets中，也可能在其他位置，对于某一个目标，根据场景不同，存在不同的实现策略</em></p>
+<p>继续按照经验推断，注册会分为不同的策略组，对应不同的目标,这一点我们稍后再看。</p>
+<p>再按照我们常见的使用习惯，追踪一下初始化过程：<em>泛读即可</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Glide</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#E1E4E8"> Glide </span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Context </span><span style="color:#FFAB70">context</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (glide </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            synchronized</span><span style="color:#E1E4E8"> (Glide.class) {</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (glide </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">                    checkAndInitializeGlide</span><span style="color:#E1E4E8">(context);</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> glide;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> checkAndInitializeGlide</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Context </span><span style="color:#FFAB70">context</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        //...</span></span>
+<span class="line"><span style="color:#B392F0">        initializeGlide</span><span style="color:#E1E4E8">(context);</span></span>
+<span class="line"><span style="color:#6A737D">        //...</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //重载略去</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#E1E4E8"> RequestManager </span><span style="color:#B392F0">with</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Activity </span><span style="color:#FFAB70">activity</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> getRetriever</span><span style="color:#E1E4E8">(activity).</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(activity);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">NonNull</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#E1E4E8"> RequestManagerRetriever </span><span style="color:#B392F0">getRetriever</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">Nullable</span><span style="color:#E1E4E8"> Context </span><span style="color:#FFAB70">context</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        // Context could be null for other reasons (ie the user passes in null), but in practice it will</span></span>
+<span class="line"><span style="color:#6A737D">        // only occur due to errors with the Fragment lifecycle.</span></span>
+<span class="line"><span style="color:#E1E4E8">        Preconditions.</span><span style="color:#B392F0">checkNotNull</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                context,</span></span>
+<span class="line"><span style="color:#9ECBFF">                "You cannot start a load on a not yet attached View or a Fragment where getActivity() "</span></span>
+<span class="line"><span style="color:#F97583">                        +</span><span style="color:#9ECBFF"> "returns null (which usually occurs when getActivity() is called before the Fragment "</span></span>
+<span class="line"><span style="color:#F97583">                        +</span><span style="color:#9ECBFF"> "is attached or after the Fragment is destroyed)."</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> Glide.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(context).</span><span style="color:#B392F0">getRequestManagerRetriever</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>按照使用习惯，一般从 <code>Glide.with(...)</code> 开始得到 <code>RequestManager</code>，当然，也可以以 <code>Glide.get(context).getRequestManagerRetriever()</code>
+方式获取。如果Glide没有初始化，则会调用 <code>initializeGlide</code> 进行初始化。</p>
+<p>跟进一下代码，<em>泛读即可</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Glide</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> initializeGlide</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Context </span><span style="color:#FFAB70">context</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">        initializeGlide</span><span style="color:#E1E4E8">(context, </span><span style="color:#F97583">new</span><span style="color:#B392F0"> GlideBuilder</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">SuppressWarnings</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"deprecation"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> initializeGlide</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Context </span><span style="color:#FFAB70">context</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> GlideBuilder </span><span style="color:#FFAB70">builder</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Context applicationContext </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> context.</span><span style="color:#B392F0">getApplicationContext</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        GeneratedAppGlideModule annotationGeneratedModule </span><span style="color:#F97583">=</span><span style="color:#B392F0"> getAnnotationGeneratedGlideModules</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        List&#x3C;</span><span style="color:#F97583">com</span><span style="color:#E1E4E8">.</span><span style="color:#F97583">bumptech</span><span style="color:#E1E4E8">.</span><span style="color:#F97583">glide</span><span style="color:#E1E4E8">.</span><span style="color:#F97583">module</span><span style="color:#E1E4E8">.</span><span style="color:#F97583">GlideModule</span><span style="color:#E1E4E8">> manifestModules </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Collections.</span><span style="color:#B392F0">emptyList</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (annotationGeneratedModule </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> annotationGeneratedModule.</span><span style="color:#B392F0">isManifestParsingEnabled</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            manifestModules </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ManifestParser</span><span style="color:#E1E4E8">(applicationContext).</span><span style="color:#B392F0">parse</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (annotationGeneratedModule </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#F97583">                &#x26;&#x26;</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">annotationGeneratedModule.</span><span style="color:#B392F0">getExcludedModuleClasses</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">isEmpty</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            Set&#x3C;Class&#x3C;</span><span style="color:#F97583">?</span><span style="color:#E1E4E8">>> excludedModuleClasses </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">                    annotationGeneratedModule.</span><span style="color:#B392F0">getExcludedModuleClasses</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            Iterator&#x3C;</span><span style="color:#F97583">com</span><span style="color:#E1E4E8">.</span><span style="color:#F97583">bumptech</span><span style="color:#E1E4E8">.</span><span style="color:#F97583">glide</span><span style="color:#E1E4E8">.</span><span style="color:#F97583">module</span><span style="color:#E1E4E8">.</span><span style="color:#F97583">GlideModule</span><span style="color:#E1E4E8">> iterator </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> manifestModules.</span><span style="color:#B392F0">iterator</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            while</span><span style="color:#E1E4E8"> (iterator.</span><span style="color:#B392F0">hasNext</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                com.bumptech.glide.module.GlideModule current </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> iterator.</span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">excludedModuleClasses.</span><span style="color:#B392F0">contains</span><span style="color:#E1E4E8">(current.</span><span style="color:#B392F0">getClass</span><span style="color:#E1E4E8">())) {</span></span>
+<span class="line"><span style="color:#F97583">                    continue</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (Log.</span><span style="color:#B392F0">isLoggable</span><span style="color:#E1E4E8">(TAG, Log.DEBUG)) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(TAG, </span><span style="color:#9ECBFF">"AppGlideModule excludes manifest GlideModule: "</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> current);</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">                iterator.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (Log.</span><span style="color:#B392F0">isLoggable</span><span style="color:#E1E4E8">(TAG, Log.DEBUG)) {</span></span>
+<span class="line"><span style="color:#F97583">            for</span><span style="color:#E1E4E8"> (com.bumptech.glide.module.GlideModule glideModule </span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> manifestModules) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(TAG, </span><span style="color:#9ECBFF">"Discovered GlideModule from manifest: "</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> glideModule.</span><span style="color:#B392F0">getClass</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        RequestManagerRetriever.RequestManagerFactory factory </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">                annotationGeneratedModule </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#F97583">                        ?</span><span style="color:#E1E4E8"> annotationGeneratedModule.</span><span style="color:#B392F0">getRequestManagerFactory</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">:</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        builder.</span><span style="color:#B392F0">setRequestManagerFactory</span><span style="color:#E1E4E8">(factory);</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (com.bumptech.glide.module.GlideModule module </span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> manifestModules) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            module.</span><span style="color:#B392F0">applyOptions</span><span style="color:#E1E4E8">(applicationContext, builder);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (annotationGeneratedModule </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            annotationGeneratedModule.</span><span style="color:#B392F0">applyOptions</span><span style="color:#E1E4E8">(applicationContext, builder);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        Glide glide </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">(applicationContext);</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (com.bumptech.glide.module.GlideModule module </span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> manifestModules) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            module.</span><span style="color:#B392F0">registerComponents</span><span style="color:#E1E4E8">(applicationContext, glide, glide.registry);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (annotationGeneratedModule </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            annotationGeneratedModule.</span><span style="color:#B392F0">registerComponents</span><span style="color:#E1E4E8">(applicationContext, glide, glide.registry);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        applicationContext.</span><span style="color:#B392F0">registerComponentCallbacks</span><span style="color:#E1E4E8">(glide);</span></span>
+<span class="line"><span style="color:#E1E4E8">        Glide.glide </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> glide;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>泛读之后，我们发现主要有 <code>三步</code>：</p>
+<ul>
+<li>构建GlideBuilder</li>
+<li>通过反射，加载 <code>可能存在</code> 的自定义模块，设置到Builder中</li>
+<li>构建Glide</li>
+</ul>
+<blockquote>
+<p>思危：如果直接使用GlideBuilder进行构建，则无法直接运用自定义模块的内容，需要自行注入。</p>
+</blockquote>
+<h2 id="模块职责划分于register挖细节">模块职责划分，于Register挖细节</h2>
+<p>上一节中，我们略去了Glide实例化过程的一些细节，其实现内容为：向Register注册了各种模块，可以泛读一下源码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8"> registry</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(ByteBuffer.class,</span><span style="color:#F97583">new</span><span style="color:#B392F0"> ByteBufferEncoder</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(InputStream.class,</span><span style="color:#F97583">new</span><span style="color:#B392F0"> StreamEncoder</span><span style="color:#E1E4E8">(arrayPool))</span></span>
+<span class="line"><span style="color:#6A737D">        /* Bitmaps */</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Registry.BUCKET_BITMAP,ByteBuffer.class,Bitmap.class,byteBufferBitmapDecoder)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Registry.BUCKET_BITMAP,InputStream.class,Bitmap.class,streamBitmapDecoder)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Registry.BUCKET_BITMAP,</span></span>
+<span class="line"><span style="color:#E1E4E8">        ParcelFileDescriptor.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        Bitmap.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        parcelFileDescriptorVideoDecoder)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Registry.BUCKET_BITMAP,</span></span>
+<span class="line"><span style="color:#E1E4E8">        AssetFileDescriptor.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        Bitmap.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        VideoDecoder.</span><span style="color:#B392F0">asset</span><span style="color:#E1E4E8">(bitmapPool))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Bitmap.class,Bitmap.class,UnitModelLoader.Factory.</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">Bitmap</span><span style="color:#F97583">></span><span style="color:#B392F0">getInstance</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Registry.BUCKET_BITMAP,Bitmap.class,Bitmap.class,</span><span style="color:#F97583">new</span><span style="color:#B392F0"> UnitBitmapDecoder</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Bitmap.class,bitmapEncoder)</span></span>
+<span class="line"><span style="color:#6A737D">        /* BitmapDrawables */</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Registry.BUCKET_BITMAP_DRAWABLE,</span></span>
+<span class="line"><span style="color:#E1E4E8">        ByteBuffer.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        BitmapDrawable.class,</span></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#E1E4E8"> BitmapDrawableDecoder&#x3C;>(resources,byteBufferBitmapDecoder))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Registry.BUCKET_BITMAP_DRAWABLE,</span></span>
+<span class="line"><span style="color:#E1E4E8">        InputStream.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        BitmapDrawable.class,</span></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#E1E4E8"> BitmapDrawableDecoder&#x3C;>(resources,streamBitmapDecoder))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Registry.BUCKET_BITMAP_DRAWABLE,</span></span>
+<span class="line"><span style="color:#E1E4E8">        ParcelFileDescriptor.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        BitmapDrawable.class,</span></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#E1E4E8"> BitmapDrawableDecoder&#x3C;>(resources,parcelFileDescriptorVideoDecoder))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(BitmapDrawable.class,</span><span style="color:#F97583">new</span><span style="color:#B392F0"> BitmapDrawableEncoder</span><span style="color:#E1E4E8">(bitmapPool,bitmapEncoder))</span></span>
+<span class="line"><span style="color:#6A737D">        /* GIFs */</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Registry.BUCKET_GIF,</span></span>
+<span class="line"><span style="color:#E1E4E8">        InputStream.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        GifDrawable.class,</span></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#B392F0"> StreamGifDecoder</span><span style="color:#E1E4E8">(registry.</span><span style="color:#B392F0">getImageHeaderParsers</span><span style="color:#E1E4E8">(),byteBufferGifDecoder,arrayPool))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Registry.BUCKET_GIF,ByteBuffer.class,GifDrawable.class,byteBufferGifDecoder)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(GifDrawable.class,</span><span style="color:#F97583">new</span><span style="color:#B392F0"> GifDrawableEncoder</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#6A737D">        /* GIF Frames */</span></span>
+<span class="line"><span style="color:#6A737D">        // Compilation with Gradle requires the type to be specified for UnitModelLoader here.</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        GifDecoder.class,GifDecoder.class,UnitModelLoader.Factory.</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">GifDecoder</span><span style="color:#F97583">></span><span style="color:#B392F0">getInstance</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Registry.BUCKET_BITMAP,</span></span>
+<span class="line"><span style="color:#E1E4E8">        GifDecoder.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        Bitmap.class,</span></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#B392F0"> GifFrameResourceDecoder</span><span style="color:#E1E4E8">(bitmapPool))</span></span>
+<span class="line"><span style="color:#6A737D">        /* Drawables */</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Uri.class,Drawable.class,resourceDrawableDecoder)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Uri.class,Bitmap.class,</span><span style="color:#F97583">new</span><span style="color:#B392F0"> ResourceBitmapDecoder</span><span style="color:#E1E4E8">(resourceDrawableDecoder,bitmapPool))</span></span>
+<span class="line"><span style="color:#6A737D">        /* Files */</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> ByteBufferRewinder.</span><span style="color:#B392F0">Factory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(File.class,ByteBuffer.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> ByteBufferFileLoader.</span><span style="color:#B392F0">Factory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(File.class,InputStream.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> FileLoader.</span><span style="color:#B392F0">StreamFactory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(File.class,File.class,</span><span style="color:#F97583">new</span><span style="color:#B392F0"> FileDecoder</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(File.class,ParcelFileDescriptor.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> FileLoader.</span><span style="color:#B392F0">FileDescriptorFactory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#6A737D">        // Compilation with Gradle requires the type to be specified for UnitModelLoader here.</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(File.class,File.class,UnitModelLoader.Factory.</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">File</span><span style="color:#F97583">></span><span style="color:#B392F0">getInstance</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#6A737D">        /* Models */</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> InputStreamRewinder.</span><span style="color:#B392F0">Factory</span><span style="color:#E1E4E8">(arrayPool))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(int.class,InputStream.class,resourceLoaderStreamFactory)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        int.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        ParcelFileDescriptor.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        resourceLoaderFileDescriptorFactory)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Integer.class,InputStream.class,resourceLoaderStreamFactory)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Integer.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        ParcelFileDescriptor.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        resourceLoaderFileDescriptorFactory)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Integer.class,Uri.class,resourceLoaderUriFactory)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        int.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        AssetFileDescriptor.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        resourceLoaderAssetFileDescriptorFactory)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Integer.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        AssetFileDescriptor.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        resourceLoaderAssetFileDescriptorFactory)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(int.class,Uri.class,resourceLoaderUriFactory)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(String.class,InputStream.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> DataUrlLoader.</span><span style="color:#B392F0">StreamFactory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(String.class,InputStream.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> StringLoader.</span><span style="color:#B392F0">StreamFactory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(String.class,ParcelFileDescriptor.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> StringLoader.</span><span style="color:#B392F0">FileDescriptorFactory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        String.class,AssetFileDescriptor.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> StringLoader.</span><span style="color:#B392F0">AssetFileDescriptorFactory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Uri.class,InputStream.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> HttpUriLoader.</span><span style="color:#B392F0">Factory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Uri.class,InputStream.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> AssetUriLoader.</span><span style="color:#B392F0">StreamFactory</span><span style="color:#E1E4E8">(context.</span><span style="color:#B392F0">getAssets</span><span style="color:#E1E4E8">()))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Uri.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        ParcelFileDescriptor.class,</span></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#E1E4E8"> AssetUriLoader.</span><span style="color:#B392F0">FileDescriptorFactory</span><span style="color:#E1E4E8">(context.</span><span style="color:#B392F0">getAssets</span><span style="color:#E1E4E8">()))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Uri.class,InputStream.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> MediaStoreImageThumbLoader.</span><span style="color:#B392F0">Factory</span><span style="color:#E1E4E8">(context))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Uri.class,InputStream.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> MediaStoreVideoThumbLoader.</span><span style="color:#B392F0">Factory</span><span style="color:#E1E4E8">(context))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Uri.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        InputStream.class,</span></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#E1E4E8"> UriLoader.</span><span style="color:#B392F0">StreamFactory</span><span style="color:#E1E4E8">(contentResolver))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Uri.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        ParcelFileDescriptor.class,</span></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#E1E4E8"> UriLoader.</span><span style="color:#B392F0">FileDescriptorFactory</span><span style="color:#E1E4E8">(contentResolver))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Uri.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        AssetFileDescriptor.class,</span></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#E1E4E8"> UriLoader.</span><span style="color:#B392F0">AssetFileDescriptorFactory</span><span style="color:#E1E4E8">(contentResolver))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Uri.class,InputStream.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> UrlUriLoader.</span><span style="color:#B392F0">StreamFactory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(URL.class,InputStream.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> UrlLoader.</span><span style="color:#B392F0">StreamFactory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Uri.class,File.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> MediaStoreFileLoader.</span><span style="color:#B392F0">Factory</span><span style="color:#E1E4E8">(context))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(GlideUrl.class,InputStream.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> HttpGlideUrlLoader.</span><span style="color:#B392F0">Factory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">byte</span><span style="color:#E1E4E8">[].class,ByteBuffer.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> ByteArrayLoader.</span><span style="color:#B392F0">ByteBufferFactory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">byte</span><span style="color:#E1E4E8">[].class,InputStream.class,</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> ByteArrayLoader.</span><span style="color:#B392F0">StreamFactory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Uri.class,Uri.class,UnitModelLoader.Factory.</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">Uri</span><span style="color:#F97583">></span><span style="color:#B392F0">getInstance</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Drawable.class,Drawable.class,UnitModelLoader.Factory.</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">Drawable</span><span style="color:#F97583">></span><span style="color:#B392F0">getInstance</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(Drawable.class,Drawable.class,</span><span style="color:#F97583">new</span><span style="color:#B392F0"> UnitDrawableDecoder</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#6A737D">        /* Transcoders */</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Bitmap.class,</span></span>
+<span class="line"><span style="color:#E1E4E8">        BitmapDrawable.class,</span></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#B392F0"> BitmapDrawableTranscoder</span><span style="color:#E1E4E8">(resources))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(Bitmap.class,</span><span style="color:#F97583">byte</span><span style="color:#E1E4E8">[].class,bitmapBytesTranscoder)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        Drawable.class,</span></span>
+<span class="line"><span style="color:#F97583">        byte</span><span style="color:#E1E4E8">[].class,</span></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#B392F0"> DrawableBytesTranscoder</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        bitmapPool,bitmapBytesTranscoder,gifDrawableBytesTranscoder))</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(GifDrawable.class,</span><span style="color:#F97583">byte</span><span style="color:#E1E4E8">[].class,gifDrawableBytesTranscoder);</span></span></code></pre>
+<p><code>直接讲解</code> 这段代码是 <code>无意义</code> 的，我们从 <code>Register</code> 类入手，分析注册的内容。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Registry</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> String BUCKET_GIF </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Gif"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> String BUCKET_BITMAP </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Bitmap"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> String BUCKET_BITMAP_DRAWABLE </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "BitmapDrawable"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> String BUCKET_PREPEND_ALL </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "legacy_prepend_all"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> String BUCKET_APPEND_ALL </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "legacy_append"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> ModelLoaderRegistry modelLoaderRegistry;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> EncoderRegistry encoderRegistry;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> ResourceDecoderRegistry decoderRegistry;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> ResourceEncoderRegistry resourceEncoderRegistry;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> DataRewinderRegistry dataRewinderRegistry;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> TranscoderRegistry transcoderRegistry;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> ImageHeaderParserRegistry imageHeaderParserRegistry;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> ModelToResourceClassCache modelToResourceClassCache </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#F97583">            new</span><span style="color:#B392F0"> ModelToResourceClassCache</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> LoadPathCache loadPathCache </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> LoadPathCache</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> Pool&#x3C;List&#x3C;</span><span style="color:#F97583">Throwable</span><span style="color:#E1E4E8">>> throwableListPool </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> FactoryPools.</span><span style="color:#B392F0">threadSafeList</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> Registry</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.modelLoaderRegistry </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ModelLoaderRegistry</span><span style="color:#E1E4E8">(throwableListPool);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.encoderRegistry </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> EncoderRegistry</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.decoderRegistry </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ResourceDecoderRegistry</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.resourceEncoderRegistry </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ResourceEncoderRegistry</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.dataRewinderRegistry </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> DataRewinderRegistry</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.transcoderRegistry </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> TranscoderRegistry</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.imageHeaderParserRegistry </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ImageHeaderParserRegistry</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#B392F0">        setResourceDecoderBucketPriorityList</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                Arrays.</span><span style="color:#B392F0">asList</span><span style="color:#E1E4E8">(BUCKET_GIF, BUCKET_BITMAP, BUCKET_BITMAP_DRAWABLE));</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    //API略去</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="资源model加载器">资源Model加载器</h3>
+<p><code>modelLoaderRegistry</code> 用于注册 <code>资源Model加载方式</code> 信息。例如，资源的定义Model为 <code>Uri</code> 类，注册一个 <code>ModelLoaderFactory</code> ，生产对应的
+<code>ModelLoader</code>，将 <code>Uri</code> 媒体实体，加载为 <code>InputStream</code> 或者其他形式的 <code>内容</code></p>
+<p>相关类：</p>
+<ul>
+<li><code>ModelLoaderFactory</code></li>
+<li><code>ModelLoader</code> 等</li>
+</ul>
+<h3 id="编码器">编码器</h3>
+<p><code>encoderRegistry</code> 用于注册 <code>内容encode方式</code> 信息。例如，媒体实体已被加载为 <code>InputStream</code>，注册一个对应处理的 <code>Encoder&#x3C;InputStream></code>，
+用于处理内容的encode，如写入磁盘过程</p>
+<p>相关类：<code>Encoder</code> 接口及其实现类</p>
+<p>相应的，<code>resourceEncoderRegistry</code> 用于注册 <code>Resource 的encode方式</code>，这些encoder面向 <code>Resource</code>，相比于 <code>InputStream</code> 等低级形式的编码内容封装，
+<code>Resource</code> 实现类进行了更高级别的编码内容封装。</p>
+<p>相关类：</p>
+<ul>
+<li><code>ResourceEncoder</code> 接口及其实现类</li>
+<li><code>Resource</code> 接口及其实现类</li>
+<li><code>EncodeStrategy</code></li>
+</ul>
+<p>不难理解：媒体资源的数据封装存在不同 <code>层级</code>：</p>
+<ul>
+<li>读取数据的InputSteam</li>
+<li>Bitmap，BitmapDrawable</li>
+</ul>
+<p>所以 encode过程 对不同层级的封装类，有不同的处理，当然，encoder可以通过 <code>wrapper</code>，<code>adapter</code>,<code>transfer</code> 等形式，利用其它encoder扩展功能</p>
+<h3 id="解码器">解码器</h3>
+<p><code>decoderRegistry</code> 用于注册 <code>媒体数据解码为Resource方式</code> 的信息。</p>
+<p>前面我们提到 <code>modelLoaderRegistry</code> 注册的信息中，可以得到 <code>ModelLoader</code>， 它们负责将 <code>资源Model</code> 加载为 <code>资源内容</code>，这种 <code>资源内容</code>以 <code>InputStream</code> 等低级形式存在即可。</p>
+<p>不难理解，这可以有效的解决 <code>类数量爆炸</code> 问题。</p>
+<blockquote>
+<p>脑暴：假定 Model 的类数量为m个，解码后输出的形式有n个</p>
+<ul>
+<li>不采用这种方式处理，一共需要 m*n 个 decoder 类</li>
+<li>采用这种方式处理，一共需要 m+n 个 decoder 类</li>
+</ul>
+<p>当 <code>层级</code> 增加时，差距会更加明显</p>
+<p>按照经验推断，Glide在处理decode过程时，采用了 <code>Wrapper/delegate</code> 模式 或者 <code>bridge</code> 模式。</p>
+</blockquote>
+<blockquote>
+<p>思变：项目中是否可以使用类似方式，处理不同层级之间 <code>数据Bean</code> 的 <code>转化</code> 或者 <code>包装</code>？</p>
+</blockquote>
+<p>相关类：</p>
+<ul>
+<li><code>ResourceDecoder</code> 及其实现类</li>
+<li><code>Resource</code> 及其实现类</li>
+</ul>
+<h3 id="转换器">转换器</h3>
+<p><em>虽然直译为转码器，但是容易概念混淆，按照其功能称为转换器</em></p>
+<p><code>transcoderRegistry</code> 用于注册 <code>转化器，及其负责的原始类型和转换类型</code> 信息，转换器将资源从一种形式转换为另一种形式。例如: <code>Bitmap -> byte[]</code></p>
+<p>相关类：</p>
+<ul>
+<li><code>ResourceTranscoder</code> 及其实现类</li>
+<li><code>Resource</code> 及其实现类</li>
+</ul>
+<h3 id="头信息解析器">头信息解析器</h3>
+<p><code>imageHeaderParserRegistry</code> 用于注册 <code>头信息解析器</code> 信息</p>
+<p><em>注，部分操作系统为了更简便的决定文件的处理方式，利用了文件扩展名。但文件实质内容的编码方式信息，存储在文件头信息中，又称： <code>File Sigs</code>、<code>文件魔数</code> 。</em></p>
+<blockquote>
+<p>例如 FF D8 代表 Generic JPEG image file，即 JPE, JPEG, JPG</p>
+</blockquote>
+<p><a href="https://www.garykessler.net/library/file_sigs.html">了解更多关于File Sigs内容</a></p>
+<p>相关类：</p>
+<ul>
+<li><code>ImageHeaderParser</code> 及其实现类</li>
+<li><code>ImageType</code></li>
+</ul>
+<h2 id="模块职责总结">模块职责总结</h2>
+<p>通过前文的分析，并查阅Glide源码，我们可以对模块职责进行一次初步总结。</p>
+<p>在之后的文章中，我们将对具体模块进行 <code>更细致</code> 的挖掘，此处总结的类信息，就是 <code>突破口</code> 。</p>
+<p><em>考虑到目前收集的信息 <code>并不全面</code> ，我不打算绘制一个图，下面的信息也 <code>并非</code> 十分重要，所以将其作为一个 <code>临时的备忘录</code> 即可。
+在后续内容中，我会对各个模块单独总结成图</em></p>
+<p>下一篇，我们将对 <code>资源Model加载、获取流程</code> 进行 <code>深度挖掘</code>。</p>
+<hr>
+<h3 id="缓存与池">缓存与池</h3>
+<ul>
+<li>MemorySizeCalculator</li>
+<li>LruBitmapPool</li>
+<li>BitmapPoolAdapter</li>
+<li>LruArrayPool</li>
+<li>LruResourceCache</li>
+<li>InternalCacheDiskCacheFactory</li>
+</ul>
+<h3 id="资源获取">资源获取</h3>
+<ul>
+<li>RequestManagerRetriever</li>
+<li>RequestManager</li>
+<li>RequestBuilder</li>
+<li>Request</li>
+<li>DefaultConnectivityMonitorFactory</li>
+</ul>
+<h3 id="核心流程">核心流程</h3>
+<ul>
+<li>Engine</li>
+</ul>
+<p>其他信息尚不能确定。主要流程的相关信息如下：</p>
+<h4 id="资源model加载器-1">资源Model加载器</h4>
+<ul>
+<li><code>ModelLoaderFactory</code></li>
+<li><code>ModelLoader</code> 等</li>
+</ul>
+<h4 id="编码器-1">编码器</h4>
+<ul>
+<li><code>Encoder</code> 接口及其实现类</li>
+<li><code>ResourceEncoder</code> 接口及其实现类</li>
+<li><code>Resource</code> 接口及其实现类</li>
+<li><code>EncodeStrategy</code></li>
+</ul>
+<h4 id="解码器-1">解码器</h4>
+<ul>
+<li><code>ResourceDecoder</code> 及其实现类</li>
+<li><code>Resource</code> 及其实现类</li>
+</ul>
+<h4 id="转换器-1">转换器</h4>
+<ul>
+<li><code>ResourceTranscoder</code> 及其实现类</li>
+<li><code>Resource</code> 及其实现类</li>
+</ul>
+<h4 id="头信息解析器-1">头信息解析器</h4>
+<ul>
+<li><code>ImageHeaderParser</code> 及其实现类</li>
+<li><code>ImageType</code></li>
+</ul>
+<h3 id="线程池">线程池</h3>
+<ul>
+<li>GlideExecutor</li>
+</ul>
+<h3 id="glide的创建与配置">Glide的创建与配置</h3>
+<p><code>GlideBuilder</code> 用于创建，<code>com.bumptech.glide.module</code> 包下的内容用于自定义模块，诸如：</p>
+<ul>
+<li><code>AppGlideModule</code></li>
+<li><code>LibraryGlideModule</code></li>
+</ul>
+<p>以及一些已废弃的内容，不再赘述</p>
+<h2 id="思危思退思变">思危、思退、思变</h2>
+<p><em>可能有读者习惯性地拉到尾部，前面提到，结尾处的大篇幅内容都是 <code>备忘录</code> 性质,而且之后的系列文章会在这些内容的基础上展开，可读可不读</em></p>
+<p>但既然拉到了这里，就思考一下吧，阅读优秀的框架，不仅仅可以深入了解框架内容，也可以锻炼设计能力：</p>
+<ul>
+<li>思危：使用GlideBuilder构建Glide实例是否有没有注意到的危险？</li>
+<li>思危：项目中再次对Glide实现单例是否存在危险？</li>
+<li>思变：项目中是否存在可以借鉴Glide的设计思路的地方？</li>
+</ul></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

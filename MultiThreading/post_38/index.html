@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Java多线程系列--掌控面试，一文吃透Synchronized锁 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Java多线程系列--掌控面试，一文吃透Synchronized锁</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="java多线程系列掌控面试一文吃透synchronized锁">Java多线程系列—掌控面试，一文吃透Synchronized锁</h1>
+<h2 id="前言">前言</h2>
+<p>各位亲爱的读者朋友，我正在创作 <code>Java多线程系列</code> 文章，本篇我们将分析重点内容：<code>锁</code></p>
+<p>锁是 <strong>面试中的常客</strong> ，也是多线程编码中 <strong>必不可少</strong> 的内容，无论是为了 <strong>“面试胜利”</strong> ，还是 <strong>“写出高质量的代码”</strong> ，我们都需要掌握它。</p>
+<p><em>作者按：本篇按照自己有限的知识进行整理，如有谬误，还请读者在评论区不吝指出</em></p>
+<blockquote>
+<p>了解系列以及总纲：<a href="https://leobert-lan.github.io/MultiThreading/post_33.html">Java多线程系列</a></p>
+</blockquote>
+<p>本文篇幅较长，内容较为跳跃，可参考导图阅读：</p>
+<p><img  src="/_astro/guide.iEzsUjwZ_ZN6mJ2.webp" alt loading="lazy" decoding="async" width="2624" height="1442"></p>
+<h2 id="前文拾遗--java对象结构">前文拾遗 — JAVA对象结构</h2>
+<p>先前已经发布过一篇系列文章：<a href="https://juejin.cn/post/7068941257074016263">克服焦虑—图解JVM内存模型和JVM线程模型</a></p>
+<p>其中还有一处关键知识没有展开：“Java对象包含哪些内容”，这部分内容和锁的实现有关，本篇将由此继续展开。</p>
+<p>单刀直入，在HotSpot虚拟机中，一个对象实例可以被划分出三块信息：</p>
+<ul>
+<li>对象头 Header</li>
+<li>实例数据 Instance Data，亦有称之对象体</li>
+<li>对齐填充 Padding</li>
+</ul>
+<p>其中对齐填充可能存在，实例数据是供给 <code>应用程序逻辑</code> 使用的，存储了实例的字段信息。接下来重点探讨对象头。</p>
+<h3 id="java对象头">Java对象头</h3>
+<p>对象头部分的信息主要面向JVM，包含：</p>
+<ul>
+<li>Mark Word</li>
+<li>kclass, 对象对应的类的元数据指针</li>
+<li>array length ，仅数组对象才拥有</li>
+</ul>
+<p>整体划分如图所示：</p>
+<p><img  src="/_astro/jvm_header.C8TklaUk_1un9py.webp" alt loading="lazy" decoding="async" width="732" height="441"></p>
+<p><em>图片来自网络搜索，水印为Java帮帮</em></p>
+<h4 id="mark-word">Mark Word</h4>
+<p>Mark Word 用于存储对象运行时数据： <code>哈希</code>、<code>GC分代年龄</code>、<code>锁状态标志</code>、<code>线程持有的锁</code>、<code>偏向线程ID</code>、<code>偏向时间戳</code> 等。</p>
+<p>查找 HotSpot中markOop的doc如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#6A737D">// The markOop describes the header of an object.</span></span>
+<span class="line"><span style="color:#6A737D">// Note that the mark is not a real oop but just a word.</span></span>
+<span class="line"><span style="color:#6A737D">// It is placed in the oop hierarchy for historical reasons.</span></span>
+<span class="line"><span style="color:#6A737D">//</span></span>
+<span class="line"><span style="color:#6A737D">// Bit-format of an object header (most significant first, big endian layout below):</span></span>
+<span class="line"><span style="color:#6A737D">//</span></span>
+<span class="line"><span style="color:#6A737D">//  32 bits:</span></span>
+<span class="line"><span style="color:#6A737D">//  --------</span></span>
+<span class="line"><span style="color:#6A737D">//  hash:25 ------------>| age:4    biased_lock:1 lock:2 (normal object)</span></span>
+<span class="line"><span style="color:#6A737D">//  JavaThread*:23 epoch:2 age:4    biased_lock:1 lock:2 (biased object)</span></span>
+<span class="line"><span style="color:#6A737D">//  size:32 ------------------------------------------>| (CMS free block)</span></span>
+<span class="line"><span style="color:#6A737D">//  PromotedObject*:29 ---------->| promo_bits:3 ----->| (CMS promoted object)</span></span>
+<span class="line"><span style="color:#6A737D">//</span></span>
+<span class="line"><span style="color:#6A737D">//  64 bits:</span></span>
+<span class="line"><span style="color:#6A737D">//  --------</span></span>
+<span class="line"><span style="color:#6A737D">//  unused:25 hash:31 -->| unused:1   age:4    biased_lock:1 lock:2 (normal object)</span></span>
+<span class="line"><span style="color:#6A737D">//  JavaThread*:54 epoch:2 unused:1   age:4    biased_lock:1 lock:2 (biased object)</span></span>
+<span class="line"><span style="color:#6A737D">//  PromotedObject*:61 --------------------->| promo_bits:3 ----->| (CMS promoted object)</span></span>
+<span class="line"><span style="color:#6A737D">//  size:64 ----------------------------------------------------->| (CMS free block)</span></span>
+<span class="line"><span style="color:#6A737D">//</span></span>
+<span class="line"><span style="color:#6A737D">//  unused:25 hash:31 -->| cms_free:1 age:4    biased_lock:1 lock:2 (COOPs &#x26;&#x26; normal object)</span></span>
+<span class="line"><span style="color:#6A737D">//  JavaThread*:54 epoch:2 cms_free:1 age:4    biased_lock:1 lock:2 (COOPs &#x26;&#x26; biased object)</span></span>
+<span class="line"><span style="color:#6A737D">//  narrowOop:32 unused:24 cms_free:1 unused:4 promo_bits:3 ----->| (COOPs &#x26;&#x26; CMS promoted object)</span></span>
+<span class="line"><span style="color:#6A737D">//  unused:21 size:35 -->| cms_free:1 unused:7 ------------------>| (COOPs &#x26;&#x26; CMS free block)</span></span></code></pre>
+<p><em>32位和64位的虚拟机（未开启压缩指针）中分别为32bit和64bit，开启压缩后为32bit</em></p>
+<p>梳理64位虚拟机五种状态下的对象头：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>|------------------------------------------------------------------------------------------------------------------|</span></span>
+<span class="line"><span>|                                     Object Header(128bits)                                                       |</span></span>
+<span class="line"><span>|---------------------|--------------------------------------------------------------------------------------------|</span></span>
+<span class="line"><span>|       State         |                                   Mark Word(64bits)               |  Klass Word(64bits)    |</span></span>
+<span class="line"><span>|---------------------|--------------------------------------------------------------------------------------------|</span></span>
+<span class="line"><span>|       Nomal         | unused:25|identity_hashcode:31|unused:1|age:4|biase_lock:1|lock:2 | OOP to metadata object |</span></span>
+<span class="line"><span>|---------------------|--------------------------------------------------------------------------------------------|</span></span>
+<span class="line"><span>|       Biased        | thread:54|      epoch:2       |unused:1|age:4|biase_lock:1|lock:2 | OOP to metadata object |</span></span>
+<span class="line"><span>|---------------------|--------------------------------------------------------------------------------------------|</span></span>
+<span class="line"><span>|  Lightweight Locked |                     ptr_to_lock_record:62                 |lock:2 | OOP to metadata object |</span></span>
+<span class="line"><span>|---------------------|--------------------------------------------------------------------------------------------|</span></span>
+<span class="line"><span>|  Heavyweight Locked |                    ptr_to_heavyweight_monitor:62          |lock:2 | OOP to metadata object |</span></span>
+<span class="line"><span>|---------------------|--------------------------------------------------------------------------------------------|</span></span>
+<span class="line"><span>|     Marked for GC   |                                                           |lock:2 | OOP to metadata object |</span></span>
+<span class="line"><span>|---------------------|--------------------------------------------------------------------------------------------|</span></span></code></pre>
+<p><em>排版不方便的话看下图：</em></p>
+<p><img  src="/_astro/jvm_header_64.G3m0CV73_1sGDbG.webp" alt loading="lazy" decoding="async" width="786" height="276"></p>
+<p>如果运行在 HotSpot openJdk VM 上，可以借助：“org.openjdk.jol:jol-core:0.9” 打印对象头进行对照。</p>
+<p><a href="https://blog.csdn.net/qdh186/article/details/96162413">五种状态下分析对象头的一份参考博客</a></p>
+<p><em>作者按：此处的知识我们留一个印象即可，Android同学可能只能拿来吹牛</em></p>
+<p>归纳后知识概要如图：</p>
+<p><img  src="/_astro/jvm_obj_structure.mUafH0-2_Z1qbNSP.webp" alt loading="lazy" decoding="async" width="1162" height="960"></p>
+<p><em>注：32位</em></p>
+<h2 id="锁的常见概念分类">锁的常见概念、分类</h2>
+<p>我们平时会听到关于锁的各种概念名词，前文的表中，我们也看到了 <code>偏向锁</code> <code>轻量级锁</code> <code>重量级锁</code> 的身影，接下来简单聊一聊分类以及常见概念。</p>
+<h3 id="乐观锁--悲观锁">乐观锁 / 悲观锁</h3>
+<p>乐观锁和悲观锁是一种相对的 <strong>态度</strong> 。在并发的背景下，访问临界区时 <strong>可能会</strong> 发生 “冲突”，不同的态度演变出不同的策略。</p>
+<p><strong>悲观</strong> 地看，可以 <strong>认为冲突一定会发生</strong> ：访问临界区时，自身线程的写入行为一定会影响其他线程，自身线程的读取行为一定会受到其他线程的写入影响！ 所以 <strong>必须要进行锁保护</strong> ，通过 “独占”，“排他” 等特性，保障无冲突。
+即：<strong>悲观地认为，不加锁的并发操作一定会出现冲突，必须加锁</strong></p>
+<p><strong>乐观</strong> 地看，可以 <strong>认为发生冲突是场景限定的事件</strong> ：读不会有冲突，但写入存在冲突可能。所以 <strong>只有在写操作时，进行冲突检测，检测到冲突时操作就会失败，返回错误信息</strong></p>
+<p>在Java中，悲观锁即各种实际的锁实现，而乐观锁即无锁编程，转为使用CAS算法。</p>
+<h3 id="独享锁--共享锁">独享锁 / 共享锁</h3>
+<p>锁可以被访问者独享或者共享，直白地讲：独享锁在某一时间点，只能被一个线程获取，其它线程必须等待锁被持有者释放之后，才可能获取到锁，而共享锁可以被多个线程获取。</p>
+<p>独享锁又称独占锁、排它锁。</p>
+<p>显然，共享锁认为持有它的线程们在并发操作时并不会发生冲突。</p>
+<h3 id="可重入锁--非可重入锁">可重入锁 / 非可重入锁</h3>
+<p>从概念上看：一个线程在持有一个锁的时候，它内部能否再次（多次）申请该锁，如果可以则为可重入锁，否则为不可重入锁。</p>
+<p>显然易见：<code>不可重入</code> 将大大增加 <code>死锁</code> 的机率。</p>
+<p><em>作者按：但在线程的基础上实现类似协程的机制时，非可重入将具有重要意义。</em></p>
+<h3 id="公平锁--非公平锁">公平锁 / 非公平锁</h3>
+<p>锁需要通过竞争获取，公平 / 非公平指的是 是否按照”先来后到”获取锁。</p>
+<p>如果按照申请顺序分配锁，则为公平锁，否则为非公平锁。</p>
+<p>我们常用的Synchronized即非公平锁，Java的可重入锁（ReentrantLock）默认为非公平锁，但可以实例化为公平锁。</p>
+<p>非公平锁的优点在于吞吐量比公平锁大。</p>
+<h3 id="互斥锁读写锁">互斥锁、读写锁</h3>
+<p>独享锁、共享锁的具体实现，读写锁作为读模式时是共享锁。</p>
+<p>Java中的 <code>ReentrantLock</code> 是互斥锁，<code>ReadWriteLock</code> 是读写锁实现。</p>
+<h3 id="分段锁">分段锁</h3>
+<p>分段锁并非是一种锁，而是一种提高效率的设计思路，将临界区进行划分，当某一块区域的写入并不影响其他区域的读取时，就可以采用分段的思路， 对写入区域加锁，读取其他区域则无需竞争锁从而提高效率，例如 <code>ConcurrentHashMap</code>
+就采用了这一设计</p>
+<h3 id="偏向锁--轻量级锁--重量级锁">偏向锁 / 轻量级锁 / 重量级锁</h3>
+<p>专指 <code>synchronized</code> 的三种锁状态，并且关系到后文中的 <code>锁升级</code> 部分。</p>
+<p>在前文中，我们花了很多篇幅梳理 <code>对象头</code> 中的 <code>Mark Word</code>，其中有三种状态：Biased，Lightweight Locked，Heavyweight Locked 于此对应。</p>
+<ul>
+<li>偏向锁状态：同步代码一直被同一线程访问时，该线程会自动获取锁，降低获取锁的代价。</li>
+<li>轻量级锁状态：在偏向锁状态时，一旦另一线程竞争该锁，则升级为轻量级锁，竞争的线程通过 <code>有限的自旋</code> 尝试获取锁，如果锁的持有者在此过程中 <strong>释放了锁</strong> ， 并被该线程成功获取锁，则可以避免阻塞，减少线程切换，*
+挂起和恢复线程是较为昂贵的*。</li>
+<li>重量级锁状态：当线程完成了有限的自旋后依旧未能获得锁，将不得不进行阻塞以免空耗CPU，此时锁升级为重量级锁</li>
+</ul>
+<p>不难理解，按照Java的线程模型，<strong>仅多核CPU情况下，采用轻量级锁并利用自旋才有意义</strong>。如果是单核CPU，并不存在真正的时间意义上的线程并发，自旋时，持有锁的线程是挂起的，并无释放锁的可能</p>
+<p><em>作者按：Java的线程模型可参见拙作：<a href="https://juejin.cn/post/7068941257074016263">克服焦虑—图解JVM内存模型和JVM线程模型</a></em></p>
+<h3 id="自旋锁">自旋锁</h3>
+<p>基于CAS利用自旋去竞争锁实现同步的一种方式，如前文所言，发生竞争而产生自旋时，当前线程不会阻塞，所以不会直接导致系统调用，减少上下文切换的开销，
+但如果一直竞争不到锁，将造成CPU空转，所谓的busy-waiting。对于计算密集型程序而言，可能会带来负面效果。</p>
+<p>我们可以利用Atomic实现一个简单的 <code>可重入自旋锁</code></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ReentrantSpinLock</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> AtomicReference&#x3C;</span><span style="color:#F97583">Thread</span><span style="color:#E1E4E8">> cas </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> AtomicReference&#x3C;</span><span style="color:#F97583">Thread</span><span style="color:#E1E4E8">>();</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> count;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> lock</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Thread current </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (current </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> cas.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            count</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        while</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">cas.</span><span style="color:#B392F0">compareAndSet</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, current)) {</span></span>
+<span class="line"><span style="color:#6A737D">            // Do nothing</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> unlock</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Thread cur </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (cur </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> cas.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (count </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                count</span><span style="color:#F97583">--</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                cas.</span><span style="color:#B392F0">compareAndSet</span><span style="color:#E1E4E8">(cur, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>很显然，这也是一个非公平锁、独享锁</p>
+<h2 id="synchronized锁">Synchronized锁</h2>
+<p><code>synchronized</code> 作为Java关键字，提供同步能力，其核心依赖于Java对象的对象头，当一个类对象被作为synchronized锁对象时，其即为 <code>Monitor</code>，JVM通过
+<strong>进入、退出Monitor</strong> 来实现同步</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Foo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    synchronized</span><span style="color:#F97583"> static</span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    synchronized</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> bar</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> baz</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        synchronized</span><span style="color:#E1E4E8"> (Foo.class) {</span></span>
+<span class="line"><span style="color:#6A737D">            //同步块</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>如上代码中展示了三种同步的方式：</p>
+<ul>
+<li><code>foo()</code> 中锁对应的Monitor为 <code>Foo.class</code></li>
+<li><code>bar()</code> 中锁对应的Monitor为 Foo 的对象实例</li>
+<li><code>baz()</code> 中的同步块可以用任意的对象作为Monitor，演示部分使用了 <code>Foo.class</code> 作为Monitor</li>
+</ul>
+<p>注意，Monitor的选取务必慎重，不仅仅要从 <code>同步</code> 的需求角度出发，避免性能损耗，也要注意锁无法正常生效的问题。例如：</p>
+<p>我们模拟5个线程同时竞争一个数（初始值为6）并做 <code>--</code> 运算，读者是否认为它会按照 <code>5、4、3、2、1</code> 的顺序输出？</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Foo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  Integer integer </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 6</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  void</span><span style="color:#B392F0"> minus</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    synchronized</span><span style="color:#E1E4E8"> (integer) {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (integer </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        integer</span><span style="color:#F97583">--</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">      System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " -> i:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> integer);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> MThread</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Thread</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    final</span><span style="color:#E1E4E8"> Foo foo;</span></span>
+<span class="line"><span style="color:#F97583">    final</span><span style="color:#E1E4E8"> CountDownLatch latch;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    MThread</span><span style="color:#E1E4E8">(Foo </span><span style="color:#FFAB70">foo</span><span style="color:#E1E4E8">, CountDownLatch </span><span style="color:#FFAB70">latch</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">      this</span><span style="color:#E1E4E8">.foo </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> foo;</span></span>
+<span class="line"><span style="color:#79B8FF">      this</span><span style="color:#E1E4E8">.latch </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> latch;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Override</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> run</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">      super</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">run</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">      try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">        latch.</span><span style="color:#B392F0">await</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        foo.</span><span style="color:#B392F0">minus</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">      } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (InterruptedException </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    Foo foo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Foo</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    CountDownLatch latch </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> CountDownLatch</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 5</span><span style="color:#E1E4E8">; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">      new</span><span style="color:#B392F0"> MThread</span><span style="color:#E1E4E8">(foo,latch).</span><span style="color:#B392F0">start</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">    latch.</span><span style="color:#B392F0">countDown</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">      Thread.</span><span style="color:#B392F0">sleep</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1000</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (InterruptedException </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>多执行几次就会发现 <code>可能</code> 会像下面的结果，它并非是一个同步情况的结果，<em>如果想要更顺利的模拟问题的出现，增大线程数即可</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8"> Task </span><span style="color:#F97583">:</span><span style="color:#E1E4E8">Foo.</span><span style="color:#B392F0">main</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#79B8FF">13</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">3</span></span>
+<span class="line"><span style="color:#79B8FF">15</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">4</span></span>
+<span class="line"><span style="color:#79B8FF">12</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">3</span></span>
+<span class="line"><span style="color:#79B8FF">14</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">1</span></span>
+<span class="line"><span style="color:#79B8FF">11</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">2</span></span></code></pre>
+<p>如果读者注意了lint，会注意到提示：Synchronization on a non-final field ‘integer’</p>
+<p>很显然，上面的代码并未采用正确的Monitor，在 <code>integer--</code> 的过程中，integer实例已经发生变化：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> </span></span>
+<span class="line"><span style="color:#9ECBFF">        " -> i:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> integer</span><span style="color:#F97583">+</span><span style="color:#9ECBFF">","</span><span style="color:#F97583">+</span><span style="color:#E1E4E8">System.</span><span style="color:#B392F0">identityHashCode</span><span style="color:#E1E4E8">(integer));</span></span></code></pre>
+<p>我们增加identityHashCode，并增大并发数量到10，输出如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#79B8FF">13</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">482590393</span></span>
+<span class="line"><span style="color:#79B8FF">15</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">1722967101</span></span>
+<span class="line"><span style="color:#79B8FF">11</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">1130778910</span></span>
+<span class="line"><span style="color:#79B8FF">16</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">482590393</span></span>
+<span class="line"><span style="color:#79B8FF">17</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">482590393</span></span>
+<span class="line"><span style="color:#79B8FF">20</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">482590393</span></span>
+<span class="line"><span style="color:#79B8FF">12</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">685260083</span></span>
+<span class="line"><span style="color:#79B8FF">14</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">1983109557</span></span>
+<span class="line"><span style="color:#79B8FF">19</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">482590393</span></span>
+<span class="line"><span style="color:#79B8FF">18</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> i</span><span style="color:#F97583">:</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">482590393</span></span></code></pre>
+<p>显然，<strong>锁了个寂寞</strong> 。<em>当然，该问题深入研究下去，读者可以一直挖到动态常量池，不再展开</em>。</p>
+<p>所以，编码中一定要保持好习惯：<code>Monitor对象不可变</code>，无形中就避开了bug。</p>
+<h3 id="锁升级">锁升级</h3>
+<p>前文已经提到了锁的升级：</p>
+<blockquote>
+<p>偏向锁 -> 轻量级锁 -> 重量级锁 , 锁的升级是单向的</p>
+</blockquote>
+<p>这其实是 <code>synchronized</code> 内部实现上对锁方式的优化</p>
+<h4 id="转换原因">转换原因</h4>
+<p>很显然，这一过程充分考虑各种锁的优点和缺点，在相应场景下以期获得最好的性能。</p>
+<ul>
+<li>偏向锁：没有自旋、没有系统调用，所以 <strong>消耗少性能高</strong> ，并且具有可重入特性，在 <code>同一线程执行同步代码</code> 场景下是最优选择，但它具有 <strong>撤销锁消耗高</strong> 的缺点。</li>
+<li>轻量级锁：前面已经提到，用CAS取代了阻塞，在 <code>锁持有时间短</code> 的场景下是最优选择，可追求 <code>快速响应</code> ，但缺点是短时间内无法获取锁时，自旋消耗CPU资源。</li>
+<li>重量级锁：具备 <code>大吞吐量</code> ，未竞争到锁的线程不会自旋消耗资源，适合 <code>锁占用时间长，吞吐量需求大</code> 的场景</li>
+</ul>
+<p>而从 <strong>偏向锁到轻量级锁</strong>，意味着多线程竞争，假定锁的持有时间不会太长，有限的自旋可以等到持有者释放锁，而当 <strong>轻量级锁升级到重量级锁</strong> ，意味着这一 <strong>假设不成立</strong> ，自旋只是在白白消耗，通过挂起和等待唤醒以提升吞吐量</p>
+<h4 id="转换过程">转换过程</h4>
+<p><img  src="/_astro/Synchronization.jWxTJ5yS_Z1ga7Xy.webp" alt loading="lazy" decoding="async" width="619" height="285"></p>
+<p>从OpenJdk的 <a href="%5Bhttps://wiki.openjdk.java.net/display/HotSpot/Synchronization">WIKI — Synchronization</a> 可以得到这张图。</p>
+<p>为广泛流传的下图的原版
+<img  src="/_astro/synchronized2.BHusakVn_Z1JWLmw.webp" alt loading="lazy" decoding="async" width="1127" height="604"></p>
+<p>一图胜千言，图中表现的非常明确，读者可以结合WIKI内容自行理解，不再多做赘述。</p>
+<p>经常在课程广告中出现的一张图如下,收藏不等于学会：</p>
+<p><img  src="/_astro/java_sync.CdaUNP_T_Z1cyshT.webp" alt loading="lazy" decoding="async" width="2311" height="1080"></p>
+<p><em>图片水印Blog.Dreamtobe.cn</em></p>
+<h2 id="一段很长的后记">一段很长的后记</h2>
+<p>在拟定系列大纲时，本篇的原名为：<code>Java多线程系列--掌控面试，一文吃透锁</code>，然而写至 <code>JDK中的Lock接口</code> 时，
+后知后觉的意识到将 <strong>不得不深入源码</strong> 并且涉及到 <code>AQS</code>，AQS的内容在大纲中已有单篇计划，展开则篇幅过长不利于阅读，不展开则实在无内容可写。</p>
+<p>原章节内容权且作为 <strong>开端</strong> 、 <strong>引子</strong> 留于文末：</p>
+<h3 id="jdk中的lock接口">JDK中的Lock接口</h3>
+<p>在Jdk1.5之后，存在Lock接口：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> Lock</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    //获取锁</span></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> lock</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //获取锁，如果线程阻塞状态（未获取到而进入阻塞）被中断则抛出异常</span></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> lockInterruptibly</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">throws</span><span style="color:#E1E4E8"> InterruptedException;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //尝试获取锁</span></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> tryLock</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //在给定时间内尝试获取锁，</span></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> tryLock</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> var1</span><span style="color:#E1E4E8">, TimeUnit </span><span style="color:#FFAB70">var3</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">throws</span><span style="color:#E1E4E8"> InterruptedException;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> unlock</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    Condition </span><span style="color:#B392F0">newCondition</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>前四个API均为获取锁的API，<code>unlock</code> 释放锁，通过Condition提供线程通信能力. <em>Condition将在以后的文章中展开</em></p>
+<p>有别于语言关键字 <code>synchronized</code> , 在使用角度上，Lock将需要使用者自行获取锁、释放锁。在内部实现上，区别于 <code>Monitor模式</code> ，增加了更丰富的功能：</p>
+<ul>
+<li>支持 <code>锁的公平性</code></li>
+<li>获取 <code>当前线程调用lock的次数</code></li>
+<li>获取 <code>等待锁的线程数</code></li>
+<li>查询 <code>是否存在线程等待获取该锁</code></li>
+<li>查询 <code>指定的线程是否在等待获取该锁</code></li>
+<li>查询 <code>当前线程是否持有该锁</code></li>
+<li>判断 <code>锁是否已被持有</code></li>
+<li>加锁时如果中断则不加锁，抛出异常</li>
+<li><code>尝试获取锁</code> 的机制，如果锁未被其他线程持有则成功，否则返回失败，不会直接进入阻塞</li>
+</ul>
+<p>很显然，<strong>限于目标和篇幅，这篇文章不会再和诸位读者一同探索源码</strong>，写至此处，我意识到真的无法做到标题中说的：“一篇文章吃透锁”。
+JDK中还有锁实现，例如常用的：</p>
+<ul>
+<li>ReentrantLock</li>
+<li>ReadWriteLock，一般使用实现类 <code>ReentrantReadWriteLock</code></li>
+</ul>
+<p><em>作者按：一旦开始深入，将势必谈及AQS，按照计划，这将于后续文章中展开，故本篇不再展开。望读者见谅</em></p>
+<h3 id="真正的后记">真正的后记</h3>
+<p>这一篇又断断续续写了超过一周，期间我也一度怀疑，这个系列要不要继续下去，对于读者而言，买本书钻研可能是比看本系列更加实在的行为，<code>勘校后的知识准确性</code> 、 <code>文字的准确性</code> 、
+<code>表达的结构性</code> 都更胜一筹，博客仅能靠碎片化特性占点便宜。</p>
+<p>但一件事情坚定了我将它写下去的信念，我翻看了往年的博客，清晰的意识到：</p>
+<ul>
+<li>将脑海中的知识，整理后再做 <code>结构化的输出</code> ，可以牢靠地掌握这些知识，并且在任意时刻都可以完成流畅的表达</li>
+<li>通过对比，清晰的看到自己的成长</li>
+<li>文字功力可以通过锻炼得到长足提升</li>
+</ul></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

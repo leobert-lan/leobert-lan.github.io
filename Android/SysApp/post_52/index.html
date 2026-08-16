@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>使用日历丰富产品的用户体验 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">使用日历丰富产品的用户体验</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="使用日历丰富产品的用户体验">使用日历丰富产品的用户体验</h1>
+<h2 id="前言">前言</h2>
+<p>经过一段时间的梳理和遴选，我挑选出了Android知识图谱中重要的部分，制作了一张脑图。读者朋友们可按照脑图查漏补缺了， <a href="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4eb015559c364ca09a216c92c7b1c5de~tplv-k3u1fbpfcp-watermark.image?">图片尺寸较大，仅附链接</a> 。</p>
+<p><em>当然，这是我按照自己的判断、结合参考其他博主的观点进行的挑选，不同的细分领域要求的重点有所不同，不可一以概之，且未曾遴选内容并非没必要掌握。图中的4-5层没有展示，以后文章见。</em></p>
+<p>本篇属于 part2-系统应用部分。</p>
+<img width="600" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8763beabd548467daea5a634c790c797~tplv-k3u1fbpfcp-watermark.image?">
+<p>在一些助手类的APP中，在使用应用的过程中会产生 “日程” 数据。作为用户理所当然的希望在事情发生前收到提醒。</p>
+<p>而我们知道，通过 <code>推送进行提醒</code> 存在一定的不可靠性。那么 <code>在用户手机日历中自动插入事件</code> 则是一个重要的补充手段。</p>
+<p>本篇中，我们将用 5-10分钟的时间，回顾操作日历的知识点。</p>
+<p><em>注：开发者官网具有更详尽地说明，只是有点啰嗦，<a href="https://developer.android.google.cn/guide/topics/providers/calendar-provider?hl=en">英文版</a>  <a href="https://developer.android.google.cn/guide/topics/providers/calendar-provider?hl=zh_cn">中文版</a></em></p>
+<h2 id="重点先行">重点先行</h2>
+<p>值得关注的重点：</p>
+<ul>
+<li>权限</li>
+<li>ContentResolver 进行 查询、插入、修改、删除 操作</li>
+<li>CalendarContract 中 各”表”含义和字段作用 （文中不会详细列举，看API doc即可，足够详细）</li>
+<li>同步适配器以及何时需要使用同步适配器</li>
+<li>EntityIterator简化模板代码</li>
+<li>RFC 5545 简要规则</li>
+<li>使用逻辑删除与物理删除</li>
+<li>从日历日程跳转回APP</li>
+</ul>
+<p>如果您已经掌握了这些内容，可忽略下文，下文面向初学者。</p>
+<h2 id="权限">权限</h2>
+<p>小于23时，不需要获取动态权限，Manifest声明日历读写权限即可。</p>
+<p><em>API 14 即 Android 4.0以下不支持，庆幸没那么古老的手机了</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">manifest</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">uses-permission</span><span style="color:#B392F0"> android:name</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"android.permission.READ_CALENDAR"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">uses-permission</span><span style="color:#B392F0"> android:name</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"android.permission.WRITE_CALENDAR"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"><span style="color:#E1E4E8">    ...</span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">manifest</span><span style="color:#E1E4E8">></span></span></code></pre>
+<p>大于等于23时，用你喜欢的方式处理动态权限获取即可。</p>
+<h2 id="查询创建本地日历">查询、创建本地日历</h2>
+<p>实际上，从这里开始的所有内容均和 <code>ContentResolver</code> 有关，相应的，日历应用通过 <code>ContentProvider</code>提供了这些服务，以及通过 <code>Intent</code> 做功能补充。</p>
+<p>日历账户信息属于 <code>CalendarContract.Calendars</code> 范畴，可将其看做一张数据库表理解查询与插入</p>
+<h3 id="查询">查询</h3>
+<p>定义关心的列，可理解为 SQL 语句中 Select片段的Column，当然使用null传参可获取所有列，这将增加I/O成本和内存开销。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#6A737D"> // dynamic lookups improves performance.</span></span>
+<span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> EVENT_PROJECTION: </span><span style="color:#B392F0">Array</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#B392F0"> arrayOf</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    CalendarContract.Calendars._ID,                     </span><span style="color:#6A737D">// 0</span></span>
+<span class="line"><span style="color:#E1E4E8">    CalendarContract.Calendars.ACCOUNT_NAME,            </span><span style="color:#6A737D">// 1</span></span>
+<span class="line"><span style="color:#E1E4E8">    CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,   </span><span style="color:#6A737D">// 2</span></span>
+<span class="line"><span style="color:#E1E4E8">    CalendarContract.Calendars.OWNER_ACCOUNT            </span><span style="color:#6A737D">// 3</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// The indices for the projection array above.</span></span>
+<span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> PROJECTION_ID_INDEX: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> PROJECTION_ACCOUNT_NAME_INDEX: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 1</span></span>
+<span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> PROJECTION_DISPLAY_NAME_INDEX: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 2</span></span>
+<span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> PROJECTION_OWNER_ACCOUNT_INDEX: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 3</span></span></code></pre>
+<p>uri则类似SQL中的 FROM片段，代表了表名</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> uri: </span><span style="color:#B392F0">Uri</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> CalendarContract.Calendars.CONTENT_URI</span></span></code></pre>
+<p>拼接条件模板，条件模板+参数 则类似SQL中的 Where片段。代码中演示了查询条件为 <strong>账户名为”张三” 且 账户类型为本地账户 且 账户拥有者为”张三”</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> selection: </span><span style="color:#B392F0">String</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "((${CalendarContract.Calendars.ACCOUNT_NAME} = ?) AND ("</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#9ECBFF">        "${CalendarContract.Calendars.ACCOUNT_TYPE} = ?) AND ("</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#9ECBFF">        "${CalendarContract.Calendars.OWNER_ACCOUNT} = ?))"</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> selectionArgs: </span><span style="color:#B392F0">Array</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#B392F0"> arrayOf</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"张三"</span><span style="color:#E1E4E8">, CalendarContract.ACCOUNT_TYPE_LOCAL, </span><span style="color:#9ECBFF">"张三"</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> cur: </span><span style="color:#B392F0">Cursor</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> contentResolver.</span><span style="color:#B392F0">query</span><span style="color:#E1E4E8">(uri, EVENT_PROJECTION, selection, selectionArgs, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>执行查询，<strong>注意此类操作均回避主线程，养成好习惯</strong></p>
+<p>遍历cursor，略</p>
+<p>_
+注：可能您在使用Sqlite数据库时，因为表结构是自行定义的，已经习惯了编码操作cursor、或者依赖ORM框架。而在ContentResolver相关的模块中，您可以尝试使用 <code>android.content.EntityIterator</code>
+进而遍历 <code>Entity</code>，可直接获得 <code>ContentValue</code>，减少很多模板代码_</p>
+<h3 id="插入">插入</h3>
+<p>可以选择插入 <code>本地账户</code> 或 <code>在线同步账户</code>，区别就是是否通过服务器同步数据。</p>
+<p><em>一般Exchange协议的邮件服务器适用性更强，但本地账户已经足够满足需求。</em></p>
+<p>我们需要注意：这张表的数据列来自4处定义：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Calendars</span></span>
+<span class="line"><span style="color:#F97583">        implements</span><span style="color:#B392F0"> BaseColumns</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">SyncColumns</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">CalendarColumns</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>牵涉到 <code>SyncColumns</code> 中定义的字段时，其写操作必须以 <code>同步适配器</code> 方式进行。</p>
+<p><em>作者按：不需要死记，有十几个列，记住规则即可，开发时注意</em></p>
+<p>需对uri做一定处理，包括：</p>
+<ul>
+<li><code>CALLER_IS_SYNCADAPTER</code> 设置为 true</li>
+<li>提供 <code>ACCOUNT_NAME</code> 和 <code>ACCOUNT_TYPE</code>，作为 URI 中的查询参数，插入时据实填写即可，修改时注意数据有效性。</li>
+</ul>
+<p>代码固定如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> Uri</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">asSyncAdapter</span><span style="color:#E1E4E8">(accountName: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, accountType: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Uri</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">buildUpon</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">appendQueryParameter</span><span style="color:#E1E4E8">(CalendarContract.CALLER_IS_SYNCADAPTER, </span><span style="color:#9ECBFF">"true"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">appendQueryParameter</span><span style="color:#E1E4E8">(CalendarContract.Calendars.ACCOUNT_NAME, accountName)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">appendQueryParameter</span><span style="color:#E1E4E8">(CalendarContract.Calendars.ACCOUNT_TYPE, accountType).</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//例如：</span></span>
+<span class="line"><span style="color:#E1E4E8">CalendarContract.Calendars.CONTENT_URI.</span><span style="color:#B392F0">asSyncAdapter</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"张三"</span><span style="color:#E1E4E8">, CalendarContract.ACCOUNT_TYPE_LOCAL)</span></span></code></pre>
+<p>以下代码演示插入的关键代码，您可以按照需求增加列参数，例如是否显示、时区、地区等</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#6A737D">//构造行数据</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> values </span><span style="color:#F97583">=</span><span style="color:#B392F0"> ContentValues</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // The new display name for the calendar</span></span>
+<span class="line"><span style="color:#B392F0">    put</span><span style="color:#E1E4E8">(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, </span><span style="color:#9ECBFF">"${username}的日历"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">    put</span><span style="color:#E1E4E8">(CalendarContract.Calendars.ACCOUNT_NAME, username)</span></span>
+<span class="line"><span style="color:#B392F0">    put</span><span style="color:#E1E4E8">(CalendarContract.Calendars.OWNER_ACCOUNT, username)</span></span>
+<span class="line"><span style="color:#B392F0">    put</span><span style="color:#E1E4E8">(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//插入</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> resultUri </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> contentResolver.</span><span style="color:#B392F0">insert</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    CalendarContract.Calendars.CONTENT_URI.</span><span style="color:#B392F0">asSyncAdapter</span><span style="color:#E1E4E8">(username, CalendarContract.ACCOUNT_TYPE_LOCAL),</span></span>
+<span class="line"><span style="color:#E1E4E8">    values</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//解析id</span></span>
+<span class="line"><span style="color:#E1E4E8">resultUri?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    calendarId </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ContentUris.</span><span style="color:#B392F0">parseId</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="插入日程和提醒">插入日程和提醒</h2>
+<p><em>注：源码中体现为Event、文档中直译为事件，文中采用日程，更符合用语习惯，并非新事物</em></p>
+<p>日程数据隶属于日历，因此我们需要事先获取操作的日历的日历id，<em>参见上一节</em>。</p>
+<h3 id="插入日程">插入日程</h3>
+<p>日程对应 <code>CalendarContract.Events</code> “表” ：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Events</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> BaseColumns</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">        SyncColumns</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">EventsColumns</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">CalendarColumns</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>同理，写 <code>SyncColumns</code> 中的字段时，需要使用同步适配器，不再赘述。</p>
+<p>业务相关字段主要定义于：<code>EventsColumns</code>，包含以下类别：</p>
+<ul>
+<li>所属日历id</li>
+<li>日程的名称、描述</li>
+<li>颜色等样式相关</li>
+<li>时间和规则描述，如起止时间、是否全天时间、如何重复</li>
+<li>访客控制权限</li>
+<li>等</li>
+</ul>
+<p>如果是非重复日程，则必须提供起止时间，如下代码构建ContentValue：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> event </span><span style="color:#F97583">=</span><span style="color:#B392F0"> ContentValues</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    //UTC 毫秒级时间戳</span></span>
+<span class="line"><span style="color:#E1E4E8">    it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.DTSTART, startMillis)</span></span>
+<span class="line"><span style="color:#E1E4E8">    it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.DTEND, endMillis)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //非全天</span></span>
+<span class="line"><span style="color:#E1E4E8">    it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.ALL_DAY, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#6A737D">    //标题和描述</span></span>
+<span class="line"><span style="color:#E1E4E8">    it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.TITLE, title)</span></span>
+<span class="line"><span style="color:#E1E4E8">    it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.DESCRIPTION, desc)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //所属日历的id</span></span>
+<span class="line"><span style="color:#E1E4E8">    it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.CALENDAR_ID, calendarId)</span></span>
+<span class="line"><span style="color:#6A737D">    //时区</span></span>
+<span class="line"><span style="color:#E1E4E8">    it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.EVENT_TIMEZONE, SimpleTimeZone.</span><span style="color:#B392F0">getDefault</span><span style="color:#E1E4E8">().displayName)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //API >=16</span></span>
+<span class="line"><span style="color:#6A737D">    // 来源APP的应用包名</span></span>
+<span class="line"><span style="color:#E1E4E8">    it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.CUSTOM_APP_PACKAGE, pkg)</span></span>
+<span class="line"><span style="color:#6A737D">    // 为日程自定义uri，在支持的设备上，打开来源APP时可获取该uri值</span></span>
+<span class="line"><span style="color:#E1E4E8">    it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.CUSTOM_APP_URI, uri)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    it</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>其他字段参考API文档选择使用。</p>
+<p>如果是重复事件，<strong>则无需传递结束时间戳，而需要提供规则信息</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#6A737D">//单次持续时间，而非从第一次起到最后一次截至的时间</span></span>
+<span class="line"><span style="color:#E1E4E8">it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.DURATION, duration)</span></span>
+<span class="line"><span style="color:#6A737D">//日程的重复发生规则</span></span>
+<span class="line"><span style="color:#E1E4E8">it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.RRULE, rRule)</span></span>
+<span class="line"><span style="color:#6A737D">//日程的日期重复规则</span></span>
+<span class="line"><span style="color:#E1E4E8">it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.RDATE, rDate)</span></span></code></pre>
+<p>这三个参数的值，均遵循 <a href="https://www.rfc-editor.org/rfc/rfc5545">RFC 5545</a></p>
+<ul>
+<li>DURATION: ”P600S” 标识持续600s即10分钟, “PT1H” 表示持续1小时， “P2W” 表示持续 2周。</li>
+<li>RRULE: ”FREQ=DAILY;WKST=SU;UNTIL=20230225T070000Z” 表示每日重复直至2023年2月25号7点；</li>
+<li>RDATE: 配合RRULE生成更加复杂的规则，如有必要，请研究 RFC 5545</li>
+</ul>
+<p><strong>插入日程并获取日程id</strong>：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> uri: </span><span style="color:#B392F0">Uri</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> contentResolver.</span><span style="color:#B392F0">insert</span><span style="color:#E1E4E8">(CalendarContract.Events.CONTENT_URI, event)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// get the event ID that is the last element in the Uri</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> eventID: </span><span style="color:#B392F0">Long</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> uri?.lastPathSegment?.</span><span style="color:#B392F0">toLong</span><span style="color:#E1E4E8">() ?: </span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span></span></code></pre>
+<h4 id="从日程详情回到来源app">从日程详情回到来源APP</h4>
+<p>插入日程时，我们使用了如下字段，标识了日程的来源APP和日程的自定义Uri。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#6A737D">//API >=16</span></span>
+<span class="line"><span style="color:#6A737D">// 来源APP的应用包名</span></span>
+<span class="line"><span style="color:#E1E4E8">it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.CUSTOM_APP_PACKAGE, pkg)</span></span>
+<span class="line"><span style="color:#6A737D">// 为日程自定义uri，在支持的设备上，打开来源APP时可获取该uri值</span></span>
+<span class="line"><span style="color:#E1E4E8">it.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(CalendarContract.Events.CUSTOM_APP_URI, uri)</span></span></code></pre>
+<p>在大多数ROM的内置日历中，均支持在日程详情中跳转到来源应用。<em>注意，存在一些例外。鸿蒙系统内置日历也并未完全支持该特性</em></p>
+<p>您可以通过注册IntentFilter配合实现该功能：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"><span style="color:#6A737D">&#x3C;!--注意：exported需设置为true，进行适配--></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">activity</span><span style="color:#B392F0"> android:name</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"XXXActivity"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">intent-filter</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">action</span><span style="color:#B392F0"> android:name</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"android.provider.calendar.action.HANDLE_CUSTOM_EVENT"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">category</span><span style="color:#B392F0"> android:name</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"android.intent.category.DEFAULT"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">data</span><span style="color:#B392F0"> android:mimeType</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"vnd.android.cursor.item/event"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">intent-filter</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">activity</span><span style="color:#E1E4E8">></span></span></code></pre>
+<p>并从Intent中获取日程的自定义Uri：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#B392F0">getIntent</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getStringExtra</span><span style="color:#E1E4E8">(CalendarContract.EXTRA_CUSTOM_APP_URI)</span></span></code></pre>
+<h3 id="为日程插入提醒">为日程插入提醒</h3>
+<p>首先，要获取日程的id，可以在插入日程时从返回uri中解析得出，也可以通过查询日程解析得出</p>
+<p>此时，操作的是提醒表，<code>CalendarContract.Reminders</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Reminders</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> BaseColumns</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">        RemindersColumns</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">EventsColumns</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>一般设置提前时间、 提醒方式、日程id即可</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> values </span><span style="color:#F97583">=</span><span style="color:#B392F0"> ContentValues</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    put</span><span style="color:#E1E4E8">(CalendarContract.Reminders.MINUTES, </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">    put</span><span style="color:#E1E4E8">(CalendarContract.Reminders.EVENT_ID, eventID)</span></span>
+<span class="line"><span style="color:#B392F0">    put</span><span style="color:#E1E4E8">(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">contentResolver.</span><span style="color:#B392F0">insert</span><span style="color:#E1E4E8">(CalendarContract.Reminders.CONTENT_URI, values)</span></span></code></pre>
+<h2 id="读取日程">读取日程</h2>
+<p>掌握了插入之后，您已经掌握了表和字段含义，读取日程则更加简单</p>
+<p>按实际需求拼接查询条件后，执行查询。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> selection </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "((${CalendarContract.Events.CALENDAR_ID} = ?))"</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> selectionArgs: </span><span style="color:#B392F0">Array</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#B392F0"> arrayOf</span><span style="color:#E1E4E8">(calendarId.</span><span style="color:#B392F0">toString</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> cur: </span><span style="color:#B392F0">Cursor</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> contentResolver.</span><span style="color:#B392F0">query</span><span style="color:#E1E4E8">(CalendarContract.Events.CONTENT_URI, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, selection, selectionArgs, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span></code></pre>
+<p>解析：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#E1E4E8">cur?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> events </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> CalendarContract.EventsEntity.</span><span style="color:#B392F0">newEntityIterator</span><span style="color:#E1E4E8">(cur, contentResolver)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">asSequence</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">map</span><span style="color:#E1E4E8"> { entity </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> entity.entityValues }</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">map</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">            //解析转换实体对象</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">toCollection</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">arrayListOf</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="更改日程">更改日程</h2>
+<p>通过向URI追加ID的方式，可以限定至修改的条目（类似数据库ORM框架中按主键更新），而不必使用限定条件。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> values </span><span style="color:#F97583">=</span><span style="color:#B392F0"> ContentValues</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // The new title for the event</span></span>
+<span class="line"><span style="color:#B392F0">    put</span><span style="color:#E1E4E8">(CalendarContract.Events.TITLE, </span><span style="color:#9ECBFF">"Kickboxing"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> updateUri: </span><span style="color:#B392F0">Uri</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ContentUris.</span><span style="color:#B392F0">withAppendedId</span><span style="color:#E1E4E8">(CalendarContract.Events.CONTENT_URI, eventID)</span></span>
+<span class="line"><span style="color:#6A737D">//影响的行数</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> rows: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> contentResolver.</span><span style="color:#B392F0">update</span><span style="color:#E1E4E8">(updateUri, values, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>而使用限定条件可以更加灵活</p>
+<h2 id="删除日程">删除日程</h2>
+<p>同样的，删除也可以使用追加ID方式，或者使用限定条件方式。</p>
+<p>删除可分为两种：应用删除（逻辑删除）、同步适配器删除（物理删除）</p>
+<p>应用删除将 deleted 列的值设置为 1，即逻辑删除。此标记告知同步适配器该行已删除，并且应将此删除传播至服务器。</p>
+<p>同步适配器删除将会从数据库中移除事件及其所有关联数据。</p>
+<p>以下为逻辑删：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> deleteUri: </span><span style="color:#B392F0">Uri</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ContentUris.</span><span style="color:#B392F0">withAppendedId</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    CalendarContract.Events.CONTENT_URI, 日程id</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">return</span><span style="color:#E1E4E8"> contentResolver.</span><span style="color:#B392F0">delete</span><span style="color:#E1E4E8">(deleteUri, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>物理删除则需通过URI构造同步适配器，参见上文。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

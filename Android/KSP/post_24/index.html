@@ -1,0 +1,392 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="好玩系列--拥抱kotlin-symbol-processingksp项目实战">好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</h1>
+<h2 id="写在最前">写在最前</h2>
+<p>这一篇，我们抱着拥抱新事物的心态，尝试一些新事物。笔者在这一次历程中，对三项事物进行了尝鲜：</p>
+<ul>
+<li>手动迁移一个小规模的Gradle项目，由 <code>Groovy Script</code> 转为 <code>Kotlin Script</code></li>
+<li>Kotlin Symbol Processing</li>
+<li>Kotlin Poet</li>
+</ul>
+<p>这次的 <code>重点是KSP</code> ，Kotlin Poet学习成本比较低，迁移 <code>Kotlin Script</code> 仅仅是比较繁琐。</p>
+<p><strong>既然要实战，那么就需要一个实际的项目来支持</strong>，笔者选取了个人的开源项目<a href="https://github.com/leobert-lan/DaVinCi">DaVinCi</a>,.</p>
+<p>关注笔者动态的读者可能注意到：笔者在过年时发布过一篇文章<a href="https://leobert-lan.github.io/Android/Drawable/post_4.html">好玩系列：拥有它，XML文件少一半—更方便的处理View背景</a>,
+在这篇文章中，我们提到了一种 <code>取代xml背景资源文件</code> 的方案，并且提到之后会 <code>实现Style机制</code>。本篇文章中，以此为目标，展开 <code>KSP的实战过程</code>。</p>
+<p><em>PS:对DaVinCi不了解并不影响本文内容的理解</em></p>
+<p><em>如果读者对好玩系列感兴趣，建议点个关注，查看 <a href="https://github.com/leobert-lan/Blog/blob/main/info/%E5%85%B3%E4%BA%8E%E5%A5%BD%E7%8E%A9%E7%B3%BB%E5%88%97.md">关于好玩系列</a>
+了解笔者创作该系列的初衷。</em></p>
+<h2 id="ksp简介">KSP简介</h2>
+<p>在正式了解KSP之前，我们需要 <code>复习</code> 之前的知识：</p>
+<ul>
+<li>编译期处理</li>
+<li>APT与KAPT</li>
+<li>Transformer</li>
+</ul>
+<p>因为一些特定的需求，在项目进行编译的过程中，需要增加一定的处理，例如：生成源码文件并参与编译；修改编译的产物。</p>
+<p>基于Gradle编译任务链中的 <code>APT机制</code>，可以实现 <code>Annotation Processor</code>，常见于 <code>代码生成</code>， <code>SPI机制实现</code><em>如AutoService</em> ，也可以用来生成文档。</p>
+<p>而APT仅支持Java源码，KAPT并没有 <code>专门的注解处理器</code> ，所以kotlin项目使用KAPT时，需要 <code>生成代码桩</code> <em>即Java Stub</em> 再交由APT 进行处理。</p>
+<p>基于Gradle编译任务链中的 <code>Transformer机制</code>，可以动态的修改编译结果，例如利用 <code>Javasist</code>，<code>ASM</code> 等字节码操纵框架 增加、修改字节码中的业务逻辑。</p>
+<p>这导致Kotlin项目想要针对注解进行处理时，要么用力过猛，采用Transformer机制，要么就使用KAPT并牺牲时间。<em>Transformer机制并无时间优势，若KAPT可以等价处理时，
+Transformer机制往往呈现力大砖飞之势</em></p>
+<p>那么顺理成章，KSP用于解决纯Kotlin项目下，无专门注解处理器的问题。</p>
+<p>在KSP之前，Kotlin的编译存在有 <code>Kotlin Compiler Plugin</code>
+<a href="https://kotlinlang.org/docs/all-open-plugin.html#:~:text=The%20all-open%20compiler%20plugin,without%20the%20explicit%20open%20keyword.&#x26;text=All-open%20allows%20to%20specify%20such%20annotations."><em>了解更多</em></a>
+，下文简称KCP，KCP用于解决Kotlin 的关键词和注解的编译问题，例如 <code>data class</code>，</p>
+<p>而KCP的功能太过于强大，以至于需要 <code>很大的学习成本</code> ，而将问题局限于 <code>注解处理</code> 时，这一学习成本是多余的，于是出现了KSP，它基于KCP，但 <code>屏蔽了KCP的细节</code> ，
+让我们 <code>专注于注解处理的业务</code></p>
+<p><img src="https://img-blog.csdnimg.cn/202011012150146.png" alt="KCP开发的若干过程"></p>
+<p><em>KCP的复杂程度从其架构可见一斑</em></p>
+<p><em><a href="https://android-developers.googleblog.com/2021/02/announcing-kotlin-symbol-processing-ksp.html">KSP-Alpha版本已于2月发布</a></em></p>
+<h2 id="正式开始之前">正式开始之前</h2>
+<p>在正式开始之前，我们再简要的阐明一下实战的目标：DaVinCi中可以定义 Style 和 StyleFactory：</p>
+<p><em>推荐使用 StyleRegistry.Style.Factory，而不要直接定义 StyleRegistry.Style</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@DaVinCiStyle</span><span style="color:#E1E4E8">(styleName </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "btn_style.main"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> DemoStyle</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">StyleRegistry</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Style</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"btn_style.main"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    init</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_ENABLE_FALSE,</span></span>
+<span class="line"><span style="color:#E1E4E8">            expression </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> DaVinCiExpression.</span><span style="color:#B392F0">shape</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">rectAngle</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">solid</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"#80ff3c08"</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">corner</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"10dp"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        ).</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_ENABLE_TRUE,</span></span>
+<span class="line"><span style="color:#E1E4E8">            expression </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> DaVinCiExpression.</span><span style="color:#B392F0">shape</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">rectAngle</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">corner</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"10dp"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">gradient</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"#ff3c08"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"#ff653c"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        )</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">@DaVinCiStyleFactory</span><span style="color:#E1E4E8">(styleName </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "btn_style.main"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> DemoStyleFactory</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">StyleRegistry</span><span style="color:#E1E4E8">.Style.</span><span style="color:#B392F0">Factory</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> styleName: </span><span style="color:#B392F0">String</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "btn_style.main"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> apply</span><span style="color:#E1E4E8">(style: </span><span style="color:#B392F0">StyleRegistry</span><span style="color:#E1E4E8">.Style) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        style.</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_ENABLE_FALSE,</span></span>
+<span class="line"><span style="color:#E1E4E8">            expression </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> DaVinCiExpression.</span><span style="color:#B392F0">shape</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">rectAngle</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">solid</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"#80ff3c08"</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">corner</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"10dp"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        ).</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_ENABLE_TRUE,</span></span>
+<span class="line"><span style="color:#E1E4E8">            expression </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> DaVinCiExpression.</span><span style="color:#B392F0">shape</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">rectAngle</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">corner</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"10dp"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">gradient</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"#ff3c08"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"#ff653c"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        )</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>并利用</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#E1E4E8">osp.leobert.android.davinci.StyleRegistry#</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(style: </span><span style="color:#B392F0">Style</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">osp.leobert.android.davinci.StyleRegistry#</span><span style="color:#B392F0">registerFactory</span><span style="color:#E1E4E8">(factory: </span><span style="color:#B392F0">Style</span><span style="color:#E1E4E8">.Factory)</span></span></code></pre>
+<p>进行全局注册</p>
+<p>我们并且期望将 <code>StyleName</code> 生成常量，且分别检查Style和StyleFactory是否有重复。</p>
+<p>那么我们期望生成以下内容：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * auto-generated by DaVinCi, do not modify</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> object</span><span style="color:#B392F0"> AppDaVinCiStyles</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  public</span><span style="color:#F97583"> const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> btn_style_main: </span><span style="color:#B392F0">String</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "btn_style.main"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  /**</span></span>
+<span class="line"><span style="color:#6A737D">   * register all styles and styleFactories</span></span>
+<span class="line"><span style="color:#6A737D">   */</span></span>
+<span class="line"><span style="color:#F97583">  public</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> register</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Unit</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    registerStyles</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#B392F0">    registerStyleFactories</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> registerStyles</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Unit</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    osp.leobert.android.davinci.StyleRegistry.</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(com.example.simpletest.factories.</span><span style="color:#B392F0">DemoStyle</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> registerStyleFactories</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Unit</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    osp.leobert.android.davinci.StyleRegistry.</span><span style="color:#B392F0">registerFactory</span><span style="color:#E1E4E8">(com.example.simpletest.factories.</span><span style="color:#B392F0">DemoStyleFactory</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="正式开始">正式开始</h2>
+<h3 id="定义注解">定义注解</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@Target</span><span style="color:#E1E4E8">(AnnotationTarget.CLASS)</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> annotation</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> DaVinCiStyle</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> styleName: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">@Target</span><span style="color:#E1E4E8">(AnnotationTarget.CLASS)</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> annotation</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> DaVinCiStyleFactory</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> styleName: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>显然，需要单独建立Module，这并不复杂。</p>
+<h3 id="引入-comgoogledevtoolsksp-插件">引入 com.google.devtools.ksp 插件</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#6A737D">//project build.gradle.kts</span></span>
+<span class="line"><span style="color:#B392F0">plugins</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    id</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"com.google.devtools.ksp"</span><span style="color:#E1E4E8">) version Dependencies.Kotlin.Ksp.version apply </span><span style="color:#79B8FF">false</span></span>
+<span class="line"><span style="color:#B392F0">    kotlin</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"jvm"</span><span style="color:#E1E4E8">) version Dependencies.Kotlin.version apply </span><span style="color:#79B8FF">false</span></span>
+<span class="line"><span style="color:#B392F0">    id</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"org.jetbrains.dokka"</span><span style="color:#E1E4E8">) version Dependencies.Kotlin.dokkaVersion  apply </span><span style="color:#79B8FF">false</span></span>
+<span class="line"><span style="color:#B392F0">    id</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"com.vanniktech.maven.publish"</span><span style="color:#E1E4E8">) version </span><span style="color:#9ECBFF">"0.15.1"</span><span style="color:#E1E4E8"> apply </span><span style="color:#79B8FF">false</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#6A737D">//Module build.gradle.kts</span></span>
+<span class="line"><span style="color:#B392F0">plugins</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    id</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"com.google.devtools.ksp"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">    kotlin</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"jvm"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#6A737D">//  kotlin("kapt")</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">dependencies</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    compileOnly</span><span style="color:#E1E4E8">(Dependencies.Kotlin.Ksp.api)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    implementation</span><span style="color:#E1E4E8">(Dependencies.AutoService.annotations)</span></span>
+<span class="line"><span style="color:#B392F0">    ksp</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"dev.zacsweers.autoservice:auto-service-ksp:0.5.2"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">    implementation</span><span style="color:#E1E4E8">(Dependencies.KotlinPoet.kotlinPoet)</span></span>
+<span class="line"><span style="color:#B392F0">    implementation</span><span style="color:#E1E4E8">(Dependencies.guava)</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//  todo use stable version when release</span></span>
+<span class="line"><span style="color:#B392F0">    implementation</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">project</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">":annotation"</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>引入必要的依赖，这里我们使用ksp实现的auto-service实现SPI，<strong>具体可参考DaVinCi项目源码，此处不再赘述</strong></p>
+<h2 id="实现-symbolprocessorprovider-处理注解">实现 SymbolProcessorProvider 处理注解</h2>
+<h3 id="必要的知识">必要的知识</h3>
+<p>核心非常简要，<code>实现SymbolProcessorProvider接口</code> ，提供一个 <code>SymbolProcessor</code> 接口的实例</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">package</span><span style="color:#B392F0"> com.google.devtools.ksp.processing</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * [SymbolProcessorProvider] is the interface used by plugins to integrate into Kotlin Symbol Processing.</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> SymbolProcessorProvider</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Called by Kotlin Symbol Processing to create the processor.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> create</span><span style="color:#E1E4E8">(environment: </span><span style="color:#B392F0">SymbolProcessorEnvironment</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">SymbolProcessor</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>处理注解的入口：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">package</span><span style="color:#B392F0"> com.google.devtools.ksp.processing</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#B392F0"> com.google.devtools.ksp.symbol.KSAnnotated</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * [SymbolProcessor] is the interface used by plugins to integrate into Kotlin Symbol Processing.</span></span>
+<span class="line"><span style="color:#6A737D"> * SymbolProcessor supports multiple round execution, a processor may return a list of deferred symbols at the end</span></span>
+<span class="line"><span style="color:#6A737D"> * of every round, which will be passed to proceesors again in the next round, together with the newly generated symbols.</span></span>
+<span class="line"><span style="color:#6A737D"> * Upon Exceptions, KSP will try to distinguish the exceptions from KSP and exceptions from processors.</span></span>
+<span class="line"><span style="color:#6A737D"> * Exceptions will result in a termination of processing immediately and be logged as an error in KSPLogger.</span></span>
+<span class="line"><span style="color:#6A737D"> * Exceptions from KSP should be reported to KSP developers for further investigation.</span></span>
+<span class="line"><span style="color:#6A737D"> * At the end of the round where exceptions or errors happened, all processors will invoke onError() function to do</span></span>
+<span class="line"><span style="color:#6A737D"> * their own error handling.</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> SymbolProcessor</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Called by Kotlin Symbol Processing to run the processing task.</span></span>
+<span class="line"><span style="color:#6A737D">     *</span></span>
+<span class="line"><span style="color:#6A737D">     * </span><span style="color:#F97583">@param</span><span style="color:#FFAB70"> resolver</span><span style="color:#6A737D"> provides [SymbolProcessor] with access to compiler details such as Symbols.</span></span>
+<span class="line"><span style="color:#6A737D">     * </span><span style="color:#F97583">@return</span><span style="color:#6A737D"> A list of deferred symbols that the processor can't process.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> process</span><span style="color:#E1E4E8">(resolver: </span><span style="color:#B392F0">Resolver</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">KSAnnotated</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Called by Kotlin Symbol Processing to finalize the processing of a compilation.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> finish</span><span style="color:#E1E4E8">() {}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Called by Kotlin Symbol Processing to handle errors after a round of processing.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> onError</span><span style="color:#E1E4E8">() {}</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>环境可以给到的内容：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> SymbolProcessorEnvironment</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * passed from command line, Gradle, etc.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> options: </span><span style="color:#B392F0">Map</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">>,</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * language version of compilation environment.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> kotlinVersion: </span><span style="color:#B392F0">KotlinVersion</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * creates managed files.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> codeGenerator: </span><span style="color:#B392F0">CodeGenerator</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * for logging to build output.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> logger: </span><span style="color:#B392F0">KSPLogger</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>这里注意，ksp还无法像APT一样进行debug，所以开发阶段还有一些障碍，仅能 <code>靠日志进行排查</code>。</p>
+<p><code>codeGenerator</code> 用于生成kotlin源码文件，注意写入时 <code>必须分离到子线程</code> ，否则KSP会进入无限等待。
+<code>options</code> 用于手机、获取配置参数</p>
+<h3 id="开始编码">开始编码</h3>
+<p>略去获取配置参数的部分</p>
+<p>定义目标注解的信息：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> DAVINCI_STYLE_NAME </span><span style="color:#F97583">=</span><span style="color:#B392F0"> requireNotNull</span><span style="color:#E1E4E8">(DaVinCiStyle::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.qualifiedName)</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> DAVINCI_STYLE_FACTORY_NAME </span><span style="color:#F97583">=</span><span style="color:#B392F0"> requireNotNull</span><span style="color:#E1E4E8">(DaVinCiStyleFactory::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.qualifiedName)</span></span></code></pre>
+<p>利用Resolver得到目标注解的KSName，e.g.:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#E1E4E8">resolver.</span><span style="color:#B392F0">getKSNameFromString</span><span style="color:#E1E4E8">(DAVINCI_STYLE_NAME)</span></span></code></pre>
+<p>并进一步得到被注解的类</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#E1E4E8">resolver.</span><span style="color:#B392F0">getClassDeclarationByName</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    resolver.</span><span style="color:#B392F0">getKSNameFromString</span><span style="color:#E1E4E8">(DAVINCI_STYLE_NAME)</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>此刻，代码示例如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"></span>
+<span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> DaVinCiSymbolProcessor</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    environment: </span><span style="color:#B392F0">SymbolProcessorEnvironment</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">SymbolProcessor</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //忽略</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    companion</span><span style="color:#F97583"> object</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> DAVINCI_STYLE_NAME </span><span style="color:#F97583">=</span><span style="color:#B392F0"> requireNotNull</span><span style="color:#E1E4E8">(DaVinCiStyle::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.qualifiedName)</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> DAVINCI_STYLE_FACTORY_NAME </span><span style="color:#F97583">=</span><span style="color:#B392F0"> requireNotNull</span><span style="color:#E1E4E8">(DaVinCiStyleFactory::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.qualifiedName)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> process</span><span style="color:#E1E4E8">(resolver: </span><span style="color:#B392F0">Resolver</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">KSAnnotated</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> styleNotated </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> resolver.</span><span style="color:#B392F0">getClassDeclarationByName</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            resolver.</span><span style="color:#B392F0">getKSNameFromString</span><span style="color:#E1E4E8">(DAVINCI_STYLE_NAME)</span></span>
+<span class="line"><span style="color:#E1E4E8">        )?.</span><span style="color:#B392F0">asType</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">emptyList</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> factoryNotated </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> resolver.</span><span style="color:#B392F0">getClassDeclarationByName</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            resolver.</span><span style="color:#B392F0">getKSNameFromString</span><span style="color:#E1E4E8">(DAVINCI_STYLE_FACTORY_NAME)</span></span>
+<span class="line"><span style="color:#E1E4E8">        )?.</span><span style="color:#B392F0">asType</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">emptyList</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //暂未涉及</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> emptyList</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>进行必要的检查，如果没有任意的目标注解，按照自己的计划进行抛错或者其他；</p>
+<p>此刻我们得到了目标注解的类型，即 <code>KSClassDeclaration实例</code></p>
+<h3 id="扫描被注解的目标">扫描被注解的目标</h3>
+<p>利用 <code>Resolver</code> 和 <code>目标注解的类型</code> 进行扫描</p>
+<p>而我们的既定目标是寻找被注解的类，所以直接过滤被注解的目标为 <code>KSClassDeclaration</code>，直接排除掉 Method 和 Property</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">factoryNotated?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    handleDaVinCiStyleFactory</span><span style="color:#E1E4E8">(resolver </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> resolver, notationType </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> it)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> handleDaVinCiStyleFactory</span><span style="color:#E1E4E8">(resolver: </span><span style="color:#B392F0">Resolver</span><span style="color:#E1E4E8">, notationType: </span><span style="color:#B392F0">KSType</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    resolver.</span><span style="color:#B392F0">getSymbolsWithAnnotation</span><span style="color:#E1E4E8">(DAVINCI_STYLE_FACTORY_NAME)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">asSequence</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">filterIsInstance</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">KSClassDeclaration</span><span style="color:#E1E4E8">>()</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8"> { style </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#6A737D">                //解析类上的注解信息、保存以待后续处理</span></span>
+<span class="line"><span style="color:#6A737D">                /*end @forEach*/</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="解析注解信息">解析注解信息</h3>
+<p>这里和APT有一点差异，无法直接将 <code>KSAnnotation</code> 转换为实际注解，但并不影响我们操作，可以判断注解的类型、获取注解中方法的返回值。</p>
+<p>前面已经得到了被注解的 <code>KSClassDeclaration实例</code>，可以直接得到对于它的注解，并通过 <code>KSType</code> 比对得到目标注解，并进一步解析其 <code>arguments</code>，
+得到注解中的值。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#F97583"> annotation</span><span style="color:#F97583"> =</span></span>
+<span class="line"><span style="color:#E1E4E8">        style.annotations.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8"> { it.annotationType.</span><span style="color:#B392F0">resolve</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> notationType }</span></span>
+<span class="line"><span style="color:#E1E4E8">                ?: </span><span style="color:#B392F0">run</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">                    logE</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"@DaVinCiStyleFactory annotation not found"</span><span style="color:#E1E4E8">, style)</span></span>
+<span class="line"><span style="color:#F97583">                    return</span><span style="color:#E1E4E8">@forEach</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//structure: DaVinCiStyle(val styleName: String, val parent: String = "")</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> styleName </span><span style="color:#F97583">=</span><span style="color:#F97583"> annotation</span><span style="color:#E1E4E8">.arguments.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    it.name?.</span><span style="color:#B392F0">getShortName</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> "styleName"</span></span>
+<span class="line"><span style="color:#E1E4E8">}?.</span><span style="color:#F97583">value</span><span style="color:#E1E4E8">?.</span><span style="color:#B392F0">toString</span><span style="color:#E1E4E8">() ?: kotlin.</span><span style="color:#B392F0">run</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    logE</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"missing styleName? version not matched?"</span><span style="color:#E1E4E8">, style)</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8">@forEach</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//下面是简要的信息处理和保存</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> constName </span><span style="color:#F97583">=</span><span style="color:#B392F0"> generateConstOfStyleName</span><span style="color:#E1E4E8">(styleName)</span></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> (styleFactoryProviders.</span><span style="color:#B392F0">containsKey</span><span style="color:#E1E4E8">(constName)) {</span></span>
+<span class="line"><span style="color:#B392F0">    logE</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">            "duplicated style name:${styleName}, original register:${styleFactoryProviders[constName]?.clzNode}"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            style</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8">@forEach</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">styleFactoryProviders[constName] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> MetaInfo.</span><span style="color:#B392F0">Factory</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        constName </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> constName,</span></span>
+<span class="line"><span style="color:#E1E4E8">        styleName </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> styleName,</span></span>
+<span class="line"><span style="color:#E1E4E8">        clzNode </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> style</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span></code></pre>
+<h3 id="基于信息生成kotlin源码">基于信息生成Kotlin源码</h3>
+<p>参考 <a href="https://square.github.io/kotlinpoet/">kotlin poet</a> 进行学习</p>
+<p>鉴于此部分代码完全与DaVinCi的业务相关，故略去。</p>
+<h3 id="生成源码文件">生成源码文件</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#6A737D">//daVinCiStylesSpec 为利用Kotlin Poet编写的源码信息</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> fileSpec </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> FileSpec.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(packageName ?: </span><span style="color:#9ECBFF">""</span><span style="color:#E1E4E8">, daVinCiStylesSpec)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> dependencies </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Dependencies</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">thread</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    codeGenerator.</span><span style="color:#B392F0">createNewFile</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        dependencies </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> dependencies,</span></span>
+<span class="line"><span style="color:#E1E4E8">        packageName </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> packageName ?: </span><span style="color:#9ECBFF">""</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        fileName </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "${moduleName ?: ""}DaVinCiStyles"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        extensionName </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "kt"</span></span>
+<span class="line"><span style="color:#E1E4E8">    ).</span><span style="color:#B392F0">bufferedWriter</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">use</span><span style="color:#E1E4E8"> { writer </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            fileSpec.</span><span style="color:#B392F0">writeTo</span><span style="color:#E1E4E8">(writer)</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (e: </span><span style="color:#B392F0">Exception</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">            logE</span><span style="color:#E1E4E8">(e.message ?: </span><span style="color:#9ECBFF">""</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">finally</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            writer.</span><span style="color:#B392F0">flush</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            writer.</span><span style="color:#B392F0">close</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>再次注意，<code>需要在子线程中执行</code></p>
+<p><em>若对碎片化的代码不太敏感，可以下载DaVinCi的源码进行对照阅读</em></p>
+<h2 id="在项目中使用">在项目中使用</h2>
+<p>前面我们已经完成了KSP的核心逻辑，现在我们需要配置并使用它</p>
+<p>这里注意，<strong>ksp的生成目录不属于默认sourceSets，<code>需要单独配置</code></strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">plugins</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    id</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"com.android.application"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">    id</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"com.google.devtools.ksp"</span><span style="color:#E1E4E8">) </span><span style="color:#6A737D">//version Dependencies.Kotlin.Ksp.version</span></span>
+<span class="line"><span style="color:#6A737D">    //略</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">android</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    //略</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    buildTypes</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        getByName</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"release"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">            sourceSets</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">                getByName</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"main"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    java.</span><span style="color:#B392F0">srcDir</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">File</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"build/generated/ksp/release/kotlin"</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#6A737D">            //略</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        getByName</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"debug"</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">            sourceSets</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">                getByName</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"main"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    java.</span><span style="color:#B392F0">srcDir</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">File</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"build/generated/ksp/debug/kotlin"</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">ksp</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    arg</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"daVinCi.verbose"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"true"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">    arg</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"daVinCi.pkg"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"com.examole.simpletest"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">    arg</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"daVinCi.module"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"App"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">dependencies</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    implementation</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">project</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">":davinci"</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"><span style="color:#B392F0">    ksp</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">project</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">":anno_ksp"</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"><span style="color:#B392F0">    implementation</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">project</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">":annotation"</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"><span style="color:#6A737D">    //略</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>运行 <code>kspXXXXKotlin</code> 任务即可</p>
+<h2 id="结语">结语</h2>
+<p>至此，KSP的实战已告一段落，相信读者朋友们一定产生了浓厚的兴趣，并准备尝试一番了，赶紧开始吧！</p>
+<hr>
+<h3 id="写给对davinci感兴趣的读者朋友们">写给对DaVinCi感兴趣的读者朋友们</h3>
+<p>继DaVinCi开源以及相关文章发布后，也引起了部分读者朋友们的讨论和关注，此次结合实战KSP的机会，对DaVinCi的功能进行了升级，这里也简单的交代一下，
+DaVinCi目前已经支持：</p>
+<ul>
+<li><code>GradientDrawable</code> , <code>StateListDrawable</code> 的背景设置 （原有）</li>
+<li><code>ColorStateList</code> 文字色设置（新增）</li>
+<li>以上两者的Style定义和使用 （新增）</li>
+</ul>
+<p>开发DaVinCi时，我的初衷是：“既然难以管理Style和Shape资源，那索性就用一种更加方便的方式来处理”，但这件本身是违背”优秀代码、优秀项目管理”的。</p>
+<p>而本次为DaVinCi添加Style机制，又将这一问题摆上桌面，笔者也将思考并尝试寻找一种 <code>有效、有趣</code> 的方式，来解决这一问题。如果各位读者对此有比较好的点子，非常希望能够分享一二。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

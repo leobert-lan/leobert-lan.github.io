@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Java基础--图解JVM内存模型和JVM线程模型 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Java基础--图解JVM内存模型和JVM线程模型</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="java基础图解jvm内存模型和jvm线程模型">Java基础—图解JVM内存模型和JVM线程模型</h1>
+<h2 id="前言">前言</h2>
+<p>各位亲爱的读者朋友，我正在创作 <code>Java多线程系列</code> 文章，严格的说，<strong>JVM内存模型的知识并不隶属于Java多线程范畴</strong>，但在讨论多线程的过程中，会涉及到相关概念，考虑到它作为 <code>面经常客</code>，故单独成篇进行知识梳理。</p>
+<p><em>在有意无意渲染之下，环境中充斥着焦虑，虽然我并不认为正经面试真的有必要考察这些，毕竟没有几个岗位是开发JVM的。本篇文章将尽最大努力做到容易记忆，帮助各位克服焦虑！</em></p>
+<p>在本篇中，将JVM内存模型以及JVM线程模型的关键知识，形成凝练的图、辅以文字，同读者一起回顾并掌握这些知识。</p>
+<p><em>作者按：本篇按照自己有限的知识进行整理，如有谬误，还请读者在评论区不吝指出</em></p>
+<blockquote>
+<p>了解系列以及总纲：<a href="https://leobert-lan.github.io/MultiThreading/post_33.html">Java多线程系列</a></p>
+</blockquote>
+<p>先来看一张 <strong>较为完整</strong> 的图：</p>
+<p><img  src="/_astro/jvm_memory_structure.CKGzl1aE_Z2cNt9b.webp" alt loading="lazy" decoding="async" width="1632" height="1060"></p>
+<p><em>作者按：图片源自亿图图示的模板</em></p>
+<p>再右侧再补充GC部分后，就比较完整了。今天的文章中，类加载部分略去，GC部分略去。</p>
+<p><em>作者按：读者朋友们还是应当将这两部分吃透的，如果面试遇到，可以顺着图展开作答</em></p>
+<p><strong>图中的 <code>Java栈</code> 又称为 <code>Java虚拟机栈</code> 、 <code>虚拟机栈</code> 、 <code>JVM栈</code> 等； <code>本地栈</code> 即 <code>本地方法栈</code></strong></p>
+<h2 id="jvm内存模型">JVM内存模型</h2>
+<p>从上图中，我们将运行时数据区剥出来，形成下图，即JVM内存模型 <em>(内存区域)</em>：</p>
+<p><img  src="/_astro/jvm_memory.DWS3LH2L_ZbhEwN.webp" alt loading="lazy" decoding="async" width="1962" height="1536"></p>
+<p><strong>在JVM1.8中，图中的 <code>方法区</code> 为 <code>元数据区</code></strong></p>
+<blockquote>
+<p>在多线程背景下，我们应个景：</p>
+<ul>
+<li>堆和方法区是 <strong>线程共享</strong> 的</li>
+<li>虚拟机栈、本地方法栈、程序计数器是 <strong>线程隔离</strong> 的</li>
+</ul>
+</blockquote>
+<p>下面展开谈一谈这五个区域的作用。</p>
+<p><em>以Java虚拟机规范为界，不讨论具体实现</em></p>
+<h3 id="方法区jvm18为元数据区">方法区（JVM1.8为元数据区）</h3>
+<p>方法区的作用为：存放虚拟机加载的：类型信息，域（Field）信息，方法（Method）信息，常量，静态变量，即时编译器编译后的代码缓存</p>
+<p>值得注意的是，无法申请到内存时，将抛出 <code>OutOfMemoryError</code></p>
+<p>方法区中存在运行时常量池，字面量、符号引用等存放入其中。</p>
+<p>在Hotspot的演变过程中：</p>
+<ul>
+<li>Java6及之前：方法区存在永久代，保存有静态变量</li>
+<li>Java7：进行去永久代工作，虽然还保留着，但静态常量池，如字符串常量池，已经移动到堆中</li>
+<li>Java8：移除永久代，类型信息、域（Field）信息、方法（Method）信息存放在元数据区；字符串常量池、静态变量存放在堆区</li>
+</ul>
+<p><em>作者按：不同的虚拟机实现细节我也没有研究过，感兴趣的读者可以自行研究，如有靠谱文章希望分享下</em></p>
+<h3 id="虚拟机栈">虚拟机栈</h3>
+<p>虚拟机栈中保存了 <strong>每一次</strong> <code>方法调用</code> 的信息。</p>
+<p>每个Java线程创建时，都会创建对应的 <code>虚拟机栈</code> ，每一次方法调用，都会往栈中压入一个 <code>栈帧</code>。如下图：</p>
+<p><img  src="/_astro/stack_frame.D8-bfQGC_Z1XaQjO.webp" alt loading="lazy" decoding="async" width="1280" height="664"></p>
+<p>而栈帧中，包含：</p>
+<ul>
+<li>局部变量表：保存函数 <em>（即方法）</em> 的局部变量</li>
+<li>操作数栈：保存计算过程中的结果，即临时变量</li>
+<li>动态链接：指向方法区的运行时常量池。字节码中的 <code>方法调用指令</code> 以常量池中指向方法的 <code>符号引用</code> 为参数。</li>
+<li>方法的返回地址</li>
+</ul>
+<h3 id="本地方法栈">本地方法栈</h3>
+<p>和虚拟机栈功能上类似，它管理了native方法的一些执行细节，而虚拟机栈管理的是Java方法的执行细节。</p>
+<h3 id="程序计数器">程序计数器</h3>
+<p>程序计数器记录线程执行的字节码行号，<em>如果当前线程正在运行native方法则为空</em>。也有称之为 <code>PC寄存器</code></p>
+<p>字节码解释器在工作时，通过改变计数器的值来选取下一跳需要执行的字节码指令，<code>分支</code> 、 <code>循环</code> 、
+<code>跳转</code> 、 <code>异常处理</code> 、<code>线程恢复</code> 等基本功能都需要依赖计数器来完成。</p>
+<blockquote>
+<p>Java虚拟机的多线程实现方式：通过 <strong>轮流切换并分配处理器执行时间</strong> 实现</p>
+</blockquote>
+<p>所以，在任意确定的时间点，一个处理器只会处理一个线程中的指令。为了正确地处理 <strong>线程切换后的任务恢复</strong> ，每一个线程都具有自身的程序计数器</p>
+<h3 id="堆">堆</h3>
+<p>堆提供了类实例和数组的内存，可以按如下方式划分：</p>
+<ul>
+<li>新生代 <em>亦可称之年轻代、New Generation</em>
+<ul>
+<li>Eden区</li>
+<li>Survivor 区 <em>S0和S1中存在互相移动，一些文章中的from、to是指移动上的逻辑关系</em>
+<ul>
+<li>S0</li>
+<li>S1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>老年代 <em>Old Generation</em></li>
+</ul>
+<p>如下图所示：</p>
+<p><img  src="/_astro/jvm_heap.aP7bp0Z9_ZvyOdo.webp" alt loading="lazy" decoding="async" width="572" height="220"></p>
+<p>划分和对象创建与GC有关，</p>
+<ul>
+<li>新生成的对象在Eden区</li>
+<li>触发 Minor GC后，还 “幸存” 的对象移动到S0</li>
+<li>再次触发Minor GC后，S0和Eden 中存活的对象被移动到S1中，S0清空</li>
+<li>每次移动时，自动递增计数器，超过默认值时 <em>（印象中是16）</em>，移动到老年代，如果Eden中没有足够内存分配，也将直接在老年代中分配内存</li>
+<li>老年代中依靠Major GC</li>
+</ul>
+<h3 id="小总结">小总结</h3>
+<p>将上文的知识点进行汇总后，我们可以得到一张新图：</p>
+<p><img  src="/_astro/JVM_1_8.BApu9Pti_P248Q.webp" alt loading="lazy" decoding="async" width="1754" height="874"></p>
+<p><em>图片来自亿图图示模板，再次不用画图了😂</em></p>
+<h2 id="jvm线程模型">JVM线程模型</h2>
+<p>一个Java线程的实现方式可以有三种：</p>
+<ul>
+<li>使用内核线程实现</li>
+<li>使用用户线程实现</li>
+<li>使用用户线程加轻量级进程混合实现</li>
+</ul>
+<p>印象中JVM没有规定线程实现的规范，具体研究需要结合具体的JVM实现，下面我们简单探索一下</p>
+<h3 id="内核线程模型">内核线程模型</h3>
+<p>内核线程模型: 完全依赖操作系统内核提供的内核线程（Kernel-Level Thread ，KLT）来实现多线程。这种方式下：<code>线程的切换调度</code> 由 <code>系统内核</code> 完成。</p>
+<p>一般而言，程序不会直接使用内核线程，而是使用一种 <strong>高级接口</strong> 即 <code>轻量级进程</code>（Light Weight Process,LWP）。</p>
+<p><img  src="/_astro/jvm_thread_model1.Cuf123cY_2r4Ml.webp" alt loading="lazy" decoding="async" width="802" height="626"></p>
+<p><em>图片来自网络</em></p>
+<p>用户进程中，通过 <code>LWP</code> 使用系统的 <code>内核线程</code> 。由于其一对一的关系，又称为 <code>一对一模型</code></p>
+<p>由于 <code>用户线程</code> 与 <code>LWP</code> 一一对应，<code>LWP</code> 是独立的调度单元，因此某个LWP在 <strong>用户进程调用过程中</strong> 发生阻塞，以及在 <strong>系统调用中</strong> 发生了阻塞，都不会影响整个进程的执行。</p>
+<p>但是LWP依托内核线程，所以 <strong>线程操作</strong> 需要 <strong>依赖系统调用</strong> ，代价是较高的，需要在 <code>用户态（User Mode）</code> 和 <code>内核态（Kernel Mode）</code> 中来回切换；
+而且每个 <code>LWP</code> 都需要一个 <code>内核线程</code> 进行支持，因此 <code>LWP</code> 要消耗一定的内核资源，因此一个系统仅可支持 <strong>少量有限</strong> 的 <code>LWP</code>。</p>
+<h3 id="用户线程模型">用户线程模型</h3>
+<p>排除掉 <code>内核线程</code> ，JVM平台也可以实现 <code>用户线程 User Thread</code> 下文简称 <code>UT</code> ，完全自行实现创建、调度、销毁。</p>
+<p>区别于内核线程模型，此时线程的调度不再依赖内核，极少占据内核资源，基本限定在用户态内，所以可以突破量的限制，并且减少线程切换时的损耗。</p>
+<p>这样看起来似乎很美好，但难以利用多核CPU的优势，并且一旦产生系统调用发生中断，其他线程也将被中断。</p>
+<p>这种 <code>多对一模型</code> 的实用性较低。</p>
+<p><img  src="/_astro/jvm_thread_model2.CD_GcSfW_Z1V8iu5.webp" alt loading="lazy" decoding="async" width="625" height="409"></p>
+<h3 id="混合模型">混合模型</h3>
+<p>又称 <code>多对多模型</code> ，这种方式充分利用了上面两种方式的优点。</p>
+<p><img  src="/_astro/jvm_thread_model3.4cYfUFmt_70d5f.webp" alt loading="lazy" decoding="async" width="729" height="596"></p>
+<p>这种模型中，既存在UT，也存在LWP。</p>
+<p>创建、切换线程(UT)依旧是廉价的，并且可以拥有大量的线程；同时利用 LWP作为UT到KLT（内核线程）的桥梁，
+享受了系统内核的线程调度、CPU映射，免去了自行实现系统调用的部分，进行系统调用时，阻塞整个进程的概率也低于 <code>用户线程模型</code> 。</p>
+<h2 id="后记">后记</h2>
+<p>又水了一篇文章，相信各位读者朋友已经基本记住了这些内容，可以愉快的侃大山了。希望疫情早日结束。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

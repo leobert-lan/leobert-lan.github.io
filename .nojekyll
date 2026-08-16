@@ -1,1 +1,1 @@
-This file makes sure that Github Pages doesn't process mdBook's output.
+# Prevent GitHub Pages from ignoring files in directories starting with an underscore (e.g. _astro)

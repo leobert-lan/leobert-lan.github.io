@@ -1,0 +1,1062 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>三思系列：Android的消息机制，一文吃透 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">三思系列：Android的消息机制，一文吃透</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="三思系列android的消息机制一文吃透">三思系列：Android的消息机制，一文吃透</h1>
+<blockquote>
+<p>三思系列是我最新的学习、总结形式，着重于:<strong>问题分析</strong>、<strong>技术积累</strong>、<strong>视野拓展</strong>，<a href="https://leobert-lan.github.io/info/about_sansi_series.html">关于三思系列</a></p>
+</blockquote>
+<p>这次，真的可以一文吃透：</p>
+<ul>
+<li>Java层消息队列的设计</li>
+<li>Java层Looper分发</li>
+<li>Native层消息队列和Java层消息队列的关系</li>
+<li>Native层Looper分发</li>
+<li>消息</li>
+<li>epoll</li>
+</ul>
+<h2 id="前言">前言</h2>
+<p>作为Android中 <code>至关重要</code> 的机制之一，十多年来，分析它的文章不断，大量的内容已经被挖掘过了。所以：</p>
+<ul>
+<li>已经对这一机制比较 <code>熟稔</code> 的读者，在这篇文章中，看不到 <code>新东西</code> 了。</li>
+<li>还不太熟悉消息机制的读者，可以在文章的基础上，继续挖一挖。</li>
+</ul>
+<p>但是，经过简单的检索和分析，<code>大部分</code> 的文章是围绕：</p>
+<ul>
+<li>Handler，Looper，MQ的关系</li>
+<li>上层的Handler，Looper、MQ 源码分析</li>
+</ul>
+<p>展开的。单纯的从这些角度学习的话，并不能 <code>完全理解</code> 消息机制。</p>
+<p>这篇文章本质还是 <code>一次脑暴</code> ，一来 <code>避免脑暴跑偏</code> ，二来帮助读者 <code>捋清内容脉络</code> 。先放出脑图：</p>
+<p><img  src="/_astro/guide.e0d2VHvy_qgxkM.webp" alt="guide" loading="lazy" decoding="async" width="616" height="332"></p>
+<h2 id="脑暴os解决进程间通信问题">脑暴：OS解决进程间通信问题</h2>
+<p>程序世界中，存在着大量的 <code>通信</code> 场景。搜索我们的知识，解决 <code>进程间通信</code> 问题有以下几种方式：</p>
+<p><em>这段内容可以泛读，了解就行，不影响往下阅读</em></p>
+<blockquote>
+<ul>
+<li>管道
+<ul>
+<li>
+<p>普通管道pipe：一种 <code>半双工</code> 的通信方式，数据只能 <code>单向流动</code> ，而且只能在具有 <code>亲缘关系</code> 的进程间使用。</p>
+</li>
+<li>
+<p>命令流管道s_pipe: <code>全双工</code>，可以同时双向传输</p>
+</li>
+<li>
+<p>命名管道FIFO：<code>半双工</code> 的通信方式，<code>允许</code> 在 <code>无亲缘关系</code> 的进程间通信。</p>
+</li>
+</ul>
+</li>
+<li>消息队列 MessageQueue：</li>
+</ul>
+<p><code>消息的链表</code>，<code>存放在内核</code> 中 并由 <code>消息队列标识符</code> 标识。
+消息队列克服了 <code>信号传递信息少</code>、<code>管道</code> 只能承载 <code>无格式字节流</code> 以及 <code>缓冲区大小受限</code> 等缺点。</p>
+<ul>
+<li>共享存储 SharedMemory：</li>
+</ul>
+<p>映射一段 <code>能被其他进程所访问</code> 的内存，这段共享内存由 <code>一个进程创建</code>，但 <code>多个进程都可以访问</code>。
+共享内存是 <code>最快的 IPC 方式</code>，它是针对 <code>其他</code> 进程间通信方式 <code>运行效率低</code> 而专门设计的。
+往往与其他通信机制一同使用，如 <code>信号量</code> 配合使用，来实现进程间的同步和通信。</p>
+<ul>
+<li>信号量 Semaphore：</li>
+</ul>
+<p>是一个 <code>计数器</code> ，可以用来控制多个进程对共享资源的访问。它常作为一种 <code>锁机制</code>，防止某进程正在访问共享资源时，
+其他进程也访问该资源，实现 <code>资源的进程独占</code>。因此，主要作为 <code>进程间</code> 以及 <code>同一进程内线程间</code> 的同步手段。</p>
+<ul>
+<li>套接字Socket：</li>
+</ul>
+<p>与其他通信机制不同的是，它可以 <code>通过网络</code> ，在 <code>不同机器之间</code> 进行进程通信。</p>
+<ul>
+<li>信号 signal：</li>
+</ul>
+<p>用于通知接收进程 <code>某事件已发生</code>。机制比较复杂。</p>
+</blockquote>
+<p>我们可以想象，Android之间也有大量的 <code>进程间通信场景</code>，OS必须采用 <code>至少一种</code> 机制，以实现进程间通信。</p>
+<p>仔细研究下去，我们发现，Android OS用了不止一种方式。而且，Android 还基于 <code>OpenBinder</code> 开发了 <code>Binder</code> 用于 <code>用户空间</code> 内的进程间通信。</p>
+<p>关于 <strong>为什么不直接使用Linux中现有的进程间通信方式</strong> ，可以看看<a href="https://www.zhihu.com/question/39440766/answer/89210950">这篇知乎问答</a></p>
+<p><a href="https://www.jianshu.com/p/1b25bc6b861e">这篇文章</a> 也简单探讨了 “内核空间内的消息队列”</p>
+<p>这里我们留一个问题以后探究：</p>
+<blockquote>
+<p>Android 有没有使用 Linux内核中的MessageQueue机制 干事情</p>
+</blockquote>
+<p>基于消息队列的消息机制设计有很多优势，Android 在很多通信场景内，采用了这一设计思路。</p>
+<h2 id="消息机制的三要素">消息机制的三要素</h2>
+<p>不管在哪，我们谈到消息机制，都会有这三个要素：</p>
+<ul>
+<li><code>消息队列</code></li>
+<li><code>消息循环（分发）</code></li>
+<li><code>消息处理</code></li>
+</ul>
+<p><code>消息队列</code> ，是 <code>消息对象</code> 的队列，基本规则是 <code>FIFO</code>。</p>
+<p><code>消息循环（分发）</code>， 基本是通用的机制，利用 <code>死循环</code> 不断的取出消息队列头部的消息，派发执行</p>
+<p><code>消息处理</code>，这里不得不提到 <code>消息</code> 有两种形式：</p>
+<ul>
+<li>Enrichment 自身信息完备</li>
+<li>Query-Back 自身信息不完备，需要回查</li>
+</ul>
+<p>这两者的取舍，主要看系统中 <code>生成消息的开销</code> 和 <code>回查信息的开销</code> 两者的博弈。</p>
+<p>在信息完备后，接收者即可处理消息。</p>
+<h2 id="android-framework中的消息队列">Android Framework中的消息队列</h2>
+<p>Android 的Framework中的消息队列有两个：</p>
+<ul>
+<li>Java层  <code>frameworks/base/core/java/android/os/MessageQueue.java</code></li>
+<li>Native层 <code>frameworks/base/core/jni/android_os_MessageQueue.cpp</code></li>
+</ul>
+<p>Java层的MQ并不是 <code>List</code> 或者 <code>Queue</code> 之类的 Jdk内的数据结构实现。</p>
+<p>Native层的源码我下载了一份 Android 10 的 <a href="https://github.com/leobert-lan/Blog/blob/main/Android/Mechanism/Message/code/android_os_MessageQueue.cpp">源码</a> ，并不长，大家可以完整的读一读。</p>
+<blockquote>
+<p>并不难理解：<code>用户空间</code> 会接收到来自 <code>内核空间</code> 的 <code>消息</code> ， 从 <code>下图</code> 我们可知，这部分消息先被 <code>Native层</code> 获知，所以：</p>
+<ul>
+<li>通过 <code>Native层</code> 建立消息队列，它拥有消息队列的各种基本能力</li>
+<li>利用<code>JNI</code> 打通 <code>Java层</code> 和 <code>Native层</code> 的 <code>Runtime屏障</code>，在Java层 <code>映射</code> 出消息队列</li>
+<li>应用建立在Java层之上，在Java层中实现消息的 <code>分发</code> 和 <code>处理</code></li>
+</ul>
+<p>PS：在Android 2.3那个时代，消息队列的实现是在Java层的，至于10年前为何改成了 native实现，
+推测和CPU空转有关，笔者没有继续探究下去，如果有读者了解，希望可以留言帮我解惑。</p>
+</blockquote>
+<p><img src="https://developer.android.google.cn/guide/platform/images/android-stack_2x.png" alt=""></p>
+<p><em>PS:还有一张经典的 <code>系统启动架构图</code> 没有找到，这张图更加直观</em></p>
+<h3 id="代码解析">代码解析</h3>
+<p>我们简单的 阅读、分析 下Native中的MQ源码</p>
+<p>Native层消息队列的创建：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">static</span><span style="color:#B392F0"> jlong</span><span style="color:#B392F0"> android_os_MessageQueue_nativeInit</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">JNIEnv</span><span style="color:#F97583">*</span><span style="color:#FFAB70"> env</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">jclass</span><span style="color:#FFAB70"> clazz</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">    NativeMessageQueue</span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> nativeMessageQueue </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> NativeMessageQueue</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">nativeMessageQueue) {</span></span>
+<span class="line"><span style="color:#B392F0">        jniThrowRuntimeException</span><span style="color:#E1E4E8">(env, </span><span style="color:#9ECBFF">"Unable to allocate native queue"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    nativeMessageQueue-></span><span style="color:#B392F0">incStrong</span><span style="color:#E1E4E8">(env);</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#F97583"> reinterpret_cast&#x3C;</span><span style="color:#E1E4E8">jlong</span><span style="color:#F97583">></span><span style="color:#E1E4E8">(nativeMessageQueue);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>很简单，创建一个Native层的消息队列，如果创建失败，抛异常信息,返回0，否则将指针转换为Java的long型值返回。当然，会<code>被Java层的MQ所持有</code>。</p>
+<p><code>NativeMessageQueue</code> 类的构造函数</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#B392F0">NativeMessageQueue</span><span style="color:#E1E4E8">::</span><span style="color:#B392F0">NativeMessageQueue</span><span style="color:#E1E4E8">() :</span></span>
+<span class="line"><span style="color:#B392F0">        mPollEnv</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">NULL</span><span style="color:#E1E4E8">), </span><span style="color:#B392F0">mPollObj</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">NULL</span><span style="color:#E1E4E8">), </span><span style="color:#B392F0">mExceptionObj</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">NULL</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    mLooper </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Looper</span><span style="color:#E1E4E8">::</span><span style="color:#B392F0">getForThread</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (mLooper </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> NULL</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        mLooper </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Looper</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">        Looper</span><span style="color:#E1E4E8">::</span><span style="color:#B392F0">setForThread</span><span style="color:#E1E4E8">(mLooper);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>这里的Looper是native层Looper，通过静态方法 <code>Looper::getForThread()</code> 获取对象实例，如果未获取到，则创建实例，并通过静态方法设置。</p>
+<p>看一下Java层MQ中会使用到的native方法</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> MessageQueue</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> mPtr; </span><span style="color:#6A737D">// used by native code</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> native</span><span style="color:#F97583"> static</span><span style="color:#F97583"> long</span><span style="color:#B392F0"> nativeInit</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> native</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> nativeDestroy</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> ptr</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> native</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> nativePollOnce</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> ptr</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> timeoutMillis</span><span style="color:#E1E4E8">); </span><span style="color:#6A737D">/*non-static for callbacks*/</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> native</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> nativeWake</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> ptr</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> native</span><span style="color:#F97583"> static</span><span style="color:#F97583"> boolean</span><span style="color:#B392F0"> nativeIsPolling</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> ptr</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> native</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> nativeSetFileDescriptorEvents</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> ptr</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> fd</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> events</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>对应签名：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> const</span><span style="color:#B392F0"> JNINativeMethod</span><span style="color:#E1E4E8"> gMessageQueueMethods[] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    /* name, signature, funcPtr */</span></span>
+<span class="line"><span style="color:#E1E4E8">    { </span><span style="color:#9ECBFF">"nativeInit"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"()J"</span><span style="color:#E1E4E8">, (</span><span style="color:#F97583">void*</span><span style="color:#E1E4E8">)android_os_MessageQueue_nativeInit },</span></span>
+<span class="line"><span style="color:#E1E4E8">    { </span><span style="color:#9ECBFF">"nativeDestroy"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"(J)V"</span><span style="color:#E1E4E8">, (</span><span style="color:#F97583">void*</span><span style="color:#E1E4E8">)android_os_MessageQueue_nativeDestroy },</span></span>
+<span class="line"><span style="color:#E1E4E8">    { </span><span style="color:#9ECBFF">"nativePollOnce"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"(JI)V"</span><span style="color:#E1E4E8">, (</span><span style="color:#F97583">void*</span><span style="color:#E1E4E8">)android_os_MessageQueue_nativePollOnce },</span></span>
+<span class="line"><span style="color:#E1E4E8">    { </span><span style="color:#9ECBFF">"nativeWake"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"(J)V"</span><span style="color:#E1E4E8">, (</span><span style="color:#F97583">void*</span><span style="color:#E1E4E8">)android_os_MessageQueue_nativeWake },</span></span>
+<span class="line"><span style="color:#E1E4E8">    { </span><span style="color:#9ECBFF">"nativeIsPolling"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"(J)Z"</span><span style="color:#E1E4E8">, (</span><span style="color:#F97583">void*</span><span style="color:#E1E4E8">)android_os_MessageQueue_nativeIsPolling },</span></span>
+<span class="line"><span style="color:#E1E4E8">    { </span><span style="color:#9ECBFF">"nativeSetFileDescriptorEvents"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"(JII)V"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            (</span><span style="color:#F97583">void*</span><span style="color:#E1E4E8">)android_os_MessageQueue_nativeSetFileDescriptorEvents },</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<p><code>mPtr</code> 是Native层MQ的内存地址在Java层的映射。</p>
+<h4 id="java层判断mq是否还在工作">Java层判断MQ是否还在工作：</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> boolean</span><span style="color:#B392F0"> isPollingLocked</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">    // If the loop is quitting then it must not be idling.</span></span>
+<span class="line"><span style="color:#6A737D">    // We can assume mPtr != 0 when mQuitting is false.</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">mQuitting </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#B392F0"> nativeIsPolling</span><span style="color:#E1E4E8">(mPtr);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">static</span><span style="color:#B392F0"> jboolean</span><span style="color:#B392F0"> android_os_MessageQueue_nativeIsPolling</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">JNIEnv</span><span style="color:#F97583">*</span><span style="color:#FFAB70"> env</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">jclass</span><span style="color:#FFAB70"> clazz</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">jlong</span><span style="color:#FFAB70"> ptr</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">    NativeMessageQueue</span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> nativeMessageQueue </span><span style="color:#F97583">=</span><span style="color:#F97583"> reinterpret_cast&#x3C;</span><span style="color:#E1E4E8">NativeMessageQueue</span><span style="color:#F97583">*></span><span style="color:#E1E4E8">(ptr);</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> nativeMessageQueue-></span><span style="color:#B392F0">getLooper</span><span style="color:#E1E4E8">()-></span><span style="color:#B392F0">isPolling</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * Returns whether this looper's thread is currently polling for more work to do.</span></span>
+<span class="line"><span style="color:#6A737D"> * This is a good signal that the loop is still alive rather than being stuck</span></span>
+<span class="line"><span style="color:#6A737D"> * handling a callback.  Note that this method is intrinsically racy, since the</span></span>
+<span class="line"><span style="color:#6A737D"> * state of the loop can change before you get the result back.</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">bool</span><span style="color:#B392F0"> isPolling</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">const</span><span style="color:#E1E4E8">;</span></span></code></pre>
+<h4 id="唤醒-native层mq">唤醒 Native层MQ：</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> android_os_MessageQueue_nativeWake</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">JNIEnv</span><span style="color:#F97583">*</span><span style="color:#FFAB70"> env</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">jclass</span><span style="color:#FFAB70"> clazz</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">jlong</span><span style="color:#FFAB70"> ptr</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">    NativeMessageQueue</span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> nativeMessageQueue </span><span style="color:#F97583">=</span><span style="color:#F97583"> reinterpret_cast&#x3C;</span><span style="color:#E1E4E8">NativeMessageQueue</span><span style="color:#F97583">*></span><span style="color:#E1E4E8">(ptr);</span></span>
+<span class="line"><span style="color:#E1E4E8">    nativeMessageQueue-></span><span style="color:#B392F0">wake</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> NativeMessageQueue</span><span style="color:#E1E4E8">::</span><span style="color:#B392F0">wake</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    mLooper-></span><span style="color:#B392F0">wake</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="native层poll">Native层Poll：</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> android_os_MessageQueue_nativePollOnce</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">JNIEnv</span><span style="color:#F97583">*</span><span style="color:#FFAB70"> env</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">jobject</span><span style="color:#FFAB70"> obj</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">        jlong</span><span style="color:#FFAB70"> ptr</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">jint</span><span style="color:#FFAB70"> timeoutMillis</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">    NativeMessageQueue</span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> nativeMessageQueue </span><span style="color:#F97583">=</span><span style="color:#F97583"> reinterpret_cast&#x3C;</span><span style="color:#E1E4E8">NativeMessageQueue</span><span style="color:#F97583">*></span><span style="color:#E1E4E8">(ptr);</span></span>
+<span class="line"><span style="color:#E1E4E8">    nativeMessageQueue-></span><span style="color:#B392F0">pollOnce</span><span style="color:#E1E4E8">(env, obj, timeoutMillis);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> NativeMessageQueue</span><span style="color:#E1E4E8">::</span><span style="color:#B392F0">pollOnce</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">JNIEnv</span><span style="color:#F97583">*</span><span style="color:#FFAB70"> env</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">jobject</span><span style="color:#FFAB70"> pollObj</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> timeoutMillis</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    mPollEnv </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> env;</span></span>
+<span class="line"><span style="color:#E1E4E8">    mPollObj </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> pollObj;</span></span>
+<span class="line"><span style="color:#E1E4E8">    mLooper-></span><span style="color:#B392F0">pollOnce</span><span style="color:#E1E4E8">(timeoutMillis);</span></span>
+<span class="line"><span style="color:#E1E4E8">    mPollObj </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> NULL</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    mPollEnv </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> NULL</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (mExceptionObj) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        env-></span><span style="color:#B392F0">Throw</span><span style="color:#E1E4E8">(mExceptionObj);</span></span>
+<span class="line"><span style="color:#E1E4E8">        env-></span><span style="color:#B392F0">DeleteLocalRef</span><span style="color:#E1E4E8">(mExceptionObj);</span></span>
+<span class="line"><span style="color:#E1E4E8">        mExceptionObj </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> NULL</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>这里比较重要，我们先大概看下 Native层的Looper是 <code>如何分发消息</code> 的</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#6A737D">//Looper.h</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> pollOnce</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> timeoutMillis</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int*</span><span style="color:#FFAB70"> outFd</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int*</span><span style="color:#FFAB70"> outEvents</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">void**</span><span style="color:#FFAB70"> outData</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">inline</span><span style="color:#F97583"> int</span><span style="color:#B392F0"> pollOnce</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> timeoutMillis</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#B392F0"> pollOnce</span><span style="color:#E1E4E8">(timeoutMillis, </span><span style="color:#79B8FF">NULL</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">NULL</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">NULL</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//实现</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> Looper</span><span style="color:#E1E4E8">::</span><span style="color:#B392F0">pollOnce</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> timeoutMillis</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int*</span><span style="color:#FFAB70"> outFd</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int*</span><span style="color:#FFAB70"> outEvents</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">void**</span><span style="color:#FFAB70"> outData</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#E1E4E8"> result </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> (;;) {</span></span>
+<span class="line"><span style="color:#F97583">        while</span><span style="color:#E1E4E8"> (mResponseIndex </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> mResponses.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#F97583">            const</span><span style="color:#B392F0"> Response</span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> response </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mResponses.</span><span style="color:#B392F0">itemAt</span><span style="color:#E1E4E8">(mResponseIndex</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">            int</span><span style="color:#E1E4E8"> ident </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> response.request.ident;</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (ident </span><span style="color:#F97583">>=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                int</span><span style="color:#E1E4E8"> fd </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> response.request.fd;</span></span>
+<span class="line"><span style="color:#F97583">                int</span><span style="color:#E1E4E8"> events </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> response.events;</span></span>
+<span class="line"><span style="color:#F97583">                void*</span><span style="color:#E1E4E8"> data </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> response.request.data;</span></span>
+<span class="line"><span style="color:#F97583">#if</span><span style="color:#B392F0"> DEBUG_POLL_AND_WAKE</span></span>
+<span class="line"><span style="color:#B392F0">                ALOGD</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"</span><span style="color:#79B8FF">%p</span><span style="color:#9ECBFF"> ~ pollOnce - returning signalled identifier </span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF">: "</span></span>
+<span class="line"><span style="color:#9ECBFF">                        "fd=</span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF">, events=0x</span><span style="color:#79B8FF">%x</span><span style="color:#9ECBFF">, data=</span><span style="color:#79B8FF">%p</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">                        this</span><span style="color:#E1E4E8">, ident, fd, events, data);</span></span>
+<span class="line"><span style="color:#F97583">#endif</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (outFd </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> NULL</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">*</span><span style="color:#E1E4E8">outFd </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> fd;</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (outEvents </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> NULL</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">*</span><span style="color:#E1E4E8">outEvents </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> events;</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (outData </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> NULL</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">*</span><span style="color:#E1E4E8">outData </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> data;</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#E1E4E8"> ident;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (result </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">#if</span><span style="color:#B392F0"> DEBUG_POLL_AND_WAKE</span></span>
+<span class="line"><span style="color:#B392F0">            ALOGD</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"</span><span style="color:#79B8FF">%p</span><span style="color:#9ECBFF"> ~ pollOnce - returning result </span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, result);</span></span>
+<span class="line"><span style="color:#F97583">#endif</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (outFd </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> NULL</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">*</span><span style="color:#E1E4E8">outFd </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (outEvents </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> NULL</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">*</span><span style="color:#E1E4E8">outEvents </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (outData </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> NULL</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">*</span><span style="color:#E1E4E8">outData </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> NULL</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> result;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        result </span><span style="color:#F97583">=</span><span style="color:#B392F0"> pollInner</span><span style="color:#E1E4E8">(timeoutMillis);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>先处理Native层滞留的Response，然后调用pollInner。这里的细节比较复杂，稍后我们在 <a href="#native_looper">Native Looper解析</a> 中进行脑暴。</p>
+<blockquote>
+<p>先于此处细节分析，我们知道，调用一个方法，这是<code>阻塞的</code> ，用大白话描述即在方法返回前，调用者在 <code>等待</code>。</p>
+</blockquote>
+<p>Java层调动 <code>native void nativePollOnce(long ptr, int timeoutMillis);</code> 过程中是阻塞的。</p>
+<p>此时我们再阅读下Java层MQ的消息获取：代码比较长，直接在代码中进行要点注释。</p>
+<p>在看之前，我们先单纯从 <code>TDD的角度</code> 思考下，有哪些 <code>主要场景</code> ：<em>当然，这些场景不一定都合乎Android现有的设计</em></p>
+<ul>
+<li>消息队列是否在工作中
+<ul>
+<li>工作中，期望返回消息</li>
+<li>不工作，期望返回null</li>
+</ul>
+</li>
+<li>工作中的消息队列 <code>当前</code> 是否有消息
+<ul>
+<li>不存在消息，阻塞 or 返回null？— 如果返回null，则在外部需要需要 <code>保持空转</code> 或者 <code>唤醒机制</code>，以支持正常运作。从封装角度出发，应当 <code>保持空转</code>，自己解决问题</li>
+<li>存在消息
+<ul>
+<li>特殊的 <code>内部功能性消息</code>，期望MQ内部自行处理</li>
+<li>已经到处理时间的消息， <strong>返回消息</strong></li>
+<li>未到处理时间，<em>如果都是排过序的</em>，期望 <code>空转保持阻塞</code> or <code>返回静默并设置唤醒</code>？ 按照前面的讨论，是期望 <code>保持空转</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> MessageQueue</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    Message </span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // Return here if the message loop has already quit and been disposed.</span></span>
+<span class="line"><span style="color:#6A737D">        // This can happen if the application tries to restart a looper after quit</span></span>
+<span class="line"><span style="color:#6A737D">        // which is not supported.</span></span>
+<span class="line"><span style="color:#6A737D">        // 1. 如果 native消息队列指针映射已经为0，即虚引用，说明消息队列已经退出，没有消息了。</span></span>
+<span class="line"><span style="color:#6A737D">        // 则返回 null</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> ptr </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mPtr;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (ptr </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> pendingIdleHandlerCount </span><span style="color:#F97583">=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// -1 only during first iteration</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> nextPollTimeoutMillis </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#6A737D">        // 2. 死循环，当为获取到需要 `分发处理` 的消息时，保持空转</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (;;) {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (nextPollTimeoutMillis </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                Binder.</span><span style="color:#B392F0">flushPendingCommands</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // 3. 调用native层方法，poll message，注意，消息还存在于native层</span></span>
+<span class="line"><span style="color:#B392F0">            nativePollOnce</span><span style="color:#E1E4E8">(ptr, nextPollTimeoutMillis);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            synchronized</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">                // Try to retrieve the next message.  Return if found.</span></span>
+<span class="line"><span style="color:#F97583">                final</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> now </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> SystemClock.</span><span style="color:#B392F0">uptimeMillis</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">                Message prevMsg </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">                Message msg </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mMessages;</span></span>
+<span class="line"><span style="color:#E1E4E8">                </span></span>
+<span class="line"><span style="color:#6A737D">                //4. 如果发现 barrier ，即同步屏障，则寻找队列中的下一个可能存在的异步消息</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (msg </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> msg.target </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">                    // Stalled by a barrier.  Find the next asynchronous message in the queue.</span></span>
+<span class="line"><span style="color:#F97583">                    do</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                        prevMsg </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> msg;</span></span>
+<span class="line"><span style="color:#E1E4E8">                        msg </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> msg.next;</span></span>
+<span class="line"><span style="color:#E1E4E8">                    } </span><span style="color:#F97583">while</span><span style="color:#E1E4E8"> (msg </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">msg.</span><span style="color:#B392F0">isAsynchronous</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">                </span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (msg </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">                    // 5. 发现了消息，</span></span>
+<span class="line"><span style="color:#6A737D">                    // 如果是还没有到约定时间的消息，则设置一个 `下次唤醒` 的最大时间差</span></span>
+<span class="line"><span style="color:#6A737D">                    // 否则 `维护单链表信息` 并返回消息</span></span>
+<span class="line"><span style="color:#E1E4E8">                    </span></span>
+<span class="line"><span style="color:#F97583">                    if</span><span style="color:#E1E4E8"> (now </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> msg.when) {</span></span>
+<span class="line"><span style="color:#6A737D">                        // Next message is not ready.  Set a timeout to wake up when it is ready.</span></span>
+<span class="line"><span style="color:#E1E4E8">                        nextPollTimeoutMillis </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8">) Math.</span><span style="color:#B392F0">min</span><span style="color:#E1E4E8">(msg.when </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> now, Integer.MAX_VALUE);</span></span>
+<span class="line"><span style="color:#E1E4E8">                    } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">                        // 寻找到了 `到处理时间` 的消息。 `维护单链表信息` 并返回消息</span></span>
+<span class="line"><span style="color:#6A737D">                        // Got a message.</span></span>
+<span class="line"><span style="color:#E1E4E8">                        mBlocked </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">                        if</span><span style="color:#E1E4E8"> (prevMsg </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                            prevMsg.next </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> msg.next;</span></span>
+<span class="line"><span style="color:#E1E4E8">                        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                            mMessages </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> msg.next;</span></span>
+<span class="line"><span style="color:#E1E4E8">                        }</span></span>
+<span class="line"><span style="color:#E1E4E8">                        msg.next </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">                        if</span><span style="color:#E1E4E8"> (DEBUG) Log.</span><span style="color:#B392F0">v</span><span style="color:#E1E4E8">(TAG, </span><span style="color:#9ECBFF">"Returning message: "</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> msg);</span></span>
+<span class="line"><span style="color:#E1E4E8">                        msg.</span><span style="color:#B392F0">markInUse</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">                        return</span><span style="color:#E1E4E8"> msg;</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">                    // No more messages.</span></span>
+<span class="line"><span style="color:#E1E4E8">                    nextPollTimeoutMillis </span><span style="color:#F97583">=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">                // 处理 是否需要 停止消息队列                </span></span>
+<span class="line"><span style="color:#6A737D">                // Process the quit message now that all pending messages have been handled.</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (mQuitting) {</span></span>
+<span class="line"><span style="color:#B392F0">                    dispose</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">                    return</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">                // 维护 接下来需要处理的 IDLEHandler 信息，</span></span>
+<span class="line"><span style="color:#6A737D">                // 如果没有 IDLEHandler，则直接进入下一轮消息获取环节</span></span>
+<span class="line"><span style="color:#6A737D">                // 否则处理 IDLEHandler</span></span>
+<span class="line"><span style="color:#6A737D">                // If first time idle, then get the number of idlers to run.</span></span>
+<span class="line"><span style="color:#6A737D">                // Idle handles only run if the queue is empty or if the first message</span></span>
+<span class="line"><span style="color:#6A737D">                // in the queue (possibly a barrier) is due to be handled in the future.</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (pendingIdleHandlerCount </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#F97583">                        &#x26;&#x26;</span><span style="color:#E1E4E8"> (mMessages </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> now </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> mMessages.when)) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    pendingIdleHandlerCount </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mIdleHandlers.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (pendingIdleHandlerCount </span><span style="color:#F97583">&#x3C;=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">                    // No idle handlers to run.  Loop and wait some more.</span></span>
+<span class="line"><span style="color:#E1E4E8">                    mBlocked </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">                    continue</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (mPendingIdleHandlers </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    mPendingIdleHandlers </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> IdleHandler</span><span style="color:#E1E4E8">[Math.</span><span style="color:#B392F0">max</span><span style="color:#E1E4E8">(pendingIdleHandlerCount, </span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">)];</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">                mPendingIdleHandlers </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mIdleHandlers.</span><span style="color:#B392F0">toArray</span><span style="color:#E1E4E8">(mPendingIdleHandlers);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // 处理 IDLEHandler</span></span>
+<span class="line"><span style="color:#6A737D">            // Run the idle handlers.</span></span>
+<span class="line"><span style="color:#6A737D">            // We only ever reach this code block during the first iteration.</span></span>
+<span class="line"><span style="color:#F97583">            for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> pendingIdleHandlerCount; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                final</span><span style="color:#E1E4E8"> IdleHandler idler </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mPendingIdleHandlers[i];</span></span>
+<span class="line"><span style="color:#E1E4E8">                mPendingIdleHandlers[i] </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// release the reference to the handler</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">                boolean</span><span style="color:#E1E4E8"> keep </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">                try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    keep </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> idler.</span><span style="color:#B392F0">queueIdle</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">                } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (Throwable </span><span style="color:#FFAB70">t</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    Log.</span><span style="color:#B392F0">wtf</span><span style="color:#E1E4E8">(TAG, </span><span style="color:#9ECBFF">"IdleHandler threw exception"</span><span style="color:#E1E4E8">, t);</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">keep) {</span></span>
+<span class="line"><span style="color:#F97583">                    synchronized</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                        mIdleHandlers.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(idler);</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // Reset the idle handler count to 0 so we do not run them again.</span></span>
+<span class="line"><span style="color:#E1E4E8">            pendingIdleHandlerCount </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // While calling an idle handler, a new message could have been delivered</span></span>
+<span class="line"><span style="color:#6A737D">            // so go back and look again for a pending message without waiting.</span></span>
+<span class="line"><span style="color:#E1E4E8">            nextPollTimeoutMillis </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="java层压入消息">Java层压入消息</h4>
+<p>这就比较简单了，当消息本身合法，且消息队列还在工作中时。
+依旧从 <code>TDD角度</code> 出发：</p>
+<ul>
+<li>如果消息队列没有头，期望直接作为头</li>
+<li>如果有头
+<ul>
+<li><code>消息处理时间</code> 先于 <code>头消息</code> 或者是需要立即处理的消息，则作为新的头</li>
+<li>否则按照 <code>处理时间</code> 插入到合适位置</li>
+</ul>
+</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583"> boolean</span><span style="color:#B392F0"> enqueueMessage</span><span style="color:#E1E4E8">(Message msg, </span><span style="color:#F97583">long</span><span style="color:#E1E4E8"> when) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (msg.target </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> IllegalArgumentException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Message must have a target."</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        synchronized</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (msg.</span><span style="color:#B392F0">isInUse</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#F97583">                throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> IllegalStateException</span><span style="color:#E1E4E8">(msg </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " This message is already in use."</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (mQuitting) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                IllegalStateException e </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> IllegalStateException</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                        msg.target </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " sending message to a Handler on a dead thread"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">                Log.</span><span style="color:#B392F0">w</span><span style="color:#E1E4E8">(TAG, e.</span><span style="color:#B392F0">getMessage</span><span style="color:#E1E4E8">(), e);</span></span>
+<span class="line"><span style="color:#E1E4E8">                msg.</span><span style="color:#B392F0">recycle</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            msg.</span><span style="color:#B392F0">markInUse</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            msg.when </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> when;</span></span>
+<span class="line"><span style="color:#E1E4E8">            Message p </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mMessages;</span></span>
+<span class="line"><span style="color:#F97583">            boolean</span><span style="color:#E1E4E8"> needWake;</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (p </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> when </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> when </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> p.when) {</span></span>
+<span class="line"><span style="color:#6A737D">                // New head, wake up the event queue if blocked.</span></span>
+<span class="line"><span style="color:#E1E4E8">                msg.next </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> p;</span></span>
+<span class="line"><span style="color:#E1E4E8">                mMessages </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> msg;</span></span>
+<span class="line"><span style="color:#E1E4E8">                needWake </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mBlocked;</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">                // Inserted within the middle of the queue.  Usually we don't have to wake</span></span>
+<span class="line"><span style="color:#6A737D">                // up the event queue unless there is a barrier at the head of the queue</span></span>
+<span class="line"><span style="color:#6A737D">                // and the message is the earliest asynchronous message in the queue.</span></span>
+<span class="line"><span style="color:#E1E4E8">                needWake </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mBlocked </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> p.target </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> msg.</span><span style="color:#B392F0">isAsynchronous</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">                Message prev;</span></span>
+<span class="line"><span style="color:#F97583">                for</span><span style="color:#E1E4E8"> (;;) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    prev </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> p;</span></span>
+<span class="line"><span style="color:#E1E4E8">                    p </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> p.next;</span></span>
+<span class="line"><span style="color:#F97583">                    if</span><span style="color:#E1E4E8"> (p </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> when </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> p.when) {</span></span>
+<span class="line"><span style="color:#F97583">                        break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#F97583">                    if</span><span style="color:#E1E4E8"> (needWake </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> p.</span><span style="color:#B392F0">isAsynchronous</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                        needWake </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">                msg.next </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> p; </span><span style="color:#6A737D">// invariant: p == prev.next</span></span>
+<span class="line"><span style="color:#E1E4E8">                prev.next </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> msg;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // We can assume mPtr != 0 because mQuitting is false.</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (needWake) {</span></span>
+<span class="line"><span style="color:#B392F0">                nativeWake</span><span style="color:#E1E4E8">(mPtr);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p><code>同步屏障 barrier</code>后面单独脑暴， 其他部分就先不看了</p>
+<h2 id="java层消息分发">Java层消息分发</h2>
+<p>这一节开始，我们脑暴消息分发，前面我们已经看过了 <code>MessageQueue</code> ，消息分发就是 <code>不停地</code> 从 <code>MessageQueue</code> 中取出消息，并指派给处理者。
+完成这一工作的，是Looper。</p>
+<p>在前面，我们已经知道了，Native层也有Looper，但是<code>不难理解</code>：</p>
+<ul>
+<li>消息队列需要 <code>桥梁</code> 连通 Java层和Native层</li>
+<li>Looper只需要 <code>在自己这一端</code>，处理自己的消息队列分发即可</li>
+</ul>
+<p>所以，我们看Java层的消息分发时，看Java层的Looper即可。</p>
+<p>关注三个主要方法：</p>
+<ul>
+<li>出门上班</li>
+<li>工作</li>
+<li>下班回家</li>
+</ul>
+<h3 id="出门上班-prepare">出门上班 prepare</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Looper</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> prepare</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#B392F0">        prepare</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> prepare</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">boolean</span><span style="color:#FFAB70"> quitAllowed</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (sThreadLocal.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> RuntimeException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Only one Looper may be created per thread"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        sThreadLocal.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#B392F0"> Looper</span><span style="color:#E1E4E8">(quitAllowed));</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>这里有两个注意点：</p>
+<ul>
+<li>已经出了门，除非再进门，否则没法再出门了。同样，一个线程有一个Looper就够了，只要它还活着，就没必要再建一个。</li>
+<li>责任到人，一个Looper服务于一个Thread，这需要 <code>注册</code> ，代表着 <code>某个Thread</code> 已经由自己服务了。利用了ThreadLocal，因为多线程访问集合，<code>总需要考虑 竞争</code>，这很不人道主义，干脆分家，每个Thread操作自己的内容互不干扰，也就没有了竞争，于是封装了 <code>ThreadLocal</code></li>
+</ul>
+<h3 id="上班-loop">上班 loop</h3>
+<p>注意工作性质是 <code>分发</code>，并不需要自己处理</p>
+<ul>
+<li>没有 <code>注册</code> 自然就找不到负责这份工作的人。</li>
+<li>已经在工作了就不要催，催了会导致工作出错，顺序出现问题。</li>
+<li>工作就是不断的取出 <code>老板</code>— <code>MQ</code> 的 <code>指令</code> — <code>Message</code>，并交给 <code>相关负责人</code> — <code>Handler</code> 去处理，并记录信息</li>
+<li><code>007</code>，不眠不休，<code>当MQ再也不发出消息了</code>，没活干了，大家都散了吧，下班回家</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Looper</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> loop</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#E1E4E8"> Looper me </span><span style="color:#F97583">=</span><span style="color:#B392F0"> myLooper</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (me </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> RuntimeException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"No Looper; Looper.prepare() wasn't called on this thread."</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (me.mInLoop) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            Slog.</span><span style="color:#B392F0">w</span><span style="color:#E1E4E8">(TAG, </span><span style="color:#9ECBFF">"Loop again would have the queued messages be executed"</span></span>
+<span class="line"><span style="color:#F97583">                    +</span><span style="color:#9ECBFF"> " before this one completed."</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        me.mInLoop </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#E1E4E8"> MessageQueue queue </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> me.mQueue;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // Make sure the identity of this thread is that of the local process,</span></span>
+<span class="line"><span style="color:#6A737D">        // and keep track of what that identity token actually is.</span></span>
+<span class="line"><span style="color:#E1E4E8">        Binder.</span><span style="color:#B392F0">clearCallingIdentity</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> ident </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Binder.</span><span style="color:#B392F0">clearCallingIdentity</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // Allow overriding a threshold with a system prop. e.g.</span></span>
+<span class="line"><span style="color:#6A737D">        // adb shell 'setprop log.looper.1000.main.slow 1 &#x26;&#x26; stop &#x26;&#x26; start'</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> thresholdOverride </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">                SystemProperties.</span><span style="color:#B392F0">getInt</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"log.looper."</span></span>
+<span class="line"><span style="color:#F97583">                        +</span><span style="color:#E1E4E8"> Process.</span><span style="color:#B392F0">myUid</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> "."</span></span>
+<span class="line"><span style="color:#F97583">                        +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getName</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">                        +</span><span style="color:#9ECBFF"> ".slow"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        boolean</span><span style="color:#E1E4E8"> slowDeliveryDetected </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (;;) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            Message msg </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> queue.</span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">(); </span><span style="color:#6A737D">// might block</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (msg </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">                // No message indicates that the message queue is quitting.</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // This must be in a local variable, in case a UI event sets the logger</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#E1E4E8"> Printer logging </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> me.mLogging;</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (logging </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                logging.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">">>>>> Dispatching to "</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> msg.target </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " "</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#E1E4E8">                        msg.callback </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ": "</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> msg.what);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#6A737D">            // Make sure the observer won't change while processing a transaction.</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#E1E4E8"> Observer observer </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> sObserver;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> traceTag </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> me.mTraceTag;</span></span>
+<span class="line"><span style="color:#F97583">            long</span><span style="color:#E1E4E8"> slowDispatchThresholdMs </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> me.mSlowDispatchThresholdMs;</span></span>
+<span class="line"><span style="color:#F97583">            long</span><span style="color:#E1E4E8"> slowDeliveryThresholdMs </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> me.mSlowDeliveryThresholdMs;</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (thresholdOverride </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                slowDispatchThresholdMs </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> thresholdOverride;</span></span>
+<span class="line"><span style="color:#E1E4E8">                slowDeliveryThresholdMs </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> thresholdOverride;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> boolean</span><span style="color:#E1E4E8"> logSlowDelivery </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (slowDeliveryThresholdMs </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> (msg.when </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> boolean</span><span style="color:#E1E4E8"> logSlowDispatch </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (slowDispatchThresholdMs </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> boolean</span><span style="color:#E1E4E8"> needStartTime </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> logSlowDelivery </span><span style="color:#F97583">||</span><span style="color:#E1E4E8"> logSlowDispatch;</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> boolean</span><span style="color:#E1E4E8"> needEndTime </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> logSlowDispatch;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (traceTag </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> Trace.</span><span style="color:#B392F0">isTagEnabled</span><span style="color:#E1E4E8">(traceTag)) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                Trace.</span><span style="color:#B392F0">traceBegin</span><span style="color:#E1E4E8">(traceTag, msg.target.</span><span style="color:#B392F0">getTraceName</span><span style="color:#E1E4E8">(msg));</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> dispatchStart </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> needStartTime </span><span style="color:#F97583">?</span><span style="color:#E1E4E8"> SystemClock.</span><span style="color:#B392F0">uptimeMillis</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">:</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> dispatchEnd;</span></span>
+<span class="line"><span style="color:#E1E4E8">            Object token </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (observer </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                token </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> observer.</span><span style="color:#B392F0">messageDispatchStarting</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            long</span><span style="color:#E1E4E8"> origWorkSource </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ThreadLocalWorkSource.</span><span style="color:#B392F0">setUid</span><span style="color:#E1E4E8">(msg.workSourceUid);</span></span>
+<span class="line"><span style="color:#F97583">            try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">                //注意这里</span></span>
+<span class="line"><span style="color:#E1E4E8">                msg.target.</span><span style="color:#B392F0">dispatchMessage</span><span style="color:#E1E4E8">(msg);</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (observer </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    observer.</span><span style="color:#B392F0">messageDispatched</span><span style="color:#E1E4E8">(token, msg);</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">                dispatchEnd </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> needEndTime </span><span style="color:#F97583">?</span><span style="color:#E1E4E8"> SystemClock.</span><span style="color:#B392F0">uptimeMillis</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">:</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (Exception </span><span style="color:#FFAB70">exception</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (observer </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    observer.</span><span style="color:#B392F0">dispatchingThrewException</span><span style="color:#E1E4E8">(token, msg, exception);</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#F97583">                throw</span><span style="color:#E1E4E8"> exception;</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">finally</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                ThreadLocalWorkSource.</span><span style="color:#B392F0">restore</span><span style="color:#E1E4E8">(origWorkSource);</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (traceTag </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    Trace.</span><span style="color:#B392F0">traceEnd</span><span style="color:#E1E4E8">(traceTag);</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (logSlowDelivery) {</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (slowDeliveryDetected) {</span></span>
+<span class="line"><span style="color:#F97583">                    if</span><span style="color:#E1E4E8"> ((dispatchStart </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> msg.when) </span><span style="color:#F97583">&#x3C;=</span><span style="color:#79B8FF"> 10</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                        Slog.</span><span style="color:#B392F0">w</span><span style="color:#E1E4E8">(TAG, </span><span style="color:#9ECBFF">"Drained"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">                        slowDeliveryDetected </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                    if</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">showSlowLog</span><span style="color:#E1E4E8">(slowDeliveryThresholdMs, msg.when, dispatchStart, </span><span style="color:#9ECBFF">"delivery"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                            msg)) {</span></span>
+<span class="line"><span style="color:#6A737D">                        // Once we write a slow delivery log, suppress until the queue drains.</span></span>
+<span class="line"><span style="color:#E1E4E8">                        slowDeliveryDetected </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (logSlowDispatch) {</span></span>
+<span class="line"><span style="color:#B392F0">                showSlowLog</span><span style="color:#E1E4E8">(slowDispatchThresholdMs, dispatchStart, dispatchEnd, </span><span style="color:#9ECBFF">"dispatch"</span><span style="color:#E1E4E8">, msg);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (logging </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                logging.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"&#x3C;&#x3C;&#x3C;&#x3C;&#x3C; Finished to "</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> msg.target </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " "</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> msg.callback);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // Make sure that during the course of dispatching the</span></span>
+<span class="line"><span style="color:#6A737D">            // identity of the thread wasn't corrupted.</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> newIdent </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Binder.</span><span style="color:#B392F0">clearCallingIdentity</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (ident </span><span style="color:#F97583">!=</span><span style="color:#E1E4E8"> newIdent) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                Log.</span><span style="color:#B392F0">wtf</span><span style="color:#E1E4E8">(TAG, </span><span style="color:#9ECBFF">"Thread identity changed from 0x"</span></span>
+<span class="line"><span style="color:#F97583">                        +</span><span style="color:#E1E4E8"> Long.</span><span style="color:#B392F0">toHexString</span><span style="color:#E1E4E8">(ident) </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " to 0x"</span></span>
+<span class="line"><span style="color:#F97583">                        +</span><span style="color:#E1E4E8"> Long.</span><span style="color:#B392F0">toHexString</span><span style="color:#E1E4E8">(newIdent) </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " while dispatching to "</span></span>
+<span class="line"><span style="color:#F97583">                        +</span><span style="color:#E1E4E8"> msg.target.</span><span style="color:#B392F0">getClass</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getName</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " "</span></span>
+<span class="line"><span style="color:#F97583">                        +</span><span style="color:#E1E4E8"> msg.callback </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " what="</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> msg.what);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            msg.</span><span style="color:#B392F0">recycleUnchecked</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h3 id="下班-quitquitsafely">下班 quit/quitSafely</h3>
+<p>这是比较粗暴的行为，MQ离开了Looper就没法正常工作了，即下班即意味着辞职</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Looper</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> quit</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        mQueue.</span><span style="color:#B392F0">quit</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> quitSafely</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        mQueue.</span><span style="color:#B392F0">quit</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="消息处理-handler">消息处理 Handler</h2>
+<p>这里就比较清晰了。API基本分为以下几类：</p>
+<p>面向使用者：</p>
+<ul>
+<li>创建Message，通过Message的 <code>享元模式</code></li>
+<li>发送消息，注意postRunnable也是一个消息</li>
+<li>移除消息，</li>
+<li>退出等</li>
+</ul>
+<p>面向消息处理：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Handler</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Subclasses must implement this to receive messages.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> handleMessage</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Message </span><span style="color:#FFAB70">msg</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Handle system messages here.</span></span>
+<span class="line"><span style="color:#6A737D">     * Looper分发时调用的API</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> dispatchMessage</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Message </span><span style="color:#FFAB70">msg</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (msg.callback </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">            handleCallback</span><span style="color:#E1E4E8">(msg);</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (mCallback </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (mCallback.</span><span style="color:#B392F0">handleMessage</span><span style="color:#E1E4E8">(msg)) {</span></span>
+<span class="line"><span style="color:#F97583">                    return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#B392F0">            handleMessage</span><span style="color:#E1E4E8">(msg);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>如果有 <code>Handler callback</code>，则交给callback处理，否则自己处理，如果没覆写 <code>handleMessage</code> ，消息相当于被 drop 了。</p>
+<p>消息发送部分可以结合下图梳理：</p>
+<p><img  src="/_astro/send_msg.MI9sO5Ky_XM7QH.webp" alt="send_msg" loading="lazy" decoding="async" width="554" height="401"></p>
+<hr>
+<blockquote>
+<p>阶段性小结,至此，我们已经对 <code>Framework层的消息机制</code> 有一个完整的了解了。
+前面我们梳理了：</p>
+<ul>
+<li>Native层 和 Java层均有消息队列，并且通过JNI和指针映射，存在对应关系</li>
+<li>Native层 和 Java层MQ <code>消息获取时的大致过程</code></li>
+<li>Java层 Looper 如何工作</li>
+<li>Java层 Handler 大致概览</li>
+</ul>
+<p>根据前面梳理的内容，可以总结：从 <code>Java Runtime</code> 看：</p>
+<ul>
+<li>消息队列机制服务于 <code>线程级别</code>，即一个线程有一个工作中的消息队列即可，当然，也可以没有。
+即，一个Thread <code>至多有</code> 一个工作中的Looper。</li>
+<li>Looper 和 Java层MQ <code>一一对应</code></li>
+<li>Handler 是MQ的入口，也是 <code>消息</code> 的处理者</li>
+<li>消息— <code>Message</code> 应用了 <code>享元模式</code>，自身信息足够，满足 <code>自洽</code>，创建消息的开销性对较大，所以利用享元模式对消息对象进行复用。</li>
+</ul>
+</blockquote>
+<p>下面我们再继续探究细节，解决前面语焉不详处留下的疑惑：</p>
+<ul>
+<li>消息的类型和本质</li>
+<li>Native层Looper 的pollInner</li>
+</ul>
+<hr>
+<h2 id="消息的类型和本质">消息的类型和本质</h2>
+<p>message中的几个重要成员变量：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Message</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">   </span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> what;</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> arg1;</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> arg2;</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> Object obj;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> Messenger replyTo;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /*package*/</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> flags;</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> when;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /*package*/</span><span style="color:#E1E4E8"> Bundle data;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /*package*/</span><span style="color:#E1E4E8"> Handler target;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /*package*/</span><span style="color:#E1E4E8"> Runnable callback;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>其中 target是 <code>目标</code>，如果没有目标，那就是一个特殊的消息： <code>同步屏障</code> 即 <code>barrier</code>；</p>
+<p>what 是消息标识
+arg1 和 arg2 是开销较小的 <code>数据</code>，如果 <code>不足以表达信息</code>  则可以放入 <code>Bundle data</code> 中。</p>
+<p>replyTo 和 obj 是跨进程传递消息时使用的，暂且不看。</p>
+<p>flags 是 message 的状态标识，例如 <code>是否在使用中</code>，<code>是否是同步消息</code></p>
+<blockquote>
+<p>上面提到的同步屏障，即 barrier，其作用是拦截后面的 <code>同步消息</code> 不被获取，在前面阅读Java层MQ的next方法时读到过。</p>
+<p>我们还记得，next方法中，使用死循环，尝试读出一个满足处理条件的消息，如果取不到，因为死循环的存在，调用者（Looper）会被一直阻塞。</p>
+</blockquote>
+<p>此时可以印证一个结论，消息按照 <code>功能分类</code> 可以分为 <code>三种</code>：</p>
+<ul>
+<li>普通消息</li>
+<li>同步屏障消息</li>
+<li>异步消息</li>
+</ul>
+<p>其中同步消息是一种内部机制。设置屏障之后需要在合适时间取消屏障，否则会导致 <code>普通消息永远无法被处理</code>，而取消时，需要用到设置屏障时返回的token。</p>
+<h2 id="native层looper"><a id="native_looper">Native层Looper</a></h2>
+<p>相信大家都对 <code>Native层</code> 的Looper产生兴趣了，想看看它在Native层都干些什么。</p>
+<p>对完整源码感兴趣的可以看 <a href="https://github.com/leobert-lan/Blog/blob/main/Android/Mechanism/Message/code/Looper.cpp">这里</a> ，下面我们节选部分进行阅读。</p>
+<p>前面提到了Looper的pollOnce，处理完搁置的Response之后，会调用pollInner获取消息</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> Looper</span><span style="color:#E1E4E8">::</span><span style="color:#B392F0">pollInner</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> timeoutMillis</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">#if</span><span style="color:#B392F0"> DEBUG_POLL_AND_WAKE</span></span>
+<span class="line"><span style="color:#B392F0">    ALOGD</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"</span><span style="color:#79B8FF">%p</span><span style="color:#9ECBFF"> ~ pollOnce - waiting: timeoutMillis=</span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, timeoutMillis);</span></span>
+<span class="line"><span style="color:#F97583">#endif</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // Adjust the timeout based on when the next message is due.</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (timeoutMillis </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> mNextMessageUptime </span><span style="color:#F97583">!=</span><span style="color:#E1E4E8"> LLONG_MAX) {</span></span>
+<span class="line"><span style="color:#79B8FF">        nsecs_t</span><span style="color:#E1E4E8"> now </span><span style="color:#F97583">=</span><span style="color:#B392F0"> systemTime</span><span style="color:#E1E4E8">(SYSTEM_TIME_MONOTONIC);</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> messageTimeoutMillis </span><span style="color:#F97583">=</span><span style="color:#B392F0"> toMillisecondTimeoutDelay</span><span style="color:#E1E4E8">(now, mNextMessageUptime);</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (messageTimeoutMillis </span><span style="color:#F97583">>=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#F97583">                &#x26;&#x26;</span><span style="color:#E1E4E8"> (timeoutMillis </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> messageTimeoutMillis </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> timeoutMillis)) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            timeoutMillis </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> messageTimeoutMillis;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">#if</span><span style="color:#B392F0"> DEBUG_POLL_AND_WAKE</span></span>
+<span class="line"><span style="color:#B392F0">        ALOGD</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"</span><span style="color:#79B8FF">%p</span><span style="color:#9ECBFF"> ~ pollOnce - next message in </span><span style="color:#79B8FF">%lld</span><span style="color:#9ECBFF">ns, adjusted timeout: timeoutMillis=</span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">                this</span><span style="color:#E1E4E8">, mNextMessageUptime </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> now, timeoutMillis);</span></span>
+<span class="line"><span style="color:#F97583">#endif</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // Poll.</span></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#E1E4E8"> result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ALOOPER_POLL_WAKE;</span></span>
+<span class="line"><span style="color:#E1E4E8">    mResponses.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    mResponseIndex </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    struct</span><span style="color:#B392F0"> epoll_event</span><span style="color:#E1E4E8"> eventItems[EPOLL_MAX_EVENTS];</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    //注意 1</span></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#E1E4E8"> eventCount </span><span style="color:#F97583">=</span><span style="color:#B392F0"> epoll_wait</span><span style="color:#E1E4E8">(mEpollFd, eventItems, EPOLL_MAX_EVENTS, timeoutMillis);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // Acquire lock.</span></span>
+<span class="line"><span style="color:#E1E4E8">    mLock.</span><span style="color:#B392F0">lock</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 注意 2</span></span>
+<span class="line"><span style="color:#6A737D">    // Check for poll error.</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (eventCount </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (errno </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> EINTR) {</span></span>
+<span class="line"><span style="color:#F97583">            goto</span><span style="color:#B392F0"> Done</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#B392F0">        ALOGW</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Poll failed with an unexpected error, errno=</span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">, errno);</span></span>
+<span class="line"><span style="color:#E1E4E8">        result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ALOOPER_POLL_ERROR;</span></span>
+<span class="line"><span style="color:#F97583">        goto</span><span style="color:#B392F0"> Done</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 注意 3</span></span>
+<span class="line"><span style="color:#6A737D">    // Check for poll timeout.</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (eventCount </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">#if</span><span style="color:#B392F0"> DEBUG_POLL_AND_WAKE</span></span>
+<span class="line"><span style="color:#B392F0">        ALOGD</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"</span><span style="color:#79B8FF">%p</span><span style="color:#9ECBFF"> ~ pollOnce - timeout"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">#endif</span></span>
+<span class="line"><span style="color:#E1E4E8">        result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ALOOPER_POLL_TIMEOUT;</span></span>
+<span class="line"><span style="color:#F97583">        goto</span><span style="color:#B392F0"> Done</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//注意 4</span></span>
+<span class="line"><span style="color:#6A737D">    // Handle all events.</span></span>
+<span class="line"><span style="color:#F97583">#if</span><span style="color:#B392F0"> DEBUG_POLL_AND_WAKE</span></span>
+<span class="line"><span style="color:#B392F0">    ALOGD</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"</span><span style="color:#79B8FF">%p</span><span style="color:#9ECBFF"> ~ pollOnce - handling events from </span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF"> fds"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, eventCount);</span></span>
+<span class="line"><span style="color:#F97583">#endif</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> eventCount; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> fd </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> eventItems[i].data.fd;</span></span>
+<span class="line"><span style="color:#F97583">        uint32_t</span><span style="color:#E1E4E8"> epollEvents </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> eventItems[i].events;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (fd </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> mWakeReadPipeFd) {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (epollEvents </span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> EPOLLIN) {</span></span>
+<span class="line"><span style="color:#B392F0">                awoken</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">                ALOGW</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Ignoring unexpected epoll events 0x</span><span style="color:#79B8FF">%x</span><span style="color:#9ECBFF"> on wake read pipe."</span><span style="color:#E1E4E8">, epollEvents);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            ssize_t</span><span style="color:#E1E4E8"> requestIndex </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mRequests.</span><span style="color:#B392F0">indexOfKey</span><span style="color:#E1E4E8">(fd);</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (requestIndex </span><span style="color:#F97583">>=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                int</span><span style="color:#E1E4E8"> events </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (epollEvents </span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> EPOLLIN) events </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> ALOOPER_EVENT_INPUT;</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (epollEvents </span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> EPOLLOUT) events </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> ALOOPER_EVENT_OUTPUT;</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (epollEvents </span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> EPOLLERR) events </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> ALOOPER_EVENT_ERROR;</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (epollEvents </span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> EPOLLHUP) events </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> ALOOPER_EVENT_HANGUP;</span></span>
+<span class="line"><span style="color:#B392F0">                pushResponse</span><span style="color:#E1E4E8">(events, mRequests.</span><span style="color:#B392F0">valueAt</span><span style="color:#E1E4E8">(requestIndex));</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">                ALOGW</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Ignoring unexpected epoll events 0x</span><span style="color:#79B8FF">%x</span><span style="color:#9ECBFF"> on fd </span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF"> that is "</span></span>
+<span class="line"><span style="color:#9ECBFF">                        "no longer registered."</span><span style="color:#E1E4E8">, epollEvents, fd);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">Done: ;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 注意 5</span></span>
+<span class="line"><span style="color:#6A737D">    // Invoke pending message callbacks.</span></span>
+<span class="line"><span style="color:#E1E4E8">    mNextMessageUptime </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> LLONG_MAX;</span></span>
+<span class="line"><span style="color:#F97583">    while</span><span style="color:#E1E4E8"> (mMessageEnvelopes.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        nsecs_t</span><span style="color:#E1E4E8"> now </span><span style="color:#F97583">=</span><span style="color:#B392F0"> systemTime</span><span style="color:#E1E4E8">(SYSTEM_TIME_MONOTONIC);</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#B392F0"> MessageEnvelope</span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> messageEnvelope </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mMessageEnvelopes.</span><span style="color:#B392F0">itemAt</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (messageEnvelope.uptime </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> now) {</span></span>
+<span class="line"><span style="color:#6A737D">            // Remove the envelope from the list.</span></span>
+<span class="line"><span style="color:#6A737D">            // We keep a strong reference to the handler until the call to handleMessage</span></span>
+<span class="line"><span style="color:#6A737D">            // finishes.  Then we drop it so that the handler can be deleted *before*</span></span>
+<span class="line"><span style="color:#6A737D">            // we reacquire our lock.</span></span>
+<span class="line"><span style="color:#E1E4E8">            {</span><span style="color:#6A737D"> // obtain handler</span></span>
+<span class="line"><span style="color:#B392F0">                sp</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">MessageHandler</span><span style="color:#E1E4E8">> handler </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> messageEnvelope.handler;</span></span>
+<span class="line"><span style="color:#B392F0">                Message</span><span style="color:#E1E4E8"> message </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> messageEnvelope.message;</span></span>
+<span class="line"><span style="color:#E1E4E8">                mMessageEnvelopes.</span><span style="color:#B392F0">removeAt</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">                mSendingMessage </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">                mLock.</span><span style="color:#B392F0">unlock</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">#if</span><span style="color:#B392F0"> DEBUG_POLL_AND_WAKE</span><span style="color:#F97583"> ||</span><span style="color:#B392F0"> DEBUG_CALLBACKS</span></span>
+<span class="line"><span style="color:#B392F0">                ALOGD</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"</span><span style="color:#79B8FF">%p</span><span style="color:#9ECBFF"> ~ pollOnce - sending message: handler=</span><span style="color:#79B8FF">%p</span><span style="color:#9ECBFF">, what=</span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">                        this</span><span style="color:#E1E4E8">, handler.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(), message.what);</span></span>
+<span class="line"><span style="color:#F97583">#endif</span></span>
+<span class="line"><span style="color:#E1E4E8">                handler-></span><span style="color:#B392F0">handleMessage</span><span style="color:#E1E4E8">(message);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span><span style="color:#6A737D"> // release handler</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            mLock.</span><span style="color:#B392F0">lock</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            mSendingMessage </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ALOOPER_POLL_CALLBACK;</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">            // The last message left at the head of the queue determines the next wakeup time.</span></span>
+<span class="line"><span style="color:#E1E4E8">            mNextMessageUptime </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> messageEnvelope.uptime;</span></span>
+<span class="line"><span style="color:#F97583">            break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // Release lock.</span></span>
+<span class="line"><span style="color:#E1E4E8">    mLock.</span><span style="color:#B392F0">unlock</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//注意 6</span></span>
+<span class="line"><span style="color:#6A737D">    // Invoke all response callbacks.</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">size_t</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> mResponses.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">(); i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">        Response</span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> response </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mResponses.</span><span style="color:#B392F0">editItemAt</span><span style="color:#E1E4E8">(i);</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (response.request.ident </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> ALOOPER_POLL_CALLBACK) {</span></span>
+<span class="line"><span style="color:#F97583">            int</span><span style="color:#E1E4E8"> fd </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> response.request.fd;</span></span>
+<span class="line"><span style="color:#F97583">            int</span><span style="color:#E1E4E8"> events </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> response.events;</span></span>
+<span class="line"><span style="color:#F97583">            void*</span><span style="color:#E1E4E8"> data </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> response.request.data;</span></span>
+<span class="line"><span style="color:#F97583">#if</span><span style="color:#B392F0"> DEBUG_POLL_AND_WAKE</span><span style="color:#F97583"> ||</span><span style="color:#B392F0"> DEBUG_CALLBACKS</span></span>
+<span class="line"><span style="color:#B392F0">            ALOGD</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"</span><span style="color:#79B8FF">%p</span><span style="color:#9ECBFF"> ~ pollOnce - invoking fd event callback </span><span style="color:#79B8FF">%p</span><span style="color:#9ECBFF">: fd=</span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF">, events=0x</span><span style="color:#79B8FF">%x</span><span style="color:#9ECBFF">, data=</span><span style="color:#79B8FF">%p</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">                    this</span><span style="color:#E1E4E8">, response.request.callback.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(), fd, events, data);</span></span>
+<span class="line"><span style="color:#F97583">#endif</span></span>
+<span class="line"><span style="color:#F97583">            int</span><span style="color:#E1E4E8"> callbackResult </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> response.request.callback-></span><span style="color:#B392F0">handleEvent</span><span style="color:#E1E4E8">(fd, events, data);</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (callbackResult </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">                removeFd</span><span style="color:#E1E4E8">(fd);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#6A737D">            // Clear the callback reference in the response structure promptly because we</span></span>
+<span class="line"><span style="color:#6A737D">            // will not clear the response vector itself until the next poll.</span></span>
+<span class="line"><span style="color:#E1E4E8">            response.request.callback.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ALOOPER_POLL_CALLBACK;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> result;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>上面标记了注意点</p>
+<ul>
+<li>1 epoll机制，等待 <code>mEpollFd</code> 产生事件, 这个等待具有超时时间。</li>
+<li>2，3，4 是等待的三种结果，<code>goto</code> 语句可以直接跳转到 <code>标记</code> 处</li>
+<li>2 检测poll <code>是否出错</code>，如果有，跳转到 Done</li>
+<li>3 检测pool <code>是否超时</code>，如果有，跳转到 Done</li>
+<li>4 处理epoll后所有的事件</li>
+<li>5 处理 pending 消息的回调</li>
+<li>6 处理 所有 Response的回调</li>
+</ul>
+<p>并且我们可以发现返回的结果有以下几种：</p>
+<ul>
+<li>ALOOPER_POLL_CALLBACK</li>
+</ul>
+<p>有 <code>pending message</code> 或者 <code>request.ident</code> 值为 <code>ALOOPER_POLL_CALLBACK</code> 的 Response被处理了。
+如果没有：</p>
+<ul>
+<li>ALOOPER_POLL_WAKE 正常唤醒</li>
+<li>ALOOPER_POLL_ERROR epoll错误</li>
+<li>ALOOPER_POLL_TIMEOUT epoll超时</li>
+</ul>
+<p>查找了一下枚举值:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">ALOOPER_POLL_WAKE </span><span style="color:#F97583">=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">ALOOPER_POLL_CALLBACK </span><span style="color:#F97583">=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">ALOOPER_POLL_TIMEOUT </span><span style="color:#F97583">=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">ALOOPER_POLL_ERROR </span><span style="color:#F97583">=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">4</span></span></code></pre>
+<hr>
+<blockquote>
+<p>阶段性小结, 我们对 <code>消息</code> 和 <code>Native层的pollInner</code> 进行了一次脑暴，引出了epoll机制。</p>
+<p>其实Native层的 <code>Looper分发</code>还有不少值得脑暴的点，但我们先缓缓，已经迫不及待的要对 <code>epoll</code>机制进行脑暴了。</p>
+</blockquote>
+<hr>
+<p>##脑暴：Linux中的I/O模型</p>
+<blockquote>
+<p>这部分内容，推荐一篇文章：<a href="https://blog.csdn.net/hguisu/article/details/38638183#t12">使用 libevent 和 libev 提高网络应用性能——I/O模型演进变化史</a> 作者 hguisu</p>
+<p>PS:本段中，存在部分图片直接引用自该文，我偷了个懒，没有去找原版内容并标记出处</p>
+</blockquote>
+<p>阻塞I/O模型图：在调用recv()函数时，发生在内核中等待数据和复制数据的过程</p>
+<p><img src="https://img-blog.csdnimg.cn/20190525214406514.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hndWlzdQ==,size_16,color_FFFFFF,t_70" alt="阻塞I/O模型"></p>
+<p>实现非常的 <code>简单</code>，但是存在一个问题，阻塞导致线程无法执行其他任何计算，如果是在网络编程背景下，需要使用多线程提高处理并发的能力。</p>
+<p><strong>注意，不要用 Android中的 <code>点击屏幕等硬件被触发事件</code> 去对应这里的 <code>网络并发</code>，这是两码事。</strong></p>
+<p>如果采用了 <code>多进程</code> 或者 <code>多线程</code> 实现 <code>并发应答</code>，模型如下：</p>
+<p><img src="https://img-blog.csdn.net/20140818224818116?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaGd1aXN1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="应答模型"></p>
+<p>到这里，我们看的都是 I/O 阻塞 模型。</p>
+<blockquote>
+<p>脑暴，阻塞为调用方法后一直在等待返回值，线程内执行的内容就像 <code>卡顿</code> 在这里。</p>
+</blockquote>
+<p>如果要消除这种卡顿，那就不能调用方法等待I/O结果，而是要 <code>立即返回</code> ！</p>
+<p>举个例子：</p>
+<ul>
+<li>去西装店定制西装，确定好款式和尺寸后，你坐在店里一直等着，等到做好了拿给你，这就是阻塞型的，这能等死你；</li>
+<li>去西装店定制西装，确定好款式和尺寸后，店员告诉你别干等着，好多天呢，等你有空了来看看，这就是非阻塞型的。</li>
+</ul>
+<p>改变为非阻塞模型后，应答模型如下：</p>
+<p><img src="https://img-blog.csdn.net/20140825233622500" alt="应答模型——非阻塞"></p>
+<p>不难理解，这种方式需要顾客去 <code>轮询</code> 。对客户不友好，但是对店家可是一点损失都没有，还让等候区没那么挤了。</p>
+<p>有些西装店进行了改革，对客户更加友好了:</p>
+<blockquote>
+<p>去西装店定制西装，确定好款式和尺寸后，留下联系方式，等西服做好了联系客户，让他来取。</p>
+</blockquote>
+<p>这就变成了 <code>select</code> or <code>poll</code> 模型：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190603172255403.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ndWlzdS5ibG9nLmNzZG4ubmV0,size_16,color_FFFFFF,t_70" alt="select模型"></p>
+<p><strong>注意</strong>：进行改革的西装店需要增加一个员工，<em>图中标识的用户线程</em>，他的工作是：</p>
+<ul>
+<li>在前台记录客户订单和联系方式</li>
+<li>拿记录着 <code>订单</code> 的小本子去找制作间，<code>不断检查</code> 订单是否完工，完工的就可以提走并联系客户了。</li>
+</ul>
+<p>而且，他去看订单完工时，无法在前台记录客户信息，这意味他 <code>阻塞</code> 了，其他工作只能先搁置着。</p>
+<p>这个做法，对于制作间而言，和 <code>非阻塞模型</code> 并没有多大区别。还增加了一个店员，但是，用 <code>一个店员</code> 就解决了之前 <code>很多店员</code> 都会跑去 <code>制作间</code> 帮客户问”订单好了没有？” 的问题。</p>
+<blockquote>
+<p>值得一提的是，为了提高服务质量，这个员工每次去制作间询问一个订单时，都需要记录一些信息：</p>
+<ul>
+<li>订单完成度询问时，是否被应答；</li>
+<li>应答有没有说谎；等</li>
+</ul>
+<p>有些店对每种不同的考核项均准备了记录册，这和 <code>select</code>模型类似</p>
+<p>有些店只用一本记录册，但是册子上可以利用表格记录各种考核项，这和 <code>poll</code> 模型类似</p>
+</blockquote>
+<p><code>select</code> 模型 和 <code>poll</code> 模型的近似度比较高。</p>
+<p>没多久，老板就发现了，这个店员的工作效率有点低下，他每次都要拿着一本订单簿，去把订单都问一遍，倒不是员工不勤快，是这个模式有点问题。</p>
+<p>于是老板又进行了改革：</p>
+<ul>
+<li>在 <code>前台</code> 和 <code>制作间</code> 之间加一个送信管道。</li>
+<li>制作间有进度需要汇报了，就送一份信到前台，信上写着订单号。</li>
+<li>前台员工直接去问对应的订单。</li>
+</ul>
+<p>这就变成了 <code>epoll模型</code>解决了 <code>select/poll</code> 模型的遍历效率问题。</p>
+<p>这样改革后，前台员工就不再需要按着订单簿从上到下挨个问了。提高了效率，前台员工只要<code>无事发生</code>，就可以优雅的划水了。</p>
+<p>我们看一下NativeLooper的构造函数：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#B392F0">Looper</span><span style="color:#E1E4E8">::</span><span style="color:#B392F0">Looper</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">bool</span><span style="color:#E1E4E8"> allowNonCallbacks) :</span></span>
+<span class="line"><span style="color:#B392F0">        mAllowNonCallbacks</span><span style="color:#E1E4E8">(allowNonCallbacks), </span><span style="color:#B392F0">mSendingMessage</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#B392F0">        mResponseIndex</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">), </span><span style="color:#B392F0">mNextMessageUptime</span><span style="color:#E1E4E8">(LLONG_MAX) {</span></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#E1E4E8"> wakeFds[</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#E1E4E8"> result </span><span style="color:#F97583">=</span><span style="color:#B392F0"> pipe</span><span style="color:#E1E4E8">(wakeFds);</span></span>
+<span class="line"><span style="color:#B392F0">    LOG_ALWAYS_FATAL_IF</span><span style="color:#E1E4E8">(result </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Could not create wake pipe.  errno=</span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">, errno);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    mWakeReadPipeFd </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> wakeFds[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#E1E4E8">    mWakeWritePipeFd </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> wakeFds[</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    result </span><span style="color:#F97583">=</span><span style="color:#B392F0"> fcntl</span><span style="color:#E1E4E8">(mWakeReadPipeFd, F_SETFL, O_NONBLOCK);</span></span>
+<span class="line"><span style="color:#B392F0">    LOG_ALWAYS_FATAL_IF</span><span style="color:#E1E4E8">(result </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Could not make wake read pipe non-blocking.  errno=</span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            errno);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    result </span><span style="color:#F97583">=</span><span style="color:#B392F0"> fcntl</span><span style="color:#E1E4E8">(mWakeWritePipeFd, F_SETFL, O_NONBLOCK);</span></span>
+<span class="line"><span style="color:#B392F0">    LOG_ALWAYS_FATAL_IF</span><span style="color:#E1E4E8">(result </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Could not make wake write pipe non-blocking.  errno=</span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            errno);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // Allocate the epoll instance and register the wake pipe.</span></span>
+<span class="line"><span style="color:#E1E4E8">    mEpollFd </span><span style="color:#F97583">=</span><span style="color:#B392F0"> epoll_create</span><span style="color:#E1E4E8">(EPOLL_SIZE_HINT);</span></span>
+<span class="line"><span style="color:#B392F0">    LOG_ALWAYS_FATAL_IF</span><span style="color:#E1E4E8">(mEpollFd </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Could not create epoll instance.  errno=</span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">, errno);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    struct</span><span style="color:#B392F0"> epoll_event</span><span style="color:#E1E4E8"> eventItem;</span></span>
+<span class="line"><span style="color:#B392F0">    memset</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> eventItem, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">sizeof</span><span style="color:#E1E4E8">(epoll_event));</span><span style="color:#6A737D"> // zero out unused members of data field union</span></span>
+<span class="line"><span style="color:#E1E4E8">    eventItem.events </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> EPOLLIN;</span></span>
+<span class="line"><span style="color:#E1E4E8">    eventItem.data.fd </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mWakeReadPipeFd;</span></span>
+<span class="line"><span style="color:#E1E4E8">    result </span><span style="color:#F97583">=</span><span style="color:#B392F0"> epoll_ctl</span><span style="color:#E1E4E8">(mEpollFd, EPOLL_CTL_ADD, mWakeReadPipeFd, </span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> eventItem);</span></span>
+<span class="line"><span style="color:#B392F0">    LOG_ALWAYS_FATAL_IF</span><span style="color:#E1E4E8">(result </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"Could not add wake read pipe to epoll instance.  errno=</span><span style="color:#79B8FF">%d</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            errno);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="总结">总结</h2>
+<p>相信看到这里，大家已经自己悟透了各种问题。按照惯例，还是要总结下，因为 <code>这篇是脑暴</code>，所以 <code>思绪</code> 是比较 <code>跳跃</code> 的，内容前后关系不太明显。</p>
+<p>我们结合一个问题来点明内容前后关系。</p>
+<blockquote>
+<p>Java层 Looper和MQ 会什么使用了死循环但是 <code>不会"阻塞"UI线程</code> / <code>没造成ANR</code> / <code>依旧可以响应点击事件</code></p>
+</blockquote>
+<ul>
+<li>Android是基于 <code>事件驱动</code> 的，并建立了 <code>完善的</code> 消息机制</li>
+<li>Java层的消息机制只是一个局部，其负责的就是面向消息队列，处理 <code>消息队列管理</code>，<code>消息分发</code>，<code>消息处理</code></li>
+<li>Looper的死循环保障了 <code>消息队列</code> 的 <code>消息分发</code> 一直处于有效运行中，不循环就停止了分发。</li>
+<li>MessageQueue的 <code>死循环</code> 保障了 <code>Looper可以获取有效的消息</code>，保障了Looper <code>只要有消息，就一直运行</code>，发现有效消息，就跳出了死循环。</li>
+<li>而且Java层MessageQueue在 next() 方法中的死循环中，通过JNI调用了 Native层MQ的 <code>pollOnce</code>，驱动了Native层去处理Native层消息</li>
+<li>值得一提的是，UI线程处理的事情也都是基于消息的，无论是更新UI还是响应点击事件等。</li>
+</ul>
+<p>所以，正是Looper 进行loop()之后的死循环，保障了UI线程的各项工作正常执行。</p>
+<p>再说的ANR，这是Android 确认<code>主线程</code> 消息机制 <code>正常</code> 且 <code>健康</code> 运转的一种检测机制。</p>
+<p>因为主线程Looper需要利用 <code>消息机制</code> 驱动UI渲染和交互事件处理，
+如果某个消息的执行，或者其衍生出的业务，在主线程占用了大量的时间，导致主线程长期阻塞，会影响用户体验。</p>
+<p>所以ANR检测采用了一种 <code>埋定时炸弹</code> 的机制，必须依靠Looper的高效运转来消除之前装的定时炸弹。而这种定时炸弹比较有意思，<code>被发现了才会炸</code>。</p>
+<p>在说到 <code>响应点击事件</code>，类似的事件总是从硬件出发的，在到内核，再进程间通信到用户空间，这些事件以消息的形式存在于Native层，经过处理后，表现出：</p>
+<blockquote>
+<p>ViewRootImpl收到了InputManager的输入，并进行了事件处理</p>
+</blockquote>
+<hr>
+<p>这里我们借用一张图总结整个消息机制流程：</p>
+<p><img src="https://img.jbzj.com/file_images/article/201609/2016922103751644.jpg?2016822103759" alt=""></p>
+<p><em>图片来自 《Android7.0 MessageQueue详解》 作者 Gaugamela</em></p>
+<blockquote>
+<p>PS:这篇文章写得很长，内容长，耗时也长，大约花费了10天的时间，其中还有不少内容写得未能尽兴。例如：
+“Java层在哪些情况下利用JNI调取Native层的唤醒，为什么这么干？“等等。</p>
+<p>但是考虑到篇幅，决定不再往下挖了。</p>
+</blockquote></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>关于View系列 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">关于View系列</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="关于view系列">关于View系列</h1>
+<p>其实想写这个系列很久了，这两年多次撰写了草稿，但又全部放弃。</p>
+<ul>
+<li>一来，是对大纲内容不满意</li>
+<li>二来，是对撰写的目的产生质疑</li>
+</ul>
+<p>有一个问题一直思考了多年：</p>
+<blockquote>
+<p>为什么View体系从Android出现就有，到现在这么多年，还是不断的有分析的文章出现？</p>
+</blockquote>
+<p>按照黑格尔的观点:</p>
+<blockquote>
+<p>Was vernünftig ist , das ist wirklich ,</p>
+<p>und was wirklich ist , das ist vernünftig</p>
+</blockquote>
+<blockquote>
+<p>凡是合乎理性的东西都是现实的；凡是现实的东西都是合乎理性的。</p>
+<p>有一个常见的译文叫：“存在即合理”</p>
+</blockquote>
+<p>思考之后，个人认为，有以下几点：</p>
+<ul>
+<li>View体系的内容实在 <code>太大、太深</code> ，没有人能够做到用几篇文章让 <code>不同知识层面</code> 的读者们都理解
+<ul>
+<li>几乎每一位写相关内容的博主，都曾是其他相关内容文章的读者。</li>
+<li>结合多方资料学习总结后，出现了更高的认知，<code>新事物比旧事物更加"合乎理性"</code>。</li>
+</ul>
+</li>
+<li>与其说分享知识，不如说 <code>自我总结、记录</code></li>
+</ul>
+<h2 id="为什么之前抛弃了草稿">为什么之前抛弃了草稿</h2>
+<ul>
+<li>内容总是偏向于 <code>总结</code>，那么在写它的时候，知识已经被个人掌握，写不写，是一个形式。</li>
+<li>不从至少高一层的水平写文章时，写出的内容往往不易于阅读</li>
+<li>不能够激发读者思考的内容，更容易被灭亡，自己总结的，总会比别人总结的看着舒服</li>
+</ul>
+<h2 id="为什么又开始撰写">为什么又开始撰写</h2>
+<p>一个长假期，做了很多思考。回想了之前想要撰写的内容，再思考了自己学习View体系的全过程。想明白了一件事情：</p>
+<p>值得分享的是对 <code>View的认知体系</code>。</p>
+<p>前面提到，View体系太大太深，对它的学习也不是阅读几篇文章的事情，
+而同读者一道，对该 <code>知识体系</code> 建立 <code>相对完整的认知</code>。这才是 <code>最有意义</code>，<code>最有价值</code> 的事情。</p>
+<p>通俗的讲，<code>认识</code> View体系的 <code>全貌</code>，知道每一块内容 <code>解决什么问题</code>，再从这个基础上，<code>挖掘细节</code>。
+即，这是 <code>学习的指导手册</code> ，而不是被学习的内容。</p>
+<h2 id="为什么放入三思系列中">为什么放入三思系列中</h2>
+<p>对这部分内容的 <code>认知过程</code>，是和三思系列一致的，其 <code>目的</code>，也是和三思系列一致。下定决心要开始撰写时，
+是打算 <code>挑重点</code> 写三思系列，转念一想，与其写的零碎，写的看的都不过瘾，<code>索性做全套</code>。</p>
+<h2 id="系列大纲">系列大纲</h2>
+<ul>
+<li><a href="../Android/View/%E4%B8%89%E6%80%9D%E7%B3%BB%E5%88%97%EF%BC%9AView%E4%BD%93%E7%B3%BB%E8%AE%A4%E7%9F%A5(%E4%B8%80)%EF%BC%8C%E5%86%85%E5%AE%B9%E6%98%AF%E5%A6%82%E4%BD%95%E6%AD%A3%E7%A1%AE%E8%A2%AB%E5%B1%95%E7%8E%B0%E5%87%BA%E6%9D%A5%E7%9A%84--%E8%A7%86%E8%A7%89%E5%91%88%E7%8E%B0%E6%A6%82%E8%A7%88.md">三思系列：View体系认知(一)，视觉呈现概览</a></li>
+<li>三思系列：View体系认知(二)，用户交互概览</li>
+<li>三思系列：View体系认知(三)，滑动的本质</li>
+<li>三思系列：View体系认知(四)，Canvas绘制总结 — <em>这一篇可能不写，从认知体系上，一段话就能说清楚它存在的目的，其他都是总结</em></li>
+<li>三思系列：View体系认知(五)，自定义View的意义和实践</li>
+<li><a href="../Android/View/%E4%B8%89%E6%80%9D%E7%B3%BB%E5%88%97%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%87%AA%E5%AE%9A%E4%B9%89View.md">三思系列：为什么自定义View</a></li>
+</ul>
+<p>目前先定下这些内容。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

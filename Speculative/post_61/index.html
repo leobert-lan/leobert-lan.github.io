@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="好玩系列--如果后端让你用sse接收多次返回那我们改造retrofit吧">好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</h1>
+<h2 id="前言">前言</h2>
+<p>说来惭愧，最近都没写技术帖，每月写一篇原创的Flag也倒了，倒并非无内容可写，实则是因为懒惰， 虽然工作和生活牵扯了很多精力，但仍是有碎片化时间的。一篇关于DataBinding非常有趣的文章还在编写中，今天我们先看一篇轻松点的内容。</p>
+<p>随着ChatGpt等生成式AI大火，SSE（Server Send Events）又回到了技术讨论当中，今天我们聊一聊，<strong>如果客户端需要获取服务端长耗时任务结果，有哪些实践方式</strong>。</p>
+<blockquote>
+<p>本篇博客将聚焦于4个方面：</p>
+<ul>
+<li>归纳获取服务端长耗时任务结果的常见实践方式</li>
+<li>对SSE进行详细的讨论，尤其是其协议细节</li>
+<li>实操：搭建SSE服务端、使用OKHttp搭建客户端</li>
+<li>探索：对Retrofit进行了分析，扩展Retrofit使用SSE</li>
+</ul>
+</blockquote>
+<h2 id="4种常见的实践方式">4种常见的实践方式</h2>
+<p>不外乎两种思路：</p>
+<ul>
+<li>客户端 polling</li>
+<li>服务端 push</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ec3a01c5cc74032a71befa745dccea1~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1366&#x26;h=740&#x26;s=71846&#x26;e=png&#x26;b=fffdfd" alt="4种方式.png"></p>
+<h3 id="客户端polling">客户端polling</h3>
+<p>不难理解，服务端处理一项任务，只有服务端才清晰地知道任务的状态，客户端可以通过 <strong>周期性主动轮询</strong> 直至获取任务的最终结果。</p>
+<p>按照此类实践方式，可使用 <code>HTTP/HTTPs</code> 协议。</p>
+<h4 id="short-polling">short polling</h4>
+<p>客户端向服务端发起请求，如果服务端状态已经更新，返回结果并关闭链接；<strong>如果服务端状态尚未更新，返回一个特定的结果告知还在处理中，并关闭链接</strong></p>
+<h4 id="long-polling">long polling</h4>
+<p>和 <code>short polling</code> 类似，客户端向服务端发起请求，如果服务端状态已经更新，返回结果并关闭链接；</p>
+<p>但如果服务端状态尚未更新，</p>
+<ul>
+<li>服务端会在超时时间内维持链接，进行等待，直至状态更新，返回结果并关闭链接；</li>
+<li>若等待至超时也未更新状态，返回一个特定的结果告知还在处理中，并关闭链接</li>
+</ul>
+<h3 id="服务端push">服务端push</h3>
+<p>这类实践方式中，不需要客户端采取”问”，而是当服务端状态更新时，自行通知客户端，典型的实践方式有：</p>
+<ul>
+<li>Server Send Events (SSE)</li>
+<li>WebSocket</li>
+</ul>
+<h4 id="sse">SSE</h4>
+<p>SSE是本文的讨论核心，从服务端发往客户端的消息，存在一个限制，即仅可以发送 <code>纯文本</code> 类型的消息。</p>
+<p>SSE基于http协议的持久连接，<code>SSE</code> 具有 W3C 标准化的网络协议和 EventSource 客户端接口，属于 <code>HTML5</code> 标准套件。</p>
+<p>有兴趣的读者可以访问 <a href="https://html.spec.whatwg.org/multipage/server-sent-events.html">扩展阅读</a> 了解协议细节</p>
+<h4 id="websocket">WebSocket</h4>
+<p>定制性、扩展性最强的实践方案，有趣的话题实在太多，不做任何展开。</p>
+<h2 id="sse协议细节">SSE协议细节</h2>
+<p>不难理解，SSE形如消息订阅，由客户端主动发起订阅，双方维持链接，服务端向客户端推送message。</p>
+<h3 id="header主要部分">Header主要部分</h3>
+<p>按照协议约定，<code>Method</code> 为 <code>GET</code>，并且需要在 <code>Header</code> 中包含以下内容：</p>
+<ul>
+<li>Accept: text/event-stream 指定Media Type</li>
+<li>Cache-Control: no-cache 不使用cache</li>
+<li>Connection: keep-alive 使用持久性连接</li>
+</ul>
+<p>以下是Header部分的示例：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="text"><code><span class="line"><span>GET /{path} HTTP/1.1</span></span>
+<span class="line"><span>Accept: text/event-stream</span></span>
+<span class="line"><span>Cache-Control: no-cache</span></span>
+<span class="line"><span>Connection: keep-alive</span></span></code></pre>
+<p>服务端的响应Header至少包含：</p>
+<ul>
+<li>Content-Type: text/event-stream;charset=UTF-8 指定Media Type</li>
+<li>Transfer-Encoding: chunked</li>
+</ul>
+<p>以下是响应Header部分的示例：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="text"><code><span class="line"><span>HTTP/1.1 200</span></span>
+<span class="line"><span>Content-Type: text/event-stream;charset=UTF-8</span></span>
+<span class="line"><span>Transfer-Encoding: chunked</span></span></code></pre>
+<h3 id="event-stream-解析">Event-Stream 解析</h3>
+<p>event-stream的内容(结构和字符)需满足以下 <a href="https://www.rfc-editor.org/rfc/rfc5234">ABNF</a> 语法范式约定</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>stream        = [ bom ] *event</span></span>
+<span class="line"><span>event         = *( comment / field ) end-of-line</span></span>
+<span class="line"><span>comment       = colon *any-char end-of-line</span></span>
+<span class="line"><span>field         = 1*name-char [ colon [ space ] *any-char ] end-of-line</span></span>
+<span class="line"><span>end-of-line   = ( cr lf / cr / lf )</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>; characters</span></span>
+<span class="line"><span>lf            = %x000A ; U+000A LINE FEED (LF)</span></span>
+<span class="line"><span>cr            = %x000D ; U+000D CARRIAGE RETURN (CR)</span></span>
+<span class="line"><span>space         = %x0020 ; U+0020 SPACE</span></span>
+<span class="line"><span>colon         = %x003A ; U+003A COLON (:)</span></span>
+<span class="line"><span>bom           = %xFEFF ; U+FEFF BYTE ORDER MARK</span></span>
+<span class="line"><span>name-char     = %x0000-0009 / %x000B-000C / %x000E-0039 / %x003B-10FFFF</span></span>
+<span class="line"><span>; a scalar value other than U+000A LINE FEED (LF), U+000D CARRIAGE RETURN (CR), or U+003A COLON (:)</span></span>
+<span class="line"><span>any-char      = %x0000-0009 / %x000B-000C / %x000E-10FFFF</span></span>
+<span class="line"><span>; a scalar value other than U+000A LINE FEED (LF) or U+000D CARRIAGE RETURN (CR)</span></span></code></pre>
+<p>需要逐行读取内容并进行解析，按照语法约定：<code>end-of-line = ( cr lf / cr / lf )</code>，CRLF、CR、LF都代表换行</p>
+<ul>
+<li>如果是空行，后续是新Event，可通俗理解为事件之间用空行分隔</li>
+<li>如果是以 <code>:</code> <em>冒号，UniCode编码 U+003A</em> 开始，忽略此行</li>
+<li>如果包含 <code>:</code> <em>冒号，UniCode编码 U+003A</em>，从第一个冒号开始分割
+<ul>
+<li>冒号前的内容为 <code>field</code></li>
+<li>冒号后的内容为 <code>value</code>，如果冒号后的第一个字符为 <code>空格</code> U+0020，从 <code>value</code> 中移除</li>
+</ul>
+</li>
+<li>非空但不包含 <code>:</code>, 内容全部作为 <code>field</code>, <code>value</code> 为空字符串</li>
+</ul>
+<p>field的约定：</p>
+<ul>
+<li>“event”：其value为 event type</li>
+<li>“data”：其value为事件数据，解析后单独再尾部拼接 <code>LF</code></li>
+<li>“id”：若其value不包含 <code>U+0000 即NULL</code>，值为事件的ID，否则忽略</li>
+<li>“retry”：其value若只包含ASCII码表示的数值，认为是十进制数解析为Int，作为毫秒级的重连时间，<em>当链接断开，客户端应当在此时间后自动发起重连</em>，否则忽略</li>
+<li>其他情况均忽略</li>
+</ul>
+<h3 id="last-event-id">Last-Event-ID</h3>
+<p>前文已经提到了如下内容：</p>
+<ul>
+<li>Header</li>
+<li>Event-Stream中field为”id”、“retry”</li>
+</ul>
+<p>不难理解，当出现意外情况时，例如网络原因导致的链接断开，涉及到重连；显然，重连时一般不希望再获取已经收到的信息。</p>
+<p>Header中存在 <code>Last-Event-ID</code> field约定，指定上次收到的Event的id，因Event有序，可避免冗余信息传输。</p>
+<h2 id="纸上得来终觉浅">纸上得来终觉浅</h2>
+<p>至此，协议部分的主要内容已经讨论完毕，让我们进入愉快的Demo环节。</p>
+<h3 id="编写服务端">编写服务端</h3>
+<p>对部分读者而言，这部分可能有点超纲，但没有关系，已经准备好了Demo代码，各位只需要准备好Java环境和路由器即可。</p>
+<p><a href="https://github.com/leobert-lan/SSE-Server-demo">代码仓库</a></p>
+<p>在Demo中，准备了两条接口：</p>
+<ul>
+<li>http://{ip}:8080/sse/mvc/words , 模拟多次生成文本段落并推送至客户端</li>
+<li>http://{ip}:8080/sse/mvc/folder-watch , 模拟文件夹监听</li>
+</ul>
+<p>启动服务后，可使用控制台和curl进行测试：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>curl -v http://localhost:8080/sse/mvc/words</span></span></code></pre>
+<h3 id="编写客户端">编写客户端</h3>
+<p>很显然，一个非新事物往往不需要普通开发者造轮子，<a href="https://github.com/square/okhttp/tree/master/okhttp-sse">OkHttp</a> 已经支持SSE</p>
+<p>不同于大家熟知的 <code>Call</code>， Okhttp-SSE中封装了 <code>EventSource</code>，并通过 <code>Factory</code> 创建实例、发起请求：</p>
+<p>一个朴素地使用示例如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> demoCode</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        OkHttpClient okHttpClient </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> OkHttpClient</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        EventSource.Factory factory </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> EventSources.</span><span style="color:#B392F0">createFactory</span><span style="color:#E1E4E8">(okHttpClient);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        Request.Builder builder </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> Request.</span><span style="color:#B392F0">Builder</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">url</span><span style="color:#E1E4E8">(url);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        builder.</span><span style="color:#B392F0">addHeader</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Content-Type"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"text/event-stream"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">addHeader</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Accept-Encoding"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">""</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">addHeader</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Accept"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"text/event-stream"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">addHeader</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Cache-Control"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"no-cache"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        builder.</span><span style="color:#B392F0">addHeader</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Last-Event-ID"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"2"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        Request request </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        factory.</span><span style="color:#B392F0">newEventSource</span><span style="color:#E1E4E8">(request, </span><span style="color:#F97583">new</span><span style="color:#B392F0"> EventSourceListener</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">            //ignore</span></span>
+<span class="line"><span style="color:#E1E4E8">        });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>请注意，如果将其作为 <code>Call</code>，将无法获得多次推送的效果，在不出现错误或超时的情况下，形如一次响应较慢的Get请求。</p>
+<p><a href="https://github.com/leobert-lan/SSE-android-Demo">demo代码仓库</a></p>
+<h3 id="是否可以使用retrofit">是否可以使用Retrofit</h3>
+<p>截至目前为止，Retrofit未对其进行适配，其实在多年前即展开过讨论，我找到了此条 <a href="https://github.com/square/retrofit/issues/1029">讨论issue</a></p>
+<p>Retrofit的设计原理并不复杂：</p>
+<blockquote>
+<ul>
+<li>通过运行时反射，建立动态代理，依据注解构建Okhttp的Call</li>
+<li>通过CallAdapter，将Call的结果处理方式，进行不同的适配</li>
+</ul>
+</blockquote>
+<p>但设计之初，仅设计了 <code>Retrofit.Call</code> 对 <code>Okhttp.Call</code> 进行Wrap，而 <code>EventSource</code> 并不继承 <code>Okhttp.Call</code>，当然，依据其特性也不应当继承自Call</p>
+<p>鉴于此，若将 <code>EventSource</code> 强行包装为 <code>Retrofit.Call</code> 将会很容易引起错误，例如调用</p>
+<ul>
+<li><code>Response&#x3C;T> execute() throws IOException;</code></li>
+<li><code>void enqueue(Callback&#x3C;T> callback);</code></li>
+</ul>
+<p>若在Retrofit中平行展开一条 <code>EventSource</code> 的处理逻辑，需要对库进行很多修改，并且考虑对生态的影响，并不划算。</p>
+<p>但是使用者自己的行为是不受限的，自己结合项目情况开发，自己对其负责。</p>
+<h2 id="动手写retrofit扩展库">动手写Retrofit扩展库</h2>
+<p>正如我上文所言，直接在Retrofit中进行扩展需要考虑对生态的影响，读者诸君可以详细阅读Jake Wharton 的post，其设计构思在考虑 “一致性” 问题。</p>
+<p>但如果在Retrofit之外进行扩展，则可以回避生态问题，即便有非一致性设计，也可以不用直面。</p>
+<p><a href="https://github.com/leobert-lan/SSE-android-Demo">代码仓库</a> 需切换到 <code>retrofit-sse</code> 分支！</p>
+<p><strong><em>作者按：读者诸君请注意，在编写此文时，我尚未有充足的时间投入扩展库的设计与编写，代码库中的Sample代码，仅可作为指导，仍存在设计盲点，不要直接投入商用。</em></strong></p>
+<p>很容易得出以下核心设计思路，<em>可看导图或下文的文字说明，较为啰嗦</em>：</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/766af76c9b1a4ab1b386f0b2c930e65c~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2916&#x26;h=2272&#x26;s=564681&#x26;e=png&#x26;b=fffefe" alt="扩展库.png"></p>
+<ul>
+<li>将连续的Event内容转变为可观测的Source，例如Rxjava的观测源、LiveData、kotlin协程的Flow
+<ul>
+<li>内建 <code>EventSourceListener</code> 实现类，从回调触发源的更新</li>
+<li>定义 <code>EventSourceAdapter</code>，用于将 <code>Okhttp-EventSource</code> 转变为 可观测的Source</li>
+</ul>
+</li>
+<li>需要存在一种机制，依据Interface中Method定义的返回类型，获取 <code>EventSourceAdapter</code> 实例
+<ul>
+<li>应当有Factory、Factory注册池，亦可以考虑直接使用实例、实例注册池</li>
+<li>需要利用反射</li>
+<li>Factory注册池或Adapter实例注册池需能区分目标类型</li>
+</ul>
+</li>
+<li>需要能够创建（<strong>完整功能应当为管理</strong>）<code>EventSource</code>
+<ul>
+<li>需可注册 <code>EventSource.Factory</code> 实例</li>
+</ul>
+</li>
+<li>存在一条扩展路径，符合SSE时，走新设计；否则走原Retrofit设计
+<ul>
+<li>增加入口，例如 <code>RetrofitSSE</code>，承载以上设计，并包含 <code>Retrofit</code></li>
+<li>扩展 <code>ServiceMethod&#x3C;?> loadServiceMethod(Method method)</code>，新增SSE情况的执行路径</li>
+<li>扩展 <code>ServiceMethod</code>，内建SSE情况的处理逻辑，即承载设计1、2</li>
+</ul>
+</li>
+</ul>
+<p>简要的代码如下：</p>
+<h3 id="内建的eventsourcelistener--对应1">内建的EventSourceListener — 对应1</h3>
+<blockquote>
+<p>内建选择了Flow，可自行扩展其他，通过回调实现源的更新</p>
+</blockquote>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> FlowAdapterEventListener</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> channel: </span><span style="color:#B392F0">Channel</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Event</span><span style="color:#E1E4E8">>,</span></span>
+<span class="line"><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">EventSourceListener</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> scope: </span><span style="color:#B392F0">CoroutineScope</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> CoroutineScope</span><span style="color:#E1E4E8">(Dispatchers.IO)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onEvent</span><span style="color:#E1E4E8">(eventSource: </span><span style="color:#B392F0">EventSource</span><span style="color:#E1E4E8">, id: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?, type: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?, </span><span style="color:#F97583">data</span><span style="color:#E1E4E8">: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">onEvent</span><span style="color:#E1E4E8">(eventSource, id, type, </span><span style="color:#F97583">data</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        scope.</span><span style="color:#B392F0">launch</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            channel.</span><span style="color:#B392F0">send</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">Event</span><span style="color:#E1E4E8">(id, type, </span><span style="color:#F97583">data</span><span style="color:#E1E4E8">))</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onFailure</span><span style="color:#E1E4E8">(eventSource: </span><span style="color:#B392F0">EventSource</span><span style="color:#E1E4E8">, t: </span><span style="color:#B392F0">Throwable</span><span style="color:#E1E4E8">?, response: </span><span style="color:#B392F0">Response</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">onFailure</span><span style="color:#E1E4E8">(eventSource, t, response)</span></span>
+<span class="line"><span style="color:#E1E4E8">        scope.</span><span style="color:#B392F0">launch</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            channel.</span><span style="color:#B392F0">send</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#B392F0">                Event</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">""</span><span style="color:#E1E4E8">, t)</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"><span style="color:#E1E4E8">            channel.</span><span style="color:#B392F0">close</span><span style="color:#E1E4E8">(t)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="定义eventsourceadapter--对应2">定义EventSourceAdapter — 对应2</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> EventSourceAdapter</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> adapt</span><span style="color:#E1E4E8">(request: </span><span style="color:#B392F0">Request</span><span style="color:#E1E4E8">, factory: </span><span style="color:#B392F0">EventSource</span><span style="color:#E1E4E8">.Factory): </span><span style="color:#B392F0">T</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Factory</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        abstract</span><span style="color:#F97583"> operator</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> get</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            returnType: </span><span style="color:#B392F0">Type</span><span style="color:#E1E4E8">, annotations: </span><span style="color:#B392F0">Array</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Annotation</span><span style="color:#E1E4E8">>, retrofitSSE: </span><span style="color:#B392F0">RetrofitSSE</span></span>
+<span class="line"><span style="color:#E1E4E8">        ): </span><span style="color:#B392F0">EventSourceAdapter</span><span style="color:#E1E4E8">&#x3C;*>?</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="内建eventsourceadapter-和-factory--对应2">内建EventSourceAdapter 和 Factory — 对应2</h3>
+<p>这是一个示例，以内建选择的Flow情况为例，展示Factory能区分目标类型，
+Factory注册池遍历执行至非NULL返回时，认为得到目标类型的Factory</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> FlowAdapter</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">EventSourceAdapter</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Flow</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Event</span><span style="color:#E1E4E8">>> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> adapt</span><span style="color:#E1E4E8">(request: </span><span style="color:#B392F0">Request</span><span style="color:#E1E4E8">, factory: </span><span style="color:#B392F0">EventSource</span><span style="color:#E1E4E8">.Factory): </span><span style="color:#B392F0">Flow</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Event</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            val</span><span style="color:#E1E4E8"> channel </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Channel</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Event</span><span style="color:#E1E4E8">>()</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> channel.</span><span style="color:#B392F0">receiveAsFlow</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">shareIn</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">CoroutineScope</span><span style="color:#E1E4E8">(Dispatchers.IO), SharingStarted.Eagerly)</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">onSubscription</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    factory.</span><span style="color:#B392F0">newEventSource</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                        request, </span><span style="color:#B392F0">FlowAdapterEventListener</span><span style="color:#E1E4E8">(channel)</span></span>
+<span class="line"><span style="color:#E1E4E8">                    )</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        companion</span><span style="color:#F97583"> object</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            val</span><span style="color:#E1E4E8"> Factory </span><span style="color:#F97583">=</span><span style="color:#F97583"> object</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">Factory</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">                override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> get</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                    returnType: </span><span style="color:#B392F0">Type</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                    annotations: </span><span style="color:#B392F0">Array</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Annotation</span><span style="color:#E1E4E8">>,</span></span>
+<span class="line"><span style="color:#E1E4E8">                    retrofitSSE: </span><span style="color:#B392F0">RetrofitSSE</span></span>
+<span class="line"><span style="color:#E1E4E8">                ): </span><span style="color:#B392F0">EventSourceAdapter</span><span style="color:#E1E4E8">&#x3C;*>? {</span></span>
+<span class="line"><span style="color:#F97583">                    if</span><span style="color:#E1E4E8"> (Flow::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java.</span><span style="color:#B392F0">isAssignableFrom</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">getRawType</span><span style="color:#E1E4E8">(returnType))) {</span></span>
+<span class="line"><span style="color:#F97583">                        return</span><span style="color:#B392F0"> FlowAdapter</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#F97583">                    return</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<h3 id="servicemethod扩展以及路径">ServiceMethod扩展以及路径</h3>
+<p>新路径：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>abstract class ServiceMethodV2&#x3C;T> extends ServiceMethod&#x3C;T> {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    static &#x3C;T> ServiceMethod&#x3C;T> parseAnnotationsV2(RetrofitSSE retrofit, Method method) {</span></span>
+<span class="line"><span>        RequestFactory requestFactory = RequestFactory.parseAnnotations(retrofit.retrofit, method);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        Type returnType = method.getGenericReturnType();</span></span>
+<span class="line"><span>        if (Utils.hasUnresolvableType(returnType)) {</span></span>
+<span class="line"><span>            throw methodError(/*ignore*/);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        if (returnType == void.class) {</span></span>
+<span class="line"><span>            throw methodError(method, "Service methods cannot return void.");</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        return HttpServiceMethodV2.parseAnnotations(retrofit, method, requestFactory);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<blockquote>
+<p>扩展 <code>ServiceMethod</code>，内建SSE情况的处理逻辑，即承载设计1、2</p>
+</blockquote>
+<p>详见：<code>HttpServiceMethodV2</code>，代码较多，不做展开,当满足SSE情况时，走新逻辑，否则回归至 <code>HttpServiceMethod#parseAnnotations</code></p>
+<h3 id="新入口">新入口</h3>
+<blockquote>
+<ul>
+<li>具备EventSource.Factory注册</li>
+<li>具备EventSourceAdapter.Factory池，以及识别目标的能力</li>
+<li>走新逻辑：<code>ServiceMethodV2.parseAnnotationsV2(this, method)</code></li>
+</ul>
+</blockquote>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span></span></span>
+<span class="line"><span>public final class RetrofitSSE {</span></span>
+<span class="line"><span>    private final Map&#x3C;Method, ServiceMethod&#x3C;?>> serviceMethodCache = new ConcurrentHashMap&#x3C;>();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    final Retrofit retrofit;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @NotNull</span></span>
+<span class="line"><span>    final EventSource.Factory eventSourceFactory;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    final List&#x3C;EventSourceAdapter.Factory> eventSourceAdapterFactories = new ArrayList&#x3C;>();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public RetrofitSSE(Retrofit retrofit, @NotNull EventSource.Factory eventSourceFactory) {</span></span>
+<span class="line"><span>        this.retrofit = retrofit;</span></span>
+<span class="line"><span>        this.eventSourceFactory = eventSourceFactory;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @SuppressWarnings("unchecked") // Single-interface proxy creation guarded by parameter safety.</span></span>
+<span class="line"><span>    public &#x3C;T> T create(final Class&#x3C;T> service) {</span></span>
+<span class="line"><span>        //ignore</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public RetrofitSSE addEventSourceAdapterFactory(EventSourceAdapter.Factory factory) {</span></span>
+<span class="line"><span>        eventSourceAdapterFactories.add(Objects.requireNonNull(factory, "factory == null"));</span></span>
+<span class="line"><span>        return this;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    ServiceMethod&#x3C;?> loadServiceMethod(Method method) {</span></span>
+<span class="line"><span>        ServiceMethod&#x3C;?> result = serviceMethodCache.get(method);</span></span>
+<span class="line"><span>        if (result != null) return result;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        synchronized (serviceMethodCache) {</span></span>
+<span class="line"><span>            result = serviceMethodCache.get(method);</span></span>
+<span class="line"><span>            if (result == null) {</span></span>
+<span class="line"><span>                result = ServiceMethodV2.parseAnnotationsV2(this, method);</span></span>
+<span class="line"><span>                serviceMethodCache.put(method, result);</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>        return result;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public EventSourceAdapter&#x3C;?> eventSourceAdapter(Type returnType, Annotation[] annotations) {</span></span>
+<span class="line"><span>        return nextEventSourceAdapter(null, returnType, annotations);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public EventSourceAdapter&#x3C;?> nextEventSourceAdapter(</span></span>
+<span class="line"><span>            @Nullable EventSourceAdapter.Factory skipPast, Type returnType, Annotation[] annotations) {</span></span>
+<span class="line"><span>        Objects.requireNonNull(returnType, "returnType == null");</span></span>
+<span class="line"><span>        Objects.requireNonNull(annotations, "annotations == null");</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        int start = eventSourceAdapterFactories.indexOf(skipPast) + 1;</span></span>
+<span class="line"><span>        for (int i = start, count = eventSourceAdapterFactories.size(); i &#x3C; count; i++) {</span></span>
+<span class="line"><span>            EventSourceAdapter&#x3C;?> adapter = eventSourceAdapterFactories.get(i).get(returnType, annotations, this);</span></span>
+<span class="line"><span>            if (adapter != null) {</span></span>
+<span class="line"><span>                return adapter;</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        throw new IllegalArgumentException(/*ignore*/);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p><em>作者按：更多的代码细节，还请移步 <a href="https://github.com/leobert-lan/SSE-android-Demo">代码仓库</a> 需切换到 <code>retrofit-sse</code> 分支！</em></p>
+<h2 id="结语">结语</h2>
+<p>又到了说再见的时候，这篇文章中，我们一同完成了：</p>
+<ul>
+<li>获取服务端长耗时任务结果的常见实践方式的归纳</li>
+<li>对SSE进行了详细的讨论，尤其是其协议细节</li>
+<li>搭建SSE服务端、使用OKHttp搭建客户端，进行实操</li>
+<li>对Retrofit进行了分析，探讨并发现了一条扩展路径，可通过Retrofit使用SSE</li>
+</ul>
+<p><strong>应当是一次有趣、好玩的历程！</strong></p>
+<p>在结尾，还是再次提醒，<a href="https://github.com/leobert-lan/SSE-android-Demo">代码仓库</a> 中Retrofit-SSE的代码，并未经过严谨的设计论证并进行充分的测试，
+我仅花费了数小时时间实现博客内容所需的最少设计，势必会存在BUG和设计不健全的内容，<strong>不要直接商用，以免影响绩效</strong>。</p>
+<p>汇总链接如下：</p>
+<p><a href="https://html.spec.whatwg.org/multipage/server-sent-events.html">SSE协议内容扩展阅读</a></p>
+<p><a href="https://www.rfc-editor.org/rfc/rfc5234">ABNF语法RFC</a></p>
+<p><a href="https://github.com/leobert-lan/SSE-android-Demo">服务端 SSE demo代码仓库</a></p>
+<p><a href="https://github.com/square/retrofit/issues/1029">Retrofit关于SSE的讨论issue</a></p>
+<p><a href="https://github.com/leobert-lan/SSE-android-Demo">Android代码仓库</a> 注意分支</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

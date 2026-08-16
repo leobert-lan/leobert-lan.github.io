@@ -1,0 +1,295 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hilt进阶--一文吃透Hilt自定义与跨壁垒 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Hilt进阶--一文吃透Hilt自定义与跨壁垒</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="hilt进阶一文吃透hilt自定义与跨壁垒">Hilt进阶—一文吃透Hilt自定义与跨壁垒</h1>
+<h2 id="前言">前言</h2>
+<p>本文隶属于我归纳整理的Android知识体系的第四部分，属于DI中Hilt的进阶内容</p>
+<img width="360" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/488677faa02244ddbe171a873d4ae62b~tplv-k3u1fbpfcp-watermark.image?">
+<p>如果您需要学习Hilt的基础内容，可以通过Android开发者官方提供的
+<a href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=Mzk0NDIwMTExNw==&#x26;action=getalbum&#x26;album_id=1797733109421948930&#x26;token=1293285389&#x26;lang=zh_CN#wechat_redirect">MAD Skills</a>
+12-15篇 和 <a href="https://dagger.dev/hilt/">官方使用教程</a></p>
+<p>文章按照以下内容展开：</p>
+<img width="800" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b2331bffb3e04976bea27c41fc54e42b~tplv-k3u1fbpfcp-watermark.image?">
+<p>文中涉及的代码和案例，均可以于 <a href="https://github.com/leobert-lan/HiltWorkshop">workshop</a> 中获得。</p>
+<blockquote>
+<p><strong>非常重要</strong>：经过反复思考，我删除了原先编写的关于Hilt工作原理和生成代码的部分。或许加上这部分，会让部分读者获得更深刻地理解，<strong>但我担心会让更多的读者陷入困境</strong> 而不敢使用。</p>
+<p>正如同Google要创建Hilt一样，他们希望开发者以更简单的方式接入Dagger2，本篇文章也希望读者朋友能够先掌握如何使用，并结合场景选用最佳实践方案。在此基础上再行理解背后的设计原理。</p>
+</blockquote>
+<h2 id="跨越-ioc容器的壁垒">跨越 IOC容器的壁垒</h2>
+<p>使用依赖注入（DI）时，我们需要它对 <code>实例</code> 、<code>依赖关系</code> 、 <code>生命周期</code> 进行管理，因此DI框架会构建一个容器，用于实现这些功能。这个容器我们惯称为IOC容器。</p>
+<p>在容器中，会按照我们制定的规则：</p>
+<ul>
+<li>创建实例</li>
+<li>访问实例</li>
+<li>注入依赖</li>
+<li>管理生命周期</li>
+</ul>
+<p>但容器外也有访问容器内部的需求，显然这里存在一道虚拟的 <code>边界、壁垒</code>。这种需求分为两类：</p>
+<ul>
+<li>依赖注入客观需要的入口</li>
+<li>系统中存在合理出现的、非DI框架管理的实例，但它不希望破坏其他实例对象的 <code>生命周期</code> 、<code>作用域唯一性</code>，即它的依赖希望交由DI框架管理</li>
+</ul>
+<p><strong>但请注意</strong>，IOC容器内部也存在着 <code>边界、壁垒</code>，这和它管理实例的机制有关，在Hilt（包括Dagger）中，最大颗粒度的内部壁垒是 <code>Component</code>。</p>
+<p><strong>即便从外部突破IOC容器的壁垒，也只能进入某个特定的Component</strong></p>
+<h3 id="使用entrypoint跨越ioc容器壁垒">使用EntryPoint跨越IOC容器壁垒</h3>
+<p>在Hilt中，我们可以很方便地</p>
+<ul>
+<li>使用接口定义 进入点（EntryPoint），并使用 <code>@EntryPoint</code> 注解使其生效；</li>
+<li>用 <code>@InstallIn</code> 注解指明访问的Component；</li>
+<li>并利用 <code>EntryPoints</code> 完成访问，突破容器壁垒</li>
+</ul>
+<p>下面的代码展示了如何定义：</p>
+<p><em>UserComponent是自定义的Component，在下文中会详细展开</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@EntryPoint</span></span>
+<span class="line"><span style="color:#B392F0">@InstallIn</span><span style="color:#E1E4E8">(UserComponent::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> UserEntryPoint</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> provideUserVO</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">UserVO</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>下面的代码展示了如何获取进入点，注意，您需要先获得对应的Component实例。</p>
+<p><em>对于Hilt内建的Component，均有其获取方法，而自定义的Component，需从外界发起生命周期控制，同样会预留实例访问路径</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> manualGet</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">UserEntryPoint</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> EntryPoints.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        UserComponentManager.instance.</span><span style="color:#B392F0">generatedComponent</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">        UserEntryPoint::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>当获取进入点后，即可使用预定义的API，访问容器内的对象实例。</p>
+<h2 id="自定义scopecomponent">自定义Scope、Component</h2>
+<p>部分业务场景中，Hilt内建的Scope和Component并不能完美支持，此时我们需要进行自定义。</p>
+<p><em>为了下文能够更顺利的展开，我们再花一定的笔墨对 <code>Scope</code>、<code>Component</code>、<code>Module</code> 的含义进行澄清。</em></p>
+<h3 id="scopecomponentmodule的真实含义">Scope、Component、Module的真实含义</h3>
+<p>前文提到两点:</p>
+<ul>
+<li>DI框架需要 <code>创建实例</code>、<code>访问实例</code>、<code>注入依赖</code>、<code>管理生命周期</code></li>
+<li>IOC容器内部也存在着 <code>边界、壁垒</code>，这和它管理实例的机制有关，在Hilt（包括Dagger）中，最大颗粒度的内部壁垒是 <code>Component</code>。</li>
+</ul>
+<p>不难理解：</p>
+<ul>
+<li>实例之间，也会存在依赖关系；</li>
+<li>DI框架需要管理内部实例的生命周期；</li>
+<li>需要进行依赖注入的客户，本身也存在生命周期，<strong>它的依赖对象，应该结合实际需求被合理控制生命周期，避免生命周期泄漏</strong>；</li>
+</ul>
+<p>因此，出现了 <code>范围、作用域</code> 即 <code>Scope</code> 的概念，它包含两个维度：实例的生命周期范围；实例之间的访问界限。</p>
+<p>并且DI框架通过Component控制内部对象的生命周期。</p>
+<p>举一个例子描述，以Activity为例，Activity需要进行依赖注入，并且我们不希望Activity自身需要的依赖出现生命周期泄漏，于是按照Activity的生命周期特点定义了：</p>
+<ul>
+<li><code>ActivityRetainedScoped</code> <code>ActivityRetainedComponent</code>，不受reCreate 影响</li>
+<li><code>ActivityScoped</code>、 <code>ActivityComponent</code>，横竖屏切换等配置变化引起reCreate 开始新生命周期</li>
+</ul>
+<p>并据此对 <code>依赖对象实例</code> 实施 <code>生命周期</code> 和 <code>访问范围</code> 控制</p>
+<p>可以记住以下三点结论：</p>
+<ul>
+<li>Activity实例按照 <code>预定Scope对应的生命周期范围</code> 创建、管理Component，访问Component中的实例；</li>
+<li>Component内的实例可以互相访问，实例的生命周期和Component一致；</li>
+<li>Activity实例（需要依赖注入的客户）和 Component中的实例 可以访问 <code>父Component</code>中的实例，<em>父Component的生命周期完全包含子Component的生命周期</em></li>
+</ul>
+<p>内建的Scope、Component关系参考：</p>
+<img style="background-color:white" width="400" alt="desc" src="https://dagger.dev/hilt/component-hierarchy.svg">
+<p><strong>而Module指导DI框架 <code>创建实例</code>、<code>选用实例进行注入</code></strong></p>
+<p>值得注意的是，Hilt（以及Dagger）可以通过 <code>@Inject</code> 注解类构造函数指导 <code>创建实例</code>，此方式创建的实例的生命周期跟随宿主，与 <code>通过Module方式</code> 进行对比，存在生命周期管理粒度上的差异。</p>
+<h3 id="自定义">自定义</h3>
+<p>至此，已不难理解：因为有实际的生命周期范围管理需求，才会自定义。</p>
+<p>为了方便行文以及编写演示代码，我们举一个常见的例子：用户登录的生命周期。</p>
+<blockquote>
+<p>一般的APP在设计中，用户登录后会持久化TOKEN，下次APP启动后验证TOKEN真实性和时效性，通过验证后用户仍保持登录状态，直到TOKEN超时、登出。当APP退出时，可以等效认为用户登录生命周期结束。</p>
+</blockquote>
+<p>显然，用户登录的生命周期完全涵盖在APP生命周期（Singleton Scope）中，但略小于APP生命周期；和Activity生命周期无明显关联。</p>
+<h4 id="定义scope">定义Scope</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#B392F0"> javax.inject.Scope</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">@Scope</span></span>
+<span class="line"><span style="color:#F97583">annotation</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> UserScope</span></span></code></pre>
+<p>就是这么简单。</p>
+<h4 id="定义component">定义Component</h4>
+<p>定义Component时，需要指明父Component和对应的Scope：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#B392F0"> dagger.hilt.DefineComponent</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">@DefineComponent</span><span style="color:#E1E4E8">(parent </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> SingletonComponent::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">@UserScope</span></span>
+<span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> UserComponent</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Hilt需要以Builder构建Component，不仅如此，一般构建Component时存在初始信息，例如：ActivityComponent需要提供Activity实例。</p>
+<p>通常设计中，用户Component存在 <code>用户基本信息、TOKEN</code> 等初始信息</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">data</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> User</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> name: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> token: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>此时，我们可以在Builder中完成初始信息的注入：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#B392F0"> dagger.BindsInstance</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#B392F0"> dagger.hilt.DefineComponent</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">@DefineComponent.Builder</span></span>
+<span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> Builder</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> feedUser</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">@BindsInstance</span><span style="color:#E1E4E8"> user: </span><span style="color:#B392F0">User</span><span style="color:#E1E4E8">?): </span><span style="color:#B392F0">Builder</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> build</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">UserComponent</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>我们以 <code>@BindsInstance</code> 注解标识需要注入的初始信息，<em>注意合理控制其可空性，在后续的使用中，可空性需保持一致</em></p>
+<p><em>注意：方法名并不重要，采用习惯性命名即可，我习惯于将向容器喂入参数的API添加feed前缀</em></p>
+<p>当我们通过Hilt获得Builder实例时，即可控制Component的创建（即生命周期开始）</p>
+<h4 id="使用manager管理component">使用Manager管理Component</h4>
+<p>不难想象，Component的管理基本为模板代码，Hilt中提供了模板和接口类：</p>
+<p><em>如果您想避免模板代码编写，可以定义扩展模块，使用APT、KCP、KSP生成</em></p>
+<p>此处展示非线程安全的简单使用Demo</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@Singleton</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> UserComponentManager</span><span style="color:#B392F0"> @Inject</span><span style="color:#B392F0"> constructor</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> builder: </span><span style="color:#B392F0">UserComponent</span><span style="color:#E1E4E8">.Builder</span></span>
+<span class="line"><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">GeneratedComponentManager</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">UserComponent</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    companion</span><span style="color:#F97583"> object</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        lateinit</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> instance: </span><span style="color:#B392F0">UserComponentManager</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> userComponent </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> builder</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">feedUser</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> onLogin</span><span style="color:#E1E4E8">(user: </span><span style="color:#B392F0">User</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        userComponent </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">feedUser</span><span style="color:#E1E4E8">(user).</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> onLogout</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        userComponent </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> builder.</span><span style="color:#B392F0">feedUser</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> generatedComponent</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">UserComponent</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> userComponent</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>您也可以定义如下的线程安全的Manager，并使用 <code>ComponentSupplier</code> 提供实例</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> CustomComponentManager</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> componentCreator: </span><span style="color:#B392F0">ComponentSupplier</span></span>
+<span class="line"><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">GeneratedComponentManager</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @Volatile</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> component: </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> componentLock </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Any</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> generatedComponent</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (component </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">            synchronized</span><span style="color:#E1E4E8">(componentLock) {</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (component </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    component </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> componentCreator.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> component</span><span style="color:#F97583">!!</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>您可以根据实际需求选择最适宜的方法进行管理，不再赘述。</p>
+<h4 id="在生命周期范围更小的component中使用">在生命周期范围更小的Component中使用</h4>
+<p>至此，我们已经完成了自定义Scope、Component的主要工作，通过Manager即可控制生命周期。</p>
+<p>如果想在生命周期范围更小的Component中访问 UserComponent中的对象实例，您需要谨记前文提到的三条结论。</p>
+<p><em>该需求很合理，但下面的例子并不足够典型</em></p>
+<p>此时，您需要通过一个合理的Component实现访问，例如在Activity中需要注入相关实例时。
+因为 <code>ActivityRetainedComponent</code> 和 <code>UserComponent</code> 不存在父子关系，Scope没有交集，所以 <strong>需要找到共同的父Component进行帮助，并通过EntryPoint突破壁垒</strong> ：</p>
+<p>前文中，我们将 <code>UserComponentManager</code> 划入 <code>SingletonComponent</code>, 他是两种的共同父Component，此时可以这样处理：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@Module</span></span>
+<span class="line"><span style="color:#B392F0">@InstallIn</span><span style="color:#E1E4E8">(ActivityRetainedComponent::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">object</span><span style="color:#B392F0"> AppModule</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @Provides</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> provideUserVO</span><span style="color:#E1E4E8">(manager: </span><span style="color:#B392F0">UserComponentManager</span><span style="color:#E1E4E8">):</span><span style="color:#B392F0">UserVO</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> UserEntryPoint.</span><span style="color:#B392F0">manualGet</span><span style="color:#E1E4E8">(manager.</span><span style="color:#B392F0">generatedComponent</span><span style="color:#E1E4E8">()).</span><span style="color:#B392F0">provideUserVO</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="解决独立library的依赖初始化问题">解决独立library的依赖初始化问题</h2>
+<p>此问题属于常见案例，通过研究它的解决方案，我们可以更深刻地理解前文内容，做到吃透。</p>
+<p>当处理主工程时，没有代码隔离，我们可以很轻易的修改Application的代码，因此很多问题难以暴露。</p>
+<blockquote>
+<p>例如，我们可以在Application中通过注解标明依赖 <em>（满足Singleton Scope前提）</em> ，DI框架会帮助我们进行注入，在注入后可以编写逻辑代码，将对象赋值给全局变量，便可以 “方便” 的使用。</p>
+<p><em>为方便下文表述，我们称之 “方案1”</em></p>
+</blockquote>
+<p><strong>显然，这是有异味的代码，虽然它有效且方便。</strong></p>
+<blockquote>
+<p>因此，我们选取一些场景来说明该做法的弊端：</p>
+<ul>
+<li>场景1：创建独立Library，其中使用Hilt作为DI框架，Library中存在自定义Component，需要初始化管理入口</li>
+<li>场景2：项目采用了组件化，该Library按照渠道包需求，渠道包A集成、渠道包B不集成</li>
+<li>场景3：项目采用了Uni-App、React-Native等技术，该Library中存在实例由反射方式创建、不受Hilt管理，无法借助Hilt自动注入依赖</li>
+</ul>
+<p>以上场景并不相互孤立</p>
+</blockquote>
+<p>在场景1中，我们仍然可以通过 <code>方案1</code> 完成需求，但在场景2中便不再可行。</p>
+<p>常规的组件化、插件化，都会完成代码隔离&#x26;使用抽象，因此无法在主工程的Application中使用目标类。通过定制字节码工具曲线救国，则属实是大炮打蚊子、屎盆子镶金边</p>
+<h3 id="使用hilt的聚合能力解决问题">使用hilt的聚合能力解决问题</h3>
+<p>在 MAD Skills 系列文章的最后一篇中，简单提及了Hilt的聚合能力，它至少包含以下两个层面：</p>
+<ul>
+<li>即便一个已经编译为aar的库，在被集成后，Hilt依旧能够扫描该库中Hilt相关的内容，进行依赖图聚合</li>
+<li>Hilt生成的代码，依旧存在着注解，这些注解可以被注解处理器、字节码工具识别、并进一步处理。可以是Hilt内建的处理器或您自定义的扩展处理器</li>
+</ul>
+<p>依据第一个层面，我们可以制定一个约定：</p>
+<blockquote>
+<p>子Library按照抽象接口提供Library初始化实例，主工程的Application通过DI框架获取后进行初始化</p>
+<p><em>我们将其称为方案2</em></p>
+</blockquote>
+<p>例如，在Library中定义如下初始化类：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> LibInitializer</span><span style="color:#B392F0"> @Inject</span><span style="color:#B392F0"> constructor</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> userComponentManager: </span><span style="color:#B392F0">UserComponentManager</span></span>
+<span class="line"><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">Function1</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Application</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> invoke</span><span style="color:#E1E4E8">(app: </span><span style="color:#B392F0">Application</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">        UserComponentManager.instance </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> userComponentManager</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> Unit</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>不难发现，他是方案1的变种，将依赖获取从Application中挪到了LibInitializer中</p>
+<p>并约定绑定实例&#x26;集合注入， <em>依旧在Library中编码</em> ：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@InstallIn</span><span style="color:#E1E4E8">(SingletonComponent::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">@Module</span></span>
+<span class="line"><span style="color:#F97583">abstract</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> AppModuleBinds</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    @Binds</span></span>
+<span class="line"><span style="color:#B392F0">    @IntoSet</span></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> provideLibInitializer</span><span style="color:#E1E4E8">(bind: </span><span style="color:#B392F0">LibInitializer</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Function1</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Application</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>在主工程的Application中：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@HiltAndroidApp</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> App</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">Application</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#B392F0">    @Inject</span></span>
+<span class="line"><span style="color:#F97583">    lateinit</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> initializers: </span><span style="color:#B392F0">Set</span><span style="color:#E1E4E8">&#x3C;@</span><span style="color:#B392F0">JvmSuppressWildcards</span><span style="color:#B392F0"> Function1</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Application</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8">>></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onCreate</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">onCreate</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        initializers.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            it</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>如此即可满足场景1、场景2的需求。</p>
+<p>但仔细思考一下，这种做法太 <strong>“强硬”</strong> 了，不仅要求主工程的Application进行配合，而且需要小心的处理初始化代码的分配。</p>
+<p>在场景3中，这些技术均有相适应的插件初始化入口；组件化插件化项目中，也具有类似的设计。随集成方式的不同，很可能造成 <strong>初始化逻辑遗漏或者重复</strong> 。</p>
+<p>注意：重复初始化可能造成潜在的Scope泄漏，滋生bug。</p>
+<h3 id="聚合能力entrypoint">聚合能力+EntryPoint</h3>
+<p>前文中，我们已经讨论了使用EntryPoint突破IOC容器的壁垒，也体验了Hilt的聚合能力。而 <code>SingletonComponent</code> 作为内建Component，同样可以使用EntryPoint突破容器壁垒。</p>
+<p>如果您对Hilt的源码或其设计有一定程度的了解，应当清楚：</p>
+<blockquote>
+<p>内建Component均有对应的ComponentHolder，而SingletonComponent对应的Holder即为Application。</p>
+</blockquote>
+<p>通过 Holder实例和 <code>EntryPointAccessors</code> 可以获得定义的 <code>EntryPoint接口</code></p>
+<p>为 <code>SingletonComponent</code> 自定义EntryPoint后，即可摆脱Hilt自定注入的传递链而通过逻辑编码获取实例。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@EntryPoint</span></span>
+<span class="line"><span style="color:#B392F0">@InstallIn</span><span style="color:#E1E4E8">(SingletonComponent::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> UserComponentEntryPoint</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    companion</span><span style="color:#F97583"> object</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        fun</span><span style="color:#B392F0"> manualGet</span><span style="color:#E1E4E8">(context: </span><span style="color:#B392F0">Context</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">UserComponentEntryPoint</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> EntryPointAccessors.</span><span style="color:#B392F0">fromApplication</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                context, UserComponentEntryPoint::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> provideBuilder</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">UserComponent</span><span style="color:#E1E4E8">.Builder</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> provideManager</span><span style="color:#E1E4E8">():</span><span style="color:#B392F0">UserComponentManager</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>通过这一方式，我们只需要获得Context即可突破壁垒访问容器内部实例，Hilt不再约束Library的初始化方式。</p>
+<p>至此，您可以在原先的Library初始化模块中，按需自由的添加逻辑！</p>
+<p><em>注意：Builder由Hilt生成实现，无法干预其生命周期，故每次调用时生成新的实例，从一般的编码需求，获取Manager实例即可。您可以在WorkShop项目中获得验证</em></p>
+<h3 id="问题衍生">问题衍生</h3>
+<p>在场景3中，我们继续进行衍生：</p>
+<blockquote>
+<p>Library作为动态插件，并不直接集成，而是通过插件化技术，动态集成启用功能。又该如何处理呢？</p>
+</blockquote>
+<p>在MAD Skills系列文章的第四篇中，简单提及了Hilt的扩展能力。考虑到篇幅以及AAB（Dynamic Feature）、插件化的背景，我们将在下一篇文章中对该问题展开解决方案的讨论。</p>
+<h2 id="末">末</h2>
+<p>先做到正确使用，再逐步理解原理。我会在后续系列文章中，同读者酣畅淋漓的讨论Hilt的工作原理和实现原理。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

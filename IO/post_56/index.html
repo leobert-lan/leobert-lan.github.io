@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Java IO系列 | 经典 IO | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Java IO系列 | 经典 IO</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="java-io系列--经典-io">Java IO系列 | 经典 IO</h1>
+<h2 id="前言">前言</h2>
+<p>Android 开发中不可避免会接触到IO，本篇作为系列中的第一篇，将和大家一同花费5分钟的时间，梳理 经典IO 的知识。</p>
+<p>重点内容脑图如下，文章亦按照此结构展开，如已熟练掌握，可跳过</p>
+<img width="600" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e30f7a31900446f0ad56e53124d564e8~tplv-k3u1fbpfcp-watermark.image">
+<p><em>作者按：在一些文章、资料中，将JDK1.4前的IO内容，称为 <code>经典IO</code>、 <code>BIO</code> 、 <code>标准IO</code> 、 <code>Blocking IO</code> 、<code>传统IO</code> 、 <code>Java IO</code>。 都有一定的道理，但注意 <code>BIO</code>
+、<code>Blocking IO</code> 此类称谓可能引起混淆。本系列中以 <code>经典IO</code> 指代JDK1.4 前的IO</em></p>
+<h2 id="java-经典io-概述">JAVA 经典IO 概述</h2>
+<h3 id="流模型与分类">流模型与分类</h3>
+<img width="600" alt="desc" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b37be911d88b4b97a3fa12dc1cc0cb8c~tplv-k3u1fbpfcp-watermark.image">
+<p>在经典IO中，流(stream)是对数据传输的总称。流代表数据的流动。</p>
+<ul>
+<li>按 <code>操作单位</code> ，可以分为
+<ul>
+<li><code>字节流</code> ，操作对象为字节</li>
+<li><code>字符流</code> ，操作对象为字符，涉及到编码</li>
+</ul>
+</li>
+<li>按 <code>数据流方向</code> ， 可以分为：
+<ul>
+<li><code>输入流</code> ， 输入流代表从某个地方(硬盘、内存、网络等)读入内存</li>
+<li><code>输出流</code> ， 输出流代表从内存写出到某个地方</li>
+</ul>
+</li>
+<li>按 <code>功能类型</code> ， 可以分为：
+<ul>
+<li><code>节点流</code> ， 节点流代表数据的源头和终点，常见的有文件流、数组流和管道流等</li>
+<li><code>处理流</code> ， 处理流是连接在节点流之上，为节点流提供某种额外的功能,如缓冲、转换等</li>
+</ul>
+</li>
+</ul>
+<h3 id="优点">优点</h3>
+<p>不难想象，IO的 <code>场景</code> 和 <code>处理过程</code> 是多而繁杂的，因此需要 <code>加以抽象</code> 、并 <code>建立类簇</code>，以满足程序设计的通用性和扩展性，而 <code>流</code> 的抽象非常贴切，包含了最基础的操作API。
+<strong>对于调用方而言非常友好</strong>。</p>
+<h3 id="局限性">局限性</h3>
+<p>经典IO 设计中采用 <code>同步阻塞机制</code> 。以读为例，调用 <code>read()</code> 方法时，如果数据尚未就绪，线程会阻塞。这会降低程序的运行效率，在网络IO中更加明显。</p>
+<p>对于IO负荷较小的客户端程序，尚可接受，但对于 <code>高负载</code> 、<code>高并发</code> 的服务器环境，经典IO存在明显的瓶颈，并不能充分发挥硬件性能和带宽。</p>
+<h2 id="字节流">字节流</h2>
+<p>按照数据流方向，JDK中设计有两个基类：</p>
+<ul>
+<li><code>InputStream</code> 读取字节数据的抽象父类</li>
+<li><code>OutputStream</code> 写出字节数据的抽象父类</li>
+</ul>
+<h3 id="uml">UML</h3>
+<p>JDK中主要的类UML图如下：</p>
+<p><em>作者按：每个子类的具体作用不再展开，如您尚不清楚部分类的作用，可直接阅读JDK中的注释</em></p>
+<img width="600" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/12158bd37e164a2ea047778527bd4c98~tplv-k3u1fbpfcp-watermark.image">
+<img width="600" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2d0d8f5a1bf840e5954fb1348ba7eaa6~tplv-k3u1fbpfcp-watermark.image">
+<ul>
+<li><code>FileInputStream</code> 和 <code>FileOutputStream</code>:用于读写文件</li>
+<li><code>BufferedInputStream</code> 和 <code>BufferedOutputStream</code>:带缓冲的文件流,可以提高读写效率</li>
+<li><code>DataInputStream</code> 和 <code>DataOutputStream</code>:用于读写基本数据类型</li>
+<li><code>ByteArrayInputStream</code> 和 <code>ByteArrayOutputStream</code>:操作内存中的字节数组</li>
+<li><code>ObjectInputStream</code> 和 <code>ObjectOutputStream</code>:用于读写可序列化的对象</li>
+</ul>
+<p><em>当下，应用中 <code>ObjectInputStream</code>、<code>ObjectOutputStream</code> 使用相对较少，一般会将其序列化为JSON、XML存储或映射到数据库。</em></p>
+<p>对象类必须满足以下条件：</p>
+<ul>
+<li>实现 <code>java.io.Serializable</code> 接口。</li>
+<li>该类 <code>除transient关键字修饰</code> 的所有属性必须是可序列化的。</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">throws</span><span style="color:#E1E4E8"> Exception{</span></span>
+<span class="line"><span style="color:#6A737D">        // 写对象</span></span>
+<span class="line"><span style="color:#E1E4E8">        ObjectOutputStream oos </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ObjectOutputStream</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#B392F0"> FileOutputStream</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"object.txt"</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">        oos.</span><span style="color:#B392F0">writeObject</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#B392F0"> Person</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"张三"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">25</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">        oos.</span><span style="color:#B392F0">close</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // 读对象</span></span>
+<span class="line"><span style="color:#E1E4E8">        ObjectInputStream ois </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ObjectInputStream</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#B392F0"> FileInputStream</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"object.txt"</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">        Person p </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (Person) ois.</span><span style="color:#B392F0">readObject</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        ois.</span><span style="color:#B392F0">close</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(p.</span><span style="color:#B392F0">getName</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ", "</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> p.</span><span style="color:#B392F0">getAge</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#6A737D">        // 张三, 25</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="字符流">字符流</h2>
+<p>按照数据流的方向，JDK中设计有两大基类：</p>
+<ul>
+<li><code>Reader</code> :读取字符数据的抽象父类。</li>
+<li><code>Writer</code> :写出字符数据的抽象父类。</li>
+</ul>
+<h3 id="uml-1">UML</h3>
+<p>JDK中主要的类UML图如下：</p>
+<img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7ec3a5ac25154cfeaaeecbf6c6b833de~tplv-k3u1fbpfcp-watermark.image">
+<img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f1eb46d280c44f479fbbe4f0de6b202c~tplv-k3u1fbpfcp-watermark.image">
+<ul>
+<li><code>FileReader</code> 和 <code>FileWriter</code> :用于读取和写入字符文件</li>
+<li><code>BufferedReader</code> 和 <code>BufferedWriter</code> :带缓冲的文件字符流,可以提高读写效率</li>
+<li><code>CharArrayReader</code> 和 <code>CharArrayWriter</code> :读取和写入内存字符数组</li>
+<li><code>PipedReader</code> 和 <code>PipedWriter</code> :pipe输入流、输出流,线程间通信</li>
+<li><code>InputStreamReader</code> 和 <code>OutputStreamWriter</code>:将字节流转化为字符流,作为桥梁使用</li>
+</ul>
+<p><em>不再展示使用方式</em></p>
+<h2 id="缓冲流">缓冲流</h2>
+<p>缓冲流内部有一个缓冲区,可以减少实际读取数据的次数,从而提高流的读取、写入效率。</p>
+<p>缓冲流是一种加强的流, 内部拥有一个 <code>缓冲区</code> ,可以 <strong>减少系统调用的次数,从而提高读写效率</strong> 。</p>
+<p>Java 提供了以下的缓冲流:</p>
+<ul>
+<li>字节缓冲流 <code>BufferedInputStream</code> 和 <code>BufferedOutputStream</code> : 对 <code>FileInputStream</code> 和 <code>FileOutputStream</code>  加以缓冲</li>
+<li>字符缓冲流 <code>BufferedReader</code> 和 <code>BufferedWriter</code> : 对 <code>FileReader</code> 和 <code>FileWriter</code> 加以缓冲</li>
+</ul>
+<h2 id="打印流">打印流</h2>
+<p><code>PrintStream</code> 和 <code>PrintWriter</code> 可以打印各种数据类型，<code>PrintWriter</code> 的打印格式更加丰富一些,支持字符串的格式化输出。</p>
+<p>两者主要区别:</p>
+<ul>
+<li><code>PrintStream</code> 是字节流, <code>PrintWriter</code> 是字符流。</li>
+<li><code>PrintStream</code> 不支持写入文件之外的其他sink, 但 <code>PrintWriter</code> 支持。</li>
+<li>在API丰富性上，<code>PrintStream</code> 只有 <code>print()</code> 和 <code>println()</code> 两个打印API, <code>PrintWriter</code> 更丰富,且支持格式化输出。</li>
+<li><code>PrintWriter</code> 可能抛出 <code>IOException</code>。</li>
+</ul>
+<p><code>PrintStream</code> 存在少许性能优势，但在大多数情况下 PrintWriter 比 PrintStream 更实用。</p>
+<h2 id="随机访问流">随机访问流</h2>
+<p><code>RandomAccessFile</code> 可以随机访问文件中的任意位置，它既可以作为输入流也可以作为输出流。</p>
+<p>它具有两个构造方法:</p>
+<ul>
+<li><code>RandomAccessFile(File file, String mode)</code></li>
+<li><code>RandomAccessFile(String name, String mode)</code></li>
+</ul>
+<p><code>mode参数</code> 指定打开文件的模式,有以下几种:</p>
+<ul>
+<li>r: 只读模式</li>
+<li>rw: 读写模式</li>
+<li>rws: 读写同步模式</li>
+<li>rwd: 读写,同步元数据</li>
+</ul>
+<blockquote>
+<p><code>rws</code>,比rw的写多了同步，同步写入指的是将文件内容和元数据同步写入磁盘,保证数据不丢失。</p>
+<p>例如,我们写入一些数据,关闭流后,数据实际上还在操作系统的缓冲区,还没有真正写入磁盘，如果系统出现异常，缓冲区数据会丢失。</p>
+<p><code>rwd</code>,比rw多了同步元数据，元数据是描述数据属性和结构的信息,文件系统会维护每个文件的元数据,如:</p>
+<ul>
+<li>文件大小</li>
+<li>创建时间</li>
+<li>最后修改时间</li>
+<li>文件权限</li>
+<li>文件类型等
+rwd模式会在修改文件内容后自动更新文件的元数据,保证元数据的同步性</li>
+</ul>
+</blockquote>
+<p>在文件断点续传需求场景下，<code>RandomAccessFile</code> 具有极高适用性，结合切片处理的思路，可以充分发挥带宽和多核多线程优势。</p>
+<h2 id="结语">结语</h2>
+<p>本篇文章简单梳理了Java 经典IO的基础知识，并未深入，应对客户端中的需求场景已基本够用，下一篇，我们将继续梳理Java NIO的基础知识。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

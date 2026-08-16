@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>孔乙己：你可知道页面和弹窗“通信“的方式有四种？ | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">孔乙己：你可知道页面和弹窗“通信“的方式有四种？</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="孔乙己你可知道页面和弹窗通信的方式有四种">孔乙己：你可知道页面和弹窗“通信“的方式有四种？</h1>
+<p><em>演示用源码和内容思维导图于文末</em></p>
+<p>这日孔乙己照常走进星巴克，点了份大杯拿铁，还要脱脂奶的， 虽然过上了小康生活，但毛病还是没有改，照例掏出一大把硬币，排出三十二枚。</p>
+<p>就在等待时，听到旁边一桌人说道：“好兄弟，别摸鱼了，今天我请你喝咖啡，这个弹窗功能可务必要加好，不能出bug啊”。“呵呵，一个弹窗、还能难道我伟大的Android工程师？”
+手指孔乙己说道：“在他拿到咖啡前，我就能写好，bug不存在的！”</p>
+<p>孔乙己看热闹不嫌事大，凑上前去，“哟嚯，小兄弟年纪不大口气不小，你可知道Android中界面使用弹窗，有四种写法？今天就让我孔乙己来和你说道说道”</p>
+<p>众人哂笑：“这孔乙己还真是孔乙己，茴香豆的茴字你是不是也要说道说道？”</p>
+<p>孔乙己大怒道：“这可不是茴香豆的茴字！这可是必备的基础知识啊，有些你今天用不着了，但遇上祖传代码呢？”</p>
+<p>为了说的清晰些，我们约定：“在界面点击按钮触发弹窗、弹窗中可输入文字，确定后将输入的内容显示在按钮上方的文本框中。让场景更加真实些，界面包含Activity界面和Fragment界面两种主流情况”。</p>
+<p>孔乙己准备先做点准备工作：封装两种情况获取Context、绑定View、绑定事件</p>
+<p><em>诸位可以忽略下面这段模板代码，仅仅是担心后续内容中的代码引起疑惑，可以直接跳跃到 <a href="#demo1">最久远的做法: Dialog</a></em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">sealed</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Host</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> context: </span><span style="color:#B392F0">Context</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> fun</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">View</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">view</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">@IdRes</span><span style="color:#E1E4E8"> id: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">T</span></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> launchFragment</span><span style="color:#E1E4E8">(fragment: </span><span style="color:#B392F0">DialogFragment</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> launchFragment2</span><span style="color:#E1E4E8">(fragment: </span><span style="color:#B392F0">DialogFragment</span><span style="color:#E1E4E8">, listener: </span><span style="color:#B392F0">FragmentResultListener</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    class</span><span style="color:#B392F0"> ActivityHost</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> activity: </span><span style="color:#B392F0">AppCompatActivity</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">Host</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> context: </span><span style="color:#B392F0">Context</span></span>
+<span class="line"><span style="color:#F97583">            get</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> activity</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> fun</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">View</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">view</span><span style="color:#E1E4E8">(id: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">T</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> activity.</span><span style="color:#B392F0">findViewById</span><span style="color:#E1E4E8">(id)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> launchFragment</span><span style="color:#E1E4E8">(fragment: </span><span style="color:#B392F0">DialogFragment</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">            //下文展开</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> launchFragment2</span><span style="color:#E1E4E8">(fragment: </span><span style="color:#B392F0">DialogFragment</span><span style="color:#E1E4E8">, listener: </span><span style="color:#B392F0">FragmentResultListener</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">            //下文展开</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    class</span><span style="color:#B392F0"> FragmentHost</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> fragment: </span><span style="color:#B392F0">Fragment</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">Host</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> context: </span><span style="color:#B392F0">Context</span></span>
+<span class="line"><span style="color:#F97583">            get</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> fragment.</span><span style="color:#B392F0">requireContext</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> fun</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">View</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">view</span><span style="color:#E1E4E8">(id: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">T</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> fragment.</span><span style="color:#B392F0">requireView</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">findViewById</span><span style="color:#E1E4E8">(id)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> launchFragment</span><span style="color:#E1E4E8">(fragment: </span><span style="color:#B392F0">DialogFragment</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">            //下文展开</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> launchFragment2</span><span style="color:#E1E4E8">(fragment: </span><span style="color:#B392F0">DialogFragment</span><span style="color:#E1E4E8">, listener: </span><span style="color:#B392F0">FragmentResultListener</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">            //下文展开</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> host: </span><span style="color:#B392F0">Host</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    interface</span><span style="color:#B392F0"> OnResultListener</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        fun</span><span style="color:#B392F0"> onResult</span><span style="color:#E1E4E8">(text: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    companion</span><span style="color:#F97583"> object</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> BUNDLE_STR_INPUT </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "BUNDLE_STR_INPUT"</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> BUNDLE_BOOL_FROM_FG </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "BUNDLE_BOOL_FROM_FG"</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> KEY_INPUT </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "KEY_INPUT"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> onStart</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> btnDemo1: </span><span style="color:#B392F0">Button</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> host.</span><span style="color:#B392F0">view</span><span style="color:#E1E4E8">(R.id.btn1)</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> btnDemo2: </span><span style="color:#B392F0">Button</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> host.</span><span style="color:#B392F0">view</span><span style="color:#E1E4E8">(R.id.btn2)</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> btnDemo3: </span><span style="color:#B392F0">Button</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> host.</span><span style="color:#B392F0">view</span><span style="color:#E1E4E8">(R.id.btn3)</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> btnDemo4: </span><span style="color:#B392F0">Button</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> host.</span><span style="color:#B392F0">view</span><span style="color:#E1E4E8">(R.id.btn4)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        btnDemo1.</span><span style="color:#B392F0">setOnClickListener</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">demo1</span><span style="color:#E1E4E8">() }</span></span>
+<span class="line"><span style="color:#E1E4E8">        btnDemo2.</span><span style="color:#B392F0">setOnClickListener</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">demo2</span><span style="color:#E1E4E8">() }</span></span>
+<span class="line"><span style="color:#E1E4E8">        btnDemo3.</span><span style="color:#B392F0">setOnClickListener</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">demo3</span><span style="color:#E1E4E8">() }</span></span>
+<span class="line"><span style="color:#E1E4E8">        btnDemo4.</span><span style="color:#B392F0">setOnClickListener</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">demo4</span><span style="color:#E1E4E8">() }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> setText</span><span style="color:#E1E4E8">(text: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        host.</span><span style="color:#B392F0">view</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">TextView</span><span style="color:#E1E4E8">>(R.id.tv_result).text </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> text</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> demo1</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> demo2</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> demo3</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> demo4</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>很轻易的，孔乙己完成了准备工作</p>
+<h2 id="最久远的做法-dialog"><a id="demo1">最久远的做法: Dialog</a></h2>
+<p>还能看到这种做法的，那项目一定是历史悠久了。</p>
+<h3 id="做法">做法</h3>
+<p>孔乙己继续说道：“这种做法只需要拿到 Context 和 业务回调函数即可”</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> demo1</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> view </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> LayoutInflater.</span><span style="color:#B392F0">from</span><span style="color:#E1E4E8">(host.context).</span><span style="color:#B392F0">inflate</span><span style="color:#E1E4E8">(R.layout.view_input, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> dialog </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> AlertDialog.</span><span style="color:#B392F0">Builder</span><span style="color:#E1E4E8">(host.context)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">setView</span><span style="color:#E1E4E8">(view)</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">setPositiveButton</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"OK"</span><span style="color:#E1E4E8">) { dialog, _ </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#E1E4E8">            dialog?.</span><span style="color:#B392F0">dismiss</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#B392F0">            setText</span><span style="color:#E1E4E8">(view.</span><span style="color:#B392F0">findViewById</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">EditText</span><span style="color:#E1E4E8">>(R.id.et_input)?.text?.</span><span style="color:#B392F0">toString</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">setNegativeButton</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"cancel"</span><span style="color:#E1E4E8">) { dialog, _ </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> dialog?.</span><span style="color:#B392F0">dismiss</span><span style="color:#E1E4E8">() }</span></span>
+<span class="line"><span style="color:#E1E4E8">        .</span><span style="color:#B392F0">create</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    dialog.</span><span style="color:#B392F0">show</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="优点">优点</h3>
+<p>很显然，它的优点很明显：<strong>简单、易于封装</strong>，诸位可以很容易的按照产品和UI的需求、剥离弹窗UI部分，从而保持业务部分 “纯粹”， 既能够 <code>高效复用</code> ，也 <code>避免</code> UI变更时改动业务类。</p>
+<h3 id="缺点">缺点</h3>
+<p>孔乙己转头问小兄弟：“你可知道它的缺点吗？“，小兄弟默默不言， 孔乙己也不去管他，笑道：“你把弹窗弹出来、再转一下屏幕看。或者把不保留活动打开，退后台再进。哈哈，是不是弹窗没了？”</p>
+<p>再仔细看看，是不是还发生了 <code>WindowLeak</code>？</p>
+<p>这个设计需要开发者额外维护生命周期变化所导致的问题。</p>
+<h2 id="不操心生命周期变化的方式dialogfragment--settargetfragment">不操心生命周期变化的方式：DialogFragment + setTargetFragment</h2>
+<p>孔乙己继续说道：“Google知道这个设计不好，于是再Fragment系统中增加弹窗交互系统，想要利用Fragment在宿主生命周期变化后的恢复特性来解决这一问题”</p>
+<h3 id="做法-1">做法</h3>
+<p>孔乙己又做了点准备工作，和前文的Dialog保持了功能一致：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">sealed</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> DemoDialogFragment</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">DialogFragment</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onCreateDialog</span><span style="color:#E1E4E8">(savedInstanceState: </span><span style="color:#B392F0">Bundle</span><span style="color:#E1E4E8">?): </span><span style="color:#B392F0">Dialog</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> view </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> LayoutInflater.</span><span style="color:#B392F0">from</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">requireContext</span><span style="color:#E1E4E8">()).</span><span style="color:#B392F0">inflate</span><span style="color:#E1E4E8">(R.layout.view_input, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> AlertDialog.</span><span style="color:#B392F0">Builder</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">requireContext</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">setView</span><span style="color:#E1E4E8">(view)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">setPositiveButton</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"OK"</span><span style="color:#E1E4E8">) { _, _ </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#B392F0">                dismissAllowingStateLoss</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#B392F0">                onPositive</span><span style="color:#E1E4E8">(view.</span><span style="color:#B392F0">findViewById</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">EditText</span><span style="color:#E1E4E8">>(R.id.et_input)?.text?.</span><span style="color:#B392F0">toString</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">setNegativeButton</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Cancel"</span><span style="color:#E1E4E8">) { _, _ </span><span style="color:#F97583">-></span><span style="color:#B392F0"> dismissAllowingStateLoss</span><span style="color:#E1E4E8">() }</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">create</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> abstract</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onPositive</span><span style="color:#E1E4E8">(text: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>孔乙己又按照两种界面形式区分了结果处理：</p>
+<ul>
+<li>Fragment来源则重新获得 targetFragment，约定调用onActivityResult进行回调</li>
+<li>Activity来源则约定Activity必须实现回调接口，获取宿主Activity后进行转型继而进行回调</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo2</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">DemoDialogFragment</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> fromFg </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onCreate</span><span style="color:#E1E4E8">(savedInstanceState: </span><span style="color:#B392F0">Bundle</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">onCreate</span><span style="color:#E1E4E8">(savedInstanceState)</span></span>
+<span class="line"><span style="color:#E1E4E8">        fromFg </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> arguments?.</span><span style="color:#B392F0">getBoolean</span><span style="color:#E1E4E8">(BUNDLE_BOOL_FROM_FG) ?: </span><span style="color:#79B8FF">false</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onPositive</span><span style="color:#E1E4E8">(text: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> intent </span><span style="color:#F97583">=</span><span style="color:#B392F0"> Intent</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        intent.</span><span style="color:#B392F0">putExtras</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">Bundle</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            putString</span><span style="color:#E1E4E8">(BUNDLE_STR_INPUT, text)</span></span>
+<span class="line"><span style="color:#E1E4E8">        })</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (fromFg) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            targetFragment?.</span><span style="color:#B392F0">onActivityResult</span><span style="color:#E1E4E8">(targetRequestCode, Activity.RESULT_OK, intent)</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            (</span><span style="color:#B392F0">requireActivity</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> OnResultListener).</span><span style="color:#B392F0">onResult</span><span style="color:#E1E4E8">(text)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>编写好 “启动” 方式</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583"> class</span><span style="color:#B392F0"> ActivityHost</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> activity: </span><span style="color:#B392F0">AppCompatActivity</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">Host</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> launchFragment</span><span style="color:#E1E4E8">(fragment: </span><span style="color:#B392F0">DialogFragment</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> arg </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> fragment.arguments ?: </span><span style="color:#B392F0">Bundle</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        arg.</span><span style="color:#B392F0">putBoolean</span><span style="color:#E1E4E8">(BUNDLE_BOOL_FROM_FG, </span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        fragment.arguments </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> arg</span></span>
+<span class="line"><span style="color:#E1E4E8">        fragment.</span><span style="color:#B392F0">show</span><span style="color:#E1E4E8">(activity.supportFragmentManager, fragment.javaClass.name)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> FragmentHost</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> fragment: </span><span style="color:#B392F0">Fragment</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">Host</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> launchFragment</span><span style="color:#E1E4E8">(fragment: </span><span style="color:#B392F0">DialogFragment</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> arg </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> fragment.arguments ?: </span><span style="color:#B392F0">Bundle</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        arg.</span><span style="color:#B392F0">putBoolean</span><span style="color:#E1E4E8">(BUNDLE_BOOL_FROM_FG, </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        fragment.arguments </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> arg</span></span>
+<span class="line"><span style="color:#E1E4E8">        fragment.</span><span style="color:#B392F0">setTargetFragment</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.fragment, </span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#6A737D">        //使用 fragment.requireActivity().supportFragmentManager 亦可</span></span>
+<span class="line"><span style="color:#E1E4E8">        fragment.</span><span style="color:#B392F0">show</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.fragment.</span><span style="color:#B392F0">requireFragmentManager</span><span style="color:#E1E4E8">(), fragment.javaClass.name)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>略去回调处理逻辑，<em>简单的取数据和方法调用</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> demo2</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    host.</span><span style="color:#B392F0">launchFragment</span><span style="color:#E1E4E8">(DemoDialogFragment.</span><span style="color:#B392F0">Demo2</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="优点-1">优点</h3>
+<p>小兄弟拿起demo进行了把玩，不错不错，这个没bug了。</p>
+<h3 id="缺点-1">缺点</h3>
+<p>孔乙己又是邪魅一笑，你不觉得这 <strong>代码太TM多</strong> 了吗？使用很不方便啊，Activity和Fragment还有使用差异。</p>
+<p>小兄弟试探的答道：“改造下，全部干成回调函数？那不就基本统一了吗？”</p>
+<p>孔乙己又是邪魅一笑，不错、这就是第三种做法了，你来试一试。</p>
+<h2 id="不靠谱的-dialogfragment--callback">不靠谱的 DialogFragment + Callback</h2>
+<p>孔乙己在一旁看着小兄弟飞快的编码，左手一个Callback，右手一个invoke Callback，三下五除二就改完了</p>
+<h3 id="做法-2">做法</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo3</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">DemoDialogFragment</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#E1E4E8"> listener: </span><span style="color:#B392F0">OnResultListener</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onPositive</span><span style="color:#E1E4E8">(text: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        listener?.</span><span style="color:#B392F0">onResult</span><span style="color:#E1E4E8">(text) ?: Log.</span><span style="color:#B392F0">e</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"DEMO3"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"listener is null!"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> demo3</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    host.</span><span style="color:#B392F0">launchFragment</span><span style="color:#E1E4E8">(DemoDialogFragment.</span><span style="color:#B392F0">Demo3</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.listener </span><span style="color:#F97583">=</span><span style="color:#F97583"> object</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">OnResultListener</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onResult</span><span style="color:#E1E4E8">(text: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#B392F0">                setText</span><span style="color:#E1E4E8">(text)</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    })</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="优点-2">优点</h3>
+<p>小兄弟对孔乙己说：“孔兄，你看，它又变得 <strong>很简单、很容易封装</strong> 了，他们再改UI我也不担心改业务代码了，你看生命周期变化的时候它也不消失了！”</p>
+<h3 id="缺点-2">缺点</h3>
+<p>孔乙己邪魅一笑，“小兄弟别高兴的太早，转完了屏幕测一下功能还正常不？”</p>
+<p>小兄弟闻言一试，大呼：“回调函数怎么没了！可有解救之法？”</p>
+<p>孔乙己说道：“自然是有的，先想想为什么会这样？重新出现的弹窗是系统在处理宿主生命周期变化时为你恢复的，但并不保证所有的引用都恢复”</p>
+<p>破解自然是有办法的，让Callback被恢复，或者让Callback不需要被恢复也能得到正确的对象即可，但需要注意不能带来宿主的内存泄漏问题。</p>
+<p>改造自然是需要花费很多精力的，但是现在有福了。</p>
+<h2 id="拥抱新变化fragmentresultlistener">拥抱新变化：FragmentResultListener</h2>
+<p>孔乙己说道：“Google自然是知道方法二中的诸多问题，终于是提供了大一统解决方案”</p>
+<p>先把AndroidX-Appcompat升级到 1.3.0</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#E1E4E8">implementation </span><span style="color:#9ECBFF">'androidx.appcompat:appcompat:1.3.0'</span></span></code></pre>
+<p>我们将会拥有新API：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#E1E4E8">FragmentManager#</span><span style="color:#B392F0">setFragmentResultListener</span><span style="color:#E1E4E8">(key:</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, lifecycleOwner:</span><span style="color:#B392F0">LifecycleOwner</span><span style="color:#E1E4E8">, listener:</span><span style="color:#B392F0">FragmentResultListener</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">FragmentManager#</span><span style="color:#B392F0">setFragmentResult</span><span style="color:#E1E4E8">(key:</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, bundle:</span><span style="color:#B392F0">Bundle</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<h3 id="做法-3">做法</h3>
+<p>孔乙己使用新API进行了修改</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ActivityHost</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> activity: </span><span style="color:#B392F0">AppCompatActivity</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">Host</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> launchFragment2</span><span style="color:#E1E4E8">(fragment: </span><span style="color:#B392F0">DialogFragment</span><span style="color:#E1E4E8">, listener: </span><span style="color:#B392F0">FragmentResultListener</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        activity.supportFragmentManager.</span><span style="color:#B392F0">setFragmentResultListener</span><span style="color:#E1E4E8">(Demo.KEY_INPUT, activity, listener)</span></span>
+<span class="line"><span style="color:#E1E4E8">        fragment.</span><span style="color:#B392F0">show</span><span style="color:#E1E4E8">(activity.supportFragmentManager, fragment.javaClass.name)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> FragmentHost</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> fragment: </span><span style="color:#B392F0">Fragment</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">Host</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> launchFragment2</span><span style="color:#E1E4E8">(fragment: </span><span style="color:#B392F0">DialogFragment</span><span style="color:#E1E4E8">, listener: </span><span style="color:#B392F0">FragmentResultListener</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.fragment.parentFragmentManager.</span><span style="color:#B392F0">setFragmentResultListener</span><span style="color:#E1E4E8">(Demo.KEY_INPUT, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.fragment, listener)</span></span>
+<span class="line"><span style="color:#E1E4E8">        fragment.</span><span style="color:#B392F0">show</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.fragment.parentFragmentManager, fragment.javaClass.name)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>重新呼出弹窗后</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> demo4</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">    host.</span><span style="color:#B392F0">launchFragment2</span><span style="color:#E1E4E8">(fragment </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> DemoDialogFragment.</span><span style="color:#B392F0">Demo4</span><span style="color:#E1E4E8">()) { requestKey, result </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (requestKey </span><span style="color:#F97583">!=</span><span style="color:#E1E4E8"> KEY_INPUT) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8">@launchFragment2</span></span>
+<span class="line"><span style="color:#B392F0">        setText</span><span style="color:#E1E4E8">(result.</span><span style="color:#B392F0">getString</span><span style="color:#E1E4E8">(BUNDLE_STR_INPUT))</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>非常完美。此时店员的声音飘来：“孔乙己先生，您的大杯脱脂奶拿铁好了”。</p>
+<p>孔乙己对众人说道：“我的咖啡好了，要走了，有这种官方方案，第三种方法便不再优化了，至于此方案是否有缺点，诸位还请阅读源码，江湖再见”。</p>
+<h2 id="附">附</h2>
+<p><a href="https://github.com/leobert-lan/BlogWorkShop">演示代码</a></p>
+<p>内容导图</p>
+<p><img  src="/_astro/post_35.8RjBEiU0_Z8WwdY.webp" alt loading="lazy" decoding="async" width="2226" height="1296"></p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

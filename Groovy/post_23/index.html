@@ -1,0 +1,676 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Groovy：MOP一文打尽 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Groovy：MOP一文打尽</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="groovymop一文打尽">Groovy：MOP一文打尽</h1>
+<h2 id="写在最前">写在最前</h2>
+<p>Groovy已经不再是一门新出现的语言，而笔者是在2013年左右接触到它的，并且在2017年时，有机会尝试使用它编写了基于SpringBoot的后端项目。</p>
+<p>但说来惭愧，在很长的一段时间里，我都没有系统的学习它。并且时至今日，我也 <code>不推荐</code> 大家再去 <code>系统的学习</code> 它，毕竟 <code>使用它的机会越发地少了</code>，
+但是我依旧认为大家有必要花费一些零碎的时间，快餐式的了解它。</p>
+<p>这一篇讲MOP，之后还有一篇闭包</p>
+<p>文章代码已发布于：<a href="https://github.com/leobert-lan/GroovyWorkshop">GroovyWorkshop</a></p>
+<h3 id="为何产生编写groovy系列的想法">为何产生编写Groovy系列的想法</h3>
+<p>一言以蔽之：“被刺激到了，很多事情不知其所以然”.</p>
+<p><a href="https://leobert-lan.github.io/Groovy/why_write_groovy.html">完整了解</a></p>
+<h2 id="metaobject-protocol-元对象协议">MetaObject Protocol 元对象协议</h2>
+<p>本文直接从MOP开始，忽略掉Groovy的大量基础部分，因为这些基础部分，基本和Java一致。</p>
+<p>MOP的目标在于：<code>运行期进行实时变化</code>，听起来有点像Java的反射，但是要比Java的反射更加强大。可以：</p>
+<ul>
+<li>修改方法名、属性名，</li>
+<li>动态增加类的方法、属性 等等</li>
+</ul>
+<h3 id="神奇的方法分配-invokemethod-和-methodmissing">神奇的方法分配— <code>invokeMethod</code> 和 <code>methodMissing</code></h3>
+<p>首先我们简单了解一下Groovy的方法分配机制：</p>
+<div style="background-color: white">
+<img src="https://upload-images.jianshu.io/upload_images/6168671-819123f425c9c5bc.png" alt="invokemethod_methodmissing">
+</div>
+<p><em>图片来自网络</em></p>
+<p><strong>本节内容，结果上看起来很神奇，但内容比较枯燥，并且对非语言使用者帮助不大，可以泛读，有个印象即可</strong></p>
+<h4 id="invokemethod-拦截示例">invokeMethod 拦截示例</h4>
+<p>我们先看一个简单的例子：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo1</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#9ECBFF"> 'foo'</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> invokeMethod</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> name</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "unknown method </span><span style="color:#E1E4E8">$name</span><span style="color:#9ECBFF">(${args.join(',')})"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> demo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Demo1</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        demo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">foo()</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8"> demo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">bar(</span><span style="color:#9ECBFF">"A"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"B"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>如果是Java或者Kotlin，很明显，<code>Demo1</code> 中并没有 <code>bar</code> 方法，编译不能通过，但Groovy可以通过编译，得到运行结果：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8"> Task </span><span style="color:#B392F0">:Demo1.main</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#B392F0">foo</span></span>
+<span class="line"><span style="color:#B392F0">unknown</span><span style="color:#9ECBFF"> method</span><span style="color:#9ECBFF"> bar</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">A,B</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>这就是所谓的 <code>invokeMethod</code>，Groovy中设计了一个顶层接口：<code>GroovyObject</code></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> GroovyObject</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    Object</span><span style="color:#B392F0"> invokeMethod</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> var1</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> var2</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    Object</span><span style="color:#B392F0"> getProperty</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> var1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> setProperty</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> var1</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> var2</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    MetaClass</span><span style="color:#B392F0"> getMetaClass</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> setMetaClass</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">MetaClass</span><span style="color:#FFAB70"> var1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>编译结果：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">package</span><span style="color:#E1E4E8"> osp.leobert.groovyworkshop.mop;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> groovy.lang.GroovyObject;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> groovy.lang.MetaClass;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> groovy.transform.Generated;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> org.codehaus.groovy.runtime.GStringImpl;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> org.codehaus.groovy.runtime.callsite.CallSite;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Demo1</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> GroovyObject</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    @Generated</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> Demo1</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        CallSite</span><span style="color:#E1E4E8">[] var1 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $getCallSiteArray();</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        MetaClass</span><span style="color:#E1E4E8"> var2 </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">$getStaticMetaClass();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">metaClass </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> var2;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> Object</span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        CallSite</span><span style="color:#E1E4E8">[] var1 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $getCallSiteArray();</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> var1[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">callCurrent(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"foo"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> Object</span><span style="color:#B392F0"> invokeMethod</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> name</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        CallSite</span><span style="color:#E1E4E8">[] var3 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $getCallSiteArray();</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> new</span><span style="color:#F97583"> GStringImpl</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#F97583"> Object</span><span style="color:#E1E4E8">[]{name, var3[</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">call(args, </span><span style="color:#9ECBFF">","</span><span style="color:#E1E4E8">)}, </span><span style="color:#F97583">new</span><span style="color:#F97583"> String</span><span style="color:#E1E4E8">[]{</span><span style="color:#9ECBFF">"unknown method "</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"("</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">")"</span><span style="color:#E1E4E8">});</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">... </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        CallSite</span><span style="color:#E1E4E8">[] var1 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $getCallSiteArray();</span></span>
+<span class="line"><span style="color:#F97583">        Object</span><span style="color:#E1E4E8"> demo </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> var1[</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">callConstructor(</span><span style="color:#F97583">Demo1.</span><span style="color:#E1E4E8">class);</span></span>
+<span class="line"><span style="color:#E1E4E8">        var1[</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">call(demo);</span></span>
+<span class="line"><span style="color:#E1E4E8">        var1[</span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">callStatic(</span><span style="color:#F97583">Demo1.</span><span style="color:#E1E4E8">class, var1[</span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">call(demo, </span><span style="color:#9ECBFF">"A"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"B"</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p>我们发现，调用 <code>foo()</code> 方法时，并未执行 <code>invokeMethod</code> 中的逻辑，而Groovy中还有一个特殊的接口：<code>GroovyInterceptable</code>，如果实现它的话：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo2</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> GroovyInterceptable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> s</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "foo:</span><span style="color:#E1E4E8">$s</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> invokeMethod</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> name</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "unknown method </span><span style="color:#E1E4E8">$name</span><span style="color:#9ECBFF">(${args.join(',')})"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> demo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Demo2</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8"> demo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">foo(</span><span style="color:#9ECBFF">"a"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8"> demo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">bar(</span><span style="color:#9ECBFF">"A"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"B"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>我们将得到如下结果：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8"> Task </span><span style="color:#B392F0">:Demo2.main</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#B392F0">unknown</span><span style="color:#9ECBFF"> method</span><span style="color:#9ECBFF"> foo</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">a</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">unknown</span><span style="color:#9ECBFF"> method</span><span style="color:#9ECBFF"> bar</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">A,B</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p><code>foo()</code> 方法并未被分配!!, 这个场景很容易让我们联想到 <code>Java的动态代理</code> 并 <code>拦截、自行分配方法执行</code></p>
+<h4 id="methodmissing示例">methodMissing示例</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo3</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> s</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "foo:</span><span style="color:#E1E4E8">$s</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> invokeMethod</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> name</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "unknown method </span><span style="color:#E1E4E8">$name</span><span style="color:#9ECBFF">(${args.join(',')})"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> methodMissing</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> name</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "methodMissing </span><span style="color:#E1E4E8">$name</span><span style="color:#9ECBFF">(${args.join(',')})"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> demo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Demo3</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8"> demo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">foo(</span><span style="color:#9ECBFF">"a"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8"> demo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">bar(</span><span style="color:#9ECBFF">"A"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"B"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>按照前文的分派流程图，我们猜到结果为：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8"> Task </span><span style="color:#B392F0">:Demo3.main</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#B392F0">foo:a</span></span>
+<span class="line"><span style="color:#B392F0">methodMissing</span><span style="color:#9ECBFF"> bar</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">A,B</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>而实现了 <code>GroovyInterceptable</code> 的情况下，就无法再利用methodMissing机制拦截，而是按照 <code>GroovyInterceptable</code> 走 invokeMethod拦截</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo4</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> GroovyInterceptable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> s</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "foo:</span><span style="color:#E1E4E8">$s</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> invokeMethod</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> name</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "unknown method </span><span style="color:#E1E4E8">$name</span><span style="color:#9ECBFF">(${args.join(',')})"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> methodMissing</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> name</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "methodMissing </span><span style="color:#E1E4E8">$name</span><span style="color:#9ECBFF">(${args.join(',')})"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> demo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Demo4</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8"> demo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">foo(</span><span style="color:#9ECBFF">"a"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8"> demo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">bar(</span><span style="color:#9ECBFF">"A"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"B"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#F97583">></span><span style="color:#E1E4E8"> Task </span><span style="color:#B392F0">:Demo4.main</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#B392F0">unknown</span><span style="color:#9ECBFF"> method</span><span style="color:#9ECBFF"> foo</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">a</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">unknown</span><span style="color:#9ECBFF"> method</span><span style="color:#9ECBFF"> bar</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">A,B</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<h3 id="动态处理类的属性">动态处理类的属性</h3>
+<blockquote>
+<p>一个有关的题外话</p>
+<p>一个传统的 <code>简单JavaBean</code>，在很多场景下又称为 <code>POJO</code> ，大家对此不会陌生，它包含了属性和属性的Getter、Setter并且不包含任意逻辑。</p>
+<p>我们知道, POJO需要添加Getter、Setter，<em>哪怕通过IDE生成，并且编译时如果可能，会被inline优化</em>，为此，还有 <code>是否该使用Lombok之争</code></p>
+<p>但是，对于 “应当有Getter、Setter，但是不应当由编写者处理，而是应该由编译器处理” 是多数人认同的</p>
+</blockquote>
+<p>Groovy中对此进行了尝试，提供了 <code>GPath</code>机制：通过编译器直接生成Getter、Setter，编码时形如属性访问,用”.”符 <code>foo.bar</code>，实际却相对复杂。</p>
+<p><em>kotlin中也有类似的机制。</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> GpathDemo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Foo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        String</span><span style="color:#E1E4E8"> bar</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#B392F0"> getBaz</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#9ECBFF"> "baz"</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        Foo</span><span style="color:#E1E4E8"> foo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Foo</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">bar</span><span style="color:#E1E4E8">:</span><span style="color:#9ECBFF">"bar"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        foo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">bar </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "bar 2"</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8">(foo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">bar)</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8">(foo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">baz)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>我们可以发现，生成的类：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583"> public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Foo</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> GroovyObject</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> String</span><span style="color:#E1E4E8"> bar;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    @Generated</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> Foo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        CallSite</span><span style="color:#E1E4E8">[] var1 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $getCallSiteArray();</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        MetaClass</span><span style="color:#E1E4E8"> var2 </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">$getStaticMetaClass();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">metaClass </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> var2;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> Object</span><span style="color:#B392F0"> getBaz</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        CallSite</span><span style="color:#E1E4E8">[] var1 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $getCallSiteArray();</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "baz"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    @Generated</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> String</span><span style="color:#B392F0"> getBar</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> this</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">bar;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    @Generated</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> setBar</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> var1</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">bar </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> var1;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">... </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    CallSite</span><span style="color:#E1E4E8">[] var1 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $getCallSiteArray();</span></span>
+<span class="line"><span style="color:#F97583">    GpathDemo.Foo</span><span style="color:#E1E4E8"> foo </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">GpathDemo.Foo</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">ScriptBytecodeAdapter</span></span>
+<span class="line"><span style="color:#E1E4E8">            .castToType(var1[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">callConstructor(</span><span style="color:#F97583">GpathDemo.Foo.</span><span style="color:#E1E4E8">class,</span></span>
+<span class="line"><span style="color:#F97583">                    ScriptBytecodeAdapter.</span><span style="color:#E1E4E8">createMap(</span><span style="color:#F97583">new</span><span style="color:#F97583"> Object</span><span style="color:#E1E4E8">[]{</span><span style="color:#9ECBFF">"bar"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"bar"</span><span style="color:#E1E4E8">})),</span></span>
+<span class="line"><span style="color:#F97583">                    GpathDemo.Foo.</span><span style="color:#E1E4E8">class);</span></span>
+<span class="line"><span style="color:#F97583">    String</span><span style="color:#E1E4E8"> var3 </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "bar 2"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    ScriptBytecodeAdapter.</span><span style="color:#E1E4E8">setProperty(var3, (</span><span style="color:#F97583">Class</span><span style="color:#E1E4E8">)</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, foo, (</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">)</span><span style="color:#9ECBFF">"bar"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    var1[</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">callStatic(</span><span style="color:#F97583">GpathDemo.</span><span style="color:#E1E4E8">class, var1[</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">callGetProperty(foo));</span></span>
+<span class="line"><span style="color:#E1E4E8">    var1[</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">callStatic(</span><span style="color:#F97583">GpathDemo.</span><span style="color:#E1E4E8">class, var1[</span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">callGetProperty(foo));</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>读者可能已经注意到了，通过手动添加Getter，也可以利用GPath机制，用”.”访问；</p>
+<p>另外，读者可能也注意到：设置bar属性时，并未直接访问Setter，此处，我们可以动态的添加属性！</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> GpathDemo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Bar</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        Bar.</span><span style="color:#E1E4E8">metaClass</span><span style="color:#F97583">.</span><span style="color:#9ECBFF">"getBaz"</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#9ECBFF"> "baz"</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        Bar</span><span style="color:#E1E4E8"> bar </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Bar</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8">(bar</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">baz)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>从编译结果看：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Bar</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> GroovyObject</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    @Generated</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> Bar</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        CallSite</span><span style="color:#E1E4E8">[] var1 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $getCallSiteArray();</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        MetaClass</span><span style="color:#E1E4E8"> var2 </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">$getStaticMetaClass();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">metaClass </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> var2;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// main：</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">... </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    CallSite</span><span style="color:#E1E4E8">[] var1 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $getCallSiteArray();</span></span>
+<span class="line"><span style="color:#F97583">    final</span><span style="color:#E1E4E8"> class _main_closure1 extends </span><span style="color:#F97583">Closure</span><span style="color:#E1E4E8"> implements </span><span style="color:#F97583">GeneratedClosure</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#E1E4E8"> _main_closure1(</span><span style="color:#F97583">Object</span><span style="color:#E1E4E8"> _outerInstance, </span><span style="color:#F97583">Object</span><span style="color:#E1E4E8"> _thisObject) {</span></span>
+<span class="line"><span style="color:#F97583">            CallSite</span><span style="color:#E1E4E8">[] var3 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $getCallSiteArray();</span></span>
+<span class="line"><span style="color:#79B8FF">            super</span><span style="color:#E1E4E8">(_outerInstance, _thisObject);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> Object</span><span style="color:#E1E4E8"> doCall() {</span></span>
+<span class="line"><span style="color:#F97583">            CallSite</span><span style="color:#E1E4E8">[] var1 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> $getCallSiteArray();</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#9ECBFF"> "baz"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    _main_closure1 var4 </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> _main_closure1(</span><span style="color:#F97583">GpathDemo.</span><span style="color:#E1E4E8">class, </span><span style="color:#F97583">GpathDemo.</span><span style="color:#E1E4E8">class);</span></span>
+<span class="line"><span style="color:#F97583">    ScriptBytecodeAdapter.</span><span style="color:#E1E4E8">setProperty(var4, (</span><span style="color:#F97583">Class</span><span style="color:#E1E4E8">)</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, </span></span>
+<span class="line"><span style="color:#E1E4E8">            var1[</span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">callGetProperty(</span><span style="color:#F97583">GpathDemo.Bar.</span><span style="color:#E1E4E8">class), (</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">)</span><span style="color:#9ECBFF">"getBaz"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    GpathDemo.Bar</span><span style="color:#E1E4E8"> bar </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">GpathDemo.Bar</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">ScriptBytecodeAdapter.</span><span style="color:#E1E4E8">castToType(</span></span>
+<span class="line"><span style="color:#E1E4E8">            var1[</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">callConstructor(</span><span style="color:#F97583">GpathDemo.Bar.</span><span style="color:#E1E4E8">class),</span></span>
+<span class="line"><span style="color:#F97583">            GpathDemo.Bar.</span><span style="color:#E1E4E8">class);</span></span>
+<span class="line"><span style="color:#E1E4E8">    var1[</span><span style="color:#79B8FF">7</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">callStatic(</span><span style="color:#F97583">GpathDemo.</span><span style="color:#E1E4E8">class, var1[</span><span style="color:#79B8FF">8</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">callGetProperty(bar));</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>此时，在运行期增加了属性！</p>
+<p><em>如果对Kotlin的扩展和代理比较熟悉，此处应该不难理解</em></p>
+<p>但Groovy的设计更加有趣：</p>
+<p>追踪：</p>
+<ul>
+<li><code>org.codehaus.groovy.runtime.InvokerHelper#getProperty</code></li>
+<li><code>org.codehaus.groovy.runtime.InvokerHelper#setProperty</code></li>
+</ul>
+<p>发现会进入：<code>GroovyObject</code>，前面已经接触过</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> GroovyObject</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    Object</span><span style="color:#B392F0"> invokeMethod</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> var1</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> var2</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    Object</span><span style="color:#B392F0"> getProperty</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> var1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> setProperty</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> var1</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> var2</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    MetaClass</span><span style="color:#B392F0"> getMetaClass</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> setMetaClass</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">MetaClass</span><span style="color:#FFAB70"> var1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>那么借助集合，如 <code>Map</code> ，并复写 <code>getProperty</code> 、 <code>setProperty</code>，就可以做一些有趣的事情</p>
+<h4 id="特殊的expando类">特殊的Expando类</h4>
+<p>哈哈，这个有趣的事情Groovy已经做了,这就是 <code>Expando</code> 类。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ExpandoDemo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        Expando</span><span style="color:#E1E4E8"> expando </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Expando</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        expando</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">foo </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "foo"</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8">(expando</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">foo)</span></span>
+<span class="line"><span style="color:#E1E4E8">        expando</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">bar </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "bar"</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8">(expando</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">bar)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        expando</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">properties</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">forEach(</span><span style="color:#F97583">new</span><span style="color:#F97583"> BiConsumer</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">            @Override</span></span>
+<span class="line"><span style="color:#F97583">            void</span><span style="color:#B392F0"> accept</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> o</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> o2</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">                println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"key:</span><span style="color:#E1E4E8">$o</span><span style="color:#9ECBFF">,value:</span><span style="color:#E1E4E8">$o2</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        })</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>> Task :ExpandoDemo.main()</span></span>
+<span class="line"><span>foo</span></span>
+<span class="line"><span>bar</span></span>
+<span class="line"><span>key:bar,value:bar</span></span>
+<span class="line"><span>key:foo,value:foo</span></span></code></pre>
+<h3 id="利用expandometaclass实现mixin机制">利用ExpandoMetaClass实现Mixin机制</h3>
+<p>Mixin 即 Mix In，混合, 我们可以笼统地认为：<code>Mixin 即为 在一个类中混入其他类的内容</code>。</p>
+<ul>
+<li>对于支持多继承的语言，往往是在讨论 <code>多继承</code> 的问题；</li>
+<li>对于单继承的语言，Java是利用 <code>接口</code> 制造多继承的表现，基于 <code>组合</code>，<code>委托</code> 等方式在目标类中 <code>混入</code>，
+从 <code>规格继承</code> 变相解决问题；Ruby 等语言则引入 <code>Minin</code> 从 <code>实现继承</code> 变相解决问题。</li>
+</ul>
+<p>我们不再对此概念进行纠缠，可以认为 “多继承语言可以解决很多问题并带来更多的关联问题，单继承语言想要好处又要规避坏处，部分语言提出了Minin机制”</p>
+<p>而Groovy的Minin，除了 <code>编译期</code> 要能混入，还要 <code>运行期混入</code></p>
+<p>看个例子，<em>虽然它的场景很不合理，你一定有一万种理由劝说我使用各类设计模式，但不要较真</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> MixinDemo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Paint</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#B392F0"> draw</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">Drawable</span><span style="color:#FFAB70"> drawable</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"paint ${drawable.name}"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Drawable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        String</span><span style="color:#E1E4E8"> name</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> paint </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Paint</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">        Drawable.</span><span style="color:#E1E4E8">metaClass</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">draw </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> paint</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">&#x26;</span><span style="color:#9ECBFF">"draw"</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> drawable </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Drawable</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"test"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        drawable</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">draw(drawable)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>例子中，我们动态的给Drawable添加了draw方法</p>
+<p>如果我们将这一过程适当的封装：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> MixinDemo2</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> MixinDelegate</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        private</span><span style="color:#E1E4E8"> targetClass</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        MixinDelegate</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">targetClass</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">targetClass </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> targetClass</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#B392F0"> mixin</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> asMethodName</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Closure</span><span style="color:#FFAB70"> closure</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            targetClass</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">metaClass</span><span style="color:#F97583">.</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">$asMethodName</span><span style="color:#9ECBFF">"</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> closure</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> mixin </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> MixinDelegate</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">MixinDemo.Drawable</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        mixin</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">mixin(</span><span style="color:#9ECBFF">"draw"</span><span style="color:#E1E4E8">,</span><span style="color:#F97583">new</span><span style="color:#F97583"> MixinDemo.Paint</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">&#x26;</span><span style="color:#9ECBFF">"draw"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> drawable </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> MixinDemo.Drawable</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"test"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        drawable</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">draw(drawable)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>这将会变得很有趣！！！</p>
+<p>假设我们有一套 <code>控制协议</code> ，在此之前，我们只能在编译期决定好 <code>指令的执行</code> — 即控制协议实现，即使运用一些巧妙的设计模式，自由程度也很低，
+但现在可以在运行时更为自由地扩展、修改</p>
+<p>当然，结合前面的知识，我们可以让它更加的酷炫：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> MixinDemo3</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> MixinDsl</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> GroovyInterceptable</span><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">        private</span><span style="color:#E1E4E8"> targetClass</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        MixinDsl</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">targetClass</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">targetClass </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> targetClass</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#B392F0"> invokeMethod</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#FFAB70"> s</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">o</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (s</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">startsWith(</span><span style="color:#9ECBFF">"mixinFun"</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> s</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">length() </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 8</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> o[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">instanceof</span><span style="color:#F97583"> Closure</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                def</span><span style="color:#E1E4E8"> methodName </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> s[</span><span style="color:#79B8FF">8</span><span style="color:#E1E4E8">]</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">toLowerCase() </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> s[</span><span style="color:#79B8FF">9</span><span style="color:#F97583">..</span><span style="color:#79B8FF">-1</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">                targetClass</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">metaClass</span><span style="color:#F97583">.</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">$methodName</span><span style="color:#9ECBFF">"</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> o[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">                println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"cannot handle"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        (</span><span style="color:#F97583">new</span><span style="color:#F97583"> MixinDsl</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">MixinDemo.Drawable</span><span style="color:#E1E4E8">))</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">mixinFunDraw </span><span style="color:#F97583">new</span><span style="color:#F97583"> MixinDemo.Paint</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">&#x26;</span><span style="color:#9ECBFF">"draw"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> drawable </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> MixinDemo.Drawable</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"test"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        drawable</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">draw(drawable)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>此时，添加方法的写法呈现出 <code>DSL的风格</code></p>
+<h3 id="运行时的其他修改">运行时的其他修改</h3>
+<p>前面我们已经学习了在运行时给类添加方法，接下来再了解更多的内容：</p>
+<h4 id="添加构造器">添加构造器</h4>
+<p>这个例子要和Java进行对比</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> RuntimeDemo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Bean</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        String</span><span style="color:#E1E4E8"> a</span></span>
+<span class="line"><span style="color:#F97583">        String</span><span style="color:#E1E4E8"> b</span></span>
+<span class="line"><span style="color:#F97583">        String</span><span style="color:#E1E4E8"> c</span></span>
+<span class="line"><span style="color:#F97583">        String</span><span style="color:#E1E4E8"> d</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#F97583">        @Override</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> String</span><span style="color:#B392F0"> toString</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#9ECBFF"> "Bean{"</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#9ECBFF">                    "a='"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> a </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> '</span><span style="color:#79B8FF">\'</span><span style="color:#9ECBFF">'</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#9ECBFF">                    ", b='"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> b </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> '</span><span style="color:#79B8FF">\'</span><span style="color:#9ECBFF">'</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#9ECBFF">                    ", c='"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> c </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> '</span><span style="color:#79B8FF">\'</span><span style="color:#9ECBFF">'</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#9ECBFF">                    ", d='"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> d </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> '</span><span style="color:#79B8FF">\'</span><span style="color:#9ECBFF">'</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#9ECBFF">                    '}'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ConstructorDemo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">            Bean.</span><span style="color:#E1E4E8">metaClass</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">constructor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">String</span><span style="color:#FFAB70"> a</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#F97583">                new</span><span style="color:#F97583"> Bean</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">a</span><span style="color:#E1E4E8">: a, </span><span style="color:#79B8FF">b</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"b"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">c</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"c"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">d</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"d"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            def</span><span style="color:#E1E4E8"> bean </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Bean</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"a"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#E1E4E8">(bean)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> bean </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Bean</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">a</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"a"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">b</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"b"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">c</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"c"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8">(bean)</span></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#F97583"> ConstructorDemo</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">main()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>本身Groovy允许我们在构造时设置属性值，但这并不是有重载的构造器！如果没有这个机制，我们就不得不建立一系列重载的构造器，或者老老实实赋值。</p>
+<p>但Groovy可以添加构造器</p>
+<h4 id="添加静态方法">添加静态方法</h4>
+<p>类比前面提到的添加方法，我们只需要添加关键字 <code>static</code> 就可以添加静态方法。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    GpathDemo.Foo.</span><span style="color:#E1E4E8">metaClass</span><span style="color:#F97583">.</span><span style="color:#9ECBFF">'static'</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">hello </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> { </span><span style="color:#FFAB70">args1</span><span style="color:#F97583"> -></span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "RuntimeDemo：hello,${args1}"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#79B8FF">    println</span><span style="color:#F97583"> GpathDemo.Foo.</span><span style="color:#E1E4E8">hello(</span><span style="color:#9ECBFF">"foo"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="为对象添加方法">为对象添加方法</h4>
+<p>前文已经介绍过给类添加方法，不再赘述。这里注意，我们可以单独给对象添加方法，而不累及该类的其他实例。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#E1E4E8"> bean </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Bean</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">a</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"a"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">b</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"b"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">c</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"c"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    //为对象添加方法</span></span>
+<span class="line"><span style="color:#F97583">    try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">        bean</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">hello()</span></span>
+<span class="line"><span style="color:#E1E4E8">    } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">Exception</span><span style="color:#E1E4E8"> e) {</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8">(e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">message)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#E1E4E8"> emc </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> ExpandoMetaClass</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">Bean.</span><span style="color:#E1E4E8">class, </span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    emc</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">hello </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">println</span><span style="color:#9ECBFF"> "hello"</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">    emc</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">initialize()</span></span>
+<span class="line"><span style="color:#E1E4E8">    bean</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">metaClass </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> emc</span></span>
+<span class="line"><span style="color:#E1E4E8">    bean</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">hello()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#F97583"> Bean</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">hello()</span></span>
+<span class="line"><span style="color:#E1E4E8">    } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">Exception</span><span style="color:#E1E4E8"> e) {</span></span>
+<span class="line"><span style="color:#79B8FF">        println</span><span style="color:#E1E4E8">(e</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">message)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>很显然，第一次得到Exception，第二次正常打印hello，第三次得到Exception</p>
+<h3 id="自省">自省</h3>
+<p>前文讲了如此之多的运行时修改，很显然，Groovy可以自省，我们简单了解一下以下知识，毕竟这些内容使用不多。</p>
+<h4 id="反射">反射</h4>
+<p>Groovy承袭了Java，那么自然可以使用Java的反射，但是注意：</p>
+<blockquote>
+<p>基于MOP添加的内容，均无法通过Java反射获知</p>
+</blockquote>
+<h4 id="respondsto-和-hasproperty">respondsTo 和 hasProperty</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ResponseToDemo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> p </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "p"</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"foo"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        Demo.</span><span style="color:#E1E4E8">metaClass</span><span style="color:#F97583">.</span><span style="color:#9ECBFF">"bar"</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#9ECBFF"> 'bar'</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> demo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Demo</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (demo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">metaClass</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">respondsTo(demo, </span><span style="color:#9ECBFF">'bar'</span><span style="color:#E1E4E8">)) {</span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#9ECBFF"> 'bar ok'</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (demo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">metaClass</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">respondsTo(demo, </span><span style="color:#9ECBFF">'foo'</span><span style="color:#E1E4E8">)) {</span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#9ECBFF"> 'foo ok'</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (demo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">metaClass</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">hasProperty(demo, </span><span style="color:#9ECBFF">'p'</span><span style="color:#E1E4E8">)) {</span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#9ECBFF"> 'p ok'</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//> Task :ResponseToDemo.main()</span></span>
+<span class="line"><span style="color:#6A737D">//bar ok</span></span>
+<span class="line"><span style="color:#6A737D">//foo ok</span></span>
+<span class="line"><span style="color:#6A737D">//p ok</span></span></code></pre>
+<p>利用respondsTo和hasProperty，可以分析固有属性、方法以及MOP添加的内容。</p>
+<h4 id="hasmetamethod-和-hasmetaproperty">hasMetaMethod 和 hasMetaProperty</h4>
+<p>这里直接给出结论：</p>
+<blockquote>
+<p>这一组方法仅可对类进行分析，而针对对象利用MOP添加的属性和方法，利用respondsTo和hasProperty 可以分析得到。</p>
+</blockquote>
+<h3 id="借助interceptor实现aop能力">借助Interceptor实现AOP能力</h3>
+<p>相信各位对AOP（Aspect-Orient-Program）都有或多或少的了解，在Java中也有大名鼎鼎的AspectJ，而在Groovy中，
+本身就可以利用 <code>Interceptor机制</code> 进行简单的AOP，而不必借助框架的力量。</p>
+<p>看一个简单的例子：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> InterceptorDemo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        void</span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"foo"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> DemoInterceptor1</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> Interceptor</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        @Override</span></span>
+<span class="line"><span style="color:#F97583">        Object</span><span style="color:#B392F0"> beforeInvoke</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> o</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">String</span><span style="color:#FFAB70"> s</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">objects</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"before </span><span style="color:#E1E4E8">$s</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> o</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        @Override</span></span>
+<span class="line"><span style="color:#F97583">        Object</span><span style="color:#B392F0"> afterInvoke</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> o</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">String</span><span style="color:#FFAB70"> s</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">objects</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> o1</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"after </span><span style="color:#E1E4E8">$s</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> o1</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        @Override</span></span>
+<span class="line"><span style="color:#F97583">        boolean</span><span style="color:#B392F0"> doInvoke</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> proxy </span><span style="color:#F97583">=</span><span style="color:#F97583"> ProxyMetaClass.</span><span style="color:#E1E4E8">getInstance(</span><span style="color:#F97583">Demo</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        proxy</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">interceptor </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> DemoInterceptor1</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        proxy</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">use {</span></span>
+<span class="line"><span style="color:#F97583">            def</span><span style="color:#E1E4E8"> demo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Demo</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            demo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">foo()</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>得到的结果会如何呢？</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>> Task :InterceptorDemo.main()</span></span>
+<span class="line"><span>before ctor</span></span>
+<span class="line"><span>after ctor</span></span>
+<span class="line"><span>before foo</span></span>
+<span class="line"><span>before println</span></span>
+<span class="line"><span>foo</span></span>
+<span class="line"><span>after println</span></span>
+<span class="line"><span>after foo</span></span></code></pre>
+<p>如果 <code>doInvoke</code> 返回false，那么 foo() 方法将被拦截。</p>
+<p>接下来我们做个有趣的事情，先做一定的修改：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> InterceptorDemo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#F97583"> String</span><span style="color:#E1E4E8"> s</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        String</span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#9ECBFF"> "foo </span><span style="color:#E1E4E8">$s</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        @Override</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> String</span><span style="color:#B392F0"> toString</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#9ECBFF"> "Demo{"</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#9ECBFF">                    "s='"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> s </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> '</span><span style="color:#79B8FF">\'</span><span style="color:#9ECBFF">'</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#9ECBFF">                    '}'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> DemoInterceptor1</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> Interceptor</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> tmp </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Demo</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">s</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"DemoInterceptor1"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        @Override</span></span>
+<span class="line"><span style="color:#F97583">        Object</span><span style="color:#B392F0"> beforeInvoke</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> o</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">String</span><span style="color:#FFAB70"> s</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">objects</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (s </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> "foo"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">                println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"before </span><span style="color:#E1E4E8">$s</span><span style="color:#9ECBFF">, </span><span style="color:#E1E4E8">$o</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">                o</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">s </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "aaaaa"</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> tmp</span></span>
+<span class="line"><span style="color:#6A737D">//            return o</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        @Override</span></span>
+<span class="line"><span style="color:#F97583">        Object</span><span style="color:#B392F0"> afterInvoke</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> o</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">String</span><span style="color:#FFAB70"> s</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">objects</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Object</span><span style="color:#FFAB70"> o1</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (s </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> "foo"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">                println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"after </span><span style="color:#E1E4E8">$s</span><span style="color:#9ECBFF">, </span><span style="color:#E1E4E8">$o</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#9ECBFF"> "hahaha"</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> o1</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        @Override</span></span>
+<span class="line"><span style="color:#F97583">        boolean</span><span style="color:#B392F0"> doInvoke</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        def</span><span style="color:#E1E4E8"> proxy </span><span style="color:#F97583">=</span><span style="color:#F97583"> ProxyMetaClass.</span><span style="color:#E1E4E8">getInstance(</span><span style="color:#F97583">Demo</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        proxy</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">interceptor </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> DemoInterceptor1</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        proxy</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">use {</span></span>
+<span class="line"><span style="color:#F97583">            def</span><span style="color:#E1E4E8"> demo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> Demo</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">s</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"demo"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">            println</span><span style="color:#E1E4E8"> demo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">foo()</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>会得到怎么的输出呢？</p>
+<p>不难推测：</p>
+<ul>
+<li>最开始会打印 “before foo, Demo{s=‘demo’}”</li>
+<li>最终会打印 “hahaha”</li>
+</ul>
+<p>那么afterInvoke会打印什么呢？</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>after foo, Demo{s='aaaaa'}</span></span></code></pre>
+<p>如果将doInvoke设为false，又会打印什么呢？</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>> Task :InterceptorDemo.main()</span></span>
+<span class="line"><span>foo DemoInterceptor1</span></span></code></pre>
+<p>确实有趣，感兴趣的同学可以继续研究。我们言归正传。</p>
+<p>上面的例子是比较简单的，结合大家的编程经验，不难想到，可以添加助手类和拦截器逻辑，针对各种类采用拦截器了。</p>
+<p>如果有进行实践的同学，是否在折腾过程中出现了堆栈溢出？这里补充一个知识：</p>
+<blockquote>
+<p>在调用方法时添加 <code>&#x26;</code>，例如：demo.&#x26;foo() , 使得本身拦截的方法不被拦截，本身不拦截的方法会被拦截。</p>
+<p>显然,会出现堆栈溢出，应该对方法进行了拦截并且不断拦截。</p>
+</blockquote>
+<p>当然，还有一个很简单的技巧，分别在before和after中，<code>先将拦截器移除，执行完业务后再添加回去</code></p>
+<h3 id="对java类使用上述特性">对Java类使用上述特性</h3>
+<p>拦截器是Groovy的运行机制，所以依旧可以使用。</p>
+<h4 id="使用代理对象">使用代理对象</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#F97583">ExpandoMetaClass</span><span style="color:#E1E4E8"> emc </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> ExpandoMetaClass</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">JavaClz</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">emc</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">foo </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">return</span><span style="color:#9ECBFF"> "hello,world!"</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">emc</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">initialize()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#E1E4E8"> foo </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> groovy.util.Proxy</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">wrap(</span><span style="color:#F97583">new</span><span style="color:#F97583"> JavaClz</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">foo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">setMetaClass(emc)</span></span>
+<span class="line"><span style="color:#79B8FF">println</span><span style="color:#E1E4E8"> foo</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">foo()</span></span></code></pre>
+<p>除此之外，还可以利用委托，向上下文注册Java类的MetaClass为一个委托，进而实现一些动态性，因为和上文的做法有一定区别，不再扩展，有兴趣的同学
+可以搜索 <code>groovy.lang.DelegatingMetaClass</code> 了解更多。</p>
+<h2 id="结语">结语</h2>
+<p>MOP是Groovy的高阶内容之一，可能短期内你都不会使用到它，甚至不作为主语言时，你永远不会用到它，但再次遇到gradle项目采用了 “神奇方案” 来解决问题时，
+有能力弄明白为何这会生效！！</p>
+<p>如果你觉得笔者的博客对你有帮助，希望可以点个赞或者留个言，让我知道这达到了正向的效果！！</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

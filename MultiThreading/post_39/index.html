@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Java多线程基础--线程生命周期与线程协作详解 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Java多线程基础--线程生命周期与线程协作详解</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="java多线程基础线程生命周期与线程协作详解">Java多线程基础—线程生命周期与线程协作详解</h1>
+<h2 id="前言">前言</h2>
+<p>各位亲爱的读者朋友，我正在创作 <code>Java多线程系列</code> 文章，本篇我们将梳理基础内容：<code>线程生命周期与线程协作</code></p>
+<p>这是非常基础的内容，本篇仅从 <strong>知识完整性</strong> 角度出发，做一次梳理。</p>
+<p><em>作者按：本篇按照自己有限的知识进行整理，如有谬误，还请读者在评论区不吝指出</em></p>
+<blockquote>
+<p>了解系列以及总纲：<a href="https://leobert-lan.github.io/MultiThreading/post_33.html">Java多线程系列</a></p>
+</blockquote>
+<h2 id="线程生命周期">线程生命周期</h2>
+<p>面向对象设计中，广义上对象均具备生命周期，在狭义上，<code>Thread</code> 类实例的 <code>状态</code> 状态的转变即为线程生命周期。</p>
+<p>依据JDK 1.5 开始的代码，Thread实例的State存在6种：</p>
+<ul>
+<li>NEW</li>
+<li>RUNNABLE</li>
+<li>BLOCKED</li>
+<li>WAITING</li>
+<li>TIMED_WAITING</li>
+<li>TERMINATED</li>
+</ul>
+<p>并且有如下生命周期图：</p>
+<p><img  src="/_astro/thread_lifecycle1.D1_xfr1E_Z2u2nbC.webp" alt loading="lazy" decoding="async" width="551" height="364"></p>
+<h3 id="new-新建">NEW 新建</h3>
+<p>尚未 <code>start</code> 的线程的状态，从代码上看：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">Thread thread</span><span style="color:#F97583">=new</span><span style="color:#B392F0"> Thread</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        thread.</span><span style="color:#B392F0">start</span><span style="color:#E1E4E8">();</span></span></code></pre>
+<p>在调用start前，即为 <code>NEW</code> 状态。</p>
+<h3 id="runnable-可运行">RUNNABLE 可运行</h3>
+<p>当start方法被调用后，即进入 <code>RUNNABLE</code> 状态，注意：</p>
+<ul>
+<li>start方法多次调用将返回 <code>IllegalThreadStateException</code> 异常</li>
+<li>RUNNABLE 存在两种细分：ready（就绪）和 running（运行），调用start时，如果native方法 <code>start0</code> 调用成功则线程就绪，调用失败则从 <code>ThreadGroup</code> 中移除。
+就绪状态的线程被处理器调度获得CPU时间片，则变为 <code>running</code></li>
+</ul>
+<p><img  src="/_astro/thread_runnable.4pS5Ym-e_ZnkCGH.webp" alt loading="lazy" decoding="async" width="583" height="120"></p>
+<h3 id="blocked-阻塞">BLOCKED 阻塞</h3>
+<p>注意，JVM中线程的阻塞状态不同于操作系统的I/O阻塞，仅仅是在等待获取监视器锁，在JVM中，发生在进入（或者 调用过 <code>Object#wait()</code> 之后重新进入）synchronized 块/方法</p>
+<h3 id="waiting-等待">WAITING 等待</h3>
+<p>线程进入这种状态意味着：<strong>“等待其他线程执行特定操作”</strong>，笼统的从意图上看，它在等待其他线程的执行结果，当对方完成后唤醒它继续工作。</p>
+<ul>
+<li><code>Object#wait()</code> with no timeout</li>
+<li><code>Thread#join()</code> with no timeout</li>
+<li><code>LockSupport#park()</code></li>
+</ul>
+<p>如上三种方式可以让线程进入 <code>WAITING</code> 状态，只能等待其他线程进行唤醒</p>
+<h3 id="timed_waiting-计时等待">TIMED_WAITING 计时等待</h3>
+<p>类似于 <code>WAITING</code> 只不过这种等待是有时限的，</p>
+<ul>
+<li>当前线程 <code>Thread#sleep</code> 调用</li>
+<li>调用<code>Object#wait()</code> with timeout</li>
+<li>对其他线程调用 <code>Thread#join(long)</code> with timeout</li>
+<li><code>LockSupport#parkNanos</code></li>
+<li><code>LockSupport#parkUntil</code></li>
+</ul>
+<p>会进入这种状态</p>
+<h3 id="terminated-终止">TERMINATED 终止</h3>
+<p>线程中的所有任务执行完毕后进入这种状态，运行时异常或者Error也会导致线程进入终止状态。</p>
+<h3 id="小结">小结</h3>
+<p>务必注意，以上6种状态是从jdk1.5开始引入的。</p>
+<p>在一些博客、操作系统相关的书籍中，会看到类似下图的内容：</p>
+<p><img  src="/_astro/os_thread_lifecycle.BwD3MCja_Z2auiSG.webp" alt loading="lazy" decoding="async" width="617" height="265"></p>
+<p>注意，这是操作系统层面进程、或者早期的单线程进程时期的进程生命周期，<strong>不能简单的和Java线程生命周期混为一谈</strong>。</p>
+<p>可以和Java的线程状态进行如下的映射关联：</p>
+<p><img  src="/_astro/thread_lifecycle.B0YeazCY_ZoFITh.webp" alt loading="lazy" decoding="async" width="699" height="444"></p>
+<p>操作系统是从 <code>CPU使用</code> 的角度谈论线程的状态，而JVM是从自身 <code>管理、调度</code> 的角度谈论线程的状态，更贴切地讲是 <code>服务于监测</code> ，它受限于JVM显式引入的机制。不难理解：</p>
+<ul>
+<li>OS中的线程：ready、running均对应了 java线程的 <code>RUNNABLE</code> 状态；</li>
+<li>而OS中的线程因为 <code>I/O</code> 或者 <code>Event wait</code> 让出CPU使用权进入 <code>waiting</code>，并且 <code>I/O、Event</code> 尚未完成时，并不会进入到可使用CPU的 <code>ready</code> 状态。 在JVM层面：
+<ul>
+<li>线程可能处在等待监视器锁的 <code>BLOCKED</code> 状态，</li>
+<li>也可能是通过操作进入了 <code>WAITING、TIMED_WAITING</code> 状态，</li>
+<li>也可能处于 <code>RUNNABLE</code> 状态 ，<em>例如I/O发生时</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="线程api与线程协作">线程API与线程协作</h2>
+<p>除却 <code>Thread</code> 中的API，<code>Object</code>中还有和监视器锁有关的API</p>
+<h3 id="object相关api">Object相关API</h3>
+<p>必须在同步代码中调用（准确的讲：获取了对应的锁方可调用），否则抛出 <code>IllegalMonitorStateException</code></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">Object#</span><span style="color:#B392F0">wait</span><span style="color:#E1E4E8">()</span></span></code></pre>
+<p>使当前线程 立刻 <strong>释放锁对象</strong> 、进入 <code>WAITING</code> 状态，直到被其他线程唤醒，进入等锁池。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">Object#</span><span style="color:#B392F0">wait</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#6A737D"> /*timeout*/</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>和</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">Object#</span><span style="color:#B392F0">wait</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#6A737D"> /*timeout*/</span><span style="color:#E1E4E8">,</span><span style="color:#F97583">int</span><span style="color:#6A737D"> /*nanos*/</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#6A737D">//jdk 1.8 源码附于下</span></span></code></pre>
+<p>使当前线程 立刻 <strong>释放锁对象</strong> 、进入 <code>TIMED_WAITING</code> 状态，直到被其他线程唤醒或者达到时间自动唤醒，进入等锁池。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#6A737D">//附 jdk 1.8</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Object</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> final</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> wait</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> timeout</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> nanos</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">throws</span><span style="color:#E1E4E8"> InterruptedException {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (timeout </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> IllegalArgumentException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"timeout value is negative"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (nanos </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> nanos </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 999999</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> IllegalArgumentException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"nanosecond timeout value out of range"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (nanos </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            timeout</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        wait</span><span style="color:#E1E4E8">(timeout);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">Object#</span><span style="color:#B392F0">notify</span><span style="color:#E1E4E8">()</span></span></code></pre>
+<p>在 <strong>同一个等待阻塞池中</strong> 随机唤醒一个处于等待中的线程</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">Object#</span><span style="color:#B392F0">notifyAll</span><span style="color:#E1E4E8">()</span></span></code></pre>
+<p>在 <strong>同一个等待阻塞池中</strong> 唤醒所有等待中的线程</p>
+<h3 id="thread中相关的api">Thread中相关的API</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">static</span><span style="color:#E1E4E8"> Thread#</span><span style="color:#B392F0">interrupted</span><span style="color:#E1E4E8">()</span></span></code></pre>
+<p>检测当前线程是否已经中断,调用后将该线程的中断标志位设置为false</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">static</span><span style="color:#E1E4E8"> Thread#</span><span style="color:#B392F0">sleep</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#6A737D"> /*millis*/</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>使当前线程睡眠，<strong>不释放锁对象</strong>，让其他线程具有被执行机会</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">static</span><span style="color:#E1E4E8"> Thread#</span><span style="color:#F97583">yield</span><span style="color:#E1E4E8">()</span></span></code></pre>
+<p>使当前线程放弃cpu的执行权。</p>
+<p><em>但选择执行的线程依赖于线程的优先级，有可能又被重新选中</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">Thread#</span><span style="color:#B392F0">interrupt</span><span style="color:#E1E4E8">()</span></span></code></pre>
+<p>中断该线程，<em>实际只是将中断标志设置为true</em></p>
+<p>如果目标线程处在sleep(),join(),wait()中时，目标会收到抛出的 <code>InterruptedException</code> 异常</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">Thread#</span><span style="color:#B392F0">join</span><span style="color:#E1E4E8">()</span></span></code></pre>
+<p>阻塞当前线程，等待目标线程执行完毕后唤醒</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">Thread#</span><span style="color:#B392F0">join</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#6A737D"> /*millis*/</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>阻塞当前线程，等待目标线程执行完毕后、或者等待了设定的时间后唤醒</p>
+<p>其他API略</p>
+<h3 id="线程之间的协作">线程之间的协作</h3>
+<p>不难理解，程序往往被设计为通过多个线程之间的协作完成一项复杂的任务，而每个线程所承担的职责也被简化。</p>
+<p>但这种设计方式有利亦有弊，所面向的问题过于具化，模型难以复用。</p>
+<p><em>作者按：当然，本文中所指的线程协作，仅局限于线程之间通过监视器锁、线程API让线程执行的顺序有序可控，在此基础上完成整体任务</em></p>
+<hr>
+<p>本篇文章篇幅较短，内容也较为基础、浅显，但部分内容依旧值得深挖，例如JVM如何实现线程管理，可能短期内不会得到明显的提升但可以加深对JVM、OS、程序微观运行过程的理解。</p>
+<p>另外，我删除了线程之间协作的WorkShop内容，内容过于干巴巴，如果有机会，我更希望以 <a href="https://leobert-lan.github.io/info/about_sansi_series.html">三思系列</a> 的形式结合具体实例展开讨论。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

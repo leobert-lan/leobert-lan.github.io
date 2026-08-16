@@ -1,0 +1,291 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="再不行动起来你的托管的library就没了">再不行动起来，你的托管的library就没了</h1>
+<h2 id="前言">前言</h2>
+<p>相信不少朋友都有自己进行维护的作品，并托管在三方Library仓库开放使用。
+而距离Jcenter宣布停止对非付费用户的各项运营政策已经有一段时间了，再不行动起来，托管在Jcenter和Jfrog的 <code>library就要没了</code>。</p>
+<p>本文带你走一遍 <code>sonatype账号注册</code> 、<code>申请groupId</code> 和 <code>MavenCentral发布</code> ，并提供一个更加方便的 <code>Gradle插件</code> 用于发布。</p>
+<h2 id="背景">背景</h2>
+<p>今年Jfrog宣布了 <a href="https://jfrog.com/blog/into-the-sunset-bintray-jcenter-gocenter-and-chartcenter/">这项决定</a> ：</p>
+<blockquote>
+<p>UPDATE: To better support the community in this migration,
+JFrog has extended the JCenter new package versions submission deadline through March 31st 2021.</p>
+<p>To clarify, the JCenter repository will keep serving packages for 12 months until February 1st 2022.
+Only the JCenter REST API and UI will be sunsetted on May 1st 2021.</p>
+</blockquote>
+<p>这就很尴尬了，随着时间的推移，未付费用户托管的library将无法再被获取。</p>
+<p>扯点题外话，Google也被这一波操作秀到了，按照Google的尿性，可能会在未来支撑这件事业，但毕竟八字没一撇。</p>
+<p>所以，我们剩下的选择不多了：</p>
+<ul>
+<li>成为 <code>尊贵的付费用户</code></li>
+<li>转投 <code>sonatype</code> 的怀抱，使用免费的MavenCentral</li>
+</ul>
+<h2 id="注册-sonatype-账户">注册 sonatype 账户</h2>
+<p>sonatype的玩法很溜，使用了敏捷开发管理的知名工具 <code>JIRA</code> 进行事物管理，所以第一件事情是 <code>注册sonatype的JIRA账户</code></p>
+<p><a href="https://issues.sonatype.org/secure/Signup!default.jspa">注册地址</a></p>
+<p>按照信息指导填写即可。</p>
+<h2 id="申请groupid">申请GroupId</h2>
+<blockquote>
+<p>一个托管在三方仓库的Library由三个信息确定：GroupId，ArtifactId，version</p>
+</blockquote>
+<p>不难理解，我们需要先申请一个可用的GroupId。开始申请之前，请先阅读以下内容，避免无用操作：</p>
+<blockquote>
+<p>按照sonatype的运营策略，他们利用了一些巧妙的方式来管理GroupId并且规避抢注风险</p>
+<p>首先分为两种类型：</p>
+<ul>
+<li>你拥有域名</li>
+<li>你没有域名</li>
+</ul>
+<p>第一类的验证方法我没有测试过，拥有域名的可以按照官网介绍试一下：</p>
+<ul>
+<li>Add a TXT record to your DNS referencing this JIRA ticket: (JIRA-TASK-ID) (Fastest)</li>
+<li>Setup a redirect to your Github page (if it does not already exist) You can find more information here: <a href="https://central.sonatype.org/publish/">https://central.sonatype.org/publish/</a></li>
+</ul>
+<p>第二类需要利用到第三方（如：Github、Gitlab、Gitee 等）
+通过第三方 “对于其用户名的唯一性约束” 和 “Pages服务”，可以得到一个托管在三方平台的网站，以github为例：
+开通Pages后，简单配置可以得到网站：<a href="https://leobert-lan.github.io/">https://leobert-lan.github.io/</a></p>
+</blockquote>
+<h3 id="创建pages网站">创建Pages网站</h3>
+<p><em>以github为例，Gitee等应该类似</em></p>
+<p><a href="https://pages.github.com/">官方介绍</a></p>
+<p>创建一个 {github_user_name}.github.io 的仓库</p>
+<p><img  src="/_astro/pages_create.Dq7_Tpn__qPuxW.webp" alt="pages_create.png" loading="lazy" decoding="async" width="1043" height="386"></p>
+<p><em>如果已经有个人博客，也可以利用HEXO或者Git-Book等工具，生成相关博客网页进行托管</em></p>
+<p>下载仓库并添加一个 <code>不太离谱</code> 的 <code>index.html</code></p>
+<p>注意：</p>
+<ul>
+<li>sonatype 仅关注这个域名是否存在，按照映射规则，GroupId为 io.github.{github_user_name}，如果这个域名不存在，不会颁发对应的GroupId给你</li>
+<li>sonatype 并不关注网页的内容是啥（哪怕和项目无关），但不要弄得太离谱：政治、宗教、不良信息等不要乱来即可</li>
+</ul>
+<p>随后进入项目的设置
+<img  src="/_astro/pages_setting.DJtT97te_ZmEsDe.webp" alt="img.png" loading="lazy" decoding="async" width="1322" height="708"></p>
+<p>选定分支和路径后保存，可以很快得到部署结果，部署成功后可以自行验证下。</p>
+<h3 id="jira创建申请task">JIRA创建申请task</h3>
+<ul>
+<li>点击新建Task后，类型等均为默认，简单描述你的意图；</li>
+<li>按照映射规则，填写GroupId：io.github.{github_user_name} <em>gitlab、gitee同理</em></li>
+<li>填写你的Github项目的仓库信息等</li>
+</ul>
+<p>提交后等待，一般会先有 <code>机器人</code> 进行答复，告知你平台的运营政策、相关注意事项。</p>
+<p><strong>注意：不要一直盯着等待，注册时填写了邮箱，一旦流程状态发生了变更，会有邮件通知</strong></p>
+<p>收到邮件后，通过备注进行回复可以改变流程状态，随后等待人工审核（如果信息均无误，可能机器直接过审）</p>
+<p>随后进入账户归属权认证</p>
+<h3 id="验证账号归属权">验证账号归属权</h3>
+<p>当然，这里是Github或者Gitee等账号的归属权。</p>
+<p>前面我们利用这些平台得到了唯一的域名，但是sonatype需要判断 <code>这个域名是你的</code>，因为：</p>
+<ul>
+<li>账号和Pages一一对应</li>
+<li>Pages和GroupId一一对应</li>
+<li>Task中对GroupId进行了唯一性校验</li>
+</ul>
+<p>所以sonatype要求在对应的Github账号下创建一个和TaskID一致的仓库
+例如：</p>
+<blockquote>
+<p>Please create a public repo called <a href="https://github.com/leobert-lan/OSSRH-67741">https://github.com/leobert-lan/OSSRH-67741</a> to verify github account ownership.</p>
+<p>If you do not own this github account, please read:
+<a href="https://central.sonatype.org/publish/requirements/coordinates/">https://central.sonatype.org/publish/requirements/coordinates/</a></p>
+</blockquote>
+<p>创建成功后，再回来评论一次推进流程，等审核通过后，就获得了GroupId</p>
+<hr>
+<p>到此为止我们就获取了GroupId。接下来我们需要 <code>准备签名工具</code></p>
+<p><em>Library的信息全部存在pom文件中，如果没有签名机制，就有可能出现李代桃僵的事情。</em></p>
+<p>这里我们需要用到 <code>GPG</code> ，<a href="https://www.gnupg.org/">gpg官网</a> ，有兴趣的可以多研究研究。</p>
+<p><em>注意:macOs >= 10.15时，暂无法安装gpg，你可能需要寻找一台window电脑来生成签名密钥，不用担心，密钥是可以导出的</em></p>
+<h2 id="生成gpg签名密钥">生成GPG签名密钥</h2>
+<h3 id="生成">生成</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">gpg</span><span style="color:#79B8FF"> --full-generate-key</span></span></code></pre>
+<p>使用命令进入密钥生成，</p>
+<ul>
+<li>选择 RSA(仅用于签名)即可</li>
+<li>设置密钥长度，使用密钥默认长度 2048</li>
+<li>设置过期时间，永久有效即可，<em>没必要自己折腾自己</em></li>
+<li>确认信息后输入 “真实姓名”，“邮箱”，“密钥Comment”，Comment不参与任何校验、用于备注他的作用</li>
+<li>确定信息或者再次修改，确认后需要输入两次密码，请不要忘记你的密码</li>
+<li>生成完成后会输出信息</li>
+</ul>
+<p>当然，没有必要死记这些信息，</p>
+<p>利用：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">gpg</span><span style="color:#79B8FF"> --list-keys</span></span></code></pre>
+<p>或者</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">gpg</span><span style="color:#79B8FF"> -K</span></span></code></pre>
+<p>可以查看所有生成的key，每个key都有一段很长的ID，这是其公钥的ID，长41位，当然，它的后八位也可以作为其ID，在使用上两者是等价的，一般用 <code>后八位</code> 即可。</p>
+<h3 id="上传公钥到公共服务器">上传公钥到公共服务器</h3>
+<p>我选择了”pool.sks-keyservers.net”，当然还有其他公共服务器可以托管。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">gpg</span><span style="color:#79B8FF"> --keyserver</span><span style="color:#9ECBFF"> hkp://pool.sks-keyservers.net</span><span style="color:#79B8FF"> --send-keys</span><span style="color:#9ECBFF"> 公钥</span><span style="color:#9ECBFF"> ID</span></span></code></pre>
+<p>检查是否上传成功：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">gpg</span><span style="color:#79B8FF"> --keyserver</span><span style="color:#9ECBFF"> hkp://pool.sks-keyservers.net</span><span style="color:#79B8FF"> --recv-keys</span><span style="color:#9ECBFF"> 公钥</span><span style="color:#9ECBFF"> ID</span></span></code></pre>
+<h3 id="导出公钥密钥钥匙串keyring">导出公钥、密钥、钥匙串（KeyRing）</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#6A737D">#导出公钥到 public-file.key 文件：</span></span>
+<span class="line"><span style="color:#B392F0">gpg</span><span style="color:#79B8FF"> -a</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> public-file.key</span><span style="color:#79B8FF"> --export</span><span style="color:#9ECBFF"> KeyId</span><span style="color:#E1E4E8"> </span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">#导出私钥到 private-file.key 文件：</span></span>
+<span class="line"><span style="color:#B392F0">gpg</span><span style="color:#79B8FF"> -a</span><span style="color:#79B8FF"> -o</span><span style="color:#9ECBFF"> private-file.key</span><span style="color:#79B8FF"> --export-secret-keys</span><span style="color:#9ECBFF"> KeyId</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">#导出钥匙串到 secring.gpg 文件：</span></span>
+<span class="line"><span style="color:#B392F0">gpg</span><span style="color:#79B8FF"> --keyring</span><span style="color:#9ECBFF"> secring.gpg</span><span style="color:#79B8FF"> --export-secret-keys</span></span></code></pre>
+<p>保管好你的钥匙！！</p>
+<h2 id="配置项目">配置项目</h2>
+<p>此时，我们的准备工作已经到位，开始修改你的项目：</p>
+<h3 id="更改plugin">更改plugin</h3>
+<p>考虑到 <code>Gradle 7.0</code> 会弃用 <code>maven插件</code> ，我们选用 <code>maven-publish</code> 插件</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">plugins {</span></span>
+<span class="line"><span style="color:#6A737D">//    其他必要的插件</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    id </span><span style="color:#9ECBFF">'signing'</span></span>
+<span class="line"><span style="color:#E1E4E8">    id </span><span style="color:#9ECBFF">'maven-publish'</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>添加 <code>maven-publish</code> 用于发布
+添加 <code>signing</code> 用于签名</p>
+<h3 id="添加签名的必要信息">添加签名的必要信息</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="properties"><code><span class="line"><span style="color:#F97583">signing.keyId</span><span style="color:#E1E4E8">=公钥ID，后八位即可</span></span>
+<span class="line"><span style="color:#F97583">signing.password</span><span style="color:#E1E4E8">= GPG密钥的密码</span></span>
+<span class="line"><span style="color:#F97583">signing.secretKeyRingFile</span><span style="color:#E1E4E8">=/Users/leobert/.gnupg/secring.gpg </span><span style="color:#6A737D">#钥匙串地址</span></span></code></pre>
+<p>比较遗憾的是我没有找到在local.properties中配置的方法，似乎signing插件内部直接读取了属性。</p>
+<p>考虑到密钥安全性，可以将gradle.properties 文件从Git中移除并忽略。</p>
+<h3 id="配置生成javadoc和sources的task">配置生成JavaDoc和Sources的Task</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">task sourcesJar(</span><span style="color:#79B8FF">type</span><span style="color:#E1E4E8">: </span><span style="color:#F97583">Jar</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    classifier </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'sources'</span></span>
+<span class="line"><span style="color:#E1E4E8">    from sourceSets</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">main</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">java</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">srcDirs</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//android 项目需要额外定义一下task，java-library等项目插件自带task</span></span>
+<span class="line"><span style="color:#6A737D">//task javadoc(type: Javadoc) {</span></span>
+<span class="line"><span style="color:#6A737D">//    source = android.sourceSets.main.java.srcDirs</span></span>
+<span class="line"><span style="color:#6A737D">//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))</span></span>
+<span class="line"><span style="color:#6A737D">//}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">task javadocJar(</span><span style="color:#79B8FF">type</span><span style="color:#E1E4E8">: </span><span style="color:#F97583">Jar</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">dependsOn</span><span style="color:#E1E4E8">: javadoc) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    classifier </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'javadoc'</span></span>
+<span class="line"><span style="color:#E1E4E8">    from javadoc</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">destinationDir</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">tasks</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">withType(</span><span style="color:#F97583">Javadoc</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    options</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">addStringOption(</span><span style="color:#9ECBFF">'Xdoclint:none'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'-quiet'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    options</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">addStringOption(</span><span style="color:#9ECBFF">'encoding'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'UTF-8'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    options</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">addStringOption(</span><span style="color:#9ECBFF">'charSet'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'UTF-8'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><em>注意：android 项目需要额外定义一下javadoc 的 task，java-library等项目插件自带task，并注意路径</em></p>
+<h3 id="配置发布信息">配置发布信息</h3>
+<p>注意，在任务Evaluated之后进行配置，即配置在 <code>afterEvaluate</code> 闭包内</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">afterEvaluate {</span></span>
+<span class="line"><span style="color:#E1E4E8">    publishing {</span></span>
+<span class="line"><span style="color:#E1E4E8">        publications {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mavenAndroid(</span><span style="color:#F97583">MavenPublication</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                groupId </span><span style="color:#79B8FF">GROUP_ID</span></span>
+<span class="line"><span style="color:#E1E4E8">                artifactId </span><span style="color:#79B8FF">ARTIFACT_ID</span></span>
+<span class="line"><span style="color:#E1E4E8">                version </span><span style="color:#79B8FF">VERSION_NAME</span></span>
+<span class="line"><span style="color:#E1E4E8">                artifact sourcesJar</span></span>
+<span class="line"><span style="color:#E1E4E8">                artifact javadocJar</span></span>
+<span class="line"><span style="color:#E1E4E8">                artifact(</span><span style="color:#9ECBFF">'build/libs/xxx.jar'</span><span style="color:#E1E4E8">) </span><span style="color:#6A737D">//</span></span>
+<span class="line"><span style="color:#6A737D">                // 配置 pom 文件格式</span></span>
+<span class="line"><span style="color:#E1E4E8">                pom {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    packaging </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'jar'</span></span>
+<span class="line"><span style="color:#E1E4E8">                    name </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> ARTIFACT_ID</span></span>
+<span class="line"><span style="color:#E1E4E8">                    description </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> ARTIFACT_ID</span></span>
+<span class="line"><span style="color:#E1E4E8">                    url </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> siteUrl</span></span>
+<span class="line"><span style="color:#E1E4E8">                    licenses {</span></span>
+<span class="line"><span style="color:#E1E4E8">                        license {</span></span>
+<span class="line"><span style="color:#E1E4E8">                            name </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'The Apache Software License, Version 2.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">                            url </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'http://www.apache.org/licenses/LICENSE-2.0.txt'</span></span>
+<span class="line"><span style="color:#E1E4E8">                        }</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                    developers {</span></span>
+<span class="line"><span style="color:#E1E4E8">                        developer {</span></span>
+<span class="line"><span style="color:#E1E4E8">                            id </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'leobert'</span></span>
+<span class="line"><span style="color:#E1E4E8">                            name </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'leobert'</span></span>
+<span class="line"><span style="color:#E1E4E8">                            email </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'leobert.l@hotmail.com'</span></span>
+<span class="line"><span style="color:#E1E4E8">                        }</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                    scm {</span></span>
+<span class="line"><span style="color:#E1E4E8">                        connection </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> siteUrl</span></span>
+<span class="line"><span style="color:#E1E4E8">                        developerConnection </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> gitUrl</span></span>
+<span class="line"><span style="color:#E1E4E8">                        url </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> siteUrl</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#6A737D">        // 配置远程仓库</span></span>
+<span class="line"><span style="color:#E1E4E8">        repositories {</span></span>
+<span class="line"><span style="color:#E1E4E8">            maven {</span></span>
+<span class="line"><span style="color:#E1E4E8">                url </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'</span></span>
+<span class="line"><span style="color:#E1E4E8">                credentials {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    username </span><span style="color:#79B8FF">ACCOUNT</span></span>
+<span class="line"><span style="color:#E1E4E8">                    password </span><span style="color:#79B8FF">PASSWORD</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    signing {</span></span>
+<span class="line"><span style="color:#E1E4E8">        sign publishing</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">publications</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">mavenAndroid</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>这是一个简单的样板，当然，协议部分、开发者部分、贡献者部分等还可以继续扩展。
+<code>ACCOUNT</code> 和 <code>PASSWORD</code> 为sonatype的账密，</p>
+<p>build之后，执行publish task 即可进行签名和上传</p>
+<h2 id="最后一步">最后一步</h2>
+<p>使用sonatype的账密 登录 <a href="https://s01.oss.sonatype.org/#stagingRepositories">sonatype 的maven仓库</a></p>
+<p>左侧导航进入：stagingRepositories，找到提交的内容，再次检查下所有的校验已通过，close，刷新后进行release。</p>
+<p>确认成功后，关闭sonatype-jira的task。</p>
+<p><em>上述操作成功后，提交的Components应当已经进入sonatype的release仓库，大约1小时内同步到MavenCentral</em></p>
+<p>之后更新版本，理论上会自动同步。</p>
+<h2 id="编写gradle插件让配置更加简单">编写Gradle插件让配置更加简单</h2>
+<p>其实maven-publish插件还支持更加复杂的配置，但个人项目中可能很少用到，挑选了”够用”的配置项后，我们编写一个Gradle插件，
+这样可以省略重复样板。</p>
+<p><a href="https://github.com/leobert-lan/EsayPublish">插件源码仓库</a>,</p>
+<ul>
+<li>gradle.properties 中 写入签名必要的信息</li>
+</ul>
+<blockquote>
+<p>考虑到本篇的主题是分享MavenCentral发布的经验，略去Gradle插件的相关知识，以及本插件的源码介绍。有兴趣的朋友可以<strong>通过仓库的源码自行了解</strong>。</p>
+<p><em>PS：很多时候我们都是copy了野生配置，而且往往是Groovy代码，出于Groovy语言的特殊性，这些闭包配置项出现错误时，大概率会被兼容，插件使用Kotlin编写，
+阅读其源码可以加深对于maven-publish等插件API的认知</em></p>
+</blockquote>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="properties"><code><span class="line"><span style="color:#F97583">signing.keyId</span><span style="color:#E1E4E8">=公钥ID，后八位即可</span></span>
+<span class="line"><span style="color:#F97583">signing.password</span><span style="color:#E1E4E8">= GPG密钥的密码</span></span>
+<span class="line"><span style="color:#F97583">signing.secretKeyRingFile</span><span style="color:#E1E4E8">=/Users/leobert/.gnupg/secring.gpg </span><span style="color:#6A737D">#钥匙串地址</span></span></code></pre>
+<ul>
+<li>local.properties 中写入sonatype 账密信息：</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="properties"><code><span class="line"><span style="color:#F97583">nexus_user</span><span style="color:#E1E4E8">=sonatype账号</span></span>
+<span class="line"><span style="color:#F97583">nexus_pwd</span><span style="color:#E1E4E8">= sonatype密码</span></span></code></pre>
+<ul>
+<li>引入插件后，build.gradle进行必要的配置：</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">plugins {</span></span>
+<span class="line"><span style="color:#E1E4E8">    id </span><span style="color:#9ECBFF">'osp.leobert.maven.publish'</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">EasyPublish</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    sourceSet </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> android</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">sourceSets</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">main</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">java</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">srcDirs</span></span>
+<span class="line"><span style="color:#E1E4E8">    docClassPathAppend </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> project</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">files(android</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">getBootClasspath()</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">join(</span><span style="color:#F97583">File.</span><span style="color:#E1E4E8">pathSeparator))</span><span style="color:#F97583">.</span><span style="color:#E1E4E8">asPath</span></span>
+<span class="line"><span style="color:#E1E4E8">    docExcludes </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span><span style="color:#9ECBFF">"a/b/c/*"</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">    artifact {</span></span>
+<span class="line"><span style="color:#E1E4E8">        value </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "build/outputs/aar/android-lib-demo-release.aar"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    developer {</span></span>
+<span class="line"><span style="color:#E1E4E8">        id </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'leobert'</span></span>
+<span class="line"><span style="color:#E1E4E8">        name </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'leobert'</span></span>
+<span class="line"><span style="color:#E1E4E8">        email </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'leobert.l@hotmail.com'</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //append developers</span></span>
+<span class="line"><span style="color:#6A737D">//    developer {</span></span>
+<span class="line"><span style="color:#6A737D">//        id = 'aa'</span></span>
+<span class="line"><span style="color:#6A737D">//        name = 'bb'</span></span>
+<span class="line"><span style="color:#6A737D">//        email = 'cc'</span></span>
+<span class="line"><span style="color:#6A737D">//    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    groupId </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "io.github.leobert-lan"</span></span>
+<span class="line"><span style="color:#E1E4E8">    artifactId </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "android-demo"</span></span>
+<span class="line"><span style="color:#E1E4E8">    version </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "1.0.0"</span></span>
+<span class="line"><span style="color:#E1E4E8">    packaging </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "aar"</span></span>
+<span class="line"><span style="color:#E1E4E8">    siteUrl </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "https://github.com/leobert-lan/EsayPublish"</span></span>
+<span class="line"><span style="color:#E1E4E8">    gitUrl </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "https://github.com/leobert-lan/EsayPublish.git"</span></span>
+<span class="line"><span style="color:#E1E4E8">    licenseName </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'Apache 2.0'</span></span>
+<span class="line"><span style="color:#E1E4E8">    licenseUrl </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> 'https://github.com/leobert-lan/EsayPublish/blob/master/LICENSE'</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    mavenRepoUrl </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>即可进行发布。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

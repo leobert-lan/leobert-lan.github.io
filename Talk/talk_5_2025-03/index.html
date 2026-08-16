@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>推倒樊笼 -- 设计能力 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">推倒樊笼 -- 设计能力</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="推倒樊笼--设计能力">推倒樊笼 — 设计能力</h1>
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>未经思考的人生不值得一过 — 苏格拉底。</p>
+</blockquote>
+<p>本篇是对近期职业发展思考后所整理的内容输出。 和我互动过的读者、以及一直关注我的动向的读者知道：我于去年年中做出了推倒樊笼重新出发的决定，当时在博客平台，还有读者和我私信交流此事。 今年我会整理关键内容和读者分享。</p>
+<h2 id="正其末者端其本善其后者慎其先">正其末者端其本，善其后者慎其先</h2>
+<p>随着AI的涌现和快速发展，Coder们会发现编写软件功能单元代码的门槛越发降低，甚至”机械性”的工作，从脑力工作退化到体力工作并急剧衰变为AI可完成的工作。 例如标准化的界面绘制、模板化的接口实现。</p>
+<p>时代决定了我们无法像20年前的前辈从业者般，可以惬意地享受职业，在缓步的成长中又获得丰厚的回报。</p>
+<p>因此，我们要重视”发端”，并选择最佳路径，打破限制你的樊笼，突围以获得成长空间。</p>
+<blockquote>
+<p>作者按：何谓樊笼？限制你进步的约束，无论是主观意识层面的障碍，还是客观层面的工作内容</p>
+</blockquote>
+<h2 id="天下难事必作于易天下大事必作于细">天下难事必作于易，天下大事必作于细</h2>
+<p>想要做成大事难事，需要将其分解为易事、小事。设计过程需要将问题不断分解，并制定分解后的问题的解决方案。</p>
+<p>要进行有效的设计，需要做好以下工作：</p>
+<ul>
+<li>全面的了解需求，避免错误</li>
+<li>准确的对需求进行分级，避免主次偏差</li>
+<li>了解所需背景知识，采用“共识”，降低学习成本，避免成本过度损耗</li>
+</ul>
+<p>当这些工作完备，可进入系统设计和模块单元设计！ 笼统的来讲，系统设计偏重于：</p>
+<ul>
+<li>体系结构定义，有效的将职责划分到不同的模块，定义好边界，解耦</li>
+<li>分层，屏蔽细节 最终体现为系统框架；</li>
+</ul>
+<p>模块单元设计偏重于：</p>
+<ul>
+<li>功能完整度和有效性</li>
+<li>性能指标 最终体现为各种业务实现和”轮子”。</li>
+</ul>
+<blockquote>
+<p>作者按：“轮子”是固化的内容，可以是特定的模块单元，例如OKHttp、MyBatis，也可以是含有一整套轮子的小系统框架，例如Spring-boot。</p>
+</blockquote>
+<h2 id="衡量轮子和框架的标准">衡量轮子和框架的标准</h2>
+<blockquote>
+<p>闭门造车开门合辙。</p>
+</blockquote>
+<p>抛开正确性（这是最起码得要求），一个优秀的轮子和框架，从功能范围上：</p>
+<ul>
+<li>应当尽可能聚焦，关注某一类问题，并在解决此类问题时，尽力做到完整</li>
+<li>解决同类型问题时，可以通过扩展</li>
+<li>可以通过组合的方式，将多个轮子联合使用</li>
+</ul>
+<p>从使用方式：应当尽力做到简单，易理解，符合大众习惯。</p>
+<blockquote>
+<p>作者按：这里的描述略显抽象，举几个例子：
+当我们制作一个处理HTTPS协议的轮子时：</p>
+<ul>
+<li>应当优先关注HTTPS协议本身的定义与实现，不应当杂糅其他内容，例如多线程，功能应当完整，例如HTTP1.0/HTTP1.1/HTTP2的核心部分应当完整实现，SSL/TLS应完整实现。</li>
+<li>当处理HTTP3时，使用扩展包要优于在轮子内部大范围修改；受益于HTTP协议本身的设计优异，这一点感受不明显，若是解决文件传输问题，提供FTP实现和HTTP实现，则较为鲜明。</li>
+<li>假设我们有类似Retrofit的框架轮子，则可以组合多个轮子共同使用，例如OKHTTP+Rxjava，OKHTTP+Java8 concurrent</li>
+</ul>
+</blockquote>
+<p>不难理解，衡量轮子和框架的标准，即设计轮子和框架的标准，随着工作深度的发展，读者诸君均会面临从”挑选”到”自建”的转变。</p>
+<h2 id="设计能力的核心维度">设计能力的核心维度</h2>
+<blockquote>
+<p>具有 可定义、可度量标准 的事物是有限的，因此在创造性工作中，没法闭门造车。</p>
+</blockquote>
+<p>设计能力有三个核心维度，抽象能力、权衡能力、预见能力：</p>
+<ul>
+<li>抽象能力：从需求到模型的跃迁
+<ul>
+<li>如何识别领域本质问题</li>
+<li>锻炼建模能力</li>
+</ul>
+</li>
+<li>权衡能力：在矛盾中寻找最优解
+<ul>
+<li>性能 vs. 可扩展性</li>
+<li>技术先进性 vs. 团队适配性</li>
+</ul>
+</li>
+<li>预见能力
+<ul>
+<li>通过可扩展接口预留演化空间</li>
+<li>混沌工程与容错设计的结合</li>
+</ul>
+</li>
+</ul>
+<p>以通俗地描述表达，这三个维度分别对应：</p>
+<ul>
+<li>是否能清晰的描述问题、定义问题、描述方案</li>
+<li>是否能找到当前环境下的最优解、最合理解</li>
+<li>是否能留足扩展空间，以满足局部替换优化、增加新的方案模块</li>
+</ul>
+<h2 id="锻炼设计能力">锻炼设计能力</h2>
+<p>要锻炼设计能力，可以从以下3点入手</p>
+<h3 id="思维和视角的转变">思维和视角的转变</h3>
+<p>从工程师视角向架构师视角转变，</p>
+<ul>
+<li>工程师的视角停留于：使用具体方案解决具体问题，并尽可能做到：性能最好、健壮性最强；</li>
+<li>架构师的视角聚焦于：基于产品目标，确定技术路径，定义路径中的问题，确定”规格”、“标准”，进而定义系统，由系统中的组件/模块解决具体问题。</li>
+</ul>
+<p>需要做到”局部优化”到系统性思维的转变，从解决问题提前到定义问题。</p>
+<blockquote>
+<p>作者按：可参考以下框架进行训练。</p>
+<p><img  src="/_astro/system.kmbXcADe_28ExDX.webp" alt loading="lazy" decoding="async" width="1300" height="2940"></p>
+</blockquote>
+<h3 id="技术深度和广度相融合">技术深度和广度相融合</h3>
+<p>单纯凭借技术深度，无法在定义问题时确定规格和标准，因而需要学习跨领域知识，如运维、产品、业务</p>
+<h3 id="协作与沟通的艺术">协作与沟通的艺术</h3>
+<p>协作的前提是达成一致，达成一致的前提是描述准确，因此，在协作与沟通中，需要以准确、高效的方式输出自己的设计意图，通过设计文档与图表降低认知偏差。</p>
+<blockquote>
+<p>作者按：一个停留在想象中的设计，无法用文字图表确切完整的表达出来，只有它可以被记录下来，才是成型的设计，而非遐想幻视。</p>
+</blockquote>
+<h2 id="后记">后记</h2>
+<p>这篇文章前前后后5个月方才完稿，期间删改篇幅超正文长度2倍，摒弃了书生意气式的言论，摘选自己彻底掌握、读者能够理解并跟着做的内容流于笔端。</p>
+<p>祝各位在生活和工作中顺意。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Java IO 系列总纲 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Java IO 系列总纲</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="java-io-系列总纲">Java IO 系列总纲</h1>
+<p>在Android开发中，不可避免的会接触到IO，抛开系统部分的IO，在应用开发领域，仍然会接触到IO，诸如：</p>
+<ul>
+<li>文件读写</li>
+<li>网络通信</li>
+</ul>
+<p>或许您在开发中不再直接使用JDK中的API完成IO部分的功能，但仍有必要了解相关知识。</p>
+<p>JAVA的IO，通过虚拟机建立在操作系统的IO之上，在梳理JAVA的IO时，可适当了解操作系统部分IO的相关知识，但本系列不会深究。</p>
+<h3 id="大纲">大纲</h3>
+<p>本系列中，计划包含以下内容：</p>
+<ul>
+<li>JAVA 经典IO 一篇</li>
+<li>JAVA NIO 1-3篇</li>
+<li>OK-IO 1篇</li>
+<li>Linux系统中的IO（如有必要）</li>
+<li>IO模型概览 <em>本文顺带</em></li>
+</ul>
+<hr>
+<p>下图表现了一个冯诺依曼机的结构：</p>
+<img width="500" alt="desc" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/52fed46757174695b60c342ed90c0596~tplv-k3u1fbpfcp-watermark.image">
+<p>在操作系统中，IO操作会涉及到 <code>用户空间、内核空间的切换</code> ，以及 <code>内核空间、用户空间之间的数据拷贝</code> ，接下来就常见的IO模型，简单了解下概念和设计理念。</p>
+<p><em>注：不同操作系统在实现时会存在一定差异，不做深究</em></p>
+<h2 id="io模型">IO模型</h2>
+<ul>
+<li>阻塞I/O(blocking I/O)</li>
+<li>非阻塞I/O(non-blocking I/O)</li>
+<li>I/O复用(I/O multiplexing)</li>
+<li>信号驱动式I/O(signal-driven I/O)</li>
+<li>异步I/O(asynchronous I/O)</li>
+</ul>
+<h3 id="阻塞ioblocking-io">阻塞I/O(blocking I/O)</h3>
+<blockquote>
+<p>阻塞IO、BIO、Blocking IO</p>
+<p>在 <code>内核IO操作</code> 彻底完成后，才返回 <code>用户空间</code> 执行应用的操作。</p>
+<p>此过程中，用户空间程序的执行状态是阻塞的，程序需等到IO操作彻底完成。</p>
+</blockquote>
+<p>以读为例，示意图如下</p>
+<img width="500" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b64a8bb2f6cb49c382790cc817a1c933~tplv-k3u1fbpfcp-watermark.image">
+<h3 id="非阻塞ionon-blocking-io">非阻塞I/O(non-blocking I/O)</h3>
+<p><em>注意，此处不要与 <code>JAVA的nio包</code> 内容混淆</em></p>
+<blockquote>
+<p>非阻塞IO</p>
+<p>相比于BIO，NIO中 <code>数据等待阶段</code> 是非阻塞的，操作系统不会挂起应用。</p>
+<p>类似于JAVA中使用Future进行非阻塞多线程编程，以读为例，应用 <code>轮询</code> 内核，数据是否完成，数据准备就绪后，发起系统调用获取数据，系统调用的过程中，应用阻塞。</p>
+</blockquote>
+<blockquote>
+<p>轮询： 应用进程对非阻塞描述符循环发送系统调用，以查看某个操作是否就绪</p>
+</blockquote>
+<p>以读为例，示意图如下</p>
+<img width="500" alt="desc" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ba20f635d8954f349fa91f149a67b0f8~tplv-k3u1fbpfcp-watermark.image">
+<h3 id="io复用io-multiplexing">I/O复用(I/O multiplexing)</h3>
+<blockquote>
+<p>I/O复用</p>
+<p>经典的Reactor设计。进程通过将一个或者多个操作阻塞在 <code>select</code> 阶段，select可以帮我们检测 <code>fd（文件操作符）</code> 是否处于就绪状态。</p>
+<p>如果有数据准备好，就返回可操作的信息，再进行进一步地读写操作</p>
+</blockquote>
+<p>当需要观测的fd很多时，数据准备的占比可能变高，轮询的收益会降低，而多路复用会得到更高的收益。</p>
+<p>以读为例，示意图如下</p>
+<img width="500" alt="desc" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/072845f506cf49e2a887ff59dec607f2~tplv-k3u1fbpfcp-watermark.image">
+<h3 id="信号驱动式iosignal-driven-io">信号驱动式I/O(signal-driven I/O)</h3>
+<blockquote>
+<p>信号驱动式I/O</p>
+<p>在数据准备阶段，不再阻塞等待，内核准备好数据后，通过信号通知用户空间，用户空间的应用发起系统调用，阻塞获取数据</p>
+</blockquote>
+<p>以读为例，示意图如下</p>
+<img width="500" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e8a09e9bc7b74e449c1d07fd470380d7~tplv-k3u1fbpfcp-watermark.image">
+<h3 id="异步ioasynchronous-io">异步I/O(asynchronous I/O)</h3>
+<blockquote>
+<p>异步I/O</p>
+<p>不同于信号驱动式I/O，在数据等待完成后，进行内核到用户空间的数据拷贝，完成后信号通知应用程序处理数据</p>
+</blockquote>
+<img width="500" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/73a8f4e05bf5483da29e79cb6d012256~tplv-k3u1fbpfcp-watermark.image"></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

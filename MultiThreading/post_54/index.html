@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Java多线程系列--掌握CompletableFuture，驾驭异步编程 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Java多线程系列--掌握CompletableFuture，驾驭异步编程</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="java多线程系列掌握completablefuture驾驭异步编程">Java多线程系列—掌握CompletableFuture，驾驭异步编程</h1>
+<h2 id="前言">前言</h2>
+<p>本文隶属于我归纳整理的Android知识体系的第四部分，属于 <code>异步</code> 部分的多线程内容</p>
+<p>您可以通过访问 <a href="https://leobert-lan.github.io/MultiThreading/post_33.html">总纲</a> 阅读系列内的其他文章。</p>
+<img width="600" alt="desc" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d229ce6c3a5d4e52985f24fd489f4943~tplv-k3u1fbpfcp-watermark.image?">
+<p><em>作者按：草稿进行了几次大改，移除了Demo部分、源码解析部分、设计原理部分。结合实际工作经验，“掌握API能熟练使用、能无障碍阅读相关框架源码” 已基本够用。</em></p>
+<p>读者可结合下面的导图进行快速的知识自查</p>
+<img width="800" alt="desc" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3d39c0a5a14540a787f6cc95706d62ce~tplv-k3u1fbpfcp-watermark.image?">
+<h2 id="一个美好的期望">一个美好的期望</h2>
+<p>通常情况下，我们希望代码的执行顺序和代码的组织顺序一致，即代码表述了同步执行的程序，这样可以减少很多思考。</p>
+<p>而 <strong>阅读异步的程序代码，需要在脑海中建立事件流</strong>，当程序业务复杂时，将挑战人的记忆力和空间想象力，<strong>并非所有人都擅长在脑海中构建并分析异步事件流模型</strong>。</p>
+<blockquote>
+<p>所以，我们期望拥有一个非常友好的框架，能够让我们方便地进行异步编程，并且在框架内部设计有线程同步、异常处理机制。</p>
+<p>并且，基于该框架编写的代码具有很高的可读、可理解性。</p>
+</blockquote>
+<p>而Future基本无法满足这一期望。</p>
+<h2 id="future的不足与completablefuture的来源">Future的不足与CompletableFuture的来源</h2>
+<h3 id="future的不足">Future的不足</h3>
+<blockquote>
+<p>在先前的系列文章中，我们已经回顾了Future类的设计，在绝大多数场景下，我们选择使用多线程，是为了 <strong>充分利用机器性能</strong> 以及 <strong>避免用户交互线程出现长时间阻塞</strong> 以致影响体验。</p>
+<p>所以我们将耗时的、会引起长时间阻塞的任务分离到其他线程执行，并在 <strong>合适时机</strong> 进行线程同步，于主线程（一般负责用户交互处理、界面渲染）中处理结果。</p>
+</blockquote>
+<p><em>详见拙作 <a href="https://leobert-lan.github.io/MultiThreading/post_46.html">掌握Future，轻松获取异步任务结果</a>
+、<a href="https://juejin.cn/post/7147552484213719076">掘金链接</a></em></p>
+<p><code>Future</code> 于 Java 1.5版本引入，它类似于 <code>异步处理的结果占位符</code> ， 提供了两个方法获取结果：</p>
+<ul>
+<li><code>get()</code>, 调用线程进入阻塞直至得到结果或者异常。</li>
+<li><code>get(long timeout, TimeUnit unit)</code>, 调用线程将仅在指定时间 timeout 内等待结果或者异常，如果超时未获得结果就会抛出 TimeoutException 异常。</li>
+</ul>
+<p><code>Future</code> 可以实现 <code>Runnable</code> 或 <code>Callable</code> 接口来定义任务，一定程度上满足 <code>使用框架进行异步编程</code> 的期望，但通过整体源码可知它存在如下 <strong>3个问题</strong> ：</p>
+<ul>
+<li>调用 <code>get()</code> 方法会一直阻塞直到获取结果、异常，无法在任务完成时获得 “通知” ，无法附加回调函数</li>
+<li>不具备链式调用和结果聚合处理能力，当我们想链接多个 <code>Future</code> 共同完成一件任务时，<strong>没有框架级的处理，只能编写业务级逻辑</strong>，合并结果，并小心的处理同步</li>
+<li>需要单独编写异常处理代码</li>
+</ul>
+<p><em>使用 <code>get(long timeout, TimeUnit unit)</code> 和 <code>isDone()</code> 判断，确实可以缓解问题1，但这需要结合业务单独设计（调优），存在大量的不确定性。不再展开</em></p>
+<p>Java 8中引入 <code>CompletableFuture</code> 来解决 <code>Future</code> 的不足。</p>
+<h3 id="completablefuture来源">CompletableFuture来源</h3>
+<p><code>CompletableFuture</code> 的设计灵感来自于 <code>Google Guava</code> 库的 <code>ListenableFuture</code> 类，它实现了 <code>Future接口</code> 和 <code>CompletionStage接口</code> ，
+并且新增一系列API，支持Java 8的 <code>lambda特性</code>，通过回调利用非阻塞方法，提升了异步编程模型。</p>
+<img width="600" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b0affb25beff4ac7bff9d5a28576ff12~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?">
+<p>它解决了Future的不足，允许我们在非主线程中运行任务，并向启动线程 <em>(一般是主线程)</em> 通知 <code>任务完成</code> 或 <code>任务失败</code>，编写异步的、非阻塞的程序。</p>
+<h2 id="使用completablefuture">使用CompletableFuture</h2>
+<h3 id="最简方式获取实例">最简方式获取实例</h3>
+<p>使用 <code>CompletableFuture.completedFuture(U value)</code> 可以获取一个 <code>执行状态已经完成</code> 的 <code>CompletableFuture</code> 对象。</p>
+<p><em>这可以用于快速改造旧程序，并进行逐步过渡</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Test</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> testSimpleCompletableFuture</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        CompletableFuture&#x3C;</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">> completableFuture </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">                CompletableFuture.</span><span style="color:#B392F0">completedFuture</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"testSimpleCompletableFuture"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        assertTrue</span><span style="color:#E1E4E8">(completableFuture.</span><span style="color:#B392F0">isDone</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            assertEquals</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"testSimpleCompletableFuture"</span><span style="color:#E1E4E8">, completableFuture.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (InterruptedException | ExecutionException </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="改造线程同步部分">改造线程同步部分</h3>
+<p><em>部分老旧程序已经建立了多线程业务模型，我们可以使用 <code>CompletableFuture</code> 改造其中的线程同步部分，但暂不改造数据传递。</em></p>
+<p>使用 <code>runAsync()</code> 方法，该方法接收一个 <code>Runnable</code> 类型的参数返回 <code>CompletableFuture&#x3C;Void></code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#6A737D">//并不改变原项目中数据传递的部分、或者不关心结果数据，仅进行同步</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Test</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> testCompletableFutureRunAsync</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        AtomicInteger variable </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> AtomicInteger</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        CompletableFuture&#x3C;</span><span style="color:#F97583">Void</span><span style="color:#E1E4E8">> runAsync </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> CompletableFuture.</span><span style="color:#B392F0">runAsync</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">-></span><span style="color:#B392F0"> process</span><span style="color:#E1E4E8">(variable));</span></span>
+<span class="line"><span style="color:#E1E4E8">        runAsync.</span><span style="color:#B392F0">join</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#B392F0">        assertEquals</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, variable.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> process</span><span style="color:#E1E4E8">(AtomicInteger </span><span style="color:#FFAB70">variable</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " Process..."</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        variable.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="进一步改造结果数据传递">进一步改造结果数据传递</h3>
+<p>当我们关心异步任务的结果数据、或者改造原 <strong>多线程业务模型</strong> 的 <strong>数据传递方式</strong> 时，可以使用 <code>supplyAsync()</code> 方法，该方法接收一个 <code>Supplier&#x3C;T></code>
+接口类型的参数，它实现了任务的逻辑，方法返回 <code>CompletableFuture&#x3C;T></code> 实例。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Test</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> testCompletableFutureSupplyAsync</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        CompletableFuture&#x3C;</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">> supplyAsync </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">                CompletableFuture.</span><span style="color:#B392F0">supplyAsync</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#F97583">::</span><span style="color:#E1E4E8">process);</span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">            // Blocking </span></span>
+<span class="line"><span style="color:#B392F0">            assertEquals</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"testCompletableFutureSupplyAsync"</span><span style="color:#E1E4E8">, supplyAsync.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (ExecutionException | InterruptedException </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> String </span><span style="color:#B392F0">process</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "testCompletableFutureSupplyAsync"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="指定执行线程池">指定执行线程池</h3>
+<p>“获取用于执行任务的线程” 类似 Java 8 中的 <code>parallelStream</code>， <code>CompletableFuture</code> 默认从全局
+<code>ForkJoinPool.commonPool()</code> 获取线程，用于执行任务。同时也提供了指定线程池的方式用于获取线程执行任务，您可以使用API中具有 <code>Executor</code> 参数的重载方法。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Test</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> testCompletableFutureSupplyAsyncWithExecutor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        ExecutorService newFixedThreadPool </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">                Executors.</span><span style="color:#B392F0">newFixedThreadPool</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        CompletableFuture&#x3C;</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">> supplyAsync </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> CompletableFuture.</span><span style="color:#B392F0">supplyAsync</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#F97583">::</span><span style="color:#E1E4E8">process,</span></span>
+<span class="line"><span style="color:#E1E4E8">                newFixedThreadPool);</span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">            // Blocking </span></span>
+<span class="line"><span style="color:#B392F0">            assertEquals</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"testCompletableFutureSupplyAsyncWithExecutor"</span><span style="color:#E1E4E8">, supplyAsync.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (ExecutionException | InterruptedException </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> String </span><span style="color:#B392F0">process</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "testCompletableFutureSupplyAsyncWithExecutor"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><code>CompletableFuture</code> 中有众多API，方法命名中含有 <code>Async</code> 的API可使用线程池。</p>
+<p><em>截至此处，以上使用方式均与 <code>Future</code> 类似，接下来演示 <code>CompletableFuture</code> 的不同</em></p>
+<h3 id="回调链式调用">回调&#x26;链式调用</h3>
+<p><code>CompletableFuture</code> 的 <code>get()</code>API是阻塞式获取结果，<code>CompletableFuture</code> 提供了</p>
+<ul>
+<li><code>thenApply</code></li>
+<li><code>thenAccept</code></li>
+<li><code>thenRun</code></li>
+</ul>
+<p>等API来避免阻塞式获取，并且可添加 <code>任务完成</code> 后的回调。这几个方法的使用场景如下：</p>
+<ul>
+<li><code>&#x3C;U> CompletableFuture&#x3C;U> thenApply(Function&#x3C;? super T,? extends U> fn)</code> 收到结果后，可以进行转化</li>
+<li><code>CompletableFuture&#x3C;Void> thenAccept(Consumer&#x3C;? super T> action)</code> 收到结果后，对其进行消费</li>
+<li><code>CompletableFuture&#x3C;Void> thenRun(Runnable action)</code> 收到结果后，执行回调，无法消费结果只能消费 <strong>这一事件</strong></li>
+</ul>
+<p><em>API较为简单，不再代码演示</em></p>
+<p>显然，通过链式调用可以组装多个执行过程。</p>
+<blockquote>
+<p>有读者可能会疑惑：<code>Function</code> 和 <code>Consumer</code> 也可以进行链式组装，是否存在冗余呢？</p>
+</blockquote>
+<p>两种的链式调用特性确实存在重叠，您可以自行选择用法，但 <code>thenRun</code> 只能采用 <code>CompletableFuture</code>的链式调用。</p>
+<p>另外，前面提到，我们可以指定线程池执行任务，对于这三组API，同样有相同的特性，通过 <code>thenXXXXAsync</code> 指定线程池，这是 <code>Function</code> 和 <code>Consumer</code> 的链式组装所无法完成的。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Test</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> testCompletableFutureApplyAsync</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        ExecutorService newFixedThreadPool </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Executors.</span><span style="color:#B392F0">newFixedThreadPool</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        ScheduledExecutorService newSingleThreadScheduledExecutor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Executors.</span><span style="color:#B392F0">newSingleThreadScheduledExecutor</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#6A737D">        // 从线程池 newFixedThreadPool 获取线程执行任务 </span></span>
+<span class="line"><span style="color:#E1E4E8">        CompletableFuture&#x3C;</span><span style="color:#F97583">Double</span><span style="color:#E1E4E8">> completableFuture </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">                CompletableFuture.</span><span style="color:#B392F0">supplyAsync</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">-></span><span style="color:#79B8FF"> 1D</span><span style="color:#E1E4E8">, newFixedThreadPool)</span></span>
+<span class="line"><span style="color:#E1E4E8">                        .</span><span style="color:#B392F0">thenApplyAsync</span><span style="color:#E1E4E8">(d </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> d </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1D</span><span style="color:#E1E4E8">, newSingleThreadScheduledExecutor)</span></span>
+<span class="line"><span style="color:#E1E4E8">                        .</span><span style="color:#B392F0">thenApplyAsync</span><span style="color:#E1E4E8">(d </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> d </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 2D</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        Double result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> completableFuture.</span><span style="color:#B392F0">join</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#B392F0">        assertEquals</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">4D</span><span style="color:#E1E4E8">, result);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="聚合多个completablefuture">聚合多个CompletableFuture</h3>
+<p>通过 <code>聚合</code> 多个 <code>CompletableFuture</code>，可以组成更 <code>复杂</code> 的业务流，可以达到精细地控制粒度、聚焦单个节点的业务。</p>
+<p><em>注意：操作符并不能完全的控制 <code>CompletableFuture</code> 任务执行的时机，您需要谨慎的选择 <code>CompletableFuture</code> 的创建时机</em></p>
+<h4 id="thencomposethencomposeasync">thenCompose、thenComposeAsync</h4>
+<p><code>compose</code> 原意为 <code>组成</code>， 通过多个 <code>CompletableFuture</code> 构建异步流。</p>
+<p>在操作的 <code>CompletableFuture</code> 获得结果时，将另一个 <code>CompletableFuture</code> <code>compose</code> 到异步流中，compose的过程中，可以根据操作的 <code>CompletableFuture</code> 的结果编写逻辑。</p>
+<p>与 <code>thenApply</code> 相比，<code>thenCompose</code> 返回逻辑中提供的 <code>CompletableFuture</code> 而 <code>thenApply</code> 返回框架内处理的新实例。</p>
+<p><em>注意，这一特性在使用 <code>FP编程范式</code>进行编码时，会显得非常灵活，一定程度上提升了函数的复用性</em></p>
+<p><em>API含义直观，不再进行代码演示</em></p>
+<h4 id="thencombinethencombineasync">thenCombine、thenCombineAsync</h4>
+<p><code>thenCombine</code> 可以用于合并多个 <strong>独立任务</strong> 的处理结果。</p>
+<blockquote>
+<p><em>注意： <code>thenCompose</code> 进行聚合时，下游可以使用上游的结果，在业务需求上一般表现为依赖上一步结果，而非两者相互独立。</em></p>
+</blockquote>
+<p>例如，产品希望在博客详情页同时展示 “博客的详情” 和 “作者主要信息” ，以避免内容区抖动或割裂的骨架占位。这两者 <strong>可以独立获取时</strong> ，则可以使用 <code>thenCombine</code> 系列API，分别获取，并合并结果。</p>
+<p><code>combine</code> 的特点是 被合并的两个 <code>CompletableFuture</code> 可以并发，等两者都获得结果后进行合并。</p>
+<p>但它依旧存在使用上的不便捷，合并超过2个 <code>CompletableFuture</code> 时，显得不够灵活。可以使用
+<code>static CompletableFuture&#x3C;Void> allOf(CompletableFuture&#x3C;?>... cfs)</code> API。</p>
+<p><code>allOf</code> 创建了 <code>CompletableFuture&#x3C;Void></code>，并不会帮助我们合并结果，所以需要自行编写业务代码合并，故存在 <code>Side Effects</code>。</p>
+<h4 id="runafterbothrunafterbothasyncrunaftereitherrunaftereitherasync">runAfterBoth、runAfterBothAsync;runAfterEither、runAfterEitherAsync</h4>
+<ul>
+<li><code>runAfterBoth</code> 系列API在两个 <code>CompletableFuture</code> 都获得结果后执行回调</li>
+<li><code>runAfterEither</code> 系列API在两个 <code>CompletableFuture</code> 任意一个获得结果后执行回调</li>
+</ul>
+<p>通过API，不难理解它们需要使用者自行处理结果</p>
+<ul>
+<li><code>CompletableFuture&#x3C;Void> runAfterBoth(CompletionStage&#x3C;?> other, Runnable action)</code>;</li>
+<li><code>CompletableFuture&#x3C;Void> runAfterEither(CompletionStage&#x3C;?> other, Runnable action)</code></li>
+</ul>
+<p>同样可以增加编码灵活性，不再赘述。</p>
+<h4 id="applytoeitherapplytoeitherasyncaccepteitheraccepteitherasyncthenacceptboththenacceptbothasync">applyToEither、applyToEitherAsync；acceptEither、acceptEitherAsync;thenAcceptBoth、thenAcceptBothAsync</h4>
+<ul>
+<li><code>applyToEither</code> 系列API表现如 <code>thenApply</code> 和 <code>Either</code> 的组合，两个同类型的 <code>CompletableFuture</code> 任意一个获得结果后，可消费该结果并进行改变，类似 thenApply</li>
+<li><code>acceptEither</code> 系列API表现如 <code>thenAccept</code> 和 <code>Either</code> 的组合，两个同类型的 <code>CompletableFuture</code> 任意一个获得结果后，可消费该结果，类似 thenAccept</li>
+<li><code>thenAcceptBoth</code> 系列API表现如 <code>thenCombine</code>，但返回 <code>CompletableFuture&#x3C;Void></code></li>
+</ul>
+<p>同样可以增加编码灵活性，不再赘述</p>
+<h3 id="结果处理">结果处理</h3>
+<p>使用回调处理结果有两种API，注意，除了正常获得结果外还可能获得异常，而这两组API簇差异体现在对 <code>异常</code> 的处理中。</p>
+<p><code>&#x3C;U> CompletableFuture&#x3C;U> handle(BiFunction&#x3C;? super T, Throwable, ? extends U> fn)</code>
+<code>CompletableFuture&#x3C;T> whenComplete(BiConsumer&#x3C;? super T, ? super Throwable> action)</code></p>
+<p><code>handle</code> 使用 <code>BiFunction</code>，无论是正常结果还是异常情况，均视作可被逻辑接受，消费后转化</p>
+<p>而 <code>whenComplete</code> 使用 <code>BiConsumer</code>，仅可消费但不能转化，异常情况被视作不可被逻辑接受，仍会抛出。</p>
+<p>举个例子，进行网络编程时会遇到 <code>Exception</code>, 如果业务设计中使用的模型实体包含了 <code>正常结果</code>、<code>异常</code> 两种情况：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">open</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Result</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">>(</span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> t: </span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#F97583">    open</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> isThr: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> FailResult</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">>(</span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> tr: </span><span style="color:#B392F0">Throwable</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">Result</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">>(</span><span style="color:#B392F0">null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> isThr: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>则适合使用 <code>handle</code> API在底层处理。否则需要额外的异常处理，<em>可依据项目的设计选择处理方式，一般在依据FP范式设计的程序中，倾向于使用handle，避免增加side effect。</em></p>
+<h3 id="异常处理">异常处理</h3>
+<p>在多线程背景下，异常处理并不容易。它不仅仅是使用 <code>try-catch</code> 捕获异常，还包含程序异步流中，节点出现异常时流的业务走向。</p>
+<p>在 <code>CompletableFuture</code> 中，节点出现异常将跳过后续节点，进入异常处理。</p>
+<p>_如果您不希望某个节点抛出异常导致后续流程中断，则可在节点的处理中捕获并包装为结果、或者对子 CompletableFuture 节点采用 <code>handle</code>、<code>exceptionally</code> API转换异常 _</p>
+<p>除前文提到的 <code>handle</code> <code>whenComplete</code>，<code>CompletableFuture</code> 中还提供了 <code>exceptionally</code> API用于处理异常</p>
+<p><code>CompletableFuture&#x3C;T> exceptionally(Function&#x3C;Throwable, ? extends T> fn)</code></p>
+<p>从表现结果看，它类似于 <code>handle</code> API中对异常的处理，将异常转换为目标结果的一种特定情形。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

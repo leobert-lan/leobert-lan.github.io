@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="jetpack-compose--控件篇三--switchcheckboxradiobutton">Jetpack Compose | 控件篇（三） — Switch、CheckBox、RadioButton</h1>
+<h2 id="写在最前">写在最前</h2>
+<p>在之前的文章中，我们学习过Compose 中的 <code>ImageButton</code>。</p>
+<p>本篇我们将继续学习 <code>Switch</code> 、 <code>CheckBox</code> 、<code>RadioButton</code> , 这三个控件在 <code>人机交互界面</code> 中也是由来已久。</p>
+<blockquote>
+<p><em>文中代码均基于 1.0.1版本</em></p>
+<p><em>如无特殊说明，文中的 <code>Compose</code> 均指代 <code>Jetpack compose</code></em></p>
+<p>文中代码均可在 <a href="https://github.com/leobert-lan/ComposeWorkShop">WorkShop</a> 中获取，本篇代码集中于 post28 包下</p>
+<p>完整系列目录: <a href="https://leobert-lan.github.io/Compose/">Github Pages</a> | <a href="https://juejin.cn/column/6999815370697605156">掘金</a> | <a href="https://blog.csdn.net/a774057695/category_11298077.html">csdn</a></p>
+</blockquote>
+<h2 id="switch">Switch</h2>
+<p>当功能含义如同 <code>开关</code> 一般时，我们可以使用该控件，例如：“深色模式”、“飞行模式”</p>
+<h3 id="使用方式">使用方式</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> Switch</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    checked: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    onCheckedChange: ((</span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">) -> </span><span style="color:#B392F0">Unit</span><span style="color:#E1E4E8">)?,</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    enabled: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    interactionSource: </span><span style="color:#B392F0">MutableInteractionSource</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> remember</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">MutableInteractionSource</span><span style="color:#E1E4E8">() },</span></span>
+<span class="line"><span style="color:#E1E4E8">    colors: </span><span style="color:#B392F0">SwitchColors</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> SwitchDefaults.</span><span style="color:#B392F0">colors</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>经过前面的学习，这些参数的含义应该不陌生了。</p>
+<p>修改配色可以通过如下API构建 <code>SwitchColors</code> 对象实例</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">object</span><span style="color:#B392F0"> SwitchDefaults</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> colors</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        checkedThumbColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> MaterialTheme.colors.secondaryVariant,</span></span>
+<span class="line"><span style="color:#E1E4E8">        checkedTrackColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> checkedThumbColor,</span></span>
+<span class="line"><span style="color:#E1E4E8">        checkedTrackAlpha: </span><span style="color:#B392F0">Float</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 0.54f</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        uncheckedThumbColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> MaterialTheme.colors.surface,</span></span>
+<span class="line"><span style="color:#E1E4E8">        uncheckedTrackColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> MaterialTheme.colors.onSurface,</span></span>
+<span class="line"><span style="color:#E1E4E8">        uncheckedTrackAlpha: </span><span style="color:#B392F0">Float</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 0.38f</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        disabledCheckedThumbColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> checkedThumbColor</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">copy</span><span style="color:#E1E4E8">(alpha </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ContentAlpha.disabled)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">compositeOver</span><span style="color:#E1E4E8">(MaterialTheme.colors.surface),</span></span>
+<span class="line"><span style="color:#E1E4E8">        disabledCheckedTrackColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> checkedTrackColor</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">copy</span><span style="color:#E1E4E8">(alpha </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ContentAlpha.disabled)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">compositeOver</span><span style="color:#E1E4E8">(MaterialTheme.colors.surface),</span></span>
+<span class="line"><span style="color:#E1E4E8">        disabledUncheckedThumbColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> uncheckedThumbColor</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">copy</span><span style="color:#E1E4E8">(alpha </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ContentAlpha.disabled)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">compositeOver</span><span style="color:#E1E4E8">(MaterialTheme.colors.surface),</span></span>
+<span class="line"><span style="color:#E1E4E8">        disabledUncheckedTrackColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> uncheckedTrackColor</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">copy</span><span style="color:#E1E4E8">(alpha </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ContentAlpha.disabled)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">compositeOver</span><span style="color:#E1E4E8">(MaterialTheme.colors.surface)</span></span>
+<span class="line"><span style="color:#E1E4E8">    ): </span><span style="color:#B392F0">SwitchColors</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>结合前文学习的知识，我们不难推测，下述的代码并不能真正起到 <code>开关</code> 的功能：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">Switch</span><span style="color:#E1E4E8">(checked </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">, onCheckedChange </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"tag"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"onCheckChanged:</span><span style="color:#79B8FF">$it</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">})</span></span></code></pre>
+<p><em>实际效果可体验WorkShop</em></p>
+<p>我们需要构建一个 <code>"被观测"</code> 的数据源  <em>[注意：这个说法虽然比较形象但并不准确]</em> ，它被 <code>Compose构建的树的节点</code> 所观测，即 <code>该Switch</code>，当其内容发生变化
+后，可反映到UI上。</p>
+<p>例如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> checked </span><span style="color:#F97583">by</span><span style="color:#B392F0"> rememberSaveable</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">mutableStateOf</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">) }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">Switch</span><span style="color:#E1E4E8">(checked </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> checked, onCheckedChange </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    checked </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> it</span></span>
+<span class="line"><span style="color:#E1E4E8">    Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"tag"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"onCheckChanged:</span><span style="color:#79B8FF">$it</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">})</span></span></code></pre>
+<p>或者：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> checked </span><span style="color:#F97583">=</span><span style="color:#B392F0"> remember</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">mutableStateOf</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">) }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">Switch</span><span style="color:#E1E4E8">(checked </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> checked.</span><span style="color:#F97583">value</span><span style="color:#E1E4E8">, onCheckedChange </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    checked.</span><span style="color:#F97583">value</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> it</span></span>
+<span class="line"><span style="color:#E1E4E8">    Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"tag"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"onCheckChanged:</span><span style="color:#79B8FF">$it</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">})</span></span></code></pre>
+<p><em>当然，按照Compose的用法，这些函数必须要同时存在于 <code>@Compose</code> 的函数块中，这样才能被目标节点所 <code>"观测"</code></em></p>
+<p><em>效果将在文末给出</em></p>
+<h2 id="checkbox">CheckBox</h2>
+<p>当形式为：<code>选中/不选中</code> 时，可以使用该控件。</p>
+<h3 id="使用方式-1">使用方式</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> Checkbox</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    checked: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    onCheckedChange: ((</span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">) -> </span><span style="color:#B392F0">Unit</span><span style="color:#E1E4E8">)?,</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    enabled: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    interactionSource: </span><span style="color:#B392F0">MutableInteractionSource</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> remember</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">MutableInteractionSource</span><span style="color:#E1E4E8">() },</span></span>
+<span class="line"><span style="color:#E1E4E8">    colors: </span><span style="color:#B392F0">CheckboxColors</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> CheckboxDefaults.</span><span style="color:#B392F0">colors</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>和 <code>Switch</code> 非常相似，同样的，我们可以修改配色：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">object</span><span style="color:#B392F0"> CheckboxDefaults</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">   </span></span>
+<span class="line"><span style="color:#B392F0">    @Composable</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> colors</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        checkedColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> MaterialTheme.colors.secondary,</span></span>
+<span class="line"><span style="color:#E1E4E8">        uncheckedColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> MaterialTheme.colors.onSurface.</span><span style="color:#B392F0">copy</span><span style="color:#E1E4E8">(alpha </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0.6f</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">        checkmarkColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> MaterialTheme.colors.surface,</span></span>
+<span class="line"><span style="color:#E1E4E8">        disabledColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> MaterialTheme.colors.onSurface.</span><span style="color:#B392F0">copy</span><span style="color:#E1E4E8">(alpha </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ContentAlpha.disabled),</span></span>
+<span class="line"><span style="color:#E1E4E8">        disabledIndeterminateColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> checkedColor.</span><span style="color:#B392F0">copy</span><span style="color:#E1E4E8">(alpha </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ContentAlpha.disabled)</span></span>
+<span class="line"><span style="color:#E1E4E8">    ): </span><span style="color:#B392F0">CheckboxColors</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><strong>至此，我们意识到，<code>Compose</code> 固定了 <code>Switch</code> , <code>Checkbox</code> 的样式风格，如果定制图标，可以使用 <code>ImageButton</code> 。</strong></p>
+<p>如下代码将得到一个最简单可用的 <code>CheckBox</code></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> checked </span><span style="color:#F97583">by</span><span style="color:#B392F0"> rememberSaveable</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">mutableStateOf</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">) }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">Checkbox</span><span style="color:#E1E4E8">(checked </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> checked, onCheckedChange </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    checked </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> it</span></span>
+<span class="line"><span style="color:#E1E4E8">    Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"tag"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"onCheckChanged:</span><span style="color:#79B8FF">$it</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">})</span></span></code></pre>
+<blockquote>
+<p>不同于Android原生控件，<code>Compose</code> 中的 <code>Checkbox</code> 无法添加文字 — 这很 <strong>Compose!</strong>.</p>
+<p>Compose 贯穿始终的一个原则就是 <code>组合</code> ， 显然：文字部分应该使用 Text。</p>
+</blockquote>
+<h2 id="radiobutton">RadioButton</h2>
+<p><code>Compose</code> 中并没有 <code>RadioButtonGroup</code> 的内容。 <em>也有可能是我没有找到</em>。</p>
+<p>但是，这并不重要！<code>Compose</code> 并不推崇在控件内部维护状态，否则会违背 <code>纯函数</code> 的理念。而且，我们可以很轻易地利用 <code>组合</code> 方式外挂一段逻辑，实现单选。</p>
+<p><em>注意：按照一般性的UI设计语言，多选应该利用Checkbox，实现思路有类似之处</em></p>
+<h3 id="如何使用">如何使用</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@Composable</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> RadioButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    selected: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    onClick: (() </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit)?,</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    enabled: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    interactionSource: </span><span style="color:#B392F0">MutableInteractionSource</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> remember</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">MutableInteractionSource</span><span style="color:#E1E4E8">() },</span></span>
+<span class="line"><span style="color:#E1E4E8">    colors: </span><span style="color:#B392F0">RadioButtonColors</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> RadioButtonDefaults.</span><span style="color:#B392F0">colors</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>和前两者不同，<code>RadioButton</code> 的回调函数是 <code>点击回调</code> 含义。</p>
+<p><em>遵照UI设计语言，被点击则意味着 <code>选中</code>，而在单选中，通过逻辑保持该组仅目标项被选中。</em></p>
+<p>通过以下API可以修改配色</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">object</span><span style="color:#B392F0"> RadioButtonDefaults</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#B392F0">    @Composable</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> colors</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        selectedColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> MaterialTheme.colors.secondary,</span></span>
+<span class="line"><span style="color:#E1E4E8">        unselectedColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> MaterialTheme.colors.onSurface.</span><span style="color:#B392F0">copy</span><span style="color:#E1E4E8">(alpha </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0.6f</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">        disabledColor: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> MaterialTheme.colors.onSurface.</span><span style="color:#B392F0">copy</span><span style="color:#E1E4E8">(alpha </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ContentAlpha.disabled)</span></span>
+<span class="line"><span style="color:#E1E4E8">    ): </span><span style="color:#B392F0">RadioButtonColors</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>构建一个单选组：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> tags </span><span style="color:#F97583">=</span><span style="color:#B392F0"> arrayListOf</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"A"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"B"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"C"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"D"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> selectedTag </span><span style="color:#F97583">=</span><span style="color:#B392F0"> remember</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">mutableStateOf</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">""</span><span style="color:#E1E4E8">) }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">Row</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    tags.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        Row</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            RadioButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                selected </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> it </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> selectedTag.</span><span style="color:#F97583">value</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                onClick </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    selectedTag.</span><span style="color:#F97583">value</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> it</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">            Text</span><span style="color:#E1E4E8">(text </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> it)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        Spacer</span><span style="color:#E1E4E8">(modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier.</span><span style="color:#B392F0">width</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">.dp))</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>同样，读者可以按照喜好利用代理的方式创建 <code>可观测数据源</code></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> tags </span><span style="color:#F97583">=</span><span style="color:#B392F0"> arrayListOf</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"A"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"B"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"C"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"D"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> selectedTag </span><span style="color:#F97583">by</span><span style="color:#B392F0"> rememberSaveable</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">mutableStateOf</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">""</span><span style="color:#E1E4E8">) }</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">Row</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    tags.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        Row</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            RadioButton</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                selected </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> selectedTag </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> it,</span></span>
+<span class="line"><span style="color:#E1E4E8">                onClick </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    selectedTag </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> it</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">            Text</span><span style="color:#E1E4E8">(text </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> it,modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier.</span><span style="color:#B392F0">clickable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                selectedTag </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> it</span></span>
+<span class="line"><span style="color:#E1E4E8">            })</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        Spacer</span><span style="color:#E1E4E8">(modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier.</span><span style="color:#B392F0">width</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">.dp))</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>而且，按照UX的设计风格，可以灵活的为文字部分添加触发。</p>
+<blockquote>
+<p>思考：如下代码可以实现多选吗？</p>
+</blockquote>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> tags </span><span style="color:#F97583">=</span><span style="color:#B392F0"> arrayListOf</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"A"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"B"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"C"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"D"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> selectedItems </span><span style="color:#F97583">by</span><span style="color:#B392F0"> rememberSaveable</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">mutableStateOf</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">linkedSetOf</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">>()) }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">Row</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    tags.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        Row</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            Checkbox</span><span style="color:#E1E4E8">(checked </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> selectedItems.</span><span style="color:#B392F0">contains</span><span style="color:#E1E4E8">(it), onCheckedChange </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {selected</span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (selected) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    selectedItems.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">                } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    selectedItems.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">                Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"tag"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"onCheckChanged:</span><span style="color:#79B8FF">$it</span><span style="color:#9ECBFF">,</span><span style="color:#79B8FF">$selected</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            })</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">            Text</span><span style="color:#E1E4E8">(text </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> it)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        Spacer</span><span style="color:#E1E4E8">(modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier.</span><span style="color:#B392F0">width</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">.dp))</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>当然不可以！Set 集合内容的变化并无法被观测！那么怎么处理呢？</p>
+<p>以目前我们掌握的知识，可以：</p>
+<ul>
+<li>利用位运算</li>
+<li>添加一个观测源、组合判断，但这会被lint校验警告</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#6A737D">//组合判断 会被警告的做法</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> tags </span><span style="color:#F97583">=</span><span style="color:#B392F0"> arrayListOf</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"A"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"B"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"C"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"D"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> selectedItems </span><span style="color:#F97583">by</span><span style="color:#B392F0"> rememberSaveable</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">mutableStateOf</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">linkedSetOf</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">>()) }</span></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> version </span><span style="color:#F97583">by</span><span style="color:#B392F0"> rememberSaveable</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">mutableStateOf</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">) }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">Row</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    tags.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        Row</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            Checkbox</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                checked </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> version </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> selectedItems.</span><span style="color:#B392F0">contains</span><span style="color:#E1E4E8">(it),</span></span>
+<span class="line"><span style="color:#E1E4E8">                onCheckedChange </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> { selected </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#F97583">                    if</span><span style="color:#E1E4E8"> (selected) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                        selectedItems.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">                    } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                        selectedItems.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                    version</span><span style="color:#F97583">++</span></span>
+<span class="line"><span style="color:#E1E4E8">                    Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"tag"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"onCheckChanged:</span><span style="color:#79B8FF">$it</span><span style="color:#9ECBFF">,</span><span style="color:#79B8FF">$selected</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">                })</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">            Text</span><span style="color:#E1E4E8">(text </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> it)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        Spacer</span><span style="color:#E1E4E8">(modifier </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Modifier.</span><span style="color:#B392F0">width</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">.dp))</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<blockquote>
+<p>是否还有更加优雅的解法呢？我们先保留这一疑惑，使得我们的探索过程更加的 <code>平稳</code> 、 <code>有趣</code> ， 而不必在开始阶段花费过多的精力。</p>
+</blockquote>
+<h2 id="效果">效果</h2>
+<p><img  src="/_astro/p28_demo.VFisg_05_Z2pVzLE.webp" alt="效果" loading="lazy" decoding="async" width="1080" height="2160"></p>
+<h2 id="结语">结语</h2>
+<p>很快又到了这一阶段，这意味着我们又掌握了新的知识，同时也产生了更多的疑惑，不过不用心急，所有的谜题最终都会解开。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

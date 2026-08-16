@@ -1,0 +1,514 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Java多线程系列--掌握Future，轻松获取异步任务结果 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Java多线程系列--掌握Future，轻松获取异步任务结果</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="java多线程系列掌握future轻松获取异步任务结果">Java多线程系列—掌握Future，轻松获取异步任务结果</h1>
+<h2 id="前言">前言</h2>
+<p>最近因为一些个人原因，未能抽出太多精力更新Java多线程系列，一搁置就是好几个月，先向读者诸君致歉。</p>
+<p>在本系列的其他文章中，已经提到过线程之间的相互协作， 通过分工，将程序系统的不同任务进行线程分离，充分利用机器性能、提升特定线程的利用率和程序的体验感。</p>
+<p><em>详见拙作：<a href="https://juejin.cn/post/7080088772754292744">Java多线程基础—线程生命周期与线程协作详解</a></em>.</p>
+<p>并在线程池相关文章中提到：作为程序构建者，我们更关心线程（组）的特性和它们所执行的任务，并不愿意分心去做线程操作。</p>
+<p>详见拙作：<a href="https://juejin.cn/post/7098235227490746375">Java多线程基础—线程的创建与线程池管理</a></p>
+<p>然而实际开发中，我们同样关心一个任务对程序系统产生的影响，<em>习惯上称之为任务的的执行结果</em>。</p>
+<h2 id="runnable的局限性">Runnable的局限性</h2>
+<p>在前文中我们谈到，通过编码实现Runnable接口，将获得具有边界性的 “任务”，在指定的线程（或者线程池）中运行。</p>
+<p>重新观察该接口，不难发现它并没有方法返回值：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> Runnable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> run</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>在JDK1.5之前，想利用任务的执行结果，需要小心的操作线程访问临界区资源。使用 <code>回调</code> 进行解耦是非常不错的选择。</p>
+<h3 id="练手小demo--回顾既往文章知识">练手小Demo — 回顾既往文章知识</h3>
+<p><em>注意，为了减少篇幅使用了lambda，但jdk1.5之前并不支持lambda</em></p>
+<blockquote>
+<p>将计算任务分离到其他线程执行，再回到主线程消费结果</p>
+</blockquote>
+<p>我们将计算、IO等耗时任务丢到其他线程，让主线程专注于自身业务，<em>假想它在接受用户输入以及处理反馈,但我们略去这一部分</em></p>
+<p>我们可以设计出类似下面的代码：</p>
+<p><em>虽然它还有很多不合理之处值得优化，但也足以用于演示</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> Object queueLock </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Object</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#E1E4E8"> List&#x3C;</span><span style="color:#F97583">Runnable</span><span style="color:#E1E4E8">> mainQueue </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> ArrayList&#x3C;>();</span></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> boolean</span><span style="color:#E1E4E8"> running </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> Runnable FINISH </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> running </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        synchronized</span><span style="color:#E1E4E8"> (queueLock) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mainQueue.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(Demo</span><span style="color:#F97583">::</span><span style="color:#E1E4E8">onStart);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        while</span><span style="color:#E1E4E8"> (running) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            Runnable runnable </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">            synchronized</span><span style="color:#E1E4E8"> (queueLock) {</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">mainQueue.</span><span style="color:#B392F0">isEmpty</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">                    runnable </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mainQueue.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (runnable </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                runnable.</span><span style="color:#B392F0">run</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">            Thread.</span><span style="color:#B392F0">yield</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> onStart</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        //...</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> finish</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        synchronized</span><span style="color:#E1E4E8"> (queueLock) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mainQueue.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            mainQueue.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(FINISH);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>再模拟一个计算的线程和任务回调：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> Callback</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> onResultCalculated</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> result</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> CalcThread</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Thread</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> Callback callback;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> a;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> b;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> CalcThread</span><span style="color:#E1E4E8">(Callback </span><span style="color:#FFAB70">callback</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> a</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> b</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.callback </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> callback;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.a </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> a;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.b </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> b;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Override</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> run</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">run</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            Thread.</span><span style="color:#B392F0">sleep</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (InterruptedException </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> a </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> b;</span></span>
+<span class="line"><span style="color:#E1E4E8">        System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ",calc result:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> result </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ";"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        synchronized</span><span style="color:#E1E4E8"> (queueLock) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mainQueue.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> callback.</span><span style="color:#B392F0">onResultCalculated</span><span style="color:#E1E4E8">(result));</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>填充一下onStart业务：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> onStart</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ",onStart,"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#B392F0"> CalcThread</span><span style="color:#E1E4E8">(result </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ",onResultCalculated:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> result </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ";"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#B392F0">            finish</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }, </span><span style="color:#79B8FF">200</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">300</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">start</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="复习优化为使用runnable">复习：优化为使用Runnable</h4>
+<p>在前文我们提到，如果业务仅关注任务的执行，并不过于关心线程本身，则可以利用Runnable：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> CalcRunnable</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> Runnable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        private</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> Callback callback;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        private</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> a;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        private</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> b;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#B392F0"> CalcRunnable</span><span style="color:#E1E4E8">(Callback </span><span style="color:#FFAB70">callback</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> a</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> b</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.callback </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> callback;</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.a </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> a;</span></span>
+<span class="line"><span style="color:#79B8FF">            this</span><span style="color:#E1E4E8">.b </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> b;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        @</span><span style="color:#F97583">Override</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> run</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">            try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                Thread.</span><span style="color:#B392F0">sleep</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (InterruptedException </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> a </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> b;</span></span>
+<span class="line"><span style="color:#E1E4E8">            System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ",calc result:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> result </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ";"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            synchronized</span><span style="color:#E1E4E8"> (queueLock) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                mainQueue.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> callback.</span><span style="color:#B392F0">onResultCalculated</span><span style="color:#E1E4E8">(result));</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> onStart</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ",onStart,"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        new</span><span style="color:#B392F0"> Thread</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#B392F0"> CalcRunnable</span><span style="color:#E1E4E8">(result </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ",onResultCalculated:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> result </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ";"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#B392F0">            finish</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }, </span><span style="color:#79B8FF">200</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">300</span><span style="color:#E1E4E8">)).</span><span style="color:#B392F0">start</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<blockquote>
+<p>不难想象出：我们非常需要</p>
+<ul>
+<li>让特定线程、特定类型的线程方便地接收任务，<em>回顾本系列文章中的 <a href="https://juejin.cn/post/7098235227490746375">线程池篇</a> ，线程池是应运而生</em></li>
+<li>拥有比Synchronize更轻量的机制</li>
+<li>拥有更方便的数据结构</li>
+</ul>
+</blockquote>
+<p>至此，我们可以体会到：JDK1.5之前，因为JDK的功能不足，Java程序对于线程的使用 <strong>较为粗糙</strong>。</p>
+<h2 id="为异步而生的future">为异步而生的Future</h2>
+<p>终于在JDK1.5中，迎来了新特性： <code>Future</code> 以及先前文章中提到的线程池, <em>时光荏苒，一晃将近20年了</em>。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * 略</span></span>
+<span class="line"><span style="color:#6A737D"> * </span><span style="color:#F97583">@since</span><span style="color:#6A737D"> 1.5</span></span>
+<span class="line"><span style="color:#6A737D"> * </span><span style="color:#F97583">@author</span><span style="color:#6A737D"> Doug Lea</span></span>
+<span class="line"><span style="color:#6A737D"> * </span><span style="color:#F97583">@param</span><span style="color:#FFAB70"> &#x3C;V></span><span style="color:#6A737D"> The result type returned by this Future's {@code get} method</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> Future</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#F97583">V</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> cancel</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">boolean</span><span style="color:#FFAB70"> mayInterruptIfRunning</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> isCancelled</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> isDone</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    V </span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">throws</span><span style="color:#E1E4E8"> InterruptedException, ExecutionException;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    V </span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> timeout</span><span style="color:#E1E4E8">, TimeUnit </span><span style="color:#FFAB70">unit</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            throws</span><span style="color:#E1E4E8"> InterruptedException, ExecutionException, TimeoutException;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>尽管已经移除了API注释，但仍然能够理解每个API的含义，不多做赘述。</p>
+<p>显而易见，为了增加返回值，<strong>没有必要用如此复杂的</strong> 接口来替代 <code>Runnable</code>。简单思考后可以对返回值的情况进行归纳：</p>
+<ul>
+<li>返回Runnable中业务的结果，例如计算、读取资源等</li>
+<li>单纯的在Runnable执行完毕后返回一个结果</li>
+</ul>
+<p>从业务层上看，仅需要如下接口即可，它增加了返回值、并可以更友好地让使用者处理异常：</p>
+<p><em>作者按：抛开底层实现，仅看业务方编码需要</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> Callable</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#F97583">V</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Computes a result, or throws an exception if unable to do so.</span></span>
+<span class="line"><span style="color:#6A737D">     *</span></span>
+<span class="line"><span style="color:#6A737D">     * </span><span style="color:#F97583">@return</span><span style="color:#6A737D"> computed result</span></span>
+<span class="line"><span style="color:#6A737D">     * </span><span style="color:#F97583">@throws</span><span style="color:#B392F0"> Exception</span><span style="color:#6A737D"> if unable to compute a result</span></span>
+<span class="line"><span style="color:#6A737D">     * 防盗戳 leobert-lan https://juejin.cn/user/2066737589654327</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#E1E4E8">    V </span><span style="color:#B392F0">call</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">throws</span><span style="color:#E1E4E8"> Exception;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>显然，JDK需要提供后向兼容能力：</p>
+<ul>
+<li>Runnable 不能够丢弃，也不应当丢弃</li>
+<li>不能要求使用者完全的重构代码</li>
+</ul>
+<p>所以一并提供了适配器，让使用者进行简单的局部重构即可用上新特性</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> RunnableAdapter</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#F97583">T</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">implements</span><span style="color:#B392F0"> Callable</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#F97583">T</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">    final</span><span style="color:#E1E4E8"> Runnable task;</span></span>
+<span class="line"><span style="color:#F97583">    final</span><span style="color:#E1E4E8"> T result;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    RunnableAdapter</span><span style="color:#E1E4E8">(Runnable </span><span style="color:#FFAB70">task</span><span style="color:#E1E4E8">, T </span><span style="color:#FFAB70">result</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.task </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> task;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> result;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> T </span><span style="color:#B392F0">call</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        task.</span><span style="color:#B392F0">run</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> result;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>而Future恰如其名，它代表了在 “未来” 的一个结果和状态，为了更方便地处理异步而生。</p>
+<p>并且内置了 <code>FutureTask</code>，在 <a href="#anchor1">FutureTask详解</a> 章节中再行展开。</p>
+<h3 id="类图">类图</h3>
+<p>在JDK1.8的基础上，看一下精简的类图结构：</p>
+<p><img  src="/_astro/FutureDiagram.CkvXZq68_Z2td9w7.webp" alt loading="lazy" decoding="async" width="516" height="257"></p>
+<h2 id="futuretask详解"><a id="anchor1">FutureTask详解</a></h2>
+<h3 id="构造函数">构造函数</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> FutureTask</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> FutureTask</span><span style="color:#E1E4E8">(Callable&#x3C;</span><span style="color:#F97583">V</span><span style="color:#E1E4E8">> </span><span style="color:#FFAB70">callable</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (callable </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> NullPointerException</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.callable </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> callable;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> NEW;       </span><span style="color:#6A737D">// ensure visibility of callable</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> FutureTask</span><span style="color:#E1E4E8">(Runnable </span><span style="color:#FFAB70">runnable</span><span style="color:#E1E4E8">, V </span><span style="color:#FFAB70">result</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.callable </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Executors.</span><span style="color:#B392F0">callable</span><span style="color:#E1E4E8">(runnable, result);</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> NEW;       </span><span style="color:#6A737D">// ensure visibility of callable</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="生命周期">生命周期</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> FutureTask</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    //新建</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> NEW </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //处理中</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> COMPLETING </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //正常</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> NORMAL </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //异常</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> EXCEPTIONAL </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 3</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //已取消</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> CANCELLED </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 4</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //中断中</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> INTERRUPTING </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 5</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //已中断</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> INTERRUPTED </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 6</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>可能的生命周期转换如下：</p>
+<ul>
+<li>NEW -> COMPLETING -> NORMAL</li>
+<li>NEW -> COMPLETING -> EXCEPTIONAL</li>
+<li>NEW -> CANCELLED</li>
+<li>NEW -> INTERRUPTING -> INTERRUPTED</li>
+</ul>
+<p>JDK中原汁原味的解释如下：</p>
+<blockquote>
+<p>The run state of this task, initially NEW. The run state
+transitions to a terminal state only in methods set,
+setException, and cancel. During completion, state may take on
+transient values of COMPLETING (while outcome is being set) or
+INTERRUPTING (only while interrupting the runner to satisfy a
+cancel(true)). Transitions from these intermediate to final
+states use cheaper ordered/lazy writes because values are unique
+and cannot be further modified.</p>
+</blockquote>
+<h3 id="核心方法">核心方法</h3>
+<p>本节从以下三块入手阅读源码</p>
+<ul>
+<li>状态判断</li>
+<li>取消</li>
+<li>获取结果</li>
+</ul>
+<p>状态判断API的实现非常简单</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> FutureTask</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> boolean</span><span style="color:#B392F0"> isCancelled</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> state </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> CANCELLED;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> boolean</span><span style="color:#B392F0"> isDone</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> state </span><span style="color:#F97583">!=</span><span style="color:#E1E4E8"> NEW;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>取消：</p>
+<ol>
+<li>当前状态为 <code>NEW</code> 且 CAS修改 state 成功，否则返回取消失败</li>
+<li>如果 <code>mayInterruptIfRunning</code> 则中断在执行的线程并CAS修改state为INTERRUPTED</li>
+<li>调用 finishCompletion
+<ol>
+<li>删除并通知所有等待的线程</li>
+<li>调用done()</li>
+<li>设置callable为null</li>
+</ol>
+</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> FutureTask</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> boolean</span><span style="color:#B392F0"> cancel</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">boolean</span><span style="color:#FFAB70"> mayInterruptIfRunning</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">(state </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> NEW </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">                UNSAFE.</span><span style="color:#B392F0">compareAndSwapInt</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, stateOffset, NEW,</span></span>
+<span class="line"><span style="color:#E1E4E8">                        mayInterruptIfRunning </span><span style="color:#F97583">?</span><span style="color:#E1E4E8"> INTERRUPTING </span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> CANCELLED))) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> {    </span><span style="color:#6A737D">// in case call to interrupt throws exception</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (mayInterruptIfRunning) {</span></span>
+<span class="line"><span style="color:#F97583">                try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    Thread t </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> runner;</span></span>
+<span class="line"><span style="color:#F97583">                    if</span><span style="color:#E1E4E8"> (t </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">                        t.</span><span style="color:#B392F0">interrupt</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">                } </span><span style="color:#F97583">finally</span><span style="color:#E1E4E8"> { </span><span style="color:#6A737D">// final state</span></span>
+<span class="line"><span style="color:#E1E4E8">                    UNSAFE.</span><span style="color:#B392F0">putOrderedInt</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, stateOffset, INTERRUPTED);</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">finally</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            finishCompletion</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> finishCompletion</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // assert state > COMPLETING;</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (WaitNode q; (q </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> waiters) </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">; ) {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (UNSAFE.</span><span style="color:#B392F0">compareAndSwapObject</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, waitersOffset, q, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">)) {</span></span>
+<span class="line"><span style="color:#F97583">                for</span><span style="color:#E1E4E8"> (; ; ) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    Thread t </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> q.thread;</span></span>
+<span class="line"><span style="color:#F97583">                    if</span><span style="color:#E1E4E8"> (t </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                        q.thread </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">                        LockSupport.</span><span style="color:#B392F0">unpark</span><span style="color:#E1E4E8">(t);</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                    WaitNode next </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> q.next;</span></span>
+<span class="line"><span style="color:#F97583">                    if</span><span style="color:#E1E4E8"> (next </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">                        break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">                    q.next </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// unlink to help gc</span></span>
+<span class="line"><span style="color:#E1E4E8">                    q </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> next;</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#F97583">                break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        done</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        callable </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;        </span><span style="color:#6A737D">// to reduce footprint</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>获取结果： 先判断状态，如果未进入到 <code>COMPLETING</code>（即为NEW状态），则阻塞等待状态改变，返回结果或抛出异常</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> FutureTask</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> V </span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">throws</span><span style="color:#E1E4E8"> InterruptedException, ExecutionException {</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> s </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> state;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (s </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> COMPLETING)</span></span>
+<span class="line"><span style="color:#E1E4E8">            s </span><span style="color:#F97583">=</span><span style="color:#B392F0"> awaitDone</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0L</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> report</span><span style="color:#E1E4E8">(s);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> V </span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> timeout</span><span style="color:#E1E4E8">, TimeUnit </span><span style="color:#FFAB70">unit</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            throws</span><span style="color:#E1E4E8"> InterruptedException, ExecutionException, TimeoutException {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (unit </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> NullPointerException</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> s </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> state;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (s </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> COMPLETING </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">                (s </span><span style="color:#F97583">=</span><span style="color:#B392F0"> awaitDone</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">, unit.</span><span style="color:#B392F0">toNanos</span><span style="color:#E1E4E8">(timeout))) </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> COMPLETING)</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> TimeoutException</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> report</span><span style="color:#E1E4E8">(s);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> V </span><span style="color:#B392F0">report</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> s</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">throws</span><span style="color:#E1E4E8"> ExecutionException {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Object x </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> outcome;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (s </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> NORMAL)</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> (V) x;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (s </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> CANCELLED)</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> CancellationException</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ExecutionException</span><span style="color:#E1E4E8">((Throwable) x);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="如何使用">如何使用</h2>
+<p>而使用则非常简单，也非常的朴素。</p>
+<p>我们以文中的的例子进行改造:</p>
+<ol>
+<li>沿用原Runnable逻辑</li>
+<li>移除回调，增加 <code>CalcResult</code></li>
+<li>将 <code>CalcResult</code> 对象作为既定返回结果，Runnable中设置其属性</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">   static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> CalcResult</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">      public</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> result;</span></span>
+<span class="line"><span style="color:#E1E4E8">   }</span></span>
+<span class="line"><span style="color:#F97583">   public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> onStart</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">      System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ",onStart,"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">      final</span><span style="color:#E1E4E8"> CalcResult calcResult </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> CalcResult</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">      Future&#x3C;</span><span style="color:#F97583">CalcResult</span><span style="color:#E1E4E8">> resultFuture </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Executors.</span><span style="color:#B392F0">newSingleThreadExecutor</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">submit</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">         try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            Thread.</span><span style="color:#B392F0">sleep</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">         } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (InterruptedException </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">         }</span></span>
+<span class="line"><span style="color:#F97583">         final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> result </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 200</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 300</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">         System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ",calc result:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> result </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ";"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">         calcResult.result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> result;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }, calcResult);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">      System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> "反正干点什么,"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (resultFuture.</span><span style="color:#B392F0">isDone</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#F97583">         try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> ret </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> resultFuture.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">().result;</span></span>
+<span class="line"><span style="color:#E1E4E8">            System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ",get result:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> ret </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ";"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">         } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (InterruptedException | ExecutionException </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">         }</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#B392F0">      finish</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">   }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>如果直接使用新特性Callback，则如下：</p>
+<p><em>直接返回结果，当然也可以直接返回Integer，不再包裹一层</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">   public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> onStart</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">      System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ",onStart,"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">      ExecutorService executor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Executors.</span><span style="color:#B392F0">newSingleThreadExecutor</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">      Future&#x3C;</span><span style="color:#F97583">CalcResult</span><span style="color:#E1E4E8">> resultFuture </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> executor.</span><span style="color:#B392F0">submit</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">         try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            Thread.</span><span style="color:#B392F0">sleep</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">         } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (InterruptedException </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">         }</span></span>
+<span class="line"><span style="color:#F97583">         final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> result </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 200</span><span style="color:#F97583"> +</span><span style="color:#79B8FF"> 300</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">         System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ",calc result:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> result </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ";"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#F97583">         final</span><span style="color:#E1E4E8"> CalcResult calcResult </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> CalcResult</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">         calcResult.result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> result;</span></span>
+<span class="line"><span style="color:#F97583">         return</span><span style="color:#E1E4E8"> calcResult;</span></span>
+<span class="line"><span style="color:#E1E4E8">      });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">      System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> "反正干点什么,"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (resultFuture.</span><span style="color:#B392F0">isDone</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#F97583">         try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> ret </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> resultFuture.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">().result;</span></span>
+<span class="line"><span style="color:#E1E4E8">            System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"threadId"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getId</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ",get result:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> ret </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> ";"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">         } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (InterruptedException | ExecutionException </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">         }</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">      executor.</span><span style="color:#B392F0">shutdown</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#B392F0">      finish</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">   }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>相信读者诸君会有这样的疑惑：</p>
+<blockquote>
+<p>为何使用Future比原先的回调看起来粗糙？</p>
+</blockquote>
+<p>首先要明确一点：文中前段的回调Demo，虽然达成了既定目标，但效率并不高！！在当时计算很昂贵的背景下，并不会如此莽撞地使用！</p>
+<p>而在JDK1.5开始，提供了大量内容支持多线程开发。考虑到篇幅，会在系列文章中逐步展开。</p>
+<p>另外，FutureTask中的CAS与Happens-Before本篇中亦不做展开。</p>
+<p>接下来，再做一些引申，简单看一看多线程业务模式。</p>
+<h2 id="引申多线程业务模式">引申，多线程业务模式</h2>
+<p>常用的多线程设计模式包括：</p>
+<ul>
+<li>Future模式</li>
+<li>Master-Worker模式</li>
+<li>Guarded Suspension模式</li>
+<li>不变模式</li>
+<li>生产者-消费</li>
+</ul>
+<h3 id="future模式">Future模式</h3>
+<p>文中对于Future的使用方式遵循了Future模式。</p>
+<p>业务方在使用时，已经明确了任务被分离到其他线程执行时有等待期，在此期间，可以干点别的事情，不必浪费系统资源。</p>
+<h3 id="master-worker模式">Master-Worker模式</h3>
+<blockquote>
+<p>在程序系统中设计两类线程，并相互协作：</p>
+<ul>
+<li>Master线程（单个）</li>
+<li>Worker线程</li>
+</ul>
+<p>Master线程负责接受任务、分配任务、接收（必要时进一步组合）结果并返回；</p>
+<p>Worker线程负责处理子任务，当子任务处理完成后，向Master线程返回结果；</p>
+</blockquote>
+<p><em>作者按：此时可再次回想一下文章开头的Demo</em></p>
+<h3 id="guarded-suspension模式">Guarded Suspension模式</h3>
+<ol>
+<li>使用缓存队列，使得 服务线程/服务进程 在未就绪、忙碌时能够延迟处理请求。</li>
+<li>使用等待-通知机制，将消费 <code>服务的返回结果</code> 的方式规范化</li>
+</ol>
+<h3 id="不变模式">不变模式</h3>
+<p>在并行开发过程中，为确保数据的一致性和正确性，有必要对对象进行同步，而同步操作会对程序系统的性能产生相当的损耗。</p>
+<p>因此，使用状态不可改变的对象，依靠其不变性来确保 <strong>并行操作</strong> 在 <strong>没有同步机制</strong> 的情况下，保持一致性和正确性。</p>
+<ol>
+<li>对象创建后，其内部状态和数据不再发生改变</li>
+<li>对象被共享、被多个线程访问</li>
+</ol>
+<h3 id="生产者-消费">生产者-消费</h3>
+<p>设计两类线程：若干个生产者线程和若干个消费者线程。</p>
+<p>生产者线程负责提交用户请求，消费者线程负责处理用户请求。生产者和消费者之间通过共享内存缓冲区进行通信。</p>
+<p>内存缓冲区的意义：</p>
+<ul>
+<li>解决是数据在多线程间的共享问题</li>
+<li>缓解生产者和消费者之间的性能差</li>
+</ul>
+<p>这几种模式从不同角度出发解决特定问题，但亦有一定的相似之处，不再展开。</p>
+<h2 id="后记">后记</h2>
+<p>至此，我们已经进入尾声，JDK1.5中，对多线程的支持迎来一波井喷。本文以及系列文章中关于线程池的内容也仅仅是基础中的基础，仍旧有大量的内容值得深入，本篇不再往下挖掘。</p>
+<p>在后续的系列文章中，我们将展开AQS、HAPPENS-BEFORE等内容，以及和本文高度关联的CompleteFutureTask，JUC工具等。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

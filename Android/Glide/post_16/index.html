@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>三思系列：Glide 4.X加载过程一文掌握 | Glide（二） | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="三思系列glide-4x加载过程一文掌握--glide二">三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</h1>
+<p>上一篇中，我们通过阅读Glide初始化的主要代码，对Glide中的模块进行了职责梳理。这一篇，我们在前文的基础上，对Glide的 <code>资源加载过程</code> 进行梳理。</p>
+<p>当然，通过博文来看 <code>大篇幅</code> 的代码是相当 <code>枯燥乏味</code> 的，为了让阅读体验更佳，本文中会直接用 <code>UML图</code> 代替绝大多数的 <code>代码拷贝</code>。</p>
+<p><em>注：本文基于Glide 4.12.0。另：我的UML功底不太牢，文中涉及的UML图未必是最恰当的，如图类型或者标识错用，如果读者对此有所建树，我真诚的希望你可以在留言区留下宝贵的参考意见。</em></p>
+<p>再次介绍下三思系列：</p>
+<blockquote>
+<p>三思系列是我最新的学习、总结形式，着重于:<strong>问题分析</strong>、<strong>技术积累</strong>、<strong>视野拓展</strong>，<a href="https://leobert-lan.github.io/info/about_sansi_series.html">了解更多</a></p>
+</blockquote>
+<hr>
+<h2 id="攻坚突破口">攻坚突破口</h2>
+<p>在第一篇收尾时，我们总结了深度分析时的突破口，和加载过程强关联的内容摘录如下：</p>
+<blockquote>
+<p>资源获取</p>
+<ul>
+<li>RequestManagerRetriever</li>
+<li>RequestManager</li>
+<li>RequestBuilder</li>
+<li>Request</li>
+<li>DefaultConnectivityMonitorFactory</li>
+</ul>
+<p>核心流程</p>
+<ul>
+<li>Engine</li>
+</ul>
+<p>资源Model加载器</p>
+<ul>
+<li><code>ModelLoaderFactory</code></li>
+<li><code>ModelLoader</code> 等</li>
+</ul>
+</blockquote>
+<p>如果读者在阅读本文时，手边刚好有Glide的源码，可以配合阅读。</p>
+<h2 id="request的构建">Request的构建</h2>
+<p>不难理解，Glide在设计时，将 <code>资源加载</code> &#x26; <code>资源处理</code> &#x26; <code>资源使用</code> 等指令描述封装在了 <code>Request</code> 实现类中。</p>
+<p>最简单的使用Sample代码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// Samples/imgur</span></span>
+<span class="line"><span>// com.bumptech.glide.samples.imgur.MainActivity</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>ImgurGlide.with(vh.imageView)</span></span>
+<span class="line"><span>      .load(image.link)</span></span>
+<span class="line"><span>      .into(vh.imageView);</span></span></code></pre>
+<p>调用 Glide.with 得到 <code>RequestManagerRetriever</code> 实例，并进一步调用 RequestManagerRetriever.get 得到 <code>RequestManager</code> 实例</p>
+<p>而接下来的过程，则如下图所示，<em>相比于此图，以文字形式描述的过程略显啰嗦</em></p>
+<p><img  src="/_astro/FetchResourceSequence1.DtQ_zh6c_Zp4jQA.webp" alt loading="lazy" decoding="async" width="985" height="548"></p>
+<p>图中的 1、2、3 表示了Request的创建过程。</p>
+<p>当创建完成后，需要执行 Request，但需要注意，Glide处理了一个 <code>很重要</code> 的问题：</p>
+<blockquote>
+<p>Target复用场景下，与Resource并非 <code>一一对应</code></p>
+</blockquote>
+<p>并且这个问题在 <code>网络环境变化</code>、 <code>生命周期协同</code> 等背景下被放大。</p>
+<p>所以在开始执行请求前，还需要进行一层判断：</p>
+<blockquote>
+<p>对于该Target，<code>本次</code> 请求的Request是否与 <code>前次</code> 请求的Request一致？</p>
+</blockquote>
+<ul>
+<li>一致，执行前次请求</li>
+<li>不一致，清空与target绑定的各种关系；设置本次请求；执行请求</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> RequestBuilder</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#F97583">Y</span><span style="color:#F97583"> extends</span><span style="color:#E1E4E8"> Target&#x3C;</span><span style="color:#F97583">TranscodeType</span><span style="color:#E1E4E8">>> Y </span><span style="color:#B392F0">into</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Y </span><span style="color:#FFAB70">target</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            @</span><span style="color:#F97583">Nullable</span><span style="color:#E1E4E8"> RequestListener&#x3C;</span><span style="color:#F97583">TranscodeType</span><span style="color:#E1E4E8">> </span><span style="color:#FFAB70">targetListener</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">            @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> RequestOptions </span><span style="color:#FFAB70">options</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        //...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        options </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> options.</span><span style="color:#B392F0">autoClone</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        Request request </span><span style="color:#F97583">=</span><span style="color:#B392F0"> buildRequest</span><span style="color:#E1E4E8">(target, targetListener, options);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        Request previous </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> target.</span><span style="color:#B392F0">getRequest</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (request.</span><span style="color:#B392F0">isEquivalentTo</span><span style="color:#E1E4E8">(previous)</span></span>
+<span class="line"><span style="color:#F97583">                &#x26;&#x26;</span><span style="color:#F97583"> !</span><span style="color:#B392F0">isSkipMemoryCacheWithCompletePreviousRequest</span><span style="color:#E1E4E8">(options, previous)) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            request.</span><span style="color:#B392F0">recycle</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">Preconditions.</span><span style="color:#B392F0">checkNotNull</span><span style="color:#E1E4E8">(previous).</span><span style="color:#B392F0">isRunning</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                previous.</span><span style="color:#B392F0">begin</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> target;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        requestManager.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">(target);</span></span>
+<span class="line"><span style="color:#E1E4E8">        target.</span><span style="color:#B392F0">setRequest</span><span style="color:#E1E4E8">(request);</span></span>
+<span class="line"><span style="color:#E1E4E8">        requestManager.</span><span style="color:#B392F0">track</span><span style="color:#E1E4E8">(target, request);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> target;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><em>其他代码忽略</em></p>
+<h2 id="request的触发">Request的触发</h2>
+<p>前文中，我们已经阅读到了 <code>新Request</code> 的触发环节，入口代码如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> RequestManager</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> track</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Target&#x3C;</span><span style="color:#F97583">?</span><span style="color:#E1E4E8">> </span><span style="color:#FFAB70">target</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Request </span><span style="color:#FFAB70">request</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        targetTracker.</span><span style="color:#B392F0">track</span><span style="color:#E1E4E8">(target);</span></span>
+<span class="line"><span style="color:#E1E4E8">        requestTracker.</span><span style="color:#B392F0">runRequest</span><span style="color:#E1E4E8">(request);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>接下来挖掘下Request触发流程细节，依旧先看图：</p>
+<p><img  src="/_astro/FetchResourceSequence2.BtGqQ4TU_Z1s5oCi.webp" alt loading="lazy" decoding="async" width="933" height="488"></p>
+<p><code>1、2</code> 两步对应了 <code>RequestManager#track(Target&#x3C;?> target, Request request)</code>, 标签中备注了<code>1</code> 处为 <code>生命周期监测</code></p>
+<blockquote>
+<p>简要扩展：<code>TargetTracker</code> 是一个 <code>组合模式</code> 实现，实现了 Glide 中的 <code>LifecycleListener</code>，当关联的对象的生命周期产生变化时，这些变化会被感知，并且
+<code>TargetTracker</code> 会被回调，实现请求的生命周期协同管理。</p>
+</blockquote>
+<p>而 <code>2</code> 则开始处理请求：</p>
+<ul>
+<li>如果当前 RequestTracker 是运行中的，则直接调用 <code>Request#begin()</code> 执行请求； <code>5</code></li>
+<li>否则加入等待队列，当 <code>resumeRequests</code> 或 <code>restartRequests</code> 被调用时，进入运行状态，调用 <code>Request#begin()</code> 执行请求； <code>3、4</code></li>
+</ul>
+<h2 id="request执行细节">Request执行细节</h2>
+<p>在开始阅读请求细节之前，不妨先了解下Request中的状态机制。</p>
+<p>不难理解：Request的整个过程是 <code>复杂的</code>，设计中，将其设计成不同的 <code>切面过程</code> ，处于不同的状态时，处理对应的切面，这样可以降低外部调度时的复杂度。</p>
+<h3 id="状态概览">状态概览</h3>
+<p>状态的枚举如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> enum</span><span style="color:#B392F0"> Status</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Created but not yet running.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#79B8FF">    PENDING</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * In the process of fetching media.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#79B8FF">    RUNNING</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Waiting for a callback given to the Target to be called to </span></span>
+<span class="line"><span style="color:#6A737D">     * determine target dimensions.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#79B8FF">    WAITING_FOR_SIZE</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Finished loading media successfully.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#79B8FF">    COMPLETE</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Failed to load media, may be restarted.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#79B8FF">    FAILED</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Cancelled by the user, may not be restarted.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#79B8FF">    CANCELLED</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Cleared by the user with a placeholder set, may not be restarted.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#79B8FF">    CLEARED</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Temporarily paused by the system, may be restarted.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#79B8FF">    PAUSED</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span></code></pre>
+<p>阅读代码后，整理主要的状态变化图如下：<em>在阅读处理细节时，还会提到相应的内容</em></p>
+<p><img  src="/_astro/state.tyPz4FHw_Z13Xpys.webp" alt loading="lazy" decoding="async" width="615" height="1376"></p>
+<h3 id="request处理流程一">Request处理流程一</h3>
+<p>这一小节，我们将涉及这三个细节：</p>
+<ul>
+<li>尺寸获取</li>
+<li>必要的PlaceHolder设置</li>
+<li>向Engine 发起加载请求</li>
+</ul>
+<p><img  src="/_astro/FetchResourceSequence3.Dv_asr3A_ZTdBCd.webp" alt loading="lazy" decoding="async" width="1782" height="891"></p>
+<p>如前文所提及:</p>
+<ul>
+<li>当资源无法通过校验，将直接进入 FAILED</li>
+<li>当一切都已准备就绪，即 COMPLETE，则进入资源处理流程 <code>onResourceReady</code></li>
+</ul>
+<p>否则进入 <code>WAITING_FOR_SIZE</code>，并处理尺寸处理</p>
+<ul>
+<li>如果已经测量过的尺寸是合法的，进入 <code>onSizeReady</code>； <code>2、11</code></li>
+<li>否则获取尺寸，并挂Callback； <code>3、5、6、7、8、9、10、11</code></li>
+</ul>
+<p><em>注意：当onSizeReady后，状态将变为 RUNNING，进入资源获取流程，即<code>11</code>，并且，如果有必要处理PlaceHolder且满足条件，则会在begin时处理PlaceHolder设置，即<code>4</code></em></p>
+<p>不难理解：处理请求时，Target的尺寸未必处于可测量状态，Glide内利用了ViewTree的回调机制，以ViewTarget为例，当该Target进入 <code>PreDraw状态</code> 时，
+开始测量尺寸，准确的讲是 <code>获取尺寸</code>。</p>
+<p>至此，我们即将阅读到了 <code>资源加载</code> 过程。</p>
+<h3 id="request处理流程二--资源加载">Request处理流程二 — 资源加载</h3>
+<p>这一小节，我们专注于一个流程细节：<code>资源加载</code> 过程</p>
+<p>简单想象一下，一个媒体资源，它的真身可能存在于：“网络中的某台主机”，“本地的磁盘的用户文件目录下”，“当前应用的核心资源目录下” 等等。</p>
+<p>使用这些资源时，<code>均从原始位置获取</code> 的方式是不可取的，除了 <code>最大的获取成本</code> 外，还额外付诸 <code>加载时间、解析算力成本</code>。</p>
+<blockquote>
+<p>不难理解：在资源有效时限可被信任的前提下，有必要设计缓存机制，<code>牺牲空间换取时间和算力</code> 。</p>
+<p>下一篇中，我们将深入Glide的缓存机制，挖掘细节；在本篇中，读者仅需要先记住：</p>
+<ul>
+<li>Glide 设计了缓存</li>
+<li>缓存包含 <code>内存缓存</code>，<code>磁盘缓存</code>；内存缓存中包含两个级别：<code>已加载激活的缓存</code>、<code>LRU缓存以及映射</code>； 磁盘缓存包含两个级别：<code>已解码数据</code>，<code>原始数据</code></li>
+<li>不同的缓存使用策略，同时对应了缓存的<code>存储</code>、<code>获取</code></li>
+</ul>
+</blockquote>
+<p>整个加载流程可以分为3个环节：</p>
+<ul>
+<li>生成key</li>
+<li>从内存缓存中获取</li>
+<li>使用EngineJob 从磁盘缓存中获取</li>
+</ul>
+<p>同样先给出图：<em>为了方便阅读，将流程切分成了5张图</em></p>
+<p><img  src="/_astro/FetchResourceSequence4_1-0.BUWfTrYV_Z3zbWt.webp" alt loading="lazy" decoding="async" width="1046" height="188">
+<img  src="/_astro/FetchResourceSequence4_1-1.BRDtsHHo_Z1w2azy.webp" alt loading="lazy" decoding="async" width="1046" height="467">
+<img  src="/_astro/FetchResourceSequence4_1-2.J8IoEiYx_Z2sGBFK.webp" alt loading="lazy" decoding="async" width="1046" height="487">
+<img  src="/_astro/FetchResourceSequence4_2-0.DXrNUAYy_2uwwQ.webp" alt loading="lazy" decoding="async" width="1089" height="385">
+<img  src="/_astro/FetchResourceSequence4_2-1.CmpWtlRF_Zx6Sh4.webp" alt loading="lazy" decoding="async" width="1089" height="425"></p>
+<hr>
+<p>接下来我们逐步分析</p>
+<p><img  src="/_astro/FetchResourceSequence4_1-0.BUWfTrYV_Z3zbWt.webp" alt loading="lazy" decoding="async" width="1046" height="188"></p>
+<p><code>1、2</code>是生成key过程，<strong>注意：KEY的生成方式中，隐藏着危险</strong>。</p>
+<p>不难理解，对同一个媒体资源，采用不同的处理方式，得到的结果存在差别，缓存时，必须 <code>完整的</code> 考虑到这些处理差别，否则会出现 <code>资源错用</code>。<em>本文先不对此进行展开</em></p>
+<hr>
+<p><img  src="/_astro/FetchResourceSequence4_1-1.BRDtsHHo_Z1w2azy.webp" alt loading="lazy" decoding="async" width="1046" height="467"></p>
+<p>接下来执行 <code>loadFromActiveResources</code>,即从 <code>已加载激活的缓存</code> 中获取</p>
+<p>如果不允许使用内存缓存，则直接返回null进入下一级缓存获取</p>
+<p>如果得到了缓存资源，则直接运用；否则进入下一级缓存获取</p>
+<hr>
+<p>此时，激活缓存未取到目标资源，将进入LRU内存缓存获取</p>
+<p><img  src="/_astro/FetchResourceSequence4_1-2.J8IoEiYx_Z2sGBFK.webp" alt loading="lazy" decoding="async" width="1046" height="487"></p>
+<p>同样的，如果不允许使用内存缓存，则直接返回null进入下一级缓存获取</p>
+<p>如果得到了缓存资源，<em>将从LRU内存缓存中被remove，做LRU标记维护，并被加载到 <code>激活缓存</code> 中激活</em>，则直接运用；否则进入下一级缓存获取。</p>
+<hr>
+<p>至此，内存缓存无法支持目标资源的获取，需要转向磁盘缓存</p>
+<p><em>不难理解：这里的内在细节会很复杂。将在缓存分析篇章中展开</em></p>
+<p>同样不难理解：当细节非常复杂时，有必要进行 <code>封装</code> ，<code>隐藏实现细节</code>，对调用者提供语义恰当的 <code>API</code> 即可。</p>
+<p>Glide中，将这些细节封装为 EngineJob 和 DecodeJob；</p>
+<p>不难理解：这种加载过程是 <code>相对耗时</code> 的，没有必要 <code>阻塞式</code> 等待结果以使用；因此，在加载的过程中，完全可能出现以下场景： <code>同一资源</code> 被 <code>多次要求</code> 加载。
+于是，对Job可以进行 <code>复用</code> ，获取到还在加载中的Job时，增加回调即可，如下图所示：</p>
+<p><img  src="/_astro/FetchResourceSequence4_2-0.DXrNUAYy_2uwwQ.webp" alt loading="lazy" decoding="async" width="1089" height="385"></p>
+<p>如果没有可复用的Job，则创建相应的Job，维护Job资源池，设置回调，如下图所示：
+<img  src="/_astro/FetchResourceSequence4_2-1.CmpWtlRF_Zx6Sh4.webp" alt loading="lazy" decoding="async" width="1089" height="425"></p>
+<h3 id="request处理流程三--资源使用">Request处理流程三 — 资源使用</h3>
+<p>在前文的讲解中，我们阅读到当资源加载成功后，会执行到： <code>Request#onResourceReady(Resource&#x3C;?>, DataSource)</code>，而其实现内容即为资源使用。
+当然加载失败，或者资源校验失败会执行 <code>onLoadFailed(GlideException e)</code>。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> SingleRequest</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Override</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> onResourceReady</span><span style="color:#E1E4E8">(Resource&#x3C;</span><span style="color:#F97583">?</span><span style="color:#E1E4E8">> </span><span style="color:#FFAB70">resource</span><span style="color:#E1E4E8">, DataSource </span><span style="color:#FFAB70">dataSource</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        stateVerifier.</span><span style="color:#B392F0">throwIfRecycled</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        loadStatus </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (resource </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            GlideException exception </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> GlideException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"..."</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">            onLoadFailed</span><span style="color:#E1E4E8">(exception);</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        Object received </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> resource.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (received </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> ||</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">transcodeClass.</span><span style="color:#B392F0">isAssignableFrom</span><span style="color:#E1E4E8">(received.</span><span style="color:#B392F0">getClass</span><span style="color:#E1E4E8">())) {</span></span>
+<span class="line"><span style="color:#B392F0">            releaseResource</span><span style="color:#E1E4E8">(resource);</span></span>
+<span class="line"><span style="color:#E1E4E8">            GlideException exception </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> GlideException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"..."</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">            onLoadFailed</span><span style="color:#E1E4E8">(exception);</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#B392F0">canSetResource</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#B392F0">            releaseResource</span><span style="color:#E1E4E8">(resource);</span></span>
+<span class="line"><span style="color:#6A737D">            // We can't put the status to complete before asking canSetResource().</span></span>
+<span class="line"><span style="color:#E1E4E8">            status </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Status.COMPLETE;</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        onResourceReady</span><span style="color:#E1E4E8">((Resource</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">R</span><span style="color:#F97583">></span><span style="color:#E1E4E8">) resource, (R) received, dataSource);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> onResourceReady</span><span style="color:#E1E4E8">(Resource&#x3C;</span><span style="color:#F97583">R</span><span style="color:#E1E4E8">> </span><span style="color:#FFAB70">resource</span><span style="color:#E1E4E8">, R </span><span style="color:#FFAB70">result</span><span style="color:#E1E4E8">, DataSource </span><span style="color:#FFAB70">dataSource</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        // We must call isFirstReadyResource before setting status.</span></span>
+<span class="line"><span style="color:#F97583">        boolean</span><span style="color:#E1E4E8"> isFirstResource </span><span style="color:#F97583">=</span><span style="color:#B392F0"> isFirstReadyResource</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        status </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Status.COMPLETE;</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.resource </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> resource;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //log</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        isCallingCallbacks </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> ((requestListener </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#F97583">                    ||</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">requestListener.</span><span style="color:#B392F0">onResourceReady</span><span style="color:#E1E4E8">(result, model, target, dataSource, isFirstResource))</span></span>
+<span class="line"><span style="color:#F97583">                    &#x26;&#x26;</span><span style="color:#E1E4E8"> (targetListener </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#F97583">                    ||</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">targetListener.</span><span style="color:#B392F0">onResourceReady</span><span style="color:#E1E4E8">(result, model, target, dataSource, isFirstResource))) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                Transition&#x3C;</span><span style="color:#F97583">?</span><span style="color:#F97583"> super</span><span style="color:#F97583"> R</span><span style="color:#E1E4E8">> animation </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">                        animationFactory.</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">(dataSource, isFirstResource);</span></span>
+<span class="line"><span style="color:#E1E4E8">                target.</span><span style="color:#B392F0">onResourceReady</span><span style="color:#E1E4E8">(result, animation);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">finally</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            isCallingCallbacks </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        notifyLoadSuccess</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p><em>注意:RequestListener 以及 TargetListener的处理，在使用监听器 <code>附加</code> 一些功能时，例如 <code>采集埋点</code>、 <code>依赖状态触发</code>，需要注意此处细节。</em></p>
+<p>而Target实现类的具体实现，本文略去，感兴趣的读者还请自行阅读源码。</p>
+<h2 id="内容总结">内容总结</h2>
+<p>这是一张Glide 3.x时代的架构图，仅供参考</p>
+<div style="background-color: white">
+<img src="http://sniffer-site.oss-cn-shenzhen.aliyuncs.com/GlideDiagram.png" alt="Glide 3.x架构图供参考">
+</div>
+<p><em>图片有区域透明，使用了html加了背景色，如果被转义了，<a href="http://sniffer-site.oss-cn-shenzhen.aliyuncs.com/GlideDiagram.png">请看这里</a></em></p>
+<p>图中，<code>蓝色</code> 和 <code>紫色</code> 区域对应了资源加载过程，<code>黄色</code> 区域对应了原始资源获取，<code>品红色</code> 区域对应了内部线程池。</p>
+<p><em>虽然这张图已经无法和 <code>Glide 4.x</code> 完全对应，但是处理问题的主要流程还是没有变化的。</em></p>
+<p>本文的内容，是在 <code>Glide 4.12.0版本基础上</code> 对 <code>蓝色区域</code> 的 <code>深度挖掘</code> 以及对 <code>紫色区域</code> 的 <code>简要梳理</code> <em>择去了缓存实现细节</em>。</p>
+<h2 id="思危思退思变">思危、思退、思变</h2>
+<p>在加载过程分析中，我们已经罗列了部分可能出现错误使用的地方。这些点需要注意并在使用中避开。</p>
+<p>本文中没有涉及到具体案例，所以没有 <code>更优做法</code> ， <code>更合适的做法</code> 。</p>
+<p>但阅读优秀的源码，可以分析其设计思路，思考这样设计的优劣。</p>
+<p>如：</p>
+<ul>
+<li>Request 根据内在状态枚举处理切面，在异步处理的过程中，隐藏了内在实现，仅提供最简单的控制API，如 <code>begin</code>，<code>pause</code>；又为什么不使用 <code>状态模式</code>？</li>
+<li>Engine 作为整个流程的控制核心，这是一种 <code>Facade模式</code> 实践，如果没有它的存在，则使用者需要清晰的了解：
+<ul>
+<li>缓存的使用细节</li>
+<li>EngineJob的调度等 <p>
+而增加了 Facade层后，对使用者而言，仅需要知道其功能和API语义即可。</p></li>
+</ul>
+</li>
+</ul>
+<p>当然，这些内容以及更细致的思考，需要建立在 <code>有目的</code> 地源码阅读上，而本文所起到的作用，类似于 <code>引子</code>，<code>参考</code>。</p>
+<hr>
+<p>假期到了，也希望读者们去踏踏青，锻炼锻炼，拥有健康的身体状态！</p>
+<p>最近会降低写原创的频次，<em>先前一周写两到三篇着实也有些累</em>。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

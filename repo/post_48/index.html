@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>研究良久，终于发现了他代码写的快且bug少的原因 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">研究良久，终于发现了他代码写的快且bug少的原因</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="研究良久终于发现了他代码写的快且bug少的原因">研究良久，终于发现了他代码写的快且bug少的原因</h1>
+<h2 id="前言">前言</h2>
+<p>读者诸君，今日我们适当放松一下，不钻研枯燥的知识和源码，分享一套高效的摸鱼绝活。</p>
+<p>我有一位程序员朋友，当时在一个团队中开发Android应用，历经多次考核后发现：</p>
+<blockquote>
+<p>在组内以及与iOS团队的对比中:</p>
+<ul>
+<li>他的任务量略多</li>
+<li>但他的bug数量和严重度均低</li>
+<li>但他加班的时间又少于其他人</li>
+</ul>
+<p>不禁令人产生好奇，他是如何做到代码别的又快，质量又高的</p>
+</blockquote>
+<p>经过多次研究我终于发现了奥秘。</p>
+<p><em>为了行文方便我用”老L”来代指这位朋友。</em></p>
+<h2 id="最常见的客户端bug">最常见的客户端bug</h2>
+<blockquote>
+<p>“老L，听说昨晚上线，你又坐那摸鱼看测试薅别人，有什么秘诀吗？”</p>
+</blockquote>
+<blockquote>
+<p>老L：“秘诀？倒也谈不上，你这么说，我倒是有个问题，你觉得平日里最常见的bug有哪些？”</p>
+</blockquote>
+<blockquote>
+<p>“emm，编码上不健壮的地方，例如NPE，IndexOutOfBoundsException，UI上的可就海了去了，文本长度不一导致显示不下，间距问题，乱七八糟的一大堆”</p>
+</blockquote>
+<blockquote>
+<p>老L：“哈哈，都是些看起来很幼稚、愚蠢的问题吧？是不是测试挂嘴边的那句：’ 你就不能跑一跑吗，你又不瞎，跑两下不就看到了，这么明显！！！’ ”</p>
+</blockquote>
+<blockquote>
+<p>我突然来了兴致，“你是说我们有必要上 TDD（test-driven-develop），按照DevOps思想，在CI（Continuous Integration）的时候，顺带跑自动化测试用例发现问题？”</p>
+</blockquote>
+<blockquote>
+<p>老L突然打断了我：“<strong>不要拽你那些词了</strong>，记住了，事情是要人干的，机器只能替代可重复劳动，现在还不能替代人的主观能动性，拽词并不能解决问题。我们已经找到了第一个问题的答案，现在换个角度”</p>
+</blockquote>
+<hr>
+<p>平日里最常见的bug有哪些？</p>
+<ul>
+<li>编码不健壮, 例如NPE，IndexOutOfBoundsException</li>
+<li>UI细节问题, 例如文本长度不一导致显示不下，间距，等</li>
+</ul>
+<h2 id="为什么很浅显的问题没有被发现">为什么很浅显的问题没有被发现</h2>
+<img width="220" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8120cd2c23264880b7d373c13932ab8c~tplv-k3u1fbpfcp-watermark.image?" alt="问题来了">
+<blockquote>
+<p>老L：“那么问题来了，为什么这些浅显的问题，在交测前没有被发现呢？”</p>
+</blockquote>
+<p>我陷入了思考…</p>
+<p>是开发们都很懒吗？也不至于啊！</p>
+<p>是时间很紧来不及吗？确实节奏紧张，但也不至于不给调试就拿去测了！</p>
+<blockquote>
+<p>“emm, 可能是迭代的节奏的太频繁，压力较大，并没有整块的时间用来自测联调”</p>
+</blockquote>
+<img width="220" alt="问题不大" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8310c4177171446a92661e4e576df8ae~tplv-k3u1fbpfcp-watermark.image?">
+<blockquote>
+<p>老L接过话茬，“假定你说的是正确的，那么就有两种可能。”</p>
+<p>“第一种，自测与联调要比开发还要耗费心思的一件事情。但实际上，你我都知道，这一点并站不住脚！”</p>
+<p>“而第二种，就是在开发阶段无法及时测试，拖到开发完，简单测测甚至被催促着就交差了”</p>
+</blockquote>
+<p>仔细的思考后</p>
+<ul>
+<li>业务逐步展开，无法在任意时间自由地进行有效的集成测试</li>
+<li>后端节奏并不比前端快多少，在前端的开发阶段，难以借助后端接口测试，也许接口也有问题</li>
+</ul>
+<blockquote>
+<p>“确实，这是一个挺麻烦的问题，听你一说，我感觉除了多给几天，开发完集中自测一波才行” 我如是说到。</p>
+</blockquote>
+<img width="220" alt="没有问题" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0ecbfafbe0104f23b8db06e31446195a~tplv-k3u1fbpfcp-watermark.image?">
+<blockquote>
+<p>“NO NO NO”，老L又打断了我：“你想的过多了，你想借助一个可靠的、已经完备的后端系统来进行自测。对于你的需求来说，这个要求过高了，你这是准备干QA的活”</p>
+<p>“我帮你列举一下情况”</p>
+</blockquote>
+<ol>
+<li>一些数据处理的算法，这种没有办法，老老实实写单元测试，在开发阶段就可以做好，保障可靠性</li>
+<li>UI呢，我们现在写的代码，基本都做到了UI与逻辑分层，只要能模拟数据，就能跑起来看页面</li>
+<li>业务层，后端逻辑我们无法控制，但 Web-API 调用的情况可以分析下并做一下测试，而对于返回数据的JSON结构校验、约束性校验也可以考虑做一下测试</li>
+</ol>
+<p><strong>总而言之，我们只需要先排除掉浅显的错误</strong>。而这些浅显的错误，属于情况2、3</p>
+<blockquote>
+<p>老L接着说道：“你先歇歇吧，我来说，你再插嘴这文章就太长了！”</p>
+</blockquote>
+<p>接下来就可以实现矛盾转移：“如何模拟数据进行测试”，准确的说，问题分成两个子问题：</p>
+<ul>
+<li>如何生成模拟数据</li>
+<li>如何从接缝中塞入数据，让系统得以使用</li>
+</ul>
+<h2 id="可能存在的接缝">可能存在的接缝</h2>
+<img width="220" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8120cd2c23264880b7d373c13932ab8c~tplv-k3u1fbpfcp-watermark.image?" alt="问题来了">
+<p>先看问题2：“如何从接缝中塞入数据，让系统得以使用”</p>
+<p>脑暴一下，可以得出结论：</p>
+<ul>
+<li>应用内部
+<ul>
+<li>替换调用web-api的业务模块，使用假数据调用业务链，一般替换Presenter、Controller实例</li>
+<li>替换Model层，不调用web-api，返回假数据或用假数据调用回调链</li>
+<li>侵入网络层实现，不进行实际网络层交互，直接使用假数据</li>
+<li>遵循切面，向缓存等机制模块中植入假数据</li>
+</ul>
+</li>
+<li>应用外部
+<ul>
+<li>使用代理，返回假数据</li>
+<li>假数据服务器</li>
+</ul>
+</li>
+</ul>
+<p>简单分析：</p>
+<ul>
+<li><del>“假数据服务器”</del> 的代价太大，并且使用逻辑编造假数据的代价太大，过。</li>
+<li>“使用代理，返回假数据”，可以用于特定问题的调试，不适用广泛情况，过。</li>
+<li><del>“替换调用web-api的业务模块”</del>，成本过大，过。</li>
+<li>“替换Model层”，对项目的依赖注入管理具有较大挑战，备选，可能带来很多冗余代码。</li>
+<li>“侵入网络层实现”，优选。</li>
+<li>“向缓存等机制模块中植入假数据”，操作真实的缓存较复杂，但可以考虑增加一个 Mock缓存实现模块，基于SPI等机制，可以解决冗余代码问题，备选。</li>
+</ul>
+<p>得出结论：</p>
+<ul>
+<li>方案1：“侵入网络层实现”，优选</li>
+<li>方案2：“替换Model层”，<em>（项目的依赖注入做得很好时</em>）作为备选，可能带来冗余代码</li>
+<li>方案3：“向缓存等机制模块中植入假数据”，增加一个 Mock缓存实现模块，备选。<em>（基于SPI等机制，可以解决冗余代码问题）</em></li>
+</ul>
+<p>再仔细分析： <strong>方案1和方案3可以合并，形成一个完整的方案，但未必需要限定在缓存机制中</strong></p>
+<img width="220" alt="没有问题" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0ecbfafbe0104f23b8db06e31446195a~tplv-k3u1fbpfcp-watermark.image?">
+<p>OK 我们先搁置一下这个问题，看前一个问题。</p>
+<img width="220" alt="全是问题" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f4959e7c21de4b7e8d41173c53210dbc~tplv-k3u1fbpfcp-watermark.image?">
+<h2 id="创造假数据">创造假数据</h2>
+<p>简单脑暴一下，无非三种：</p>
+<ul>
+<li>人工介入，手动编写 — 成本过大
+<ul>
+<li>可能在前期准备好，基本是纯文本</li>
+<li>可能使用一个交互工具，在需要数据时介入，通过图形化操作和输入产生数据</li>
+</ul>
+</li>
+<li>人工介入，逻辑编码</li>
+<li>基于反射等自省机制，并完全随机或者基于限制生成数据</li>
+</ul>
+<blockquote>
+<p>“第一种代价过大，暂且抛弃”</p>
+<p>“第二种可以采用，但是人力成本不容忽视! 一个可以说服我使用它的理由是：“可以精心设计单测数据，针对性的发现问题”</p>
+<p>“第三种很轻松，例如使用Mockito，但生成合适的数据需要花费一定的精力”</p>
+</blockquote>
+<p>我们来扒一扒第三种方式，其核心思想为：</p>
+<blockquote>
+<ol>
+<li>获取类信息，得到属性集</li>
+<li>遍历属性填充
+></li>
+</ol>
+</blockquote>
+<ol>
+<li>基础类型、箱体类型，枚举，确定取值范围，使用Random取值，赋值</li>
+</ol>
+<blockquote>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>2. 普通类、泛型类，创建实例，回归步骤1</span></span>
+<span class="line"><span>3. 集合、数组等，创建实例，回归步骤1，收集填充</span></span></code></pre>
+</blockquote>
+<p>不难得出结论，这一方法虽然很强大，但 <code>创建高度定制化的数据</code> 是一件有挑战的事情。</p>
+<p>举个例子，模拟字符串时，一般会使用语料集作为枚举，进行取值。要得到“地址”、“邮箱”等特定风格的数据，需要结合框架做配置，客观上存在较高地学习、使用门槛。</p>
+<p>你也知道，前几年我图好玩，写了个 <a href="https://github.com/leobert-lan/Mocker">mock库</a> 。</p>
+<p>必须强调的一点：“我并不认为我写的库比Mockito等库强大，仅仅是在我们开发人员够用的基础上，做到尽可能简单！”</p>
+<p>你也知道，Google 在Androidx（前身为support）中提供了一套注解包： annotations。<em>但Google并未提供bean validation 实现</em>
+，我之前也基于此做过一套JSR303实现，有一次突发灵感，这套注解的含义同样适用于 <code>声明假数据取值范围</code> ！！！</p>
+<p>所以，我能使用它便捷的生成合适的假数据，在开发阶段及时的进行 “伪集成”</p>
+<hr>
+<p>此刻，我再也忍不住要发言了：“且慢，老L，你这个做法有一定的侵入性吧。而且，如果数据类在不同业务下复用的话，是否存在问题呢？”</p>
+<blockquote>
+<p>老L顿了顿，“确实，google的annotations是源码级注解，并不是运行时，我为了保持简单，使用了运行时反射而非代码生成。所以确实存在一定的代码侵入性”。</p>
+<p>但是，我们可以基于此建立一套简单的MOCK-API，这样就不存在代码侵入了。</p>
+<p>另外，也可以增加一套Annotation-Processor 实现方案，这样就可以适当沿用项目中的注解约束了，但我个人认为华而不实。</p>
+<hr>
+<p>看你的第二个问题，Mocker一开始确实存在这个问题，有一次从Spring的JSR380中得到灵感，我优化了注解规则，这个问题已经被解决了。得空你可以顺着这个图看看：</p>
+</blockquote>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/19f0a9418005492eb0533a4c3ea93ff8~tplv-k3u1fbpfcp-watermark.image?" alt="Mocker.png"></p>
+<p>或者去看看代码和使用说明：<a href="https://github.com/leobert-lan/Mocker">https://github.com/leobert-lan/Mocker</a></p>
+<h2 id="再次审视如何处理接缝">再次审视如何处理接缝</h2>
+<p>此时我已经有点云里雾里，虽然听起来很牛，如何用起来呢？我还是很茫然，简直人麻了！不得不再次请教。</p>
+<p>老L笑着说：“你问的是一个实践方案的问题，而这类问题没有银弹.不同的项目、不同的习惯都有最适宜的方法，我只能分享一下我的想法和做法，仅做参考”</p>
+<blockquote>
+<p>在之前的项目中，我自己建了一个Mock-API，利用我的Mocker库，写一个假数据接口就是分分钟的事情。</p>
+<p>测试机挂上charles代理，有需要的接口直接进行mapping，所以在客户端代码中，你看不到我做了啥。</p>
+</blockquote>
+<p>当然，这个做法是在软件外部。</p>
+<p>如果要在软件内部做，我个人认为这也是一个华而不实的事情。不过不得不承认是一件好玩的事情，那就提一些思路。</p>
+<h3 id="基于retrofit的calladapter">基于Retrofit的CallAdapter</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> CallAdapter</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#F97583">R</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">T</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    Type </span><span style="color:#B392F0">responseType</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    T </span><span style="color:#B392F0">adapt</span><span style="color:#E1E4E8">(Call&#x3C;</span><span style="color:#F97583">R</span><span style="color:#E1E4E8">> </span><span style="color:#FFAB70">call</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Factory</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> abstract</span><span style="color:#E1E4E8"> @</span><span style="color:#F97583">Nullable</span></span>
+<span class="line"><span style="color:#E1E4E8">        CallAdapter&#x3C;</span><span style="color:#F97583">?</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">?</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(Type </span><span style="color:#FFAB70">returnType</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">Annotation</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">annotations</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                              Retrofit </span><span style="color:#FFAB70">retrofit</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        protected</span><span style="color:#F97583"> static</span><span style="color:#E1E4E8"> Type </span><span style="color:#B392F0">getParameterUpperBound</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> index</span><span style="color:#E1E4E8">, </span></span>
+<span class="line"><span style="color:#E1E4E8">                                                     ParameterizedType </span><span style="color:#FFAB70">type</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> Utils.</span><span style="color:#B392F0">getParameterUpperBound</span><span style="color:#E1E4E8">(index, type);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        protected</span><span style="color:#F97583"> static</span><span style="color:#E1E4E8"> Class&#x3C;</span><span style="color:#F97583">?</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">getRawType</span><span style="color:#E1E4E8">(Type </span><span style="color:#FFAB70">type</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> Utils.</span><span style="color:#B392F0">getRawType</span><span style="color:#E1E4E8">(type);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>很明显，我们可以追加注解，用以区分是否需要考虑mock；</p>
+<p><em>可选：对于有可能需要mock的接口，可以继续追加切面，实现在软件外部控制使用 <code>mock数据</code> 或 <code>真实数据</code></em></p>
+<p>而Retrofit已经使用反射确定了方法的 <code>return Type</code> ，在Mocker中也有适应的API直接生成假数据</p>
+<h3 id="基于retrofit的interceptor">基于Retrofit的Interceptor</h3>
+<p>相比于上一种，拦截器已经在Retrofit处理流程中靠后，此时在 <code>Chain</code> 中能够得到的内容已经属于Okhttp库的范畴。</p>
+<p>所以需要一定的前置措施用于确定 “return Type”、“是否需要Mock” 等信息。可以借助Tag机制：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Documented</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Target</span><span style="color:#E1E4E8">(PARAMETER)</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Retention</span><span style="color:#E1E4E8">(RUNTIME)</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#E1E4E8"> @</span><span style="color:#F97583">interface</span><span style="color:#F97583"> Tag</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">GET</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">Call</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">ResponseBody</span><span style="color:#F97583">></span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">Tag</span><span style="color:#E1E4E8"> String tag);</span></span></code></pre>
+<p>最终从 <code>Request#tag(type: Class&#x3C;out T>): T?</code> 方式获取，并接入mock，并生成 <code>Response</code></p>
+<h3 id="其他针对okhttp的封装">其他针对Okhttp的封装</h3>
+<p>思路基本类似，不再展开。</p>
+<h2 id="写在最后">写在最后</h2>
+<p>听完老L的思路，我若有所思，若有所悟。他的方案似乎很有效，而且直觉告诉我，这些方案中还有很多留白空间，例如：</p>
+<ul>
+<li>借用SPI等技术思路，可以轻易的解决 “Mock 模块集成与移除” 的问题</li>
+<li>提前外部控制是否Mock的接缝，可以在加一个工具APP、或者Socket+网页端工具 用以实现控制</li>
+</ul>
+<p>但我似乎遗漏了问题的开始</p>
+<img width="220" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8120cd2c23264880b7d373c13932ab8c~tplv-k3u1fbpfcp-watermark.image?" alt="问题来了">
+<blockquote>
+<p>是否原意做 用于约束假数据生成规则的基础建设工作呢？？？ 例如维护注解</p>
+<p>事情终究是人干的，人原意做，办法总比困难多。</p>
+</blockquote>
+<p>最后一个小问题：</p>
+<img width="220" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/78b9d577bea34124a743cd5cfaaeb051~tplv-k3u1fbpfcp-watermark.image?">
+<img width="220" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6f63755e9fe44642a97d9887417db3ca~tplv-k3u1fbpfcp-watermark.image?"></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

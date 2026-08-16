@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>温故：线性表 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">温故：线性表</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><p>温故：线性表|数据结构</p>
+<p>对 数据结构 - <code>线性表</code> 进行温故，以期获新知</p>
+<blockquote>
+<p>温故系列是我尝试的一种新学习总结方式，在 <code>阅历增长</code>时，总结旧闻，以 <code>期获</code> 新知，并不断迭代。<a href="https://github.com/leobert-lan/Blog/blob/main/info/%E5%85%B3%E4%BA%8E%E6%B8%A9%E6%95%85%E7%B3%BB%E5%88%97.md">了解更多</a></p>
+<p>本次温故时间：2021年3月</p>
+</blockquote>
+<blockquote>
+<p>注：<em>部分图片来自网络检索，未找到出处，内容仅供学习，如有侵权，可留言联系 <code>要求删除</code> 或者 <code>要求指明出处</code></em></p>
+</blockquote>
+<h2 id="基本概念">基本概念</h2>
+<p><code>线性表</code> ，全名为 <code>线性存储结构</code>，是一种 <code>有序数据项</code> 的 <code>集合</code>，其中每个数据项都有 <code>唯一</code> 的 <code>前驱</code> 和 <code>后继</code>，
+<em>注意：第一个没有前驱，最后一个没有后继</em>。</p>
+<p>新数据项加入到数据集中时，只会加入到原有某个数据项 <code>之前</code> 或者 <code>之后</code></p>
+<p><img  src="/_astro/table1.CjVOaSMI_Z1EDu0q.webp" alt="table1" loading="lazy" decoding="async" width="243" height="300"></p>
+<p>从上图我们可以理解，线性表是<code>将数据项串起来</code> 之后 <code>存入物理空间</code> 的一种数据结构。</p>
+<p><img  src="/_astro/table2.CKwaob-D_ZkVlJY.webp" alt="table1" loading="lazy" decoding="async" width="400" height="368"></p>
+<p>不同的存储方式，衍生出两种实现方式：</p>
+<ul>
+<li>将数据 <code>依次存储</code> 在 <code>连续的整块</code> 物理空间中，是 <code>顺序存储结构</code> 又称 <code>顺序表</code>；</li>
+<li>将数据 <code>分散存储</code> 在物理空间中，并能够存储数据项之间的 <code>前、后驱</code> 关系，是 <code>链式存储结构</code> ，又称 <code>链表</code>；</li>
+</ul>
+<h2 id="顺序表">顺序表</h2>
+<p>其性质可以直接对应到 <code>数组</code>，具有随机读写能力，使用需要先初始化，获取 <code>整块的存储空间</code>，如果使用中需要扩容，
+则需要先分配一块新的存储空间，并进行内容复制。</p>
+<h2 id="链表">链表</h2>
+<p>普通链表又称单链表，用于存储逻辑关系为 “一对一” 的数据。</p>
+<p>与顺序表不同，链表不限制数据的物理存储状态，即数据项的物理存储位置是随机的。</p>
+<p>每个 <code>节点</code> 对应一个数据项，包含了两部分信息：</p>
+<ul>
+<li>数据元素本身，其所在的区域称为 <code>数据域</code>；</li>
+<li>指向 <code>直接后继元素</code> 的指针，所在的区域称为 <code>指针域</code>；</li>
+</ul>
+<p><code>头指针</code> ：一个普通的指针，它的特点是永远指向链表第一个节点的位置。</p>
+<p><code>头节点</code> ：一个 <code>不存任何数据</code> 的空节点。不是必须的，但可以解决一些实际问题：</p>
+<ul>
+<li>链表数据变动时，需要维护 <code>链表的引用地址</code> 即 <code>头指针</code> 的问题</li>
+<li>遍历时，不需要对第一个节点进行特殊处理</li>
+</ul>
+<p><code>首元节点</code> ：链表中第一个存有数据的节点为首元节点。</p>
+<h2 id="静态链表">静态链表</h2>
+<p>比较早期的时候，并不能像C语言那样灵活的操作指针，于是用 <code>数组代替指针</code> 来描述单链表。
+这种用数组描述的链表叫做静态链表，这种描述方法叫做 <code>游标实现法</code>。</p>
+<h2 id="算法题小练手">算法题小练手</h2>
+<p>206.<a href="https://leetcode-cn.com/problems/reverse-linked-list/">反转链表</a></p>
+<blockquote>
+<p>反转一个单链表。</p>
+</blockquote>
+<p>示例:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>输入: 1->2->3->4->5->NULL</span></span>
+<span class="line"><span>输出: 5->4->3->2->1->NULL</span></span></code></pre>
+<blockquote>
+<p>进阶:
+你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p>
+</blockquote>
+<p>来源：力扣（LeetCode）</p>
+<p>迭代思路：遍历整个链表，将每个节点的next指向前驱，返回链表的尾端节点即可。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#E1E4E8"> ListNode </span><span style="color:#B392F0">reverseList</span><span style="color:#E1E4E8">(ListNode head) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    ListNode prev </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    ListNode curr </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> head;</span></span>
+<span class="line"><span style="color:#E1E4E8">    ListNode tmp </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    while</span><span style="color:#E1E4E8"> (curr </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        tmp </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> curr.next;</span></span>
+<span class="line"><span style="color:#E1E4E8">        curr.next </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> prev;</span></span>
+<span class="line"><span style="color:#E1E4E8">        prev </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> curr;</span></span>
+<span class="line"><span style="color:#E1E4E8">        curr </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> tmp;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> prev;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>递归思路：
+<code>递</code>： 将结点的 <code>后继</code> 作为 新的链表头节点，调用reverseList，直到进行到原始链表的尾端时，即 node.next 为 null 时。此时开始归，返回新链表头节点</p>
+<p><code>归</code>：归的过程中，反转链表的方向，设原先有 <code>a.next = b</code>, 现在需要转变为 <code>b.next = a</code>, 即 <code>a.next.next = a</code>,</p>
+<p>边界问题：</p>
+<ul>
+<li>因为是在归中处理，所以相当于是从 <code>原链表尾端</code> 开始处理反转，开始位置不用担心</li>
+<li>结束位置需要注意，必须将其的 next 改为 null，即 a.next = null</li>
+</ul>
+<p>我们再用数学归纳法复盘一下：令长度为l （L的小写，部分字体下看起来像数字1，特此说明），原链表头结点为head</p>
+<ul>
+<li>当l=0时，直接返回null，head也是null</li>
+<li>当l=1时，直接返回head</li>
+<li>当l=2时：
+<ul>
+<li>取head的next，作为新链表先进入处理，返回结果即newHead，新链表长度l=1，直接返回了,确实是期望的反转链表的头节点</li>
+<li>反转两者(即 head 与 head.next)前后驱关系，head.next.next = head，处理head的next 为 null</li>
+<li>返回newHead</li>
+</ul>
+</li>
+<li>当l=3时：
+<ul>
+<li>取head的next，作为新链表先进入处理，返回的newHead 是期望的 <code>反转链表的头结点</code></li>
+<li>处理head 与 head.next 的前后驱关系，head.next.next = head，处理head的next 为 null</li>
+<li>返回newHead</li>
+</ul>
+</li>
+</ul>
+<p>…</p>
+<ul>
+<li>当l=n，n>3时：
+<ul>
+<li>取head的next，作为新链表先进入处理，返回的newHead 是期望的 <code>反转链表的头结点</code></li>
+<li>处理head 与 head.next 的前后驱关系，head.next.next = head，处理head的next 为 null</li>
+<li>返回newHead</li>
+</ul>
+</li>
+<li>当l=n+1,n>3时：
+<ul>
+<li>取head的next，作为新链表先进入处理，返回的newHead 是期望的 <code>反转链表的头结点</code></li>
+<li>处理head 与 head.next 的前后驱关系，head.next.next = head，处理head的next 为 null</li>
+<li>返回newHead</li>
+</ul>
+</li>
+</ul>
+<p>我们依据数学归纳法，得出：l=0或l=1时，返回head，l >= 2时，处理方式一致，<em>不再誊写</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#E1E4E8"> ListNode </span><span style="color:#B392F0">reverseList</span><span style="color:#E1E4E8">(ListNode head) {</span></span>
+<span class="line"><span style="color:#6A737D">    //l=0时，head为null；l=1时，head.next 为null。 均直接返回head，归的特殊处理</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (head </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> head.next </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> head;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    //递</span></span>
+<span class="line"><span style="color:#E1E4E8">    ListNode newHead </span><span style="color:#F97583">=</span><span style="color:#B392F0"> reverseList</span><span style="color:#E1E4E8">(head.next);</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    //归的处理</span></span>
+<span class="line"><span style="color:#6A737D">    //反转 head 与 head.next 的前后驱关系</span></span>
+<span class="line"><span style="color:#E1E4E8">    head.next.next </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> head;</span></span>
+<span class="line"><span style="color:#E1E4E8">    head.next </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    //返回newHead</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> newHead;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="温故总结">温故总结</h2>
+<p>作为比较基础的内容，在更复杂的数据结构中，线性表可能会作为底层实现。在实际应用中，我们用到 <code>单链表</code> 的地方不会太多。</p>
+<p>在算法练手环节中，突然发现一个 <code>很趁手</code> 的东西，以为考虑 <code>递归实现</code> 思路时，我总是要非常仔细的思考边界问题。</p>
+<blockquote>
+<p>但这次突然发现，若能够 <code>被递归实现</code>，一定可以用 <code>数学归纳法</code> 论证 <code>做法的正确性</code>，推导过程可以 <code>完善地</code> 讨论边界问题。
+并且其推导过程非常 <code>人性化</code>。</p>
+</blockquote>
+<p>这篇内容很短，就到此结束了。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

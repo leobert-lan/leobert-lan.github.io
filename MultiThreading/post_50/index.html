@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Java多线程系列--Fork&amp;Join框架，分治的艺术 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Java多线程系列--Fork&amp;Join框架，分治的艺术</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="java多线程系列-forkjoin框架分治的艺术">Java多线程系列— Fork&#x26;Join框架，分治的艺术</h1>
+<h2 id="前言">前言</h2>
+<p>本篇是多线程系列中的一篇，我们在先前的一篇文章中回顾了线程池的主要知识</p>
+<p><em><a href="https://juejin.cn/post/7098235227490746375">Java多线程基础—线程的创建与线程池管理</a></em></p>
+<p>过去了很长时间，我们简单提要一下：</p>
+<ul>
+<li>设计目的：简化线程的使用，管理与复用，避免直接操作线程</li>
+<li>如何使用线程池</li>
+<li>设计实现与源码细节</li>
+</ul>
+<p>本篇我们延续下去，回顾 Fork&#x26;Join。主要内容如下：</p>
+<ul>
+<li>使用场景和注意事项</li>
+<li>设计原理</li>
+<li>示例代码演示使用方式以及和线程池简单对比</li>
+</ul>
+<h2 id="全文总结">全文总结</h2>
+<p><em>内容为基础部分，简单拾遗的读者扫一眼总结即可，若均已掌握，没必要浪费时间阅读细节</em></p>
+<ul>
+<li>ForkJoinPool是线程池的补充，并不是替代。线程池一般用于处理 <strong>独立的</strong> 请求、任务</li>
+<li>适合实现 “分治” 类算法，尤其是分治后递归调用的函数</li>
+<li>适用于计算密集型，如果是I/O密集型，或者线程间同步等造成长时间阻塞时，可配合ManagedBlocker使用</li>
+<li>Work Stealing（工作窃取）机制 和 双端队列，已经了解设计细节便不需要再看下去了</li>
+</ul>
+<h2 id="如何使用">如何使用</h2>
+<p><em>本章非常的基础，已经掌握如何使用，但没有思考过Fork&#x26;Join设计思路的读者，可以跳跃到 <a href="#anchor1">原理</a></em></p>
+<p>我们挑选一道简单题 <a href="https://leetcode.cn/problems/fibonacci-number/">计算斐波那契数</a> ,并使用递归算法求解。</p>
+<blockquote>
+<p>斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是：</p>
+<p>F(0) = 0，F(1) = 1</p>
+<p>F(n) = F(n - 1) + F(n - 2)，其中 n > 1</p>
+<p>给定 n ，请计算 F(n) 。</p>
+<p>来源：<a href="https://leetcode.cn/problems/fibonacci-number/">力扣（LeetCode）</a></p>
+</blockquote>
+<h3 id="forkjoin-实现">Fork&#x26;Join 实现</h3>
+<p>如题，我们需要定义计算任务，这将通过继承 <code>ForkJoinTask 实现</code>，当计算任务不可分（或者没有必要分解）时，自行处理结果返回，否则分解任务。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">static</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Fibonacci</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> RecursiveTask</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#F97583">Long</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">    final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> n;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> Fibonacci</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> n</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.n </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> n;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Override</span></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#E1E4E8"> Long </span><span style="color:#B392F0">compute</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"compute fib("</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> "), in thread:"</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> Thread.</span><span style="color:#B392F0">currentThread</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getName</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (n </span><span style="color:#F97583">&#x3C;=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">long</span><span style="color:#E1E4E8">) n;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        Fibonacci f1 </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Fibonacci</span><span style="color:#E1E4E8">(n </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        f1.</span><span style="color:#B392F0">fork</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        Fibonacci f2 </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Fibonacci</span><span style="color:#E1E4E8">(n </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        f2.</span><span style="color:#B392F0">fork</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> f2.</span><span style="color:#B392F0">join</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> f1.</span><span style="color:#B392F0">join</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>我们通过 <code>fork()</code> 将子任务丢入任务队列，并通过 <code>join()</code> 得到计算后的结果。</p>
+<p>接下来看一看使用ForkJoinPool执行任务：</p>
+<p>我们定义一个最大工作线程数为4的ForkJoinPool，并计算 Fib(5) 的结果。<em>可按照CPU核心数取最大工作线程数</em></p>
+<p><em>注意，因为没有针对计算过程做任何优化，并且使用了输出，不要计算过大的值折腾电脑</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        ForkJoinPool forkJoinPool </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ForkJoinPool</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        Fibonacci fib </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Fibonacci</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        Long result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> forkJoinPool.</span><span style="color:#B392F0">invoke</span><span style="color:#E1E4E8">(fib);</span></span>
+<span class="line"><span style="color:#E1E4E8">        System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(result);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>通过 <code>invoke(ForkJoinTask&#x3C;T> task)</code> 可以在当前线程阻塞式获取计算结果。</p>
+<p>通过 <code>execute(ForkJoinTask&#x3C;?> task)</code> 可以进行异步处理，因为 <code>class ForkJoinTask&#x3C;V> implements Future&#x3C;V></code>，
+使用方式和Future一致，<a href="https://juejin.cn/post/7147552484213719076">复习链接</a></p>
+<p><em>可以看到，递归过程中有很多的重复,但这源于算法本身</em>，</p>
+<p>当递归算法本身会使得子任务产生重复计算或者重复任务时，应当考虑处理中间结果缓存，减少不必要的任务，可以减少重复计算和GC压力。</p>
+<p>如果移除控制台输出，一般可以尝试下计算第40个，不建议再计算你更靠后的值。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>compute fib(5), in thread:ForkJoinPool-1-worker-1</span></span>
+<span class="line"><span>compute fib(3), in thread:ForkJoinPool-1-worker-1</span></span>
+<span class="line"><span>compute fib(1), in thread:ForkJoinPool-1-worker-1</span></span>
+<span class="line"><span>compute fib(2), in thread:ForkJoinPool-1-worker-3</span></span>
+<span class="line"><span>compute fib(0), in thread:ForkJoinPool-1-worker-3</span></span>
+<span class="line"><span>compute fib(1), in thread:ForkJoinPool-1-worker-0</span></span>
+<span class="line"><span>compute fib(4), in thread:ForkJoinPool-1-worker-2</span></span>
+<span class="line"><span>compute fib(2), in thread:ForkJoinPool-1-worker-2</span></span>
+<span class="line"><span>compute fib(0), in thread:ForkJoinPool-1-worker-2</span></span>
+<span class="line"><span>compute fib(1), in thread:ForkJoinPool-1-worker-2</span></span>
+<span class="line"><span>compute fib(3), in thread:ForkJoinPool-1-worker-2</span></span>
+<span class="line"><span>compute fib(1), in thread:ForkJoinPool-1-worker-2</span></span>
+<span class="line"><span>compute fib(2), in thread:ForkJoinPool-1-worker-0</span></span>
+<span class="line"><span>compute fib(0), in thread:ForkJoinPool-1-worker-0</span></span>
+<span class="line"><span>compute fib(1), in thread:ForkJoinPool-1-worker-3</span></span>
+<span class="line"><span>5</span></span></code></pre>
+<h2 id="原理"><a id="anchor1">原理</a></h2>
+<p>实际上，关于Java ForkJoin设计原理的分析，均源自其开发者 Doug Lea 的论文 <a href="https://gee.cs.oswego.edu/dl/papers/fj.pdf">A Java Fork/Join Framework</a>
+以及结合源码展开讨论。</p>
+<p>时间充裕的读者可以看一看论文原文，接下来我们节选论文重要内容进行理解。</p>
+<h3 id="分治算法的核心思路">分治算法的核心思路</h3>
+<p>以伪代码描述分治的思想如下，当问题足够小（无需再拆分）时，直接处理，否则拆分问题，处理并汇总结果</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Result solve(Problem problem){</span></span>
+<span class="line"><span>    if(problem is small){</span></span>
+<span class="line"><span>        directly solve problem</span></span>
+<span class="line"><span>    }else{</span></span>
+<span class="line"><span>        split problem into independent parts</span></span>
+<span class="line"><span>        fork new subtasks to solve each part</span></span>
+<span class="line"><span>        join all subtasks</span></span>
+<span class="line"><span>        compose result from subresults</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<h3 id="分治并行的核心要求">分治+并行的核心要求</h3>
+<p>核心要求:框架能够让构建的子任务并行执行，并且拥有一种等待子任务运行结束的机制。</p>
+<p>不难理解这一要求。</p>
+<blockquote>
+<p>让我们思考一下，线程池+Future是不是满足这一要求？</p>
+</blockquote>
+<p>很显然，线程池满足这个要求，但线程池的部分策略，甚至Thread的很多核心设计，对于 Fork/Join思路 而言是多余（过剩）的。</p>
+<h3 id="哪些是过剩的">哪些是过剩的</h3>
+<p>包含这几个方面的过剩：</p>
+<ul>
+<li>Thread本身跟踪记录阻塞的手段</li>
+<li>线程池对线程的管理</li>
+<li>线程池对任务的管理</li>
+</ul>
+<p>首先， 在同步和管理方面，Fork/Join任务只有简单的和常规的需求。<em>例如，Fork/Join任务除了等待子任务执行结果，其他情况下不需要阻塞。</em>
+因此传统的用于跟踪记录阻塞线程的代价，是一种过剩。</p>
+<p><strong>但这种过剩不会为了Fork/Join而推翻重建</strong></p>
+<p>其次，对于合理的基础任务粒度而言，构建和管理一个线程的代价，可能比执行任务花费的代价更大。线程池对线程的多种管理手段，大多是不必要的。</p>
+<p>再者，Fork&#x26;Join 是处理同一个任务的子任务，它更像是一组 “事务”，只在意最终结果，否则就全部取消并丢弃。 而线程池是面向独立的任务，并且采用了BlockingQueue暂存任务，以保障并发时高效且准确。这些对于Fork&#x26;Join
+而言，都是没有必要的。</p>
+<h3 id="fjtask框架思路图示">FJTask框架思路图示</h3>
+<p><em>注:论文从开始就以 “FJTask框架” 指代了Java中将要实现的Fork&#x26;Join框架，以 “FJTask” 指代一个可由分治解决的任务</em></p>
+<img width="400" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/13fbd2e5b60d43cba042b38031bf8e12~tplv-k3u1fbpfcp-watermark.image?">
+<p>很朴素的思路，让任务得到拆分，并被指派到合适的工作线程中执行，汇总出结果。</p>
+<h3 id="work-stealing">work-stealing</h3>
+<p>上文中我们已经提及，线程池对于任务的管理机制对于 FJTask框架 而言是过剩的。除此之外，Fork&#x26;Join倾向于 “大任务优先” 去窃取任务。</p>
+<p>这也是Java API文档中提到的，ForkJoinPool和线程池最大的不同（<em>毕竟核心线程数和最大线程数一致的线程池，管理线程是类似的</em>）</p>
+<blockquote>
+<p>all threads in the pool attempt to find and execute tasks submitted to the pool and/or
+created by other active tasks (eventually blocking waiting for work if none exist).</p>
+<p>This enables efficient processing when most tasks spawn other subtasks (as do most ForkJoinTasks),
+as well as when many small tasks are submitted to the pool from external clients.</p>
+<p>Especially when setting asyncMode to true in constructors, ForkJoinPools may also be appropriate
+for use with event-style tasks that are never joined.</p>
+</blockquote>
+<p>按照该设计思路，先让每一个工作线程拥有自己的任务队列，这样在管理方式上才有减负的空间。</p>
+<p>参考CILK的设计，给FJTask框架制定如下的任务管理策略</p>
+<ul>
+<li>每一个工作线程维护自身调度队列中的可运行任务</li>
+<li>队列以双端队列的形式被维护，<em>支持后进先出:LIFO的push和pop操作; 和先进先出:FIFO的take操作</em></li>
+<li>工作线程将任务所产生的子任务，放入到工作线程自身的双端队列中</li>
+<li>处理队列中的任务时，工作线程使用后进先出（LIFO）的策略，<em>递归</em></li>
+<li>当一个工作线程，没有本地任务可运行时，它将尝试窃取其他工作线程的任务。此时按照先进先出(FIFO)的策略，即大任务优先。</li>
+<li>当一个工作线程触及了join操作，它将尝试处理其他任务，直到目标任务被告知已经结束（通过isDone方法）。所有的任务都会无阻塞的完成。</li>
+<li></li>
+</ul>
+<p>当一个工作线程，没有本地任务可运行，且无法从其他线程中获取任务时，它就会退出（通过yield、sleep和/或者优先级调整）并经过一段时间之后再度尝试直到所有的工作线程都被告知他们都处于空闲的状态。在这种情况下，他们都会阻塞直到其他的任务再度被上层调用。</p>
+<p>其中的1-5条，均在下图中得到体现。</p>
+<p><em>椭圆代表了工作线程，它内部维护一个双端队列，通过Pushing 放入任务，通过Popping弹出任务执行，并可能被其他工作者从另一端窃取任务</em></p>
+<img width="400" alt="work-stealing" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/736cbb1d75284b509ea46f666b87b2e0~tplv-k3u1fbpfcp-watermark.image?">
+<hr>
+<p><em>作者按：源码部分本篇不展开，建议没有读过源码的读者，花点时间泛读一二</em></p>
+<h2 id="managedblocker">ManagedBlocker</h2>
+<p>这是 ForkJoinPool中采用的，为任务提供扩展管理并行数的接口。</p>
+<p>在FJTask中，我们希望充分的发挥多核CPU的计算性能，它被设计的擅长计算，但遇到会阻塞的任务时，CPU则会被浪费。</p>
+<p>往往在可能会阻塞的任务中，我们期望能增加线程来处理任务，而不是单纯的阻塞等待。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> ManagedBlocker</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> block</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">throws</span><span style="color:#E1E4E8"> InterruptedException;</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> isReleasable</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>实现并调用：<code>ForkJoinPool#managedBlock</code>。</p>
+<p><code>isReleasable()</code>: 如果不需要阻塞，则返回 true;</p>
+<p><code>block()</code>: 可能阻塞当前线程，例如等待锁定或条件, 如果没有额外的阻塞必要，返回true。</p>
+<p>关于创建补偿线程的细节，不再展开。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

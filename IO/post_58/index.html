@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Java IO系列 | NIO-1.0拾遗、NIO-2.0 &amp; 零拷贝必吹的牛皮 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Java IO系列 | NIO-1.0拾遗、NIO-2.0 &amp; 零拷贝必吹的牛皮</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="java-io系列--nio-10拾遗nio-20--零拷贝必吹的牛皮">Java IO系列 | NIO-1.0拾遗、NIO-2.0 &#x26; 零拷贝必吹的牛皮</h1>
+<h2 id="前言">前言</h2>
+<p>上一篇系列文章中，我们已经对NIO中的 Buffer、Channel、Selector 做了较为系统的梳理，凭借其内容，Android的同学应该能跨过侃大山的门槛了。</p>
+<p>在 NIO-1.0 中，仍有两块儿内容值得展开：</p>
+<ul>
+<li>Scatter/Gather</li>
+<li>零拷贝 Zero Copy</li>
+</ul>
+<p>而NIO-2.0中的内容，往底层深挖时确实量不少，但Android同学能拿来侃大山的知识相对很少，我们合并成一篇。</p>
+<h2 id="jdk中的scattergather">JDK中的Scatter&#x26;Gather</h2>
+<p><em>作者按：读者诸君务必注意，本章节中讨论的内容，均为JDK中体现 Scatter&#x26;Gather 特性的内容，并非是操作系统层面的内容</em></p>
+<p><code>Scatter</code> 译为 <code>分散</code> ， <code>Gather</code> 译为 <code>聚集</code></p>
+<p><code>Scatter</code> 在NIO-1.0中的应用是 <code>Scattering Reads</code> ，是指数据从一个Channel读取到多个 <code>Buffer</code> 中:</p>
+<img width="400" alt="desc" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/63b6a3e7aa0243fda125305843064876~tplv-k3u1fbpfcp-watermark.image">
+<p>一种典型的应用方向是实现数据协议，从应用编写角度看，编码思路更加简单。</p>
+<p>例如，约定一个数据分包协议进行数据传输，每一个包包含 “10byte的Header” 和 “50byte的Body（不足进行填充）”</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#6A737D">//ignore imports</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ScatterExample</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> (SocketChannel channel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> SocketChannel.</span><span style="color:#B392F0">open</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            channel.</span><span style="color:#B392F0">connect</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#B392F0"> InetSocketAddress</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"localhost"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">8080</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            ByteBuffer headerBuffer </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ByteBuffer.</span><span style="color:#B392F0">allocate</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            ByteBuffer bodyBuffer </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ByteBuffer.</span><span style="color:#B392F0">allocate</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            ByteBuffer</span><span style="color:#E1E4E8">[] buffers </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {headerBuffer, bodyBuffer};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            long</span><span style="color:#E1E4E8"> bytesRead </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> channel.</span><span style="color:#B392F0">read</span><span style="color:#E1E4E8">(buffers);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            headerBuffer.</span><span style="color:#B392F0">flip</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            bodyBuffer.</span><span style="color:#B392F0">flip</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // Process the data in buffers, hexString代指16进制两位补齐的字符串</span></span>
+<span class="line"><span style="color:#E1E4E8">            System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Header: "</span><span style="color:#F97583"> +</span><span style="color:#B392F0"> hexString</span><span style="color:#E1E4E8">(headerBuffer.</span><span style="color:#B392F0">array</span><span style="color:#E1E4E8">()));</span></span>
+<span class="line"><span style="color:#E1E4E8">            System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Body: "</span><span style="color:#F97583"> +</span><span style="color:#B392F0"> hexString</span><span style="color:#E1E4E8">(bodyBuffer.</span><span style="color:#B392F0">array</span><span style="color:#E1E4E8">()));</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (IOException </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<p>不难想象，我们可以比较容易地实现：Header信息识别、内容拼包。</p>
+<p><em>当然，一个健壮的协议不会如此简单，仅作为示意。</em></p>
+<p>值得注意的是：Scattering Reads适合 “定长” 的读取情况。</p>
+<p>相应的，<code>Gather</code> 在NIO-1.0中的应用是 <code>Gathering Writes</code>，指数据从多个Buffer按序写入同一个Channel中：</p>
+<img width="400" alt="desc" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2d42415585594bbb98b17c1d7af88843~tplv-k3u1fbpfcp-watermark.image">
+<p>以下是一个简单使用Demo</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#6A737D">//ignore imports</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> GatherExample</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">            // 创建SocketChannel并连接到服务器</span></span>
+<span class="line"><span style="color:#E1E4E8">            SocketChannel socketChannel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> SocketChannel.</span><span style="color:#B392F0">open</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            socketChannel.</span><span style="color:#B392F0">connect</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#B392F0"> InetSocketAddress</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"localhost"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">8080</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // 准备多个缓冲区</span></span>
+<span class="line"><span style="color:#E1E4E8">            ByteBuffer buffer1 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ByteBuffer.</span><span style="color:#B392F0">wrap</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Hello,"</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getBytes</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">            ByteBuffer buffer2 </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ByteBuffer.</span><span style="color:#B392F0">wrap</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">" World!"</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getBytes</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // 将多个缓冲区的数据写入到通道中</span></span>
+<span class="line"><span style="color:#F97583">            ByteBuffer</span><span style="color:#E1E4E8">[] buffers </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {buffer1, buffer2};</span></span>
+<span class="line"><span style="color:#E1E4E8">            socketChannel.</span><span style="color:#B392F0">write</span><span style="color:#E1E4E8">(buffers);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // 关闭SocketChannel</span></span>
+<span class="line"><span style="color:#E1E4E8">            socketChannel.</span><span style="color:#B392F0">close</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (IOException </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>与 <code>Scatter</code> 不同的是，<code>Gather</code> 擅长 <code>动态长度</code></p>
+<h2 id="os中的零拷贝">OS中的零拷贝</h2>
+<p><em>作者按：诸君请注意，本文中讨论零拷贝、Zero-Copy时，均指操作系统中的相关内容，如与Java间存在关联，会单独说明</em></p>
+<!--而之所以普遍地将Zero-Copy和Java IO放在一起讨论，大抵有如下原因：
+
+* 错误信息被不断分享
+* 知识间有关联性，Java IO底层涉及到操作系统部分机制，很容易设置面试陷阱，考察知识完整性-->
+<p>首先需要记住，<strong>零拷贝中并非没有拷贝，而是指新增各种机制，以减少主内存中不必要的拷贝，例如免去从内核态到用户态的拷贝</strong>。</p>
+<p>发展历程中涉及到的技术：</p>
+<ul>
+<li>mmap</li>
+<li>sendfile</li>
+<li>splice 等</li>
+</ul>
+<p>我们以“将文件系统中的文件通过网卡发出“为例，简单讨论。</p>
+<h3 id="传统io">传统IO</h3>
+<p>在JAVA中使用传统IO实现该需求时，即前文中所述经典IO，需要将文件系统中的文件内容，拷贝到应用内部，继而通过 <code>Socket</code> 从网卡发送.</p>
+<p>包含两个关键操作：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>read()</span></span>
+<span class="line"><span>write()</span></span></code></pre>
+<p>流程图和数据拷贝过程如下图：</p>
+<img width="700" alt="desc" src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fc6b107010c540578d571e3beaaaf429~tplv-k3u1fbpfcp-watermark.image">
+<blockquote>
+<p>DMA: Direct Memory Access, 直接内存访问, 计算机总线架构提供的功能，它能使数据从附加设备（如磁盘驱动器）直接发送到计算机主板的内存上。</p>
+</blockquote>
+<p>整个过程中，发生两次系统调用，共发生了 4次用户态与内核态的 <code>上下文切换</code>，和4次数据拷贝：</p>
+<ul>
+<li><code>第一次拷贝</code> ，把磁盘上的数据拷贝到操作系统内核的缓冲区里，通过 DMA 搬运。</li>
+<li><code>第二次拷贝</code> ，把内核缓冲区的数据拷贝到用户的缓冲区里，于是我们应用程序就可以使用这部分数据了，由 CPU 完成。</li>
+<li><code>第三次拷贝</code> ，把刚才拷贝到用户的缓冲区里的数据，再拷贝到内核的 socket 的缓冲区里，由 CPU 完成。</li>
+<li><code>第四次拷贝</code> ，把内核的 socket 缓冲区里的数据，拷贝到网卡的缓冲区里，通过 DMA 搬运。</li>
+</ul>
+<p>很显然，这一过程中，文件数据进入用户缓存区再离开，并没有附加必不可少的操作，上下文切换也比较多，存在改进的空间。</p>
+<h3 id="mmap取代read">mmap取代read</h3>
+<p>使用 <code>mmap</code> 取代 <code>read</code> 后，整个过程包含两个关键操作：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>mmap()</span></span>
+<span class="line"><span>write()</span></span></code></pre>
+<p>先补充一张 <code>虚拟内存</code> 的原理示意图，如下：</p>
+<img width="700" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f93635b183ef49828843c0f50518449a~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp">
+<p>使用虚拟地址取代物理地址后，多个虚拟内存可以指向同一个物理地址，虚拟内存表示的空间可以大于实际物理内存空间。</p>
+<p>将 <code>用户空间缓存区</code> 中的部分虚拟内存 和 <code>内核空间缓存区</code> 中的部分虚拟内存，映射到同一物理内存区域时，可以减少不必要的拷贝。</p>
+<p>在Linux中，<code>mmap</code> 将一个文件或一块设备内存（如设备寄存器）映射到进程的地址空间，实现 <code>文件磁盘地址</code> 或 <code>设备io地址</code> 与进程虚拟地址空间中一段虚拟地址建立映射，<code>ioremap</code> 实现向内核空间映射 。</p>
+<p>使用该技术后，可减少一次CPU拷贝，但上下文切换次数不变，流程图和数据流示意图如下：</p>
+<img width="700" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f185eb4d5d624e39b6e9ae1d3d7f0306~tplv-k3u1fbpfcp-watermark.image">
+<p>3次 <code>数据拷贝</code>，系统调用次数不变，4次 <code>上下文切换</code>。</p>
+<p>java中使用Demo，从上层编码也能体现一二：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">            // 获取文件</span></span>
+<span class="line"><span style="color:#E1E4E8">            FileChannel readChannel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> FileChannel.</span><span style="color:#B392F0">open</span><span style="color:#E1E4E8">(Paths.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/..../test1.txt"</span><span style="color:#E1E4E8">), StandardOpenOption.READ);</span></span>
+<span class="line"><span style="color:#E1E4E8">            MappedByteBuffer data </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> readChannel.</span><span style="color:#B392F0">map</span><span style="color:#E1E4E8">(FileChannel.MapMode.READ_ONLY, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, readChannel.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">            FileChannel writeChannel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> FileChannel.</span><span style="color:#B392F0">open</span><span style="color:#E1E4E8">(Paths.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/..../test2.txt"</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">                    StandardOpenOption.WRITE, StandardOpenOption.CREATE);</span></span>
+<span class="line"><span style="color:#6A737D">            //数据传输</span></span>
+<span class="line"><span style="color:#E1E4E8">            writeChannel.</span><span style="color:#B392F0">write</span><span style="color:#E1E4E8">(data);</span></span>
+<span class="line"><span style="color:#E1E4E8">            readChannel.</span><span style="color:#B392F0">close</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            writeChannel.</span><span style="color:#B392F0">close</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (Exception </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(e.</span><span style="color:#B392F0">getMessage</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="sendfile-取代-mmapwrite">sendfile 取代 mmap+write</h3>
+<p>上文提到，将文件数据读入用户空间内存后并没有附加必不可少的操作，那么就存在减少系统调用的优化空间。</p>
+<p>Linux 2.1 版本开始，Linux 引入了 <code>sendfile</code> 替换 <code>mmap+write</code>方式，简化流程。</p>
+<p>流程图和数据流示意图如下：</p>
+<img width="700" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c35ce9cbf96549a1b690b6c0e417214c~tplv-k3u1fbpfcp-watermark.image">
+<p>共发生 3次 <code>数据拷贝</code> ，1次 <code>系统调用</code>, 即2次 <code>上下文切换</code></p>
+<h3 id="scattergather-优化的-sendfile方式">scatter/gather 优化的 sendfile方式</h3>
+<p>在 <code>sendfile</code> 中，还有CPU拷贝的过程，能不能进一步优化呢？</p>
+<p>Linux 2.4 内核进行了优化，提供了带有 <code>scatter/gather</code> 的 <code>sendfile</code> 操作，可以减少拷贝的内容，注意，仍然有描述信息需要拷贝。</p>
+<p>原理为：</p>
+<ul>
+<li>目标：内核空间 Read Buffer 和 Socket Buffer 之间不做数据复制</li>
+<li>将 Read Buffer 的内存地址、偏移量信息等拷贝到 Socket Buffer 中。参考虚拟内存的解决思路实现目标。</li>
+</ul>
+<p><em>Read Buffer 的内存地址、偏移量信息等，即所谓描述信息</em></p>
+<p>流程图和数据流示意图如下：</p>
+<img width="700" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/62c79b1f254741979b07127accc1991e~tplv-k3u1fbpfcp-watermark.image">
+<p><em>从内核缓冲区到网卡的DMA拷贝，为 Gather Copy</em></p>
+<p>sendfile只适用于将数据从文件拷贝到套接字上，限定了它的使用范围。</p>
+<p>Linux在2.6.17版本引入splice，用于在两个文件描述符中移动数据：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#F97583">#define</span><span style="color:#B392F0"> _GNU_SOURCE</span><span style="color:#6A737D">         /* See feature_test_macros(7) */</span></span>
+<span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF"> &#x3C;fcntl.h></span></span>
+<span class="line"><span style="color:#F97583">ssize_t</span><span style="color:#B392F0"> splice</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> fd_in</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">loff_t</span><span style="color:#F97583"> *</span><span style="color:#FFAB70">off_in</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> fd_out</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">loff_t</span><span style="color:#F97583"> *</span><span style="color:#FFAB70">off_out</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">size_t</span><span style="color:#FFAB70"> len</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">unsigned</span><span style="color:#F97583"> int</span><span style="color:#FFAB70"> flags</span><span style="color:#E1E4E8">);</span></span></code></pre>
+<p><code>splice</code> 在两个文件描述符之间移动数据，从 <code>fd_in</code> 拷贝长度为 <code>len</code> 的数据到 <code>fd_out</code>，有一方必须是管道设备。</p>
+<h3 id="以java中的transferto为例">以java中的transferTo为例</h3>
+<p>在Java中，<code>transferTo</code> 底层使用零拷贝技术，但从上层编码并不能体现出来：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            FileChannel readChannel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> FileChannel.</span><span style="color:#B392F0">open</span><span style="color:#E1E4E8">(Paths.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/..../test1.txt"</span><span style="color:#E1E4E8">), StandardOpenOption.READ);</span></span>
+<span class="line"><span style="color:#F97583">            long</span><span style="color:#E1E4E8"> len </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> readChannel.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            long</span><span style="color:#E1E4E8"> position </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> readChannel.</span><span style="color:#B392F0">position</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            FileChannel writeChannel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> FileChannel.</span><span style="color:#B392F0">open</span><span style="color:#E1E4E8">(Paths.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/..../test2.txt"</span><span style="color:#E1E4E8">), StandardOpenOption.WRITE, StandardOpenOption.CREATE);</span></span>
+<span class="line"><span style="color:#E1E4E8">            readChannel.</span><span style="color:#B392F0">transferTo</span><span style="color:#E1E4E8">(position, len, writeChannel);</span></span>
+<span class="line"><span style="color:#E1E4E8">            readChannel.</span><span style="color:#B392F0">close</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            writeChannel.</span><span style="color:#B392F0">close</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (Exception </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(e.</span><span style="color:#B392F0">getMessage</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>在 zulu版本的实现中：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> FileChannelImpl</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> long</span><span style="color:#B392F0"> transferTo</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> position</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">long</span><span style="color:#FFAB70"> count</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                           WritableByteChannel </span><span style="color:#FFAB70">target</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            throws</span><span style="color:#E1E4E8"> IOException {</span></span>
+<span class="line"><span style="color:#B392F0">        ensureOpen</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#6A737D">        //ignore</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        long</span><span style="color:#E1E4E8"> n;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // Attempt a direct transfer, if the kernel supports it</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> ((n </span><span style="color:#F97583">=</span><span style="color:#B392F0"> transferToDirectly</span><span style="color:#E1E4E8">(position, icount, target)) </span><span style="color:#F97583">>=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> n;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // Attempt a mapped transfer, but only to trusted channel types</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> ((n </span><span style="color:#F97583">=</span><span style="color:#B392F0"> transferToTrustedChannel</span><span style="color:#E1E4E8">(position, icount, target)) </span><span style="color:#F97583">>=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> n;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // Slow path for untrusted targets</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> transferToArbitraryChannel</span><span style="color:#E1E4E8">(position, icount, target);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>通过注释与方法名可以看出端倪，感兴趣的读者可继续追溯源码，本文不再展开。</p>
+<h2 id="nio-20">NIO-2.0</h2>
+<h3 id="操作系统中的aio">操作系统中的AIO</h3>
+<p>还请读者诸君回忆一下 <a href="https://juejin.cn/post/7231540022595141693">总纲</a> 中提到的AIO，</p>
+<img width="400" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/73a8f4e05bf5483da29e79cb6d012256~tplv-k3u1fbpfcp-watermark.image">
+<p>很显然，这是操作系统中的AIO，例如，Windows 中提供了 <code>IOCP（I/O CompletionPort，I/O完成端口）</code></p>
+<h3 id="java中的nio-20">Java中的NIO-2.0</h3>
+<p>回想一下Java中经典IO（BIO），和NIO-1.0，并没有在JDK层面提供开箱即用的异步IO编程框架。当然，这和Java的多线程编程、异步编程发展有关。</p>
+<p>而在JDK1.7中，配套提供了异步IO的编程框架，同样置于nio包下，惯称为NIO-2.0，也有人称之为AIO。</p>
+<p><em>注意，阅读其他文章时，对于 <code>异步</code> 、 <code>阻塞</code> 的讨论，要界定清楚讨论的对象和范围</em></p>
+<p>在应用程序部分，发起IO调用和执行IO操作是异步的，但在JVM中，是否使用了操作系统异步IO则需要看操作系统平台，像Linux是通过 <code>epoll</code>，模拟了AIO。</p>
+<p>在 <code>Java.nio.channels</code> 包下增加了四个异步通道：</p>
+<ul>
+<li>AsynchronousSocketChannel</li>
+<li>AsynchronousServerSocketChannel</li>
+<li>AsynchronousFileChannel</li>
+<li>AsynchronousDatagramChannel</li>
+</ul>
+<p>结合 <code>Future</code> 进行异步编程，例如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> java.nio.channels.AsynchronousFileChannel;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> java.nio.file.Path;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> java.nio.file.StandardOpenOption;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> java.nio.ByteBuffer;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> java.util.concurrent.Future;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Path file </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Paths.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"/path/to/file.txt"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        AsynchronousFileChannel channel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> AsynchronousFileChannel.</span><span style="color:#B392F0">open</span><span style="color:#E1E4E8">(file, StandardOpenOption.READ);</span></span>
+<span class="line"><span style="color:#E1E4E8">        ByteBuffer buffer </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ByteBuffer.</span><span style="color:#B392F0">allocate</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1024</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        Future&#x3C;</span><span style="color:#F97583">Integer</span><span style="color:#E1E4E8">> operation </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> channel.</span><span style="color:#B392F0">read</span><span style="color:#E1E4E8">(buffer, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">        while</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">operation.</span><span style="color:#B392F0">isDone</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#6A737D">            // can do other work here while reading is in progress asynchronously  </span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        buffer.</span><span style="color:#B392F0">flip</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        byte</span><span style="color:#E1E4E8">[] data </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> byte</span><span style="color:#E1E4E8">[buffer.</span><span style="color:#B392F0">limit</span><span style="color:#E1E4E8">()];</span></span>
+<span class="line"><span style="color:#E1E4E8">        buffer.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(data);</span></span>
+<span class="line"><span style="color:#E1E4E8">        System.out.</span><span style="color:#B392F0">println</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#B392F0"> String</span><span style="color:#E1E4E8">(data));</span></span>
+<span class="line"><span style="color:#E1E4E8">        channel.</span><span style="color:#B392F0">close</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>当然，也可以使用 <code>Callback</code></p>
+<p>这些异步通道，通过 <code>Future</code> + <code>Callback</code> + <code>线程池</code> + <code>Native API</code> 实现了 <strong>文件异步非阻塞 IO</strong></p>
+<ul>
+<li>其中 Native API 的部分，对应到操作系统中的AIO。</li>
+<li><code>Future</code> 、 <code>Callback</code> 、 <code>线程池</code> 为异步程序编写提供了框架支持。</li>
+</ul>
+<h2 id="结语">结语</h2>
+<p>至此，Java IO系列已告一段落，作为一个Android程序员，会再写一篇关于 <code>Okio</code> 的文章，毕竟 <code>OKHttp</code> 几乎是Android程序员吃饭的家伙了。</p>
+<p>前段时间因为工作内容的变化，尚未适应过来，这篇文章的草稿攒了月余时间，期间也进行了多次思考，基础系列的文章确实相当枯燥，后面可能会靠好玩系列、三思系列进行调节。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

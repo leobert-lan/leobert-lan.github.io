@@ -1,0 +1,506 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>三思系列：前人用GreenDao留下的坑，全线被扣了绩效 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">三思系列：前人用GreenDao留下的坑，全线被扣了绩效</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="三思系列前人用greendao留下的坑全线被扣了绩效">三思系列：前人用GreenDao留下的坑，全线被扣了绩效</h1>
+<h2 id="前言">前言</h2>
+<p>本篇文章，您将从一个GreenDao使用的事故开始，围观事故现场，并获得问题分析结论。跟随作者再次巩固GreenDao的整体设计，并实践 <code>APT</code> 、 <code>Gradle Plugin</code> 两种方案，通过不断地总结、对比和深度反思扫荡盲区，将知识融会贯通！</p>
+<blockquote>
+<p>创作三思系列是我学习、总结、反思的一种方式，着重于:<strong>问题分析</strong>、<strong>技术积累</strong>、<strong>视野拓展</strong>。<a href="https://leobert-lan.github.io/info/about_sansi_series.html">了解三思系列</a></p>
+</blockquote>
+<p>去年年末，出了一个可大可小的事故，<strong>导致开发、测试一条线都被扣了绩效</strong>。</p>
+<p>背景是这样的：</p>
+<ul>
+<li>项目的部分业务数据存储于 <strong>本地数据库</strong></li>
+<li>数据库业务使用了ORM框架—GreenDao</li>
+<li>采用了类似 <a href="https://github.com/yuweiguocn/GreenDaoUpgradeHelper">GreenDaoUpgradeHelper</a> 的方案处理 “数据库版本升级”</li>
+</ul>
+<p>然而，最终事故发生在调用 <strong>Migration</strong> 时，<strong>遗漏了Dao</strong>，如果读者对这类 <strong>粗犷的</strong> 升级方案有所了解，一定猜到了最终结果：<strong>表数据丢失！！！</strong></p>
+<p>很显然，导致最终结果的原因是多元的：</p>
+<ul>
+<li>前人采用的数据库升级方案就很危险</li>
+<li>特殊渠道包的更新频次低、时间跨度长，测试覆盖粒度不够细（仅回归主功能、增量实现、从主包同步的bug修改和优化）导致一直未发现问题</li>
+<li>轻易地相信了一个老项目，没有对基建部分进行详细的review</li>
+<li>…</li>
+</ul>
+<p><em>作者按：可大可小的原因—性质比较恶劣的研发测试流程问题；值得庆幸的是这部分数据不会影响使用正确性，且发生在特殊用途的增量包中，影响范围很小，通过日志分析可回滚弥补。</em></p>
+<p>显然，诸位亲爱的读者点进来，除了围观事故现场，还想看点别的！那自然不能辜负读者厚爱，本篇会同读者一起做一些有趣的事情。</p>
+<h2 id="前人的使用方式概览">前人的使用方式概览</h2>
+<p><em>在真正开始之前，我们还需要耐心地看一下前人的使用方式</em>，<strong>此乃前车之鉴，如果你的项目中也有类似的用法，可能需要尽早地、仔细地Review一遍</strong>。</p>
+<ul>
+<li>正常的导包、应用plugin — 没问题</li>
+<li>gradle配置 <code>GreendaoOptions</code> — 没问题， <em>targetGenDir配置到了常规sourceSet中，增加一些代码提交和merge conflict 问题不大</em></li>
+<li>用注解标识Entity — 参数都是默认的，问题不大，<strong>没有隐藏的大坑</strong></li>
+<li>自实现了 <code>DaoMaster.OpenHelper</code> — 没问题</li>
+<li>自定义了数据库升级的helper，类似前文提到的GreenDaoUpgradeHelper — 坑比较大：
+<ul>
+<li>性能问题</li>
+<li>临时表名产生的制约</li>
+<li><strong>人工维护传入的dao — 直接导致的事故</strong></li>
+</ul>
+</li>
+</ul>
+<p>可能大多数项目的使用方式都是类似的，那么有三大问题丞待解决：</p>
+<ul>
+<li>需要人工维护升级的dao参数 — 人的记性差，容易遗漏。不符合GreenDaoUpgradeHelper 等工具的设计初衷，<em>即不需要人工维护升级细节</em></li>
+<li>restore时的效率问题</li>
+<li>临时表名无形中产生的制约</li>
+</ul>
+<p><strong>限于篇幅，本篇只解决第一个问题，点出第二个问题，分析第三个问题。</strong></p>
+<h3 id="greendao-如何进入升级降级">GreenDao 如何进入升级（降级）</h3>
+<p>我们知道： Sqlite 存在有 <code>PRAGMA</code> 命令，可以在 SQLite 环境内控制各种环境变量和状态标志。而数据库的版本信息存储为 环境变量 <code>user_version</code></p>
+<p>通过以下sql进行查询和设置：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>#查询</span></span>
+<span class="line"><span>PRAGMA user_version;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>#设置</span></span>
+<span class="line"><span>PRAGMA user_version = {version}</span></span></code></pre>
+<p>而GreenDao配置的schemaVersion：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">greendao {</span></span>
+<span class="line"><span style="color:#E1E4E8">    schemaVersion </span><span style="color:#79B8FF">1000</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>将通过gradle-task：<code>greendao</code> 写入生成的 <code>DaoMaster</code> 中,并作为 <code>SQLiteOpenHelper</code> 的 <code>version</code> 参数，与数据库的 <code>user_version</code>
+比对后，判断是否需要进行创建、升级、降级。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> DaoMaster</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> AbstractDaoMaster</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> SCHEMA_VERSION </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1000</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> abstract</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> OpenHelper</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> DatabaseOpenHelper</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#B392F0"> OpenHelper</span><span style="color:#E1E4E8">(Context </span><span style="color:#FFAB70">context</span><span style="color:#E1E4E8">, String </span><span style="color:#FFAB70">name</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">            super</span><span style="color:#E1E4E8">(context, name, SCHEMA_VERSION);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#B392F0"> OpenHelper</span><span style="color:#E1E4E8">(Context </span><span style="color:#FFAB70">context</span><span style="color:#E1E4E8">, String </span><span style="color:#FFAB70">name</span><span style="color:#E1E4E8">, CursorFactory </span><span style="color:#FFAB70">factory</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">            super</span><span style="color:#E1E4E8">(context, name, factory, SCHEMA_VERSION);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#6A737D">        //...</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>节选 <code>SQLiteOpenHelper</code> 一段代码如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>db.beginTransaction();</span></span>
+<span class="line"><span>try {</span></span>
+<span class="line"><span>    if (version == 0) {</span></span>
+<span class="line"><span>        onCreate(db);</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>        if (version > mNewVersion) {</span></span>
+<span class="line"><span>            onDowngrade(db, version, mNewVersion);</span></span>
+<span class="line"><span>        } else {</span></span>
+<span class="line"><span>            onUpgrade(db, version, mNewVersion);</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    db.setVersion(mNewVersion);</span></span>
+<span class="line"><span>    db.setTransactionSuccessful();</span></span>
+<span class="line"><span>} finally {</span></span>
+<span class="line"><span>    db.endTransaction();</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>您一定注意到：此处已经开启了数据库事务，如果将升级任务置于额外的线程执行，也存在风险！<strong>做好设计，减少甚至杜绝表结构变更</strong> 是最佳实践！</p>
+<h3 id="升级helper概览">升级Helper概览</h3>
+<p>几乎所有可以搜索到的工具，均以以下流程作为实现方案：</p>
+<p><img  src="/_astro/img_1.DztY-zou_ZAztTV.webp" alt loading="lazy" decoding="async" width="594" height="1114"></p>
+<p>表名关系：诸如 <code>临时表名 = {原表名}+"_TEMP"</code></p>
+<p><em>作者按：为了方便，下文以 <code>tempTableName</code> 指代临时表名，<code>oTableName</code> 指代Entity对应的表名</em></p>
+<p><strong>1.创建临时表</strong></p>
+<ul>
+<li>删除临时表 <code>DROP TABLE IF EXISTS {tempTableName}</code> — 看似没有毛病，但如果存在业务设计的临库临表，就被误删除了</li>
+<li>创建临时表 <code>CREATE TEMPORARY TABLE {tempTableName} AS SELECT * FROM {oTableName}</code></li>
+</ul>
+<p>比较奇怪的是：为何不:</p>
+<ol>
+<li>先判断临时表名是否存在，如存在则抛错，</li>
+<li>然后再判断新增表是否会和临时表重名，如果存在则抛错，</li>
+<li>继而在同一数据库内使用 <code>ALTER TABLE {oTableName} RENAME TO {tempTableName}</code> 修改表名</li>
+</ol>
+<blockquote>
+<p><em>作者按：此处仅为一个设想，是Sqlite支持的SQL，但并未在Android项目中实践验证以及推理可能出现的问题。</em></p>
+<p><em>可以预见的是：即便增加校验，也无法避免用户绕开GreenDao进行数据库操作所带来的隐性冲突可能。</em></p>
+<p><em>GreenDaoUpgradeHelper在新的临时数据库中处理临时表，作者公司项目中的代码在原数据库中处理</em></p>
+</blockquote>
+<p><strong>2.调用DaoMaster删除表</strong></p>
+<p>逻辑借用了GreenDao生成的代码，细节忽略</p>
+<p><strong>3.调用DaoMaster生成表</strong></p>
+<p>逻辑借用了GreenDao生成的代码，细节忽略</p>
+<p><strong>4.restore数据</strong>
+根据 <code>tempTableName</code> 和 <code>oTableName</code> 两张表的结构，构建SQL，迁移数据，细节忽略</p>
+<h3 id="小结">小结</h3>
+<p>至此，我们已经完成了问题2、3的基本分析：</p>
+<blockquote>
+<ol>
+<li>人工维护需要升级的dao</li>
+<li>restore时的效率问题 — <strong>不需要升级的表也进行了I/O，不需要变更的字段也进行了I/O</strong></li>
+<li>临时表名无形中产生的制约 — <strong>同库情况下产生制约，创建无冲突的临库则无影响，但会增加I/O</strong></li>
+</ol>
+</blockquote>
+<p>显而易见：问题2、3可以通过 “健壮的、可靠的数据库设计以降低升级数据库的需求”、“更加细致、高效的升级SQL” 加以解决。</p>
+<p><em>作者按：虽然前文为它们花费了较长的篇幅，但它们不是这篇文章的主角，以后时间充裕的话，我会考虑造一个更好用、高效的轮子</em></p>
+<p>而问题1的原因更加明显：GreenDao 并没有设计相关功能 <strong>用以提供需要升级的DAO信息</strong> 。而从数据库升级的算法流程分析，<strong>需要的DAO信息为全部的DAO类集合即可</strong></p>
+<blockquote>
+<p>经过前文大篇幅的分析，我们已经完成了第一次扣题：思危 — 发现、分析危险。</p>
+<p>如果有读者已经很不幸地处于危险之中，则需要开始思退。</p>
+</blockquote>
+<h2 id="两种可行的额外技术手段">两种可行的额外技术手段</h2>
+<p>此时让我们退一步，冷静地思考下：为什么先前的开发人员选择了 <strong>人工维护DAO类的Collection</strong> 呢？</p>
+<p>诚然，GreenDao 没有帮助开发者维护 <strong>需要升级的表信息</strong> ，这种小事也没有必要提issue；</p>
+<p>进一步思考：GreenDao将升级都交由开发者自行维护，Entity也由开发者自行创建，更没有理由提供这一信息；</p>
+<p>更进一步思考：GreenDao还存在着 <strong>高级用法</strong> ，此时表可以交由开发者创建、维护。当自由度提升，没有 <strong>可靠的机制</strong> 帮助GreenDao判断开发者需要哪些信息；</p>
+<p><strong>终极思考：是否GreenDao提供了，但开发者没注意到？</strong></p>
+<p>但不用担心，我们自己动手，依旧可以丰衣足食，<em>虽然方案的出发点本身存在不合理之处</em>。</p>
+<h3 id="方案1注解处理技术">方案1：注解处理技术</h3>
+<p>GreenDao使用 <code>@Entity</code> 对实体类进行注解，例如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Entity</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">indexes</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">        @</span><span style="color:#F97583">Index</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">value</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "text, date DESC"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">unique</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">})</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Note</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Id</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> Long id;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">NotNull</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> String text;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> String comment;</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> java.util.Date date;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Convert</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">converter</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> NoteTypeConverter.class, </span><span style="color:#79B8FF">columnType</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> String.class)</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> NoteType type;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>依据 <code>@Entity</code> 注解，通过APT机制，我们可以很轻易的收集Entity对应的 <code>AbstractDao</code> 类信息</p>
+<p><em>作者按：APT stands for Annotation Processing Tool. Sun shipped an API for APT in JDK 1.5, which can be viewed
+at <a href="https://docs.oracle.com/javase/1.5.0/docs/guide/apt/mirror/index.html">一个你不愿意打开，打开了也不乐意看的网站😂</a></em></p>
+<h3 id="方案2greendao插件">方案2：GreenDao插件</h3>
+<p>众所周知，GreenDao通过Gradle Plugin完成了：</p>
+<ul>
+<li>Entity 发现</li>
+<li>Entity 中表字段关系、索引、约束分析，源码级代码插桩</li>
+<li>Dao 生成</li>
+<li>DaoMaster生成</li>
+</ul>
+<p>如果我们可以 “入侵” 这一系列的流程，显然也可以达成目标，毕竟，生成的DaoMaster类头注释了：<strong>knows all DAOs.</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * Master of DAO (schema version 1000): knows all DAOs.</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> DaoMaster</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> AbstractDaoMaster</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="小时牛刀注解处理">小时牛刀—注解处理</h2>
+<p>先简单回顾一下Entity注解的源码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"></span>
+<span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * Annotation for entities</span></span>
+<span class="line"><span style="color:#6A737D"> * greenDAO only persist objects of classes which are marked with this annotation</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Retention</span><span style="color:#E1E4E8">(RetentionPolicy.SOURCE)</span></span>
+<span class="line"><span style="color:#E1E4E8">@</span><span style="color:#F97583">Target</span><span style="color:#E1E4E8">(ElementType.TYPE)</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#E1E4E8"> @</span><span style="color:#F97583">interface</span><span style="color:#F97583"> Entity</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Specifies the name on the DB side (e.g. table name) this entity maps to. By default, the name is based on the entities class name.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#E1E4E8">    String </span><span style="color:#B392F0">nameInDb</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">default</span><span style="color:#9ECBFF"> ""</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Indexes for the entity.</span></span>
+<span class="line"><span style="color:#6A737D">     * &#x3C;p/></span></span>
+<span class="line"><span style="color:#6A737D">     * Note: To create a single-column index consider using {@link Index} on the property itself</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    Index</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">indexes</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">default</span><span style="color:#E1E4E8"> {};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Advanced flag to disable table creation in the database (when set to false). This can be used to create partial</span></span>
+<span class="line"><span style="color:#6A737D">     * entities, which may use only a sub set of properties. Be aware however that greenDAO does not sync multiple</span></span>
+<span class="line"><span style="color:#6A737D">     * entities, e.g. in caches.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> createInDb</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">default</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Specifies schema name for the entity: greenDAO can generate independent sets of classes for each schema.</span></span>
+<span class="line"><span style="color:#6A737D">     * Entities which belong to different schemas should &#x3C;strong>not&#x3C;/strong> have relations.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#E1E4E8">    String </span><span style="color:#B392F0">schema</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">default</span><span style="color:#9ECBFF"> "default"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Whether update/delete/refresh methods should be generated.</span></span>
+<span class="line"><span style="color:#6A737D">     * If entity has defined {@link ToMany} or {@link ToOne} relations, then it is active independently from this value</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> active</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">default</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Whether an all properties constructor should be generated. A no-args constructor is always required.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> generateConstructors</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">default</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Whether getters and setters for properties should be generated if missing.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> generateGettersSetters</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">default</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Define a protobuf class of this entity to create an additional, special DAO for.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#E1E4E8">    Class </span><span style="color:#B392F0">protobuf</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">default</span><span style="color:#E1E4E8"> void.class;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>作用在 <code>TYPE</code> 上，保存至源码级别，显然没有限制。</p>
+<p>剩下来的工作非常简单：</p>
+<ul>
+<li>实现 <code>AbstractProcessor</code> 并完成SPI注册，进入到AnnotationProcessor流程</li>
+<li>通过获取 <code>Entity</code> 注解类对应的 <code>TypeElement</code> ，判断项目是否正确配置</li>
+<li>获取被注解的类，收集必要的信息</li>
+<li>可选项1：甄别是否会出现临时表表名冲突，<em>编译期抛错优于运行期</em></li>
+<li>可选项2：排除Kotlin类等干扰项，<em>GreenDao仅支持Java</em></li>
+<li>生成代码</li>
+</ul>
+<p><em>具体代码可参考 <a href="https://github.com/leobert-lan/GreenDaoCollector">GreenDaoCollector</a> 中的 greendao-collector 部分</em></p>
+<p><em>作者按：相信诸位读者对APT都有一定程度的掌握，如果掌握程度还不够熟练，在有时间条件的基础下，可以结合本案例展开一次练习</em></p>
+<h3 id="额外的风险">额外的风险</h3>
+<p><em>看至此处，您一定已经对 <code>可选项2：排除Kotlin类等干扰项，GreenDao仅支持Java</code> 这句话进行了思考，并对我将 <code>Entity</code> 注解的源码全文粘贴于上这一 <code>水字数</code>
+的行为表示了鄙夷。</em></p>
+<p>但是请注意：</p>
+<ul>
+<li>GreenDaoCollector 没有考虑注解中 <code> boolean createInDb() default true;</code> 等方法</li>
+<li>GreenDao存在一些限制，例如不支持Kotlin，GreenDaoCollector 采用了一个取巧的方案来甄别排除不支持的类</li>
+<li>越精密的机器越容易出现故障，对于复杂的机制也是如此</li>
+</ul>
+<p><em>作者按：这一取巧的方案为：使用GreenDao时一般会为Entity生成相应的构造函数和Getter、Setter，追加的构造函数代码会被 <code>@Generated</code> 注解，基于此排除不支持的类，但请注意这一行为可以被关闭而造成误判。</em></p>
+<p>很显然，该方案将承受巨大的风险，<strong>它仿刻了GreenDao的结果，但采用了不同的机制</strong> ，出现问题的机率会大增！</p>
+<h2 id="渐入佳境插件魔改">渐入佳境—插件魔改</h2>
+<blockquote>
+<p>莫非命也，顺受其正，是故知命者不立乎岩墙之下。尽其道而死者，正命也；桎梏死者，非正命也。</p>
+<p>防祸于先而不致于后伤情。知而慎行，君子不立于危墙之下，焉可等闲视之</p>
+<p>— 《孟子》</p>
+</blockquote>
+<p>此时我们已经充分意识到第一个方案的风险，让我们来思考第二个方案，并做出对比。</p>
+<p>您一定知道：GreenDao plugin 提供了两个 Gradle Task：</p>
+<ul>
+<li>greendaoPrepare</li>
+<li>greendao</li>
+</ul>
+<p><em>作者按：GreenDao的插件并未开源，我们选择尊重GreenDao的团队，文中不讨论通过反编译才能得到的信息</em></p>
+<h3 id="窥一斑而见全豹分析其设计">窥一斑而见全豹—分析其设计</h3>
+<p>如果您先前了解过Gradle Plugin，那一定知道Gradle的Task均有其输入和输出。</p>
+<p>而顾名思义，<code>greendaoPrepare</code> 一定是一个准备工作，将它的输出做为 <code>greendao</code> Task的输入，</p>
+<p>结合 GreenDaoCollector 项目中的sample可以获知，其输出为：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// 相对路径：build/cache/greendao-candidates.list</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>1649475279008</span></span>
+<span class="line"><span>{略去}/GreenDaoCollector/app/src/main/java/osp/leobert/android/gdc/entity/JavaDemoEntity.java</span></span>
+<span class="line"><span>{略去}/GreenDaoCollector/app/src/main/java/osp/leobert/android/gdc/entity/JavaDemoEntityTemp.java</span></span></code></pre>
+<p>并且您一定注意到了，<code>JavaDemoEntityTemp</code> 已经被全文注释</p>
+<p>从结果来看， <code>greendaoPrepare</code> 一定不是 <strong>基于编译或者基于AST</strong> 的方案，它必然是一个从源码文件中 <strong>快速筛选</strong> 可能存在Entity的方案，用以减少 <code>greendao</code> Task
+的性能开销，可以很轻易的推断出 <strong>通过字符串匹配</strong> 实现这一功能。</p>
+<p>言归正传，您一定知道：gradle借助pom文件实现library依赖管理，通过greendao plugin 的pom文件可知： 插件依赖 <code>greendao-code-modifier</code>。</p>
+<p><code>greendao-code-modifier</code> 同样未开源，通过pom文件分析其依赖：</p>
+<ul>
+<li><a href="https://github.com/greenrobot/greenDAO">greendao-api</a> 开源，greendao中的注解和基础interface</li>
+<li><a href="https://github.com/greenrobot/greenDAO">greendao-generator</a> 开源，生成源码部分</li>
+<li>greenrobot-jdt，Repackaged version of JDT</li>
+<li><a href="https://github.com/greenrobot/essentials">essentials</a> ， 开源，用于计算Hash</li>
+</ul>
+<p><em>作者按：相关的pom文件，可以于MavenCentral中检索，或者查看gradle/maven
+的本地cache，或者在 <a href="https://github.com/leobert-lan/GreenDaoCollector">GreenDaoCollector 的files目录中</a> 查阅。考虑到阅读体验，重要部分摘录附于文末</em></p>
+<p>至此，我们得出结论：</p>
+<blockquote>
+<p>通过 greendaoPrepare 任务，基于源码内容做字符串检索，快速筛选出可能是Entity的源码，信息输出到文件：greendao-candidates.list</p>
+<p>读取greendao-candidates.list 文件内容，基于jdt分析其源码语法树（AST）</p>
+<p>基于AST和注解解析Entity、主键、索引、约束、关联等</p>
+<p>调用greendao-generator生成源码</p>
+</blockquote>
+<p><em>作者按：<a href="http://www.eclipse.org/jdt/">JDT</a> 是eclipse为Java提供的一组工具，可以实现APT、支持Java editing等</em></p>
+<p>如果您对Intellij中 <strong>与Java、Kotlin源码相关</strong> 的插件开发有一定的了解，对其早期使用的 <code>lombok-ast</code> 和后来使用的 <code>uast</code> 一定不会感到陌生，JDT也是类似的工具。</p>
+<p>言归正传，我们只需要改变 <code>greendao-generator</code> 生成代码的实现即可实现需求！</p>
+<p>阅读 <code>greendao-generator</code> 源码后，您将获悉：它因为 <strong>业务非常复杂</strong> 而使用<a href="https://freemarker.apache.org/">FreeMaker</a>作为模板引擎生成源码。</p>
+<p><strong>难道要使用字节码技术，直接修改加载模板处的源码，增加新的模板</strong>，这么轻易就放大招了吗？</p>
+<h3 id="大象无形利用加载机制做文章">大象无形—利用加载机制做文章</h3>
+<p>可以发现，greenDao对FreeMaker的初始化代码如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> DaoGenerator</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> Configuration </span><span style="color:#B392F0">getConfiguration</span><span style="color:#E1E4E8">(String </span><span style="color:#FFAB70">probingTemplate</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">throws</span><span style="color:#E1E4E8"> IOException {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Configuration config </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Configuration</span><span style="color:#E1E4E8">(Configuration.VERSION_2_3_29);</span></span>
+<span class="line"><span style="color:#E1E4E8">        config.</span><span style="color:#B392F0">setClassForTemplateLoading</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">getClass</span><span style="color:#E1E4E8">(), </span><span style="color:#9ECBFF">"/"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>简单查看源码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public void setClassForTemplateLoading(Class resourceLoaderClass, String basePackagePath) {</span></span>
+<span class="line"><span>    setTemplateLoader(new ClassTemplateLoader(resourceLoaderClass, basePackagePath));</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>/**</span></span>
+<span class="line"><span> * A {@link TemplateLoader} that can load templates from the "classpath". Naturally, it can load from jar files, or from</span></span>
+<span class="line"><span> * anywhere where Java can load classes from. Internally, it uses {@link Class#getResource(String)} or</span></span>
+<span class="line"><span> * {@link ClassLoader#getResource(String)} to load templates.</span></span>
+<span class="line"><span> */</span></span>
+<span class="line"><span>public class ClassTemplateLoader extends URLTemplateLoader {</span></span>
+<span class="line"><span>//ignore 看类注释</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>如果您了解 <code>Class.getResource(String name)</code> 方法，并且对打包有了解，则可以得出结论：</p>
+<blockquote>
+<p>关键点在于 <code>ClassLoader#getResource</code> 并且存在 <code>Parent-delegate</code> 机制。</p>
+<p><strong>只需要在plugin中增加同名模板，在plugin被运行时，该模板将被先加载</strong>。</p>
+</blockquote>
+<p><em>作者按：此处不再展开，否则十篇文章也写不完。</em></p>
+<p><strong>实现目标只需要两步</strong>：</p>
+<ul>
+<li>新建插件，通过继承或者使用组合，直接使用GreenDao插件逻辑，<em>选用组合,因为无法继承</em></li>
+<li>新增同名模板，并增加相关逻辑用以生成代码，<em>最终选用dao-master模板</em></li>
+</ul>
+<p>重点代码如下： <em>具体代码可参考 <a href="https://github.com/leobert-lan/GreenDaoCollector">GreenDaoCollector</a> 中的 greendao-plugin-wrapper 部分</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>//插件</span></span>
+<span class="line"><span>class GreenDaoPluginWrapper : Plugin&#x3C;Project> {</span></span>
+<span class="line"><span>    private val wrapper: Plugin&#x3C;Project> = Greendao3GradlePlugin()</span></span>
+<span class="line"><span>    override fun apply(project: Project) {</span></span>
+<span class="line"><span>        wrapper.apply(project)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>//模板</span></span>
+<span class="line"><span>/**</span></span>
+<span class="line"><span>* Master of DAO (schema version ${schema.version?c}): knows all DAOs.</span></span>
+<span class="line"><span>*/</span></span>
+<span class="line"><span>public class ${schema.prefix}DaoMaster extends AbstractDaoMaster{</span></span>
+<span class="line"><span>  public static final int SCHEMA_VERSION=${schema.version?c};</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>  // all dao need to create in db, do not modify, created by leobert</span></span>
+<span class="line"><span>  public static final List&#x3C;Class&#x3C;? extends AbstractDao&#x3C;?, ?>>>allDao=new java.util.ArrayList();</span></span>
+<span class="line"><span>  </span></span>
+<span class="line"><span>      static {</span></span>
+<span class="line"><span>  &#x3C;#list schema.entities as entity></span></span>
+<span class="line"><span>  &#x3C;#if!entity.skipCreationInDb></span></span>
+<span class="line"><span>          allDao.add(${entity.classNameDao}.class);</span></span>
+<span class="line"><span>  &#x3C;/#if></span></span>
+<span class="line"><span>  &#x3C;/#list></span></span>
+<span class="line"><span>      }</span></span>
+<span class="line"><span>          </span></span>
+<span class="line"><span>      //其他略</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>读者应该还记得前文的 <code>Entity</code> 注解以及我提到的只言片语，开发者可以自行创建数据库，或者从某处获得数据库直接使用，那么可以通过 <code>boolean createInDb()</code> 等配置 令GreenDao忽略表的创建与删除。</p>
+<p>示例模板中通过 <code>&#x3C;#if!entity.skipCreationInDb></code> 的判断，排除了无需GreenDao协助建表的DAO。但请务必留心，<strong>数据库表升级永远是业务级别的工作</strong>，框架和工具再好，也需要 <strong>根据实际业务进行调整</strong>
+！</p>
+<p>应用插件后效果如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#6A737D">// THIS CODE IS GENERATED BY greenDAO, DO NOT EDIT.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * Master of DAO (schema version 1): knows all DAOs.</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> DaoMaster</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> AbstractDaoMaster</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> SCHEMA_VERSION </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // all dao need to create in db, do not modify, created by leobert</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> List&#x3C;Class&#x3C;</span><span style="color:#F97583">?</span><span style="color:#F97583"> extends</span><span style="color:#E1E4E8"> AbstractDao&#x3C;</span><span style="color:#F97583">?</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">?</span><span style="color:#E1E4E8">>>> allDao </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> java.util.</span><span style="color:#B392F0">ArrayList</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    static</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">        allDao.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(JavaDemoEntityDao.class);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /** Creates underlying database table using DAOs. */</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> createAllTables</span><span style="color:#E1E4E8">(Database </span><span style="color:#FFAB70">db</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">boolean</span><span style="color:#FFAB70"> ifNotExists</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        JavaDemoEntityDao.</span><span style="color:#B392F0">createTable</span><span style="color:#E1E4E8">(db, ifNotExists);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /** Drops underlying database table using DAOs. */</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> dropAllTables</span><span style="color:#E1E4E8">(Database </span><span style="color:#FFAB70">db</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">boolean</span><span style="color:#FFAB70"> ifExists</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        JavaDemoEntityDao.</span><span style="color:#B392F0">dropTable</span><span style="color:#E1E4E8">(db, ifExists);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    //其他略</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="与方案1对比">与方案1对比</h3>
+<p>显而易见，方案2借用了greendao的插件业务逻辑，除了在模板中增加少许内容，再无其他，无论风险性还是简易性均优于方案1。</p>
+<p>模板中基于 <code>&#x3C;#if!entity.skipCreationInDb></code> 判断，收集的dao信息与 <code>createAllTables、dropAllTables</code> 中保持一致！当然，亦可以移除判断，收集所有的dao ，**
+需结合业务做出选择**。</p>
+<p>不具备编译时临时表名冲突检测功能。</p>
+<h2 id="前车之鉴大彻大悟一个错误犯两次">前车之鉴—大彻大悟,一个错误犯两次</h2>
+<blockquote>
+<p>前车已覆，后未知更，何觉时？</p>
+<p>— 《荀子·成相》</p>
+</blockquote>
+<p>这句话讲的是成语前车之鉴，让我们回顾一下：</p>
+<p><strong>导致问题的原因：</strong></p>
+<ul>
+<li>前人采用的数据库升级方案就很危险</li>
+<li>特殊渠道包的更新频次低、时间跨度长，测试覆盖粒度不够细，导致一直未发现问题</li>
+<li><strong>轻易地相信了一个老项目，没有对基建部分进行详细的review</strong></li>
+<li>…</li>
+</ul>
+<p><strong>升级方案丞待解决的问题：</strong></p>
+<ul>
+<li>需要人工维护升级的dao参数，容易遗漏，存在风险</li>
+<li>restore时的效率问题</li>
+<li>临时表名无形中产生的制约</li>
+</ul>
+<p><strong>采用的手段</strong></p>
+<p>使用了 <code>APT</code> 和 <code>包装插件替换模板</code> 两种技术手段，为一个 <strong>非最佳的数据库表升级方案</strong> 解决了 <strong>需要人工维护参数</strong> 的问题。</p>
+<p>显而易见，最佳的实践方案应当为：</p>
+<blockquote>
+<p>替换一套健壮、高效的数据库升级方案: 自动收集需要升级的表 — 排除无效迁移工作提升效率、使用自动化替代人工规避人的错误。同时满足 <strong>可测性</strong></p>
+</blockquote>
+<p>那么立足当下，<strong>方案1、2就是最佳实践了吗</strong>？请重读下面这两句话：</p>
+<ul>
+<li><strong>轻易地相信了一个老项目，没有对基建部分进行详细的review</strong></li>
+<li>Master of DAO (schema version 1000): knows all DAOs.</li>
+</ul>
+<p>同一个错误又犯了一次: <strong>我们轻易地否定了一个老项目，没有对它的代码进行详细的review</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> allDao: </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Class</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">AbstractDao</span><span style="color:#E1E4E8">&#x3C;*, *>>> </span><span style="color:#F97583">=</span><span style="color:#B392F0"> DaoMaster</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    SQLiteDatabase.</span><span style="color:#B392F0">create</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">).</span><span style="color:#B392F0">newSession</span><span style="color:#E1E4E8">().allDaos.</span><span style="color:#B392F0">map</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    it.javaClass</span></span>
+<span class="line"><span style="color:#E1E4E8">}.</span><span style="color:#B392F0">toCollection</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">arrayListOf</span><span style="color:#E1E4E8">())</span></span></code></pre>
+<p><code>DaoMaster</code> 的模板中，为其构造函数实现了所有Dao的注册，无论是否创建表，它们都会被汇总到
+<code>Map&#x3C;Class&#x3C;?>, AbstractDao&#x3C;?, ?>> AbstractDaoSession#entityToDao</code> 中。</p>
+<p>但您需要始终牢记，这是在为一个非最佳方案服务，一旦使用了更好的方案，这一方式将不再适用！</p>
+<h2 id="总结">总结</h2>
+<p>本篇，我们从一个事故开始，展开了问题分析，并提出技术方案，实现方案并进行了知识巩固，通过不断地总结、对比和深度反思扫荡盲区！</p>
+<p>如果单纯的服务于解决问题，这篇博客将不会存在，区区10行代码即可。但三思系列是学习、总结、反思的一种方式，着重于:<strong>问题分析</strong>、<strong>技术积累</strong>、<strong>视野拓展</strong> ，看完这一篇，我相信你收获的内容 <strong>远远超过</strong> 一个bug的解法。</p>
+<h2 id="附">附</h2>
+<h3 id="项目源码">项目源码</h3>
+<p><a href="https://github.com/greenrobot/greenDAO">GreenDao</a></p>
+<p>作为数据库版本升级方案示例的： <a href="https://github.com/yuweiguocn/GreenDaoUpgradeHelper">GreenDaoUpgradeHelper</a></p>
+<p>Sample代码，APT, Plugin 及部分资料均开源 ：<a href="https://github.com/leobert-lan/GreenDaoCollector">GreenDaoCollector</a></p>
+<h3 id="pom文件摘要">pom文件摘要</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"><span style="color:#6A737D">&#x3C;!--greendao-gradle-plugin-3.3.0.pom--></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>org.greenrobot&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>greendao-gradle-plugin&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>3.3.0&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">>greenDAO Gradle Plugin&#x3C;/</span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">description</span><span style="color:#E1E4E8">>Gradle Plugin for greenDAO, the light and fast ORM for Android&#x3C;/</span><span style="color:#85E89D">description</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">url</span><span style="color:#E1E4E8">>https://github.com/greenrobot/greenDAO&#x3C;/</span><span style="color:#85E89D">url</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#6A737D">    &#x3C;!--  略--></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>org.greenrobot&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>greendao-code-modifier&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>3.3.0&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">>compile&#x3C;/</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#6A737D">&#x3C;!--    略--></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    &#x3C;!--greendao-code-modifier-3.3.0.pom--></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>org.greenrobot&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>greendao-code-modifier&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>3.3.0&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">>greenDAO Code Modifier&#x3C;/</span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">description</span><span style="color:#E1E4E8">>Code modifier for greenDAO, the light and fast ORM for Android&#x3C;/</span><span style="color:#85E89D">description</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">url</span><span style="color:#E1E4E8">>https://github.com/greenrobot/greenDAO&#x3C;/</span><span style="color:#85E89D">url</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#6A737D">    &#x3C;!--  略--></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>org.greenrobot&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>greendao-api&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>3.3.0&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">>compile&#x3C;/</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>org.greenrobot&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>greendao-generator&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>3.3.0&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">>compile&#x3C;/</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>org.greenrobot&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>greenrobot-jdt&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>3.20.0&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">>compile&#x3C;/</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">>org.greenrobot&#x3C;/</span><span style="color:#85E89D">groupId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">>essentials&#x3C;/</span><span style="color:#85E89D">artifactId</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">>3.0.0-RC1&#x3C;/</span><span style="color:#85E89D">version</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">>compile&#x3C;/</span><span style="color:#85E89D">scope</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">dependency</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#6A737D">&#x3C;!--  略--></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">dependencies</span><span style="color:#E1E4E8">></span></span></code></pre></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

@@ -1,0 +1,764 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="三思系列view体系认知一内容是如何正确被展现出来的视觉呈现概览">三思系列：View体系认知(一)，内容是如何正确被展现出来的—视觉呈现概览</h1>
+<h2 id="前言">前言</h2>
+<blockquote>
+<p>这是View体系认知子系列的第一篇，这一篇会探知Android中，是通过<code>怎么的设计</code>
+让视图正确呈现在屏幕上的。</p>
+</blockquote>
+<p><a href="https://leobert-lan.github.io/info/about_sansi_series.html">关于三思系列</a></p>
+<p><a href="https://github.com/leobert-lan/Blog/blob/main/info/%E5%85%B3%E4%BA%8EView%E7%B3%BB%E5%88%97.md">关于View系列</a>
+极力建议读者了解一下 <code>为什么撰写这个系列</code></p>
+<p>考虑到博客不适合做大量的代码展现，我会以 WorkShop 的形式展现这些代码。<a href="https://github.com/leobert-lan/ViewWorkShop">链接</a></p>
+<p>我们知道，在GUI编程中，必然存在一套试图体系内容，Android中也有一套，抛开掉底层内容，和Compose中的内容， 我们这一篇，一同探究下 <code>Framework中</code>，View体系 <code>如何做视觉呈现</code>。</p>
+<hr>
+<p>补充：2021-02-22</p>
+<p>感谢读者 <code>鲁班贼六</code>的建议，补充内容导图</p>
+<p>这篇文章篇幅较长，在 View 的 measure 机制上花费了不少篇幅。本文尝试先抛开 <code>Android已有知识体系</code>，模拟 <code>从现实情况思考</code>，以建立认知体系的情况。</p>
+<p>所以文章的内容编排和导图有一定出入。</p>
+<p><img  src="/_astro/display_content.Dwl4ty-0_hkqtQ.webp" alt="正确显示一个任意界面" loading="lazy" decoding="async" width="791" height="290"></p>
+<blockquote>
+<p>注:本文中不涉及：</p>
+<ul>
+<li>Canvas绘制基础</li>
+<li>屏幕渲染底层机制</li>
+</ul>
+</blockquote>
+<p>我们会先思考，如何描述一个任意的界面，引出 View 继承体系，和 View-Tree 视图树。</p>
+<p>再逆推一波：当界面被描述后，需要正确显示存在以下三步：</p>
+<ul>
+<li>将 <code>正确内容</code> 绘制在 <code>正确位置</code>
+<ul>
+<li>本文中，Widget的内容绘制略</li>
+</ul>
+</li>
+<li>依据布局规则，确定布局位置。 <strong>注</strong>：<code>显示大小</code> 也可以算作 <code>布局规则</code> 的范畴</li>
+<li>测量显示大小</li>
+</ul>
+<p>我们会先从现实情况出发，思考并设计一种可行的 <code>测量规则</code> ，并不断完善它，重点在于：</p>
+<ul>
+<li><code>理解</code> 这种设计是如何 <code>演化</code> 得来的</li>
+<li><code>明白</code> 测量本身就和 <code>布局规则</code> 有关，<code>布局规则</code> 会影响到测量过程</li>
+</ul>
+<p>如果读者对 某些内容 已经打下 坚实的基础，建议 选择性泛读。</p>
+<hr>
+<h2 id="如何描述一个任意的界面">如何描述一个任意的界面</h2>
+<p>假如我们现在对Android的内容一无所知，如何<code>描述</code> 一个 <code>任意的界面</code>。</p>
+<ul>
+<li>无论我们要达成什么效果，必然存在<code>一个虚拟窗体</code>，和物理屏幕相对应</li>
+<li>系统层面抽象的绘制呈现过程，一定需要通过 这个 <code>虚拟窗体</code>，而我们描述的界面内容，会被放在窗体中</li>
+<li>按照 <code>面向对象思想</code> 和 <code>单一职责原则</code>，描述 <code>这个窗体</code> 的类，假定被称为 <code>Window</code>，一定和描述视图的类 <code>不是同一个</code>。假定视图类被称为 <code>View</code></li>
+<li>Window可以获知内部View的信息</li>
+</ul>
+<p>在此基础上，</p>
+<p>方案1：构建一个上帝类，它全知全能，能够 <code>记录</code> 和 <code>表达</code> 任意的”文字”、“图片”、“区块”等信息。</p>
+<p>方案2：构建一个简单类 <code>View</code>，它有方式知道自己多大，并抽象了视图内容绘制，可以在内部放置子 <code>View</code>，并有方式确定如何放置；</p>
+<p>显然，方案1不可取。我们<code>细化方案2</code>.</p>
+<p>此时，我们做出了一个假设：<code>View</code>拥有3个能力</p>
+<ul>
+<li>测算自身大小</li>
+<li>可以放置<code>子View</code>；并知道其所在位置，即拥有 <code>布局能力</code></li>
+<li>准确的知道如何绘制自身所代表的内容</li>
+</ul>
+<p>在此基础上，我们就可以将 <code>任意界面</code> 拆分结构，这个结构可以用 <code>树</code> 来表达。</p>
+<p><a id="id_tree_rule">目前我们约定：</a></p>
+<ul>
+<li>每个 <code>View</code> 只能有 <code>一个</code> 双亲</li>
+<li>作为双亲的 <code>View</code>，仅用来描述 <code>布局信息</code></li>
+<li>实际 <code>可视</code> 、 <code>可交互</code> 的 <code>View</code>， 描述其代表的内容信息</li>
+</ul>
+<p>于是 <code>描述任意界面</code> 的问题，就可以用 <code>描述一棵树</code> 来解决。</p>
+<blockquote>
+<p>注：目前这个约定还很粗糙，但是不影响我们进行问题认知</p>
+</blockquote>
+<blockquote>
+<p>树的存储方法有3种：</p>
+<ul>
+<li>双亲表示法</li>
+<li>孩子表示法</li>
+<li>孩子兄弟表示法</li>
+</ul>
+<p>以及基于以上方法的改进版本</p>
+</blockquote>
+<p>为了更加方便地向上和向下检索，我们使用 <code>双亲孩子表示法</code> 这一改进版本。</p>
+<h3 id="细化方案2viewgroup和widget各司其职">细化方案2，ViewGroup和Widget，各司其职</h3>
+<p>按照我们上面对<a href="#id_tree_rule">树的约定</a></p>
+<p>我们按职责细分：</p>
+<ul>
+<li>
+<p>一部分View 专注于对子View的布局能力，而不再表达 “文字”、“图片”等内容信息，我们将其抽象为子类 <code>ViewGroup</code>。因为没有具体表达
+<code>如何放置子View</code>的 <code>规则</code>，所以它是<code>抽象类</code>。</p>
+</li>
+<li>
+<p>将 <code>非包含子View</code> 的，表达”文字”、“图片”等特定信息的View，归纳为Widget。</p>
+</li>
+</ul>
+<blockquote>
+<p>小结：在上面的阶段性成果中，我们已经细化了方案，用树的形式，描述了界面的结构和内容。
+存在一个预设的ViewGroup，作为树的根节点。</p>
+</blockquote>
+<p>下面我们先给出一些伪代码。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">open</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#E1E4E8"> parent: </span><span style="color:#B392F0">View</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //绘制能力</span></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> open</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onDraw</span><span style="color:#E1E4E8">(canvas: </span><span style="color:#B392F0">Canvas</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //布局能力</span></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> open</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onLayout</span><span style="color:#E1E4E8">(changed: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">, l: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, t: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, r: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, b: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //测量能力</span></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> open</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onMeasure</span><span style="color:#E1E4E8">(widthMeasureSpec: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, heightMeasureSpec: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">abstract</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ViewGroup</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">View</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> children </span><span style="color:#F97583">=</span><span style="color:#B392F0"> arrayListOf</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">View</span><span style="color:#E1E4E8">>()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onLayout</span><span style="color:#E1E4E8">(changed: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">, l: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, t: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, r: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, b: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> addView</span><span style="color:#E1E4E8">(view: </span><span style="color:#B392F0">View</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (view.parent </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#B392F0"> IllegalArgumentException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"view has a parent"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        children.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(view)</span></span>
+<span class="line"><span style="color:#E1E4E8">        view.parent </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> this</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h2 id="测量大小">测量大小</h2>
+<p>接下来我们设计测量大小的能力，</p>
+<p>假定有一个显示文字的View，他可以测算自身的大小，但这有3种可能：</p>
+<ul>
+<li>恰好装下文字内容</li>
+<li>被指定了大小，但和第一种大小不一致，这又分两个情况：
+<ul>
+<li>人为指定的明确值</li>
+<li>被限定的区域，比如无法超过屏幕大小</li>
+</ul>
+</li>
+</ul>
+<p>此时仔细思考一下，对于一个 <code>View-tree</code> 而言,<code>测量</code>每一个节点大小的<code>意义</code>是什么？</p>
+<blockquote>
+<p><code>准确的完成布局</code> 并 <code>完成自身的绘制</code></p>
+</blockquote>
+<p>但是有很重要的一点： <code>屏幕的大小</code>，屏幕的大小是 <code>固定的</code> 、 <code>明确的</code>，这意味着，界面能够单次展示的最大 区域已经固定。</p>
+<p>同理，对于一个有 Parent 的 View，原则上来说，它的展示区域也被限定在 Parent的区域中。</p>
+<p>但是仔细一想，这并 <code>不合理</code> 啊，有一种革命式的交互： <code>滑动</code> ，可以用有限的窗口，展示无限的内容。</p>
+<p>所以，我们先记住 <a id="issue_1">一个情况</a>：</p>
+<blockquote>
+<p>不同类型的ViewGroup，对应着不同的布局特性，他们对待 子View 的态度也是不同的，可以表现为</p>
+<ul>
+<li>子View 可以 要求 比自身大 的展示大小，最终满不满足以及如何满足是之后的事情。</li>
+<li>子View 可以 要求 比自身大 的展示大小，但是要了也不给。</li>
+</ul>
+</blockquote>
+<p>这时我们可以总结一个结论，展示和绘制一个内容时，有两组大小需要被考虑：</p>
+<ul>
+<li>内容本身的大小</li>
+<li>用于展示的区域大小</li>
+</ul>
+<p>同样的，当一个 View 或者 ViewGroup，称之为A 被置于 ViewGroup B 中时。</p>
+<p>A的大小就是内容本身的大小，B的大小就是用于展示的区域大小，递归思考之后，整个View-Tree都是这样。</p>
+<p>显然，测量工作从树的 <code>根节点开始</code>，按照经验，可以使用 <code>深度优先</code> 完成整个测量工作。</p>
+<p>我们希望得到的，是每个 View 所对应的 <code>展示区域大小</code>。按照刚才举的例子分析实际情况，我们可以用三种方式来指定View的展示大小：</p>
+<ul>
+<li>一个明确值</li>
+<li>相对值：刚好能够放下它的内容 — <code>wrap_content</code></li>
+<li>相对值：撑满 Parent 的空间 — <code>match_parent</code></li>
+</ul>
+<p>并在测量时，得到准确的结果。</p>
+<p>我们再思考这几个取值场景：</p>
+<p>对于Child而言，</p>
+<ul>
+<li>设置了 展示大小为 <code>明确值</code>，毋庸置疑，测量时一定可以得到这个明确值</li>
+<li>设置了 展示大小为 <code>match_parent</code>, 因为测量是从 Parent 到 Child， 所以，<code>对于Child</code> 而言,只要Parent的测量工作已经完成， 即 <code>Parent</code> 已经测算出自己的 <code>精确大小</code>，
+那么Child使用 <code>match_parent</code> 是可以得到明确值的。但如果Parent没有完成测算，我们先不思考这个问题</li>
+<li>设置了 <code>wrap_content</code>，显然，要先测算出 <code>其内容</code> 的大小，才能得到 <code>显示区域</code> 的 <code>明确值</code></li>
+</ul>
+<blockquote>
+<p>注 上面这一段内容，非常重要，值得仔细思考。另：上述的内容中，我们先忽略掉 <code>可能存在</code> 的 <code>内边距</code>。</p>
+</blockquote>
+<p>刚才我们还有一些没有考虑的内容：</p>
+<blockquote>
+<p>Parent 没有完成测算，Child 设置了 <code>match_parent</code></p>
+</blockquote>
+<p>那么，至少我们可以确定 Parent <code>不可能</code> 指定了 <code>显示大小</code> 的 <code>明确值</code>，至于其他的情况，需要用数学归纳法 <code>讨论嵌套</code>，我们换个角度思考。</p>
+<p><code>根节点</code> 的ViewGroup，我们可以得到 <code>显示大小</code> 的 <code>明确值</code>，按照刚才的讨论，其子View，使用 <code>match_parent</code> 或者 <code>明确值</code> 时，结合Parent 信息，可以得到 <code>明确值</code>；</p>
+<p>只有当其为 <code>wrap_content</code> 时，需要继续测量其内容，再根据内容的大小，确定自身显示大小。</p>
+<p>可以确定，当树中的一个节点为<code>wrap_content</code> 时，将<code>该节点</code>作为根节点，取出子树，当该子树的 <code>所有分支</code> 都能够找到满足 <code>条件R</code> 的节点时， 该根节点能够确定自身需要的显示大小。</p>
+<blockquote>
+<p><a id="issue_1_rule">条件R</a>为：该View</p>
+<ul>
+<li>指定 显示大小为 <code>match_parent</code> 或者 <code>明确值</code></li>
+<li>或者其 <code>布局要求</code> 能够让 parent 大小撑满至一个 <code>明确值</code></li>
+</ul>
+</blockquote>
+<p><strong>上面这一段内容有点长，适当消化一下</strong></p>
+<p>此时，我们可以做出一点约定：</p>
+<blockquote>
+<p>Parent 多承担一点责任，结合自身情况，和Child情况，先确定一下，Child是否可以得到明确的显示大小，</p>
+<ul>
+<li>如果不可以，就将自身信息传递给Child，让它向下继续处理</li>
+<li>如果可以，那么 Parent 可以得出Child的显示大小, <strong>注意</strong> <code>不同类型的Parent</code>，应该有<code>不同的计算方式</code>。 这在<a href="#issue_1">前面</a>提到过</li>
+</ul>
+</blockquote>
+<h3 id="确定测量规则">确定测量规则</h3>
+<p>经过上面的思考，我们可以拟定测量规则了。</p>
+<ol>
+<li>测量必然从一个<code>明确自身展示大小</code> 的 ViewGroup 开始</li>
+<li>对于一个<code>子View</code> — <code>A</code>，当其 <code>Parent</code> — <code>P</code> 判断出 <code>A</code>
+<ul>
+<li>可以得到 <code>明确的</code> 显示大小时，将 该信息： <code>可准确得到结果</code> + <code>结果值</code> 传递给 子View A； <em>注意，结果值是 Parent 按照自身规则计算的，和子View要求的可能不一致</em></li>
+<li>否则，将 P 的 <code>自身大小</code> 和 <code>你还需要继续测量以得到结果</code> 的信息传递给 子View A。</li>
+</ul>
+</li>
+<li>对于一个Parent，如果它是 <code>wrap_content</code>，则需要在子View 的显示大小都确定时，再计算自身大小。</li>
+<li>只要View-Tree中还 存在 <code>未确定</code> 自身 显示大小 的节点。就需要从根节点开始，继续遍历处理测量。</li>
+</ol>
+<p>让表达更加准确一些，<code>可准确得到结果</code> 用 <code>EXACTLY</code> 代替。 <code>你还需要继续测量以得到结果</code> 用 <code>AT_MOST</code> 代替。</p>
+<p>不言自明，<code>AT_MOST</code> 意味着会给定一个最大值。意味着：家族中的直系长辈 已经帮它 限定了人身自由。</p>
+<blockquote>
+<p>方便准确表达，将他们称为 <code>测量模式</code>，简称 <code>mode</code> ：</p>
+<ul>
+<li><code>EXACTLY</code>：Parent 已经为 Child 决定了显示大小，按照规则，Child 应当使用 Parent 给定的值</li>
+<li><code>AT_MOST</code>：Parent 已经为 Child 决定了最大显示大小，按照规则，Child 自行决定使用 <code>最大不超过该值</code> 的显示大小</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>方便表达, 将 <code>显示大小</code> 简称为 <code>size</code></p>
+<p>显示和屏幕像素数量有关，显然，该数量是自然数范畴。size 在绝大多数情况下，可以用 Int值 准确表达，极少数情况下，大到越界，但极不合理。</p>
+</blockquote>
+<p>若使用对象封装 <code>mode</code> 和 <code>size</code>，会出现大量的对象创建，这一点都不优雅，可以将 Int 分为 <code>高位区域</code> 和 <code>低位区域</code> 分别表达 <code>mode</code> 和 <code>size</code>
+<strong>这也是Android中采用的设计</strong></p>
+<p>考虑到 <code>测量模式</code> 中，还可能存在 Parent 不约束 Child 的情况。</p>
+<p>我们使用一个 <code>32位Int</code> 的 <code>高2位</code> 标识 <code>mode</code>，<code>低30位</code> 标识 <code>size</code></p>
+<h3 id="进一步优化以减少遍历">进一步优化以减少遍历</h3>
+<p>规则的第4点中，是通过 <code>迭代</code> 的方式，完成整个树中所有节点的测量，按照实际分析，我们可以用 <code>递归</code>
+来简化。</p>
+<blockquote>
+<p>我们约定, 对于一个 设置了 <code>wrap_content</code> 的尾端节点，如果它没有实质的内容物，我们也认为它 <code>已经测量出了</code> 需要的展示大小</p>
+</blockquote>
+<p>那么在一次递归中，我们就可以完成整个树的测量。</p>
+<p>在 <code>递</code> 的过程中，仅有设置为 <code>wrap_content</code> 的 Parent角色 无法完成准确测量，而 <code>尾端节点</code> 必然完成了自身的测量。</p>
+<p>开始 <code>归</code> 的过程，我们可以确定，每 <code>归</code> 到一个 Parent，</p>
+<ul>
+<li>已经完成测量的继续 <code>归</code>，</li>
+<li>没有完成测量的，它的 Children 都完成了测量，则按照 <code>wrap_content</code> 的定义，它必然可以完成测量，然后继续 <code>归</code></li>
+</ul>
+<p>最终整棵树完成测量。</p>
+<h3 id="完善规则再添加一种mode">完善规则，再添加一种mode</h3>
+<p>前面我们提到了 <code>滑动</code> 这一交互形式，可以利用 <code>有限的</code> 展示空间，显示 <code>无限的</code> 内容。</p>
+<p>即，我们会遇到一些场景，Child 并不会收到 Parent 的制约。更加准确的说，是 <code>内容</code> 不受到 <code>呈现主体</code> 在显示空间上的制约。</p>
+<p>而这个场景，超越了 <code>EXACTLY</code> 和 <code>AT_MOST</code> 两种测量模式的功能，我们还需要一种配套的测量模式：</p>
+<p><code>UNSPECIFIED</code>，即 Parent 不约束 Child，Child按照自身情况，自行测算。</p>
+<blockquote>
+<p>注：对于 <code>UNSPECIFIED</code> ，<code>不要</code> 强行结合场景，尤其是 <code>不要</code> 利用 <code>warp_content</code>或者 <code>match_parent</code>的概念去理解。他们虽然有一些关联，
+但并不是一个范畴的内容，也不可以相互推导。</p>
+<p>因此，我单独将其拎了出来。</p>
+</blockquote>
+<h3 id="编码以验证">编码以验证</h3>
+<blockquote>
+<p>参考Android中FrameLayout的布局规则，它对于Child要求的大小为：
+子View 可以 要求 比自身大 的展示大小，但是超过自身显示范围的不予显示。
+所以，不 按照自身情况 调整 子View的 size</p>
+</blockquote>
+<p>先给View添加一些必要的内容：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">open</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    companion</span><span style="color:#F97583"> object</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> layout_width </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "layout_width"</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> layout_height </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "layout_height"</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> debug </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#E1E4E8"> tag: </span><span style="color:#B392F0">Any</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#E1E4E8"> parent: </span><span style="color:#B392F0">View</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> layoutParams: </span><span style="color:#B392F0">MutableMap</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#B392F0"> mutableMapOf</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#E1E4E8"> measuredWidth: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> WRAP_CONTENT</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#E1E4E8"> measuredHeight: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> WRAP_CONTENT</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> heightMeasuredSize: </span><span style="color:#B392F0">Int</span></span>
+<span class="line"><span style="color:#F97583">        get</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> android.view.View.MeasureSpec.</span><span style="color:#B392F0">getSize</span><span style="color:#E1E4E8">(measuredHeight)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> widthMeasuredSize: </span><span style="color:#B392F0">Int</span></span>
+<span class="line"><span style="color:#F97583">        get</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> android.view.View.MeasureSpec.</span><span style="color:#B392F0">getSize</span><span style="color:#E1E4E8">(measuredWidth)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> heightMeasureMode: </span><span style="color:#B392F0">Int</span></span>
+<span class="line"><span style="color:#F97583">        get</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> android.view.View.MeasureSpec.</span><span style="color:#B392F0">getMode</span><span style="color:#E1E4E8">(measuredHeight)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> widthMeasureMode: </span><span style="color:#B392F0">Int</span></span>
+<span class="line"><span style="color:#F97583">        get</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> android.view.View.MeasureSpec.</span><span style="color:#B392F0">getMode</span><span style="color:#E1E4E8">(measuredWidth)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> measured: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> isMeasured</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> measured</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //绘制能力</span></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> open</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onDraw</span><span style="color:#E1E4E8">(canvas: </span><span style="color:#B392F0">Canvas</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //布局能力</span></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> open</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onLayout</span><span style="color:#E1E4E8">(changed: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">, l: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, t: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, r: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, b: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> measure</span><span style="color:#E1E4E8">(widthMeasureSpec: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, heightMeasureSpec: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">measured) {</span></span>
+<span class="line"><span style="color:#B392F0">            onMeasure</span><span style="color:#E1E4E8">(widthMeasureSpec, heightMeasureSpec)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //测量能力</span></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> open</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onMeasure</span><span style="color:#E1E4E8">(widthMeasureSpec: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, heightMeasureSpec: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">        setMeasuredDimensionRaw</span><span style="color:#E1E4E8">(widthMeasureSpec, heightMeasureSpec)</span></span>
+<span class="line"><span style="color:#B392F0">        debugMeasureInfo</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> debugMeasureInfo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (debug) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">                "view-debug"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">                "</span><span style="color:#79B8FF">$tag</span><span style="color:#9ECBFF"> has measured: </span><span style="color:#79B8FF">$measured</span><span style="color:#9ECBFF">, w mode:${</span><span style="color:#B392F0">getMode</span><span style="color:#9ECBFF">(widthMeasureMode)}, w size: </span><span style="color:#79B8FF">$widthMeasuredSize</span><span style="color:#9ECBFF"> "</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#9ECBFF">                        "h mode:${</span><span style="color:#B392F0">getMode</span><span style="color:#9ECBFF">(heightMeasureMode)}, h size: </span><span style="color:#79B8FF">$heightMeasuredSize</span><span style="color:#9ECBFF"> "</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> setMeasuredDimension</span><span style="color:#E1E4E8">(measuredWidth: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, measuredHeight: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">        setMeasuredDimensionRaw</span><span style="color:#E1E4E8">(measuredWidth, measuredHeight)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> setMeasuredDimensionRaw</span><span style="color:#E1E4E8">(measuredWidth: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, measuredHeight: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.measuredWidth </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> measuredWidth</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.measuredHeight </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> measuredHeight</span></span>
+<span class="line"><span style="color:#E1E4E8">        measured </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (debug) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">                "view-debug"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">                "</span><span style="color:#79B8FF">$tag</span><span style="color:#9ECBFF"> mark has measured: </span><span style="color:#79B8FF">$measured</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>添加一个FrameLayout：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> FrameLayout</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">ViewGroup</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onLayout</span><span style="color:#E1E4E8">(changed: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">, l: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, t: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, r: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, b: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onMeasure</span><span style="color:#E1E4E8">(widthMeasureSpec: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, heightMeasureSpec: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        //handle horizon</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> widthMode </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> View.MeasureSpec.</span><span style="color:#B392F0">getMode</span><span style="color:#E1E4E8">(widthMeasureSpec)</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> widthSize </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> View.MeasureSpec.</span><span style="color:#B392F0">getSize</span><span style="color:#E1E4E8">(widthMeasureSpec)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> wMeasured </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> hMeasured </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#F97583">        when</span><span style="color:#E1E4E8"> (widthMode) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            View.MeasureSpec.EXACTLY </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">                // widthSize 即为Parent 为此决定的准确值，直接采用</span></span>
+<span class="line"><span style="color:#E1E4E8">                wMeasured </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">            View.MeasureSpec.AT_MOST </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">                // 需要再次测量，但可以保存该信息了</span></span>
+<span class="line"><span style="color:#E1E4E8">                measuredWidth </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> widthMeasureSpec</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            else</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                throw</span><span style="color:#B392F0"> IllegalStateException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"暂不支持测量模式：</span><span style="color:#79B8FF">$widthMode</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //同理处理 vertical方向</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> heightMode </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> View.MeasureSpec.</span><span style="color:#B392F0">getMode</span><span style="color:#E1E4E8">(heightMeasureSpec)</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> heightSize </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> View.MeasureSpec.</span><span style="color:#B392F0">getSize</span><span style="color:#E1E4E8">(heightMeasureSpec)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        when</span><span style="color:#E1E4E8"> (heightMode) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            View.MeasureSpec.EXACTLY </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                hMeasured </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">            View.MeasureSpec.AT_MOST </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                measuredHeight </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> heightMeasureSpec</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            else</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                throw</span><span style="color:#B392F0"> IllegalStateException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"暂不支持测量模式：</span><span style="color:#79B8FF">$widthMode</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (hMeasured </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> wMeasured) {</span></span>
+<span class="line"><span style="color:#B392F0">            setMeasuredDimension</span><span style="color:#E1E4E8">(widthMeasureSpec, heightMeasureSpec)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        children.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            val</span><span style="color:#E1E4E8"> childWidthMeasureSpec </span><span style="color:#F97583">=</span><span style="color:#B392F0"> makeMeasureSpec</span><span style="color:#E1E4E8">(widthMode, widthSize, it.layoutWidth)</span></span>
+<span class="line"><span style="color:#F97583">            val</span><span style="color:#E1E4E8"> childHeightMeasureSpec </span><span style="color:#F97583">=</span><span style="color:#B392F0"> makeMeasureSpec</span><span style="color:#E1E4E8">(heightMode, heightSize, it.layoutHeight)</span></span>
+<span class="line"><span style="color:#E1E4E8">            it.</span><span style="color:#B392F0">measure</span><span style="color:#E1E4E8">(childWidthMeasureSpec, childHeightMeasureSpec)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">hMeasured </span><span style="color:#F97583">||</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">wMeasured) {</span></span>
+<span class="line"><span style="color:#F97583">            var</span><span style="color:#E1E4E8"> w </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#F97583">            var</span><span style="color:#E1E4E8"> h </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#E1E4E8">            children.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">wMeasured)</span></span>
+<span class="line"><span style="color:#E1E4E8">                    w </span><span style="color:#F97583">=</span><span style="color:#B392F0"> maxOf</span><span style="color:#E1E4E8">(w, it.widthMeasuredSize)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">hMeasured)</span></span>
+<span class="line"><span style="color:#E1E4E8">                    h </span><span style="color:#F97583">=</span><span style="color:#B392F0"> maxOf</span><span style="color:#E1E4E8">(h, it.heightMeasuredSize)</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (wMeasured)</span></span>
+<span class="line"><span style="color:#E1E4E8">                w </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> widthSize</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (hMeasured)</span></span>
+<span class="line"><span style="color:#E1E4E8">                h </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> heightSize</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">            setMeasuredDimension</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                View.MeasureSpec.</span><span style="color:#B392F0">makeMeasureSpec</span><span style="color:#E1E4E8">(w, widthMode),</span></span>
+<span class="line"><span style="color:#E1E4E8">                View.MeasureSpec.</span><span style="color:#B392F0">makeMeasureSpec</span><span style="color:#E1E4E8">(h, heightMode),</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#B392F0">allChildHasMeasured</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#B392F0"> IllegalStateException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"child 未全部完成测量"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        debugMeasureInfo</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> makeMeasureSpec</span><span style="color:#E1E4E8">(mode: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, size: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, childSize: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">        // 参考Android中FrameLayout的布局规则，它对于Child要求的大小为：</span></span>
+<span class="line"><span style="color:#6A737D">        // 子View 可以 要求 比自身大 的展示大小，但是超过自身显示范围的不予显示。</span></span>
+<span class="line"><span style="color:#6A737D">        // 所以，不 按照自身情况 调整 子View的 size</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> childMode </span><span style="color:#F97583">=</span><span style="color:#F97583"> when</span><span style="color:#E1E4E8"> (childSize) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            WRAP_CONTENT </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> View.MeasureSpec.AT_MOST</span></span>
+<span class="line"><span style="color:#F97583">            else</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> View.MeasureSpec.EXACTLY</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> childSize2 </span><span style="color:#F97583">=</span><span style="color:#F97583"> when</span><span style="color:#E1E4E8"> (childSize) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            WRAP_CONTENT </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> size</span></span>
+<span class="line"><span style="color:#E1E4E8">            MATCH_PARENT </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> size</span></span>
+<span class="line"><span style="color:#F97583">            else</span><span style="color:#F97583"> -></span><span style="color:#E1E4E8"> childSize</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> View.MeasureSpec.</span><span style="color:#B392F0">makeMeasureSpec</span><span style="color:#E1E4E8">(childSize2, childMode)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> allChildHasMeasured</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> children.</span><span style="color:#B392F0">iterator</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">        while</span><span style="color:#E1E4E8"> (i.</span><span style="color:#B392F0">hasNext</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">i.</span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">isMeasured</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>以上代码 结合前面的规则 理解下即可</p>
+<p>目前还没有到LayoutParam的阶段，我们将 必要的布局信息 声明在 map 中存储。</p>
+<p>我们适当添加添加一些助手类，以建立View-tree</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">enum</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Mode</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> v: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Measure specification mode: The parent has not imposed any constraint</span></span>
+<span class="line"><span style="color:#6A737D">     * on the child. It can be whatever size it wants.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#B392F0">    UNSPECIFIED</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8"> shl </span><span style="color:#79B8FF">30</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Measure specification mode: The parent has determined an exact size</span></span>
+<span class="line"><span style="color:#6A737D">     * for the child. The child is going to be given those bounds regardless</span></span>
+<span class="line"><span style="color:#6A737D">     * of how big it wants to be.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#B392F0">    EXACTLY</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8"> shl </span><span style="color:#79B8FF">30</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * Measure specification mode: The child can be as large as it wants up</span></span>
+<span class="line"><span style="color:#6A737D">     * to the specified size.</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#B392F0">    AT_MOST</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8"> shl </span><span style="color:#79B8FF">30</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> A</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    companion</span><span style="color:#F97583"> object</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        fun</span><span style="color:#B392F0"> getMode</span><span style="color:#E1E4E8">(v: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Mode</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            Mode.</span><span style="color:#B392F0">values</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (it.v </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> v)</span></span>
+<span class="line"><span style="color:#F97583">                    return</span><span style="color:#E1E4E8"> it</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#B392F0"> IllegalStateException</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>以上代码不言自明</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">typealias</span><span style="color:#B392F0"> Decor</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (v: </span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> Unit</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> MATCH_PARENT: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> android.view.ViewGroup.LayoutParams.MATCH_PARENT</span></span>
+<span class="line"><span style="color:#F97583">val</span><span style="color:#E1E4E8"> WRAP_CONTENT </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> android.view.ViewGroup.LayoutParams.WRAP_CONTENT</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> View.layoutWidth: </span><span style="color:#B392F0">Int</span></span>
+<span class="line"><span style="color:#F97583">    get</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> layoutParams[View.layout_width] ?: WRAP_CONTENT</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    set</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">value</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        layoutParams[View.layout_width] </span><span style="color:#F97583">=</span><span style="color:#F97583"> value</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> View.layoutHeight: </span><span style="color:#B392F0">Int</span></span>
+<span class="line"><span style="color:#F97583">    get</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> layoutParams[View.layout_height] ?: WRAP_CONTENT</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    set</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">value</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        layoutParams[View.layout_height] </span><span style="color:#F97583">=</span><span style="color:#F97583"> value</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> root</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">ViewGroup</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> FrameLayout</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.layoutWidth </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1080</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.layoutHeight </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1920</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">inline</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> ViewGroup</span><span style="color:#E1E4E8">?.</span><span style="color:#B392F0">frameLayout</span><span style="color:#E1E4E8">(decor: </span><span style="color:#B392F0">Decor</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">FrameLayout</span><span style="color:#E1E4E8">>): </span><span style="color:#B392F0">ViewGroup</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> child </span><span style="color:#F97583">=</span><span style="color:#B392F0"> FrameLayout</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    child.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8">(decor)</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">?.</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">addView</span><span style="color:#E1E4E8">(child) } ?: child</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">inline</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> ViewGroup</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">view</span><span style="color:#E1E4E8">(decor: </span><span style="color:#B392F0">Decor</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">View</span><span style="color:#E1E4E8">>): </span><span style="color:#B392F0">ViewGroup</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> child </span><span style="color:#F97583">=</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    child.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8">(decor)</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8"> { </span><span style="color:#B392F0">addView</span><span style="color:#E1E4E8">(child) }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>用以实现树结构描述的助手，不言自明</p>
+<p>偷个懒，不设计单元测试了，构建一个结构：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ViewTest</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @Test</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> testMeasure</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> tree </span><span style="color:#F97583">=</span><span style="color:#B392F0"> root</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">frameLayout</span><span style="color:#E1E4E8"> { v1 </span><span style="color:#F97583">-></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            v1.tag </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "v1"</span></span>
+<span class="line"><span style="color:#E1E4E8">            v1.layoutWidth </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> MATCH_PARENT</span></span>
+<span class="line"><span style="color:#E1E4E8">            v1.layoutHeight </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> WRAP_CONTENT</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            v1.</span><span style="color:#B392F0">frameLayout</span><span style="color:#E1E4E8"> { frameLayout </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#E1E4E8">                frameLayout.tag </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "v2"</span></span>
+<span class="line"><span style="color:#E1E4E8">                frameLayout.layoutWidth </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> MATCH_PARENT</span></span>
+<span class="line"><span style="color:#E1E4E8">                frameLayout.layoutHeight </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> WRAP_CONTENT</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                frameLayout.</span><span style="color:#B392F0">view</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    it.tag </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "v3"</span></span>
+<span class="line"><span style="color:#E1E4E8">                    it.layoutWidth </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 200</span></span>
+<span class="line"><span style="color:#E1E4E8">                    it.layoutHeight </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 300</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                frameLayout.</span><span style="color:#B392F0">frameLayout</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    it.tag </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "v4"</span></span>
+<span class="line"><span style="color:#E1E4E8">                    it.layoutWidth </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> WRAP_CONTENT</span></span>
+<span class="line"><span style="color:#E1E4E8">                    it.layoutHeight </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> WRAP_CONTENT</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        tree.tag </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "root"</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        tree.</span><span style="color:#B392F0">measure</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            View.MeasureSpec.</span><span style="color:#B392F0">makeMeasureSpec</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1080</span><span style="color:#E1E4E8">, View.MeasureSpec.EXACTLY),</span></span>
+<span class="line"><span style="color:#E1E4E8">            View.MeasureSpec.</span><span style="color:#B392F0">makeMeasureSpec</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1920</span><span style="color:#E1E4E8">, View.MeasureSpec.EXACTLY)</span></span>
+<span class="line"><span style="color:#E1E4E8">        )</span></span>
+<span class="line"><span style="color:#B392F0">        assert</span><span style="color:#E1E4E8">(tree </span><span style="color:#F97583">is</span><span style="color:#E1E4E8"> FrameLayout)</span></span>
+<span class="line"><span style="color:#B392F0">        assertEquals</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">, (tree </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> FrameLayout).</span><span style="color:#B392F0">allChildHasMeasured</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>直接看一下日志输出的信息：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">I/TestRunner:</span><span style="color:#9ECBFF"> started:</span><span style="color:#9ECBFF"> testMeasure</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">osp.leobert.blog.code.ViewTest</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">D/view-debug:</span><span style="color:#9ECBFF"> root</span><span style="color:#9ECBFF"> mark</span><span style="color:#9ECBFF"> has</span><span style="color:#9ECBFF"> measured:</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#B392F0">D/view-debug:</span><span style="color:#9ECBFF"> v3</span><span style="color:#9ECBFF"> mark</span><span style="color:#9ECBFF"> has</span><span style="color:#9ECBFF"> measured:</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#B392F0">D/view-debug:</span><span style="color:#9ECBFF"> v3</span><span style="color:#9ECBFF"> has</span><span style="color:#9ECBFF"> measured:</span><span style="color:#79B8FF"> true</span><span style="color:#9ECBFF">,</span><span style="color:#9ECBFF"> w</span><span style="color:#9ECBFF"> mode:EXACTLY,</span><span style="color:#9ECBFF"> w</span><span style="color:#9ECBFF"> size:</span><span style="color:#79B8FF"> 200</span><span style="color:#9ECBFF"> h</span><span style="color:#9ECBFF"> mode:EXACTLY,</span><span style="color:#9ECBFF"> h</span><span style="color:#9ECBFF"> size:</span><span style="color:#79B8FF"> 300</span><span style="color:#E1E4E8"> </span></span>
+<span class="line"><span style="color:#B392F0">D/view-debug:</span><span style="color:#9ECBFF"> v4</span><span style="color:#9ECBFF"> mark</span><span style="color:#9ECBFF"> has</span><span style="color:#9ECBFF"> measured:</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#B392F0">D/view-debug:</span><span style="color:#9ECBFF"> v4</span><span style="color:#9ECBFF"> has</span><span style="color:#9ECBFF"> measured:</span><span style="color:#79B8FF"> true</span><span style="color:#9ECBFF">,</span><span style="color:#9ECBFF"> w</span><span style="color:#9ECBFF"> mode:AT_MOST,</span><span style="color:#9ECBFF"> w</span><span style="color:#9ECBFF"> size:</span><span style="color:#79B8FF"> 0</span><span style="color:#9ECBFF"> h</span><span style="color:#9ECBFF"> mode:AT_MOST,</span><span style="color:#9ECBFF"> h</span><span style="color:#9ECBFF"> size:</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8"> </span></span>
+<span class="line"><span style="color:#B392F0">D/view-debug:</span><span style="color:#9ECBFF"> v2</span><span style="color:#9ECBFF"> mark</span><span style="color:#9ECBFF"> has</span><span style="color:#9ECBFF"> measured:</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#B392F0">D/view-debug:</span><span style="color:#9ECBFF"> v2</span><span style="color:#9ECBFF"> has</span><span style="color:#9ECBFF"> measured:</span><span style="color:#79B8FF"> true</span><span style="color:#9ECBFF">,</span><span style="color:#9ECBFF"> w</span><span style="color:#9ECBFF"> mode:EXACTLY,</span><span style="color:#9ECBFF"> w</span><span style="color:#9ECBFF"> size:</span><span style="color:#79B8FF"> 1080</span><span style="color:#9ECBFF"> h</span><span style="color:#9ECBFF"> mode:AT_MOST,</span><span style="color:#9ECBFF"> h</span><span style="color:#9ECBFF"> size:</span><span style="color:#79B8FF"> 300</span><span style="color:#E1E4E8"> </span></span>
+<span class="line"><span style="color:#B392F0">D/view-debug:</span><span style="color:#9ECBFF"> v1</span><span style="color:#9ECBFF"> mark</span><span style="color:#9ECBFF"> has</span><span style="color:#9ECBFF"> measured:</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#B392F0">D/view-debug:</span><span style="color:#9ECBFF"> v1</span><span style="color:#9ECBFF"> has</span><span style="color:#9ECBFF"> measured:</span><span style="color:#79B8FF"> true</span><span style="color:#9ECBFF">,</span><span style="color:#9ECBFF"> w</span><span style="color:#9ECBFF"> mode:EXACTLY,</span><span style="color:#9ECBFF"> w</span><span style="color:#9ECBFF"> size:</span><span style="color:#79B8FF"> 1080</span><span style="color:#9ECBFF"> h</span><span style="color:#9ECBFF"> mode:AT_MOST,</span><span style="color:#9ECBFF"> h</span><span style="color:#9ECBFF"> size:</span><span style="color:#79B8FF"> 300</span><span style="color:#E1E4E8"> </span></span>
+<span class="line"><span style="color:#B392F0">D/view-debug:</span><span style="color:#9ECBFF"> root</span><span style="color:#9ECBFF"> has</span><span style="color:#9ECBFF"> measured:</span><span style="color:#79B8FF"> true</span><span style="color:#9ECBFF">,</span><span style="color:#9ECBFF"> w</span><span style="color:#9ECBFF"> mode:EXACTLY,</span><span style="color:#9ECBFF"> w</span><span style="color:#9ECBFF"> size:</span><span style="color:#79B8FF"> 1080</span><span style="color:#9ECBFF"> h</span><span style="color:#9ECBFF"> mode:EXACTLY,</span><span style="color:#9ECBFF"> h</span><span style="color:#9ECBFF"> size:</span><span style="color:#79B8FF"> 1920</span><span style="color:#E1E4E8"> </span></span>
+<span class="line"><span style="color:#B392F0">I/TestRunner:</span><span style="color:#9ECBFF"> finished:</span><span style="color:#9ECBFF"> testMeasure</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">osp.leobert.blog.code.ViewTest</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>考虑到 一组 Parent 和 Child 有9种组合，我们全部验证一下。限于篇幅就不放代码和结果了</p>
+<hr>
+<blockquote>
+<p>小结：上面通过很长一段篇幅，让我们在 <code>抛开Android的知识</code> 的前提下：</p>
+<blockquote>
+<ol>
+<li>思考了如何设计一套系统，用以描述任意的界面</li>
+</ol>
+</blockquote>
+<p>根据经验确定了使用 <code>视图树</code> 的方式，进行界面的描述，并意识到，应用 <code>不同的类</code> 来封装不同的功能，相互配合，完成界面描述工作。</p>
+<blockquote>
+<p>2. 思考了描述尺寸的 <code>两种方式</code> 、<code>三种取值类型</code>，并延伸出 <code>测量</code> <code>视图树</code> 每个节点的 <code>显示大小</code> 问题。</p>
+</blockquote>
+<p>从现实角度出发，得出一种测量方式，并进行了优化，得出结论：</p>
+<ul>
+<li>
+<p>测量过程从 Parent 到 Child。Parent 结合自身情况和 Child的情况，为 Child 决定测量的<code>模式</code> 即 <code>mode</code>， 以及 <code>EXACTLY</code> 模式下的精准值 和 <code>AT_MOST</code> 模式下的 <code>最大值</code> 参考值</p>
+<ul>
+<li>从 Parent 到 Child 表现为：测量的入口为 <code>measure()</code>，其中封装了调用自身<code>onMeasure()</code> 的逻辑, 具体ViewGroup 类覆写 <code>onMeasure()</code> 并调用 Child的 <code>measure()</code> 方法,传递测量过程</li>
+<li>显示大小的 <code>测量</code> 和 <code>布局规则</code> 有关</li>
+</ul>
+</li>
+<li>
+<p>通过一次递归即可测量出视图树每个节点的显示大小</p>
+</li>
+</ul>
+<p>至此，我们对这套测量机制已经有了足够的认知，但是请注意，它还没有被完善。</p>
+</blockquote>
+<h2 id="确定布局位置">确定布局位置</h2>
+<p>在前面，我们思考了一套可行的测量方案，其中我们提到：<a href="#issue_1">一个情况</a></p>
+<p>并且，提出了<a href="#issue_1_rule">条件R</a>, 我们在其中提到了一个概念： <code>布局规则</code></p>
+<p>结合我们的经验，不同的GUI中，都会有布局规则体系。为了解决可能出现的布局需求，均抽象了不同的布局类，以实现不同的规则。</p>
+<p>前面我们也提到了，不同的规则下，ViewGroup 对 子View 的测量是不同的。</p>
+<p>这很合理，<code>测量的目的</code> 是为了 <code>正确布局</code>，不同的布局规则，具有特定的测量规则。</p>
+<h3 id="使用-layoutparams-描述布局规则和信息">使用 LayoutParams 描述布局规则和信息</h3>
+<p>在前面，我们参考Android 建立了 FrameLayout 类，实现了 <code>帧布局</code> 的规则， 当然，这一种规则还不足以处理各种界面布局需求，还有更多的ViewGroup子类 等着我们实现。</p>
+<blockquote>
+<p>换个说法：当 一个View 被 添加到 一个ViewGroup 中时，需要按照该ViewGroup的布局规则，阐述自身的布局信息.
+必要信息不可缺省</p>
+</blockquote>
+<p>显然，</p>
+<ul>
+<li>按照面向对象思想，布局规则簇 应该被封装为类，称之为 <code>LayoutParams</code>。</li>
+<li>按照单一职责原则，不同的布局规则，对应不同的ViewGroup子类，也对应不同的 <code>LayoutParams</code>类，显然这是一一对应的</li>
+<li>按照依赖倒置原则，View 的 layoutParam 依赖于 抽象，而不是某个规则的具体类；</li>
+<li>按照里氏代换原则，LayoutParams的继承关系，和ViewGroup的继承关系应当是对应的；</li>
+</ul>
+<p>按照经验，我们会写出如下代码，一个 <code>必须指定宽高规则</code> 的 <code>ViewGroup.LayoutParams 基类</code>。</p>
+<p>而视图 <code>可以</code> 存在 <code>内、外边距</code>，这可以被认为是 <code>基本规则</code>。</p>
+<p>继续为FrameLayout 加上 <code>重力</code> 规则。</p>
+<p>我们很快写出如下代码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">abstract</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ViewGroup</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">View</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    open</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> LayoutParams</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">var</span><span style="color:#E1E4E8"> width: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">var</span><span style="color:#E1E4E8"> height: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    open</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> MarginLayoutParams</span><span style="color:#E1E4E8">(width: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, height: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">LayoutParams</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">width</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">height</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> leftMargin </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> topMargin </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> rightMargin </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> bottomMargin </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> FrameLayout</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">ViewGroup</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    class</span><span style="color:#B392F0"> LayoutParams</span><span style="color:#E1E4E8">(width: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, height: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">ViewGroup</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">MarginLayoutParams</span><span style="color:#E1E4E8">(width, height) {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> UNSPECIFIED_GRAVITY </span><span style="color:#F97583">=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> gravity </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> UNSPECIFIED_GRAVITY</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onLayout</span><span style="color:#E1E4E8">(changed: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">, l: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, t: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, r: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, b: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> checkLayoutParams</span><span style="color:#E1E4E8">(layoutParams: </span><span style="color:#B392F0">ViewGroup</span><span style="color:#E1E4E8">.LayoutParams): </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> layoutParams </span><span style="color:#F97583">is</span><span style="color:#E1E4E8"> LayoutParams</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> generateDefaultLayoutParams</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">ViewGroup</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">LayoutParams</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> LayoutParams</span><span style="color:#E1E4E8">(MATCH_PARENT, MATCH_PARENT)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>并对原先的Demo工程进行重构， <em>限于篇幅，略去相关代码</em></p>
+<blockquote>
+<p>注：按照里氏代换原则，我们定义的 LayoutParams 体系在使用中时，可能会遇到 <code>输入不符合期望</code> 的问题。此时我们需要了解一下：
+<code>契约式设计</code>：</p>
+<blockquote>
+<p>使用契约式设计，类中的方法需要声明前置条件和后置条件。前置条件为真，则方法才能被执行。而在方法调用完成之前，方法本身将确保后置条件也成立。</p>
+</blockquote>
+<p>于是，在ViewGroup 体系中，设计了：</p>
+<ul>
+<li>checkLayoutParams(layoutParams: ViewGroup.LayoutParams): Boolean</li>
+<li>generateDefaultLayoutParams(): ViewGroup.LayoutParams</li>
+</ul>
+<p>我们可以采用两种契约：</p>
+<ul>
+<li>输入的LayoutParams 必须满足约束，否则抛出异常</li>
+<li>输入的LayoutParams 需要满足约束，否则使用默认规则</li>
+</ul>
+</blockquote>
+<h3 id="获得布局规则信息按照viewgroup-的布局规则进行布局">获得布局规则信息、按照ViewGroup 的布局规则进行布局</h3>
+<blockquote>
+<p>至此，我们已经理解了：</p>
+<ul>
+<li>使用视图树描述一个任意视图</li>
+<li>用不同的 ViewGroup 子类描述不同的布局，他们具有特定的布局规则；用不同的 Widget 展现不同的内容</li>
+<li>一种 测量<code>视图树各个节点</code> 的 <code>显示大小</code> 的测量方式</li>
+<li>不同的规则，决定了显示大小测算的细节有所不同</li>
+<li>使用LayoutParams 描述布局规则信息</li>
+</ul>
+</blockquote>
+<p>在此基础上，我们需要接受设定：</p>
+<blockquote>
+<p>存在一个机制，可以正确地解析 <code>视图树各个节点</code> 中申明的 <code>布局规则信息</code>，这些信息，会存储在正确的
+LayoutParams 对象中，被对应的节点所持有，以待使用。</p>
+<p>这个机制，我们先忽略。</p>
+</blockquote>
+<p>按照刚才获得的经验，布局和测量的过程类似，</p>
+<p>我们定义 <code>layout()</code> 和 <code>onLayout()</code> 方法</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">open</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    open</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> layout</span><span style="color:#E1E4E8">(l: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, t: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, r: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, b: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        //todo</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //布局能力</span></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> open</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onLayout</span><span style="color:#E1E4E8">(changed: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">, l: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, t: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, r: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, b: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>对于参数，约定为：</p>
+<ul>
+<li>l Left position, relative to parent</li>
+<li>t Top position, relative to parent</li>
+<li>r Right position, relative to parent</li>
+<li>b Bottom position, relative to parent</li>
+</ul>
+<p>在完成了 <code>大小测试</code> 和 <code>布局规则解析</code> 的前提下，这些相对值的计算并不复杂。</p>
+<p>我们约定，实际的布局逻辑，在onLayout中完成，而layout方法，用于实现 <code>前置条件</code>，onLayout调用 和 <code>状态维护</code></p>
+<p>对于 ViewGroup 而言，需要遍历Children，为每个 Child，使用其显示大小信息&#x26;布局规则信息，确定其布局位置，即 l,t,r,b 四个参数值。
+调用 Child 的 layout() 方法。</p>
+<p>对于 Widget 而言，则是需要决定Content的展示区域，因为 Content 不再是 View，不再需要继续向下调用 layout 方法。</p>
+<p>至此，所有的准备工作均已完成，接下来，就是绘制工作。</p>
+<h2 id="最后一步绘制在正确位置">最后一步，绘制在正确位置</h2>
+<p>在此之前，我们已经得到了视图树每个节点的正确位置，此时，只需要将内容绘制在对应位置，即可通过屏幕呈现在用户眼前。</p>
+<p>按照之前的经验，我们定义：</p>
+<ul>
+<li>draw(canvas:Canvas) 方法，封装整个绘制流程</li>
+<li>onDraw(canvas:Canvas) 方法，实现内容的绘制</li>
+<li>如果在ViewGroup中覆写onDraw(canvas:Canvas) 同时 实现 <code>自身内容的绘制</code>，<em>例如背景</em> ，和 <code>分发 Child 的绘制</code>，这并不符合开闭原则
+故而添加 dispatchDraw(canvas: Canvas) 用以实现 <code>分发 Child 的绘制</code></li>
+</ul>
+<p>其实到此为止，我们已经对 <code>正确展示内容</code> 有了比较完善的认知，绘制的内容，理解不复杂，但内容很庞杂，本篇就不再展开了。</p>
+<h2 id="展望">展望</h2>
+<p>本身还计划再写如下内容的：</p>
+<ul>
+<li>和Framework中的实现思路进行对比</li>
+<li>编码验证布局规则 等</li>
+</ul>
+<p>限于篇幅，这些内容被择掉了。不过我会将一些 <code>编码验证</code>的内容以 <a href="https://github.com/leobert-lan/ViewWorkShop">WorkShop</a> 的形式展现。</p>
+<p>下一篇，会对 <code>View</code>体系的 <code>交互</code> 功能进行探索。<code>点关注不迷路</code>。</p>
+<blockquote>
+<p>注：关于WorkShop的内容，原定计划是配合博客中的知识体系，独立建立一套 <code>简单的</code>，<code>可视交互</code> 系统。用以验证和帮助理解 Android-View 体系的知识。</p>
+<p>希望今年的业务时间还能比较充裕。</p>
+</blockquote></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

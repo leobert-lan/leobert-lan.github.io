@@ -1,0 +1,739 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>好玩系列：拥有它，XML文件少一半--更方便的处理View背景 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">好玩系列：拥有它，XML文件少一半--更方便的处理View背景</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="好玩系列拥有它xml文件少一半更方便的处理view背景">好玩系列：拥有它，XML文件少一半—更方便的处理View背景</h1>
+<h2 id="前言">前言</h2>
+<p><a href="https://github.com/leobert-lan/Blog/blob/main/info/%E5%85%B3%E4%BA%8E%E5%A5%BD%E7%8E%A9%E7%B3%BB%E5%88%97.md">关于好玩系列</a></p>
+<p>这是一项已经被我们项目<code>实验性投产</code>将近一年的方案，虽然还处于实验性阶段，但<code>稳定性</code>和<code>实用性</code>都不错。</p>
+<p><a href="https://github.com/leobert-lan/DaVinCi">DaVinCi 仓库链接</a></p>
+<blockquote>
+<p>问题背景：Android 中普遍使用XML来定义资源，对于视图的背景样式而言，需要定义大量的
+<code>GradientDrawable</code>、<code>StateListDrawable</code> 资源等。当项目体量很大时。这些资源就会出现难管理的问题。</p>
+</blockquote>
+<p>诚然，从<code>最佳实践</code>角度出发，<strong>对项目中的资源进行合理地命名以满足查询索引规则，按照设计风格定义对应的Style，视图定义时利用Style约束其样式</strong>。这才是
+<code>优秀的做法</code>。但是，事与愿违，按照国内的从业者现状看，大多数处理大型项目的团队都<code>没有</code>做好这一点的<code>必要条件</code>。</p>
+<p>在展开实践之前，我们不妨反思下为何会如此，不外乎：</p>
+<ul>
+<li>缺乏或者频繁变动顶层<code>设计语言</code>，<em>这个词可能并不太准确</em></li>
+<li>以往的页面已经在线上运行了，设计新的页面簇改变了设计风格时，没有安排原有内容的统一修改并给到时间。</li>
+<li>以上两条导致全栈Style混乱</li>
+<li>当Style超过3种风格时，开发团队一般选择<code>毁灭吧，我累了</code>，谁动全栈风格跟谁急。</li>
+</ul>
+<p>OK，既然都选择了毁灭吧,那为什么不选择一种更加舒适的方式来处理常见的背景问题。</p>
+<h2 id="挑选目标最常用的drawable资源">挑选目标—最常用的Drawable资源</h2>
+<p>经过一番草率的筛选，我们很快锁定了目标：selector、shape</p>
+<p>举个例子，窥一斑而见全豹：</p>
+<p><img  src="/_astro/img_a_lot_of_drawable.BqD-BbbS_1EG4H.webp" alt="大量的资源" loading="lazy" decoding="async" width="455" height="845"></p>
+<p>这还只是一小部分，相信各位的项目中也会有这样的痛点吧。</p>
+<p>且不谈 <code>命名规则</code> 是否合情合理，这是一种很反人类的设定，就像你忘记了密码，申请重置，按照一系列的密码规则， 终于设定了一个 <code>让你惴惴不安</code> 担心 <code>再次忘记</code> 的密码后，提交提示：不能和原密码一致。</p>
+<p>对Drawable体系有一定了解的话，我们知道 selector、shape 分别对应：</p>
+<ul>
+<li><code>StateListDrawable</code></li>
+<li><code>GradientDrawable</code></li>
+</ul>
+<p><em>如果对Drawable体系还不太清楚的话，<a href="post_2.md">可以简要阅读一下我之前的一篇博客：三思系列：重新认识Drawable</a></em></p>
+<h2 id="换一种定义资源解析资源的方式">换一种定义资源、解析资源的方式</h2>
+<p>布局文件中使用这些Drawable资源时，在View被创建后，会解析配置的属性，而Drawable相关的资源，会被DrawableInflater加载并运用。</p>
+<p>这一点就不展开了。毫无疑问，如果要替换掉基于xml的资源定义方式，我们只能采用一个新的方式。但是，我们并<code>没有打算</code> 抛弃使用xml文件定义布局资源</p>
+<p>且不卖关子，当时搜索枯肠，要满足：</p>
+<ul>
+<li>丢弃单独文件定义</li>
+<li>方便，不需要查手册</li>
+</ul>
+<p>两个要素，只想到两个关键词： <code>DSL</code>，<code>OO</code>，没错，<code>领域特定语言</code> 和 <code>面向对象</code>。</p>
+<p>严格来说，这两者基本是互斥的。</p>
+<p>但是很抱歉，这里必须要先打住，要先讲点别的，然后再回到这个话题。</p>
+<blockquote>
+<p>注，后面很大一段篇幅，会用于：</p>
+<ul>
+<li>解释抛弃自定义View和属性的方案</li>
+<li>使用Builder简化Drawable构造过程</li>
+<li>DSL简介</li>
+<li>用DSL解决这个问题</li>
+</ul>
+<p>个人认为 <code>使用自定义文法</code> 和 <code>解释器</code>处理文法解析 是一件挺好玩的事情，值得玩一玩，
+但限于我的水平，这段内容读起来可能很晦涩，如果不是非常感兴趣，可以直接跳过到：<a href="#anchor2">到底是DSL还是OO</a></p>
+</blockquote>
+<h3 id="抛弃了自定义view和属性的方式">抛弃了自定义View和属性的方式</h3>
+<p>在开始时，我考虑过这种方案。但是使用 <code>自定义的</code> <code>LayoutInflater</code> 或者 <code>hook</code> 系统LayoutInflater 都是可能影响到某些 <code>黑科技</code>的</p>
+<p>就算不考虑干扰到其他黑科技，也需要严格的处理各种属性组合，并提供完善的查询手册，这很 <code>不人道主义</code>，</p>
+<p>而基于十几个属性组合场景自定义lint规则，这 <code>很烦</code> ，一点都 <code>不好玩</code></p>
+<p>所以这个方案直接被否决</p>
+<h2 id="工欲善其事必先利其器drawable对象构建工具--drawable-builder">工欲善其事必先利其器，Drawable对象构建工具 — Drawable Builder</h2>
+<p>因为 <code>StateListDrawable</code> 和 <code>GradientDrawable</code> 的内部细节都是比较多的，这句话等价于：构建这两者的实例对象比较复杂。</p>
+<p>这很符合Builder模式的使用场景，我们先设计一个Builder来处理这两者的构建，并在构建过程中检验信息</p>
+<blockquote>
+<p>这是一件比较枯燥的事情，代码略。详见DaVinCiCore.kt</p>
+</blockquote>
+<p>在我们完善的考虑了 各种state下： 形状，渐变的角度、方式，填充，描边，尺寸，指定的drawable等之后，我们可以 “很方便” 的创建Drawable啦！</p>
+<h2 id="一套适应场景的dsl--定义规则">一套适应场景的DSL — 定义规则</h2>
+<p>在内容展开之前，我们再回顾一下DSL的基础。</p>
+<p><code>DSL</code>即 <code>Domain Specified Language</code> 、<code>领域专用语言</code>。</p>
+<p>Wikipedia中关于这个词条的描述：</p>
+<blockquote>
+<p>A specialized computer language designed for a specific task.</p>
+</blockquote>
+<p>为了解决 <code>某类</code> <code>特定问题</code> 而设计的一种 <code>特殊</code> 的计算机语言</p>
+<p>而马丁老爷子关于它的描述，看起来就很高深了，但我更喜欢这一个描述：</p>
+<blockquote>
+<p>A computer programming language of limited expressiveness focused on a particular domain.</p>
+</blockquote>
+<p>一种 <code>抑制表达能力</code> 以 <code>专注于</code> <code>特定领域</code> 的计算机语言。</p>
+<p>这种抑制，让它专注于特定的领域，而抛弃了其他的领域，以达到更加高效、准确的目的。</p>
+<p>我们知道，xml协议的<code>扩展性非常强</code>，而这种扩展性，让它的<code>解析</code>变得非常的<code>繁琐</code>，继而带来了效率问题。Android中，为了 <code>兼顾</code> xml的 <code>扩展性</code> 和 使用的 <code>效率问题</code>， 定制了各类Inflater以处理特定的问题。</p>
+<p>显然，我们这次不打算在巨人的肩膀上更进一步，而是要在特定问题上，剑走偏锋。</p>
+<p>按照我们积累的知识，要构建一个 <code>GradientDrawable</code>，可能用到：</p>
+<ul>
+<li>形状 shape</li>
+<li>纯色填充色 solidColor</li>
+<li>圆角相关：
+<ul>
+<li>cornersRadius</li>
+<li>cornersBottomLeftRadius</li>
+<li>cornersBottomRightRadius</li>
+<li>cornersTopLeftRadius</li>
+<li>cornersTopRightRadius</li>
+</ul>
+</li>
+<li>填充渐变：
+<ul>
+<li>渐变方向角 gradientAngle</li>
+<li>渐变中点x gradientCenterX</li>
+<li>渐变中点y gradientCenterY</li>
+<li>渐变起始颜色 gradientStartColor</li>
+<li>渐变中点颜色 gradientCenterColor</li>
+<li>渐变终点颜色 gradientEndColor</li>
+</ul>
+</li>
+<li>渐变形式 gradient</li>
+<li>形式为 RADIAL_GRADIENT时的 gradientRadius</li>
+<li>useLevel</li>
+<li>padding</li>
+<li>sizeWidth</li>
+<li>sizeHeight</li>
+<li>描边宽度 strokeWidth</li>
+<li>描边颜色 strokeColor</li>
+<li>虚线段宽度 strokeDashWidth</li>
+<li>虚线段间距 strokeDashGap</li>
+</ul>
+<p>当然，我们还需要考虑到 <code>不同的状态</code>，和一些 <code>细节</code> ，这里先不展开</p>
+<p>此时我们有两个选择方向，让我们的DSL类似于：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>shape:[</span></span>
+<span class="line"><span>    gradient:[type:linear;startColor:#ff3c08;endColor:#353538 ];</span></span>
+<span class="line"><span>    st:[Oval];</span></span>
+<span class="line"><span>    corners:[40 dp];</span></span>
+<span class="line"><span>    stroke:[width:4 dp;color:rc / colorAccent ]</span></span>
+<span class="line"><span>]</span></span></code></pre>
+<p><em>ps，因为目标固定为设置background，所以语法式中忽略这种描述</em></p>
+<p>或者类似于sql的insert语句。</p>
+<p>不过后者的 <code>字段</code> 太多，实在不适合阅读，而且SQL的 <code>表达能力</code> 相对于我们要处理的问题，还是过强了一点。</p>
+<p>ok，我们再仔细设计一下规则。</p>
+<p>终结符：</p>
+<ul>
+<li><code>[</code> <code>]</code>,当前域的子句均置于其中，例：</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#E1E4E8">域:[子域1:[值]]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">shape:[st:[Oval]]</span></span></code></pre>
+<ul>
+<li><code>;</code>,当前域有多个子域时，子域之间用 <code>;</code> 分隔</li>
+</ul>
+<p>非终结符：</p>
+<ul>
+<li>shape: 代表创建一个GradientDrawable</li>
+<li>st: 代表shape类型，枚举值为
+<ul>
+<li>Rectangle</li>
+<li>Oval</li>
+<li>Line</li>
+<li>Ring</li>
+</ul>
+</li>
+<li>corners: 圆角相关设置，值置于[]中，一个值代表4个角，4个值代表 左上、右上、右下、左下 四个值对应设置</li>
+<li>solid: 纯色填充，[]内为色值，色值表达见后</li>
+<li>gradient:渐变色，子命令置于 [] 中
+<ul>
+<li>type：渐变类型，枚举为：
+<ul>
+<li>linear</li>
+<li>radial</li>
+<li>sweep</li>
+</ul>
+</li>
+<li>startColor: 起始色</li>
+<li>centerColor: 中间色</li>
+<li>endColor: 结束色</li>
+<li>centerX: 中点x</li>
+<li>centerY: 中点y</li>
+<li>angle: 渐变角度</li>
+</ul>
+</li>
+<li>stroke: 描边，子命令置于 [] 中
+<ul>
+<li>width: 描边宽度</li>
+<li>color: 描边颜色</li>
+<li>dashWidth: 虚线宽</li>
+<li>dashGap: 虚线间距</li>
+</ul>
+</li>
+<li>size: 尺寸
+<ul>
+<li>width:</li>
+<li>height:</li>
+</ul>
+</li>
+<li>padding: 内边距
+<ul>
+<li>left</li>
+<li>top</li>
+<li>right</li>
+<li>bottom</li>
+</ul>
+</li>
+</ul>
+<p>特殊规则：</p>
+<ul>
+<li>尺寸描述：纯数字代表px，数值+dp 代表dp值，<code>w</code>代表 <code>wrap_content</code>，<code>m</code> 代表 <code>match_parent</code></li>
+<li>颜色表达：“#ffffff”等色值字符串，代表ARGB值的 int 值，“rc/资源名” 表达资源引用， 以及用”@idName”来获取目标View的tag，tag值需为颜色字符串或者ARGB色</li>
+</ul>
+<p>为了适当减少类的数量，我们约定：</p>
+<ul>
+<li>不拥有子域的域弱化为属性，以<code>属性名:属性值</code>的方式表达，而不再需要 <code>[]</code> 符号</li>
+<li>当某个域的属性只存在一个或者已经被约定时，可以忽略其属性名，直接使用属性值</li>
+</ul>
+<blockquote>
+<p>注:重新整理时，我发现最开始编码的 <code>ShapeType</code> 和 <code>Corners</code> 没有重新按照上述约定修正，
+这是一处遗忘修改的bug，准确的讲，是将子域弱化为属性时，期望略去终结符而带来的文法规则缺陷，读者<strong>不要深究</strong>。</p>
+<p>出现这个bug的根本原因是：我当时想减少小类数量，并
+一定程度上降低解析复杂度，将非终结符识别标记 和终结符 <code>[</code> 组合在了一起，替代原先的非终结符识别标记使用。</p>
+</blockquote>
+<blockquote>
+<p>注2：主体是 GradientDrawable ，为什么用 Shape去对应？因为国内普遍存在的文章中，绝大多数都已经将
+Gradient 对应为”颜色的梯度渐变”，而将这一资源文件定义为 “形状”、带”填充”和”描边”的形状。而Android的资源定义语法中，
+也是类似的。大家也都习惯了，索性尊重习惯。</p>
+</blockquote>
+<h2 id="解释器--处理表达式解析">解释器 — 处理表达式解析</h2>
+<blockquote>
+<p>在GOF的设计模式中，<code>解释器模式</code> ( <code>Interpreter Pattern</code> ) 提供了 <code>评估</code> 语言的 <code>语法</code> 或 <code>表达式</code> 的方式，它属于 <code>行为型模式</code>。</p>
+</blockquote>
+<p>需要注意，其实在这个问题的实际场景中，一条语句，子句出现的频率可能并不会太高，但解释器模式 <code>依旧是场景适用</code> 的。</p>
+<p>我们再回顾一下解释器模式的 <code>优缺点</code>：</p>
+<p>优点：</p>
+<ul>
+<li>可扩展性比较好，灵活。</li>
+<li>易于实现简单文法。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>对于复杂的文法比较难维护</li>
+<li>可能引起类膨胀</li>
+<li>采用递归调用方法，层级过深，可能出现效率问题</li>
+</ul>
+<h3 id="定义上下文">定义上下文</h3>
+<p><img  src="/_astro/img_uml_davinci.DBPYVFIQ_Z1n6eOn.webp" alt="uml_davinci" loading="lazy" decoding="async" width="636" height="994"></p>
+<p>其中 <code>core:DaVinCiCore</code> 是上面提到的构建者，未遵循习惯命名法。
+<code>view:View</code> 是要操作的View。</p>
+<p><strong>源码枯燥，略</strong></p>
+<h3 id="抽象表达式">抽象表达式</h3>
+<p><img  src="/_astro/img_uml_davinciexp.C4NJxCZW_Z1PrrY0.webp" alt="uml_davinci" loading="lazy" decoding="async" width="562" height="1124"></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">sealed</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> DaVinCiExpression</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">var</span><span style="color:#E1E4E8"> daVinCi: </span><span style="color:#B392F0">DaVinCi</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // 节点名称</span></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> tokenName: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // 文本内容</span></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> text: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //实际属性是否需要从text解析，手动创建并给了专有属性的，设为false，就不会被覆盖了</span></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> parseFromText </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> injectThenParse</span><span style="color:#E1E4E8">(daVinCi: </span><span style="color:#B392F0">DaVinCi</span><span style="color:#E1E4E8">?)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /*</span></span>
+<span class="line"><span style="color:#6A737D">     * 执行方法</span></span>
+<span class="line"><span style="color:#6A737D">     */</span></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> interpret</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    open</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> startTag</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">String</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> ""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    companion</span><span style="color:#F97583"> object</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        @JvmStatic</span></span>
+<span class="line"><span style="color:#F97583">        fun</span><span style="color:#B392F0"> shape</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Shape</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> Shape</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> sLogTag </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "DaVinCi"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> END </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "]"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> NEXT </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "];"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> sResourceColor </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "rc/"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="终结符处理">终结符处理</h3>
+<p>只需要处理兄弟域的关系即可，例如，我们知道 solid 和 stroke 就是兄弟域，</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583"> protected</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ListExpression</span><span style="color:#E1E4E8">(daVinCi: </span><span style="color:#B392F0">DaVinCi</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> manual: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">) :</span></span>
+<span class="line"><span style="color:#B392F0">    DaVinCiExpression</span><span style="color:#E1E4E8">(daVinCi) {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> list: </span><span style="color:#B392F0">ArrayList</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#B392F0"> ArrayList</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> append</span><span style="color:#E1E4E8">(exp: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        list.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(exp)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> injectThenParse</span><span style="color:#E1E4E8">(daVinCi: </span><span style="color:#B392F0">DaVinCi</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.daVinCi </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> daVinCi</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (manual) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            list.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8"> { it.</span><span style="color:#B392F0">injectThenParse</span><span style="color:#E1E4E8">(daVinCi) }</span></span>
+<span class="line"><span style="color:#F97583">            return</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // 在ListExpression解析表达式中,循环解释语句中的每一个单词,直到终结符表达式或者异常情况退出</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCi?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            var</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#F97583">            while</span><span style="color:#E1E4E8"> (i </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 100</span><span style="color:#E1E4E8">) { </span><span style="color:#6A737D">// true,语法错误时有点可怕，先上限100</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (it.currentToken </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) { </span><span style="color:#6A737D">// 获取当前节点如果为 null 则表示缺少]表达式</span></span>
+<span class="line"><span style="color:#B392F0">                    println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Error: The Expression Missing ']'! "</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">                    break</span></span>
+<span class="line"><span style="color:#E1E4E8">                } </span><span style="color:#F97583">else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (it.</span><span style="color:#B392F0">equalsWithCommand</span><span style="color:#E1E4E8">(END)) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    it.</span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#6A737D">                    // 解析正常结束</span></span>
+<span class="line"><span style="color:#F97583">                    break</span></span>
+<span class="line"><span style="color:#E1E4E8">                } </span><span style="color:#F97583">else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (it.</span><span style="color:#B392F0">equalsWithCommand</span><span style="color:#E1E4E8">(NEXT)) {</span></span>
+<span class="line"><span style="color:#6A737D">                    //进入同级别下一个解析</span></span>
+<span class="line"><span style="color:#E1E4E8">                    it.</span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">                } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> { </span><span style="color:#6A737D">// 建立Command 表达式</span></span>
+<span class="line"><span style="color:#F97583">                    try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                        val</span><span style="color:#E1E4E8"> expressions: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> CommandExpression</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">                        list.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(expressions)</span></span>
+<span class="line"><span style="color:#E1E4E8">                    } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (e: </span><span style="color:#B392F0">Exception</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                        if</span><span style="color:#E1E4E8"> (DaVinCi.enableDebugLog) Log.</span><span style="color:#B392F0">e</span><span style="color:#E1E4E8">(sLogTag, </span><span style="color:#9ECBFF">"语法解析有误"</span><span style="color:#E1E4E8">, e)</span></span>
+<span class="line"><span style="color:#F97583">                        break</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">                i</span><span style="color:#F97583">++</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (i </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 100</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (DaVinCi.enableDebugLog) Log.</span><span style="color:#B392F0">e</span><span style="color:#E1E4E8">(sLogTag, </span><span style="color:#9ECBFF">"语法解析有误，进入死循环，强制跳出"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> interpret</span><span style="color:#E1E4E8">() { </span><span style="color:#6A737D">// 循环list列表中每一个表达式 解释执行</span></span>
+<span class="line"><span style="color:#E1E4E8">        list.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8"> { it.</span><span style="color:#B392F0">interpret</span><span style="color:#E1E4E8">() }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> toString</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> b </span><span style="color:#F97583">=</span><span style="color:#B392F0"> StringBuilder</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> iMax: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> list.size </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (iMax </span><span style="color:#F97583">==</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">return</span><span style="color:#9ECBFF"> ""</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#F97583">        while</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            b.</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(list[i].</span><span style="color:#B392F0">toString</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (i </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> iMax) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8"> b.</span><span style="color:#B392F0">toString</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            b.</span><span style="color:#B392F0">append</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"; "</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            i</span><span style="color:#F97583">++</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="非终结符的规则处理">非终结符的规则处理</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"></span>
+<span class="line"><span style="color:#F97583">open</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> CommandExpression</span><span style="color:#E1E4E8">(daVinCi: </span><span style="color:#B392F0">DaVinCi</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> manual: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">) :</span></span>
+<span class="line"><span style="color:#B392F0">    DaVinCiExpression</span><span style="color:#E1E4E8">(daVinCi) {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> expressions: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    init</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">        //因为是嵌套层，且作为父类了，避免递归</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">::</span><span style="color:#B392F0">class</span><span style="color:#F97583"> ==</span><span style="color:#E1E4E8"> CommandExpression::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">            onParse</span><span style="color:#E1E4E8">(daVinCi)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> injectThenParse</span><span style="color:#E1E4E8">(daVinCi: </span><span style="color:#B392F0">DaVinCi</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#B392F0">        onParse</span><span style="color:#E1E4E8">(daVinCi)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> toPx</span><span style="color:#E1E4E8">(str: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, context: </span><span style="color:#B392F0">Context</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">? {</span></span>
+<span class="line"><span style="color:#6A737D">        //略</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> parseColor</span><span style="color:#E1E4E8">(text: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?): </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">? {</span></span>
+<span class="line"><span style="color:#6A737D">        //略</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> parseInt</span><span style="color:#E1E4E8">(text: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?, default: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">?): </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">? {</span></span>
+<span class="line"><span style="color:#6A737D">        //略</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> parseFloat</span><span style="color:#E1E4E8">(text: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?, default: </span><span style="color:#B392F0">Float</span><span style="color:#E1E4E8">?): </span><span style="color:#B392F0">Float</span><span style="color:#E1E4E8">? {</span></span>
+<span class="line"><span style="color:#6A737D">        //略</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> getTag</span><span style="color:#E1E4E8">(context: </span><span style="color:#B392F0">Context</span><span style="color:#E1E4E8">?, resName: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">? {</span></span>
+<span class="line"><span style="color:#6A737D">        //略</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> getColor</span><span style="color:#E1E4E8">(context: </span><span style="color:#B392F0">Context</span><span style="color:#E1E4E8">?, resName: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?): </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">? {</span></span>
+<span class="line"><span style="color:#6A737D">        //略</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @Throws</span><span style="color:#E1E4E8">(Exception::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onParse</span><span style="color:#E1E4E8">(daVinCi: </span><span style="color:#B392F0">DaVinCi</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.daVinCi </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> daVinCi</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (manual) </span><span style="color:#F97583">return</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCi?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            expressions </span><span style="color:#F97583">=</span><span style="color:#F97583"> when</span><span style="color:#E1E4E8"> (it.currentToken) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                Corners.tag </span><span style="color:#F97583">-></span><span style="color:#B392F0"> Corners</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">                Solid.tag </span><span style="color:#F97583">-></span><span style="color:#B392F0"> Solid</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">                ShapeType.tag </span><span style="color:#F97583">-></span><span style="color:#B392F0"> ShapeType</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">                Stroke.tag </span><span style="color:#F97583">-></span><span style="color:#B392F0"> Stroke</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">                Size.tag </span><span style="color:#F97583">-></span><span style="color:#B392F0"> Size</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">                Padding.tag </span><span style="color:#F97583">-></span><span style="color:#B392F0"> Padding</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">                Gradient.tag </span><span style="color:#F97583">-></span><span style="color:#B392F0"> Gradient</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#F97583">                else</span><span style="color:#F97583"> -></span><span style="color:#F97583"> throw</span><span style="color:#B392F0"> Exception</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"cannot parse ${it.currentToken}"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    protected</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> asPrimitiveParse</span><span style="color:#E1E4E8">(start: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, daVinCi: </span><span style="color:#B392F0">DaVinCi</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.daVinCi </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> daVinCi</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCi?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            tokenName </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> it.currentToken</span></span>
+<span class="line"><span style="color:#E1E4E8">            it.</span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (start </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> tokenName) {</span></span>
+<span class="line"><span style="color:#79B8FF">                this</span><span style="color:#E1E4E8">.text </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> it.currentToken</span></span>
+<span class="line"><span style="color:#E1E4E8">                it.</span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                it.</span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> interpret</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        expressions?.</span><span style="color:#B392F0">interpret</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> toString</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "</span><span style="color:#79B8FF">$expressions</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>以solid为例：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Solid</span><span style="color:#E1E4E8">(daVinCi: </span><span style="color:#B392F0">DaVinCi</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">, manual: </span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">) :</span></span>
+<span class="line"><span style="color:#B392F0">    CommandExpression</span><span style="color:#E1E4E8">(daVinCi, manual) {</span></span>
+<span class="line"><span style="color:#B392F0">    @ColorInt</span></span>
+<span class="line"><span style="color:#F97583">    internal</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> colorInt: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#6A737D"> //这是解析出来的，不要乱赋值</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    companion</span><span style="color:#F97583"> object</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> tag </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "solid:["</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    init</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        injectThenParse</span><span style="color:#E1E4E8">(daVinCi)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> injectThenParse</span><span style="color:#E1E4E8">(daVinCi: </span><span style="color:#B392F0">DaVinCi</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.daVinCi </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> daVinCi</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (manual) {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (parseFromText)</span></span>
+<span class="line"><span style="color:#E1E4E8">                colorInt </span><span style="color:#F97583">=</span><span style="color:#B392F0"> parseColor</span><span style="color:#E1E4E8">(text)</span></span>
+<span class="line"><span style="color:#F97583">            return</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        colorInt </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#B392F0">        asPrimitiveParse</span><span style="color:#E1E4E8">(tag, daVinCi)</span></span>
+<span class="line"><span style="color:#E1E4E8">        colorInt </span><span style="color:#F97583">=</span><span style="color:#B392F0"> parseColor</span><span style="color:#E1E4E8">(text)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> interpret</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (tag </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> tokenName </span><span style="color:#F97583">||</span><span style="color:#E1E4E8"> manual) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            daVinCi?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                colorInt?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> { color </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#E1E4E8">                    it.core.</span><span style="color:#B392F0">setSolidColor</span><span style="color:#E1E4E8">(color)</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> toString</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#9ECBFF"> "</span><span style="color:#79B8FF">$tag</span><span style="color:#9ECBFF"> ${</span><span style="color:#F97583">if</span><span style="color:#9ECBFF"> (parseFromText) text </span><span style="color:#F97583">else</span><span style="color:#9ECBFF"> colorInt?.</span><span style="color:#B392F0">run</span><span style="color:#9ECBFF"> { text }} </span><span style="color:#79B8FF">$END</span><span style="color:#9ECBFF">"</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>同理，我们处理完：</p>
+<ul>
+<li>Corners</li>
+<li>ShapeType</li>
+<li>Stroke</li>
+<li>Size</li>
+<li>Padding</li>
+<li>Gradient</li>
+</ul>
+<p>即可。</p>
+<h4 id="最重要的shape">最重要的Shape</h4>
+<p>至此，我们只需要再解析 <code>shape:[]</code> 即可完成工作。</p>
+<p>很简单，只要我们识别出来，其子域的描述子句均可被提取出来，<em>利用 <code>;</code> 分割子句</em>，那么我们只需要用 <code>ListExpression</code> 即可储存子句。</p>
+<p>代码略</p>
+<blockquote>
+<p>注，至此，我们完成了文法的定义和解析处理，注意，目前所有的主体都是 GradientDrawable，他的文法已经足够复杂了，</p>
+<p>StateListDrawable 所对应的各种状态
+我们不在文法中进行扩展了，否则单条语句的长度会非常可怕。</p>
+</blockquote>
+<h2 id="到底是dsl还是oo"><a id="anchor2">到底是DSL还是OO</a></h2>
+<blockquote>
+<p>前面我们谈到了这个问题，要满足</p>
+<ul>
+<li>丢弃单独文件定义</li>
+<li>方便，不需要查手册</li>
+</ul>
+<p>两个要素，只想到两个关键词： <code>DSL</code>，<code>OO</code>，即 <code>领域特定语言</code> 和 <code>面向对象</code>。</p>
+</blockquote>
+<p>当时我们切到了其他话题，并顺带着已经把 <code>DSL方案</code> 的核心实现了。</p>
+<p>我们注意到，如果使用DSL，直接使用 <code>字符串形式</code> 的 <code>表达语句</code>，这 <code>很不人道主义</code>。</p>
+<blockquote>
+<p>我们不太可能像web技术那样，再走一条 css 方式的道路</p>
+</blockquote>
+<p>那么，我们目前做的都是鸡肋吗？</p>
+<p>这个问题，笔者我目前也无法回答，因为我站得高度还不够高。</p>
+<p>但是，这不影响我们继续探究：如何使用OO思想，让构建变得更加简单</p>
+<h3 id="在文法符号的相关类基础上面向对象">在文法符号的相关类基础上，面向对象</h3>
+<p>在前面的工作中，我们定义了一堆 <code>终结符</code> 和 <code>非终结符</code> 对应的类，而其语法树结构，是通过直接反解
+一段 <code>文法表达式字符串</code> 得到的。</p>
+<p>反过来想，我们直接面向对象操作，也可以直接构建出期望的语法树。</p>
+<p>只要有正确的语法树，执行后一样可以得到期望的结果。</p>
+<p><strong>想通这一点，编码就很容易了，这里我们略去相关源码。</strong></p>
+<blockquote>
+<p>注：至此，究竟是 <code>面向对象</code> 构建语法树处理问题，还是使用 <code>文法表达式字符串</code> 构建语法树，已经不再重要。
+其本质都是构建语法树以描述Drawable的构建规则，只不过是在两个世界中的不同表达形式</p>
+</blockquote>
+<h3 id="最后一步巧借东风借助databinding直接在xml中使用">最后一步，巧借东风，借助DataBinding，直接在xml中使用</h3>
+<p>我们知道，利用DataBinding，可以直接在xml中实现声明使用</p>
+<p>再结合 <code>BindingAdapter</code> 机制，我们就可以实现 <code>声明背景</code> 的目标。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"></span>
+<span class="line"><span style="color:#B392F0">@BindingAdapter</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">    "daVinCi_bg"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"daVinCi_bg_pressed"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"daVinCi_bg_unpressed"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "daVinCi_bg_checkable"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"daVinCi_bg_uncheckable"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"daVinCi_bg_checked"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"daVinCi_bg_unchecked"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    requireAll </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">daVinCi</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    normal: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    pressed: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">, unpressed: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    checkable: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">, uncheckable: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    checked: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">, unchecked: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> daVinCi </span><span style="color:#F97583">=</span><span style="color:#B392F0"> DaVinCi</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#6A737D">    //用于多次构建</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> daVinCiLoop </span><span style="color:#F97583">=</span><span style="color:#B392F0"> DaVinCi</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    normal?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCi.</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            currentToken </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> normal.</span><span style="color:#B392F0">startTag</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (DaVinCi.enableDebugLog) Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(sLogTag, </span><span style="color:#9ECBFF">"${</span><span style="color:#79B8FF">this</span><span style="color:#9ECBFF">.</span><span style="color:#B392F0">logTag</span><span style="color:#9ECBFF">()} daVinCi normal:</span><span style="color:#79B8FF">$normal</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        normal.</span><span style="color:#B392F0">injectThenParse</span><span style="color:#E1E4E8">(daVinCi)</span></span>
+<span class="line"><span style="color:#E1E4E8">        normal.</span><span style="color:#B392F0">interpret</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    pressed?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        simplify</span><span style="color:#E1E4E8">(daVinCiLoop, it, </span><span style="color:#9ECBFF">"pressed"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCi.core.</span><span style="color:#B392F0">setPressedDrawable</span><span style="color:#E1E4E8">(daVinCiLoop.core.</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCiLoop.core.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    unpressed?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        simplify</span><span style="color:#E1E4E8">(daVinCiLoop, it, </span><span style="color:#9ECBFF">"unpressed"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCi.core.</span><span style="color:#B392F0">setUnPressedDrawable</span><span style="color:#E1E4E8">(daVinCiLoop.core.</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCiLoop.core.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    checkable?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        simplify</span><span style="color:#E1E4E8">(daVinCiLoop, it, </span><span style="color:#9ECBFF">"checkable"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCi.core.</span><span style="color:#B392F0">setCheckableDrawable</span><span style="color:#E1E4E8">(daVinCiLoop.core.</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCiLoop.core.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    uncheckable?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        simplify</span><span style="color:#E1E4E8">(daVinCiLoop, it, </span><span style="color:#9ECBFF">"uncheckable"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCi.core.</span><span style="color:#B392F0">setUnCheckableDrawable</span><span style="color:#E1E4E8">(daVinCiLoop.core.</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCiLoop.core.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    checked?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        simplify</span><span style="color:#E1E4E8">(daVinCiLoop, it, </span><span style="color:#9ECBFF">"checked"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCi.core.</span><span style="color:#B392F0">setCheckedDrawable</span><span style="color:#E1E4E8">(daVinCiLoop.core.</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCiLoop.core.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    unchecked?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">        simplify</span><span style="color:#E1E4E8">(daVinCiLoop, it, </span><span style="color:#9ECBFF">"unchecked"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCi.core.</span><span style="color:#B392F0">setUnCheckedDrawable</span><span style="color:#E1E4E8">(daVinCiLoop.core.</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">        daVinCiLoop.core.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //下面的略</span></span>
+<span class="line"><span style="color:#6A737D">    //    private var enabledDrawable: Drawable? = null</span></span>
+<span class="line"><span style="color:#6A737D">    //    private var unEnabledDrawable: Drawable? = null</span></span>
+<span class="line"><span style="color:#6A737D">    //    private var selectedDrawable: Drawable? = null</span></span>
+<span class="line"><span style="color:#6A737D">    //    private var focusedDrawable: Drawable? = null</span></span>
+<span class="line"><span style="color:#6A737D">    //    private var focusedHovered: Drawable? = null</span></span>
+<span class="line"><span style="color:#6A737D">    //    private var focusedActivated: Drawable? = null</span></span>
+<span class="line"><span style="color:#6A737D">    //    private var unSelectedDrawable: Drawable? = null</span></span>
+<span class="line"><span style="color:#6A737D">    //    private var unFocusedDrawable: Drawable? = null</span></span>
+<span class="line"><span style="color:#6A737D">    //    private var unFocusedHovered: Drawable? = null</span></span>
+<span class="line"><span style="color:#6A737D">    //    private var unFocusedActivated: Drawable? = null</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    ViewCompat.</span><span style="color:#B392F0">setBackground</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, daVinCi.core.</span><span style="color:#B392F0">build</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>示例：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"><span style="color:#E1E4E8">&#x3C;?</span><span style="color:#85E89D">xml</span><span style="color:#B392F0"> version</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"1.0"</span><span style="color:#B392F0"> encoding</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"utf-8"</span><span style="color:#E1E4E8">?></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">layout</span><span style="color:#B392F0"> xmlns:android</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://schemas.android.com/apk/res/android"</span></span>
+<span class="line"><span style="color:#B392F0">    xmlns:tools</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"http://schemas.android.com/tools"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">data</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">variable</span></span>
+<span class="line"><span style="color:#B392F0">            name</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"a"</span></span>
+<span class="line"><span style="color:#B392F0">            type</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"String"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">import</span><span style="color:#B392F0"> type</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"osp.leobert.android.davinci.DaVinCiExpression"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">data</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">androidx.core.widget.NestedScrollView</span></span>
+<span class="line"><span style="color:#B392F0">        android:layout_width</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"match_parent"</span></span>
+<span class="line"><span style="color:#B392F0">        android:layout_height</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"match_parent"</span></span>
+<span class="line"><span style="color:#B392F0">        tools:context</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">".MainActivity"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">LinearLayout</span></span>
+<span class="line"><span style="color:#B392F0">            daVinCi_bg</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@{DaVinCiExpression.shape().solid(`#eaeaea`)}"</span></span>
+<span class="line"><span style="color:#B392F0">            android:layout_width</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"match_parent"</span></span>
+<span class="line"><span style="color:#B392F0">            android:layout_height</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"wrap_content"</span></span>
+<span class="line"><span style="color:#B392F0">            android:orientation</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"vertical"</span></span>
+<span class="line"><span style="color:#B392F0">            android:padding</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"10dp"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;</span><span style="color:#85E89D">TextView</span></span>
+<span class="line"><span style="color:#B392F0">                android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@+id/test"</span></span>
+<span class="line"><span style="color:#B392F0">                daVinCi_bg</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@{DaVinCiExpression.shape().corner(60).solid(`@i2`).stroke(`4dp`,`@i2`)}"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_width</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"match_parent"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_height</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"100dp"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_marginTop</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"10dp"</span></span>
+<span class="line"><span style="color:#B392F0">                android:background</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@drawable/test"</span></span>
+<span class="line"><span style="color:#B392F0">                android:gravity</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"center"</span></span>
+<span class="line"><span style="color:#B392F0">                android:text</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@string/app_name"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">tag</span></span>
+<span class="line"><span style="color:#B392F0">                    android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@id/i1"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:value</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@color/colorPrimaryDark"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">tag</span></span>
+<span class="line"><span style="color:#B392F0">                    android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@id/i2"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:value</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@color/colorAccent"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;/</span><span style="color:#85E89D">TextView</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;</span><span style="color:#85E89D">Button</span></span>
+<span class="line"><span style="color:#B392F0">                daVinCi_bg_pressed</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@{DaVinCiExpression.shape().corner(`10dp,15dp,20dp,30dp`).stroke(`4dp`,`@i2`).gradient(`#26262a`,`#ff0699`,0)}"</span></span>
+<span class="line"><span style="color:#B392F0">                daVinCi_bg_unpressed</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@{DaVinCiExpression.shape().corner(60).solid(`@i1`).stroke(`4dp`,`@i2`)}"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_width</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"match_parent"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_height</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"100dp"</span></span>
+<span class="line"><span style="color:#B392F0">                android:gravity</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"center"</span></span>
+<span class="line"><span style="color:#B392F0">                android:text</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"Hello World!"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">tag</span></span>
+<span class="line"><span style="color:#B392F0">                    android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@id/i1"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:value</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@color/colorPrimaryDark"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">tag</span></span>
+<span class="line"><span style="color:#B392F0">                    android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@id/i2"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:value</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@color/colorAccent"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;/</span><span style="color:#85E89D">Button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;</span><span style="color:#85E89D">TextView</span></span>
+<span class="line"><span style="color:#B392F0">                android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@+id/test2"</span></span>
+<span class="line"><span style="color:#B392F0">                daVinCi_bg</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@{DaVinCiExpression.shape().corner(`10dp,15dp,20dp,30dp`).stroke(`4dp`,`@i2`).gradient(`#26262a`,`#ff0699`,0)}"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_width</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"match_parent"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_height</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"100dp"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_marginTop</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"10dp"</span></span>
+<span class="line"><span style="color:#B392F0">                android:background</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@drawable/test"</span></span>
+<span class="line"><span style="color:#B392F0">                android:gravity</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"center"</span></span>
+<span class="line"><span style="color:#B392F0">                android:text</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@string/app_name"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">tag</span></span>
+<span class="line"><span style="color:#B392F0">                    android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@id/i1"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:value</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@color/colorPrimaryDark"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">tag</span></span>
+<span class="line"><span style="color:#B392F0">                    android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@id/i2"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:value</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@color/colorAccent"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;/</span><span style="color:#85E89D">TextView</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;</span><span style="color:#85E89D">CheckBox</span></span>
+<span class="line"><span style="color:#B392F0">                daVinCi_bg</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@{DaVinCiExpression.shape().corner(60).solid(`@i2`).stroke(`4dp`,`@i2`)}"</span></span>
+<span class="line"><span style="color:#B392F0">                daVinCi_bg_pressed</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@{DaVinCiExpression.shape().corner(`10dp,15dp,20dp,30dp`).stroke(`4dp`,`@i2`).gradient(`#26262a`,`#ff0699`,0)}"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_width</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"match_parent"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_height</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"100dp"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_marginTop</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"10dp"</span></span>
+<span class="line"><span style="color:#B392F0">                android:background</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@drawable/test"</span></span>
+<span class="line"><span style="color:#B392F0">                android:gravity</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"center"</span></span>
+<span class="line"><span style="color:#B392F0">                android:text</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"错误示范：daVinCi_bg只能单独使用，一旦有其他的，就需要使用相应的成对的"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">tag</span></span>
+<span class="line"><span style="color:#B392F0">                    android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@id/i1"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:value</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@color/colorPrimaryDark"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">tag</span></span>
+<span class="line"><span style="color:#B392F0">                    android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@id/i2"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:value</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@color/colorAccent"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;/</span><span style="color:#85E89D">CheckBox</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;</span><span style="color:#85E89D">CheckBox</span></span>
+<span class="line"><span style="color:#B392F0">                daVinCi_bg_checked</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@{DaVinCiExpression.shape().corner(60).solid(`@i2`).stroke(`4dp`,`@i2`)}"</span></span>
+<span class="line"><span style="color:#B392F0">                daVinCi_bg_unchecked</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@{DaVinCiExpression.shape().corner(`10dp,15dp,20dp,30dp`).stroke(`4dp`,`@i2`).gradient(`#26262a`,`#ff0699`,0)}"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_width</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"match_parent"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_height</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"100dp"</span></span>
+<span class="line"><span style="color:#B392F0">                android:layout_marginTop</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"10dp"</span></span>
+<span class="line"><span style="color:#B392F0">                android:background</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@drawable/test"</span></span>
+<span class="line"><span style="color:#B392F0">                android:gravity</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"center"</span></span>
+<span class="line"><span style="color:#B392F0">                android:text</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"check状态"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">tag</span></span>
+<span class="line"><span style="color:#B392F0">                    android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@id/log_tag"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:value</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"测试log tag"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">tag</span></span>
+<span class="line"><span style="color:#B392F0">                    android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@id/i1"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:value</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@color/colorPrimaryDark"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">tag</span></span>
+<span class="line"><span style="color:#B392F0">                    android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@id/i2"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:value</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@color/colorAccent"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                &#x3C;</span><span style="color:#85E89D">tag</span></span>
+<span class="line"><span style="color:#B392F0">                    android:id</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@id/i3"</span></span>
+<span class="line"><span style="color:#B392F0">                    android:value</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@string/app_name"</span><span style="color:#E1E4E8"> /></span></span>
+<span class="line"><span style="color:#E1E4E8">            &#x3C;/</span><span style="color:#85E89D">CheckBox</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;/</span><span style="color:#85E89D">LinearLayout</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">androidx.core.widget.NestedScrollView</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">layout</span><span style="color:#E1E4E8">></span></span></code></pre>
+<p>粗糙的Demo效果，见笑了： <em>感谢读者<code>鲁班贼六</code>同学提醒我补充效果图</em></p>
+<p><img  src="/_astro/demo2.BOn5IstF_1fCLz8.webp" alt="demo" loading="lazy" decoding="async" width="1080" height="2160"></p>
+<p>甚至可以玩杂耍，直接使用字符串形式的DSL内容：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#E1E4E8">binding.test2.</span><span style="color:#B392F0">setOnClickListener</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    it.</span><span style="color:#B392F0">daVinCi</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"shape:[ gradient:[ type:linear;startColor:#ff3c08;endColor:#353538 ];"</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#9ECBFF">            " st:[ Oval ]; corners:[ 40dp ]; stroke:[ width:4dp;color:rc/colorAccent ] ]"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>注意，这个方式不推荐使用，很不利于维护，就是 <code>杂耍</code>，可以直接更新背景：</p>
+<p><img  src="/_astro/demo3.Ce3-gDK2_2fDvbL.webp" alt="demo3" loading="lazy" decoding="async" width="610" height="198"></p>
+<h2 id="总结和展望">总结和展望</h2>
+<p>这一篇，我们从一个问题：</p>
+<blockquote>
+<p>xml定义的资源文件难以管理、维护</p>
+</blockquote>
+<p>开始，尝试性的提出了一种 替代xml 定义背景资源文件的方式。并进行了知识展开和拓展。
+最终实现了期望目标。</p>
+<p>但是，使用 <code>xml文件</code> 或者其他形式的文件来定义资源，是有它的道理的，虽然，这种方式的弊端已经被长久诟病，
+并且在新兴技术中，资源和代码的存在位置已经开始交融。</p>
+<p>我们知道，Compose这一革命性技术，新事物想要完全替代旧事物，不是一朝一夕的事情，旧事物不会突然消失。</p>
+<p>本文中的方案，我将其视为一次 <code>好玩</code> ，<code>跟时髦</code> 的尝试。并且我个人认为，这一方案还是有存在价值的。</p>
+<p>而在此基础上，还可以继续开展 style定义和使用，<code>ColorStateList</code> 文法表达式。</p>
+<p>今天是除夕，祝大家除夕快乐。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

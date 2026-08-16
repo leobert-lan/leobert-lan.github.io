@@ -1,0 +1,386 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Java IO 系列 | NIO-1.0一文速览 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Java IO 系列 | NIO-1.0一文速览</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="java-io-系列--nio-10一文速览">Java IO 系列 | NIO-1.0一文速览</h1>
+<h2 id="前言">前言</h2>
+<p>上篇文章中，我们梳理了Java 经典IO，虽未详尽，但已基本满足日常知识储备需求。</p>
+<p>本篇文章，我们顺着Java IO的发展史，梳理 NIO-1.0 的基础知识，显然，1.0体现了版本的概念，此时 <code>NIO</code> 应解释为 <code>Java new IO</code> 更加合理。</p>
+<p>本篇将按照以下脉络展开，已经熟练掌握的章节，建议直接跳过</p>
+<img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/26515eb07b3a464092121a7872caa8aa~tplv-k3u1fbpfcp-watermark.image">
+<h2 id="nio-10概述">NIO-1.0概述</h2>
+<p>在先前多线程系列中，我们提到JVM的线程非常贴近操作系统中的线程；在JAVA经典IO中，IO的阻塞会体现到JVM中的线程上。</p>
+<p>因此，在高并发IO场景下，如果以”线程-IO一对一”的方式实现，开启、调度线程的资源消耗会演变为性能瓶颈。</p>
+<p>在JAVA 1.4 的 NIO-1.0 中，对此情况进行了设计改进，使用：<code>通道（Channel）</code>+ <code>选择器（Selector）</code>+ <code>缓冲区（Buffer）</code> 形成组合拳。</p>
+<h2 id="channel概述">Channel概述</h2>
+<p>经典IO中，立足于 <strong>数据的流动</strong> 的角度进行了抽象，提出了 <code>Stream</code>，在 NIO-1.0中，立足于 <strong>IO操作</strong>，对IO中的关键角色进行了抽象，<code>Channel</code> 是整个操作的中心。</p>
+<p>JDK文档中这样描述：</p>
+<blockquote>
+<p>A nexus for I/O operations.</p>
+<p>A channel represents an open connection to an entity such as a hardware device, a file, a network socket, or a program component that is capable of performing one or more distinct I/O operations, for example reading or writing.</p>
+<p>A channel is either open or closed. A channel is open upon creation, and once closed it remains closed. Once a channel is closed, any attempt to invoke an I/O operation upon it will cause a ClosedChannelException to be thrown. Whether or not a channel is open may be tested by invoking its isOpen method.</p>
+<p>Channels are, in general, intended to be safe for multithreaded access as described in the specifications of the interfaces and classes that extend and implement this interface.</p>
+</blockquote>
+<p>大体信息如下：</p>
+<blockquote>
+<p>Channel 是 I/O 操作的中心。</p>
+<ol>
+<li>Channel 代表与实体(如硬件设备、文件、网络套接字或程序组件)的打开连接,它能够执行一种或多种不同的 I/O 操作,例如读取或写入。</li>
+<li>一个 Channel 要么打开要么关闭。Channel 在创建时打开,关闭后将保持关闭状态。一旦 <code>Channel</code> 关闭, 在其上调用 I/O 操作时，都会导致抛出 <code>ClosedChannelException</code>。可以通过 isOpen 方法来测试 Channel 是否打开。</li>
+<li>通常,Channel 旨在支持多线程访问安全，与其接口、扩展和实现类中所陈述的规范保持一致。</li>
+</ol>
+</blockquote>
+<p>用一个草图描述：<code>通道</code> 、 <code>数据</code>、<code>应用</code>、<code>输入源/输出目标</code> 之间的关系：</p>
+<img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/27de340b4d81446aaf090395575f8be5~tplv-k3u1fbpfcp-watermark.image">
+<p>不难理解：它是 I/O操作的中心</p>
+<p>主要的 <code>Channel</code> 类有:</p>
+<ul>
+<li><code>FileChannel</code>: 主要用于文件IO</li>
+<li><code>DatagramChannel</code>: 主要用于UDP网络IO</li>
+<li><code>SocketChannel</code>: 主要用于TCP网络IO</li>
+<li><code>ServerSocketChannel</code>: 主要用于监听TCP连接</li>
+</ul>
+<p><strong>值得注意：虽然Channel宣称是线程安全的，但不代表多线程并发写入都是合理的，仍然需要考虑写入的顺序和位置，以避免数据覆盖等问题，Zero-Copy暂不讨论</strong></p>
+<p>排除掉大量干扰后，可摘出如下UML图：</p>
+<img width="600" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f5fb4bd8d5b46138f9c3a4b0c0774d1~tplv-k3u1fbpfcp-watermark.image">
+<h2 id="buffer-概述">Buffer 概述</h2>
+<p><code>Buffer</code> 是特定基本类型的数据容器, 因 <code>Channel</code> 本身并不专注于内存中存储数据的细节，它配合 <code>Channel</code> 实现数据传输。</p>
+<p>Buffer 可以从 <code>数据类型</code> 、<code>是否使用堆内存</code>、<code>访问方式</code> 三个维度进行分类</p>
+<blockquote>
+<p>按照数据类型分，JDK中主要包含有:</p>
+</blockquote>
+<ul>
+<li>ByteBuffer</li>
+<li>CharBuffer</li>
+<li>DoubleBuffer</li>
+<li>FloatBuffer</li>
+<li>IntBuffer</li>
+<li>LongBuffer</li>
+<li>ShortBuffer</li>
+</ul>
+<p>见名知意，不在赘述，均直接继承自抽象类 <code>Buffer</code></p>
+<img width="600" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c0075627688e4b69adee4f4fa53d6d4d~tplv-k3u1fbpfcp-watermark.image">
+<p>整体实现思路一致，暂不展开。</p>
+<blockquote>
+<p>按照是否使用堆内内存可以分为</p>
+</blockquote>
+<ul>
+<li>继承自 <code>XXXXBuffer</code> 的 <code>HeapXXXXBuffer</code>，如 <code>HeapByteBuffer</code>，它们使用JVM可以管理的堆内内存。</li>
+<li><code>DirectBuffer</code> 接口实现类，如 <code>DirectByteBuffer</code>，它们使用堆外内存，所谓堆外是相对概念，此内存区不受JVM管理，使用Unsafe类自行管理</li>
+</ul>
+<blockquote>
+<p>按照访问方式裂变出 只读Buffer，如 <code>HeapByteBufferR</code>, <code>DirectByteBufferR</code></p>
+</blockquote>
+<h2 id="channelbuffer-基本使用代码示例">Channel+Buffer 基本使用代码示例</h2>
+<p>以读取文件举例，使用方式大体如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> java.io.FileInputStream;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> java.io.IOException;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> java.nio.ByteBuffer;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> java.nio.channels.FileChannel;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> FileChannelRead</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">args</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">throws</span><span style="color:#E1E4E8"> IOException {</span></span>
+<span class="line"><span style="color:#E1E4E8">        String filePath </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "/path/of/file"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        FileInputStream fis </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> FileInputStream</span><span style="color:#E1E4E8">(filePath);</span></span>
+<span class="line"><span style="color:#E1E4E8">        FileChannel channel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> fis.</span><span style="color:#B392F0">getChannel</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        ByteBuffer buffer </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ByteBuffer.</span><span style="color:#B392F0">allocate</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1024</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        while</span><span style="color:#E1E4E8"> (channel.</span><span style="color:#B392F0">read</span><span style="color:#E1E4E8">(buffer) </span><span style="color:#F97583">!=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">            // Prepare for reading</span></span>
+<span class="line"><span style="color:#E1E4E8">            buffer.</span><span style="color:#B392F0">flip</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            while</span><span style="color:#E1E4E8"> (buffer.</span><span style="color:#B392F0">hasRemaining</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#F97583">                byte</span><span style="color:#E1E4E8"> b </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> buffer.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#6A737D">                // Do something with b</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // Prepare for writing</span></span>
+<span class="line"><span style="color:#E1E4E8">            buffer.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        channel.</span><span style="color:#B392F0">close</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        fis.</span><span style="color:#B392F0">close</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="selector-模型">Selector 模型</h2>
+<p>文首我们提到：</p>
+<blockquote>
+<p>在JAVA经典IO中，IO的阻塞会体现到JVM中的线程，在高并发IO场景下，开启、调度线程的资源消耗也会演变为性能瓶颈。</p>
+</blockquote>
+<p>原因在于：经典IO无法在单一线程中应对多个IO等待数据就绪的场景。</p>
+<p>不难理解，NIO1.0 需要解决这一问题，因此需要设计有 <code>Selector</code> ，它允许单个线程处理多个 <code>Channel</code>，具体表现为：
+<code>Selector</code> 可检测多个注册的Channel上是否有新连接、数据可读或数据可写事件，据此遴选出Channel进行处理。这样可以实现：<strong>单一线程管理多个channel</strong>。</p>
+<p>其工作原理本质为多路复用。可以体现为：</p>
+<ul>
+<li>将 Channel 注册到 Selector 上,并指定监听事件</li>
+<li>反复调用 selector.select() 方法，该方法会一直阻塞,直到监测到 Channel 有事件发生</li>
+<li>select() 方法返回后,可以通过 Selector 获得的 SelectionKey 集合,判断事件发生的 Channel</li>
+<li>对 Channel 执行 IO 操作</li>
+</ul>
+<p>模型示意图如下：</p>
+<img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/71ac73dd54924178912332f420d68b6f~tplv-k3u1fbpfcp-watermark.image?">
+<p><em>此图片通过某度图片检索获得，未得到具体出处，如有侵权请留言联系删除</em></p>
+<p>Selector的具体实现不再展开，它由spi机制实现特定提供。如果读者诸君感兴趣，可自行阅读 <code>EPollSelectorImpl</code> 等源码。</p>
+<p>JDK中的 <code>DefaultSelectorProvider</code> 是默认的提供逻辑，根据 <code>不同的操作系统</code> 创建不同的 <code>SelectorProvider</code>，用于提供 <code>SelectorImpl</code>：</p>
+<ul>
+<li>Windows操作系统，则创建 <code>WindowsSelectorProvider</code> 实例。</li>
+<li>MacOS操作系统，则创建 <code>KQueueSelectorProvider</code> 实例。</li>
+<li>Linux操作系统，则创建 <code>EPollSelectorProvider</code>、<code>PollSelectorProvider</code> 实例。</li>
+</ul>
+<h2 id="selector使用-与-selectionkey">Selector使用 与 SelectionKey</h2>
+<p><em>读者诸君，可还记得上文中Channel的UML类图，<code>Selector</code> 面向 <code>SelectableChannel</code> 因此，<code>FileChannel</code> 是无法使用的。</em></p>
+<h3 id="selectionkey">SelectionKey</h3>
+<p><code>SelectionKey</code> 是 可选择通道在 <code>Selector</code> 中注册的令牌， <code>SelectionKey</code> 有4个事件类型：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * 读事件：0000 0001</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> OP_READ </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8"> </span></span>
+<span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * 写事件：0000 0100</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> OP_WRITE </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8"> </span></span>
+<span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * 连接事件：0000 1000，连接操作，Client端支持的一种操作</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> OP_CONNECT </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#79B8FF"> 3</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8"> </span></span>
+<span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * 接受事件：0001 0000，可接受操作，仅ServerSocketChannel支持</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> OP_ACCEPT </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#F97583"> &#x3C;&#x3C;</span><span style="color:#79B8FF"> 4</span><span style="color:#E1E4E8">;</span></span></code></pre>
+<h4 id="常用api">常用API</h4>
+<blockquote>
+<p><code>interestOps()</code></p>
+</blockquote>
+<p>返回在Selector中注册的关注事件集，可以通过位运算反解判断 <code>Channel</code> 是否在 <code>Selector</code> 中注册某关注事件</p>
+<p>参考如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// 获取selectionKey 关注事件集</span></span>
+<span class="line"><span>int interestSet = selectionKey.interestOps(); </span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>boolean isInterestedInAccept = (interestSet &#x26; SelectionKey.OP_ACCEPT) != 0;</span></span>
+<span class="line"><span>boolean isInterestedInConnect = interestSet &#x26; SelectionKey.OP_CONNECT != 0;</span></span>
+<span class="line"><span>boolean isInterestedInRead = interestSet &#x26; SelectionKey.OP_READ != 0;</span></span>
+<span class="line"><span>boolean isInterestedInWrite = interestSet &#x26; SelectionKey.OP_WRITE != 0;</span></span></code></pre>
+<blockquote>
+<p><code>readyOps()</code></p>
+</blockquote>
+<p>获取此selectionKey 对应的通道上已经就绪的事件集。可使用位运算判断相应事件，也可以直接使用API：</p>
+<ul>
+<li>boolean isAcceptable()</li>
+<li>boolean isConnectable()</li>
+<li>boolean isReadable()</li>
+<li>boolean isWritable()</li>
+</ul>
+<blockquote>
+<p><code>channel()</code></p>
+</blockquote>
+<p>获取注册时对应的Channel</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Channel channel = selectionKey.channel();</span></span></code></pre>
+<blockquote>
+<p><code>selector()</code></p>
+</blockquote>
+<p>获取注册时目标Selector</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">Selector selector </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> selectionKey.</span><span style="color:#B392F0">selector</span><span style="color:#E1E4E8">();</span></span></code></pre>
+<blockquote>
+<p>attachment()</p>
+</blockquote>
+<p>SelectionKey支持绑定一个附加对象</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#6A737D">//注册时绑定</span></span>
+<span class="line"><span style="color:#E1E4E8">SelectionKey selectionKey </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> channel.</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(selector,SelectionKey.OP_READ,obj);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//更新绑定</span></span>
+<span class="line"><span style="color:#E1E4E8">selectionKey.</span><span style="color:#B392F0">attach</span><span style="color:#E1E4E8">(obj);</span></span></code></pre>
+<p>通过 <code>selectionKey.attachment();</code> 可获取该附加对象。</p>
+<p>需要注意：当不再需要该附加对象时，需解除绑定 <code>selectionKey.attach(null)</code>，否则影响GC</p>
+<p>SelectionKey的底层实现细节不再展开。</p>
+<h3 id="selector-常用api">Selector 常用API</h3>
+<blockquote>
+<p>select(),select(timeout),selectNow()</p>
+</blockquote>
+<p>获取 存在已就绪事件的通道 的数量，</p>
+<p>当返回值不为0时，可进行IO处理</p>
+<blockquote>
+<p>selectedKeys()</p>
+</blockquote>
+<p>获取注册于该 <code>Selector</code> 上的 <code>事件就绪</code> 的 <code>SelectionKey</code>，参考上文中 SelectionKey进行使用，以下代码是一个使用示例：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Set&#x3C;SelectionKey> selectedKeys = selector.selectedKeys();</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>Iterator&#x3C;SelectionKey> it = selectedKeys.iterator();</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>while(it.hasNext()) {</span></span>
+<span class="line"><span>    SelectionKey key = keyIterator.next();</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>    if(key.isXXXXable()) {</span></span>
+<span class="line"><span>     //处理 XXXX 事件</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span> </span></span>
+<span class="line"><span>   it.remove();</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<blockquote>
+<p>wakeUp()</p>
+</blockquote>
+<p>当调用 <code>select()</code> 阻塞时，于另一个线程调用 <code>wakeup()</code> 可强行唤醒阻塞的线程，即select()方法立即返回。</p>
+<p>如果调用wakeup()时，没有线程阻塞于 <code>select()</code> 上，下次调用 <code>select()</code> 将立即返回，不会进入阻塞状态。和 <code>LockSupport.unpark()</code> 类似。</p>
+<blockquote>
+<p><code>close()</code></p>
+</blockquote>
+<p>关闭 <code>Selector</code>，已注册的 <code>SelectionKey</code> 将失效，但不影响 <code>Channel</code></p>
+<h2 id="buffer-api图解">Buffer API图解</h2>
+<p>缓冲区本质上是一个数组,但是它通过一系列的方法来追踪和访问数据,这使得它看起来像一个列表或队列。JDK中原汁原味的描述：“a linear, finite sequence of elements of a specific
+primitive type.”</p>
+<p>去掉其包含的内容数据不谈，缓冲区有3个属性:</p>
+<ul>
+<li>容量(Capacity):最大存储量，初始化时确定，不可改变</li>
+<li>位置(Position):下一个要读或写的元素索引</li>
+<li>限制(Limit):缓冲区不可操作的下一个元素的位置，limit &#x3C;= capacity</li>
+</ul>
+<p>沿用上文中读取文件的代码示例，其主要使用方式：</p>
+<ul>
+<li>向 <code>Buffer</code> 中写入数据，如 <code>channel.read(buffer)</code>，此时为写模式</li>
+<li>调用 <code>flip()</code> 切换为读模式</li>
+<li>从 <code>Buffer</code> 中取出数据，如 <code>buffer.get()</code></li>
+<li>调用 <code>clear()</code> 或 <code>compact()</code> 切换为写模式</li>
+</ul>
+<p>重复直到读取完成（或异常）。</p>
+<h3 id="api">API</h3>
+<p>下文将结合以下Demo代码介绍API，图示其属性变化</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> demo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        // 创建一个长度为10的ByteBuffer</span></span>
+<span class="line"><span style="color:#E1E4E8">        ByteBuffer buffer </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ByteBuffer.</span><span style="color:#B392F0">allocate</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // 写入5个字节到缓冲区</span></span>
+<span class="line"><span style="color:#E1E4E8">        buffer.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">((</span><span style="color:#F97583">byte</span><span style="color:#E1E4E8">) </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        buffer.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">((</span><span style="color:#F97583">byte</span><span style="color:#E1E4E8">) </span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        buffer.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">((</span><span style="color:#F97583">byte</span><span style="color:#E1E4E8">) </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        buffer.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">((</span><span style="color:#F97583">byte</span><span style="color:#E1E4E8">) </span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        buffer.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">((</span><span style="color:#F97583">byte</span><span style="color:#E1E4E8">) </span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // 翻转缓冲区 准备读取 </span></span>
+<span class="line"><span style="color:#E1E4E8">        buffer.</span><span style="color:#B392F0">flip</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // 读取2个字节 </span></span>
+<span class="line"><span style="color:#F97583">        byte</span><span style="color:#E1E4E8"> a </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> buffer.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        byte</span><span style="color:#E1E4E8"> b </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> buffer.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        buffer.</span><span style="color:#B392F0">rewind</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // 清空缓冲区  </span></span>
+<span class="line"><span style="color:#E1E4E8">        buffer.</span><span style="color:#B392F0">clear</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="分配空间">分配空间</h4>
+<p>使用JVM堆内存的Buffer：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>ByteBuffer#allocate(int capacity)</span></span></code></pre>
+<p>使用堆外内存的Buffer：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>ByteBuffer#allocateDirect(int capacity)</span></span></code></pre>
+<p>申请一个容量为10的Buffer，此时：</p>
+<ul>
+<li>position 指向0</li>
+<li>limit 和 capacity 为10，指向最大的位置9</li>
+</ul>
+<img width="600" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f48c34f0094e4b8481ab7ea7d894075f~tplv-k3u1fbpfcp-watermark.image">
+<h4 id="向buffer中写入数据">向Buffer中写入数据</h4>
+<p>以ByteBuffer为例,具有以下重载API，参数见名知意：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">ByteBuffer#put(byte b)</span></span>
+<span class="line"><span style="color:#E1E4E8">ByteBuffer#put(int index, byte b)</span></span>
+<span class="line"><span style="color:#E1E4E8">ByteBuffer#put(ByteBuffer src)</span></span>
+<span class="line"><span style="color:#E1E4E8">ByteBuffer#put(byte[])</span></span>
+<span class="line"><span style="color:#E1E4E8">ByteBuffer#put(byte[] src, int offset, int length)</span></span></code></pre>
+<p>而在 <code>CharBuffer</code> 等Buffer子簇中，<strong>针对其目标数据类型具有相应的API</strong> 。</p>
+<p><em>而JDK中以Byte为主要数据类型进行基础功能的实现，下文中如无必要，将只讨论以Byte为目标数据的功能实现类。</em></p>
+<p><em>作者按：读者诸君，如果您对JAVA的泛型和设计模式有一定了解，可能会思考 “为何JDK中的代码不利用泛型进行更系统性的抽象”，但注意：JDK1.4中尚无泛型</em></p>
+<p>依次写入5个byte之后：</p>
+<ul>
+<li>position 指向5</li>
+<li>limit 和 capacity 为10，指向最大的位置9</li>
+</ul>
+<img width="600" alt="desc" src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/55aababd441842ff82ed871cf6acdc6b~tplv-k3u1fbpfcp-watermark.image">
+<h4 id="flip">flip</h4>
+<p>翻转Buffer：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Buffer#flip()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public Buffer flip() {</span></span>
+<span class="line"><span>    limit = position;</span></span>
+<span class="line"><span>    position = 0;</span></span>
+<span class="line"><span>    mark = -1;</span></span>
+<span class="line"><span>    return this;</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>如Doc所描述，flip干三件事情：The limit is set to the current position and then the position is set to zero. If the mark is defined then it is discarded.</p>
+<p>不难理解，它的设计意图是将Buffer从 “写” 的工作模式切换到 “读” 的工作模式，并限定读取的边界。</p>
+<p>在写入5个数据后flip：</p>
+<ul>
+<li>position 指向0</li>
+<li>limit 为5, capacity 为10</li>
+</ul>
+<img width="600" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1616d5de97b045dc998703c14a1b02bc~tplv-k3u1fbpfcp-watermark.image">
+<h4 id="从buffer中读出数据">从Buffer中读出数据</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>ByteBuffer#get() :byte</span></span>
+<span class="line"><span>ByteBuffer#get(int index) :byte</span></span>
+<span class="line"><span>ByteBuffer#get(byte[] dst)</span></span>
+<span class="line"><span>ByteBuffer#get(byte[] dst, int offset, int length)</span></span></code></pre>
+<p>参数见名知意，不再赘述。</p>
+<p>继续flip后的操作，读取两个byte数据，此时：</p>
+<ul>
+<li>position 指向2</li>
+<li>limit 为5, capacity 为10</li>
+</ul>
+<img width="600" alt="desc" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e3ededd7518041c28d702bbbe7c45ae8~tplv-k3u1fbpfcp-watermark.image">
+<h4 id="rewind">rewind</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public Buffer rewind() {</span></span>
+<span class="line"><span>    this.position = 0;</span></span>
+<span class="line"><span>    this.mark = -1;</span></span>
+<span class="line"><span>    return this;</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>使用rewind可以重置 <code>mark标记</code> 和 <code>position</code>，此时可以从头再次读取缓冲区内容。</p>
+<h4 id="clear--compact">clear &#x26; compact</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public Buffer clear() {</span></span>
+<span class="line"><span>    this.position = 0;</span></span>
+<span class="line"><span>    this.limit = this.capacity;</span></span>
+<span class="line"><span>    this.mark = -1;</span></span>
+<span class="line"><span>    return this;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>//HeapByteBuffer</span></span>
+<span class="line"><span>public ByteBuffer compact() {</span></span>
+<span class="line"><span>    int var1 = this.position();</span></span>
+<span class="line"><span>    int var2 = this.limit();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    assert var1 &#x3C;= var2;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    int var3 = var1 &#x3C;= var2 ? var2 - var1 : 0;</span></span>
+<span class="line"><span>    System.arraycopy(this.hb, this.ix(var1), this.hb, this.ix(0), var3);</span></span>
+<span class="line"><span>    this.position(var3);</span></span>
+<span class="line"><span>    this.limit(this.capacity());</span></span>
+<span class="line"><span>    this.discardMark();</span></span>
+<span class="line"><span>    return this;</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>clear 将重置所有属性，与初始化的状态一致，但并不会清除数据。不难理解：各个标记已经保障读写安全，因此历史缓冲不会导致脏数据问题</p>
+<p>compact 将清除已读数据，并将属性处理为满足 “在未读数据后写入”</p>
+<img width="600" alt="desc" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cfc82f01d0dd4b91bc12afd974fa367f~tplv-k3u1fbpfcp-watermark.image">
+<h4 id="mark--reset">mark &#x26; reset</h4>
+<p>mark和reset需要合并使用, mark用于在当前position打标记，进过一些行为后可能position发生变化，通过reset将position恢复到先前的标记。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public Buffer mark() {</span></span>
+<span class="line"><span>    this.mark = this.position;</span></span>
+<span class="line"><span>    return this;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public Buffer reset() {</span></span>
+<span class="line"><span>    int var1 = this.mark;</span></span>
+<span class="line"><span>    if (var1 &#x3C; 0) {</span></span>
+<span class="line"><span>        throw new InvalidMarkException();</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>        this.position = var1;</span></span>
+<span class="line"><span>        return this;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<h2 id="唠叨几句">唠叨几句</h2>
+<p>上个月立了个FLAG，放言端午前写完IO系列。在内心也希望在今年多产出一些基础文章。</p>
+<ul>
+<li>一来是看看温故是否能知新；</li>
+<li>二来是基础文章对刚入行或者准备入行的小兄弟们帮助大一些；</li>
+<li>三来是对阐述理念类的文章还没有做好充足的准备；</li>
+</ul>
+<p>但计划赶不上变化，我也未能想到，在不换坑的情况下，我的工作性质发生了巨大改变，这种改变尚未到谈论好坏的阶段，但确实要耗费太多心神，以至于我的零碎时间往往用于情绪垃圾回收，而没心思再做它顾。</p>
+<p>过于絮叨了。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

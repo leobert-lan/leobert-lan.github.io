@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>关于画一个句号--基于2022年终总结的反思与分享 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">关于画一个句号--基于2022年终总结的反思与分享</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="关于画一个句号基于2022年终总结的反思与分享">关于画一个句号—基于2022年终总结的反思与分享</h1>
+<p><em>没有平台鼓风造势，今年各大平台没有涌现出一批总结，非常清爽</em></p>
+<p>正如同人发明了抽屉，将杂物进行整理、丢弃、收纳，才能对空间进行更合理地使用。我们也需要对知识、过往经历进行整理、丢弃、收纳，才能对大脑进行更合理地使用。</p>
+<blockquote>
+<p>这个人需要一个句号，你可以帮他画一个 — 《天道》</p>
+</blockquote>
+<p>在电视剧天道中，丁元英说了这样一句话，指导芮小丹让罪犯彻底放下了执念。而对于人生中的一个年轮，无论它充斥几多成功与失败，夹杂几许悲欢或离合，都值得为它画一个阶段性的句号，
+它需要庄严肃穆的态度，它需要严谨全面的视角。</p>
+<p>画上句号，是对过去做一次整理、丢弃、收纳，是在自己竭尽全力反思后卸下精神的枷锁，为谱写新的篇章做好准备。认清目标，轻装简行。</p>
+<p>经过多次审视，通过这一篇文章将我认为能对读者起到帮助的内容分享出来。</p>
+<h2 id="我的个人总结">我的个人总结</h2>
+<h3 id="工作方面">工作方面</h3>
+<p>过去的一年，工作中的详细情况不适合与诸位分享。除去常规的APP编写维护工作外，我也结合工作内容在其他方向上做了一些扩展。</p>
+<ul>
+<li>实战了MVI架构，并将心得进行了分享</li>
+<li>对物联网通讯协议进行浅层次的调研学习</li>
+<li>结合”遥控器” 项目，对socket、蓝牙、WiFi等通信方面，Android事件底层机制等，进行了更深入的学习</li>
+<li>结合”日志工具”，对加密进行了复习，实战了Compose和Compose-Desktop</li>
+<li>对uni-app框架进行了浅层调研，反编译SDK简单阅读源码，和以往自研的h5-bridge进行了对比，开发了几个自研插件</li>
+<li>潜伏后端写了写接口，对诸多优秀的框架展开源码学习，基于已掌握的反射知识和APT知识，造了点轮子，让后端见识了Android不仅卷还真TM会卷不是瞎卷</li>
+</ul>
+<p>总的来说，整体工作丰富多彩，至少有30%的时间不在拧业务螺丝。但个人回看时仍觉有所不足，部分工作并未留下详尽的脑图，未曾凝练为结构化的知识信息。</p>
+<h3 id="自我学习与总结输出">自我学习与总结输出</h3>
+<p>去年年初计划全年写完Java多线程系列，以及其他零散的分享，预计12-15篇原创。</p>
+<ul>
+<li>多线程系列没有全部完成</li>
+<li>实现了文章总数目标</li>
+</ul>
+<p>订计划时，希望通过写博客实现以下目标：</p>
+<ul>
+<li>锻炼驾驭不同风格的写作能力</li>
+<li>提升结构化表达能力</li>
+<li>提升绘图能力</li>
+<li>总结、温习、继续学习知识</li>
+<li>提升个人影响力</li>
+</ul>
+<p>通过刻意试探与反思多篇文章的数据，现在看来 “提升个人影响力” 这一目标倒大可不必存在。它太过于限制分享的内容且过于功利，以至于影响到撰文时的心态。</p>
+<p>今年也会继续写下去，保底一个月出一篇，而心态转变后，文章内容和语言将不再刻意深沉。恰如标题，产出的目标都是 “画一个句号” ，将脑海中的知识挪挪地。</p>
+<h3 id="文娱与生活">文娱与生活</h3>
+<p>有事没事的陪老婆打打游戏，没遇到啥想看的新剧，周末不想起床的时候刷刷风筝之类的老剧。没去看啥电影，同样也没出去玩，逢年过节回去陪陪长辈。平淡无奇的生活。</p>
+<p>因为某些原因，和老婆一起养的猫被送走了，少了很多麻烦与乐趣。</p>
+<p>其他时间还是以读书为主，闲书（小说）读了不少，好书也读了不少，唯独技术类书籍没读几行，后续会写一些杂篇和大家分享分享。</p>
+<p>说起读书想起来一件事情，去年读到别人的年终总结，里面提到一个目标：读完一本金庸著作。请恕我直言，当时我很不厚道的笑了。目前回头看时，制定并实现这一目标并无不妥。</p>
+<p>时间固然宝贵，但我们并不能将所有的时间都用来学习技术，文武之道一张一弛，金庸的武侠世界中也有诸多人生哲理，金庸的文笔更数上乘。</p>
+<p><strong>总体来说，Work-Life-Balance还算可以，但对家人的陪伴并不够。这一点需要在今年好好改进</strong></p>
+<p>另外，在家里人强烈要求下，买了辆车，回老家倒是方便了很多，并且不出意外地养成了 “眼观六路，嘴骂八方” 的被动技能</p>
+<blockquote>
+<p>说了很多，最终汇总为一句：通过各种手段，我和自己达成了和解，阶段性地摆脱了焦虑。至于能维持多久，需要交给时间去校验。</p>
+</blockquote>
+<h2 id="工作总结与个人总结不同您需要一个更适合的思考框架">工作总结与个人总结不同，您需要一个更适合的思考框架</h2>
+<p>絮叨了很多，我们开始谈一些真正能用到的。</p>
+<p>我尚不敢指导各位如何去做工作总结，但我相信下面这些内容会给您一些启发。</p>
+<blockquote>
+<p>一定要意识到，工作总结和个人性质的总结是不同的！在目的性、思考框架上是完全两码事。</p>
+</blockquote>
+<p>我相信有不少读者朋友是这样进行工作总结的：</p>
+<ul>
+<li>细数全年做了哪些事情</li>
+<li>做的结果如何</li>
+<li>寻找一些亮点（自认为很厉害的、很有挑战的事情）</li>
+<li>横向比较以及来年如何做出更好的成绩</li>
+</ul>
+<p>如果是个人性质的总结，这样搞没有问题，毕竟你大多数时间不为别人而活，想一想干了啥，是否是自己想做的事情，怎么能做得更好，这套思维逻辑没有问题。</p>
+<p>但工作总结不一样，名义上你为自己挣钱，但实际上是为别人工作，无论是KPI或者OKR的考核机制，背后都是公司和领导层的价值导向。
+你需要思考公司提倡的价值导向，并且哪些目标的实现对公司意味着价值转换，以此展开思考：哪些工作是服务于该目标的，这些要重点写。</p>
+<p>但不可否认，在有些公司中，努力搬砖就能创造大多数价值，这对技术创新者而言并不友好，但人总要为自己的选择承担后果。
+简而言之，并不是你做的不好，而是公司不提倡，在这些公司这是一条死路。</p>
+<p>即便你的技术创新能够带来极大地便利，让开发成本降低不少，<strong>但这并不能缓解中高层和老板的焦虑</strong>。</p>
+<p>看到员工在加班创造价值会缓解老板的焦虑，哪怕付出水电费；看到手下人在加班，能够缓解管理人员的另一种焦虑。</p>
+<p><em>具体的内容我不点破，您自行观察和思考</em></p>
+<p><strong>早日认清这一点很重要。</strong></p>
+<p>伴随着总结的还有一件事情，即绩效评定。这又是一件有门道的事情。</p>
+<p>我希望每一位打工人都能受到公平公正和过程公开的对待，但很遗憾这是奢望。</p>
+<p>大多数公司的绩效考核都是过程不公开的，而大多数人收到不符合预期的绩效反馈时，总是在努力反驳，希望推倒这种非公平非公正。</p>
+<p>其实大可不必！你几乎无法改变既定的事情。</p>
+<p>但请注意，绩效考核以及其沟通环节是一个难得的机会，您拥有一个官方认可的场合去试探您的直属和间接领导。</p>
+<p>前面我们提到，考核本身是公司价值导向的体现。正如同有一千个读者就有一千个哈姆雷特。老板们和董事会们制定了公司的发展策略和近几年的核心价值，在不同层次落实时难免会发生偏差。</p>
+<p>您拥有一个冠冕堂皇的理由让直属、间接领导解释为何得到这样的评分，哪些地方做的不到位，来年如何做出 “好成绩”，没有人会拒绝这样的戏台。</p>
+<p>相信只要您留心，就一定能发现</p>
+<ul>
+<li>领导是否藏有私心</li>
+<li>自己对价值导向的理解是否有误</li>
+</ul>
+<p>而这些信息对您做出选择至关重要，借用最近随着高启强大火的孙子兵法：</p>
+<blockquote>
+<p>兵者,国之大事,死生之地,存亡之道,不可不察也。故经之以五事,校之以计,而索其情:一曰道,二曰天,三曰地,四曰将,五曰法 — 计篇</p>
+</blockquote>
+<p>这件事情往小了说是一两个月薪资的奖金问题，往大了说是未来一两年的工作安排和未来几年的职业规划。</p>
+<ul>
+<li>道：意志统一，上下一心，如果高层的想法，中层的想法，基层的想法，您的想法，如果有偏差，要注意衡量了。</li>
+<li>天：天时，公司资金流是否充裕，大环境好不好很重要！</li>
+<li>地：地利，工作中的氛围，合作者如果很不配合，一个人很难成事，主管和你不对付就更难了。</li>
+<li>将：您的直接主管和间接上级，如果他们不够体恤下属，不能传达正确的价值导向，做不到赏罚分明，工作中夹杂过多个人诉求，如果您不愿意成为他们的狗腿子，那也不会有好结果。</li>
+<li>法：指组织结构，责权划分，人员编制，管理制度，资源保障，物资调配。在绩效考核时，只要留心，一定可以观察到。</li>
+</ul>
+<h2 id="兼听则明偏听则暗">兼听则明，偏听则暗</h2>
+<blockquote>
+<p>监听则明，偏听则暗</p>
+<p>原文出自《资治通鉴》，典故为唐太宗与魏征问答，最早出处 《管子》君臣篇</p>
+</blockquote>
+<ul>
+<li>我所说的，您也未必要全盘接受，大可和信得过的朋友们商讨一二</li>
+<li>别人对你的评价，没必要全盘接受，但不能完全不听，客观地对照审视。例如绩效考评中上级对你的评价、同事对你的评价，是从他们自身的利益出发的还是从你个人利益出发的，多听一些，自见端倪。</li>
+</ul></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

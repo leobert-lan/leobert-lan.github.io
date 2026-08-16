@@ -1,0 +1,791 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>迟来的续集--Drawable+Animator，将优雅进行到底 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">迟来的续集--Drawable+Animator，将优雅进行到底</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="迟来的续集drawableanimator将优雅进行到底">迟来的续集—Drawable+Animator，将优雅进行到底</h1>
+<h2 id="前言">前言</h2>
+<p>2021年初，读过一篇关于splash页面动效的推送文章，作者讲解了如何实现一个闪屏页效果：</p>
+<blockquote>
+<p>将一个英文单词拆分为多个字母，散落在屏幕中，然后按照一定的路径回归，最终展示一段流光效果。</p>
+<p>通过自定义View的方式予以实现。</p>
+</blockquote>
+<p>当时我脑中闪过一个念头：他的实现很棒，但如果不需要点触、手势交互，使用Drawable实现更好。并由此编写了一篇文章：<a href="https://juejin.cn/post/6924240361317466125">三思系列：重新认识Drawable</a>
+, 并在不久之后通过 <a href="https://juejin.cn/post/6934222774139518984">三思系列：为什么要自定义View</a> 一文阐释了对于 “自定义View适用场景” 的个人拙见。</p>
+<p>简单通过思维导图回顾 <a href="https://juejin.cn/post/6924240361317466125">三思系列：重新认识Drawable</a> 一文的内容：
+<img  src="/_astro/Drawable_guide.DeqPIL-k_Z20L7GV.webp" alt loading="lazy" decoding="async" width="660" height="233"></p>
+<p><em>阅读原文大约需要10-15分钟</em></p>
+<p>文中，我们最终以该方案实现了 “自定义一个动画Drawable” ： <code>unscheduleSelf()</code> / <code>scheduleSelf()</code> 机制 <code>停止回调/设置定时回调</code> + <code>invalidateSelf()</code> 机制进行刷新绘制；
+方案的本质是 <strong>在预设时间点绘制关键帧</strong> 。仔细观察后不难发现问题：<strong>效果并不顺滑</strong> 。效果如下：</p>
+<img width="216" height="384" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2e60cc97c4b04c9a9c520b955f76fbae~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp">
+<p>视频：<a href="https://github.com/leobert-lan/Blog/blob/main/Android/Drawable/post_2/version_5.webm">链接</a></p>
+<p>彼时，文章的主旨为重新认识Drawable，<strong>并未对此展开讨论并进一步优化</strong>。 本篇文章作为迟来的续集，将会 <strong>对问题展开讨论、探索优化方案、追究原理、并进一步拓宽思路</strong>。按照此方式展开将迎来久违的三思系列。</p>
+<p><a href="https://leobert-lan.github.io/info/about_sansi_series.html">关于三思系列</a></p>
+<h2 id="思危问题本质">思危：问题本质</h2>
+<p>上文已经提到，我们通过 <code>unscheduleSelf()</code> / <code>scheduleSelf()</code> 机制 停止回调/设置定时回调，重新绘制关键帧。那么 <code>scheduleSelf()</code> 的本质又是什么？</p>
+<p>阅读代码可知，源码中通过接口回调的设计，将功能的实现剥离：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Drawable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> scheduleSelf</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Runnable </span><span style="color:#FFAB70">what</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">long</span><span style="color:#FFAB70"> when</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#E1E4E8"> Callback callback </span><span style="color:#F97583">=</span><span style="color:#B392F0"> getCallback</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (callback </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            callback.</span><span style="color:#B392F0">scheduleDrawable</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, what, when);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> final</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> setCallback</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">Nullable</span><span style="color:#E1E4E8"> Callback </span><span style="color:#FFAB70">cb</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        mCallback </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> cb </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> ?</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> WeakReference&#x3C;>(cb) </span><span style="color:#F97583">:</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    @</span><span style="color:#F97583">Nullable</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> Callback </span><span style="color:#B392F0">getCallback</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> mCallback </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> ?</span><span style="color:#E1E4E8"> mCallback.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">:</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> Callback</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        void</span><span style="color:#B392F0"> invalidateDrawable</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Drawable </span><span style="color:#FFAB70">who</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        void</span><span style="color:#B392F0"> scheduleDrawable</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Drawable </span><span style="color:#FFAB70">who</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Runnable </span><span style="color:#FFAB70">what</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">long</span><span style="color:#FFAB70"> when</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        void</span><span style="color:#B392F0"> unscheduleDrawable</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Drawable </span><span style="color:#FFAB70">who</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Runnable </span><span style="color:#FFAB70">what</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>继续寻找 <code>Callback</code> 实现类：<em>重点关注 scheduleDrawable 即可</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> View</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> Drawable.Callback</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> invalidateDrawable</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Drawable </span><span style="color:#FFAB70">drawable</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">verifyDrawable</span><span style="color:#E1E4E8">(drawable)) {</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#E1E4E8"> Rect dirty </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> drawable.</span><span style="color:#B392F0">getDirtyBounds</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> scrollX </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mScrollX;</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> scrollY </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mScrollY;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">            invalidate</span><span style="color:#E1E4E8">(dirty.left </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> scrollX, dirty.top </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> scrollY,</span></span>
+<span class="line"><span style="color:#E1E4E8">                    dirty.right </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> scrollX, dirty.bottom </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> scrollY);</span></span>
+<span class="line"><span style="color:#B392F0">            rebuildOutline</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //看这里</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> scheduleDrawable</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Drawable </span><span style="color:#FFAB70">who</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Runnable </span><span style="color:#FFAB70">what</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">long</span><span style="color:#FFAB70"> when</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">verifyDrawable</span><span style="color:#E1E4E8">(who) </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> what </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> delay </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> when </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> SystemClock.</span><span style="color:#B392F0">uptimeMillis</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (mAttachInfo </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                mAttachInfo.mViewRootImpl.mChoreographer.</span><span style="color:#B392F0">postCallbackDelayed</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                        Choreographer.CALLBACK_ANIMATION, what, who,</span></span>
+<span class="line"><span style="color:#E1E4E8">                        Choreographer.</span><span style="color:#B392F0">subtractFrameDelay</span><span style="color:#E1E4E8">(delay));</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">                // Postpone the runnable until we know</span></span>
+<span class="line"><span style="color:#6A737D">                // on which thread it needs to run.</span></span>
+<span class="line"><span style="color:#B392F0">                getRunQueue</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">postDelayed</span><span style="color:#E1E4E8">(what, delay);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> unscheduleDrawable</span><span style="color:#E1E4E8">(@</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Drawable </span><span style="color:#FFAB70">who</span><span style="color:#E1E4E8">, @</span><span style="color:#F97583">NonNull</span><span style="color:#E1E4E8"> Runnable </span><span style="color:#FFAB70">what</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">verifyDrawable</span><span style="color:#E1E4E8">(who) </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> what </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (mAttachInfo </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                mAttachInfo.mViewRootImpl.mChoreographer.</span><span style="color:#B392F0">removeCallbacks</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                        Choreographer.CALLBACK_ANIMATION, what, who);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#B392F0">            getRunQueue</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">removeCallbacks</span><span style="color:#E1E4E8">(what);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> unscheduleDrawable</span><span style="color:#E1E4E8">(Drawable </span><span style="color:#FFAB70">who</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mAttachInfo </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> who </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mAttachInfo.mViewRootImpl.mChoreographer.</span><span style="color:#B392F0">removeCallbacks</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                    Choreographer.CALLBACK_ANIMATION, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, who);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>简单解释程序逻辑如下：如果 “该Drawable作用于自身” 且 “Runnable非空”，计算回调的delay，如果View已经添加到Window，则交给Choreographer，否则丢入缓存队列。</p>
+<p>而缓存队列的内容将在View添加到Window时交给 <code>Choreographer</code></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> dispatchAttachedToWindow</span><span style="color:#E1E4E8">(AttachInfo </span><span style="color:#FFAB70">info</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> visibility</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        //ignore</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // Transfer all pending runnables.</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mRunQueue </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mRunQueue.</span><span style="color:#B392F0">executeActions</span><span style="color:#E1E4E8">(info.mHandler);</span></span>
+<span class="line"><span style="color:#E1E4E8">            mRunQueue </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //ignore</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<blockquote>
+<p>读者诸君，如果您熟悉Android的 <code>屏幕刷新机制</code> 和 <code>消息机制</code> ，一定不会对 <code>Choreographer</code> 感到陌生</p>
+</blockquote>
+<p>Choreographer 直译为编舞者，暗含了 “编制视图变化效果” 的隐喻，其本质依旧是利用 VSync+Handler消息机制。<strong>delay Callback的设计存在毫秒级的误差</strong>。</p>
+<p><em>作者按：本篇不再展开讨论Android的消息机制，以下仅给出 <code>基于消息机制的界面绘制设计</code> 关键部分流程图：</em></p>
+<p><img  src="/_astro/ui_msg_img.BdhHWoR6_ZefPIz.webp" alt="img.png" loading="lazy" decoding="async" width="2248" height="1608"></p>
+<p>结合前面的代码分析，<code>scheduleDrawable</code> 的流程可以参考此图理解。</p>
+<p><em>作者按，虽然仍有差异，但机制一致，可参考理解</em></p>
+<h3 id="验证">验证</h3>
+<blockquote>
+<p>Talk is cheap, show you the code</p>
+</blockquote>
+<p>在 <code>View</code> 中有一段代码和 <code>scheduleDrawable</code> 高度相似：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> postOnAnimationDelayed</span><span style="color:#E1E4E8">(Runnable </span><span style="color:#FFAB70">action</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">long</span><span style="color:#FFAB70"> delayMillis</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#E1E4E8"> AttachInfo attachInfo </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mAttachInfo;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (attachInfo </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            attachInfo.mViewRootImpl.mChoreographer.</span><span style="color:#B392F0">postCallbackDelayed</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                    Choreographer.CALLBACK_ANIMATION, action, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, delayMillis);</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">            // Postpone the runnable until we know</span></span>
+<span class="line"><span style="color:#6A737D">            // on which thread it needs to run.</span></span>
+<span class="line"><span style="color:#B392F0">            getRunQueue</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">postDelayed</span><span style="color:#E1E4E8">(action, delayMillis);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>注意：<code>scheduleDrawable</code> 基于执行的目标时间 <code>when</code>，和当前系统时钟计算了delay，又额外调整了delay时间, <code>Choreographer.subtractFrameDelay(delay)</code>，_
+它是隐藏API_</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> final</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> Choreographer</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> final</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> DEFAULT_FRAME_DELAY </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 10</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">    // The number of milliseconds between animation frames.</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> static</span><span style="color:#F97583"> volatile</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> sFrameDelay </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> DEFAULT_FRAME_DELAY;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#F97583"> long</span><span style="color:#B392F0"> subtractFrameDelay</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> delayMillis</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> frameDelay </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> sFrameDelay;</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> delayMillis </span><span style="color:#F97583">&#x3C;=</span><span style="color:#E1E4E8"> frameDelay </span><span style="color:#F97583">?</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> :</span><span style="color:#E1E4E8"> delayMillis </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> frameDelay;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>设计一个简单的验证代码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Demo</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> test</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> btn </span><span style="color:#F97583">=</span><span style="color:#B392F0"> findViewById</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Button</span><span style="color:#E1E4E8">>(R.id.btn)</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> index </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> s </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> action: </span><span style="color:#B392F0">Runnable</span><span style="color:#F97583"> =</span><span style="color:#F97583"> object</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">Runnable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> run</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">                Log.</span><span style="color:#B392F0">e</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"lmsg"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"</span><span style="color:#79B8FF">$index</span><span style="color:#9ECBFF">, offset time ${System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#9ECBFF">() </span><span style="color:#F97583">-</span><span style="color:#9ECBFF"> s </span><span style="color:#F97583">-</span><span style="color:#9ECBFF"> index </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> 30</span><span style="color:#9ECBFF">}"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">                index</span><span style="color:#F97583">++</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (index </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 100</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    btn.</span><span style="color:#B392F0">postOnAnimationDelayed</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#79B8FF">                        this</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">                        30L</span><span style="color:#F97583"> -</span><span style="color:#79B8FF"> 10L</span><span style="color:#6A737D"> /*hide api:android.view.Choreographer#subtractFrameDelay*/</span></span>
+<span class="line"><span style="color:#E1E4E8">                    )</span></span>
+<span class="line"><span style="color:#E1E4E8">                } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    Log.</span><span style="color:#B392F0">e</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"lmsg"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"finish, total time ${System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#9ECBFF">() </span><span style="color:#F97583">-</span><span style="color:#9ECBFF"> s}"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        btn.</span><span style="color:#B392F0">setOnClickListener</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            index </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#E1E4E8">            s </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> System.</span><span style="color:#B392F0">currentTimeMillis</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            it.</span><span style="color:#B392F0">postOnAnimationDelayed</span><span style="color:#E1E4E8">(action, </span><span style="color:#79B8FF">0L</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>参考一下结果：<em>注意执行结果不会幂等，但整体表现为超出预期时长</em></p>
+<p><img  src="/_astro/result_1.C7CjG_3u_ZM7HqB.webp" alt loading="lazy" decoding="async" width="875" height="852"></p>
+<h2 id="思退使用animator改进">思退：使用Animator改进</h2>
+<p>Android 在 <code>Android 3.0，API11</code> 中提供了更强大的动画 <code>Animator</code>，借助其中的 <code>ValueAnimator</code>，可以很方便的 <code>编排</code> 动画。</p>
+<p><em>即便尚未分析原理，只要使用过属性动画，也知道它具有非常丝滑的效果</em></p>
+<p>以上还都是推测，接下来进行实测。</p>
+<h3 id="实现">实现</h3>
+<p>刨去一致部分，我们需要完成以下两点：</p>
+<ul>
+<li>创建 <code>ValueAnimator</code> 实例，并按照动画需求设置 <code>时长</code>、<code>插值器</code>、<code>UpdateListener</code> 等</li>
+<li>若没有额外需要，可将 <code>Animatable2</code> 弱化为 <code>Animatable</code>，仅保留动画控制API，通过 <code>ValueAnimator</code> 实例委托实现API业务逻辑。</li>
+</ul>
+<p>核心代码如下： <em>完整代码可从github获取：<a href="https://github.com/leobert-lan/DrawableWorkShop">DrawableWorkShop</a></em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> AnimLetterDrawable2</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">Drawable</span><span style="color:#E1E4E8">(), </span><span style="color:#B392F0">Animatable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // 相似部分略去</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> totalFrames </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 30</span><span style="color:#F97583"> *</span><span style="color:#79B8FF"> 3</span><span style="color:#6A737D"> //3 second, 30frames per second</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> valueAnimator </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ValueAnimator.</span><span style="color:#B392F0">ofInt</span><span style="color:#E1E4E8">(totalFrames).</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">        duration </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 3000L</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.interpolator </span><span style="color:#F97583">=</span><span style="color:#B392F0"> LinearInterpolator</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        addUpdateListener</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            setFrame</span><span style="color:#E1E4E8">(it.animatedValue </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> Int)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> frameIndex </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> setFrame</span><span style="color:#E1E4E8">(frame: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (frame </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> totalFrames) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        frameIndex </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> frame</span></span>
+<span class="line"><span style="color:#B392F0">        invalidateSelf</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> start</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(tag, </span><span style="color:#9ECBFF">"start called"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        valueAnimator.</span><span style="color:#B392F0">start</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> stop</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        valueAnimator.</span><span style="color:#B392F0">cancel</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#B392F0">        setFrame</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> isRunning</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> valueAnimator.isRunning</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="效果和关键代码对比">效果和关键代码对比</h3>
+<img width="216" height="384" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f38dfc6780fd45c38edccc91fcd6d0ea~tplv-k3u1fbpfcp-watermark.image?">
+<p>gif的效果太差，可以在 <a href="https://github.com/leobert-lan/DrawableWorkShop/blob/main/DrawableWorkShop/animator%E6%95%88%E6%9E%9C.webm">github项目仓库</a>
+中获取 webm视频</p>
+<p>关键代码差异：</p>
+<p>在原方案中，我们计算了下一帧的播放时间点，借助 <code>scheduleSelf</code> -> <code>View#scheduleDrawable</code> 进行了刷新</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> AnimLetterDrawable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> setFrame</span><span style="color:#E1E4E8">(frame: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, unschedule: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">, animate: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (frame </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> totalFrames) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        mAnimating </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> animate</span></span>
+<span class="line"><span style="color:#E1E4E8">        frameIndex </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> frame</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (unschedule </span><span style="color:#F97583">||</span><span style="color:#E1E4E8"> animate) {</span></span>
+<span class="line"><span style="color:#B392F0">            unscheduleSelf</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (animate) {</span></span>
+<span class="line"><span style="color:#6A737D">            // Unscheduling may have clobbered these values; restore them</span></span>
+<span class="line"><span style="color:#E1E4E8">            frameIndex </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> frame</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">            scheduleSelf</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, SystemClock.</span><span style="color:#B392F0">uptimeMillis</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> durationPerFrame)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#B392F0">        invalidateSelf</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>而新方案中，我们借助ValueAnimator的更新回调函数直接刷新，显示预定帧</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> AnimLetterDrawable2</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> valueAnimator </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ValueAnimator.</span><span style="color:#B392F0">ofInt</span><span style="color:#E1E4E8">(totalFrames).</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">        duration </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 3000L</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.interpolator </span><span style="color:#F97583">=</span><span style="color:#B392F0"> LinearInterpolator</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        addUpdateListener</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            setFrame</span><span style="color:#E1E4E8">(it.animatedValue </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> Int)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> setFrame</span><span style="color:#E1E4E8">(frame: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (frame </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> totalFrames) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        frameIndex </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> frame</span></span>
+<span class="line"><span style="color:#B392F0">        invalidateSelf</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="animator的原理">Animator的原理</h2>
+<p>此时，再来思索一番，为何 <code>Animator</code> 的实现效果明显丝滑呢？</p>
+<blockquote>
+<p>思危：是否和scheduleDrawable相比使用了不一样的底层机制？</p>
+</blockquote>
+<h3 id="源码跟进">源码跟进</h3>
+<p>单纯阅读文章内的代码会很枯燥，建议读者诸君对文中列出的源码进行泛读，抓住思路后再精读一遍源码。</p>
+<p>以下将有6个关键点，可厘清其原理</p>
+<ul>
+<li>1，start方法 — 找到动画被驱动的核心</li>
+<li>2， AnimationHandler#addAnimationFrameCallback(AnimationFrameCallback)</li>
+<li>3，<code>mAnimationCallbacks</code> 何时移除元素</li>
+<li>4，<code>AnimationHandler#doAnimationFrame</code> 方法的逻辑</li>
+<li>5，向前看，何人调用FrameCallback — 驱动动画的底层逻辑</li>
+<li>6，向后看，ValueAnimator#doAnimationFrame — 丝滑的原因</li>
+</ul>
+<h4 id="1start方法">1，start方法</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ValueAnimator</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> start</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#B392F0">        start</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> start</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">boolean</span><span style="color:#FFAB70"> playBackwards</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (Looper.</span><span style="color:#B392F0">myLooper</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> AndroidRuntimeException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Animators may only be run on Looper threads"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#6A737D">        //略去一部分</span></span>
+<span class="line"><span style="color:#B392F0">        addAnimationCallback</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">); </span><span style="color:#6A737D">//这里是核心</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mStartDelay </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> mSeekFraction </span><span style="color:#F97583">>=</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> mReversing) {</span></span>
+<span class="line"><span style="color:#B392F0">            startAnimation</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (mSeekFraction </span><span style="color:#F97583">==</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">                setCurrentPlayTime</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">                setCurrentFraction</span><span style="color:#E1E4E8">(mSeekFraction);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> addAnimationCallback</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> delay</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        //startWithoutPulsing 才会return</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">mSelfPulse) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#B392F0">        getAnimationHandler</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">addAnimationFrameCallback</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, delay); </span><span style="color:#6A737D">//这里是核心</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>简单阅读，可以排除掉 <code>startAnimation</code> <code>setCurrentPlayTime</code> <code>setCurrentFraction</code>，他们均不是动画回调的核心，只是在进行必要地初始化和FLAG状态维护。</p>
+<p>真正的核心是：<code>getAnimationHandler().addAnimationFrameCallback(this, delay);</code></p>
+<p>注意：AnimationHandler 存在线程单例设计:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"></span>
+<span class="line"><span style="color:#6A737D">//使用方：</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ValueAnimator</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#E1E4E8"> AnimationHandler </span><span style="color:#B392F0">getAnimationHandler</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> mAnimationHandler </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> ?</span><span style="color:#E1E4E8"> mAnimationHandler </span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> AnimationHandler.</span><span style="color:#B392F0">getInstance</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//ThreadLocal线程单例设计</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> AnimationHandler</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> final</span><span style="color:#F97583"> static</span><span style="color:#E1E4E8"> ThreadLocal&#x3C;</span><span style="color:#F97583">AnimationHandler</span><span style="color:#E1E4E8">> sAnimatorHandler </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> ThreadLocal&#x3C;>();</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> boolean</span><span style="color:#E1E4E8"> mListDirty </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#E1E4E8"> AnimationHandler </span><span style="color:#B392F0">getInstance</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (sAnimatorHandler.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            sAnimatorHandler.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#B392F0"> AnimationHandler</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> sAnimatorHandler.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="2-animationhandleraddanimationframecallbackanimationframecallback">2, AnimationHandler#addAnimationFrameCallback(AnimationFrameCallback)</h4>
+<p>方法逻辑中，有两处需要关注：</p>
+<ul>
+<li><strong>如果无 <code>AnimationFrameCallback</code> 回调实例</strong> ， <em>说明没有在运行中的动画</em> ，<strong>则挂载 <code>Choreographer.FrameCallback mFrameCallback</code></strong> ， 为更新动画（_
+调用动画的AnimationFrameCallback回调接口_）做准备。</li>
+<li><strong>在动画的 <code>AnimationFrameCallback</code> 回调实例未被注册的情况下</strong>，注册该回调实例</li>
+</ul>
+<p>看完这一段源码，读者诸君一定会对以下两点产生兴趣，我们在下文展开：</p>
+<ul>
+<li><code>doAnimationFrame</code> 方法的逻辑</li>
+<li><code>mAnimationCallbacks</code> 何时移除元素</li>
+</ul>
+<p>先看源码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> AnimationHandler</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> final</span><span style="color:#E1E4E8"> Choreographer.FrameCallback mFrameCallback </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> Choreographer.</span><span style="color:#B392F0">FrameCallback</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        @</span><span style="color:#F97583">Override</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> doFrame</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#E1E4E8"> frameTimeNanos) {</span></span>
+<span class="line"><span style="color:#B392F0">            doAnimationFrame</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">getProvider</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getFrameTime</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            //这不就破案了，只要还有动画的 AnimationFrameCallback，就挂载 mFrameCallback</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (mAnimationCallbacks.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">                getProvider</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">postFrameCallback</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> AnimationFrameCallbackProvider </span><span style="color:#B392F0">getProvider</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mProvider </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mProvider </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> MyFrameCallbackProvider</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> mProvider;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> addAnimationFrameCallback</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">final</span><span style="color:#E1E4E8"> AnimationFrameCallback </span><span style="color:#FFAB70">callback</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">long</span><span style="color:#FFAB70"> delay</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mAnimationCallbacks.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">            getProvider</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">postFrameCallback</span><span style="color:#E1E4E8">(mFrameCallback);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">mAnimationCallbacks.</span><span style="color:#B392F0">contains</span><span style="color:#E1E4E8">(callback)) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mAnimationCallbacks.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(callback);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //注意，delay为0，阅读时可以忽略这段逻辑</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (delay </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mDelayedCallbackStartTime.</span><span style="color:#B392F0">put</span><span style="color:#E1E4E8">(callback, (SystemClock.</span><span style="color:#B392F0">uptimeMillis</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> delay));</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="3manimationcallbacks-何时移除元素">3，<code>mAnimationCallbacks</code> 何时移除元素</h4>
+<p>AnimationHandler中 “清理” <code>mAnimationCallbacks</code> 的设计 : 先设置null，再择机集中清理null，维护链表结构。<em>可以避免循环过程中移除元素带来的潜在bug、以及避免频繁调整链表空间带来的损耗</em></p>
+<p>关键代码为：<code>android.animation.AnimationHandler#removeCallback</code>，它有两处调用点，看完下面这一段源码后再行分析。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> AnimationHandler</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> removeCallback</span><span style="color:#E1E4E8">(AnimationFrameCallback </span><span style="color:#FFAB70">callback</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        mCommitCallbacks.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(callback);</span></span>
+<span class="line"><span style="color:#E1E4E8">        mDelayedCallbackStartTime.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(callback);</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> id </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mAnimationCallbacks.</span><span style="color:#B392F0">indexOf</span><span style="color:#E1E4E8">(callback);</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (id </span><span style="color:#F97583">>=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mAnimationCallbacks.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(id, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            mListDirty </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> cleanUpList</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mListDirty) {</span></span>
+<span class="line"><span style="color:#F97583">            for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mAnimationCallbacks.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">>=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i</span><span style="color:#F97583">--</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (mAnimationCallbacks.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(i) </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    mAnimationCallbacks.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(i);</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">            mListDirty </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><code>removeCallback</code> 存在一个直接调用，进而可找到两个间接调用点：</p>
+<ul>
+<li><code>endAnimation</code> 停止动画时, 主动停止以及计算出动画已结束</li>
+<li><code>doAnimationFrame</code> 中发现动画已经被暂停</li>
+</ul>
+<p><em>再看一下源码：</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ValueAnimator</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> removeAnimationCallback</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">mSelfPulse) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#6A737D">        //直接调用-1</span></span>
+<span class="line"><span style="color:#B392F0">        getAnimationHandler</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">removeCallback</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> endAnimation</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mAnimationEndRequested) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#6A737D">        //间接调用-1</span></span>
+<span class="line"><span style="color:#B392F0">        removeAnimationCallback</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#6A737D">        //略去</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> final</span><span style="color:#F97583"> boolean</span><span style="color:#B392F0"> doAnimationFrame</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> frameTime</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mStartTime </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">            // First frame. If there is start delay, start delay count down will happen *after* this</span></span>
+<span class="line"><span style="color:#6A737D">            // frame.</span></span>
+<span class="line"><span style="color:#E1E4E8">            mStartTime </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mReversing</span></span>
+<span class="line"><span style="color:#F97583">                    ?</span><span style="color:#E1E4E8"> frameTime</span></span>
+<span class="line"><span style="color:#F97583">                    :</span><span style="color:#E1E4E8"> frameTime </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">long</span><span style="color:#E1E4E8">) (mStartDelay </span><span style="color:#F97583">*</span><span style="color:#B392F0"> resolveDurationScale</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // Handle pause/resume</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mPaused) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mPauseTime </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> frameTime;</span></span>
+<span class="line"><span style="color:#6A737D">            //间接调用-2</span></span>
+<span class="line"><span style="color:#B392F0">            removeAnimationCallback</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#6A737D">        //略</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="4animationhandlerdoanimationframe-方法的逻辑">4，<code>AnimationHandler#doAnimationFrame</code> 方法的逻辑</h4>
+<p>一共有三个业务目的：</p>
+<ul>
+<li>筛选，调用回调</li>
+<li>处理 CommitCallback 情况</li>
+<li>清理 <code>mAnimationCallbacks</code> 详见3</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> AnimationHandler</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> doAnimationFrame</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> frameTime</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        long</span><span style="color:#E1E4E8"> currentTime </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> SystemClock.</span><span style="color:#B392F0">uptimeMillis</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#F97583"> int</span><span style="color:#E1E4E8"> size </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mAnimationCallbacks.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> size; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#E1E4E8"> AnimationFrameCallback callback </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mAnimationCallbacks.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(i);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // `为何会有null？` 请看3 `mAnimationCallbacks` 何时移除元素</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (callback </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                continue</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            //如果是延迟执行的callback，在未到预定时间时为false</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">isCallbackDue</span><span style="color:#E1E4E8">(callback, currentTime)) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">                // 回调，实际逻辑：android.animation.ValueAnimator#doAnimationFrame</span></span>
+<span class="line"><span style="color:#E1E4E8">                callback.</span><span style="color:#B392F0">doAnimationFrame</span><span style="color:#E1E4E8">(frameTime);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">                // 此处值得再写一篇文章</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (mCommitCallbacks.</span><span style="color:#B392F0">contains</span><span style="color:#E1E4E8">(callback)) {</span></span>
+<span class="line"><span style="color:#B392F0">                    getProvider</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">postCommitCallback</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">new</span><span style="color:#B392F0"> Runnable</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">                        @</span><span style="color:#F97583">Override</span></span>
+<span class="line"><span style="color:#F97583">                        public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> run</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#B392F0">                            commitAnimationFrame</span><span style="color:#E1E4E8">(callback, </span><span style="color:#B392F0">getProvider</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">getFrameTime</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">                        }</span></span>
+<span class="line"><span style="color:#E1E4E8">                    });</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#B392F0">        cleanUpList</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> commitAnimationFrame</span><span style="color:#E1E4E8">(AnimationFrameCallback </span><span style="color:#FFAB70">callback</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">long</span><span style="color:#FFAB70"> frameTime</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">mDelayedCallbackStartTime.</span><span style="color:#B392F0">containsKey</span><span style="color:#E1E4E8">(callback) </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">                mCommitCallbacks.</span><span style="color:#B392F0">contains</span><span style="color:#E1E4E8">(callback)) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            callback.</span><span style="color:#B392F0">commitAnimationFrame</span><span style="color:#E1E4E8">(frameTime);</span></span>
+<span class="line"><span style="color:#E1E4E8">            mCommitCallbacks.</span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">(callback);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<blockquote>
+<p>作者按：值得一提的是，AnimationHandler中定义了所谓的 <code>OneShotCommitCallback</code> ，均添加到 <code>mCommitCallbacks</code>中。</p>
+<p>ValueAnimator 中曾利用它调整动画起始帧回调</p>
+<p>SDK 24 、25 中明确存在，从26直至32均未发现使用。注意，我此次翻阅源码时较为粗略，仍需详查 <code>android.animation.ValueAnimator#addOneShotCommitCallback</code> 方可定论，如有谬误还请读者指出，避免误导。</p>
+</blockquote>
+<h4 id="5向前看何人调用framecallback">5，向前看，何人调用FrameCallback</h4>
+<p>跟进 <code>getProvider().postFrameCallback(mFrameCallback);</code> 发现是暗度陈仓</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> AnimationHandler</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#E1E4E8"> AnimationFrameCallbackProvider </span><span style="color:#B392F0">getProvider</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mProvider </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mProvider </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> MyFrameCallbackProvider</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> mProvider;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> MyFrameCallbackProvider</span><span style="color:#F97583"> implements</span><span style="color:#B392F0"> AnimationFrameCallbackProvider</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#E1E4E8"> Choreographer mChoreographer </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Choreographer.</span><span style="color:#B392F0">getInstance</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        @</span><span style="color:#F97583">Override</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> postFrameCallback</span><span style="color:#E1E4E8">(Choreographer.FrameCallback </span><span style="color:#FFAB70">callback</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mChoreographer.</span><span style="color:#B392F0">postFrameCallback</span><span style="color:#E1E4E8">(callback);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        @</span><span style="color:#F97583">Override</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> postCommitCallback</span><span style="color:#E1E4E8">(Runnable </span><span style="color:#FFAB70">runnable</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mChoreographer.</span><span style="color:#B392F0">postCallback</span><span style="color:#E1E4E8">(Choreographer.CALLBACK_COMMIT, runnable, </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        @</span><span style="color:#F97583">Override</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> long</span><span style="color:#B392F0"> getFrameTime</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> mChoreographer.</span><span style="color:#B392F0">getFrameTime</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        @</span><span style="color:#F97583">Override</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> long</span><span style="color:#B392F0"> getFrameDelay</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> Choreographer.</span><span style="color:#B392F0">getFrameDelay</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        @</span><span style="color:#F97583">Override</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> setFrameDelay</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> delay</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            Choreographer.</span><span style="color:#B392F0">setFrameDelay</span><span style="color:#E1E4E8">(delay);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>又见 <code>Choreographer</code> ，这回应该不陌生了，跟进代码：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Choreographer</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> postFrameCallback</span><span style="color:#E1E4E8">(FrameCallback </span><span style="color:#FFAB70">callback</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">        postFrameCallbackDelayed</span><span style="color:#E1E4E8">(callback, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> void</span><span style="color:#B392F0"> postFrameCallbackDelayed</span><span style="color:#E1E4E8">(FrameCallback </span><span style="color:#FFAB70">callback</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">long</span><span style="color:#FFAB70"> delayMillis</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (callback </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> IllegalArgumentException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"callback must not be null"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">        postCallbackDelayedInternal</span><span style="color:#E1E4E8">(CALLBACK_ANIMATION,</span></span>
+<span class="line"><span style="color:#E1E4E8">                callback, FRAME_CALLBACK_TOKEN, delayMillis);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>值得注意的是：此次使用的是：<code>CALLBACK_ANIMATION</code></p>
+<p><code>Choreographer</code> 中将Callback一共 <strong>分为5类</strong></p>
+<ul>
+<li>CALLBACK_INPUT = 0;</li>
+<li>CALLBACK_ANIMATION = 1;</li>
+<li>CALLBACK_INSETS_ANIMATION = 2;</li>
+<li>CALLBACK_TRAVERSAL = 3;</li>
+<li>CALLBACK_COMMIT = 4;</li>
+</ul>
+<p>回调时的顺序也是如此。</p>
+<p>读者诸君可还记得前文给出的 <code>基于消息机制处理UI绘制</code> 的关键流程图？其中多次出现关键字样：<code>TRAVERSAL</code>，对应此处的 <code>CALLBACK_TRAVERSAL</code>，它负责界面布局和绘制相关的业务。</p>
+<p>而在上文 <code>View#scheduleDrawable</code> 的分析中，发现它使用的类型为：<code>Choreographer.CALLBACK_ANIMATION</code>，<strong>和 Animator 是一致的！</strong></p>
+<blockquote>
+<p>至此，我们悬着的心可以放下，Animator 和 View#scheduleDrawable 相比，使用了同样的底层机制</p>
+</blockquote>
+<p>但是我们的疑问尚未得到答案，再顺着整个流程向后看。</p>
+<h4 id="6向后看valueanimatordoanimationframe">6，向后看，ValueAnimator#doAnimationFrame</h4>
+<p><em>作者按，以API25之后的源码解析，以下源码为API30，注意24之前、24&#x26;25，均存在差异，主要体现为首帧的开始。省略部分不重要的源码细节</em></p>
+<p><em>不难发现，重点部分为：<code>animateBasedOnTime(currentTime)</code></em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ValueAnimator</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> final</span><span style="color:#F97583"> boolean</span><span style="color:#B392F0"> doAnimationFrame</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> frameTime</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mStartTime </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">            // First frame. If there is start delay, start delay count down will happen *after* this</span></span>
+<span class="line"><span style="color:#6A737D">            // frame.</span></span>
+<span class="line"><span style="color:#E1E4E8">            mStartTime </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mReversing</span></span>
+<span class="line"><span style="color:#F97583">                    ?</span><span style="color:#E1E4E8"> frameTime</span></span>
+<span class="line"><span style="color:#F97583">                    :</span><span style="color:#E1E4E8"> frameTime </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">long</span><span style="color:#E1E4E8">) (mStartDelay </span><span style="color:#F97583">*</span><span style="color:#B392F0"> resolveDurationScale</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // Handle pause/resume</span></span>
+<span class="line"><span style="color:#6A737D">        //省略 暂停、恢复的处理</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">mRunning) {</span></span>
+<span class="line"><span style="color:#6A737D">            //省略，判断是否可以开始播放首帧</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mLastFrameTime </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">            //省略，处理动画是否seek的情况</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        mLastFrameTime </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> frameTime;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // The frame time might be before the start time during the first frame of</span></span>
+<span class="line"><span style="color:#6A737D">        // an animation.  The "current time" must always be on or after the start</span></span>
+<span class="line"><span style="color:#6A737D">        // time to avoid animating frames at negative time intervals.  In practice, this</span></span>
+<span class="line"><span style="color:#6A737D">        // is very rare and only happens when seeking backwards.</span></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> currentTime </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">max</span><span style="color:#E1E4E8">(frameTime, mStartTime);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //此处为重点</span></span>
+<span class="line"><span style="color:#F97583">        boolean</span><span style="color:#E1E4E8"> finished </span><span style="color:#F97583">=</span><span style="color:#B392F0"> animateBasedOnTime</span><span style="color:#E1E4E8">(currentTime);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //完毕的处理</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (finished) {</span></span>
+<span class="line"><span style="color:#B392F0">            endAnimation</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> finished;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>继续抓住重点：<code>animateBasedOnTime(currentTime)</code></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ValueAnimator</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> animateBasedOnTime</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">long</span><span style="color:#FFAB70"> currentTime</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        boolean</span><span style="color:#E1E4E8"> done </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mRunning) {</span></span>
+<span class="line"><span style="color:#6A737D">            //确定lastFraction、fraction</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8"> scaledDuration </span><span style="color:#F97583">=</span><span style="color:#B392F0"> getScaledDuration</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            </span></span>
+<span class="line"><span style="color:#6A737D">            //差别在这里 </span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> float</span><span style="color:#E1E4E8"> fraction </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> scaledDuration </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> ?</span></span>
+<span class="line"><span style="color:#E1E4E8">                    (</span><span style="color:#F97583">float</span><span style="color:#E1E4E8">) (currentTime </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> mStartTime) </span><span style="color:#F97583">/</span><span style="color:#E1E4E8"> scaledDuration </span><span style="color:#F97583">:</span><span style="color:#79B8FF"> 1f</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> float</span><span style="color:#E1E4E8"> lastFraction </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mOverallFraction;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            //确定轮播迭代标记</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> boolean</span><span style="color:#E1E4E8"> newIteration </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8">) fraction </span><span style="color:#F97583">></span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8">) lastFraction;</span></span>
+<span class="line"><span style="color:#F97583">            final</span><span style="color:#F97583"> boolean</span><span style="color:#E1E4E8"> lastIterationFinished </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (fraction </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> mRepeatCount </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">                    (mRepeatCount </span><span style="color:#F97583">!=</span><span style="color:#E1E4E8"> INFINITE);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // 确定 done</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (scaledDuration </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">                // 0 duration animator, ignore the repeat count and skip to the end</span></span>
+<span class="line"><span style="color:#E1E4E8">                done </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (newIteration </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">lastIterationFinished) {</span></span>
+<span class="line"><span style="color:#6A737D">                // Time to repeat</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (mListeners </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                    int</span><span style="color:#E1E4E8"> numListeners </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mListeners.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">                    for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> numListeners; </span><span style="color:#F97583">++</span><span style="color:#E1E4E8">i) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                        mListeners.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(i).</span><span style="color:#B392F0">onAnimationRepeat</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">                    }</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (lastIterationFinished) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                done </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            //确定fraction 重点1</span></span>
+<span class="line"><span style="color:#E1E4E8">            mOverallFraction </span><span style="color:#F97583">=</span><span style="color:#B392F0"> clampFraction</span><span style="color:#E1E4E8">(fraction);</span></span>
+<span class="line"><span style="color:#F97583">            float</span><span style="color:#E1E4E8"> currentIterationFraction </span><span style="color:#F97583">=</span><span style="color:#B392F0"> getCurrentIterationFraction</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                    mOverallFraction, mReversing);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            //重点2</span></span>
+<span class="line"><span style="color:#B392F0">            animateValue</span><span style="color:#E1E4E8">(currentIterationFraction);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> done;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>此处有两处重点：</p>
+<ul>
+<li>确定 currentIterationFraction</li>
+<li>animateValue 执行动画帧</li>
+</ul>
+<p>看重点1：<em>泛读即可，主要理解fraction的设计</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ValueAnimator</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> float</span><span style="color:#B392F0"> clampFraction</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> fraction</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (fraction </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            fraction </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (mRepeatCount </span><span style="color:#F97583">!=</span><span style="color:#E1E4E8"> INFINITE) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            fraction </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">min</span><span style="color:#E1E4E8">(fraction, mRepeatCount </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> fraction;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //重点1 整数部分代表iteration，小数部分代表当前iteration的fraction</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> float</span><span style="color:#B392F0"> getCurrentIterationFraction</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> fraction</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">boolean</span><span style="color:#FFAB70"> inReverse</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        fraction </span><span style="color:#F97583">=</span><span style="color:#B392F0"> clampFraction</span><span style="color:#E1E4E8">(fraction);</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> iteration </span><span style="color:#F97583">=</span><span style="color:#B392F0"> getCurrentIteration</span><span style="color:#E1E4E8">(fraction);</span></span>
+<span class="line"><span style="color:#F97583">        float</span><span style="color:#E1E4E8"> currentFraction </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> fraction </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> iteration;</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> shouldPlayBackward</span><span style="color:#E1E4E8">(iteration, inReverse)</span></span>
+<span class="line"><span style="color:#F97583">                ?</span><span style="color:#79B8FF"> 1f</span><span style="color:#F97583"> -</span><span style="color:#E1E4E8"> currentFraction</span></span>
+<span class="line"><span style="color:#F97583">                :</span><span style="color:#E1E4E8"> currentFraction;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //依据是fraction和iteration的设计：</span></span>
+<span class="line"><span style="color:#6A737D">    //    Calculates current iteration based on the overall fraction. </span></span>
+<span class="line"><span style="color:#6A737D">    //    The overall fraction will be in the range of [0, mRepeatCount + 1]. </span></span>
+<span class="line"><span style="color:#6A737D">    //    Both current iteration and fraction in the current iteration can be derived from it.</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> int</span><span style="color:#B392F0"> getCurrentIteration</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> fraction</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        fraction </span><span style="color:#F97583">=</span><span style="color:#B392F0"> clampFraction</span><span style="color:#E1E4E8">(fraction);</span></span>
+<span class="line"><span style="color:#6A737D">        // If the overall fraction is a positive integer, we consider the current iteration to be</span></span>
+<span class="line"><span style="color:#6A737D">        // complete. In other words, the fraction for the current iteration would be 1, and the</span></span>
+<span class="line"><span style="color:#6A737D">        // current iteration would be overall fraction - 1.</span></span>
+<span class="line"><span style="color:#F97583">        double</span><span style="color:#E1E4E8"> iteration </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">floor</span><span style="color:#E1E4E8">(fraction);</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (fraction </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> iteration </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> fraction </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            iteration</span><span style="color:#F97583">--</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8">) iteration;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //和动画正向、反向播放有关，可先忽略</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> boolean</span><span style="color:#B392F0"> shouldPlayBackward</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#FFAB70"> iteration</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">boolean</span><span style="color:#FFAB70"> inReverse</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (iteration </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> mRepeatMode </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> REVERSE </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">                (iteration </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> (mRepeatCount </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">||</span><span style="color:#E1E4E8"> mRepeatCount </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> INFINITE)) {</span></span>
+<span class="line"><span style="color:#6A737D">            // if we were seeked to some other iteration in a reversing animator,</span></span>
+<span class="line"><span style="color:#6A737D">            // figure out the correct direction to start playing based on the iteration</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (inReverse) {</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#E1E4E8"> (iteration </span><span style="color:#F97583">%</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#E1E4E8"> (iteration </span><span style="color:#F97583">%</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> inReverse;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>看重点2：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ValueAnimator</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> animateValue</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> fraction</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        //插值器重新计算fraction -- 优雅的设计</span></span>
+<span class="line"><span style="color:#E1E4E8">        fraction </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mInterpolator.</span><span style="color:#B392F0">getInterpolation</span><span style="color:#E1E4E8">(fraction);</span></span>
+<span class="line"><span style="color:#E1E4E8">        mCurrentFraction </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> fraction;</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> numValues </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mValues.length;</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#6A737D">        //PropertyValuesHolder 计算value -- 又是一个优雅的设计</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> numValues; </span><span style="color:#F97583">++</span><span style="color:#E1E4E8">i) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            mValues[i].</span><span style="color:#B392F0">calculateValue</span><span style="color:#E1E4E8">(fraction);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#6A737D">        //回调，onAnimationUpdate 常用到 getAnimatedValue，和 calculateValue 对应</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (mUpdateListeners </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            int</span><span style="color:#E1E4E8"> numListeners </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> mUpdateListeners.</span><span style="color:#B392F0">size</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">            for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> numListeners; </span><span style="color:#F97583">++</span><span style="color:#E1E4E8">i) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                mUpdateListeners.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(i).</span><span style="color:#B392F0">onAnimationUpdate</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="阶段性小结">阶段性小结</h3>
+<p>源码内容着实很多，经过刚才的源码重点拆解，也已梳理出大致流程。</p>
+<p>回归到我们阅读源码前的问题：</p>
+<blockquote>
+<p>Animator 是否和scheduleDrawable相比使用了不一样的底层机制？</p>
+<p>否, 均使用了 <strong>Choreographer</strong> <em>[ˌkɔːriˈɑːɡrəfər],记住它的读写</em> + <strong>Vsync</strong> + <strong>Android 消息机制</strong> ，且回调类型一致，均为 <code>CALLBACK_ANIMATION</code></p>
+<p>为何更加丝滑？</p>
+<p>动画内部调用频次 ≥ 原方案，回调时依据时间计算帧号的算法更加准确合理</p>
+</blockquote>
+<p><code>ValueAnimator#animateBasedOnTime</code> 中，使用了准确、合理的计算方式 ：<code>final float fraction = scaledDuration > 0 ? (float) (currentTime - mStartTime) / scaledDuration : 1f;</code></p>
+<p>而先前文章中的代码，并没有依据当前实际时间调整帧。</p>
+<h2 id="思变打开思路">思变：打开思路</h2>
+<p>至此，动画的核心奥秘已经揭开，似乎一切已尽在不言中，轮子也均已完备，也并不需要再额外实现一套插值器、估值器逻辑。</p>
+<p>既然如此，我们不再对第一篇中的例子进行以下改进：“依据时间调整帧”，“提升回调频率”。</p>
+<p><em>作者按：如果下次计划写插值器、估值器的文章，可能以逐步完善造轮子的方式进行内容展开</em></p>
+<p>那么本篇的核心内容，除了面试或者给同事科普外，还能带来什么呢？</p>
+<p>整体回顾一下，并打开思路：</p>
+<ol>
+<li>我们从一个实例出发进行完善，并收获一个经验：可以通过 Drawable+Animator，将动画内容推广到任意View做显示，<em>如果没有必要，可以少做一些自定义View的事情</em>。</li>
+<li>分析了Drawable更新内容的底层实现，是否可以将这种动画效果推广到更多地方呢？例如 <code>TextView的DrawableStart</code>、<code>ImageSpan</code>，<strong>是否都能正确显示动效呢</strong>？，<strong>如果不能要怎么做？</strong></li>
+<li>我们分析动画被驱动的过程中，遇到一个宝藏 <code>Choreographer</code>，是否可以拿来干点有趣的事情？例如：<strong>FPS监测</strong></li>
+<li>将ValueAnimator的核心机制复刻，在别的平台搞点好玩的东西😂</li>
+<li>在<code>视觉呈现内容</code> 与 <code>时间</code> 的函数关系确定时，使用 <code>ValueAnimator</code> 作为核心驱动，将问题变为一个纯数学问题，例如 <code>点迹动效绘制</code>，<code>全景图锚点A到锚点B之间的渐变</code></li>
+<li>融合以上内容，自定义一套数据协议，解析后，所见皆可动起来</li>
+</ol>
+<h2 id="闲话一二">闲话一二</h2>
+<p>文中出现的源码，除去AOSP部分，均收录于仓库中：<a href="https://github.com/leobert-lan/DrawableWorkShop">DrawableWorkShop</a></p>
+<p>最近还处于瓶颈之中，我花了大约半年的时间，让自己 “慢” 下来，却还没有做到真正松弛下来，礼记中言：“张而不弛，文武弗能也；弛而不张，文武弗为也；一张一弛，文武之道也。”</p>
+<p>有两个方面的瓶颈，让我颇为难受：</p>
+<ul>
+<li>“输出质量的高期望” 与 “输入、知识体系存货达不到更高层次” 之间的矛盾带来的内容瓶颈</li>
+<li>“不同读者需要的知识深度不同” 与 “博客内容提纲不能照顾到各个深度” 之间的矛盾带来的编写瓶颈</li>
+</ul>
+<p>我还需要调整好节奏、捋一捋下一个五年，再进行知识重整合，才能先驰后张，输出更有意义的内容，这能解决第一个瓶颈问题。但第二个瓶颈问题，确实没找到办法。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

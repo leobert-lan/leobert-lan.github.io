@@ -1,0 +1,474 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>谈一谈在两个商业项目中使用MVI架构后的感悟 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">谈一谈在两个商业项目中使用MVI架构后的感悟</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="谈一谈在两个商业项目中使用mvi架构后的感悟">谈一谈在两个商业项目中使用MVI架构后的感悟</h1>
+<h2 id="前言">前言</h2>
+<p>MVI并非新兴事物，在2020年时亦曾有通过撰写一篇文章与诸位读者探讨一二的念头。</p>
+<p>当时项目采用MVP分层设计，组员的代码风格差异也较大，代码中类职责赋予与封装风格各成一套，随着业务急速膨胀，代码越发混乱。试图用 <code>MVI架构</code> + <code>单向流</code> 形成 <code>掣肘</code> 带来一致风格。
+但这种做法不够以人为本，最终采用 <strong>“在MVP的基础上进行了适当改造+设计约定的方式”</strong> 解决了问题，并未将MVI投入到商业项目中，于是 <strong>放弃了纸上谈兵</strong>。</p>
+<p>在半年前终于有机会在商业项目中进行实践，同诸位谈一谈使用后的 <strong>个人感悟</strong> ，并藉此讲透MVI等架构。</p>
+<p>所有内容将按照以下要点展开：</p>
+<ul>
+<li>从架构的理念出发 — <strong>简单列明各种 <code>MVX</code> 的理念</strong> ， <em>MVX：指代 MVC、MVP、MVVM、MVI</em></li>
+<li>拥抱复杂的同时实现简化 — <strong>通过对比理解单向数据流动所解决的痛点、设计Intent的原因等问题</strong></li>
+<li>单一可信数据源，不可僵化信奉</li>
+<li>要想优雅，需要工具 — <strong>借助声明式、响应式编程工具，构建<code>流</code></strong>，<em>屏蔽命令式编程中的细节，同样是聚焦和简化</em></li>
+<li>状态和事件分家，绝不是吃饱了撑的 — <strong>为什么要裂变出状态和事件，如何界定</strong></li>
+</ul>
+<p><em>内容会很长，我会酌情再写一些 <code>解</code> ，结合实例和代码演示内容。</em></p>
+<h3 id="两个项目的基本情况">两个项目的基本情况</h3>
+<p>相比于之前的巨型项目，<strong>这两个项目的业务量均不大</strong>，一个是基于蓝牙和局域网的操控类APP，下午简称APP-A，一个是内部使用的工具，分析公司各个产品的日志，简称APP-B。</p>
+<p>虽然他们的业务深度要比一般的APP要深，但在 <strong>本质上一致</strong> ，毕竟同类型业务量再多也仅仅是重复运用一套模式 ，并不影响本质。</p>
+<p><strong>和诸多项目的本质一致</strong>，均符合如下图所示的逻辑分层，并在人机交互过程中执行业务逻辑：</p>
+<p><img  src="/_astro/img.DoXclKOU_1E2eN5.webp" alt="img.png" loading="lazy" decoding="async" width="80" height="178"></p>
+<ul>
+<li>APP-A 是Android项目，图方便纯kotlin</li>
+<li>APP-B 是 Compose-Desktop项目，不得不kotlin</li>
+</ul>
+<p>过于絮叨了，我们进入正文。</p>
+<h2 id="从架构的理念出发">从架构的理念出发</h2>
+<blockquote>
+<p>谨记，实际情况中，MVI、MVVM这些架构均先由Web应用领域提出，用于解决浏览器Web应用研发中的问题。</p>
+<p>在后续的应用领域发展过程中，存在共性问题，便引入了这些设计，并结合自身特点进行了拓展。</p>
+</blockquote>
+<p>接下来我们聊一聊理念，不比武功。</p>
+<p><img  src="/_astro/idea.Dw02OVf8_1h7dtp.webp" alt loading="lazy" decoding="async" width="1000" height="419"></p>
+<p><em>图片出自电影一代宗师</em></p>
+<h3 id="mvi的理念">MVI的理念</h3>
+<p><code>MVI</code> 脱胎于 <code>Model View Intent</code></p>
+<ul>
+<li>Intent：驱动model发生改变的意图，以UI中的事件最为常见；</li>
+<li>Model：业务模型，包含数据和逻辑，是对应 <code>客观实体</code> 的 <code>程序建模</code>；</li>
+<li>View：表现层的视图，以UI方式呈现Model的状态（以及事件），接受用户输入，转换为UI事件</li>
+</ul>
+<p>官方的这幅图很好的呈现了三者之间的驱动关系：</p>
+<p><img  src="/_astro/mvi-1.CvHintfi_1P4n4F.webp" alt loading="lazy" decoding="async" width="588" height="246"></p>
+<p>这张图非常简单，它摒弃了驱动方式的细节，只体现了角色与驱动关系。</p>
+<p>注意，只要设计中满足 <code>角色和驱动关系</code> 符合上图，就是MVI架构设计，并不限制 <code>驱动方式的实现细节</code></p>
+<p><em>经典的MVI驱动细节要比上图复杂很多，下文再聊。</em></p>
+<p>从软件设计的原则出发：<code>职责分离并封装</code> 的目的是 <code>解耦</code> 、 <code>可独立变化</code>、<code>复用</code>。</p>
+<p>显然，区别于 <code>MVVM</code> 、 <code>MVP</code> 、 <code>MVC</code>，角色上的差别在于 ViewModel、Presenter、Controller、Intent四者，而它们又是View和Model之间的纽带。除此之外，V和M亦稍有不同。</p>
+<h4 id="mvcmvp">MVC、MVP</h4>
+<p>MVC、MVP 中，C和P的职责体现为 <code>控制、调度</code>。</p>
+<p>MVP中 <code>V</code> 和 <code>M</code> 完全解耦可独立变化，MVC中 <code>M</code> 直接操作 <code>V</code> 耦合高，在web应用中，<code>C</code> 需要直接操作DOM。</p>
+<h4 id="mvvm">MVVM</h4>
+<p>MVVM中，提倡 <code>数据驱动</code>， <code>数据源</code> 被剥离到 <code>VM</code> 中，在 <code>双向绑定框架</code> 的加持下，View层的输入反映为数据的变化，数据的变化驱动视图内容。</p>
+<p>显然，VM的职责限于维护数据状态，<em>如有必要，驱动View层消费数据状态，</em> 不必再关注如何操作视图。</p>
+<p><em>一般来说，双向绑定框架已经引入观察者模式实现，可响应式驱动，VM一般没有必要关心 <strong>响应式驱动和下游观察者生命周期问题</strong></em></p>
+<p>简单思考之后会发现MVVM的问题，它的侧重点在于 <code>利用双向绑定让开发者专注于数据状态的维护，从操作视图更新中得以解放</code>，它难以解决 <code>无天然状态</code> 问题，例如：按钮点击这类事件。</p>
+<h4 id="mvi">MVI</h4>
+<p>在MVI中，结合业务背景将UI事件等内容转换为 <code>Intent</code> ，驱动Model层业务，Model层的业务结果反映为 <code>视图状态</code> + <code>事件</code>。</p>
+<p>因此View层和Model层之间已经解耦，并可以吸收MVVM中的优点采用如下设计：</p>
+<ul>
+<li>将双向绑定退化为单向绑定，View层消费UI状态流和事件流，这也意味着UI状态的职责精简，它不再承载View层的用户输入等事件</li>
+<li>将UI状态独立，Model层仅产生 <code>UI状态的局部变化</code> 和 <code>事件</code></li>
+</ul>
+<p>下图为经典的MVI原理示意图：</p>
+<p><img  src="/_astro/mvi-2.DsZ0eqii_2eeJq6.webp" alt loading="lazy" decoding="async" width="742" height="434"></p>
+<p>在上文中，我们已经讨论了各个角色的职责，下面逐步展开讨论角色具备的特性和细节知识。</p>
+<p>在此之前，还请谨记：合适的才是最好的</p>
+<blockquote>
+<p>没有绝对的最好的设计，只有最合适的设计。</p>
+</blockquote>
+<p>再好的架构，都需要遵循其理念并结合项目因地制宜地进行调整，以获得最佳使用效果。所以请读者诸君务必在阅读时，结合自身项目的情况仔细思考以下问题：</p>
+<ul>
+<li><strong>引入新框架所解决的痛点、衍生的问题、是否需要进行框架调整？</strong></li>
+<li><strong>框架中的角色功能，为什么出现，又有怎样的局限？</strong></li>
+</ul>
+<h2 id="单向数据流动">单向数据流动</h2>
+<blockquote>
+<p>MVI拥抱了结构复杂，但能够灵活应对业务编码时的各种情况，按部就班即可。</p>
+</blockquote>
+<p>从MVI原理图中，可以清晰的看到 <strong>“数据”</strong> 的流动方向。
+起始于 <code>Intent</code>，经过分类和选择性消费后产生 <code>Result</code>，对应的reducer函数计算后，得到最新的 <code>State</code> <em>（以及裂变出必要的 <code>Event</code>，图中未体现）</em> ，驱动视图。</p>
+<p>注意：</p>
+<ul>
+<li><code>单向</code> 是指 <strong>单一方向</strong></li>
+<li>此处的 <code>数据</code> 是广义的、宽泛的。</li>
+<li>仅描述数据流的 <strong>变化方向</strong> ，与数据流的数量无关，但一般 <strong>形成有效工作</strong> 均需要两条数据流（上行数据流和下行数据流）</li>
+</ul>
+<p>即驱动数据流变化的方向是唯一的，在英文中的术语为：<code>Unidirectional Data Flow</code> 简称 <code>UDF</code>。</p>
+<h3 id="mvcmvp中的痛点">MVC、MVP中的痛点</h3>
+<p>前文我们提到，在MVC和MVP中，着眼于 <strong>控制、调度</strong> ，并不强调 <code>数据流</code> 的概念。</p>
+<p>View和Model间之间的交互，一般有两种编码风格：双向的API调用、单向的API调用+回调：</p>
+<p><em>注意：以下两图并未体现Controller和Presenter细节，仅表意，从View层出发的API调用和回到View层的UI更新</em></p>
+<p><img  src="/_astro/img.DoXclKOU_1E2eN5.webp" alt="img.png" loading="lazy" decoding="async" width="80" height="178"></p>
+<p>双向API调用如上图。</p>
+<p><img  src="/_astro/img.DoXclKOU_1E2eN5.webp" alt="img.png" loading="lazy" decoding="async" width="80" height="178"></p>
+<p>单向API调用+回调更新UI如上图。</p>
+<p>显而易见，这两种方式无法继续抽象，需根据实际业务进行命令式编码。当UI复杂时，难以写出清晰、易读的代码，维护难度激增。</p>
+<h3 id="mvvm解决ui更新代码混乱问题">MVVM解决UI更新代码混乱问题</h3>
+<p>前文我们已经提到：MVVM中通过绑定框架，将UI事件转化为数据变化，驱动业务；业务结果表现为数据变化，驱动UI更新。</p>
+<p><img  src="/_astro/img.DoXclKOU_1E2eN5.webp" alt="img.png" loading="lazy" decoding="async" width="80" height="178"></p>
+<p>显而易见，<strong>维护朴素的数据要比直接维护复杂的UI要简单</strong>。</p>
+<p>但问题也同时产生，data1的变化有两个可能的原因：</p>
+<ul>
+<li>Model层业务结果使其变化，并期望它驱动UI更新</li>
+<li>View层发生事件，反馈数据变化，并期望它驱动Model层逻辑</li>
+</ul>
+<p>因此，框架需要考虑标识数据变化来源、或者其他手段消除方向性所带来的问题。</p>
+<p>并且MVVM难以灵活决定的 “何时调用Model层逻辑”，即大多数业务中，都需要结合多个属性的变化形成组合条件来驱动Model层逻辑。</p>
+<p><strong>本篇并不重点讨论MVVM，故不再展开MVVM解决循环更新的方案，以及衍生的问题。</strong></p>
+<p>尽管如此，MVVM中的数据绑定依旧解决了View层更新繁杂的问题。</p>
+<h3 id="用intent灵活决定何时调用model">用Intent灵活决定何时调用Model</h3>
+<p>既然数据驱动UI有极大的益处，且View层事件驱动ViewModel的数据变化有很多弊端 <em>（需要建立很高的复杂度）</em> ，那自然需要 <strong>趋利避害</strong></p>
+<p><img  src="/_astro/img.DoXclKOU_1E2eN5.webp" alt="img.png" loading="lazy" decoding="async" width="80" height="178"></p>
+<p>仅保留数据驱动UI的部分，并增加Intent用以驱动Model层业务</p>
+<p>在于 <code>MVC/MVP</code> 以及 <code>MVVM</code> 对比后不难得出结论：</p>
+<ul>
+<li>MVC/MVP中，View层通过调用C/P层API的方式最终调用到Model层业务，方式质朴、无难度。但业务量规模增大后接口方法数也会增多，导致C/P层尾大不掉，难以重用。</li>
+<li>MVVM中，VM层总是需要利用 <code>技巧</code> 进行模型概念转换，以满足业务响应满足实际需求，需要很深厚的设计经验才能写出非常优秀的代码，这并不友好。</li>
+</ul>
+<p><em>作者按：我个人认为一个友好的设计，不应当剑走偏锋，而应当大巧不工，能够以力破法，达成 “使用者只需要吃透理论就可以解决各类问题” 的目标。</em></p>
+<p>而MVI在架构角色中设计了Intent的角色：</p>
+<ul>
+<li>它包含了业务调用的意图和数据</li>
+<li>从设计上可满足 <code>调用</code> 与 <code>实现</code> 的分离</li>
+<li>架构模型中以Intent流的形式出现，下游对其的 <code>筛选</code> 、<code>转换</code> 、 <code>消费</code> 等行为可遵循 <code>FP范式</code> <em>（即函数式编程范式、Functional Programming Patterns）</em> ，逻辑的复用粒度为方法级，复用度更高更灵活</li>
+<li>解决了MVVM中的方向性问题、MVC/MVP 中的灵活度问题等</li>
+</ul>
+<h2 id="单一可信数据源">单一可信数据源</h2>
+<p>我猜测读者诸君都曾听过这个词，将 <code>单一可信数据源</code> 拆解一下：</p>
+<ul>
+<li>单一</li>
+<li>可信</li>
+<li>数据源</li>
+</ul>
+<p>在MVI背景下，<code>数据源</code> 指的是视图对应的数据实体，它代表视图的内容状态。</p>
+<p>可信指从数据源中获取的数据是 <code>最新的</code>、<code>完整的</code>、<code>可靠的</code>，否则是不可信的，<em>我们没有理由在编码中使用不可信的数据源</em>。</p>
+<p>单一是指这样的数据源仅一个。</p>
+<p>在经典设计中，其内涵如下图:</p>
+<p><img  src="/_astro/img.DoXclKOU_1E2eN5.webp" alt="img.png" loading="lazy" decoding="async" width="80" height="178"></p>
+<ul>
+<li>按照视图的 <strong>所有的</strong> 内容状态，定义一个不可变的 <code>ViewState</code></li>
+<li>按照业务初始化 ViewState 实例</li>
+<li>Model业务生成驱动 ViewState变化的Result</li>
+<li>计算出新状态，Reduce(Pre-ViewState,Result) -> New-ViewState</li>
+<li>更新数据源</li>
+<li>View层消费ViewState</li>
+</ul>
+<p>借助于数据绑定框架，可以很方便地解决视图更新的问题。</p>
+<blockquote>
+<p>想象一下，此时页面UI非常复杂……</p>
+<p><img  src="/_astro/img.DoXclKOU_1E2eN5.webp" alt="img.png" loading="lazy" decoding="async" width="80" height="178"></p>
+</blockquote>
+<p>如果僵化的信奉这样的 <code>单一</code> ，情况会如何呢？</p>
+<ul>
+<li>复杂（大量属性）的ViewState</li>
+<li>复杂的UI更新计算，<em>e.g. 100个属性变了2个，依然需要计算98个属性未变或者全量强制更新</em></li>
+</ul>
+<p>在 APP-A和APP-B中，我分别使用了 DataBinding和Compose，但均无法避免该问题。</p>
+<h3 id="何为单一">何为单一</h3>
+<p>从机器执行程序的原理上看，我们无法实现 <strong>多个内容一致的数据源</strong> 在 <strong>任意时刻</strong> 满足 <code>最新的</code>、<code>可靠的</code>。</p>
+<p>将视图视为一个整体，规定它只拥有 <strong>一个</strong> 可信的数据源。在此基础上看局部的视图，它们也顺其自然地仅拥有一个可信的数据源。</p>
+<p>反过来看，当任意的局部视图仅具有一个可信数据源时，整体视图也仅有一个逻辑上的可信数据源。</p>
+<p>据此，我们可以对 <code>经典MVI实现</code> 进行一定程度的改造，将ViewState进行局部分解，使得UI绑定部分的业务逻辑更 <strong>清晰、干净</strong>。</p>
+<p><em>请注意，复杂度不会凭空消失，我们为了让 “UI绑定的业务逻辑更清晰、干净”、“更新UI的计算量更少”，将复杂度转移到了ViewState的拆分。拆分后，将具有 <strong>多个视图部件的单一可信数据源</strong>，注意，为了不引起额外的麻烦、并且便于维护扩展，建议遵守以下条件：</em></p>
+<ul>
+<li>基于业务需求，组合数据源形成新数据源</li>
+<li>不在数据源的逻辑范围之外进行数据源组合操作</li>
+</ul>
+<blockquote>
+<p>举个虚拟的例子：用户需要实名认证 且 关注博主 ，才在界面上显示某功能按钮。下面使用代码分别演示。</p>
+</blockquote>
+<p><em>考虑到RxJava的广泛度依旧高于Kotlin-Coroutine+flow，数据流的实现采用RxJava</em></p>
+<p><em>注意，考虑到读者可能会编写demo做UDF局部的验证，下文中的代码以示例目的为主，兼顾编写场景冒烟的方便性，流的类型不一定是构建完整UDF的最佳选择。</em></p>
+<h4 id="经典实现">经典实现</h4>
+<p>在经典MVI实现中，需要先定义ViewState</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">data</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ViewState</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#6A737D">    /*unique id of current login user*/</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> userId: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#6A737D">    /*true if the current login user has complete real-name verified*/</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> realNameVerified: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#6A737D">    /*true if the current login user has followed the author*/</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> hasFollowAuthor: </span><span style="color:#B392F0">Boolean</span></span>
+<span class="line"><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>并定义ViewModel，创建ViewState流，忽略掉其初始化和其他部分</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> VM</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> viewState </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> BehaviorSubject.</span><span style="color:#B392F0">create</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">ViewState</span><span style="color:#E1E4E8">>()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //ignore</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>并定义View层，忽略掉其他部分，简单起见暂时不使用数据绑定框架</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> vm </span><span style="color:#F97583">=</span><span style="color:#B392F0"> VM</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">    lateinit</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> imgRealNameVerified: </span><span style="color:#B392F0">ImageView</span></span>
+<span class="line"><span style="color:#F97583">    lateinit</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> cbHasFollowAuthor: </span><span style="color:#B392F0">CheckBox</span></span>
+<span class="line"><span style="color:#F97583">    lateinit</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> someButton: </span><span style="color:#B392F0">Button</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> onCreate</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        //ignore view initialize</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        vm.viewState.</span><span style="color:#B392F0">subscribe</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            render</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> render</span><span style="color:#E1E4E8">(state: </span><span style="color:#B392F0">ViewState</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        imgRealNameVerified.isVisible </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> state.realNameVerified</span></span>
+<span class="line"><span style="color:#E1E4E8">        cbHasFollowAuthor.isChecked </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> state.hasFollowAuthor</span></span>
+<span class="line"><span style="color:#E1E4E8">        someButton.isVisible </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> state.realNameVerified </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> state.hasFollowAuthor</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //ignore other</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>在JS中，JSON并不能附加逻辑，基本等价于Java中的POJO，故在数据源外部处理简单逻辑的情况较为常见。而在Java、Kotlin中可以进行适当的优化，适当封装，使得代码更加干净便于维护：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">data</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ViewState</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#6A737D">    //ignore</span></span>
+<span class="line"><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> isSomeFuncEnabled</span><span style="color:#E1E4E8">():</span><span style="color:#B392F0">Boolean</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> realNameVerified </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> hasFollowAuthor</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    //ignore</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> render</span><span style="color:#E1E4E8">(state: </span><span style="color:#B392F0">ViewState</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        //...</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#E1E4E8">        someButton.isVisible </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> state.</span><span style="color:#B392F0">isSomeFuncEnabled</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="拆分实现">拆分实现</h4>
+<p>依旧先定义逻辑上完整的ViewState：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ComposedViewState</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#6A737D">    /*unique id of current login user*/</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> userId: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * real-name-verified observable subject,feed true if the current login user has complete real-name verified</span></span>
+<span class="line"><span style="color:#6A737D">     * */</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> realNameVerified </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> BehaviorSubject.</span><span style="color:#B392F0">create</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">>()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * follow-author observable subject, feed true if the current login user has followed the author</span></span>
+<span class="line"><span style="color:#6A737D">     * */</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> hasFollowAuthor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> BehaviorSubject.</span><span style="color:#B392F0">create</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">>()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> someFuncEnabled </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> BehaviorSubject.</span><span style="color:#B392F0">combineLatest</span><span style="color:#E1E4E8">(realNameVerified, hasFollowAuthor) { a, b </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> a </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> b }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>定义ViewModel，子模块数据流均已定义，故而无需再定义全ViewState的流</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> VM</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> userId: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> viewState </span><span style="color:#F97583">=</span><span style="color:#B392F0"> ComposedViewState</span><span style="color:#E1E4E8">(userId)</span></span>
+<span class="line"><span style="color:#6A737D">    //ignore</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>编写View层的UI绑定，同样简单起见，不使用数据绑定框架</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> vm </span><span style="color:#F97583">=</span><span style="color:#B392F0"> VM</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    lateinit</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> imgRealNameVerified: </span><span style="color:#B392F0">ImageView</span></span>
+<span class="line"><span style="color:#F97583">    lateinit</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> cbHasFollowAuthor: </span><span style="color:#B392F0">CheckBox</span></span>
+<span class="line"><span style="color:#F97583">    lateinit</span><span style="color:#F97583"> var</span><span style="color:#E1E4E8"> someButton: </span><span style="color:#B392F0">Button</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> onCreate</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">        //ignore view initialize</span></span>
+<span class="line"><span style="color:#B392F0">        bindViewStateWithUI</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> bindViewStateWithUI</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#E1E4E8">        vm.viewState.realNameVerified.</span><span style="color:#B392F0">subscribe</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            renderSection1</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        vm.viewState.hasFollowAuthor.</span><span style="color:#B392F0">subscribe</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            renderSection2</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        vm.viewState.someFuncEnabled.</span><span style="color:#B392F0">subscribe</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">            renderSection3</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#6A737D">        //...</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> renderSection1</span><span style="color:#E1E4E8">(foo:</span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        imgRealNameVerified.isVisible </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> foo</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> renderSection2</span><span style="color:#E1E4E8">(foo:</span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        cbHasFollowAuthor.isChecked </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> foo</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> renderSection3</span><span style="color:#E1E4E8">(foo:</span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        someButton.isVisible </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> foo</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>例子较为简单，在实际项目中，如果遇到复杂页面，则可以分块进行处理。</p>
+<p><em>注意：实际情况中，并没有必要将每一个子数据源拆分到一个View级别的控件，那样过于啰嗦，例子因非常简单而无法丰满起来。
+e.g. 针对每一块视图区，例如作者区域，定义子ViewState类，创建其数据流即可。</em></p>
+<blockquote>
+<p>作者按：务必评估，在一次Model业务产生的Result中，会引起数据流下游的更新次数。
+为避免产生不可预期的问题，可通过类似以下方式，使下游响应次数表现和经典实现的情况一致。</p>
+</blockquote>
+<p>额外定义PartialChange流或者功能等价的流，它用于标识 <code>reduce</code> 计算的开始和结束，可以将此期间的数据流的变化延迟到最后发送终态</p>
+<p><em>更加推荐定义功能上等价的流</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ComposedViewState</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#6A737D">    /*unique id of current login user*/</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> userId: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    internal</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> changes </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> BehaviorSubject.</span><span style="color:#B392F0">create</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">PartialChange</span><span style="color:#E1E4E8">>()</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    //ignore</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> someFuncEnabled </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">        BehaviorSubject.</span><span style="color:#B392F0">combineLatest</span><span style="color:#E1E4E8">(realNameVerified, hasFollowAuthor) { a, b </span><span style="color:#F97583">-></span><span style="color:#E1E4E8"> a </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> b }.</span><span style="color:#B392F0">sync</span><span style="color:#E1E4E8">(PartialChange.Tag, changes)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">inline</span><span style="color:#F97583"> fun</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#B392F0">reified</span><span style="color:#B392F0"> T</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">S</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">Observable</span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8">T</span><span style="color:#F97583">></span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">sync</span><span style="color:#E1E4E8">(tag: </span><span style="color:#B392F0">S</span><span style="color:#E1E4E8">, sync: </span><span style="color:#B392F0">BehaviorSubject</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">S</span><span style="color:#E1E4E8">>): </span><span style="color:#B392F0">Observable</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> BehaviorSubject.</span><span style="color:#B392F0">combineLatest</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, sync) { source, syncItem </span><span style="color:#F97583">-></span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (syncItem </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> tag) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            syncItem</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            source</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }.</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8"> { it </span><span style="color:#F97583">is</span><span style="color:#E1E4E8"> T }.</span><span style="color:#B392F0">cast</span><span style="color:#E1E4E8">(T::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>修改PartialChange，为reduce函数添加边界：</p>
+<p><em>PartialChange是Model产生的Result的表现物，封装了ViewState的reduce函数逻辑，即如何从 Pre-ViewState 生成 新 ViewState</em></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">sealed</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> PartialChange</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    open</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> reduce</span><span style="color:#E1E4E8">(state: </span><span style="color:#B392F0">ComposedViewState</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * 同步标记，从头开始到真实PartialChange之间，流的状态生效</span></span>
+<span class="line"><span style="color:#6A737D">     * */</span></span>
+<span class="line"><span style="color:#F97583">    object</span><span style="color:#B392F0"> Tag</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">PartialChange</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    object</span><span style="color:#B392F0"> None</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">PartialChange</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    class</span><span style="color:#B392F0"> Foo</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> a: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> b: </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">PartialChange</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> reduce</span><span style="color:#E1E4E8">(state: </span><span style="color:#B392F0">ComposedViewState</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            state.changes.</span><span style="color:#B392F0">onNext</span><span style="color:#E1E4E8">(Tag)</span></span>
+<span class="line"><span style="color:#E1E4E8">            state.realNameVerified.</span><span style="color:#B392F0">onNext</span><span style="color:#E1E4E8">(a)</span></span>
+<span class="line"><span style="color:#E1E4E8">            state.hasFollowAuthor.</span><span style="color:#B392F0">onNext</span><span style="color:#E1E4E8">(b)</span></span>
+<span class="line"><span style="color:#E1E4E8">            state.changes.</span><span style="color:#B392F0">onNext</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="要想优雅需要工具">要想优雅，需要工具</h2>
+<h3 id="采用响应式流避免命令式编码">采用响应式流，避免命令式编码</h3>
+<p>想来这一点已不需要多做解释。</p>
+<p>在Android中，存在 <code>LiveData</code> 组件，它通过简单的方式封装了可观测的数据，但实现方式简单也限制了它的功能 <strong>不够强大</strong> 。因此，建议使用 <code>RxJava</code> 或者 <code>Kotlin-Coroutine &#x26; flow</code> 构建数据流。</p>
+<p>本节便不再展开。</p>
+<h3 id="采用数据绑定框架">采用数据绑定框架</h3>
+<p>采用 <code>jetpack-compose</code> 或者 <code>DataBinding</code> 均可以移除枯燥的UI命令式逻辑，在APP-A中我使用了DataBinding，在APP-B中我使用了Compose。</p>
+<p>在 ViewState的代码很棒时，均可以获得优秀的编程体验，从啰嗦的UI中解放出来。</p>
+<blockquote>
+<p>作者的个人观点:</p>
+<p>关于Compose。Compose依旧属于较新的事物，在商业项目中使用存在学习门槛和造轮工作。在目标用户具有较高容忍度的情况下，已然可以进行尝试。</p>
+<p>关于DataBinding。一个近乎毁誉参半的工具，关于它的批判，大多集中于：<strong>xml中实现的逻辑难以阅读、维护</strong>，这实际上是对DataBinding设计的误解而带来的错误使用。</p>
+<p>DataBinding本身具有生成VM层的功能，但这一功能并不足够强大，且没有完善的使用指导，而在官方Demo中过度宣传了它，导致大家认为DataBinding就该这样使用。</p>
+<p>仅使用基础的数据绑定功能、和Resource或者Context有关的功能（例如字符串模板）、组件生命周期绑定等，适度自定义绑定。</p>
+</blockquote>
+<h2 id="何为状态何为事件最后的一公里">何为状态、何为事件。最后的一公里</h2>
+<p>首先区别于上文提到的UI事件，这里的状态和事件均产生于数据流的末段，而UI事件处于数据流的首段。</p>
+<blockquote>
+<p>UI事件属于：A possible action that the user can perform that is monitored by an application or the operating system (event listener). When an event occurs an event handler is called which performs a specific task</p>
+</blockquote>
+<p>在展开之前，先用一张图回顾总结上文中对于 <code>单向数据流</code> &#x26; <code>单一可信数据源</code> 的知识</p>
+<p><img  src="/_astro/MVI-UDF.DinVowrr_Zg2A93.webp" alt="img_1.png" loading="lazy" decoding="async" width="910" height="878"></p>
+<p>在 <strong>单向数据流动</strong> 章节中，提到了MVI的UDF设计：</p>
+<ul>
+<li>系统捕获的UI事件、其他侦听事件（例如熄屏、应用生命周期事件），生成Intent，压入Intent流中</li>
+<li>ViewModel层中筛选、转换、处理Intent，实际是使用Model层业务，产生业务结果，即PartialChange</li>
+<li>PartialChange经过Reducer计算处理得到最新的ViewState，压入ViewState流</li>
+<li>View层（广义的表现层）响应并呈现最新的ViewState</li>
+</ul>
+<p>在 <strong>单一可信数据源</strong> 章节中，提到View层应当采用 <code>单一可信数据源</code></p>
+<p>在这张图中，我们仅体现了 <code>状态</code> 即 ViewState。</p>
+<h3 id="关于gui程序的认知">关于GUI程序的认知</h3>
+<p>在展开前，先聊点理念上的内容。请读者诸君思考下自己对于GUI程序的认知。</p>
+<blockquote>
+<p>作者的理解：</p>
+<p>程序狭义上是计算机能识别和执行的一组指令集，编程工作是在程序世界对 <code>客观实体</code> 、 <code>业务逻辑</code> 进行 建模和逻辑表达。</p>
+<p>而GUI程序拥有 <code>用户图形界面</code> , 除了结合硬件接收用户交互输入外，可以将 <code>程序世界中的模型</code> 以 <code>用户图形界面</code> 等方式表现给用户。</p>
+<p>表现出来的内容代表着客观实体</p>
+<p>其本质目的在于：通过 <strong>描述特征属性</strong> 、 <strong>描述变化过程</strong> 等方式让用户感知并理解 <code>客观实体</code></p>
+</blockquote>
+<p>而除了通过 <strong>程序语言描述</strong> 、 <strong>程序世界模拟展现</strong> 外，同样可以通过 <strong>自然语言描述</strong> 达到目的，这也是产品经理的工作。</p>
+<p><em>当然，产品经理往往需要借助一些工具来提升自己的自然语言表达能力，但无奈的是能用数学公式和逻辑推演表达需求的产品经理太少见了。</em></p>
+<p>写这段只是为了引入 <code>他山之石</code> 。</p>
+<h3 id="first-order-logic">First-Order logic</h3>
+<p>在数学、哲学、语言学、计算机科学中，有一个概念 <code>First-Order logic</code>，无论是产品需求还是计算机程序，<strong>都可以建立FOL表达</strong>。</p>
+<p><em>当然，本篇不讨论FOL，那是一个很庞大且偏离主题的事情。我仅仅是想借用其中的概念。</em></p>
+<p>FOL表达 Event或者State时：</p>
+<ul>
+<li>Event 体现的是特定的变化</li>
+<li>State 体现的是客观实体在任意时刻都适用的一组情况，即一段时间内无变化的条件或者特征</li>
+</ul>
+<p>不难理解，变化是瞬时的，连续的变化是可分的。</p>
+<p>但在人机交互中，瞬时意义很小，我们的目的在于让用户感知。</p>
+<p>例如：“好友向你发送了一条消息的场景中”，消息抵达就是Event，它背后潜藏着 “消息数的变化”、“最新消息内容的变化” 等。 在常见的设计中:</p>
+<ul>
+<li>应用需要弹出一个气泡通知用户这一事件</li>
+<li>应用需要更新消息数，消息列表内容等，以呈现出最新的State</li>
+</ul>
+<p>而为了让用户感知到，气泡呈现时长并不是瞬时的，但在产品交互设计中依旧将其定义为事件。</p>
+<h3 id="分离状态和事件不是吃饱撑得">分离状态和事件，不是吃饱撑得</h3>
+<blockquote>
+<p>看山是山、看水是水</p>
+</blockquote>
+<p>此时此刻，答案已经很明显。</p>
+<p>在通用的产品设计中，状态和事件有不同的意义，如果程序中不分离出两者，则必然是自找麻烦，这是公然挑衅 <code>面向对象编程</code> 的行为。如果不明确定义不同的Class，则势必导致代码混乱不堪，毕竟这是违背编程原则的事情。</p>
+<p>在大多MVVM设计中，状态和事件未分家，导致bug丛生，这一点便不再展开。</p>
+<h3 id="如何区分event和state">如何区分Event和State</h3>
+<p>State是一段时间内无变化的条件或者特征，它天然的 <strong>契合</strong> 了位于表现层的主体内容所对应的 <strong>数据模型特征</strong>。</p>
+<p>Event是特定的变化，它在表现层体现，但与State的生命周期不一致，且并无一一对应的关系。</p>
+<p>基于经验主义，我们可以机械地、笼统地认为：页面主体静态内容所需要的数据属于State范畴，气泡提醒等短暂的物体所需要的数据属于Event范畴。</p>
+<p>从逻辑推演的角度出发，进行 <strong>等价逻辑推断</strong> 和 <strong>条件限定下的逻辑推断</strong> ，一定序列的Event可以模型转换为State。</p>
+<h3 id="事件粘性导致重复只是框架设计的bug">事件粘性导致重复？只是框架设计的bug</h3>
+<blockquote>
+<p>看山不是山，看水不是水</p>
+</blockquote>
+<p>前面提到，State是一段时间内无变化的条件或者特征，所以在程序设计中State具有粘性的特征。</p>
+<p>如果Event也设计出这样的粘性特征并造成重复消费，明显是违背需求的，无疑是框架设计的Bug。此问题在各大论坛中很常见。</p>
+<p><em>注意，我们无法脱离实际需求去二元化的讨论事件本身该不该有粘性特征，只能结合实际讨论框架功能是否存在bug</em></p>
+<p>如果要实现以力破法，在框架设计层面上 <strong>Event体系的设计要比State体系要复杂</strong> 。因为从交互设计上：</p>
+<ul>
+<li>State 只需要考虑呈现的准确性和及时性，<em>除去美观、可理解性等等</em></li>
+<li>Event 需要考虑准确性、优先级、及时性、按条件丢弃等等，<em>除去美观、可理解性等等</em></li>
+</ul>
+<p>举个例子：网络连接问题导致的Web-API调用失败需要使用Toast提示网络连接失败</p>
+<p>不难想象：</p>
+<ul>
+<li>可能一瞬间的断开网络连接，会导致多个连接均返回失败</li>
+<li>可能连接问题未修复，10秒前请求失败，当前请求又失败了</li>
+</ul>
+<p>难道连续弹出吗？难道和上一次Event一致就不消费吗？…</p>
+<p>或许您会使用一些 <code>剑走偏锋的技巧</code> 来解决问题，但技巧总是建立在特定条件下生效的，一旦条件发生变化，就会带来烦恼，您很难控制上游的PM和交互设计师。</p>
+<p>所以在框架层面需要针对产品、交互设计的泛化理念，设计准确的、灵活的Event体系。</p>
+<h3 id="准确的灵活的event体系">准确的、灵活的Event体系</h3>
+<blockquote>
+<p>看山还是山，看水还是水</p>
+</blockquote>
+<p>回到FOL中，为了更加准确的表达Event和State的含义，还需要一些额外的参数，例如：<code>参与者</code>、<code>地点</code>、<code>时间</code> 等。</p>
+<p>想通这一点会发现，产品中定义的Event事件、及其消费逻辑均含有隐藏属性，例如：</p>
+<ul>
+<li>发生时间</li>
+<li>客观有效期</li>
+<li>判断有效的条件（如呈现的条件）</li>
+<li>判断失效的条件 ，用于实现提前失效</li>
+</ul>
+<p><em>产品经理和交互设计师一般会使用 “响应时间”、“优先级” 等词描述它们，但一般不严谨、不成体系，带来期望不一致的问题</em></p>
+<p>反观State流，它代表了界面主体内容在时间轴上的完整变化，任意一个时间点均可以得出界面内容所对应的条件和特征。一旦State流中出现一个新的状态，它均被及时的、准确的在表现层予以体现。</p>
+<p>不难理解，一个State的生命周期为 <code>从init或者reducer计算生成开始</code> 至 <code>reducer计算出新State、宿主生命期结束为止</code>，在State流中已然暗含：</p>
+<ul>
+<li>State之间无生命周期重叠</li>
+<li>所有State的生命周期相加可填满时间轴</li>
+</ul>
+<blockquote>
+<p>前文提到Event是瞬时的，所以Event本身并没有实质意义上的生命周期，为了方便表述，我们将 “Event从生成到在表现层不可观测的阶段” 定义为Event生命周期</p>
+</blockquote>
+<p>而Event流 <strong>不同于</strong> State流 ，因为Event的生命周期情况更加复杂：</p>
+<ul>
+<li>Event可能存在生命周期重叠</li>
+<li>所有Event的生命周期相加可能无法覆盖完整的时间轴</li>
+</ul>
+<p><strong>需要额外设计实现</strong> 。实现这一点后，从Event流中分流（以及裂变+组合）出的 <strong>子流</strong> 将和State流 <strong>性质一致</strong>。</p>
+<p>此刻，您会发现，根据不同类型的事件交互控件所对应的交互特征，又将Event流结合条件流衍生出各个State流。完整的数据流细节如下：</p>
+<p><img  src="/_astro/mvi-udf2.BGndXBAl_2hhUET.webp" alt loading="lazy" decoding="async" width="1155" height="994"></p>
+<p><em>作者按：在图中省略了Event分流转变为子State流的过程，因为它需要遵循特定产品交互机制</em></p>
+<h2 id="结语">结语</h2>
+<p>这篇文章，从5月计划写，到6月动笔，断断续续，草稿写了很长，几经删改依旧留有很长的篇幅，虽已竭力尽智，但任觉文字上有表意未通透之处，欢迎在评论区讨论。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

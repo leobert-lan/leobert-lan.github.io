@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>杂谈1-2022-11 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">杂谈1-2022-11</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="杂篇一">杂篇（一）</h1>
+<h2 id="开篇词">开篇词</h2>
+<p>我本是红尘一俗客，没有那文人酸腐气。</p>
+<p>曾几何时，梳理收藏夹，发现了很久前收藏的一位前端大佬的个人博客：<a href="https://imnerd.org/">怡红院落</a> ，因为领域不同，之前一直没有拜读过他的文章。 我尚且无法判断怡红公子购买的域名中，“imnerd” 是指 “书呆子”
+还是 “电脑迷”，他在文中这样介绍自己：</p>
+<blockquote>
+<p>嗯，平凡，普通的不能在普通的一个地球人，从初中到大学都没出方圆百里的老挫男；</p>
+<p>喜欢上网，是个极度恋家的宅男+网虫。喜欢计算机技术，但自己没本事，啥也不会；</p>
+<p>网络让我认识了好多人， 比我大的，比我小的，男的，女的，还有好多动物。</p>
+<p>喜欢朦胧的细雨，爱上烟雨的江南，形式作风拖拖拉拉，是个十足的懒散蛋，行事低调，主要原因是胆小怕事，没有勇气。</p>
+<p>属于内在美没有，外在美全无的那种人， 在社会的大河中漂流， 希望平平淡淡的过完这一生。</p>
+<p>一座小房，有工资，还有一台电脑，就够了。</p>
+<p>出自：<a href="https://imnerd.org/about.html">关于|怡红院落</a></p>
+</blockquote>
+<p>但他的文章中，除了技术博文外，还有说走就走的旅行、发自内心的影评。</p>
+<p>这让我相信了：“愿你出走半生，归来仍是少年” 所言非虚。所以，在技术相关的绝对理性内容之外，我开辟了这一隅，留给自己的感性。</p>
+<h2 id="务必让自己慢下来">务必让自己慢下来</h2>
+<p>杨绛在百岁感言中写道：</p>
+<blockquote>
+<p>我们曾如此渴望命运的波澜,到最后才发现:人生最曼妙的风景,竟是内心的淡定与从容</p>
+</blockquote>
+<p>我也曾于古文中探索，君子如玉是何种风采；怎样的内涵，才能支撑起内心深处的淡定与从容。</p>
+<p>曾经我以为，能够让一个技术人员做到淡定从容的是渊博的知识与见识，就如同：“家中有粮，心里不慌”。</p>
+<p>但没过多久我就陷入了迷茫，即便我的专业知识、技能、业务知识已经能够完全掌控 “编程工作” 时，依旧会有一些事情，让我无名火起。</p>
+<p>要知道，世间有很多的的压力 <strong>迫使你往前跑</strong> ，世间有很多种声音在尝试暗示和欺骗你：“只要你有能力能够掌控这些事情，你就能…”，以此让你 <strong>跑的更快</strong> 。</p>
+<p>当你跑的足够快的时候，你就再也没有机会去观察自己了，顺其自然的，你也不会有机会发现自己的问题并修正。失去了雕琢自身的可能，自然不会锻炼出内心的淡定与从容。</p>
+<p>因此，一定要让自己先慢下来，至少先意识到要慢下来，通过观察自身，去尝试发现问题。</p>
+<p>淡定是对事物的反应的一种理智表现，而做到从容要更加困难，往往需要在认知领域达到很高的成就，它不仅是心理活动，在行动上也表现一致。这让我联想到了一个影视人物：天道中的丁元英。</p>
+<h2 id="那些有趣的玩具们">那些有趣的玩具们</h2>
+<p>小时候收到过一个玩具，一个普通的魔方，虽然它在漫长的岁月里早已损坏。嗯，就像这样的小玩意</p>
+<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3d4103e0414940e69c5585a232ba9655~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>它很容易被打乱，并且难以靠运气还原它:</p>
+<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/51cc4120c86f46399059a5fe1fe40b04~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>即便是最基本的还原方式，也需要遵循步骤，</p>
+<p>先还原一层：</p>
+<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5d10e23b35934b12bbadc07c3d050274~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>再还原一层：</p>
+<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8961fc310fb9404fbb814b9a2f6e175f~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>调整第三层：</p>
+<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2ba506c369974f08aac0f2bc9a0b5cbd~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>最后再小心的完成它</p>
+<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3d4103e0414940e69c5585a232ba9655~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>整个过程就像下图这样，即便它的组合非常的多，你也只需要记住解决问题的KeyPoint：</p>
+<img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/aedd2a0a96dd46bdadc28bf19ec91901~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>有时候，同样的问题，随着观测的角度不一致，也会让你慌乱：</p>
+<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0b60086648e74a6ab761432354e10886~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>请淡定一点，其实它们没有本质的差别</p>
+<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/86e1369769814be6bb30c23a956bebfc~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>随着年龄的增长，我们会碰到更大的麻烦：</p>
+<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bac5ef6816ba4e6eb89516dfd73dd5d8~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>甚至为了追寻刺激，自己寻找更大的麻烦：</p>
+<img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fed222860f5b4481aa6f4625867c3c85~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>但仍请保持乐观</p>
+<img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8304b527c7944901bb142da4aa3db5d6~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>问题也有可能会变得更加简单，但处理问题的步骤与经验同样可以复用</p>
+<img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a7ec15d8d92848f184fc26a6d6f0b99c~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>有时候，除了角度不同，问题面也会有变化：</p>
+<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/abc9d924be4a422791ade72e99d50b83~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6c978e684b4a4fd08849232c0a53a308~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<p>他们时刻在提醒我，具体问题具体分析，过去的成绩只能代表过去，权威并不能在所有问题下保持权威。</p>
+<p>大多数人将这一行为称为收集，部分人称之为”积累与成长”</p>
+<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/15860a9335bd424796a1936e7fe9183c~tplv-k3u1fbpfcp-watermark.image?" width="162">
+<h2 id="找准目标">找准目标</h2>
+<p>我们需要清晰地意识到正确的目标才能玩转这些玩具，人生中的各种事情也是如此。</p>
+<p>正如同兵家所言：“故善战者，立于不败之地，而不失敌之败也。是故胜兵先胜而后求战，败兵先战而后求胜。“，如此方能做到从容。</p>
+<p>将问题放大到人生路上，找准目标并非一件简单的事情，它牵涉到人生观、世界观、价值观，绝大多数情况下，我们无法判断已经认准的目标是对是错，甚至它们本身就没有对错之分！</p>
+<p>前段时间，阅读到一篇对于 “高级程序员与普通程序员差别” 的讨论帖，截取核心内容如下，相信各位同行会有所感悟。</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/557ff08585c64231a4f6515e4da2550e~tplv-k3u1fbpfcp-watermark.image?" alt="different_coder.png"></p>
+<p>大多数时候，我们都在做一些 <strong>“功利”</strong> 的事情，如同沿着如下图的技能树去扩展技能</p>
+<p><em>注意，这里功利是一个中性词</em></p>
+<img width="300" src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f3b27705d1e645abb9dfe0b301e624f0~tplv-k3u1fbpfcp-watermark.image?">
+<p>图片来自 <a href="https://github.com/skydoves/android-developer-roadmap">skydoves/android-developer-roadmap</a></p>
+<p>值得肯定的是，做此类功利的事情可以提升能力和看问题的深度，但难以提升广度。</p>
+<p>现实生活中的问题也没有编程那么纯粹；能够拥有一位智者充当人生导师亦是极其罕见的机遇；所以找准目标是一件有挑战的事情，<strong>可能 “阅读经典书籍” 是一项有帮助的行为</strong>。</p>
+<h2 id="关于读书">关于读书</h2>
+<p>这是一个比较严肃的事情，我并不打算这样轻易地展开讨论下去。</p>
+<p>读书分两种，功利的和非功利的；功利性的读书在合适场景下可以很快得到利益反馈，而非功利性的读书往往带给人思维上的质变。</p>
+<h2 id="不再拘泥认可">不再拘泥认可</h2>
+<blockquote>
+<p>我们曾如此期盼外界的认可,到最后才知道:世界是自己的,与他人毫无关系。 — 杨绛</p>
+</blockquote>
+<p>一般来说，知音体博主的小作文不会引用这一句，故一部分人只知道前一句。</p>
+<p>我也曾执着于 <strong>“证明自己”</strong> ，<strong>“赢得认可”</strong> ，换来的往往是 “君子可以欺之以方”，在我读过《老子》《管子》，之后便释怀了。</p>
+<p>从事脑力附加劳动的人，往往执着于获取他人的认可，但他人的认可是不仅仅取决于自身能力，亦取决于他人的素养、知识与道德。所以我认为，技术人需要的底线是尊重，可以不被认可，但不能不被尊重。</p>
+<blockquote>
+<p>圣人被褐而怀玉</p>
+</blockquote></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

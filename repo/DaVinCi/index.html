@@ -1,0 +1,288 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DaVinCi,取代XML编写Shape或ColorStateList的方案 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">DaVinCi,取代XML编写Shape或ColorStateList的方案</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="davinci-达芬奇">DaVinCi （达·芬奇）</h1>
+<h2 id="是什么">是什么</h2>
+<p>在Android上取代xml方式定义 Shape/GradientDrawable 以及 ColorStateList的方案。</p>
+<ul>
+<li>支持在 <code>Java/Kotlin 业务代码</code> 中使用</li>
+<li>配合 <code>DataBinding</code> 可以在 <code>XML布局文件</code> 中使用</li>
+</ul>
+<p><a href="https://github.com/leobert-lan/DaVinCi">项目地址</a></p>
+<p>几篇相关拙作：</p>
+<ul>
+<li>实现原理解析，详见拙作：<a href="../Android/Drawable/post_4.md">好玩系列：拥有它，XML文件少一半—更方便的处理View背景</a></li>
+<li>关于注解处理器（ksp实现）以及实现的核心目标，详见拙作： <a href="../Android/KSP/post_24.md">好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li>
+</ul>
+<h2 id="为何会产生这一想法">为何会产生这一想法</h2>
+<p>出于多方面原因，使用XML定义 <code>shape资源</code>， <code>gradient drawable 资源</code> ， <code>color state list 资源</code> 太麻烦了。诸如：</p>
+<ul>
+<li>xml本身很啰嗦</li>
+<li>命名是一件很麻烦的事情（数量达到一定规模后管理也很麻烦）</li>
+<li>很多样式 <code>复用度并不高</code></li>
+<li>UI在高强度模式下也难以做到 <code>对每个样式都规范化管理</code></li>
+<li>切换一个文件打断思路的成本太高 等等</li>
+</ul>
+<p>所以我产生了这一想法：</p>
+<ul>
+<li>建立Builder机制构建这些资源 （<em>构建变得简单且灵活</em>）</li>
+<li>基于纯文本化的DSL，描述这些资源，并利用Builder进行构建（<em>方便向皮肤包过渡，或者任何基于配置的形式运行</em>）</li>
+<li>建立OO封装，让构建更加简单</li>
+</ul>
+<h2 id="实现原理解析">实现原理解析</h2>
+<p>详见拙作：<a href="../Android/Drawable/post_4.md">好玩系列：拥有它，XML文件少一半—更方便的处理View背景</a></p>
+<h2 id="如何使用">如何使用</h2>
+<h3 id="添加mavencentral仓库声明">添加MavenCentral仓库声明</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>//{project root}/build.gradle</span></span>
+<span class="line"><span>subprojects {</span></span>
+<span class="line"><span>    repositories {</span></span>
+<span class="line"><span>        mavenCentral()</span></span>
+<span class="line"><span>        //...</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<h3 id="声明依赖">声明依赖</h3>
+<p>以下是包依赖信息</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#6A737D">/*</span></span>
+<span class="line"><span style="color:#6A737D">* 注解，用于Style类注解或者StyleFactory类注解，以及预览时的可选配置注解</span></span>
+<span class="line"><span style="color:#6A737D">* */</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#F97583"> val</span><span style="color:#F97583"> annotation</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "io.github.leobert-lan:davinci-anno:0.0.2"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">/*</span></span>
+<span class="line"><span style="color:#6A737D">* 注解处理器，支持ksp或者kapt或者annotationProcessor</span></span>
+<span class="line"><span style="color:#6A737D">* */</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> ksp </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "io.github.leobert-lan:davinci-anno-ksp:0.0.2"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">/*</span></span>
+<span class="line"><span style="color:#6A737D">* 核心包</span></span>
+<span class="line"><span style="color:#6A737D">* */</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> api </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "io.github.leobert-lan:davinci:0.0.5"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">/*</span></span>
+<span class="line"><span style="color:#6A737D">* 如果要预览style定义，利用debugImplementation 声明</span></span>
+<span class="line"><span style="color:#6A737D">* */</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> viewer </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "io.github.leobert-lan:davinci-style-viewer:0.0.1"</span></span></code></pre>
+<p>关于注解处理器（ksp实现）以及实现的核心目标，详见拙作： <a href="../Android/KSP/post_24.md">好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></p>
+<p>使用注解处理器简化Style注册时，需要配置参数：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">kapt {</span></span>
+<span class="line"><span style="color:#E1E4E8">    arguments {</span></span>
+<span class="line"><span style="color:#E1E4E8">        arg(</span><span style="color:#9ECBFF">"daVinCi.verbose"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"true"</span><span style="color:#E1E4E8">) </span><span style="color:#6A737D">//日志</span></span>
+<span class="line"><span style="color:#E1E4E8">        arg(</span><span style="color:#9ECBFF">"daVinCi.pkg"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"com.example.simpletest"</span><span style="color:#E1E4E8">) </span><span style="color:#6A737D">//生成类包名</span></span>
+<span class="line"><span style="color:#E1E4E8">        arg(</span><span style="color:#9ECBFF">"daVinCi.module"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"App"</span><span style="color:#E1E4E8">) </span><span style="color:#6A737D">//生成类的前缀</span></span>
+<span class="line"><span style="color:#E1E4E8">        arg(</span><span style="color:#9ECBFF">"daVinCi.preview"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"true"</span><span style="color:#E1E4E8">) </span><span style="color:#6A737D">//生成预览配置的注入代码</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>下面会展开这几个部分：</p>
+<ul>
+<li>构建一个Shape 和诸多API</li>
+<li>构建一个ColorStateList 和诸多API</li>
+<li>在XML中使用DaVinCi</li>
+<li>定义Style，及其初始化方式以及使用方式</li>
+<li>预览Style</li>
+</ul>
+<h3 id="构建一个shape">构建一个Shape</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#E1E4E8">DaVinCiExpression.</span><span style="color:#B392F0">shape</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Shape</span></span></code></pre>
+<h4 id="指定shape的类型">指定Shape的类型，</h4>
+<p>一般常用的是rectAngle 和 oval</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> rectAngle</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Shape</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> oval</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Shape</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> ring</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Shape</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> line</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">Shape</span></span></code></pre>
+<h4 id="rectangle时的圆角">rectAngle时的圆角：</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> corner</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">@Px</span><span style="color:#E1E4E8"> r: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Shape</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> corner</span><span style="color:#E1E4E8">(str: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Shape</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> corners</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">@Px</span><span style="color:#E1E4E8"> lt: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">@Px</span><span style="color:#E1E4E8"> rt: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">@Px</span><span style="color:#E1E4E8"> rb: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">@Px</span><span style="color:#E1E4E8"> lb: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Shape</span></span></code></pre>
+<p>尺寸均可以 “xdp” 表达dp值，如”3dp”即为 3个dp，“3”则为3个px。</p>
+<h4 id="填充色">填充色：</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> solid</span><span style="color:#E1E4E8">(str: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Shape</span><span style="color:#6A737D"> //色值 "#ffffffff" 或者 "rc/颜色资源名"</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> solid</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">@ColorInt</span><span style="color:#E1E4E8"> color: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Shape</span></span></code></pre>
+<h4 id="描边">描边：</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> stroke</span><span style="color:#E1E4E8">(width: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, color: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Shape</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> stroke</span><span style="color:#E1E4E8">(width: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, color: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, dashGap: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, dashWidth: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Shape</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> stroke</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">@Px</span><span style="color:#E1E4E8"> width: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">@ColorInt</span><span style="color:#E1E4E8"> colorInt: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Shape</span><span style="color:#E1E4E8"> </span></span></code></pre>
+<h4 id="渐变">渐变：</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> gradient</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    type: </span><span style="color:#B392F0">String</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Gradient.TYPE_LINEAR,</span></span>
+<span class="line"><span style="color:#B392F0">    @ColorInt</span><span style="color:#E1E4E8"> startColor: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">    @ColorInt</span><span style="color:#E1E4E8"> endColor: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    angle: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Shape</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> gradient</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    type: </span><span style="color:#B392F0">String</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Gradient.TYPE_LINEAR, </span><span style="color:#B392F0">@ColorInt</span><span style="color:#E1E4E8"> startColor: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">    @ColorInt</span><span style="color:#E1E4E8"> centerColor: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">?, </span><span style="color:#B392F0">@ColorInt</span><span style="color:#E1E4E8"> endColor: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    centerX: </span><span style="color:#B392F0">Float</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    centerY: </span><span style="color:#B392F0">Float</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    angle: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Shape</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> gradient</span><span style="color:#E1E4E8">(startColor: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, endColor: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, angle: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Shape</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> gradient</span><span style="color:#E1E4E8">(type: </span><span style="color:#B392F0">String</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Gradient.TYPE_LINEAR, startColor: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, endColor: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, angle: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Shape</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> gradient</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    type: </span><span style="color:#B392F0">String</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Gradient.TYPE_LINEAR,</span></span>
+<span class="line"><span style="color:#E1E4E8">    startColor: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    centerColor: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?,</span></span>
+<span class="line"><span style="color:#E1E4E8">    endColor: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    centerX: </span><span style="color:#B392F0">Float</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    centerY: </span><span style="color:#B392F0">Float</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    angle: </span><span style="color:#B392F0">Int</span></span>
+<span class="line"><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Shape</span></span>
+<span class="line"></span></code></pre>
+<h4 id="设置view的背景">设置View的背景</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@BindingAdapter</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">    "daVinCi_bg"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"daVinCi_bg_pressed"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"daVinCi_bg_unpressed"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "daVinCi_bg_checkable"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"daVinCi_bg_uncheckable"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"daVinCi_bg_checked"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"daVinCi_bg_unchecked"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    requireAll </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">daVinCi</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    normal: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    pressed: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">, unpressed: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    checkable: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">, uncheckable: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    checked: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">, unchecked: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<h3 id="构建一个colorstatelist">构建一个ColorStateList</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#E1E4E8">DaVinCiExpression.</span><span style="color:#B392F0">stateColor</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">ColorStateList</span></span></code></pre>
+<h4 id="设置状态色">设置状态色</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> ColorStateList</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> apply</span><span style="color:#E1E4E8">(state: </span><span style="color:#B392F0">State</span><span style="color:#E1E4E8">, color: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">ColorStateList</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> apply</span><span style="color:#E1E4E8">(state: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, color: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">ColorStateList</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> apply</span><span style="color:#E1E4E8">(state: </span><span style="color:#B392F0">State</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">@ColorInt</span><span style="color:#E1E4E8"> color: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">ColorStateList</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>示例：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#E1E4E8">DaVinCiExpression.</span><span style="color:#B392F0">stateColor</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_PRESSED_TRUE, color </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Color.</span><span style="color:#B392F0">parseColor</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"#00aa00"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">).</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_PRESSED_FALSE, color </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Color.</span><span style="color:#B392F0">parseColor</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"#667700"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">).</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_CHECKED_TRUE.name, color </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "#ff0000"</span></span>
+<span class="line"><span style="color:#E1E4E8">).</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_CHECKED_FALSE, color </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "#000000"</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    .</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">        binding.cb1.</span><span style="color:#B392F0">daVinCiColor</span><span style="color:#E1E4E8">(it)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<h4 id="应用颜色">应用颜色：</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@BindingAdapter</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"daVinCiTextColor"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> TextView</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">daVinCiColor</span><span style="color:#E1E4E8">(expressions: </span><span style="color:#B392F0">DaVinCiExpression</span><span style="color:#E1E4E8">.ColorStateList)</span></span></code></pre>
+<h3 id="在xml中使用">在XML中使用</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">layout</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">data</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#85E89D">import</span><span style="color:#B392F0"> type</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"osp.leobert.android.davinci.DaVinCiExpression"</span><span style="color:#E1E4E8">/></span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">data</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">LinearLayout</span></span>
+<span class="line"><span style="color:#B392F0">        daVinCi_bg</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@{DaVinCiExpression.shape().solid(`#eaeaea`)}"</span></span>
+<span class="line"><span style="color:#E1E4E8">    /></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">layout</span><span style="color:#E1E4E8">></span></span></code></pre>
+<p>更多 <a href="https://github.com/leobert-lan/DaVinCi">参考Demo</a></p>
+<h3 id="定义style">定义Style</h3>
+<p>当部分样式复用度较高时，我们可以定义Style，以减少创建过程</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@DaVinCiStyle</span><span style="color:#E1E4E8">(styleName </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "btn_style.main"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">@StyleViewer</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    height </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 40</span><span style="color:#E1E4E8">, width </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ViewGroup.LayoutParams.MATCH_PARENT,</span></span>
+<span class="line"><span style="color:#E1E4E8">    type </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> StyleViewer.FLAG_CSL or StyleViewer.FLAG_BG, background </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "#ffffff"</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> DemoStyle</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">StyleRegistry</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">Style</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"btn_style.main"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    init</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_ENABLE_FALSE,</span></span>
+<span class="line"><span style="color:#E1E4E8">            expression </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> DaVinCiExpression.</span><span style="color:#B392F0">shape</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">rectAngle</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">solid</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"#80ff3c08"</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">corner</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"10dp"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        ).</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_ENABLE_TRUE,</span></span>
+<span class="line"><span style="color:#E1E4E8">            expression </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> DaVinCiExpression.</span><span style="color:#B392F0">shape</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">rectAngle</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">corner</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"10dp"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">gradient</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"#ff3c08"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"#ff653c"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        ).</span><span style="color:#B392F0">registerCsl</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            exp </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> DaVinCiExpression.</span><span style="color:#B392F0">stateColor</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_ENABLE_FALSE,</span></span>
+<span class="line"><span style="color:#E1E4E8">                color </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "#ffffff"</span></span>
+<span class="line"><span style="color:#E1E4E8">            ).</span><span style="color:#B392F0">apply</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_ENABLE_TRUE,</span></span>
+<span class="line"><span style="color:#E1E4E8">                color </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "#333333"</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"><span style="color:#E1E4E8">        )</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>或者利用Factory延迟创建过程</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@DaVinCiStyleFactory</span><span style="color:#E1E4E8">(styleName </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "btn_style.main"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> DemoStyleFactory</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">StyleRegistry</span><span style="color:#E1E4E8">.Style.</span><span style="color:#B392F0">Factory</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> styleName: </span><span style="color:#B392F0">String</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "btn_style.main"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> apply</span><span style="color:#E1E4E8">(style: </span><span style="color:#B392F0">StyleRegistry</span><span style="color:#E1E4E8">.Style) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        style.</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_ENABLE_FALSE,</span></span>
+<span class="line"><span style="color:#E1E4E8">            expression </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> DaVinCiExpression.</span><span style="color:#B392F0">shape</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">rectAngle</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">solid</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"#80ff3c08"</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">corner</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"10dp"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        ).</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> State.STATE_ENABLE_TRUE,</span></span>
+<span class="line"><span style="color:#E1E4E8">            expression </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> DaVinCiExpression.</span><span style="color:#B392F0">shape</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">rectAngle</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">corner</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"10dp"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">                .</span><span style="color:#B392F0">gradient</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"#ff3c08"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"#ff653c"</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        )</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="进行初始化">进行初始化</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> MainApplication</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">Application</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> onCreate</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">onCreate</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        AppDaVinCiStyles.</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //不对预览进行额外配置可忽略</span></span>
+<span class="line"><span style="color:#E1E4E8">        AppDaVinCiStylePreviewInjector.</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //如果不使用注解，则需要手动罗列注入，数量多了后，非常啰嗦 ：</span></span>
+<span class="line"><span style="color:#6A737D">        //StyleRegistry.registerFactory(DemoStyleFactory())</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="使用style">使用Style</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@BindingAdapter</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"daVinCiBgStyle"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> View</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">daVinCiBgStyle</span><span style="color:#E1E4E8">(styleName: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">    with</span><span style="color:#E1E4E8">(StyleRegistry.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(styleName)) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">?.</span><span style="color:#B392F0">applyTo</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#B392F0">            DaVinCi</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">this@daVinCiBgStyle</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        )</span></span>
+<span class="line"><span style="color:#E1E4E8">            ?: Log.</span><span style="color:#B392F0">d</span><span style="color:#E1E4E8">(DaVinCiExpression.sLogTag, </span><span style="color:#9ECBFF">"could not found style with name </span><span style="color:#79B8FF">$styleName</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">TextView</span></span>
+<span class="line"><span style="color:#B392F0">    daVinCiBgStyle</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"@{`btn_style.main`}"</span><span style="color:#E1E4E8">/></span></span></code></pre>
+<p>如果将style定义下沉到Module，则可以使用生成的名称常量</p>
+<p><em>目前0.0.5版本扩展了较多功能编码仓促，部分API名称不恰当，会逐步新增，使得API名称和功能更加贴切</em></p>
+<h3 id="预览style">预览Style</h3>
+<p>如果在AS中扩展预览功能，那么需要付出太多的工作量。于是采用了取巧的方式</p>
+<p>一旦添加了 <code>"io.github.leobert-lan:davinci-style-viewer:0.0.1"</code> 库，则会包含一个Activity，展示所有已注册的样式。</p>
+<p>例如：</p>
+<p><img  src="/_astro/img.DAqBG5pN_ZMez7G.webp" alt="Demo" loading="lazy" decoding="async" width="1080" height="2160"></p>
+<p>很显然，条目第一行是样式名，第二行是预览区，第三行是Check和Enable的设置，更多设置将会逐步开放。</p>
+<p>利用注解可以进行一定的配置：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> annotation</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> StyleViewer</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> height: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 48</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> width: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#6A737D"> /*android.view.ViewGroup.LayoutParams.MATCH_PARENT = -1*/</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> background: </span><span style="color:#B392F0">String</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "#ffffff"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> type: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> FLAG_BG or FLAG_CSL,</span></span>
+<span class="line"><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> companion</span><span style="color:#F97583"> object</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> FLAG_BG: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8"> shl </span><span style="color:#79B8FF">0</span></span>
+<span class="line"><span style="color:#F97583">        public</span><span style="color:#F97583"> const</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> FLAG_CSL: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8"> shl </span><span style="color:#79B8FF">1</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<ul>
+<li>设置宽高，单位dp，</li>
+<li>预览区背景为白色，如果和样式比较贴近，可以设置背景区颜色</li>
+<li>如果是明确的背景样式，且尺寸较小时，可以设置type为 FLAG_BG，移除文字显示</li>
+</ul>
+<h2 id="以后的工作">以后的工作</h2>
+<ul>
+<li>继续添加更加方便的API</li>
+<li>扩展DSL</li>
+<li>优化在Java/Kotlin 代码中使用DaVinCi的简便性</li>
+<li>内部功能进一步解耦 <em>如果有必要</em> ， <em>可迁移到其他</em></li>
+<li>优化预览
+<ul>
+<li>更多模态状态设置</li>
+<li>搜索 <em>如果有必要</em></li>
+<li>分组 <em>如果有必要</em></li>
+</ul>
+</li>
+</ul>
+<p>如果你觉得DaVinCi很有趣，不妨点个Star，欢迎一起交流想法。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

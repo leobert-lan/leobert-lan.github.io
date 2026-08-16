@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Jetpack Compose | 控件篇（二） -- Icon，Image | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">Jetpack Compose | 控件篇（二） -- Icon，Image</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="jetpack-compose--控件篇二--iconimage">Jetpack Compose | 控件篇（二） — Icon，Image</h1>
+<h2 id="写在最前">写在最前</h2>
+<p>在上一篇，我们学习了Compose 中的 <code>Text</code> 、<code>TextField</code> 、<code>Button</code>，并在WorkShop中进行了一系列尝试。
+除了对他们的效果有了直观的认识外，也感受了Compose的编码乐趣。</p>
+<p>本篇我们将继续学习Icon和Image，从命名上我们可以看出他们和 <code>图形、图片</code> 有关，也是 <code>内容呈现</code> 中非常重要的一种载体和方式。</p>
+<blockquote>
+<p><em>文中代码均基于 1.0.1版本</em></p>
+<p><em>如无特殊说明，文中的 <code>Compose</code> 均指代 <code>Jetpack compose</code></em></p>
+<p>文中代码均可在 <a href="https://github.com/leobert-lan/ComposeWorkShop">WorkShop</a> 中获取，本篇代码集中于 post27 包下</p>
+</blockquote>
+<h2 id="icon">Icon</h2>
+<h3 id="使用方法">使用方法</h3>
+<p>翻阅源码，我们可以获知有三个函数用于构建Icon组件。</p>
+<p>分别是：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> Icon</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    imageVector: </span><span style="color:#B392F0">ImageVector</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentDescription: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?,</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    tint: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> LocalContentColor.current.</span><span style="color:#B392F0">copy</span><span style="color:#E1E4E8">(alpha </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> LocalContentAlpha.current)</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> Icon</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    bitmap: </span><span style="color:#B392F0">ImageBitmap</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentDescription: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?,</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    tint: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> LocalContentColor.current.</span><span style="color:#B392F0">copy</span><span style="color:#E1E4E8">(alpha </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> LocalContentAlpha.current)</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> Icon</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    painter: </span><span style="color:#B392F0">Painter</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentDescription: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?,</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    tint: </span><span style="color:#B392F0">Color</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> LocalContentColor.current.</span><span style="color:#B392F0">copy</span><span style="color:#E1E4E8">(alpha </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> LocalContentAlpha.current)</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>不难发现，仅第一个形参类型不一致，但均是Icon的实际内容。</p>
+<p>而其他三个参数，含义分别为：</p>
+<ul>
+<li>contentDescription: 内容含义描述，用于 <code>无障碍服务</code> ，如果这个Icon可以被触发，就需要解释它的含义，如果仅仅是装饰性质，可以忽略掉</li>
+<li>modifier: 修饰器</li>
+<li>tint: 着色器，可以直接修改Icon实质内容的颜色。<em>从事Android行业的读者并不陌生</em></li>
+</ul>
+<p>而实质内容可以以三种方式进行描述：</p>
+<ul>
+<li>ImageVector 矢量图</li>
+<li>ImageBitmap 位图</li>
+<li>Painter 可被绘制的内容，这是一个抽象的类，类似于Android中的 <code>Drawable</code></li>
+</ul>
+<h3 id="效果">效果</h3>
+<p>Compose中已经存在一些矢量图资源，例如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> Icons.Filled.Favorite: </span><span style="color:#B392F0">ImageVector</span></span>
+<span class="line"><span style="color:#F97583">    get</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (_favorite </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> _favorite</span><span style="color:#F97583">!!</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        _favorite </span><span style="color:#F97583">=</span><span style="color:#B392F0"> materialIcon</span><span style="color:#E1E4E8">(name </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Filled.Favorite"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">            materialPath</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">                moveTo</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">12.0f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">21.35f</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">                lineToRelative</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">-</span><span style="color:#79B8FF">1.45f</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">-</span><span style="color:#79B8FF">1.32f</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">                curveTo</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">5.4f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">15.36f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">2.0f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">12.28f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">2.0f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">8.5f</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">                curveTo</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">2.0f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">5.42f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">4.42f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3.0f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">7.5f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3.0f</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">                curveToRelative</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1.74f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.0f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3.41f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.81f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">4.5f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">2.09f</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">                curveTo</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">13.09f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3.81f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">14.76f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3.0f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">16.5f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3.0f</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">                curveTo</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">19.58f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3.0f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">22.0f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">5.42f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">22.0f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">8.5f</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">                curveToRelative</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0.0f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3.78f</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">-</span><span style="color:#79B8FF">3.4f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">6.86f</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">-</span><span style="color:#79B8FF">8.55f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">11.54f</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">                lineTo</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">12.0f</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">21.35f</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">                close</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> _favorite</span><span style="color:#F97583">!!</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span></code></pre>
+<p>当然，按照 <code>MaterialDesign</code>, 存在一系列的风格:</p>
+<ul>
+<li>Filled 默认，图形是内容填充风格</li>
+<li>Outlined 只有描边，不做填充</li>
+<li>Rounded 圆形，例如圆形启动图标</li>
+<li>TwoTone 双调，<em>不确定doc是否写错，和Sharp完全一致，可以看情况搭讪下设计MM，顺带提升下审美</em></li>
+<li>Sharp 例如直角图标</li>
+</ul>
+<p><a href="https://fonts.google.com/icons?selected=Material+Icons">均可以在Google Fonts进行定制与体验</a></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">Icon</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    Icons.Filled.Call,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentDescription </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Call"</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">Icon</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    Icons.Outlined.Call,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentDescription </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Call"</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">Icon</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    Icons.Rounded.Call,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentDescription </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Call"</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">Icon</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    Icons.TwoTone.Call,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentDescription </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Call"</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#B392F0">Icon</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    Icons.Sharp.Call,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentDescription </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Call"</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>选取了部分内置图标进行直观感受。</p>
+<p>三种资源使用方式以及Tint：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">Icon</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    ImageBitmap.</span><span style="color:#B392F0">imageResource</span><span style="color:#E1E4E8">(id </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> R.drawable.baseline_fingerprint_black_24dp),</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentDescription </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Check fingerprint"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    tint </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Color.Green</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p><img  src="/_astro/icon_demo.Biwl_YOj_Z2nGGDj.webp" alt="icon_demo.webp" loading="lazy" decoding="async" width="1080" height="2160"></p>
+<h2 id="image">Image</h2>
+<h3 id="使用方式">使用方式</h3>
+<p>和Icon的使用类似，同样有三个函数：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> Image</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    bitmap: </span><span style="color:#B392F0">ImageBitmap</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentDescription: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?,</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    alignment: </span><span style="color:#B392F0">Alignment</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Alignment.Center,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentScale: </span><span style="color:#B392F0">ContentScale</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ContentScale.Fit,</span></span>
+<span class="line"><span style="color:#E1E4E8">    alpha: </span><span style="color:#B392F0">Float</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> DefaultAlpha,</span></span>
+<span class="line"><span style="color:#E1E4E8">    colorFilter: </span><span style="color:#B392F0">ColorFilter</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> Image</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    imageVector: </span><span style="color:#B392F0">ImageVector</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentDescription: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?,</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    alignment: </span><span style="color:#B392F0">Alignment</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Alignment.Center,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentScale: </span><span style="color:#B392F0">ContentScale</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ContentScale.Fit,</span></span>
+<span class="line"><span style="color:#E1E4E8">    alpha: </span><span style="color:#B392F0">Float</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> DefaultAlpha,</span></span>
+<span class="line"><span style="color:#E1E4E8">    colorFilter: </span><span style="color:#B392F0">ColorFilter</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> Image</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    painter: </span><span style="color:#B392F0">Painter</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentDescription: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">?,</span></span>
+<span class="line"><span style="color:#E1E4E8">    modifier: </span><span style="color:#B392F0">Modifier</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Modifier,</span></span>
+<span class="line"><span style="color:#E1E4E8">    alignment: </span><span style="color:#B392F0">Alignment</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Alignment.Center,</span></span>
+<span class="line"><span style="color:#E1E4E8">    contentScale: </span><span style="color:#B392F0">ContentScale</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ContentScale.Fit,</span></span>
+<span class="line"><span style="color:#E1E4E8">    alpha: </span><span style="color:#B392F0">Float</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> DefaultAlpha,</span></span>
+<span class="line"><span style="color:#E1E4E8">    colorFilter: </span><span style="color:#B392F0">ColorFilter</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>和Icon对比，如下参数不同：</p>
+<ul>
+<li>alignment: 内容对齐方式</li>
+<li>contentScale: 缩放，<em>类似Android ScaleType</em></li>
+<li>alpha: 内容的Alpha通道</li>
+<li>colorFilter: 色彩过滤器，<em>可以实现tint、滤镜矩阵等，非Compose特有，不再展开</em></li>
+</ul>
+<blockquote>
+<p>值得一提的是, 图片因其信息量大的特性，实际应用过程中，对于远程资源，总是需要考虑：</p>
+<ul>
+<li>加载耗时</li>
+<li>清晰度分级</li>
+<li>缓存</li>
+</ul>
+<p>等内容，本篇我们仅学习静态资源的加载, 而和Compose相关的 <code>资源</code> 加载函数，在Icon中已经有代码示例，本节不再赘述。</p>
+</blockquote>
+<h2 id="结语">结语</h2>
+<p>又很愉快地学完了一些新知识，当然，在Icon和Image中，依旧存在很多我们没有挖掘的内容，但不用着急，在起始阶段，我们仅需要掌握控件的特性和使用方式。</p>
+<p>当我们掌握了UI布局相关的内容后，我们会回过头来，再学习他的原理部分。</p>
+<p><em>打个招呼：其实起始阶段的内容都非常简单，但因为我最近比较懒，而且正在处理一件有挑战的事情，占用了很多精力，所以更新有点拖沓</em></p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>好玩系列：白嫖一个优雅的类图生成工具 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">好玩系列：白嫖一个优雅的类图生成工具</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="好玩系列白嫖一个优雅的类图生成工具">好玩系列：白嫖一个优雅的类图生成工具</h1>
+<h2 id="前言">前言</h2>
+<p>首先必须声明，<strong>这不是一篇广告或者标题党</strong>。 而是我开源了一个工具，可以优雅的为Java or Kotlin 项目生成 <code>Class Diagram</code>。</p>
+<p>我推测列为读者会进来阅读，原因无非以下两点：</p>
+<ul>
+<li>获得一个生成类图的工具，并通过文章快速了解是否 <code>方便</code> 且 <code>好用</code></li>
+<li>了解一下我是如何折腾的</li>
+</ul>
+<p>仅关心如何使用的，可以移步 <a href="#demo">使用示例</a></p>
+<p>我们将按照下面的脑图顺时针展开，揭开这一工具的诞生过程</p>
+<p><img  src="/_astro/class-diagram-guide.BhCSDpJp_H3bet.webp" alt loading="lazy" decoding="async" width="833" height="295"></p>
+<h2 id="主要问题与方案">主要问题与方案</h2>
+<h3 id="背景">背景</h3>
+<blockquote>
+<p>背景：笔者今年换了份工作，所在的公司属于 <code>医疗器械</code> 下的细分领域，而相比于 <code>纯互联网行业</code> 领域，<code>医疗器械</code> 领域所属的配套软件，
+都有明确的文档要求，并非 <code>可有可无</code> ，而且公司管理层比较重视细节（<em>核心产品为颅内、体内植入的医疗器械，确实需要非常认真仔细</em>）。</p>
+</blockquote>
+<p>毋庸置疑，<code>准确的</code> 、<code>关键的</code> 算法流程图，时序图，组件图，状态图，类图等， 对于产品本身的维护及发展具有很大帮助！</p>
+<p>对于研发工作者而言，高度概括流程、设计、算法等的专业工具图对工作有极大帮助。既然需要审核的文档中也需要这些内容，又对工作有帮助，<strong>何不做的好一些呢</strong>。</p>
+<p>上文提到的各类UML图中， <code>类图 Class-Diagram</code> 是非常特殊的, 它表述的是 <code>类之间的关系</code> ，<strong>基于源码文件分析可以得出准确的结果</strong>。
+而 <code>流程图</code> 、<code>时序图</code> 、<code>状态图</code> 、 <code>组件图</code> 等则不行。</p>
+<h3 id="问题">问题</h3>
+<p>随着行业的发展，软件开发也演变为 <code>以迭代的方式，依次实现最重要的功能，持续性交付</code>，顺其自然的，我们已经不再像几十年前的前辈们那样：代码未动，文档与UML图先行。
+一般概要设计后，方案可行便进行编码了。</p>
+<p><em>根据我的实际情况，复杂的功能一般在草稿纸上画画草图，简单的就脑子里想想，难以留下存档</em></p>
+<p>在这一工作模式下，笔者也遇到了一些问题：</p>
+<ul>
+<li>业务迭代后或者代码改进后，文档（uml图）未及时更新</li>
+<li>手动维护耗时耗力</li>
+</ul>
+<p>如果这件事情可以交给机器来做，那显然是极好的！而让机器维护类图是最容易实现的！</p>
+<p>综上所述：我们需要一款工具或者插件，可以直接基于源码生成类图 <em>（或者中间产物，例如：plant-uml文件）</em> ，能够配合其他工具链，直接进行归档。</p>
+<p><em>当然，最重要是免费， 这省去了说服公司进行购买</em></p>
+<blockquote>
+<p>留有类图的好处：</p>
+<ul>
+<li>方便向他人介绍业务和代码</li>
+<li>项目庞大或者复杂时，更容易找到需求对应的关注点，重新维护时日久远的业务时，状态来的快</li>
+<li>图比代码亲切而且保护隐私🤣</li>
+</ul>
+</blockquote>
+<h3 id="解决方案">解决方案</h3>
+<p>众所周知，Intellij-Idea的官方插件可以分析出类图，但是Idea是收费软件，付费支持官方插件是一个省时省力的方案，这是个兜底方案。最终没辙时，我们再考虑它。</p>
+<h4 id="编码时分析">编码时分析</h4>
+<p>仿照官方插件的思路，基于源码文档树进行分析，在Intellij的支持下，基于 PSI和uast 即可分析出类之间的关系。这需要一定的PSI、uast知识基础。</p>
+<h4 id="编译时分析">编译时分析</h4>
+<p>在整个编译环节中，有一些切面应对特定问题，例如：“注解处理” 、 “Gradle Transformer” ，在此切面处，我们可以基于编译中间产物，间接分析出类之间的关系。</p>
+<p>最简单的是 <strong>注解处理阶段</strong> 介入，<strong>这只需要对 Element 和 TypeMirror 有一定的知识基础即可</strong>。</p>
+<h4 id="运行时反射分析"><del>运行时反射分析</del></h4>
+<p>显然这不是一个太好的切入点，直接pass。</p>
+<hr>
+<blockquote>
+<p>考虑到PSI方面的知识体系掌握地不太完善，Intellij跨越大版本时，会有较大变更，
+而注解处理方面的知识还过的了关，搞个类图生成问题不大。</p>
+<p><em>PS: AndroidStudio 基于Intellij核心二次开发，PSI插件跟随Idea大版本进行适配</em>；</p>
+<p><strong>所以最终方案为：从注解处理阶段入手，分析编译中间产物，最终生成类图</strong></p>
+</blockquote>
+<hr>
+<h2 id="问题分治与解决">问题分治与解决</h2>
+<h3 id="分治1--简化输出产物">分治1 — 简化输出产物</h3>
+<p>确定了大方向之后，我们需要再思考下整个问题的方方面面。生成类图有两大问题需要解决：</p>
+<ul>
+<li>从<del>源码</del>、或者编译的中间产物中分析出类关系； <em>ps:我们已经确定了要从编译中间产物出发</em></li>
+<li>将类关系转变为图</li>
+</ul>
+<p>显然，“开发一个用来生成图的引擎”，这件事情成本过大且没有必要。所幸的是，UML不是一个新生物，业内也有大名鼎鼎的PlantUml。</p>
+<blockquote>
+<p><a href="https://plantuml.com/zh/">PlantUml</a> 基于 <a href="http://www.graphviz.org/">Graphviz</a> ， Graphviz 本身使用Dot语法描述元素与元素关系，
+直接使用 Graphviz 比较朴素，PlantUml通过自定义语法，使得内容可阅读性提升，且无须关注转换图片时进行各类装饰问题</p>
+</blockquote>
+<p>于是，我们可以将问题转化为：从编译的中间产物中分析出类关系，将关系按照PlantUml语法生成puml文件，它的内容是纯文本。</p>
+<h3 id="分治2--确定分析的起始点">分治2 — 确定分析的起始点</h3>
+<p>如果从最终结果看，我们得到的是一个 <code>有方向的图</code>，那么 <strong>按照图本身的起始点出发</strong> 比较符合习惯。</p>
+<p>也就是说，我们将在起始点所对应的类上添加注解，作为注解处理的目标起始点</p>
+<p>例如：</p>
+<p><img  src="/_astro/img.D7RAERSi_Z2fCLJI.webp" alt="img.png" loading="lazy" decoding="async" width="161" height="176"></p>
+<p>Cat 和 Dog 将作为起始点。</p>
+<p>因为只需要标记类，我们约定注解：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@Target</span><span style="color:#E1E4E8">(AnnotationTarget.CLASS)</span></span>
+<span class="line"><span style="color:#F97583">annotation</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> GenerateClassDiagram</span><span style="color:#E1E4E8"> {}</span></span></code></pre>
+<p>在代码上，将表现为：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Animal</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">@GenerateClassDiagram</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Dog</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">Animal</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">@GenerateClassDiagram</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Cat</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">Animal</span><span style="color:#E1E4E8">()</span></span></code></pre>
+<p>在示例中，当我们处理 <code>GenerateClassDiagram</code> 时，可以扫描获得 <code>Cat</code> 以及 <code>Dog</code> 类对应的
+<code>javax.lang.model.element.Element</code> 示例，下文简称 <code>Element</code></p>
+<blockquote>
+<p><em>几点可能存在的疑惑</em>:</p>
+<ul>
+<li>为何不 “双向” 分析：<em>继承和实现关系，双向分析会带来额外的复杂度，且在使用上规则不清晰，依赖关系难以双向分析。</em> 但是，如果使用规则上可以做到清晰明了，这一点值得实现</li>
+<li>为何不标注在Animal上，进行反向分析： <em>如果高层级的类在库包中，则需要修改库包，这不利于日常管理与维护</em></li>
+<li>如果只标注了Cat而没有标注Dog，Dog将不会体现在图中？：<em>是的</em></li>
+<li>如果全部标注了，是否产生不良影响 ：<em>不会，但是没有必要</em></li>
+</ul>
+</blockquote>
+<h3 id="分治3--确定关系的分析方法">分治3 — 确定关系的分析方法</h3>
+<h4 id="继承实现">继承&#x26;实现</h4>
+<p>因为注解的标记对象是类 <em>或者接口</em>，我们理应得到 <code>TypeElement</code>，基于 <code>Element</code> 的访问者模式实现，这一点并不难。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> TypeElement</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Element</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Parameterizable</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">QualifiedNameable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    TypeMirror </span><span style="color:#B392F0">getSuperclass</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    List&#x3C;</span><span style="color:#F97583">?</span><span style="color:#F97583"> extends</span><span style="color:#F97583"> TypeMirror</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">getInterfaces</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    //其他无关代码略去</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>不言自明，我们可以通过 <code>TypeMirror getSuperclass();</code> 得到继承关系，通过 <code>List&#x3C;? extends TypeMirror> getInterfaces();</code> 得到实现关系</p>
+<blockquote>
+<p>注意，此处可以细分，接口和枚举仅需要分析实现关系即可，通过 <code>Element#getKind():ElementKind</code> 可以判断类型</p>
+</blockquote>
+<h4 id="依赖关联聚合组合">依赖&#x26;关联&#x26;聚合&#x26;组合</h4>
+<blockquote>
+<p>这四个关系非常的类似但又不同，<strong>先降低复杂度</strong>，均认为是依赖关系，<em>在后续迭代中，可以进一步增加功能，将关系细化</em></p>
+</blockquote>
+<p>进一步降低复杂度，我们仅从类的属性出发，分析依赖关系，忽略掉 <strong>方法声明</strong> <em>(可分析)</em>、<strong>方法体</strong> <em>(无法分析)</em> 、<strong>静态块</strong> <em>(无法分析)</em> 中 所包含的关系。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> TypeElement</span><span style="color:#F97583"> extends</span><span style="color:#B392F0"> Element</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Parameterizable</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">QualifiedNameable</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    List&#x3C;</span><span style="color:#F97583">?</span><span style="color:#F97583"> extends</span><span style="color:#F97583"> Element</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">getEnclosedElements</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#6A737D">    //无关代码略去</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>不言自明，通过这一API，配合 <code>ElementFilter#fieldsIn(Iterable&#x3C;? extends Element>):List&#x3C;VariableElement></code> 可以得到声明的 fields；</p>
+<p>通过Element的API可以很轻易的得到 <code>命名</code> 以及 <code>修饰</code>；</p>
+<p>通过 <code>Element#asType():TypeMirror</code> API 将其转换为TypeMirror后， 基于其Visitor模式设计可以得到field的类型 <code>DeclaredType</code> 并通过
+<code>DeclaredType#asElement():Element</code> API重新得到Element</p>
+<h3 id="分治4--确定分析的终点">分治4 — 确定分析的终点</h3>
+<p>在分治2中，我们已经确定了分析的起点 <em>(可能有多个)</em> ， 在分治3中，我们已经确定了关系的分析方式。为了方便表述，我们以：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Relation(From,End) 表述 从From 到 End 的关系</span></span></code></pre>
+<p>执行一轮 分治2&#x26;分治3，我们将得到一系列的 Relation(From,End)，此时我们将所有的 <code>End</code> 作为 <code>新的From</code>，不断迭代这一过程，即可完成图的遍历！</p>
+<p>那么合适结束这一过程呢？</p>
+<p>我们只需要维护一个集合 Sfrom，存储迭代过程中的 <code>From</code> ，每次得到的 <code>End</code> 只有满足 “不存在于Sfrom中” 这一条件时，才是 <code>新的From</code>，当无法获得
+<code>新的From</code> 时，迭代结束</p>
+<h3 id="分治5--分治3的补充处理集合数组泛型">分治5 — 分治3的补充，处理集合、数组、泛型</h3>
+<p>按照分治3中的约定，我们将集合、数组涉及的类型，以及泛型去泛化时的类型，都认为和当前类型是 <code>依赖关系</code>；<em>虽然这并不严谨</em></p>
+<p>得益于 <code>TypeMirror</code> 的 <code>Visitor模式</code> 实现，<strong>我们很容易写出以下代码，获取我们关心的内容</strong>！</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> abstract</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> CastingTypeVisitor</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">> </span><span style="color:#B392F0">constructor</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> label: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">) :</span></span>
+<span class="line"><span style="color:#B392F0">    SimpleTypeVisitor6</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">T</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Void</span><span style="color:#E1E4E8">?>() {</span></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> defaultAction</span><span style="color:#E1E4E8">(e: </span><span style="color:#B392F0">TypeMirror</span><span style="color:#E1E4E8">, v: </span><span style="color:#B392F0">Void</span><span style="color:#E1E4E8">?): </span><span style="color:#B392F0">T</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        throw</span><span style="color:#B392F0"> IllegalArgumentException</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"</span><span style="color:#79B8FF">$e</span><span style="color:#9ECBFF"> does not represent a </span><span style="color:#79B8FF">$label</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">private</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> FetchClassTypeVisitor</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">CastingTypeVisitor</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">DeclaredType</span><span style="color:#E1E4E8">>>(label </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> ""</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> defaultAction</span><span style="color:#E1E4E8">(e: </span><span style="color:#B392F0">TypeMirror</span><span style="color:#E1E4E8">, v: </span><span style="color:#B392F0">Void</span><span style="color:#E1E4E8">?): </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">DeclaredType</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#6A737D">        //ignore it</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> emptyList</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> visitArray</span><span style="color:#E1E4E8">(t: </span><span style="color:#B392F0">ArrayType</span><span style="color:#E1E4E8">, p: </span><span style="color:#B392F0">Void</span><span style="color:#E1E4E8">?): </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">DeclaredType</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> t.componentType.</span><span style="color:#B392F0">accept</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, p)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> visitWildcard</span><span style="color:#E1E4E8">(t: </span><span style="color:#B392F0">WildcardType</span><span style="color:#E1E4E8">, p: </span><span style="color:#B392F0">Void</span><span style="color:#E1E4E8">?): </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">DeclaredType</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> ret </span><span style="color:#F97583">=</span><span style="color:#B392F0"> arrayListOf</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">DeclaredType</span><span style="color:#E1E4E8">>()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        t.superBound?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            ret.</span><span style="color:#B392F0">addAll</span><span style="color:#E1E4E8">(it.</span><span style="color:#B392F0">accept</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, p))</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        t.extendsBound?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            ret.</span><span style="color:#B392F0">addAll</span><span style="color:#E1E4E8">(it.</span><span style="color:#B392F0">accept</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, p))</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> ret</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> visitDeclared</span><span style="color:#E1E4E8">(t: </span><span style="color:#B392F0">DeclaredType</span><span style="color:#E1E4E8">, p: </span><span style="color:#B392F0">Void</span><span style="color:#E1E4E8">?): </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">DeclaredType</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> ret </span><span style="color:#F97583">=</span><span style="color:#B392F0"> arrayListOf</span><span style="color:#E1E4E8">(t)</span></span>
+<span class="line"><span style="color:#E1E4E8">        t.typeArguments?.</span><span style="color:#B392F0">forEach</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            ret.</span><span style="color:#B392F0">addAll</span><span style="color:#E1E4E8">(it.</span><span style="color:#B392F0">accept</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, p))</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> ret.</span><span style="color:#B392F0">toSet</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">toList</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> visitError</span><span style="color:#E1E4E8">(t: </span><span style="color:#B392F0">ErrorType</span><span style="color:#E1E4E8">, p: </span><span style="color:#B392F0">Void</span><span style="color:#E1E4E8">?): </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">DeclaredType</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> visitDeclared</span><span style="color:#E1E4E8">(t, p)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> visitTypeVariable</span><span style="color:#E1E4E8">(t: </span><span style="color:#B392F0">TypeVariable</span><span style="color:#E1E4E8">, p: </span><span style="color:#B392F0">Void</span><span style="color:#E1E4E8">?): </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">DeclaredType</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> ret </span><span style="color:#F97583">=</span><span style="color:#B392F0"> arrayListOf</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">DeclaredType</span><span style="color:#E1E4E8">>()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        t.lowerBound?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            ret.</span><span style="color:#B392F0">addAll</span><span style="color:#E1E4E8">(it.</span><span style="color:#B392F0">accept</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, p))</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        t.upperBound?.</span><span style="color:#B392F0">let</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            ret.</span><span style="color:#B392F0">addAll</span><span style="color:#E1E4E8">(it.</span><span style="color:#B392F0">accept</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, p))</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> ret</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">fun</span><span style="color:#B392F0"> TypeMirror</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">fetchDeclaredType</span><span style="color:#E1E4E8">(): </span><span style="color:#B392F0">List</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">DeclaredType</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">accept</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">FetchClassTypeVisitor</span><span style="color:#E1E4E8">(), </span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="分治6--关系的存储">分治6 — 关系的存储</h3>
+<p>显然，我们需要一个合适的数据结构用以存储图，得益于我去年在 <a href="https://juejin.cn/post/6884492604370026503/">组件化：组件的按序初始化</a>
+方面的一些探索，当时我开发了 <a href="https://github.com/leobert-lan/Maat">Maat</a> 其中包含 <strong>组件依赖关系的有向无环图分析</strong>，其中包含DAG的实现。</p>
+<p>很显然，我们将 “无环检测” 禁用，就可以直接将数据结构拿来使用了，不需要再制造轮子！</p>
+<p>显而易见，Relation的各种情况可以和 <code>度</code> 建立映射关系，人为维护一个 <code>虚拟顶点</code> 作为遍历的起始点可以减少很多麻烦。</p>
+<h3 id="分治7--类型的细节处理">分治7 — 类型的细节处理</h3>
+<p>在分治3中，我们已经已经对类型 <em>(enum、class、interface)</em> 进行了很充分的分析，但还遗漏了一些细节，例如方法、修饰符等；</p>
+<p>在分治6中，我们确定了关系存储方案，我们还需要描述图的顶点。</p>
+<p>我们定义 UmlElement类来进行描述</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">abstract</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> UmlElement</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> diagram: </span><span style="color:#B392F0">ClassDiagram</span><span style="color:#E1E4E8">?, </span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> element: </span><span style="color:#B392F0">Element</span><span style="color:#E1E4E8">?) {</span></span>
+<span class="line"><span style="color:#6A737D">    /**</span></span>
+<span class="line"><span style="color:#6A737D">     * return: plant-uml 中相应的文本</span></span>
+<span class="line"><span style="color:#6A737D">     * */</span></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> umlElement</span><span style="color:#E1E4E8">(context: </span><span style="color:#B392F0">MutableSet</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">UmlElement</span><span style="color:#E1E4E8">>): </span><span style="color:#B392F0">String</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> parseFieldAndMethod</span><span style="color:#E1E4E8">(diagram: </span><span style="color:#B392F0">ClassDiagram</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                                     graph: </span><span style="color:#B392F0">DAG</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">UmlElement</span><span style="color:#E1E4E8">>,</span></span>
+<span class="line"><span style="color:#E1E4E8">                                     cache: </span><span style="color:#B392F0">MutableSet</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">UmlElement</span><span style="color:#E1E4E8">>)</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> drawField</span><span style="color:#E1E4E8">(fieldDrawer: </span><span style="color:#B392F0">FieldDrawer</span><span style="color:#E1E4E8">, </span></span>
+<span class="line"><span style="color:#E1E4E8">                           builder: </span><span style="color:#B392F0">StringBuilder</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                           context: </span><span style="color:#B392F0">MutableSet</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">UmlElement</span><span style="color:#E1E4E8">>)</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> drawMethod</span><span style="color:#E1E4E8">(methodDrawer: </span><span style="color:#B392F0">MethodDrawer</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                            builder: </span><span style="color:#B392F0">StringBuilder</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                            context: </span><span style="color:#B392F0">MutableSet</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">UmlElement</span><span style="color:#E1E4E8">>)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>并实现：</p>
+<ul>
+<li>UmlInterface：接口</li>
+<li>UmlEnum： 枚举</li>
+<li>UmlClass： 类</li>
+<li>UmlStub：分治6中提到的虚拟顶点</li>
+</ul>
+<p>定义：IElementDrawer 接口 与 IJavaxElementDrawer 接口</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> IElementDrawer</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> drawAspect</span><span style="color:#E1E4E8">(builder: </span><span style="color:#B392F0">StringBuilder</span><span style="color:#E1E4E8">, element: </span><span style="color:#B392F0">UmlElement</span><span style="color:#E1E4E8">, context: </span><span style="color:#B392F0">MutableSet</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">UmlElement</span><span style="color:#E1E4E8">>)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> IJavaxElementDrawer</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> drawAspect</span><span style="color:#E1E4E8">(builder: </span><span style="color:#B392F0">StringBuilder</span><span style="color:#E1E4E8">, element: </span><span style="color:#B392F0">Element</span><span style="color:#E1E4E8">, context: </span><span style="color:#B392F0">MutableSet</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">UmlElement</span><span style="color:#E1E4E8">>)</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>并参考Plant-Uml的语法规则，<strong>实现了一系列的切面处理</strong>，例如：修饰符解析与输出，类型解析与输出，名称解析与输出，方法解析与输出 <strong>等</strong></p>
+<p><em>此处使用了责任链，将Element转化plantUml语法进行了链式切分，并定义了一系列的切面处理。<strong>限于篇幅不做展开，有兴趣的读者可以在文末获取源码了解更多</strong></em></p>
+<p>例如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">abstract</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> SuperClz</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">SealedI</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#E1E4E8"> superI: </span><span style="color:#B392F0">Int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>其Element被处理后，将转变为如下的文本内容：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>abstract class "SuperClz"{</span></span>
+<span class="line"><span>  .. fields ..</span></span>
+<span class="line"><span>  {field}-superI : int</span></span>
+<span class="line"><span>  .. methods ..</span></span>
+<span class="line"><span>  {method}+ getSuperI(): int</span></span>
+<span class="line"><span>  {method}+ setSuperI(int): void</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>由PlantUml处理后形如：</p>
+<p><img  src="/_astro/img2.DSu5umzp_Z1Q8kBR.webp" alt="img.png" loading="lazy" decoding="async" width="147" height="132"></p>
+<h3 id="分治8--输出为plantuml文件">分治8 — 输出为PlantUml文件</h3>
+<p>得益于我先前的一些探索，我曾开发过一款用于生成文档的注解处理器，通过 <a href="https://blog.csdn.net/a774057695/article/details/106603455">博客连接</a> 简单了解 。</p>
+<p>设计中采用了SPI机制，我们可以很轻松地实现一个扩展，实现上面提到的所有内容，并且轻松地输出文本文档。</p>
+<p><em>虽然在APT中输出一些文本文档是一件很简单的事情，但我决定使用以前造的轮子，毕竟它本身就是为了生成文档而开发的</em></p>
+<hr>
+<p>至此，我们已经对整个问题的主要流程进行了推演，可以得出结论：这件事情可以成！</p>
+<p><strong>感谢我老婆早早就买到了中秋节回家的高铁票</strong>，在 <strong>回家的途中</strong> 便完成了方案的推演，并进行了框架编写与冒烟。 而现在整理博客的时间远远超过了编码🤣</p>
+<hr>
+<h2 id="保持优雅">保持优雅</h2>
+<p>显而易见，上述的内容仅止于 “解决问题” ， 还不能 “出色地解决问题”。</p>
+<p>例如：</p>
+<ul>
+<li>绘制多张ClassDiagram</li>
+<li>增加配置，屏蔽一些输出，例如：不想看见 <code>private</code> 修饰的fields</li>
+<li>包名是在是太长了，存在阅读干扰</li>
+</ul>
+<p>等。</p>
+<p>下面继续雕琢</p>
+<h3 id="维持简单">维持简单</h3>
+<p>在继续雕琢功能的同时，我们必须兼顾 <code>简单性</code> ，这一点非常重要！</p>
+<p>一方面，我们不要过早的考虑用不着的功能，维持功能体系的简单。另一方面，功能使用要简单，方法或规则要明确。</p>
+<p>例如在实现 “绘制多张ClassDiagram” 功能时：</p>
+<ul>
+<li>我最先想到的是在 <code>GenerateClassDiagram</code> 中添加<code>qualifier:List&#x3C;String></code>, 可以将被标识的类分配到不同的组别。但是它看起来并不太友好</li>
+<li>于是我产生了：将配置与标识分离的想法。定义一个注解，可以进行配置，它仅可被标识于注解。</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@Target</span><span style="color:#E1E4E8">(AnnotationTarget.ANNOTATION_CLASS)</span></span>
+<span class="line"><span style="color:#F97583">annotation</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ClassDiagram</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> qualifier: </span><span style="color:#B392F0">String</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> ""</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> fieldVisible: </span><span style="color:#B392F0">Array</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Visible</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [Visible.Private, Visible.Protected, Visible.Package, Visible.Public],</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> methodVisible: </span><span style="color:#B392F0">Array</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Visible</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [Visible.Private, Visible.Protected, Visible.Package, Visible.Public],</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>这样使用者可以自由的定义注解，例如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@ClassDiagram</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Demo"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">annotation</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> DemoDiagram</span></span></code></pre>
+<p>这样，注解处理器需要关心的注解将变为两个：</p>
+<ul>
+<li>ClassDiagram : 标识注解表达分组，并且包含配置</li>
+<li>GenerateClassDiagram ：标识类图中的分析起始点</li>
+</ul>
+<p>如此，我们使用时的规则更加清晰！注意，被GenerateClassDiagram 注解的类，必须添加分组注解，即 <code>被DemoDiagram注解的注解</code> 否则将被忽略</p>
+<p>例如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@GenerateClassDiagram</span></span>
+<span class="line"><span style="color:#B392F0">@DemoDiagram</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Clz</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">SuperClz</span><span style="color:#E1E4E8">(), </span><span style="color:#B392F0">SealedI</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    val</span><span style="color:#E1E4E8"> int: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">? </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><em>目前增加的功能，仅仅是在前文大流程上的细节优化，实现不再展开</em></p>
+<p><em>结合我目前的工作使用了一段时候后，插件的功能还够用，就先不做超前的功能实现了</em></p>
+<h3 id="减少侵入">减少侵入</h3>
+<p>我们从上文获知，使用这一插件，需要在代码中进行侵入修改，增加注解标注。理论上而言，侵入应该最少越好！在后续功能迭代设计中，同样需要考虑这一点。</p>
+<p>在分治3中，我们将组合、聚合等关系暂时全部认为是依赖关系。</p>
+<blockquote>
+<p><em>在最初的设计中，需要使用者通过注解标识其关系，但侵入性大大提升</em>。</p>
+</blockquote>
+<p>过多的注解会 <code>影响源码可读性</code> 以及 <code>增大侵入</code> ！</p>
+<p>在我的构想中，将通过 <code>ClassDiagram</code> 对 <code>依赖</code> 、 <code>关联</code> 、 <code>组合</code> 等进行一些约定，以解决这一问题并尽可能地减少侵入。</p>
+<h3 id="扩展能力">扩展能力</h3>
+<p>目前还有一些功能尚未有优雅的解决方案，在前文已经提及。
+我预留了足够多的扩展性用于装饰Plant-Uml语法文档，如果读者有处理方案，可以直接扩展后提PR。</p>
+<p><em>因本文 <strong>并非</strong> 为 <strong>介绍编程技巧</strong> 或者 <strong>剖析如何提升项目的扩展能力</strong> ，故不再展开</em></p>
+<p><a href="https://github.com/leobert-lan/ReportPrinter/">项目地址</a></p>
+<h2 id="使用示例"><a id="demo">使用示例</a></h2>
+<h3 id="添加依赖">添加依赖</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>implementation "io.github.leobert-lan:class-diagram-reporter:1.0.0"</span></span>
+<span class="line"><span>annotationProcessor "io.github.leobert-lan:report-anno-compiler:1.1.4"</span></span>
+<span class="line"><span>annotationProcessor "io.github.leobert-lan:class-diagram-reporter:1.0.0"</span></span></code></pre>
+<p>均已发布到MavenCentral，最新版本号可参考以下：</p>
+<p>*<img src="https://img.shields.io/static/v1?label=MavenCentray&#x26;message=report-anno-compiler">
+*<a href="https://search.maven.org/search?q=g:io.github.leobert-lan%20And%20a:report-anno-compiler"><img src="https://img.shields.io/maven-central/v/io.github.leobert-lan/report-anno-compiler.svg?label=latest%20release"></a></p>
+<p>*<img src="https://img.shields.io/static/v1?label=MavenCentray&#x26;message=class-diagram-reporter">
+*<a href="https://search.maven.org/search?q=g:io.github.leobert-lan%20And%20a:class-diagram-reporter"><img src="https://img.shields.io/maven-central/v/io.github.leobert-lan/class-diagram-reporter.svg?label=latest%20release"></a></p>
+<p>配置信息：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="groovy"><code><span class="line"><span style="color:#E1E4E8">kapt {</span></span>
+<span class="line"><span style="color:#E1E4E8">    arguments {</span></span>
+<span class="line"><span style="color:#E1E4E8">        arg(</span><span style="color:#9ECBFF">"module"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"ktsample"</span><span style="color:#E1E4E8">) </span><span style="color:#6A737D">//模块名称</span></span>
+<span class="line"><span style="color:#E1E4E8">        arg(</span><span style="color:#9ECBFF">"mode"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"mode_file"</span><span style="color:#E1E4E8">) </span></span>
+<span class="line"><span style="color:#E1E4E8">        arg(</span><span style="color:#9ECBFF">"active_reporter"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"on"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="自行定义注解">自行定义注解</h3>
+<p>该注解需被 <code>ClassDiagram</code> 注解，其他自行配置</p>
+<p>例如：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@ClassDiagram</span><span style="color:#E1E4E8">(qualifier </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "BridgePattern"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">annotation</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> BridgePatternDiagram</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">//or</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">@ClassDiagram</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    qualifier </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "AAAB"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    fieldVisible </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {Visible.Package, Visible.Public}</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">public</span><span style="color:#B392F0"> @interface</span><span style="color:#B392F0"> AAAB</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>配合 <code>GenerateClassDiagram</code> 注解使用</p>
+<p>此处以桥接模式示例，一个满足桥接模式的代码实现如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> BridgePattern</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @ClassDiagram</span><span style="color:#E1E4E8">(qualifier </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "BridgePattern"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    annotation</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> BridgePatternDiagram</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    interface</span><span style="color:#B392F0"> MessageImplementor</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        fun</span><span style="color:#B392F0"> send</span><span style="color:#E1E4E8">(message: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, toUser: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    abstract</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> AbstractMessage</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">private</span><span style="color:#F97583"> val</span><span style="color:#E1E4E8"> impl: </span><span style="color:#B392F0">MessageImplementor</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        open</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> sendMessage</span><span style="color:#E1E4E8">(message: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, toUser: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            impl.</span><span style="color:#B392F0">send</span><span style="color:#E1E4E8">(message, toUser)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @BridgePatternDiagram</span></span>
+<span class="line"><span style="color:#B392F0">    @GenerateClassDiagram</span></span>
+<span class="line"><span style="color:#F97583">    class</span><span style="color:#B392F0"> CommonMessage</span><span style="color:#E1E4E8">(impl: </span><span style="color:#B392F0">MessageImplementor</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">AbstractMessage</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">impl</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @BridgePatternDiagram</span></span>
+<span class="line"><span style="color:#B392F0">    @GenerateClassDiagram</span></span>
+<span class="line"><span style="color:#F97583">    class</span><span style="color:#B392F0"> UrgencyMessage</span><span style="color:#E1E4E8">(impl: </span><span style="color:#B392F0">MessageImplementor</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">AbstractMessage</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">impl</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> sendMessage</span><span style="color:#E1E4E8">(message: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, toUser: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">            super</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">sendMessage</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"加急：</span><span style="color:#79B8FF">$message</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">, toUser)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @BridgePatternDiagram</span></span>
+<span class="line"><span style="color:#B392F0">    @GenerateClassDiagram</span></span>
+<span class="line"><span style="color:#F97583">    class</span><span style="color:#B392F0"> MessageSMS</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">MessageImplementor</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> send</span><span style="color:#E1E4E8">(message: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, toUser: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">            println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"使用系统内短消息的方法，发送消息'</span><span style="color:#79B8FF">$message</span><span style="color:#9ECBFF">'给</span><span style="color:#79B8FF">$toUser</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @BridgePatternDiagram</span></span>
+<span class="line"><span style="color:#B392F0">    @GenerateClassDiagram</span></span>
+<span class="line"><span style="color:#F97583">    class</span><span style="color:#B392F0"> MessageEmail</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">MessageImplementor</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> send</span><span style="color:#E1E4E8">(message: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">, toUser: </span><span style="color:#B392F0">String</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">            println</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"使用邮件短消息的方法，发送消息'</span><span style="color:#79B8FF">$message</span><span style="color:#9ECBFF">'给</span><span style="color:#79B8FF">$toUser</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>编译后，我们得到的puml文件，渲染后得到：</p>
+<p><img  src="/_astro/bridge-pattern1.CepUVSIb_YFsG8.webp" alt="img.png" loading="lazy" decoding="async" width="632" height="423"></p>
+<p><em>😂恰好满足了plant-uml中package的语法，正常情况不会有package</em></p>
+<p>我们可以注意到，关系上没有太大问题，AbstractMessage 与 MessageImplementor 之间表现为关联更加恰当。</p>
+<p>除此之外，从阅读习惯上而言，图中的一些位置关系，还需要再调整，我们可以在后续的版本加，添加相应的配置方式。</p>
+<h2 id="絮叨">絮叨</h2>
+<p>从中秋节开始设计，零零碎碎完成开发，再到国庆准备写博客，又陆续做了几次修改。期间，家中也出了意外，在此也诚挚的希望各位读者注意身体，多花些时间在家人身上。代码是写不完的，知识是学不完的，但健康和生命都是有尽头的。</p>
+<p><a href="https://leobert-lan.github.io/Info/about_haowan_series.html">了解好玩系列</a></p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

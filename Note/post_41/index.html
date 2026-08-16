@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>读书笔记：《简约至上--交互式设计四策略》 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">读书笔记：《简约至上--交互式设计四策略》</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="读书笔记简约至上交互式设计四策略">读书笔记：《简约至上—交互式设计四策略》</h1>
+<h2 id="前言">前言</h2>
+<p>近来整理资料时，发现了以前留下的宝藏。这本书是2016年时一位从事 <code>产品经理</code> 职业的朋友推荐给我的，当时读完后大呼过瘾，并做了摘要。</p>
+<p>作为开发人员，工作中必然要和产品经理以及设计的同事打交道，而往往因为 <code>不够专业</code> ，导致沟通效果欠佳，明明目的是让大家都专注于一个目标，最后却沟通不愉快、还要被扣上不合作的帽子。
+当然，我的目的并非是让大家成为 <code>产品、UI、体验设计</code> 领域的专业人才，而是通过摘要快速判断 <strong>自己是否需要精读这本书</strong> ，<strong>并且从中学习到领域概念，在沟通中把握Keypoint并提升沟通效率</strong> 。</p>
+<h2 id="摘要">摘要</h2>
+<blockquote>
+<p>《简约至上》是英国的交互设计师 Giles Colborne 写的一本 <strong>小书</strong> ，说小是因为书很薄而且每篇文章都很短，<strong>但字字精彩</strong> 。
+书的内容和排版就是简约设计非常好的案例。</p>
+</blockquote>
+<p>以下是我读后觉得很棒一些摘要，与大家分享。</p>
+<p>简化交互设计的四种策略：</p>
+<ul>
+<li><code>删除</code> — 去除所有不必要的功能，直到减到不能再减</li>
+<li><code>组织</code> — 按照有意义的标准将功能划分成组</li>
+<li><code>隐藏</code> — 把那些不是最重要的功能安排在不显眼的地方，避免分散用户的注意力</li>
+<li><code>转移</code> — 将高级功能转移动另一个地方，转移复杂性</li>
+</ul>
+<p>另外十点:</p>
+<ol>
+<li><strong>简单</strong> 就是感觉在 <strong>掌控一切</strong> 。</li>
+<li><strong>要方案，不是流程</strong>。如果一个小的变化导致了复杂的流程，就应该退一步去寻找更好地解决方案。</li>
+<li>选择有限，用户反而更喜欢。因为过多的选择会让用户无所适从。</li>
+<li>删除多余文字的三大好处：
+<ol>
+<li>重要的内容”水落石出”</li>
+<li>消除了分析满屏内容的麻烦</li>
+<li>读者会对自己看到了什么更有自信</li>
+</ol>
+</li>
+<li>复杂性是相对的，对于用户擅长的事情，往往就变得简单。</li>
+<li>创建简单用户体验的秘诀就在于把复杂性转移到正确的地方，让用户每时每刻都能感受到简单之美。</li>
+<li>简单的体验应该为用户留出足够空间，让他们能够想象到当前正在做的事情同样也是自己生活的一部分。</li>
+<li>对一个产品的认识大致可以分为三个层次：
+<ol>
+<li>可信的环境(故事中的时间和地点）</li>
+<li>可信的角色（谁和为什么）</li>
+<li>流畅的细节（什么和怎么样）</li>
+</ol>
+</li>
+<li>不要匆忙着手设计。理解核心问题需要时间。</li>
+<li>想吸引大众，必须要关注主流。专家想要的功能往往会吓倒主流用户。</li>
+</ol>
+<p>提到简单，可以把用户分为 <strong>三种类型</strong> 。</p>
+<blockquote>
+<p>第一类是 <strong>专家型用户</strong></p>
+</blockquote>
+<p>他们愿意探索你的产品或服务，并且会给你提出各种改进建议。他们希望看到为他们量身定做的前所未有的技术。
+即便拿到的是一个从未见过的产品，他们也会摆出专家的态度。换句话说，他们舍得花时间研究新产品，探索产品的新功能。</p>
+<p>如果你是造手机的，他们就是那些想要浏览手机的文件系统，哪儿都动一动的人。</p>
+<p><strong>不过这类用户总体上占少数</strong>。</p>
+<blockquote>
+<p>第二类是 <strong>随意型用户</strong></p>
+</blockquote>
+<p>他们可能使用过类似的产品或服务。他们有兴趣使用更高级更复杂的产品，但却 <strong>不愿意接触</strong> 全新的东西——要想让他们认可新功能，那么新功能必须足够简单。</p>
+<p>比如说，他们可能会对更先进的手机感兴趣，但是必须保证能够轻松地导入他们宝贵的联系人。</p>
+<p><strong>这一类用户比你想象的少</strong> ，而且他们的学习意愿不强烈。</p>
+<blockquote>
+<p>第三类是 <strong>主流用户（最大的用户群体）</strong></p>
+</blockquote>
+<p>他们自己不会因为你的技术而使用你的产品，使用你的产品的目的是完成某项任务。</p>
+<p>他们会掌握一些重要功能的使用方法，但永远不会产生学会所有功能的想法。</p>
+<p>这些人的口头禅就是：“我的手机只要能打电话、能发信息就行了。”</p>
+<p><strong>大多数人都属于这一类</strong>。</p>
+<p>你可能会天真的认为，一段时间以后，其中一类人就会升级为另一类人。 但这几乎是不可能发生的。即使一个产品用了很多年，用户类型的标签也是不会变的。</p>
+<p>举例来说，有一大群使用微软的Excel软件长达5年的用户，其中有一些人可能已经知道了某些设置和选项的作用，有一些人会掌握一些高级技巧，能够通过它们为自己提供便利，而剩下的一大部分人则只会对金额一栏求和。</p>
+<h2 id="帮助理解">帮助理解</h2>
+<p><em>据我回忆，本章节是我第一次读该书时得到的一份读后感，可能来自那位PM朋友，时间太久，记忆已经模糊，但从内容侧重点推测不是我的手笔</em></p>
+<p>首先对于书的内容和排版设计都符合 <strong>“简约”</strong> 的设计：一面文字、一面图片，条理清晰，取例于生活之中，阅读起来不枯燥又易懂，让用户觉得简单快乐。作者的理论和实践结合得很完美，不得不说：这书你值得拥有！</p>
+<p>看完这本书，觉得简单的设计是如此的美好。对简单的含义也有了更深刻地理解。总结如下几点：</p>
+<h3 id="一简单的理解">一、简单的理解</h3>
+<p><strong>简单是有对象的</strong></p>
+<blockquote>
+<p>《设计之下》书中说”简单其实最复杂的设计”。</p>
+</blockquote>
+<p>这句话说明简单是有对象，对于用户来说某个操作很简单，但是对于背后的工程师为了这个操作要付出很多。</p>
+<p>简单体现在 <code>流程短</code> ，<code>选择少</code>，<code>操作简单思考少</code>，<code>视觉清晰</code> ，<code>自然人性</code>，<code>场景贴近生活</code> 等方面，<strong>但是不能拒绝复杂</strong> ，复杂在合适的位置也是简单的用户体验。</p>
+<p>有些简单看起来很简单，但是实际在具体的场景中运用时却是复杂的。比如说明书，看起来很简单，实际上用户不会看，他们只想拿起来就用。</p>
+<h3 id="二要到用户现场体验参观才能更好地理解用户使用场景">二、要到用户现场体验参观，才能更好地理解用户使用场景</h3>
+<p>要做好用户体验，必须要到用户的使用现场去，才能知道用户喜欢怎么用，会出现什么干扰因素，简化用户体验时，会影响那些环节，造成什么样的后果。</p>
+<h3 id="三用户分为专家型随意型主流用户三种">三、用户分为：专家型、随意型、主流用户三种</h3>
+<ul>
+<li>专家型的用户是愿意探索你的产品和服务，希望达到高深的体验；</li>
+<li>随意型的用户是有兴趣使用更高级更复杂的产品却不愿意接触全新的东西，所以新功能必须简单；</li>
+<li>主流用户是为了完成某项任务，比如”我的手机，只要能打电话，发信息就行”。</li>
+</ul>
+<p><strong>应该忽略专家型，为主流用户设计，因为专家型想要的功能会吓跑用户</strong>。</p>
+<h3 id="四设计简单需要关注用户的行为和行动用户体验需要用故事讲出来">四、设计简单需要关注用户的行为和行动，用户体验需要用故事讲出来</h3>
+<p>应该关注用户在做什么，而不是过多描述自己的解决方案。</p>
+<p>把他们的行为和行动描述出来，尽可能详细，特别是干扰处和自然反应。</p>
+<p>用户体验是场景再现，是简短而美好的故事。比如某一天在街上匆忙地遇到了高圆圆女神，快速拿出摄像机，然后分享至社交平台上，这个场景包含着环境，角色，情节等完整故事，是可信的，
+那么 我们设计摄像机的时候，摄像机上面的按钮一定少而且精准，否则还在摸索的时候女神就走了。</p>
+<h3 id="五增加功能不一定让用户体验更加简单">五、增加功能不一定让用户体验更加简单</h3>
+<p>用户的意见要听，<strong>但不能盲从</strong> 。</p>
+<p><em>在3年前我们团队就吃过这样的亏</em></p>
+<p>功能过多反而会分散用户的注意力，降低主流用户的满意度，从而对长期的盈利能力损害。功能过多，只会做广而做不深，“泛而不精”。</p>
+<p>用户的需求会很多，满足所有的功能只会使产品臃肿，这是不可能的。所以满足用户，我们退而求次，专注于目标客户的需求，让他们满意就可以了。记得马化腾说过：我们不能为了1%需求去伤害了99%的用户的体验，取舍的用户需求很重要。</p>
+<h3 id="六如果小的变化导致复杂的流程就应该退一步寻找更好地解决方案">六、如果小的变化导致复杂的流程，就应该退一步寻找更好地解决方案</h3>
+<p>如果设计只盯住流程简单化，那么很有可能创造更多的功能去处理出现的各种异常情况问题和细节，那么这个时候我们就应该退一步问自己：我设计这个的目的是什 么？有没有其他的解决方案。用户在使用过程中觉得简单就是掌控一切 ，如果他们在流程中还要去想：然后呢的问题，就说明这样的简单不可行。同时不能为了追求设计的完美，而牺牲速度和简单。</p>
+<h3 id="七分清用户和产品之间的任务界限让用户拥有主动控制权">七、分清用户和产品之间的任务界限，让用户拥有主动控制权</h3>
+<p>在 <code>产品功能设计</code> 的过程中，很容易对用户产生过多或者不必要的要求，这就 <strong>增加了用户的工作量</strong>。</p>
+<p>又或者，产品设计中有”霸道”甚至是”强硬”的态度表现，强迫甚至威胁用户做出一些操作，对于用户来说，这些都是很不愉快的体验。</p>
+<p>在产品设计中，我们需要首先分清用户和产品之间的任务界限，在帮助用户完成任务的目标下，尽量减少和简化用户的操作，让用能更快捷更愉快地完成任务。</p>
+<p>在用户完成任务的过程中，产品设计者需要明白用户才是主角，应该让用户拥有控制权。产品是 <strong>帮助用户完成任务的</strong> ，而不能凌驾于用户之上，让用户有强迫感和威胁感。</p>
+<h3 id="八不要为了简单而拒绝复杂而应该把复杂性放在合适的地方">八、不要为了简单而拒绝复杂，而应该把复杂性放在合适的地方</h3>
+<p>在 <strong>简约式的设计</strong> 中，有时候为了一个简单的设计需要较为复杂的实现过程，虽然没有副作用或者附加风险，但也要谨慎。</p>
+<p>复杂的过程永远应该处于隐蔽的状态，不能暴露在用户的面前，那样会让用户感到困惑。</p>
+<p>产品作为支持者和协助者的角色，很多操作都应该放在”后台”，呈献给用户的应该是一个美好的结果，而不是过程。</p>
+<p><strong>为用户而设计</strong> ，让用户感到愉悦，很多时候都会涉及到复杂的实现过程，但不必一一呈现在用户面前，以炫耀或者展示自己的功劳。</p>
+<p>产品的 <strong>简单而美好的使用体验</strong> 必然包含 <strong>优秀而复杂的实现</strong>，用户自然会有考虑，也会很感激。为了简单化的设计，复杂是值得的，但是要记得把复杂放在合适的地方。</p>
+<h3 id="九不要匆忙着手设计理解核心问题需要时间">九、不要匆忙着手设计，理解核心问题需要时间</h3>
+<p>轶</p>
+<p><em>作者按：从技术角度看，该法则依旧适用，先理解问题</em></p>
+<h3 id="十简约的四大方法删除组织隐藏和转移">十、简约的四大方法：删除，组织，隐藏和转移</h3>
+<p>删除不必要的，组织要提供的，隐藏非核心的，转移复杂的。不能为了简单过度删除，比如自行车过度删除成独轮车，你会骑吗？这样的简单主流用户是不会接受的，也就是说这样的简单是失败且不可取的。</p>
+<h2 id="后记">后记</h2>
+<p>昨天我又走马观花的读了一遍，依旧有很多收获，如果没有记错，这是第三次阅读了。</p>
+<p>相比于摘要，原书内容要更加精彩！</p>
+<p>熟练掌握知识后，必然掌握砍需求之刀！</p>
+<p>如有条件，还请支持正版（第二版已发布）！以下内容为第一版，仅供学习使用，不要肆意分享 <a href="https://pan.baidu.com/s/109aWYGnoBnRHFo3SLV_YzQ">链接</a> 提取码: c13f</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

@@ -1,228 +1,214 @@
-<!DOCTYPE HTML>
-<html lang="en" class="light" dir="ltr">
-    <head>
-        <!-- Book generated using mdBook -->
-        <meta charset="UTF-8">
-        <title>兼容 - leobert&#x27;s blog</title>
-
-
-        <!-- Custom HTML head -->
-        
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff">
-
-        <link rel="icon" href="../../../favicon.svg">
-        <link rel="shortcut icon" href="../../../favicon.png">
-        <link rel="stylesheet" href="../../../css/variables.css">
-        <link rel="stylesheet" href="../../../css/general.css">
-        <link rel="stylesheet" href="../../../css/chrome.css">
-        <link rel="stylesheet" href="../../../css/print.css" media="print">
-
-        <!-- Fonts -->
-        <link rel="stylesheet" href="../../../FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="../../../fonts/fonts.css">
-
-        <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../../../highlight.css">
-        <link rel="stylesheet" href="../../../tomorrow-night.css">
-        <link rel="stylesheet" href="../../../ayu-highlight.css">
-
-        <!-- Custom theme stylesheets -->
-
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../../../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
-
-        <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script>
-            try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
-
-                if (theme.startsWith('"') && theme.endsWith('"')) {
-                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
-                }
-
-                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
-                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
-                }
-            } catch (e) { }
-        </script>
-
-        <!-- Set the theme before any content is loaded, prevents flash -->
-        <script>
-            var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
-            if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
-            html.classList.remove('light')
-            html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
-        </script>
-
-        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
-
-        <!-- Hide / unhide sidebar before it is displayed -->
-        <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
-            if (document.body.clientWidth >= 1080) {
-                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
-                sidebar = sidebar || 'visible';
-            } else {
-                sidebar = 'hidden';
-            }
-            sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
-        </script>
-
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">目录</li><li class="chapter-item expanded "><a href="../../../Android/index.html"><strong aria-hidden="true">1.</strong> Android</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Android/View/index.html"><strong aria-hidden="true">1.1.</strong> View</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Android/View/post_1.html"><strong aria-hidden="true">1.1.1.</strong> 好玩系列：优雅的处理ButterKnife和KAE被废弃</a></li><li class="chapter-item expanded "><a href="../../../Android/View/post_6.html"><strong aria-hidden="true">1.1.2.</strong> 三思系列：View体系认知(一)，内容是如何正确被展现出来的--视觉呈现概览</a></li><li class="chapter-item expanded "><a href="../../../Android/View/post_7.html"><strong aria-hidden="true">1.1.3.</strong> 三思系列：为什么自定义View</a></li><li class="chapter-item expanded "><a href="../../../Android/Idea/post_9.html"><strong aria-hidden="true">1.1.4.</strong> 三思系列："声明式UI"和"命令式UI"，你的理解可能是错的</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Android/Drawable/index.html"><strong aria-hidden="true">1.2.</strong> Drawable</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Android/Drawable/post_2.html"><strong aria-hidden="true">1.2.1.</strong> 三思系列：重新认识Drawable</a></li><li class="chapter-item expanded "><a href="../../../Android/Drawable/post_4.html"><strong aria-hidden="true">1.2.2.</strong> 好玩系列：拥有它，XML文件少一半--更方便的处理View背景</a></li><li class="chapter-item expanded "><a href="../../../Android/Drawable/post_47.html"><strong aria-hidden="true">1.2.3.</strong> 迟来的续集--Drawable+Animator，将优雅进行到底</a></li><li class="chapter-item expanded "><a href="../../../Android/Drawable/post_49.html"><strong aria-hidden="true">1.2.4.</strong> 好玩系列：让ImageSpan动起来</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Android/Mechanism/Message/index.html"><strong aria-hidden="true">1.3.</strong> 消息机制</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Android/Mechanism/Message/post_8.html"><strong aria-hidden="true">1.3.1.</strong> 三思系列：Android的消息机制，一文吃透</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Android/Idea/post_14/index.html" class="active"><strong aria-hidden="true">1.4.</strong> 兼容</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Android/Idea/post_14.html"><strong aria-hidden="true">1.4.1.</strong> 好玩系列：让项目中的相册支持Heif格式图片</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Android/Glide/index.html"><strong aria-hidden="true">1.5.</strong> Glide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Android/Glide/post_15.html"><strong aria-hidden="true">1.5.1.</strong> 三思系列：Glide 4.X全方位认知 -- 模块职责概览</a></li><li class="chapter-item expanded "><a href="../../../Android/Glide/post_16.html"><strong aria-hidden="true">1.5.2.</strong> 三思系列：Glide 4.X加载过程一文掌握 | Glide（二）</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Android/KSP/index.html"><strong aria-hidden="true">1.6.</strong> KSP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Android/KSP/post_24.html"><strong aria-hidden="true">1.6.1.</strong> 好玩系列 | 拥抱Kotlin Symbol Processing(KSP),项目实战</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Android/Base/index.html"><strong aria-hidden="true">1.7.</strong> 基础</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Android/Base/post_35.html"><strong aria-hidden="true">1.7.1.</strong> 孔乙己：你可知道页面和弹窗“通信“的方式有四种？</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Android/SysApp/index.html"><strong aria-hidden="true">1.8.</strong> 系统APP</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Android/SysApp/post_52.html"><strong aria-hidden="true">1.8.1.</strong> 使用日历丰富产品的用户体验</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Android/DI/index.html"><strong aria-hidden="true">1.9.</strong> Part4-依赖注入部分</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Android/DI/post_53.html"><strong aria-hidden="true">1.9.1.</strong> Hilt进阶--一文吃透Hilt自定义与跨壁垒</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../Compose/index.html"><strong aria-hidden="true">2.</strong> Jetpack Compose</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Compose/post_21.html"><strong aria-hidden="true">2.1.</strong> Jetpack Compose | 一文理解神奇的Modifier</a></li><li class="chapter-item expanded "><a href="../../../Compose/post_26.html"><strong aria-hidden="true">2.2.</strong> Jetpack Compose | 控件篇（一） -- Text、TextField、Button</a></li><li class="chapter-item expanded "><a href="../../../Compose/post_27.html"><strong aria-hidden="true">2.3.</strong> Jetpack Compose | 控件篇（二） -- Icon，Image</a></li><li class="chapter-item expanded "><a href="../../../Compose/post_28.html"><strong aria-hidden="true">2.4.</strong> Jetpack Compose | 控件篇（三） -- Switch、CheckBox、RadioButton</a></li><li class="chapter-item expanded "><a href="../../../Compose/post_29.html"><strong aria-hidden="true">2.5.</strong> Jetpack Compose | 控件篇（四）-- Box、Row、Column</a></li><li class="chapter-item expanded "><a href="../../../Compose/post_30.html"><strong aria-hidden="true">2.6.</strong> Jetpack Compose | 控件篇（五）-- Spacer、LazyRow、LazyColumn & 让Column可滑动</a></li></ol></li><li class="chapter-item expanded "><a href="../../../MultiThreading/index.html"><strong aria-hidden="true">3.</strong> Java多线程</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../MultiThreading/post_33.html"><strong aria-hidden="true">3.1.</strong> 总纲</a></li><li class="chapter-item expanded "><a href="../../../MultiThreading/post_37.html"><strong aria-hidden="true">3.2.</strong> Java基础--图解JVM内存模型和JVM线程模型</a></li><li class="chapter-item expanded "><a href="../../../MultiThreading/post_38.html"><strong aria-hidden="true">3.3.</strong> Java多线程系列--掌控面试，一文吃透Synchronized锁</a></li><li class="chapter-item expanded "><a href="../../../MultiThreading/post_39.html"><strong aria-hidden="true">3.4.</strong> Java多线程基础--线程生命周期与线程协作详解</a></li><li class="chapter-item expanded "><a href="../../../MultiThreading/post_42.html"><strong aria-hidden="true">3.5.</strong> Java多线程基础--线程的创建与线程池管理</a></li><li class="chapter-item expanded "><a href="../../../MultiThreading/post_46.html"><strong aria-hidden="true">3.6.</strong> Java多线程系列--掌握Future，轻松获取异步任务结果</a></li><li class="chapter-item expanded "><a href="../../../MultiThreading/post_50.html"><strong aria-hidden="true">3.7.</strong> Java多线程系列--Fork&Join框架，分治的艺术</a></li><li class="chapter-item expanded "><a href="../../../MultiThreading/post_54.html"><strong aria-hidden="true">3.8.</strong> Java多线程系列--掌握CompletableFuture，驾驭异步编程</a></li></ol></li><li class="chapter-item expanded "><a href="../../../IO/index.html"><strong aria-hidden="true">4.</strong> Java IO系列</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../IO/post_55.html"><strong aria-hidden="true">4.1.</strong> Java IO 系列总纲</a></li><li class="chapter-item expanded "><a href="../../../IO/post_56.html"><strong aria-hidden="true">4.2.</strong> Java IO系列 | 经典 IO</a></li><li class="chapter-item expanded "><a href="../../../IO/post_57.html"><strong aria-hidden="true">4.3.</strong> Java IO 系列 | NIO-1.0一文速览</a></li><li class="chapter-item expanded "><a href="../../../IO/post_58.html"><strong aria-hidden="true">4.4.</strong> Java IO系列 | NIO-1.0拾遗、NIO-2.0 & 零拷贝必吹的牛皮</a></li><li class="chapter-item expanded "><a href="../../../IO/post_59.html"><strong aria-hidden="true">4.5.</strong> IO系列 | 一文掌握OKHTTP中的OKIO为什么这么OK</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Gradle/index.html"><strong aria-hidden="true">5.</strong> Gradle</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Gradle/Modularization/post_18.html"><strong aria-hidden="true">5.1.</strong> 组件化：三思系列：组件化场景下module依赖优雅实践方案</a></li><li class="chapter-item expanded "><a href="../../../Gradle/Publish/post_17.html"><strong aria-hidden="true">5.2.</strong> MavenCentral发布：迁移到MavenCentral--再不行动起来，你的托管的library就没了</a></li><li class="chapter-item expanded "><a href="../../../Gradle/post_22.html"><strong aria-hidden="true">5.3.</strong> Gradle | 依赖管理最佳实践</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Groovy/index.html"><strong aria-hidden="true">6.</strong> Groovy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Groovy/why_write_groovy.html"><strong aria-hidden="true">6.1.</strong> 为什么撰写这个系列</a></li><li class="chapter-item expanded "><a href="../../../Groovy/post_23.html"><strong aria-hidden="true">6.2.</strong> Groovy：MOP一文打尽</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Review/index.html"><strong aria-hidden="true">7.</strong> Review</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Review/post_10.html"><strong aria-hidden="true">7.1.</strong> 造完了这个轮子--Mocker，却让我感到很羞愧|项目复盘</a></li><li class="chapter-item expanded "><a href="../../../Review/post_40.html"><strong aria-hidden="true">7.2.</strong> 三思系列：前人用GreenDao留下的坑，全线被扣了绩效</a></li><li class="chapter-item expanded "><a href="../../../Review/post_44.html"><strong aria-hidden="true">7.3.</strong> 谈一谈在两个商业项目中使用MVI架构后的感悟</a></li><li class="chapter-item expanded "><a href="../../../Review/post_45.html"><strong aria-hidden="true">7.4.</strong> Review | 这三个坑你遇到了吗？</a></li></ol></li><li class="chapter-item expanded "><a href="../../../repo/index.html"><strong aria-hidden="true">8.</strong> 个人项目</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../repo/DaVinCi.html"><strong aria-hidden="true">8.1.</strong> DaVinCi,取代XML编写Shape或ColorStateList的方案</a></li><li class="chapter-item expanded "><a href="../../../Android/Idea/post_32.html"><strong aria-hidden="true">8.2.</strong> 好玩系列：白嫖一个优雅的类图生成工具</a></li><li class="chapter-item expanded "><a href="../../../Speculative/post_43.html"><strong aria-hidden="true">8.3.</strong> 初体验：动手搭建"小清新式"局域网文档系统</a></li><li class="chapter-item expanded "><a href="../../../repo/post_48.html"><strong aria-hidden="true">8.4.</strong> 研究良久，终于发现了他代码写的快且bug少的原因</a></li><li class="chapter-item expanded "><a href="../../../Speculative/post_61.html"><strong aria-hidden="true">8.5.</strong> 好玩系列 | 如果后端让你用SSE接收多次返回，那我们改造Retrofit吧</a></li><li class="chapter-item expanded "><a href="../../../fun/post_66/post_66.html"><strong aria-hidden="true">8.6.</strong> 好玩系列 | 用20元实现快乐保存器</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Review/DataStructure/index.html"><strong aria-hidden="true">9.</strong> 数据结构</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Review/DataStructure/post_11.html"><strong aria-hidden="true">9.1.</strong> 温故：线性表</a></li><li class="chapter-item expanded "><a href="../../../Review/DataStructure/post_12.html"><strong aria-hidden="true">9.2.</strong> 温故：栈</a></li><li class="chapter-item expanded "><a href="../../../Review/DataStructure/post_13.html"><strong aria-hidden="true">9.3.</strong> 温故：队列</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Review/README2.html"><strong aria-hidden="true">10.</strong> 年终总结&计划</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Review/post_36.html"><strong aria-hidden="true">10.1.</strong> 2021年终总结</a></li><li class="chapter-item expanded "><a href="../../../Review/post_51.html"><strong aria-hidden="true">10.2.</strong> 关于画一个句号--基于2022年终总结的反思与分享</a></li><li class="chapter-item expanded "><a href="../../../Review/post_60.html"><strong aria-hidden="true">10.3.</strong> 突如其来的秋季反思</a></li><li class="chapter-item expanded "><a href="../../../Review/post_63.html"><strong aria-hidden="true">10.4.</strong> 2023年总结 寻找到源于内心深处的无穷力量</a></li><li class="chapter-item expanded "><a href="../../../Review/post_64.html"><strong aria-hidden="true">10.5.</strong> 2024年中思考，推倒樊笼重新出发</a></li><li class="chapter-item expanded "><a href="../../../Review/post_65.html"><strong aria-hidden="true">10.6.</strong> 2025年终总结</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Note/index.html"><strong aria-hidden="true">11.</strong> 读书笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Note/post_41.html"><strong aria-hidden="true">11.1.</strong> 读书笔记：《简约至上--交互式设计四策略》</a></li><li class="chapter-item expanded "><a href="../../../Talk/talk_4_2024-08.html"><strong aria-hidden="true">11.2.</strong> 读书笔记 - 《团队管理》精华摘要</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Talk/index.html"><strong aria-hidden="true">12.</strong> 杂谈</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Talk/talk_1.html"><strong aria-hidden="true">12.1.</strong> 杂谈1-2022-11</a></li><li class="chapter-item expanded "><a href="../../../Talk/talk_2_2023-03.html"><strong aria-hidden="true">12.2.</strong> 杂篇（二）-- 认识并战胜焦虑</a></li><li class="chapter-item expanded "><a href="../../../Talk/talk_3_2024-08.html"><strong aria-hidden="true">12.3.</strong> 杂谈（三）-- 向钱看，你需要想明白企业在为什么而付钱</a></li><li class="chapter-item expanded "><a href="../../../Talk/talk_6_2025-07.html"><strong aria-hidden="true">12.4.</strong> 杂篇-2025-07</a></li><li class="chapter-item expanded "><a href="../../../Qt/post_64.html"><strong aria-hidden="true">12.5.</strong> 好玩系列：脚本和插件使我快乐</a></li></ol></li><li class="chapter-item expanded "><a href="../../../Thought/index.html"><strong aria-hidden="true">13.</strong> 半成熟的思考</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../Thought/post_62.html"><strong aria-hidden="true">13.1.</strong> 好玩系列 | 当SPI 和 设计模式、依赖注入发生碰撞，可以擦出怎样的火花</a></li><li class="chapter-item expanded "><a href="../../../Talk/talk_5_2025-03.html"><strong aria-hidden="true">13.2.</strong> 推倒樊笼 -- 设计能力</a></li></ol></li><li class="chapter-item expanded "><a href="../../../info/index.html"><strong aria-hidden="true">14.</strong> 系列说明</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../../info/about_view_series.html"><strong aria-hidden="true">14.1.</strong> 关于View系列</a></li><li class="chapter-item expanded "><a href="../../../info/about_sansi_series.html"><strong aria-hidden="true">14.2.</strong> 关于三思系列</a></li><li class="chapter-item expanded "><a href="../../../info/about_haowan_series.html"><strong aria-hidden="true">14.3.</strong> 关于好玩系列</a></li><li class="chapter-item expanded "><a href="../../../info/about_wengu_series.html"><strong aria-hidden="true">14.4.</strong> 关于温故系列</a></li></ol></li></ol>
-            </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
-                <div class="sidebar-resize-indicator"></div>
-            </div>
-        </nav>
-
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
-        <div id="page-wrapper" class="page-wrapper">
-
-            <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky">
-                    <div class="left-buttons">
-                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
-                        </label>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
-                        </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-                        </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-
-                    <h1 class="menu-title">leobert&#x27;s blog</h1>
-
-                    <div class="right-buttons">
-                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
-                            <i id="print-button" class="fa fa-print"></i>
-                        </a>
-
-                    </div>
-                </div>
-
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
-                    </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script>
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
-                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
-                    });
-                </script>
-
-                <div id="content" class="content">
-                    <main>
-                        <p>Android中遇到的兼容性工作</p>
-
-                    </main>
-
-                    <nav class="nav-wrapper" aria-label="Page navigation">
-                        <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../../Android/Mechanism/Message/post_8.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-
-                            <a rel="next prefetch" href="../../../Android/Idea/post_14.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-
-                        <div style="clear: both"></div>
-                    </nav>
-                </div>
-            </div>
-
-            <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../../Android/Mechanism/Message/post_8.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-
-                    <a rel="next prefetch" href="../../../Android/Idea/post_14.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-            </nav>
-
-        </div>
-
-
-
-
-        <script>
-            window.playground_copyable = true;
-        </script>
-
-
-        <script src="../../../elasticlunr.min.js"></script>
-        <script src="../../../mark.min.js"></script>
-        <script src="../../../searcher.js"></script>
-
-        <script src="../../../clipboard.min.js"></script>
-        <script src="../../../highlight.js"></script>
-        <script src="../../../book.js"></script>
-
-        <!-- Custom JS scripts -->
-
-
-    </div>
-    </body>
-</html>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>好玩系列：让项目中的相册支持Heif格式图片 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">好玩系列：让项目中的相册支持Heif格式图片</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="好玩系列让项目中的相册支持heif格式图片">好玩系列：让项目中的相册支持Heif格式图片</h1>
+<h2 id="前言">前言</h2>
+<p>目前市面上的成熟的APP，其用户体系中均存在 <code>设置头像</code> 的功能，考虑到尺寸规范问题，一般会加入 <code>图片裁剪</code> 功能；
+考虑到页面UI统一度问题，甚至会在应用内实现 <code>相册</code>功能。据此推断：各位的项目中，会遇到 <code>Heif格式图片</code> 需要兼容的需求。</p>
+<p>笔者目前参与的商业项目，也被市场要求对Heif图片进行适配。这篇文章，记录了我在这件事情上 <code>折腾</code> 的过程。</p>
+<blockquote>
+<p>好玩系列是我进行 <code>新事物实践</code> 、 <code>尝试创造</code> 的记录，<a href="https://github.com/leobert-lan/Blog/blob/main/info/%E5%85%B3%E4%BA%8E%E5%A5%BD%E7%8E%A9%E7%B3%BB%E5%88%97.md">了解更多</a></p>
+</blockquote>
+<h2 id="背景">背景</h2>
+<p>HEIF格式的全名为 High Efficiency Image File Format（高效率图档格式），是由动态图像专家组（MPEG）在2013年推出的新格式，<a href="https://nokiatech.github.io/heif/">了解更多</a></p>
+<p><a href="https://github.com/nokiatech/heif">了解Heif整个项目</a></p>
+<p><a href="https://github.com/nokiatech/heif_conformance">测试文件</a></p>
+<p><em>笔者注：印象中，iOS系统大约在16年就全面支持这一类型的文件了，而Android大约是三年前，在Android P推出的时候，宣布原生支持Heif文件</em></p>
+<p>随着市场上的Android机器已经大面积过渡到 <code>Android Q</code>，从这一点看，确实到了该适配的阶段了。</p>
+<blockquote>
+<p>目标，至少实现Android P及其以上的适配，尝试向更低版本适配</p>
+</blockquote>
+<h2 id="iso-base-media-file-format">ISO Base Media File Format</h2>
+<blockquote>
+<p>HEIF格式是基于 ISO Base Media File Format格式衍生出来的图像封装格式，所以它的文件格式同样符合ISO Base Media File Format (ISO/IEC 14496-12)中的定义（ ISOBMFF）。</p>
+<p>文件中所有的数据都存储在称为Box的数据块结构中，每个文件由若干个Box组成，每个Box有自己的类型和长度。在一个Box中还可以包含子Box，最终由一系列的Box组成完整的文件内容，结构如下图所示，图中每个方块即代表一个Box。</p>
+<p>我们常见的MP4文件同样是ISOBMFF结构，所以HEIF文件结构和MP4文件结构基本一致，只是用到的Box类型有区别。</p>
+<p>HEIF文件如果是单幅的静态图片的话，使用item的形式保存数据，所有item单独解码；如果保存的为图片序列的话，使用track的方式保存。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2926667-337a35837bb3325e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200" alt=""></p>
+<p>作者：金山视频云
+链接：<a href="https://www.jianshu.com/p/b016d10a087d">https://www.jianshu.com/p/b016d10a087d</a>
+来源：简书
+著作权归作者所有</p>
+</blockquote>
+<h2 id="通过contentresolver查询heif格式文件">通过ContentResolver查询Heif格式文件</h2>
+<p>系统通过ContentProvider向其他应用暴露图片等内容信息。目前 <code>尚未查询相关文档</code> ，未确定 <code>Android相册向其他应用提供了Heif文件查询支持</code></p>
+<p>通过查询我们得到Heif文件的 <code>主要的</code> 扩展名为 <code>heic</code> 、 <code>heif</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#E1E4E8">ContentResolver contentResolver </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> context.</span><span style="color:#B392F0">getContentResolver</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">String sort </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> MediaStore.Images.Media.DATE_MODIFIED </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> " desc "</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">String selection </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> MediaStore.Images.Media.MIME_TYPE </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> "=?"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] selectionArgs </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> String</span><span style="color:#E1E4E8">[]{</span><span style="color:#9ECBFF">"image/heic"</span><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">String</span><span style="color:#E1E4E8">[] projection </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {MediaStore.Images.Media._ID, MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME,</span></span>
+<span class="line"><span style="color:#E1E4E8">        MediaStore.Images.ImageColumns.DATE_MODIFIED};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">Cursor cursor </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> contentResolver.</span><span style="color:#B392F0">query</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,</span></span>
+<span class="line"><span style="color:#E1E4E8">        projection,</span></span>
+<span class="line"><span style="color:#E1E4E8">        selection,</span></span>
+<span class="line"><span style="color:#E1E4E8">        selectionArgs,</span></span>
+<span class="line"><span style="color:#E1E4E8">        sort</span></span>
+<span class="line"><span style="color:#E1E4E8">);</span></span></code></pre>
+<p>我们在测试文件中只找到了 <code>heic</code>, 就先只测一种。</p>
+<p>我们发现，系统支持的情况下，是可以查询到数据的。<em>PS，导入数据到手机后，最好重启下</em></p>
+<h2 id="解码与图片显示">解码与图片显示</h2>
+<p>我们忽略掉Android版本相应的适配问题，假定已经得到了相应文件的 Uri, 项目中Glide-4.12.0版本已经处理了适配。</p>
+<p><code>我们去探索一下，是自行添加的解码器，还是依赖于系统API</code></p>
+<p><a href="https://github.com/bumptech/glide/blob/9c6eae7dccd4570dd2914fc2be84631f7b3b570e/library/src/main/java/com/bumptech/glide/load/resource/bitmap/ExifInterfaceImageHeaderParser.java">ExifInterfaceImageHeaderParser 提及内容</a></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>/**</span></span>
+<span class="line"><span> * Uses {@link ExifInterface} to parse orientation data.</span></span>
+<span class="line"><span> *</span></span>
+<span class="line"><span> * &#x3C;p>ExifInterface supports the HEIF format on OMR1+. Glide's {@link DefaultImageHeaderParser}</span></span>
+<span class="line"><span> * doesn't currently support HEIF. In the future we should reconcile these two classes, but for now</span></span>
+<span class="line"><span> * this is a simple way to ensure that HEIF files are oriented correctly on platforms where they're</span></span>
+<span class="line"><span> * supported.</span></span>
+<span class="line"><span> */</span></span></code></pre>
+<p>文档中提到，系统版本 <code>O_MR1+</code> 中已经支持了 <code>HEIF</code>，但是目前的 <code>DefaultImageHeaderParser</code> 还不支持，未来会综合考虑这两个类（系统Exif相关类和DefaultImageHeaderParser），但目前，这是一个简单的方式，确保HEIF在受支持的平台上被正确处理图片方向。</p>
+<p><a href="https://github.com/bumptech/glide/blob/5acc99f8fc7e772aeef8aa959ff2a9c203ab1aa6/library/src/main/java/com/bumptech/glide/Glide.java">Glide 类中提及的内容</a></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// Right now we're only using this parser for HEIF images, which are only supported on OMR1+.</span></span>
+<span class="line"><span>// If we need this for other file types, we should consider removing this restriction.</span></span>
+<span class="line"><span>if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {</span></span>
+<span class="line"><span>  registry.register(new ExifInterfaceImageHeaderParser());</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>目前仅用于解析HEIF文件的头信息。</p>
+<p>我们知道，Glide加载是先获取流，解析头信息，利用对应的解码器处理。而加载此类性质的图片时，是先解码为Bitmap，在进行 <code>装饰</code> , 而Bitmap的解码是利用了系统API，见BitmapFactory.</p>
+<p>所以，如果项目中使用了Glide（<em>似乎高于4.10.0即具有功能，没有仔细查阅</em>），而手机也支持了HEIF，那么应用就可以支持Heif显示了。</p>
+<p>Glide官方对于 <code>自定义解码器</code> 还是持保守态度的。但是我们要试一下，尝试在Glide中接入Heif解码器。</p>
+<hr>
+<p>至此，我们已经完成了基本目标：</p>
+<ul>
+<li>借用平台自身兼容性（当然也可以自己根据版本适配查询语句），利用 <code>ContentResolver</code> 获取 Heif格式的图片</li>
+<li>借助Glide已有的实现，直接在支持的平台版本上解码、构建Bitmap、构建相应Drawable、呈现。</li>
+</ul>
+<p>Glide官方提供了支持，是一件值得庆幸的事情。</p>
+<p><em>因为项目中仅使用了Glide，笔者没有继续对Fresco展开调研。而Fresco作为一款优秀的图片加载框架，并且有庞大的社区支持，盲目推测其亦实现了内部支持。</em></p>
+<p>接下来展开向更低版本适配的尝试。当然，这 <code>仅限于</code> 解码、呈现环节，并不考虑 <code>ContentProvider</code>， <code>ContentResolver</code> 在低版本上对于Heif格式文件的适配。</p>
+<hr>
+<h2 id="尝试向glide接入heif解码器">尝试向Glide接入Heif解码器</h2>
+<blockquote>
+<p>将官方测试数据集导入 <code>支持Heif</code> 的小米、华为部分机型后，我发现部分图片未被系统支持，提示文件损毁或者不受支持。</p>
+</blockquote>
+<p>另外，冲着好玩，我值得折腾一下。</p>
+<p><strong>必须申明</strong>：下面的实践只是从好玩角度出发的，<code>并未考虑</code> 健壮性和全场景覆盖。</p>
+<p>我计划将Heif文件放入Assets资源，按照我们对Glide的了解，其解码路径起始点是：<code>android.content.res.AssetManager$AssetInputStream</code></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#B392F0">@GlideModule</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> CustomGlideModule</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">AppGlideModule</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> registerComponents</span><span style="color:#E1E4E8">(context: </span><span style="color:#B392F0">Context</span><span style="color:#E1E4E8">, glide: </span><span style="color:#B392F0">Glide</span><span style="color:#E1E4E8">, registry: </span><span style="color:#B392F0">Registry</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (Build.VERSION.SDK_INT </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> Build.VERSION_CODES.O_MR1) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            registry.</span><span style="color:#B392F0">register</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">object</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">ImageHeaderParser</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> getType</span><span style="color:#E1E4E8">(`</span><span style="color:#F97583">is</span><span style="color:#E1E4E8">`: </span><span style="color:#B392F0">InputStream</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">ImageHeaderParser</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">ImageType</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                    return</span><span style="color:#E1E4E8"> ImageHeaderParser.ImageType.UNKNOWN</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">                override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> getType</span><span style="color:#E1E4E8">(byteBuffer: </span><span style="color:#B392F0">ByteBuffer</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">ImageHeaderParser</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">ImageType</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                    return</span><span style="color:#E1E4E8"> ImageHeaderParser.ImageType.UNKNOWN</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">                override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> getOrientation</span><span style="color:#E1E4E8">(`</span><span style="color:#F97583">is</span><span style="color:#E1E4E8">`: </span><span style="color:#B392F0">InputStream</span><span style="color:#E1E4E8">, byteArrayPool: </span><span style="color:#B392F0">ArrayPool</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                    return</span><span style="color:#E1E4E8"> ImageHeaderParser.UNKNOWN_ORIENTATION</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">                override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> getOrientation</span><span style="color:#E1E4E8">(byteBuffer: </span><span style="color:#B392F0">ByteBuffer</span><span style="color:#E1E4E8">, byteArrayPool: </span><span style="color:#B392F0">ArrayPool</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">                    return</span><span style="color:#E1E4E8"> ImageHeaderParser.UNKNOWN_ORIENTATION</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            })</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        registry.</span><span style="color:#B392F0">prepend</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                Registry.BUCKET_BITMAP,</span></span>
+<span class="line"><span style="color:#E1E4E8">                InputStream::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java, Bitmap::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">.java, </span><span style="color:#B392F0">CustomBitmapDecoder</span><span style="color:#E1E4E8">(context, glide.bitmapPool)</span></span>
+<span class="line"><span style="color:#E1E4E8">        )</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>这样，我们会得到这样一条解码路径：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>DecodePath{ </span></span>
+<span class="line"><span>	dataClass=class android.content.res.AssetManager$AssetInputStream, </span></span>
+<span class="line"><span>	decoders=[</span></span>
+<span class="line"><span>		osp.leobert.android.heifdemo.CustomBitmapDecoder@5c4ee9e,</span></span>
+<span class="line"><span>		com.bumptech.glide.load.resource.bitmap.StreamBitmapDecoder@1c1ed7f</span></span>
+<span class="line"><span>	],</span></span>
+<span class="line"><span>	transcoder=com.bumptech.glide.load.resource.transcode.BitmapDrawableTranscoder@529014c</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p>接下来我们需要考虑解码器的接入。</p>
+<h3 id="nokia的sdk">Nokia的SDK</h3>
+<p>Nokia的Heif库：<a href="https://github.com/nokiatech/heif">链接</a></p>
+<p>草率了，经过一番源码研读，发现只有读写过程封装，相当于只有 <code>最基础</code> 的协议封包、拆包，想要真正在Android上使用，还有很多事情要处理。</p>
+<p><img  src="/_astro/a1.DPir2VA6_15PskJ.webp" alt loading="lazy" decoding="async" width="250" height="250"></p>
+<h3 id="看下android-p">看下Android P</h3>
+<p>我们知道，Android P原生支持了Heif，查一下资料，其底层支持如下：</p>
+<p><img src="https://image-static.segmentfault.com/352/543/3525433938-5bcd76c4a185b_articlex" alt=""></p>
+<hr>
+<p>一番思考后，发现 <code>成本过大</code>。</p>
+<p>再附上 Glide 适用的Decoder：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> CustomBitmapDecoder</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> context: </span><span style="color:#B392F0">Context</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">val</span><span style="color:#E1E4E8"> bitmapPool: </span><span style="color:#B392F0">BitmapPool</span><span style="color:#E1E4E8">) : </span><span style="color:#B392F0">ResourceDecoder</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">InputStream</span><span style="color:#E1E4E8">, </span><span style="color:#B392F0">Bitmap</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> handles</span><span style="color:#E1E4E8">(source: </span><span style="color:#B392F0">InputStream</span><span style="color:#E1E4E8">, options: </span><span style="color:#B392F0">Options</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Boolean</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> true</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @Throws</span><span style="color:#E1E4E8">(IOException::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> toByteArray</span><span style="color:#E1E4E8">(input: </span><span style="color:#B392F0">InputStream</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">ByteArray</span><span style="color:#E1E4E8">? {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> output </span><span style="color:#F97583">=</span><span style="color:#B392F0"> ByteArrayOutputStream</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#B392F0">        copy</span><span style="color:#E1E4E8">(input, output)</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> output.</span><span style="color:#B392F0">toByteArray</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @Throws</span><span style="color:#E1E4E8">(IOException::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> copy</span><span style="color:#E1E4E8">(input: </span><span style="color:#B392F0">InputStream</span><span style="color:#E1E4E8">, output: </span><span style="color:#B392F0">OutputStream</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> count </span><span style="color:#F97583">=</span><span style="color:#B392F0"> copyLarge</span><span style="color:#E1E4E8">(input, output)</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (count </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 2147483647L</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            -</span><span style="color:#79B8FF">1</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> count.</span><span style="color:#B392F0">toInt</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @Throws</span><span style="color:#E1E4E8">(IOException::</span><span style="color:#B392F0">class</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    fun</span><span style="color:#B392F0"> copyLarge</span><span style="color:#E1E4E8">(input: </span><span style="color:#B392F0">InputStream</span><span style="color:#E1E4E8">, output: </span><span style="color:#B392F0">OutputStream</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Long</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> buffer </span><span style="color:#F97583">=</span><span style="color:#B392F0"> ByteArray</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">4096</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> count </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0L</span></span>
+<span class="line"><span style="color:#F97583">        var</span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#F97583">        while</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span><span style="color:#F97583"> !=</span><span style="color:#E1E4E8"> input.</span><span style="color:#B392F0">read</span><span style="color:#E1E4E8">(buffer).</span><span style="color:#B392F0">also</span><span style="color:#E1E4E8"> { n </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> it }) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            output.</span><span style="color:#B392F0">write</span><span style="color:#E1E4E8">(buffer, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, n)</span></span>
+<span class="line"><span style="color:#E1E4E8">            count </span><span style="color:#F97583">+=</span><span style="color:#E1E4E8"> n.</span><span style="color:#B392F0">toLong</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> count</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    override</span><span style="color:#F97583"> fun</span><span style="color:#B392F0"> decode</span><span style="color:#E1E4E8">(source: </span><span style="color:#B392F0">InputStream</span><span style="color:#E1E4E8">, width: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, height: </span><span style="color:#B392F0">Int</span><span style="color:#E1E4E8">, options: </span><span style="color:#B392F0">Options</span><span style="color:#E1E4E8">): </span><span style="color:#B392F0">Resource</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Bitmap</span><span style="color:#E1E4E8">>? {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        val</span><span style="color:#E1E4E8"> heif </span><span style="color:#F97583">=</span><span style="color:#B392F0"> HEIF</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">            val</span><span style="color:#E1E4E8"> byteArray </span><span style="color:#F97583">=</span><span style="color:#B392F0"> toByteArray</span><span style="color:#E1E4E8">(source)</span></span>
+<span class="line"><span style="color:#6A737D">            // Load the file</span></span>
+<span class="line"><span style="color:#E1E4E8">            heif.</span><span style="color:#B392F0">load</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">ByteArrayInputStream</span><span style="color:#E1E4E8">(byteArray))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // Get the primary image</span></span>
+<span class="line"><span style="color:#F97583">            val</span><span style="color:#E1E4E8"> primaryImage </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> heif.primaryImage</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            // Check the type, assuming that it's a HEVC image</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (primaryImage </span><span style="color:#F97583">is</span><span style="color:#E1E4E8"> HEVCImageItem) {</span></span>
+<span class="line"><span style="color:#6A737D">//                val decoderConfig = primaryImage.decoderConfig.config</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">                val</span><span style="color:#E1E4E8"> imageData </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> primaryImage.itemDataAsArray</span></span>
+<span class="line"><span style="color:#6A737D">                // Feed the data to a decoder</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">                // FIXME: 2021/3/23 find a decoder to generate Bitmap when not upon Android P</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#E1E4E8"> BitmapResource.</span><span style="color:#B392F0">obtain</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">                        BitmapFactory.</span><span style="color:#B392F0">decodeByteArray</span><span style="color:#E1E4E8">(imageData, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, imageData.size),</span></span>
+<span class="line"><span style="color:#E1E4E8">                        bitmapPool</span></span>
+<span class="line"><span style="color:#E1E4E8">                )</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#6A737D">// All exceptions thrown by the HEIF library are of the same type</span></span>
+<span class="line"><span style="color:#6A737D">        // Check the error code to see what happened</span></span>
+<span class="line"><span style="color:#F97583">        catch</span><span style="color:#E1E4E8"> (e: </span><span style="color:#B392F0">Exception</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">            e.</span><span style="color:#B392F0">printStackTrace</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        } </span><span style="color:#F97583">finally</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">            heif.</span><span style="color:#B392F0">release</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> null</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>如果找到了一个解码器，在Android P以下支持解码或转码，封装为Bitmap，就 <code>可以在低版本上适配</code> 了。当然还需要完成：<code>适配所有可能的解码路径</code>，<code>头信息处理</code> 工作。</p>
+<p>这次尝试， <code>以失败告终</code>。</p>
+<p>居然翻车了，<img  src="/_astro/jljt.DTiZHyIe_Z26EHS6.webp" alt loading="lazy" decoding="async" width="268" height="268"></p>
+<h2 id="遐想">遐想</h2>
+<p>力大砖飞？集成ImageMagick之类的库，直接实现图片转码，成本有点过大了，先不折腾。</p>
+<p>本次实践，我们实现了基本目标，高级目标因为初步调研不充分以失败告终，但是也增长了知识。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>

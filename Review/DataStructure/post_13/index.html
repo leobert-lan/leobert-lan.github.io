@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>温故：队列 | Leobert&#39;s Blog</title><meta name="description" content="我是Leobert，一个喜爱开源、热衷于社区分享的程序员。记录技术思考、架构复盘与人文感悟。"><!-- Bypass external image hotlinking protections (e.g. Juejin, CSDN, ByteImg) --><meta name="referrer" content="no-referrer"><!-- KaTeX CSS for LaTeX math rendering --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css"><style>:root{--bg-main:#0b0f17;--bg-card:#151c28;--bg-card-hover:#1e293b;--border-subtle:#232d3f;--border-active:#38bdf8;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--accent-blue:#38bdf8;--accent-purple:#c084fc;--accent-green:#34d399;--accent-amber:#fbbf24}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background-color:var(--bg-main);color:var(--text-primary);-webkit-font-smoothing:antialiased;flex-direction:column;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;line-height:1.6;display:flex}a{color:inherit;text-decoration:none;transition:color .15s}.container{width:100%;max-width:1080px;margin:0 auto;padding:0 1.5rem}.katex-display{padding:.5rem 0;overflow:auto hidden}.author-note{border-left:3px solid var(--accent-purple);color:#e2e8f0;background:#c084fc14;border-radius:0 .5rem .5rem 0;margin:1.25rem 0;padding:.85rem 1.15rem;font-size:.95rem}.author-note strong{color:var(--accent-purple)}
+.prose-content{color:var(--text-primary);font-size:1.05rem;line-height:1.8}.prose-content>h1:first-child{display:none!important}.prose-content h1,.prose-content h2,.prose-content h3,.prose-content h4{color:var(--text-primary);margin-top:2.25rem;margin-bottom:1rem;font-weight:700;line-height:1.4}.prose-content h1{border-bottom:1px solid var(--border-subtle);padding-bottom:.5rem;font-size:1.65rem}.prose-content h2{font-size:1.4rem}.prose-content h3{font-size:1.18rem}.prose-content h4{font-size:1.05rem}.prose-content p{color:#cbd5e1;margin-bottom:1.25rem}.prose-content code{color:var(--accent-blue);background:#38bdf81a;border-radius:4px;padding:.2rem .4rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.9em}.prose-content pre{border:1px solid var(--border-subtle);border-radius:.75rem;margin:1.5rem 0;padding:1.25rem;overflow-x:auto;background:#0f172a!important}.prose-content pre code{color:inherit;background:0 0;padding:0}.prose-content img{border:1px solid var(--border-subtle);border-radius:8px;width:auto;max-width:85%;height:auto;max-height:520px;margin:1.75rem auto;transition:transform .2s,box-shadow .2s;display:block;box-shadow:0 4px 20px #0000004d}.prose-content img:hover{transform:scale(1.01);box-shadow:0 6px 24px #00000073}.prose-content blockquote{border-left:3px solid var(--accent-blue);color:#cbd5e1;background:#0f172a99;border-radius:0 .5rem .5rem 0;margin:1.5rem 0;padding:.85rem 1.25rem}.prose-content ul,.prose-content ol{color:#cbd5e1;margin-bottom:1.25rem;margin-left:1.5rem}.prose-content li{margin-bottom:.4rem}.prose-content a{color:var(--accent-blue);text-underline-offset:3px;text-decoration:underline}.prose-content a:hover{color:#7dd3fc}
+</style></head><body><header style="border-bottom: 1px solid var(--border-subtle); padding: 1.1rem 0; background: rgba(11, 15, 23, 0.85); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;"><div class="container" style="display: flex; justify-content: space-between; align-items: center;"><a href="/" style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;"><span>Leobert's Blog</span></a><nav style="display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);"><a href="/#ip-series" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-purple)'" onmouseout="this.style.color='var(--text-secondary)'">创作 IP 系列</a><a href="/#android-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-blue)'" onmouseout="this.style.color='var(--text-secondary)'">Android 全栈</a><a href="/#java-stack" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-amber)'" onmouseout="this.style.color='var(--text-secondary)'">Java / 多线程</a><a href="/#engineering-stack" style="transition: color 0.2s;" onmouseover="this.style.color='#2dd4bf'" onmouseout="this.style.color='var(--text-secondary)'">构建工程化</a><a href="/#growth-essays" style="transition: color 0.2s;" onmouseover="this.style.color='var(--accent-green)'" onmouseout="this.style.color='var(--text-secondary)'">总结与反思</a></nav></div></header><main style="flex: 1; padding: 3rem 0 4rem 0;"><div class="container"><article style="max-width: 820px; margin: 0 auto; padding-top: 1rem;"><header style="margin-bottom: 2.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle);"><h1 style="font-size: 2.1rem; font-weight: 800; line-height: 1.35; color: var(--text-primary); margin-bottom: 0.75rem; letter-spacing: -0.02em;">温故：队列</h1><div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 1rem; align-items: center;"><span>作者：Leobert</span></div></header><div class="prose-content"><h1 id="温故队列数据结构">温故：队列|数据结构</h1>
+<p>本文将对 数据结构 - <code>队列</code> 进行温故、总结要点、算法题练手，以期获新知。</p>
+<p>读者可以借本文反视对队列知识的掌握程度，或者在本文基础上，收集资料加深学习。</p>
+<blockquote>
+<p>温故系列是我尝试的一种新学习总结方式，在 <code>阅历增长</code>时，总结旧闻，以 <code>期获</code> 新知，并不断迭代。<a href="https://github.com/leobert-lan/Blog/blob/main/info/%E5%85%B3%E4%BA%8E%E6%B8%A9%E6%95%85%E7%B3%BB%E5%88%97.md">了解更多</a></p>
+<p>本次温故时间：2021年3月</p>
+</blockquote>
+<p>队列，和 <a href="https://github.com/leobert-lan/Blog/blob/main/Review/DataStructure/%E6%B8%A9%E6%95%85%EF%BC%9A%E6%A0%88%7C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%20--%202021.md">栈</a> 类似,
+也是一种 <a href="https://github.com/leobert-lan/Blog/blob/main/Review/DataStructure/%E6%B8%A9%E6%95%85%EF%BC%9A%E7%BA%BF%E6%80%A7%E8%A1%A8%7C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%20--%202021.md">线性存储结构</a> ，
+不同的是，队列的数据项存取方式，队列是两端 <code>开口</code> 的，从数据从一端进入，从另一端取出。</p>
+<blockquote>
+<p>进入的一端被称为 <code>队尾</code>，取出的一端被称为 <code>队头</code>，存入数据的行为称为 <code>入队</code>，取出数据的行为称为 <code>出队</code>。</p>
+</blockquote>
+<p>不难理解，这是一种 <code>先进先出</code> 的线性存储结构。</p>
+<p>和栈类似，实现方式也存在两种：</p>
+<ul>
+<li>顺序队列：在顺序表的基础上实现的队列结构</li>
+<li>链队列：在链表的基础上实现的队列结构</li>
+</ul>
+<p><em>Android中的消息队列，就是链队列</em></p>
+<p>在Java中，队列对应 <code>java.util.Queue</code></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> Queue</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#F97583">E</span><span style="color:#E1E4E8">> </span><span style="color:#F97583">extends</span><span style="color:#B392F0"> Collection</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#F97583">E</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> add</span><span style="color:#E1E4E8">(E </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    boolean</span><span style="color:#B392F0"> offer</span><span style="color:#E1E4E8">(E </span><span style="color:#FFAB70">e</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    E </span><span style="color:#B392F0">remove</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    E </span><span style="color:#B392F0">poll</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    E </span><span style="color:#B392F0">element</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    E </span><span style="color:#B392F0">peek</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<ul>
+<li>offer，add：达到容量上限时，继续尝试入队时，<code>add</code> 会抛出异常，<code>offer</code> 返回 false</li>
+<li>poll，remove：空集时，<code>remove</code> 会抛出异常，<code>poll</code> 返回 null</li>
+<li>peek，element：空集时 <code>element</code> 会抛出异常，<code>peek</code> 返回null</li>
+</ul>
+<h2 id="算法题练手">算法题练手</h2>
+<p>我在LeetCode上，搜索了一道和队列相关的题。</p>
+<h3 id="和至少为-k-的最短子数组"><a href="https://leetcode-cn.com/problems/shortest-subarray-with-sum-at-least-k/">和至少为 K 的最短子数组</a></h3>
+<p>返回 A 的最短的非空连续子数组的长度，该子数组的和至少为 K 。</p>
+<p>如果没有和至少为 K 的非空子数组，返回 -1 。</p>
+<p>示例 1：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>输入：A = [1], K = 1</span></span>
+<span class="line"><span>输出：1</span></span></code></pre>
+<p>示例 2：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>输入：A = [1,2], K = 4</span></span>
+<span class="line"><span>输出：-1</span></span></code></pre>
+<p>示例 3：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>输入：A = [2,-1,2], K = 3</span></span>
+<span class="line"><span>输出：3</span></span></code></pre>
+<p>提示：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>1 &#x3C;= A.length &#x3C;= 50000</span></span>
+<span class="line"><span>-10 ^ 5 &#x3C;= A[i] &#x3C;= 10 ^ 5</span></span>
+<span class="line"><span>1 &#x3C;= K &#x3C;= 10 ^ 9</span></span></code></pre>
+<p>来源：力扣（LeetCode） 链接：<a href="https://leetcode-cn.com/problems/shortest-subarray-with-sum-at-least-k">https://leetcode-cn.com/problems/shortest-subarray-with-sum-at-least-k</a></p>
+<p>乍一看到这个题目，我也有点慌，没啥思路。</p>
+<p>但是没关系，我们假设存在一个算法S，可以处理这个问题。从比较基本的情况找到可行的处理方式，并利用数学归纳法进行证明。然后在实现算法。</p>
+<p>按照题意，<code>需要寻找非空子数组，其和>=K</code> , 设函数 F(s,e) = ∑<sub>s</sub><sup>e</sup>A[i], s,e 满足 0≤s≤e≤A.length。</p>
+<p>并且我们用其代表对于的子数组。</p>
+<p>我们先找到所有的子数组。</p>
+<p>当length为</p>
+<ul>
+<li>1 时，子数组 1个，F(0,0)</li>
+<li>2 时，子数组 3个，F(0,0),F(1,1),F(0,1)</li>
+<li>3 时，子数组 6个，F(0,0),F(1,1),F(2,2)，F(0,1),F(1,2),F(0,2)</li>
+<li>…</li>
+<li>n 时，子数组 (n+1)(n)/2 个</li>
+</ul>
+<p>不难理解，长度为n时，<em>n>0</em>，长度为 <code>a</code> 的子数组个数为 n-a+1 个，我们把a的所有取值情况都考虑进去，就可以得到所有的子数组，<em>空数组不计</em>， 这实在是太简单了，我们不再使用数学归纳法论证。</p>
+<p>我们先通过一次遍历，得到一组基础情况：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>F(0,0),F(0,1),F(0,2),...,F(0,n-1)</span></span></code></pre>
+<p>在此基础上，我们可以得到</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>       F(1,1),F(1,2),...,F(1,n-1)</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>              F(2,2),...,F(2,n-1)</span></span></code></pre>
+<p>…</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>                         F(n-1,n-1)</span></span></code></pre>
+<p>不难理解，做法就是遍历 A[i],并在原先的基础上减掉对应值。</p>
+<p>下面的代码，我们就可以得到 <code>基础</code> 情况</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Solution</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> int</span><span style="color:#B392F0"> shortestSubarray</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">A</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> K</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> A.length;</span></span>
+<span class="line"><span style="color:#6A737D">        //可能会溢出，用long，第一个元素保持为0</span></span>
+<span class="line"><span style="color:#F97583">        long</span><span style="color:#E1E4E8">[] P </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8">[n </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> n; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            P</span><span style="color:#E1E4E8">[i </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#F97583"> P</span><span style="color:#E1E4E8">[i] </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">long</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">A</span><span style="color:#E1E4E8">[i];</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>得到每一层数据。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Solution</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> int</span><span style="color:#B392F0"> shortestSubarray</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">A</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> K</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> A.length;</span></span>
+<span class="line"><span style="color:#6A737D">        //可能会溢出，用long，第一个元素保持为0</span></span>
+<span class="line"><span style="color:#F97583">        long</span><span style="color:#E1E4E8">[] P </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8">[n </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> n; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            P</span><span style="color:#E1E4E8">[i </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#F97583"> P</span><span style="color:#E1E4E8">[i] </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">long</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">A</span><span style="color:#E1E4E8">[i];</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // 遍历 得到每一层数据</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> n; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> j </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> i; j </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> n; j</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                long</span><span style="color:#E1E4E8"> tmp </span><span style="color:#F97583">=</span><span style="color:#F97583"> P</span><span style="color:#E1E4E8">[j </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">-</span><span style="color:#F97583"> A</span><span style="color:#E1E4E8">[i </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">                P</span><span style="color:#E1E4E8">[j </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> tmp;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>F(s,e) = F(i,j)</p>
+<p>ok，我们需要找到映射关系，即 i,j 和前面 s,e 的对应关系。</p>
+<p>不难得出: <code>s=i</code>,<code>e=j</code></p>
+<p>而F(s,e)，对应的数组长度 len = e-s+1;</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Solution</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> int</span><span style="color:#B392F0"> shortestSubarray</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">A</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> K</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> A.length;</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> len </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //可能会溢出，用long，第一个元素保持为0</span></span>
+<span class="line"><span style="color:#F97583">        long</span><span style="color:#E1E4E8">[] P </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8">[n </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> n; </span><span style="color:#F97583">++</span><span style="color:#E1E4E8">i) {</span></span>
+<span class="line"><span style="color:#F97583">            long</span><span style="color:#E1E4E8"> tmp </span><span style="color:#F97583">=</span><span style="color:#F97583"> P</span><span style="color:#E1E4E8">[i] </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">long</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">A</span><span style="color:#E1E4E8">[i];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> (tmp </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> K) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                len </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">min</span><span style="color:#E1E4E8">(len, i </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            P</span><span style="color:#E1E4E8">[i </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> tmp;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // 遍历 得到每一层数据</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> n; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">            for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> j </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> i; j </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> n; j</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">                long</span><span style="color:#E1E4E8"> tmp </span><span style="color:#F97583">=</span><span style="color:#F97583"> P</span><span style="color:#E1E4E8">[j </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">-</span><span style="color:#F97583"> A</span><span style="color:#E1E4E8">[i </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> (tmp </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> K) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                    len </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">min</span><span style="color:#E1E4E8">(len, j </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">                }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">                P</span><span style="color:#E1E4E8">[j </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> tmp;</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (len </span><span style="color:#F97583">></span><span style="color:#E1E4E8"> n)</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> len;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><code>居然。。没有用到队列！！！</code></p>
+<p>然而现实比较残酷，这个解法 <code>超出了时间限制</code>，跪在了 84/93 用例上</p>
+<p>那就想想如果减少计算次数吧:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>f(i,j) 还有一种求法，f(0,j)-f(0,i-1),即 P[j+1]-P[i]</span></span></code></pre>
+<p>但也仅多通过了一个用例。</p>
+<hr>
+<p>仔细思考了一下，力大砖飞法为什么不能通过 <code>时间限制</code>？因为这个方法中，进行了 <code>全计算</code>。</p>
+<p>我们先做一个假设：数组中全是正数。</p>
+<p>那么从下标s开始，对下标i=s开始递增，一旦找到下标e满足 <code>F(s,e)>=K</code> ,那么就没有必要再对i进行递增了。</p>
+<p>再回到我们的题目中，我们已近先计算了一组 <code>基础数据</code> : P[]，而且前面我们发现了，利用 <code>基础数据</code> 本身，以及 <code>减法计算</code> ，可以表达整个数组的任意 <code>非空子数组</code>。</p>
+<p>那么,这个问题从</p>
+<blockquote>
+<p>“在&#x3C;s,e> 满足F(s,e)>=K 条件的集合中，寻找 e-s的最小值”</p>
+</blockquote>
+<p>转变成了：</p>
+<blockquote>
+<p>在&#x3C;s,e> 满足P[e+1]-P[s]>=K 条件的集合中，寻找 e-s的最小值</p>
+</blockquote>
+<p>经过这一步转化，就可以运用数学定理减少计算了。</p>
+<p>因为有负数的存在，在P[] 中，其 <code>元素值</code> 并<code>不是</code> 随着 <code>下标</code> 而 <code>单调递增</code> 的。</p>
+<p>采用示例3：输入：A = [2,-1,2], K = 3</p>
+<p>那么P[] = [0,2,1,3]</p>
+<p>我们发现，它不是单调递增的，但是这里有一个规律：</p>
+<p>P[3]-P[2] > P[3]-P[1]</p>
+<p>即，3-1 > 3-2</p>
+<ul>
+<li>如果P[3]-P[2] 不满足要求，那么P[3]-P[1]也无法满足要求</li>
+<li>如果P[3]-P[2] 满足要求，那么P[3]-P[1] 是否满足已经不再重要，即使满足，长度也更大，而且，<strong>判断是否满足还需要计算，无法直接通过不等式关系推算</strong></li>
+</ul>
+<p>从这里，我们可以总结出：当P[i]>P[i+1] 时，不需要考虑 F(i,待定) 是否满足要求。</p>
+<p>这样我们就把问题简化到了单调情况。即，s的取值范围，仅需要考虑： {0,2,3},因为 P[1]>P[2]</p>
+<p>而且，在前面的分析中，发现都是正数的数组时：</p>
+<blockquote>
+<p>从下标s开始，对下标i=s开始递增，一旦找到下标e满足 <code>F(s,e)>=K</code> ,那么就没有必要再对i进行递增了。</p>
+</blockquote>
+<p>这一点在存在负数时也同样成立。</p>
+<p>稍微打住，直觉告诉我，还有进一步优化的空间，那就是e的取值范围可以进一步缩小。</p>
+<p>我们发现 P[2]-P[0] &#x3C; P[1]-P[0]。所以e不需要考虑为2的情况，取值范围{0,1,3}.</p>
+<p>则：&#x3C;s,e> 仅需要考虑 {&#x3C;0,0>,&#x3C;0,1>,&#x3C;0,3>,&#x3C;2,3>,&#x3C;3,3>} 这几种情况。</p>
+<p>不难理解：此时再利用 <code>数组结合For循环两组下标的方式</code> 已经无法处理了，有必要引入新的数据结构，利用其特性完成这一任务。</p>
+<p>而 <code>双端队列</code> 可以满足这一需求。</p>
+<ul>
+<li>我们维护一个双端队列 <code>deque</code>，用于存储P的下标，</li>
+<li>遍历 P的下标 index</li>
+<li>假如index 存入deque尾部，需要保持 <code>deque</code> 所有下标对应的P值单调递增，如果不满足这个要求，则先从尾部移除，直到 <code>deque为空</code> 或者 <code>满足单调递增</code></li>
+<li>寻找 index 作为 e 时，满足条件的最适s，<em>即最大s</em>，如果找到，则维护最短的len值； <strong>这里又有一个减少计算的小窍门前面没有明确提到</strong></li>
+<li>index 从尾部入队</li>
+</ul>
+<blockquote>
+<p>做法中，提到了一个小技巧：</p>
+<p>在前文，我们提到了:从下标s开始，对下标i=s开始递增，一旦找到下标e满足 <code>F(s,e)>=K</code> ,那么就没有必要再对i进行递增了。</p>
+<p>这其实是相对的。一旦找到这样一组&#x3C;s,e>, 当e递增时，s直接从s+1开始考虑即可。</p>
+<p>所以这个小技巧就是将 deque 的队头出队</p>
+</blockquote>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="java"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Solution</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> int</span><span style="color:#B392F0"> shortestSubarray</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">int</span><span style="color:#E1E4E8">[] </span><span style="color:#FFAB70">A</span><span style="color:#E1E4E8">, </span><span style="color:#F97583">int</span><span style="color:#FFAB70"> K</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> A.length;</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> len </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //可能会溢出，用long，第一个元素保持为0</span></span>
+<span class="line"><span style="color:#F97583">        long</span><span style="color:#E1E4E8">[] P </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#F97583"> long</span><span style="color:#E1E4E8">[n </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> n; </span><span style="color:#F97583">++</span><span style="color:#E1E4E8">i) {</span></span>
+<span class="line"><span style="color:#6A737D">//                long tmp = P[i] + (long) A[i];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">            //其实重复了，后面的遍历中也有对应</span></span>
+<span class="line"><span style="color:#6A737D">//                if (tmp >= K) {</span></span>
+<span class="line"><span style="color:#6A737D">//                    len = Math.min(len, i + 1);</span></span>
+<span class="line"><span style="color:#6A737D">//                }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            P</span><span style="color:#E1E4E8">[i </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#F97583"> P</span><span style="color:#E1E4E8">[i] </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">long</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">A</span><span style="color:#E1E4E8">[i];</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        final</span><span style="color:#E1E4E8"> LinkedList&#x3C;</span><span style="color:#F97583">Integer</span><span style="color:#E1E4E8">> deque </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> LinkedList&#x3C;>();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        //用前置++ 减少临时变量分配内存消耗时间</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> index </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; index </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> n </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">; </span><span style="color:#F97583">++</span><span style="color:#E1E4E8">index) {</span></span>
+<span class="line"><span style="color:#F97583">            while</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">deque.</span><span style="color:#B392F0">isEmpty</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#F97583"> P</span><span style="color:#E1E4E8">[deque.</span><span style="color:#B392F0">getLast</span><span style="color:#E1E4E8">()] </span><span style="color:#F97583">>=</span><span style="color:#F97583"> P</span><span style="color:#E1E4E8">[index]) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                deque.</span><span style="color:#B392F0">removeLast</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">            while</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">deque.</span><span style="color:#B392F0">isEmpty</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#F97583"> P</span><span style="color:#E1E4E8">[index] </span><span style="color:#F97583">-</span><span style="color:#F97583"> P</span><span style="color:#E1E4E8">[deque.</span><span style="color:#B392F0">getFirst</span><span style="color:#E1E4E8">()] </span><span style="color:#F97583">>=</span><span style="color:#E1E4E8"> K) {</span></span>
+<span class="line"><span style="color:#E1E4E8">                len </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Math.</span><span style="color:#B392F0">min</span><span style="color:#E1E4E8">(len, index </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> deque.</span><span style="color:#B392F0">removeFirst</span><span style="color:#E1E4E8">());</span></span>
+<span class="line"><span style="color:#E1E4E8">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">            deque.</span><span style="color:#B392F0">add</span><span style="color:#E1E4E8">(index);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (len </span><span style="color:#F97583">></span><span style="color:#E1E4E8"> n)</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> len;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>修改后通过测试用例。</p>
+<h2 id="温故总结">温故总结</h2>
+<p>队列也是非常常用的数据结构了，其特性需要牢牢掌握。</p>
+<p>算法练手阶段出了纰漏，筛选的题目并没有着重于队列的特性。</p></div></article></div></main><footer style="border-top: 1px solid var(--border-subtle); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem;"><div class="container"><p>© 2026 Leobert (leobert-lan) • 喜爱开源、热衷于社区分享的程序员</p></div></footer></body></html>
